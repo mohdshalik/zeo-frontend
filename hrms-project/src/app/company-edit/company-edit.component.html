@@ -1,0 +1,200 @@
+<div mat-dialog-content class="">
+
+  <div class="cpm-sec" *ngIf="Emp" >
+
+      <h1>Company Details Edit</h1><hr>
+
+      <form (submit)="updateEmp">
+         <div class="row">
+          <div class="col-md-6" >
+                   
+            <label>Company Name</label>
+           <input type="text"  class="form-control" required id="cmpny_name" name="cmpny_name"  [(ngModel)]="Emp.cmpny_name"  placeholder="Enter Company Name"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_name}">
+           
+           <div *ngIf="registerButtonClicked && !cmpny_name" class="error-message">Department Name is required.</div>
+      </div>
+      
+      <div class="col-md-6" >
+                     
+          <label>Company City Name</label>
+         <input type="text"  class="form-control" required id="cmpny_city" name="cmpny_city"  [(ngModel)]="Emp.cmpny_city"  placeholder="Enter City Name"
+          [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_city}">
+         
+         <div *ngIf="registerButtonClicked && !cmpny_city" class="error-message">Department Name is required.</div>
+      </div>
+      
+      <div class="col-md-6" >
+                     
+          <label>Company pincode</label>
+         <input type="text"  class="form-control" required id="cmpny_pincode" name="cmpny_pincode"  [(ngModel)]="Emp.cmpny_pincode"  placeholder="Enter pincode"
+          [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_pincode}">
+         
+         <div *ngIf="registerButtonClicked && !cmpny_pincode" class="error-message">Department Name is required.</div>
+      </div>
+     
+      
+      <div class="col-md-6">
+                     
+          <label>Contact</label>
+         <input type="text"  class="form-control" required id="cmpny_nmbr_1" name="cmpny_nmbr_1"  [(ngModel)]="Emp.cmpny_nmbr_1"  placeholder="Enter Contact"
+          [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_nmbr_1}">
+         
+         <div *ngIf="registerButtonClicked && !cmpny_nmbr_1" class="error-message">Description is required.</div>
+      </div>
+  
+      <div class="col-md-6">
+                     
+          <label>Contact 2</label>
+         <input type="text"  class="form-control" required id="cmpny_nmbr_2" name="cmpny_nmbr_2"  [(ngModel)]="Emp.cmpny_nmbr_2"  placeholder="Enter Contact"
+          [ngModelOptions]="{standalone: true}" >
+  
+      </div>
+      
+  
+  
+      <div class="col-md-6" >
+                     
+          <label>Email</label>
+         <input type="text"  class="form-control" required id="cmpny_mail" name="cmpny_mail"  [(ngModel)]="Emp.cmpny_mail"  placeholder="Enter Email ID"
+          [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_mail}">
+         
+         <div *ngIf="registerButtonClicked && !cmpny_mail" class="error-message">Enter Email ID.</div>
+      </div>
+      
+      
+      <div class="col-md-6">
+               
+        
+        <label>Fax</label>
+        <input type="text" [(ngModel)]="Emp.cmpny_fax" [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter Fax No" >
+        
+        
+        </div>
+        
+        
+        <div class="col-md-6">
+                       
+                
+            <label>GST</label>
+            <input type="text" [(ngModel)]="Emp.cmpny_gst" [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter GST No" >
+            
+            
+            </div>
+            
+      
+   
+      
+      
+     
+      
+     
+      
+      
+     
+      
+   
+      
+    
+      
+     
+      
+     
+     
+      
+   
+      
+      
+      
+      
+      
+      
+           <!-- <div class="col-md-6">
+      
+      
+                  <div class="custom-sel">
+                      <label>Country</label>
+                      <select class="form-control" id="country" required  [(ngModel)]="Emp.cmpny_country" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}" 
+                      [ngClass]="{'error-field': registerButtonClicked && !cmpny_country}" >
+                          <option value="" >Select</option>
+                          <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+                      </select>
+                      <div *ngIf="registerButtonClicked && !cmpny_country" class="error-message">Please Select Your Country</div>
+                  </div>
+                              
+      
+              </div> -->
+
+
+              <div class="col-md-6">
+
+
+                <div class="custom-sel">
+                    <label>Country</label>
+                    <select class="form-control" id="country" required [(ngModel)]="Emp.cmpny_country" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_country}" >
+                        <option value="" >Select</option>
+                        <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+                    </select>
+                    <div *ngIf="registerButtonClicked && !cmpny_country" class="error-message">Please Select Your Country</div>
+                </div>
+                            
+    
+     
+                   
+                   
+                
+            </div>
+            <div class="col-md-6" *ngIf="states && states.length > 0">
+               
+        
+              <div class="custom-sel" >
+                  <label>State</label>
+                  <select class="form-control" id="state" required [(ngModel)]="Emp.cmpny_state_id"  [ngModelOptions]="{standalone:true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_name}">
+                      <option value=""> select</option>
+                      <option  *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
+                  </select>
+                  <div *ngIf="registerButtonClicked && !cmpny_state_id" class="error-message">Please Select your State.</div>
+              </div>
+                               
+  
+          
+      </div>
+  
+      
+              <!-- <div class="col-md-6" *ngIf="states && states.length > 0">
+                     
+              
+                  <div class="custom-sel" >
+                      <label>State</label>
+                      <select class="form-control" id="state" required [(ngModel)]="Emp.cmpny_state_id"  [ngModelOptions]="{standalone:true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_state_id}">
+                          <option value=""> select</option>
+                          <option  *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
+                      </select>
+                      <div *ngIf="registerButtonClicked && !cmpny_state_id" class="error-message">Please Select your State.</div>
+                  </div>
+                                   
+      
+              
+          </div> -->
+         </div>
+      </form>
+  
+
+  <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-2">
+          <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+      </div>
+      <div class="col-md-2">
+          <button   mat-raised-button color="primary" class="pull-right btn-full mt-4" type="submit" (click)="updateEmp()" >Edit</button>
+
+      </div>
+  </div>
+
+
+      </div>
+</div>
+<div mat-dialog-action>
+  
+</div>

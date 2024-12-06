@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="comapny_section">
+        <div class="com_list ">
+            <div class="cpm-sec">
+
+                <h2>Assigned Permission For User</h2>
+                <hr>
+
+                <form>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="custom-sel">
+                                <label>Select User</label>
+                                <select class="form-control" id="profile" required [(ngModel)]="profile"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !profile}">
+                                    <option value="">Select</option>
+                                    <option *ngFor="let deparmentsec of users" [value]="deparmentsec.id">{{ deparmentsec.username }}</option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !profile" class="error-message">Please Select Your Company</div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="col-md-6">
+
+
+                            <div class="custom-sel">
+                                <label>Select Group</label>
+                                <select class="form-control" id="groups" multiple required [(ngModel)]="groups"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !groups}" >
+                                    <option value="" >Select</option>
+                                    <option *ngFor="let deparmentsec of   Groups" [value]="deparmentsec.id">{{ deparmentsec.name     }} </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !groups" class="error-message">Please Select Your Company</div>
+                            </div>
+                                        
+                    
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-10">
+            
+                        </div>
+            
+                        <div class="col-md-2">
+                            <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerUserAssignedPermission()">Save</button>  
+                         </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,578 @@
+
+
+<div mat-dialog-content class="">
+    <div class="cpm-sec" >
+
+        <h1>Create Employee</h1><hr>
+        <mat-tab-group>
+            <mat-tab >
+
+        <form >
+
+            <div class="row">
+                <div class="col-md-6">
+
+
+
+
+                    
+        
+                 
+                    <div class="grou-item_new">
+              
+
+
+                        <div class="custom-sel drop_wid">
+                        <label>User</label>
+                        <select class="form-control form-cont-bor" id="users" name="user" required  [disabled]="isUserSelectDisabled"  [(ngModel)]="users" [ngModelOptions]="{standalone: true}">
+                            <option value="">Select</option>
+                            <option *ngFor="let user of userss" [value]="user.id">{{ user.username }}</option>
+                          </select>
+                         
+                    </div>
+                    <div class="choosing" (click)="enableUserSelect()">
+                        <h6>Change user</h6>
+                    </div>
+                 </div>
+
+              <div class="row">
+                <div class="col-md-6">
+
+                </div>
+              </div>
+                                
+                
+                </div>
+                <div class="col-md-6">
+                    <label>Select Company</label>
+                    <div class="custom-sel">
+                        <select class="form-control" i v d="companySelect" [(ngModel)]="selectedCompany" name="company" (change)="onCompanyChange()" [ngModelOptions]="{standalone: true}">
+                            <option value="">Select a company</option>
+                            <option *ngFor="let company of companies" [ngValue]="company">{{ company.schema_name }}</option>
+                          </select>
+                    </div>
+                </div>
+
+              
+            </div>
+
+        <div class="row">
+
+            <div class="col-md-6" >
+               
+                <label> Employee Code</label>
+               <input type="text"  class="form-control" required id="emp_code" name="emp_code"  [(ngModel)]="emp_code"  placeholder="Enter emp code"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_code}">
+               
+               <div *ngIf="registerButtonClicked && !emp_code" class="error-message">Department Name is required.</div>
+          </div>
+            <div class="col-md-6" >
+               
+      <label>First Name</label>
+     <input type="text"  class="form-control" required id="emp_first_name" name="emp_first_name"  [(ngModel)]="emp_first_name"  placeholder="Enter First Name"
+      [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_first_name}">
+     
+     <div *ngIf="registerButtonClicked && !emp_first_name" class="error-message">Department Name is required.</div>
+</div>
+
+
+<div class="col-md-6" >
+               
+    <label>Last Name</label>
+   <input type="text"  class="form-control" required id="emp_last_name" name="emp_last_name"  [(ngModel)]="emp_last_name"  placeholder="Enter Last Name"
+    [ngModelOptions]="{standalone: true}" >
+    <!-- [ngClass]="{'error-field': registerButtonClicked && !emp_last_name}" -->
+   <!-- <div *ngIf="registerButtonClicked && !emp_last_name" class="error-message">Department Name is required.</div> -->
+</div>
+
+
+<div class="col-md-6" >
+    
+    <div class="custom-sel">
+              
+        <label>Select Gender</label>
+        <select class="form-control" id="emp_gender" name="emp_gender"  [(ngModel)]="emp_gender"  [ngModelOptions]="{standalone: true}" >
+          
+            <option >Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+    </div>
+    <!-- <label>Last Name</label>
+   <input type="radio"  class="form-control" required  [(ngModel)]="emp_gender"  placeholder="Enter Department Name"
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_gender}">
+   
+   <div *ngIf="registerButtonClicked && !emp_gender" class="error-message">Department Name is required.</div> -->
+</div>
+
+<div class="col-md-6">
+               
+    <label>Date of birth</label>
+   <input type="date"  class="form-control" required id="emp_date_of_birth" name="emp_date_of_birth"  [(ngModel)]="emp_date_of_birth"  placeholder="Enter Date Birth"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_date_of_birth" class="error-message">Description is required.</div> -->
+</div>
+
+<div class="col-md-6" >
+               
+    <label>Email</label>
+   <input type="text"  class="form-control" required  id="emp_personal_email" name="emp_personal_email" [(ngModel)]="emp_personal_email"  placeholder="Enter Email ID"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_personal_email" class="error-message">Description is required.</div> -->
+</div>
+
+
+
+
+<div class="col-md-6" >
+               
+    <label>Company Number</label>
+   <input type="text"  class="form-control" required id="emp_mobile_number_1" name="emp_mobile_number_1" [(ngModel)]="emp_mobile_number_1"  placeholder="Enter Contact Number"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_mobile_number_1" class="error-message">Description is required.</div> -->
+</div>
+
+
+
+<div class="col-md-6" >
+               
+    <label>Personal Number</label>
+   <input type="text"  class="form-control" required id="emp_mobile_number_2" name="emp_mobile_number_2" [(ngModel)]="emp_mobile_number_2"  placeholder="Enter Contact Number"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_mobile_number_2" class="error-message">Description is required.</div> -->
+</div>
+
+
+
+
+<div class="col-md-6" >
+               
+    <label>Permenent address</label>
+    <textarea class="form-control" required id="emp_permenent_address" name="emp_permenent_address"  [(ngModel)]="emp_permenent_address"  placeholder="Enter Permenent Address"
+    [ngModelOptions]="{standalone: true}" >  </textarea>
+
+
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_permenent_address" class="error-message">Description is required.</div> -->
+</div>
+
+
+<div class="col-md-6" >
+               
+    <label>Present address</label>
+<textarea class="form-control" required id="emp_present_address" name="emp_present_address"  [(ngModel)]="emp_present_address"  placeholder="Enter Present Address"
+[ngModelOptions]="{standalone: true}" ></textarea>
+
+   
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_present_address" class="error-message">Description is required.</div> -->
+</div>
+
+<div class="col-md-6" >
+               
+    <label>City</label>
+   <input type="text"  class="form-control" required id="emp_city" name="emp_city"  [(ngModel)]="emp_city"  placeholder="Enter City Name"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_city" class="error-message">Description is required.</div> -->
+</div>
+
+
+<div class="col-md-6" >
+               
+    <label>Religion</label>
+   <input type="text"  class="form-control" required id="emp_relegion" name="emp_relegion"  [(ngModel)]="emp_relegion"  placeholder="Enter Religion"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_relegion" class="error-message">Description is required.</div> -->
+</div>
+
+<div class="col-md-6" >
+               
+    <label>Blood Group</label>
+   <input type="text"  class="form-control" required id="emp_blood_group" name="emp_blood_group"  [(ngModel)]="emp_blood_group"  placeholder="Enter Blood Group"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_blood_group" class="error-message">Description is required.</div> -->
+</div>
+
+<div class="col-md-6" >
+               
+    <label>Nationality</label>
+   <input type="text"  class="form-control" required  id="emp_nationality" name="emp_nationality" [(ngModel)]="emp_nationality"  placeholder="Enter Nationality"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_nationality" class="error-message">Description is required.</div> -->
+</div>
+
+
+<div class="col-md-6" >
+    
+    <div class="custom-sel">
+              
+        <label>marital Status</label>
+        <select class="form-control" id="emp_marital_status" name="emp_marital_status"  [(ngModel)]="emp_marital_status"  [ngModelOptions]="{standalone: true}" >
+          
+            <option >Married</option>
+            <option>Single</option>
+            <option>Divorced</option>
+            <option>Widow</option>
+            
+        </select>
+    </div>
+    <!-- <label>Last Name</label>
+   <input type="radio"  class="form-control" required  [(ngModel)]="emp_gender"  placeholder="Enter Department Name"
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_gender}">
+   
+   <div *ngIf="registerButtonClicked && !emp_gender" class="error-message">Department Name is required.</div> -->
+</div>
+
+<div class="col-md-6" >
+               
+    <label>Father Name</label>
+   <input type="text"  class="form-control" required id="emp_father_name" name="emp_father_name"  [(ngModel)]="emp_father_name"  placeholder="Enter Father Name"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_father_name" class="error-message">Description is required.</div> -->
+</div>
+
+<div class="col-md-6" >
+               
+    <label>Mother Name</label>
+   <input type="text"  class="form-control" required id="emp_mother_name" name="emp_mother_name"  [(ngModel)]="emp_mother_name"  placeholder="Enter Mother Name"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_mother_name" class="error-message">Description is required.</div> -->
+</div>
+
+<div class="col-md-6">
+
+
+    <div class="custom-sel">
+        <label>Select Location</label>
+        <select class="form-control" id="emp_posting_location" name="emp_posting_location" required [(ngModel)]="emp_posting_location"  [ngModelOptions]="{standalone: true}"
+         >
+            <option value="" >Select</option>
+            <option *ngFor="let emp_branch_id of branches" [value]="emp_branch_id.id">{{ emp_branch_id.branch_name }}</option>
+        </select>
+        <!-- <div *ngIf="registerButtonClicked && !emp_posting_location" class="error-message">Please Select Your Branch</div> -->
+    </div>
+                
+
+</div>
+
+
+
+     <div class="col-md-6">
+
+
+            <div class="custom-sel">
+                <label>Country</label>
+                <select class="form-control" id="emp_country_id" name="emp_country_id" required [(ngModel)]="emp_country_id" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}" >
+                    <option value="" >Select</option>
+                    <option *ngFor="let emp_country_id of countries" [value]="emp_country_id.id">{{ emp_country_id.country_name }}</option>
+                </select>
+                <!-- <div *ngIf="registerButtonClicked && !emp_country_id" class="error-message">Please Select Your Country</div> -->
+            </div>
+                        
+
+        </div>
+
+        <div class="col-md-6" *ngIf="states && states.length > 0">
+               
+        
+            <div class="custom-sel" >
+                <label>State</label>
+                <select class="form-control" id="emp_state_id" name="emp_state_id" required [(ngModel)]="emp_state_id"  [ngModelOptions]="{standalone:true}" >
+                    <option value=""> select</option>
+                    <option  *ngFor="let emp_state_id of states" [value]="emp_state_id.id">{{ emp_state_id.state_name }}</option>
+                </select>
+                <!-- <div *ngIf="registerButtonClicked && !emp_state_id" class="error-message">Please Select your State.</div> -->
+            </div>
+                             
+
+        
+    </div>
+
+
+    
+    <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select Branch</label>
+            <select class="form-control" id="emp_branch_id" name="emp_branch_id" required [(ngModel)]="emp_branch_id"  [ngModelOptions]="{standalone: true}"
+            [ngClass]="{'error-field': registerButtonClicked && !emp_branch_id}" >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_branch_id of branches" [value]="emp_branch_id.id">{{ emp_branch_id.branch_name }}</option>
+            </select>
+            <div *ngIf="registerButtonClicked && !emp_branch_id" class="error-message">Please Select Your Branch</div>
+        </div>
+                    
+
+    </div>
+
+    
+    <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select Departments</label>
+            <select class="form-control" id="emp_dept_id" name="emp_dept_id" required [(ngModel)]="emp_dept_id"  [ngModelOptions]="{standalone: true}"
+             >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_dept_id of departments" [value]="emp_dept_id.id">{{ emp_dept_id.dept_name }}</option>
+            </select>
+            <!-- <div *ngIf="registerButtonClicked && !emp_dept_id" class="error-message">Please Select Your Department</div> -->
+        </div>
+                    
+
+    </div>
+        
+   
+   
+    <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select Designation</label>
+            <select class="form-control" id="emp_desgntn_id" name="emp_desgntn_id" required [(ngModel)]="emp_desgntn_id"  [ngModelOptions]="{standalone: true}"
+             >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_desgntn_id of designations" [value]="emp_desgntn_id.id">{{ emp_desgntn_id.job_title }}</option>
+            </select>
+            <!-- <div *ngIf="registerButtonClicked && !emp_desgntn_id" class="error-message">Please Select Your Department</div> -->
+        </div>
+                    
+
+    </div>
+        
+
+    <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select catogory</label>
+            <select class="form-control" id="emp_ctgry_id" name="emp_ctgry_id" required [(ngModel)]="emp_ctgry_id"  [ngModelOptions]="{standalone: true}"
+           >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_ctgry_id of catogories" [value]="emp_ctgry_id.id">{{ emp_ctgry_id.catogary_title }}</option>
+            </select>
+            <!-- <div *ngIf="registerButtonClicked && !emp_ctgry_id" class="error-message">Please Select Your Catogory</div> -->
+        </div>
+                    
+
+    </div>
+<!-- 
+    <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select Language</label>
+            <select class="form-control" id="emp_languages"  required [(ngModel)]="emp_languages" name="emp_languages" multiple
+            [ngClass]="{'error-field': registerButtonClicked && !emp_languages}">
+            <option value="">Select</option>
+            <option *ngFor="let language  of languages" [value]="language.id">{{ language.language }}</option>
+         </select>
+         
+            <div *ngIf="registerButtonClicked && !emp_languages" class="error-message">Please Select Your Language</div>
+        </div>
+                    
+
+    </div> -->
+
+    <div class="col-md-6">
+               
+        <label>Hired date</label>
+       <input type="date"  class="form-control" required id="emp_hired_date" name="emp_hired_date"  [(ngModel)]="emp_hired_date"  placeholder="Enter hired Date "
+        [ngModelOptions]="{standalone: true}" >
+       
+       <!-- <div *ngIf="registerButtonClicked && !emp_hired_date" class="error-message">hired date .</div> -->
+    </div>
+
+    <div class="col-md-6">
+               
+        <label>Joining  date</label>
+       <input type="date"  class="form-control" required id="emp_active_date" name="emp_active_date"  [(ngModel)]="emp_active_date"  placeholder="Enter Active Date "
+        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_active_date}">
+       
+       <div *ngIf="registerButtonClicked && !emp_active_date" class="error-message">Active date .</div>
+    </div>
+
+ 
+
+   
+
+
+    <div class="col-md-6">
+        <label for="emp_profile_pic">Employee Profile Picture:</label>
+        <input type="file" class="form-control" id="emp_profile_pic " name="emp_profile_pic" (change)="onFileSelected($event)" >
+        <!-- <div *ngIf="emp_profile_pic && emp_profile_pic.includes('No file was submitted.')" class="error-message"> -->
+            <!-- No file was selected for the profile picture. -->
+        </div>
+
+
+
+     
+
+    </div>
+
+    <!-- <div class="row mt-4">
+        <div class="col-md-12">
+         
+              
+
+
+                  <div class="toggle-container">
+                    <span> Is Ess User</span>
+                    <input type="checkbox" id="is_ess" [(ngModel)]="is_ess" name="is_ess" class="toggle">
+                    
+                    <label for="is_ess" class="label">
+                      <div class="ball"></div>
+                      <div class="background">
+                        <div class="fill"></div>
+                      </div>
+                      <div class="checked"><i class="fa-solid fa-check"></i></div>
+                    </label>
+                  
+                  </div>
+        
+        </div>
+    </div>
+     -->
+
+    <!-- <div class="col-md-6">
+        <label for="emp_doc_document">Employee Document:</label>
+        <input type="file" id="emp_doc_document" name="emp_doc_document" (change)="onFileSelected($event)">
+    </div> -->
+ 
+    
+
+       
+    </form>
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div>
+        <div class="col-md-2">
+            <button  type="submit" (click)="uploadEmployeeDocument()"
+               mat-raised-button color="primary" class="pull-right btn-full mt-4" >Next</button>
+
+        </div>
+    </div>
+
+</mat-tab>
+<mat-tab >
+
+    <form>
+        <div class="row">
+            <!-- <div class="custom-sel drop_wid">
+                <label>User</label>
+                <select class="form-control form-cont-bor" id="users" name="user" required  [disabled]="isUserSelectDisabled"  [(ngModel)]="users" [ngModelOptions]="{standalone: true}">
+                    <option value="">Select</option>
+                    <option *ngFor="let user of userss" [value]="user.id">{{ user.username }}</option>
+                  </select>
+                 
+            </div> -->
+            <div class="col-md-6">
+                <div class="grou-item_new">
+                    <div class="custom-sel drop_wid">
+                        <label>User</label>
+                        <select class="form-control form-cont-bor" id="users" name="user" required [disabled]="isUserSelectDisabled" [(ngModel)]="users" [ngModelOptions]="{standalone: true}">
+                            <option value="">Select</option>
+                            <option *ngFor="let user of userss" [value]="user.id">{{ user.username }}</option>
+                        </select>
+                    </div>
+                    <div class="choosing" (click)="enableUserSelect()">
+                        <h6>Change user</h6>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-6">
+                <label>Select Company</label>
+                <div class="custom-sel">
+
+                    <select class="form-control" [(ngModel)]="selectedCompany" name="company" (change)="onCompanyChange()">
+                        <option value="">Select a company</option>
+                        <option *ngFor="let company of companies" [ngValue]="company">{{ company.schema_name }}</option>
+                    </select>
+                    <!-- <select class="form-control" id="companySelect" [(ngModel)]="selectedCompany" name="company" (change)="onCompanyChange()">
+                        <option value="">Select a company</option>
+                        <option *ngFor="let company of companies" [ngValue]="company">{{ company.schema_name }}</option>
+                    </select> -->
+                </div>
+            </div>
+    
+            <div class="col-md-6">
+                <label>Select Emp Code:</label>
+                <div class="custom-sel">
+
+                    <!-- <select [(ngModel)]="selectedEmployee" name="employee">
+                        <option value="">Select a user</option>
+                        <option *ngFor="let employee of employees" [ngValue]="employee.emp_code">{{ employee.emp_code }}</option>
+                    </select> -->
+                    <!-- <select class="form-control" id="employee" [(ngModel)]="emp_code" name="employee">
+                        <option value="">Select a user</option>
+                        <option *ngFor="let employee of employees" [ngValue]="employee.emp_code">{{ employee.emp_code }}</option>
+                    </select> -->
+                    <select class="form-control" id="employee" [(ngModel)]="selectedEmp" name="employee" (ngModelChange)="onEmployeeChange()">
+                        <option [ngValue]="null">Select a user</option>
+                        <option *ngFor="let employee of employees" [ngValue]="employee">
+                          {{ employee.emp_code }}
+                        </option>
+                      </select>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div>
+        <div class="col-md-2">
+            <!-- <button  type="submit" (click)="uploaduserDocument()"
+            mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button> -->
+            <button  type="submit" (click)="uploaduserDocument()"
+               mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
+
+        </div>
+    </div>
+</mat-tab>
+</mat-tab-group>
+
+
+  
+
+        </div>
+
+ 
+
+        
+</div>
+<div mat-dialog-action>
+    
+</div>
+

@@ -1,0 +1,45 @@
+
+body{
+    background: whitesmoke !important;
+}
+
+.cmp-outer{
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    /* border: solid 1px blue; */
+    margin-top: 50px;
+    padding: 20px;
+    box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+
+
+}
+
+
+
+
+
+.cpm-sec{
+    padding: 30px;
+}
+
+.cpm-sec h1{
+    font-size: 18px;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.error {
+    border-color: red;
+}
+
+/* Add this to your component's CSS file or styles section */
+.error-field {
+    border: 1px solid red;
+  }

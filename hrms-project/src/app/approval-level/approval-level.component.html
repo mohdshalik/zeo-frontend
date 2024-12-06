@@ -1,0 +1,89 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>Approval Level</h2><hr>
+
+    <form>
+        <div class="row">
+            <div class="col-md-6" >
+           
+                <label>Level</label>
+               <input type="number"  class="form-control" required  [(ngModel)]="level"  placeholder="Enter level"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !level}">
+               
+               <div *ngIf="registerButtonClicked && !level" class="error-message">level is required.</div>
+          </div>
+          
+
+          <div class="col-md-6" >
+           
+            <label>Role</label>
+           <input type="text"  class="form-control" required  [(ngModel)]="role"  placeholder="Enter role"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !role}">
+           
+           <div *ngIf="registerButtonClicked && !role" class="error-message">role is required.</div>
+      </div>
+
+
+      <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Approver</label>
+            <select class="form-control" id="approver" required [(ngModel)]="approver"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !approver}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of Users" [value]="deparmentsec.id">{{ deparmentsec.username     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !approver" class="error-message">Please Select approver  </div>
+        </div>
+                    
+
+    </div>
+
+      
+    <div class="col-md-6">
+
+        <div class="custom-sel">
+            <label>Select Request Type</label>
+            <select class="form-control" id="request_type" required [(ngModel)]="request_type"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !request_type}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of RequestType" [value]="deparmentsec.id">{{ deparmentsec.name     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !request_type" class="error-message">Please Select Your Req type</div>
+        </div>  
+
+    </div>
+
+   
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+
+            </div>
+
+            <div class="col-md-2">
+                <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerApproveLevel()">Save</button>  
+             </div>
+
+             
+        </div>
+    </form>
+
+  
+  
+
+
+        </div>
+
+        </div>
+
+
+  
+
+</div>
+</div>

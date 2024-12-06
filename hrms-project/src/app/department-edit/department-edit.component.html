@@ -1,0 +1,79 @@
+<div mat-dialog-content class="">
+
+    <div class="cpm-sec" *ngIf="department" >
+
+        <h1>Edit Department</h1><hr>
+
+        <form (submit)="updateCategory()">
+        <div class="row" >
+
+            <div class="col-md-6" >
+               
+                <label>Department Name</label>
+               <input type="text"  class="form-control" required id="dept_name" name="dept_name"  [(ngModel)]="department.dept_name"  placeholder="Enter department name "
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !dept_name}">
+               
+               <div *ngIf="registerButtonClicked && !dept_name" class="error-message">Description is required.</div>
+            </div>
+        
+            <div class="col-md-6" >
+               
+                <label>Department code</label>
+               <input type="text"  class="form-control" required  [(ngModel)]="department.dept_code"  placeholder="Enter Department code"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !dept_code}">
+               
+               <div *ngIf="registerButtonClicked && !dept_code" class="error-message">Department code is required.</div>
+            </div>
+
+<div class="col-md-6" >
+               
+    <label>Description</label>
+   <input type="text"  class="form-control" required id="dept_description" name="dept_description"  [(ngModel)]="department.description"  placeholder="Enter Description "
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !dept_description}">
+   
+   <div *ngIf="registerButtonClicked && !dept_description" class="error-message">Description is required.</div>
+</div>
+
+
+<div class="col-md-6">
+
+
+    <div class="custom-sel">
+        <label>Select Branches</label>
+        <select class="form-control" id="deparmentsec" required [(ngModel)]="department.branch_id"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch_id}" >
+            <option value="" >Select</option>
+            <option *ngFor="let deparmentsec of Departments" [value]="deparmentsec.id">{{ deparmentsec.branch_name     }} </option>
+        </select>
+        <div *ngIf="registerButtonClicked && !branch_id" class="error-message">Please Select Your Company</div>
+    </div>
+                
+
+</div>
+         
+      
+        
+        
+   
+
+
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div>
+        <div class="col-md-2">
+            <button   mat-raised-button color="primary" class="pull-right btn-full mt-4" type="submit" (click)="updateCategory()" >Save</button>
+
+        </div>
+    </div>
+
+
+        </div>
+</div>
+<div mat-dialog-action>
+    
+</div>

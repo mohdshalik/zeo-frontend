@@ -1,0 +1,167 @@
+<div mat-dialog-content class="">
+
+    <div class="cpm-sec" *ngIf="Emp" >
+  
+        <h1>Company Details Edit</h1><hr>
+  
+        <form (submit)="updateBranch">
+           <div class="row">
+
+            <div class="col-md-6" >
+                     
+                <label>Branch Name</label>
+               <input type="text"  class="form-control" required id="branch_code" name="branch_code"  [(ngModel)]="Emp.branch_code"  placeholder="Enter Branch Code"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch_code}">
+               
+               <div *ngIf="registerButtonClicked && !branch_code" class="error-message">Branch code is required.</div>
+          </div>
+          
+            <div class="col-md-6" >
+                     
+              <label>Branch Name</label>
+             <input type="text"  class="form-control" required id="branch_name" name="branch_name"  [(ngModel)]="Emp.branch_name"  placeholder="Enter Branch Name"
+              [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch_name}">
+             
+             <div *ngIf="registerButtonClicked && !branch_name" class="error-message">Branch Name is required.</div>
+        </div>
+        
+        <div class="col-md-6" >
+                       
+            <label>Branch City Name</label>
+           <input type="text"  class="form-control" required id="br_city" name="br_city"  [(ngModel)]="Emp.br_city"  placeholder="Enter City Name"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !br_city}">
+           
+           <div *ngIf="registerButtonClicked && !br_city" class="error-message">city Name is required.</div>
+        </div>
+        
+        <div class="col-md-6" >
+                       
+            <label>Branch pincode</label>
+           <input type="text"  class="form-control" required id="br_pincode" name="br_pincode"  [(ngModel)]="Emp.br_pincode"  placeholder="Enter pincode"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !br_pincode}">
+           
+           <div *ngIf="registerButtonClicked && !br_pincode" class="error-message">Pincode Name is required.</div>
+        </div>
+       
+        
+        <div class="col-md-6">
+                       
+            <label>Contact</label>
+           <input type="text"  class="form-control" required id="br_branch_nmbr_1" name="br_branch_nmbr_1"  [(ngModel)]="Emp.br_branch_nmbr_1"  placeholder="Enter Contact"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !br_branch_nmbr_1}">
+           
+           <div *ngIf="registerButtonClicked && !br_branch_nmbr_1" class="error-message">Contact is required.</div>
+        </div>
+    
+        <div class="col-md-6">
+                       
+            <label>Contact 2</label>
+           <input type="text"  class="form-control" required id="br_branch_nmbr_2" name="br_branch_nmbr_2"  [(ngModel)]="Emp.br_branch_nmbr_2"  placeholder="Enter Contact"
+            [ngModelOptions]="{standalone: true}" >
+    
+        </div>
+        
+    
+    
+        <div class="col-md-6" >
+                       
+            <label>Email</label>
+           <input type="text"  class="form-control" required id="br_branch_mail" name="br_branch_mail"  [(ngModel)]="Emp.br_branch_mail"  placeholder="Enter Email ID"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !br_branch_mail}">
+           
+           <div *ngIf="registerButtonClicked && !br_branch_mail" class="error-message">Enter Email ID.</div>
+        </div>
+        
+
+        <div class="col-md-6">
+    
+    
+            <div class="custom-sel">
+                <label>Select Company</label>
+                <select class="form-control" id="country" required name="br_company_id" [(ngModel)]="Emp.br_company_id"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !br_company_id}" >
+                    <option value="" >Select</option>
+                    <option *ngFor="let country of companies" [value]="country.id">{{ country.cmpny_name }}</option>
+                </select>
+                <div *ngIf="registerButtonClicked && !br_company_id" class="error-message">Please Select Your Company</div>
+            </div>
+                        
+    
+        </div>
+        
+        
+        
+  
+                <div class="col-md-6">
+  
+  
+                  <div class="custom-sel">
+                      <label>Country</label>
+                      <select class="form-control" id="country" required [(ngModel)]="Emp.br_country" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !br_country}" >
+                          <option value="" >Select</option>
+                          <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+                      </select>
+                      <div *ngIf="registerButtonClicked && !br_country" class="error-message">Please Select Your Country</div>
+                  </div>
+                              
+      
+       
+                     
+                     
+                  
+              </div>
+              <div class="col-md-6" *ngIf="states && states.length > 0">
+                 
+          
+                <div class="custom-sel" >
+                    <label>State</label>
+                    <select class="form-control" id="state" required [(ngModel)]="Emp.br_state_id"  [ngModelOptions]="{standalone:true}" [ngClass]="{'error-field': registerButtonClicked && !br_state_id}">
+                        <option value=""> select</option>
+                        <option  *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
+                    </select>
+                    <div *ngIf="registerButtonClicked && !br_state_id" class="error-message">Please Select your State.</div>
+                </div>
+                                 
+    
+            
+        </div>
+
+        <div class="col-md-6">
+
+
+            <div class="custom-sel">
+                <label>Select User</label>
+                <select class="form-control" id="branch_users" name="branch_users" required multiple [(ngModel)]="Emp.branch_users"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch_users}" >
+                    <option value="" >Select</option>
+                    <option *ngFor="let branch_users of companies" [value]="branch_users.id">{{ branch_users.username }}</option>
+                </select>
+                <div *ngIf="registerButtonClicked && !branch_users" class="error-message">Please Select any user</div>
+            </div>
+                        
+        
+        </div>
+    
+        
+              
+           </div>
+        </form>
+    
+  
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+  
+        </div>
+        <div class="col-md-2">
+            <button   mat-raised-button color="primary" class="pull-right btn-full mt-4" type="submit" (click)="updateBranch()" >Save</button>
+  
+        </div>
+    </div>
+  
+  
+        </div>
+  </div>
+  <div mat-dialog-action>
+    
+  </div>
+  

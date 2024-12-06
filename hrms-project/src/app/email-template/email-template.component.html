@@ -1,0 +1,132 @@
+<div class="container" >
+
+    <div class="email_div"  >
+        <mat-icon>chevron_left</mat-icon>
+    </div>
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>Email Template</h2><hr>
+
+
+        <form>
+
+            <div class="row">
+
+              
+
+   <div class="col-md-12">
+
+
+                    <div class="custom-sel">
+                        <label>Template Type</label>
+                        <select class="form-control" id="template_type" required [(ngModel)]="template_type"  [ngModelOptions]="{standalone: true}">
+                            <option value="" >Select</option>
+                            <option value="request_created">Request Created</option>
+                            <option value="request_approved">Request Approved</option>
+                            <option value="request_rejected">Request Rejected</option>
+
+
+                        </select>
+                    </div>
+                                
+            
+                </div>
+
+                <div class="col-md-12">
+                    <label>Subject</label>
+                    <input type=" text" class="form-control" [(ngModel)]="subject"  [ngModelOptions]="{standalone: true}" placeholder="enter subject">
+                </div>
+
+                <div class="col-md-8">
+                    <label>Body</label>
+                    <div id="summernote"></div>
+                </div>
+                
+                <div class="col-md-4">
+                    <label>Select Field names</label>
+                    <div class="email_placeholdername">
+                      <div class="on_by_placeholders" *ngFor="let placeholder of EmailPlaceHolders" (click)="selectPlaceholder(placeholder)">
+                        <h4>{{ placeholder }}</h4> <!-- Display the placeholder value -->
+                      </div>
+                    </div>
+                  </div>
+                
+
+                <div class="col-md-12">
+
+                    <div class="custom-sel">
+                        <label>Select Request Type</label>
+                        <select class="form-control" id="request_type" required [(ngModel)]="request_type"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !request_type}" >
+                            <option value="" >Select</option>
+                            <option *ngFor="let deparmentsec of RequestType" [value]="deparmentsec.id">{{ deparmentsec.name     }} </option>
+                        </select>
+                        <div *ngIf="registerButtonClicked && !request_type" class="error-message">Please Select Your Req type</div>
+                    </div>  
+            
+                </div>
+                
+            </div>
+    
+            <div class="row">
+                <div  class="col-md-10"></div>
+                <div class="col-md-2">
+
+                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="onclickEmailTemplate()">Save</button>  
+
+                </div>
+            </div>
+
+        </form>
+
+        
+  
+
+    
+
+
+        </div>
+
+        </div>
+
+        
+        <div class="com_list ">
+            <div class="cpm-sec">
+        
+                <h2>Email Templates</h2><hr>
+
+                <div class="row" *ngFor="let deparmentsec of tempEmails">
+                    <div class="col-md-12">
+                        <div class="emailtep_det_">
+                        <div class="row"> 
+                            <div class="col-md-10 col-8">
+                                <h6>{{deparmentsec.template_type}}</h6>
+
+                            </div>
+                            <div class="col-md-2 col-4">
+                                <button type="button" class="btn" (click)="openEditPopuss(deparmentsec)">View</button>
+
+                            </div> 
+                        </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+
+
+
+
+
+
+  
+
+        </div>
+        
+
+       
+        </div>

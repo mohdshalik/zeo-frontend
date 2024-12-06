@@ -1,0 +1,150 @@
+<div class="container" >
+    <div class="comapny_section" *ngIf="userDetails">
+        <div class="content_sec">
+   
+        <h3 class="userdisname">{{userDetails.username}}</h3>
+        <div class="row">
+            <div class="col-md-10">
+                <h3 class="mb-5">{{ currentGreeting }}</h3>
+
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn-ess btn pull-right">
+                    <span class="animated-text">
+                   
+                      <!-- <mat-icon>keyboard_double_arrow_right</mat-icon> -->
+                      Ess Profile
+                    </span>
+                  </button>
+                  
+                              </div>
+        </div>
+            
+        <div class="card-list">
+            <div class="row">
+                <div class="col-md-3 col-12">
+                    <div class="card blue">
+                        <div class="title">Branches <span class="pull-right"> <mat-icon>apartment
+                        </mat-icon></span></div>
+                       
+                        <div class="value">{{branchCount}}</div>
+                        <div class="stat"></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-12">
+                    <div class="card green">
+                        <div class="title">Departments <span class="pull-right"> <mat-icon>account_tree</mat-icon></span></div>
+                        <i class="zmdi zmdi-upload"></i>
+                        <div class="value">{{departmentCount}}</div>
+                        <div class="stat"></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-12">
+                    <div class="card orange">
+                        <div class="title">Categories <span class="pull-right"> <mat-icon>category</mat-icon></span></div>
+                        <i class="zmdi zmdi-download"></i>
+                        <div class="value">{{categoriesCount}}</div>
+                        <div class="stat"></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-12">
+                    <div class="card red">
+                        <div class="title">Designations <span class="pull-right"> <mat-icon>badge</mat-icon></span></div>
+                        <i class="zmdi zmdi-download"></i>
+                        <div class="value">{{designationsCount}}</div>
+                        <div class="stat"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content_sec_last">
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="dash_holidays">
+              <div class="row">
+                <div class="col-md-5">
+                  <h6>Holidays</h6>
+                </div>
+                <div class="col-md-7">
+                  <div class="custom-sel pull-right">
+                    <select class="drop_list" [(ngModel)]="selectedBranchIdhol" (change)="onBranchChange($event)">
+                      <option value="" disabled selected>Select Branch</option>
+                      <option *ngFor="let branch of branches" [value]="branch.id">
+                        {{ branch.branch_name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+          
+              <div *ngIf="selectedBranchHolidays.length === 0" class="mt-3">
+                <p>No holidays available for the selected branch.</p>
+              </div>
+          
+              <div *ngFor="let holiday of selectedBranchHolidays"  class="row mt-3">
+                <div class="col-md-3">
+                  <div class="holi_date_sec">
+                    <h2>{{ getDate(holiday.start_date) }} <br><span>{{ getMonth(holiday.start_date) }}</span></h2>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <h5 class="mt-2">{{ holiday.description }}</h5>
+                  <h4>{{ getDay(holiday.start_date) }}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+          <div class="col-md-8">
+            <div class="dash_holidays">
+              <div class="row">
+                <div class="col-md-5">
+                  <h6>Company Policy</h6>
+                </div>
+                <div class="col-md-7">
+                  <div class="custom-sel pull-right">
+                    <select class="drop_list" [(ngModel)]="selectedBranchId" (change)="onBranchChangeCmpPolicy($event)">
+                      <option value="" disabled selected>Select Branch</option>
+                      <option *ngFor="let branch of branches" [value]="branch.id">
+                        {{ branch.branch_name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="policy_sec mt-2" *ngIf="selectedBranchPolicies.length > 0">
+                <div *ngFor="let policy of selectedBranchPolicies" class="policy_item mt-3">
+                    <h1>Company Policy Tittle</h1>
+                  <h2>{{ policy.title }}</h2>
+                  <h1>Company Policy Description</h1>
+                  <h2>{{ policy.description }}</h2>
+                  <div *ngIf="policy.policy_file">
+                    <a [href]="policy.policy_file" target="_blank">View Policy Document</a>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="policy_sec mt-2" *ngIf="selectedBranchPolicies.length === 0">
+                <h2>No policies available for the selected branch.</h2>
+              </div>
+            </div>
+          </div>
+          
+    </div>
+    </div>
+        </div>
+        
+
+        </div>
+
+
+
+
+
+

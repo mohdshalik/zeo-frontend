@@ -1,0 +1,85 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>Attendance Marking</h2><hr>
+
+    <form>
+        <div class="row">
+            <div class="col-md-6" >
+           
+                <label>Date</label>
+               <input type="date"  class="form-control" required  [(ngModel)]="date"  placeholder="Enter date"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !date}">
+               
+               <div *ngIf="registerButtonClicked && !date" class="error-message">date is required.</div>
+          </div>
+          
+
+          <div class="col-md-6" >
+           
+            <label>check in time</label>
+           <input type="time"  class="form-control" required  [(ngModel)]="check_in_time"  placeholder="Enter check in time"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !check_in_time}">
+           
+           <div *ngIf="registerButtonClicked && !check_in_time" class="error-message">check_in_time is required.</div>
+      </div>
+
+
+      <div class="col-md-6" >
+           
+        <label>check out time</label>
+       <input type="time"  class="form-control" required  [(ngModel)]="check_out_time"  placeholder="Enter check out time"
+        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !check_out_time}">
+       
+       <div *ngIf="registerButtonClicked && !check_out_time" class="error-message">check_out_time is required.</div>
+  </div>
+
+  <div class="col-md-6" >
+           
+    <label>Total hours</label>
+   <input type="text"  class="form-control" required  [(ngModel)]="total_hours"  placeholder="Enter total hours"
+    [ngModelOptions]="{standalone: true}" >
+   
+</div>
+     
+<div class="col-md-6">
+    <label>Employee</label>
+    <div class="custom-sel">
+      <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let employee of Employees" [value]="employee.id">{{ employee.emp_code }}</option>
+      </select>
+    </div>
+  </div>
+   
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+
+            </div>
+
+            <div class="col-md-2">
+                <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerApproveLevel()">Save</button>  
+             </div>
+
+             
+        </div>
+    </form>
+
+  
+  
+
+
+        </div>
+
+        </div>
+
+
+  
+
+</div>
+</div>

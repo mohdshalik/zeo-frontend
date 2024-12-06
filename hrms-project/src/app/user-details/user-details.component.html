@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="comapny_section" *ngIf="Companies">
+
+       
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-7">
+                    <h1> User Details </h1>
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+                        <!-- <button type="button"  class="btn-Create btn btn-success "><span class="header-btn-icon"><mat-icon>add_circle
+                        </mat-icon></span> Create</button> -->
+
+                        <button type="button" class="btn-Edit btn-info btn"  (click)="openEditEmpPopuss(Companies.id)">
+                            <span class="header-btn-icon">
+                             <mat-icon>draw
+                        </mat-icon></span> Edit</button>
+                        <button type="button" class="btn-Delete btn btn-danger" (click)="onDeleteEmployee(Companies.id)">
+                            <span class="header-btn-icon">
+                                <mat-icon> delete
+                           </mat-icon></span> Delete</button>
+                  
+                        </div>
+                </div>
+
+            </div>
+           
+           
+
+        </div>
+
+        <div class="body-section">
+            
+            
+            <div class="user_spec">
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <mat-icon style="color: #714b67; height: 100%; width: 100%; font-size: 150px;">person
+                        </mat-icon>
+                    </div>
+
+                    <div class="col-md-9">
+                        <h1>{{Companies.username}}</h1>
+                        <h3 style="color: #714b67">Front End Developer</h3>
+
+
+                        <h2>User Name: {{Companies.username}}</h2><hr>
+                    </div>
+                </div>
+
+                <div class="user_de_Sec">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2 style="color: black;">Abouts</h2><hr>
+                        <!-- <h2>Date of joined</h2>
+                        <h2 style="margin-top: 0px;color: black;">12-01-2024</h2> -->
+
+                     
+
+                        <h2>Admin Status</h2>
+                        <h2 style="margin-top: 0px;color: black;">{{Companies.is_superuser}} </h2>
+
+                        <h2>Ess Status</h2>
+                        <h2 style="margin-top: 0px;color: black;">{{Companies.is_ess}} </h2>
+
+                        <h2>Staff Status</h2>
+                        <h2 style="margin-top: 0px;color: black;">{{Companies.is_staff}} </h2>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <h2 style="color: black;">Contact</h2><hr>
+                      
+
+                        <h2>Email</h2>
+                        <h2 style="margin-top: 0px;color: black;">{{Companies.email}}</h2>
+                        <h2>Phone</h2>
+                        <h2 style="margin-top: 0px;color: black;">+91 7788987867</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <h2 style="color: black;">User Details</h2><hr>
+                        <h2>Company</h2>
+                        <h2 style="margin-top: 0px;color: black;"> {{Companies.tenants}}</h2>
+
+                        <h2>Group Permissions</h2>
+                        <h2 style="margin-top: 0px;color: black;">Manager </h2>
+                    </div>
+                </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        </div>

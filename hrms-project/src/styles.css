@@ -1,0 +1,326 @@
+/* You can add global styles to this file, and also import other style files */
+/* styles.scss */
+
+/* @import "~bootstrap-icons/font/bootstrap-icons.css"; */
+/* @import "bootstrap/dist/css/bootstrap.min.css"; */
+
+
+:root {
+  --primary-color: #3498db;
+  --main-color:#5c1e81;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: whitesmoke !important; }
+.mat-expansion-panel-body {
+    padding: 0 2px 16px !important;
+}
+
+.bg-white {
+    background-color: #000!important;
+}
+
+a:not([href]):not([tabindex]) {
+    background: transparent;
+}
+
+.mat-icon{
+    color: white;
+}
+
+.sidenav-opt{
+    color: white;
+}
+
+.mat-drawer.mat-drawer-side{
+    margin-left: 56px;
+}
+
+.list-group a {
+    background: black;
+}
+
+.list-group-item:hover {
+    background: transparent;
+}
+
+.list-group-item-action:active{
+    background-color: #000;
+}
+
+.list-group-item-action:focus{
+    background-color: #000;
+}
+/* .list-group-item:hover .mat-icon{
+
+    
+} */
+
+/* .list-group-item-action:focus, .list-group-item-action:hover {
+
+    background-color: #000000;
+} */
+
+
+.btn-full{
+    width: 100%;
+
+} 
+.pull-right{
+    float: right;
+}
+
+label {
+    margin-top: 20px;
+}
+
+.mat-mdc-dialog-content {
+        max-height: 100% !important;
+}
+
+.fixed-top{
+    z-index: 1000 !important;
+}
+.mat-mdc-dialog-container{
+    margin-top: 30px !important;
+}
+
+.comapny_section{
+    padding: 20px;
+}
+
+label{
+    text-transform: capitalize !important;
+}
+
+input[type="text"]::placeholder {
+    text-transform: lowercase !important;
+}
+
+.selected-item {
+    border: 2px solid #dc3545;
+  }
+
+  .mdc-form-field label{
+    margin-top: 10px !important;
+  }
+
+
+  /* expansion panel css style hre in  angular meterial */
+
+
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+    margin-left: 8px;
+  }
+
+  .cpm-sec h1{
+    font-size: 24px;
+    text-transform: uppercase;
+  }
+
+
+
+  /* input field required style  */
+  
+.error-message {
+    color: red;
+    font-size: 12px;
+    /* margin-top: 4px; */
+    text-align: left;
+    margin-bottom: 10px;
+    text-align: left !important;
+}
+
+
+.error {
+    border-bottom-color: red !important;
+}
+
+/* Add this to your component's CSS file or styles section */
+.error-field {
+    border-bottom: 1px solid red !important;
+  }
+
+
+
+
+  /* .form-control{
+    border: none;
+    border-bottom: solid 2px black;
+    border-radius: 0px;
+  } */
+
+
+/* Define the scrollbar width for WebKit browsers (Chrome, Safari, etc.) */
+.mat-mdc-dialog-container .mdc-dialog__content::-webkit-scrollbar {
+    width: 5px; /* Adjust this value to change the width of the scrollbar */
+  }
+  
+  /* Define the scrollbar track color */
+  .modal-dialog::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Change the color as needed */
+  }
+  
+  /* Define the scrollbar handle */
+  .modal-dialog::-webkit-scrollbar-thumb {
+    background: #888; /* Change the color of the scrollbar handle */
+  }
+  
+  /* Define the scrollbar handle on hover */
+  .modal-dialog::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Change the color on hover as needed */
+  }
+
+
+  .cpm-sec{
+    padding: 20px;
+  }
+
+  /* CSS Styles */
+.hide-class {
+  display: none; /* or any other style to hide the element */
+}
+
+.show-class {
+  display: block; /* or any other style to show the element */
+}
+
+
+
+.cpm-sec h1 {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+  color: black;
+}
+
+
+.comapny_section{
+   background: whitesmoke;
+}
+
+.mat-drawer-content {
+  background: whitesmoke;
+
+}
+
+.mdc-form-field label{
+  font-size: 14px !important;
+}
+
+.mat-mdc-checkbox .mdc-form-field label{
+  font-size: 13px !important;
+}
+
+.list-group{
+  cursor: pointer;
+}
+
+.button-group button{
+  color: white !important;
+}
+
+.emp_det_list h2 {
+
+  color: #5d1e7f !important;
+  margin-top: 10px;
+}
+
+.emp_det_list h3 {
+
+  color: #d3a6a9 !important;
+}
+
+.header_section{
+  border-bottom: solid 3px var(--main-color) !important;
+}
+.emp-list{
+
+  border-left: solid 3px var(--main-color)  !important;
+  
+}
+
+
+
+table {
+  width: 100%;
+}
+
+  
+table thead th {
+  color: #ffffff;
+  background: var(--main-color) !important;
+  padding: 15px;
+  border: 1px solid #ebebec;
+  font-weight: 500;
+}
+
+table tr {
+  background: #ffffff;
+}
+
+table tr td {
+  border: 1px solid #e6edf1;
+  padding: 15px;
+}
+
+@media only screen and (max-width: 640px) {
+  table thead {
+    display: none;
+  }
+
+  table tbody {
+    display: block;
+  }
+
+  table tbody tr td {
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  table tbody tr {
+    margin-bottom: 20px;
+    display: block;
+    border: 1px solid var(--main-color) !important;
+    background: #f9f9f9;
+    overflow: hidden;
+  }
+
+  table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 30%;
+    display: flex;
+    background: var(--main-color) !important;
+    color: #fff;
+    padding: 15px;
+    margin-inline-end: 10px;
+  }
+}
+
+
+/* .com_list {
+  padding: 20px;
+  width: 100%;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-top: solid 3px var(--main-color) !important;
+  margin-bottom: 20px  ; 
+} */
+
+option{
+  width: 200px;
+}
+
+
+.bg-white{
+  background-color: black !important;
+}

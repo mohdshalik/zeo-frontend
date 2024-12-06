@@ -1,0 +1,143 @@
+<div mat-dialog-content class="">
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button  type="button" class="btn btn-full btn-primary">
+                Excel Template
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button (click)="bulkUploadDoc()" type="button" class="btn btn-full btn-danger">
+                {{ReadMore?"Back":"Bulk Upload"}}
+            </button>
+
+        </div>
+  
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        
+        <!-- <div class="col-md-2">
+            <button  type="button" class="btn btn-full btn-primary">
+                Excel Template
+            </button>
+            <button (click)="bulkUploadDoc()" type="button" class="btn btn-full btn-danger">
+                {{ReadMore?"Back":"Bulk Upload"}}
+            </button>
+        </div> -->
+    </div>
+
+       
+        <div class="cpm-sec" *ngIf="visibilitys" >
+            <h1>Bulk Upload Designation</h1>
+            <!-- <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file" name="files" (change)="onFileChange($event)">
+                    <label class="custom-file-label" for="file">Choose file</label>
+                </div>
+                <<div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Browse</button>
+                </div> -->
+            <!-- </div> --> 
+            <hr>
+            <div class="text-wrappers" >
+             
+                 
+                <br>
+                <label>Select file to upload.</label>
+                
+          
+                <input type="file" name="files" id="file" class="form-control" (change)="onFileChange($event);"><br>
+                <label for="file"><span class="textLinks">Select your file</span></label>
+                <br>
+                <div class="row">
+                      <!-- <div *ngIf="errors_sheet1.length>0">
+                        <h5>Excel Uploading Error:</h5>
+                        <p>{{errors_sheet1}}</p>
+                      </div> -->
+                      <!-- <div *ngFor="let error of errors_sheet1">
+                        <h5>Error from Backend:</h5>
+                        <p>{{ error.error }}</p>
+                      </div> -->
+
+                </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                        <button type="button" (click)="ClosePopup()" class="btn btn-danger pull-right">Cancel</button>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="text-right"> 
+                            <button type="button" (click)="bulkuploaddocument()" class="btn btn-success">Designation Generate</button>
+                        </div>
+                    </div>
+                    
+              
+            
+                </div>
+              
+        
+        
+        </div> 
+
+    <div class="cpm-sec" *ngIf="visibles">
+
+        <h1>Designation</h1><hr>
+
+        <form >
+        <div class="row">
+            <div class="col-md-6" >
+               
+      <label>Job Tittle</label>
+     <input type="text"  class="form-control" required  [(ngModel)]="desgntn_job_title"  placeholder="Enter Job Name"
+      [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !desgntn_job_title}">
+     
+     <div *ngIf="registerButtonClicked && !desgntn_job_title" class="error-message">Department Name is required.</div>
+</div>
+
+
+<div class="col-md-6" >
+               
+    <label>Description</label>
+   <input type="text"  class="form-control" required  [(ngModel)]="desgntn_description"  placeholder="Enter Description "
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !desgntn_description}">
+   
+   <div *ngIf="registerButtonClicked && !desgntn_description" class="error-message">Description is required.</div>
+</div>
+       
+         
+      
+        
+        
+   
+
+
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div>
+        <div class="col-md-2">
+            <button (click)="registerDesignation()"  mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
+
+        </div>
+    </div>
+
+
+        </div>
+</div>
+<div mat-dialog-action>
+    
+</div>
+
+

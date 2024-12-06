@@ -1,0 +1,109 @@
+<div mat-dialog-content class="">
+    <div class="cpm-sec"  >
+        <!-- 
+        <h1>Create Employee Family</h1><hr> -->
+
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+
+                    <label> Feild Name</label>
+                    <input type="text" class="form-control" required [(ngModel)]="field_name"
+                        placeholder="Enter Feild Name" [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'error-field': registerButtonClicked && !field_name}">
+
+                    <div *ngIf="registerButtonClicked && !field_name" class="error-message">Feild
+                        Name is required.</div>
+                </div>
+
+           
+
+                <div class="col-md-6">
+                    <label>Data Type</label>
+                    <div class="custom-sel">
+                   
+                        <select class="form-control"  id="data_type" required [(ngModel)]="data_type"
+                            [ngModelOptions]="{standalone: true}"
+                            [ngClass]="{'error-field': registerButtonClicked1 && !data_type}">
+                            <option >dropdown</option>
+                            <option>radio</option>
+                            <option>date</option>
+                        </select>
+                        <div *ngIf="registerButtonClicked1 && !data_type" class="error-message">Please Select
+                            type</div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <label>Dropdown Values</label>
+                    <input type="text" class="form-control" required [(ngModel)]="dropdown_values"
+                        placeholder="Enter Dropdown Values (comma separated)" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="col-md-6">
+
+                    <label> Radio Values</label>
+                    <input type="text" class="form-control" required [(ngModel)]="radio_values"
+                        placeholder="Enter Radio values (comma separated)" [ngModelOptions]="{standalone: true}"
+                      >
+                </div>
+
+
+                <div class="col-md-6">
+                    <label>Employee</label>
+                    <div class="custom-sel">
+                      <select class="form-control" disabled id="employee" required [(ngModel)]="emp_id"
+                        [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'error-field': registerButtonClicked1 && !emp_id}">
+                        <option value="">Select</option>
+                        <option *ngFor="let country of companies" [value]="country.id">
+                          {{ country.emp_first_name }} {{ country.emp_last_name }}
+                        </option>
+                      </select>
+                      <div *ngIf="registerButtonClicked1 && !emp_id" class="error-message">Please Select an Employee</div>
+                    </div>
+                  </div>
+
+
+                <!-- <div class="col-md-6" >
+
+                    <label>Employee</label>
+                    <div class="custom-sel">
+                   
+                        <select class="form-control"  id="employee" required [(ngModel)]="emp_id"
+                            [ngModelOptions]="{standalone: true}"
+                            [ngClass]="{'error-field': registerButtonClicked1 && !emp_id}">
+                            <option value="">Select</option>
+                            <option *ngFor="let country of companies" [value]="country.id">{{
+                                country.emp_first_name }} {{ country.emp_last_name }}</option>
+                        </select>
+                        <div *ngIf="registerButtonClicked1 && !emp_id" class="error-message">Please Select
+                            Your Company</div>
+                    </div>
+
+
+                </div> -->
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-2">
+                    <button (click)="ClosePopup()" class="pull-right btn btn-danger btn-full mt-4">Close</button>
+    
+                </div>
+                <div class="col-md-2">
+                    <button mat-raised-button color="primary" (click)="CreateEmployeeFeild()" class="pull-right btn-full mt-4">Done</button>
+    
+                </div>
+            </div>
+        </form>
+
+     
+
+
+    </div>
+</div>
+<div mat-dialog-action>
+
+</div>

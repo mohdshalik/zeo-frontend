@@ -1,0 +1,464 @@
+<div class="container" *ngIf="hasViewPermission">
+    <div class="comapny_section " *ngFor="let employeesec of employees">
+        <!-- <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h1> Employees </h1>
+                </div>
+
+            
+            </div>
+           
+           
+
+        </div> -->
+
+     
+        <!-- <div class="list_company_sec mt-4">
+            
+        </div> -->
+        <!-- <div class="row mt-4">
+         
+            <div class="col-md-4"     >
+                <div class="emp-list mt-2" >
+                    <div class="row" >
+                        <div class="col-md-4" >
+                            <div class="emp_pic d-block mx-auto"  >
+                                <img [src]="employeesec.emp_profile_pic" alt="Employee Document"  style="width: 100%; height: 100%;">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="emp_det_list"   >
+                                <h2>{{ employeesec.emp_first_name  }} {{ employeesec.emp_last_name }}</h2>
+                                <h3>Emp Code:{{ employeesec.emp_code  }}  </h3>
+                                <h3></h3>
+                            </div>
+                        </div>
+                        
+                    </div>
+                 
+               
+
+                </div>
+            </div>
+
+
+
+            
+
+        </div> -->
+
+
+        <div class="emp_details mt-5"  >
+           
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-card">
+                        <div class="profile_img_emp d-block mx-auto">
+                            <!-- <img [src]="employee.emp_profile_pic" alt="Employee Photo" style="width: 100%;"> -->
+                            <img [src]="employeesec.emp_profile_pic"  (error)="handleImageError($event)" style="width: 150px; height: 150px;">
+                            <!-- <img *ngIf="employee.emp_profile_pic" [src]="employee.emp_profile_pic" alt="Profile Picture" class="img-fluid d-block mx-auto" style="width: 100%;"> -->
+                        </div>
+                  
+                        <div class="text-data">
+                          <span class="name">{{ employeesec.emp_first_name }} {{ employeesec.emp_last_name }} </span>
+                          <span class="job">{{employeesec.emp_desgntn_id}}
+                  </span>
+                        </div>
+                  
+                     
+                  
+                      
+                      </div>    
+                </div>
+
+                <div class="col-md-8">
+                    <div class="emp_additional_details">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h2>Emp Code</h2>
+                                <h3>{{ employeesec.emp_code }}</h3>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h2>Employee Status</h2>
+                                <h3>{{employeesec.emp_status}}</h3>
+                                <!-- <h2>Employee Ess User</h2>
+                                <h3>{{employee.is_ess}}</h3> -->
+                            </div>
+
+                            <div class="col-md-5">
+                                <h2>Designation</h2>
+                                <h3>{{ employeesec.emp_desgntn_id }}</h3>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-3">
+                                <h2>Catogary</h2>
+                                <h3>{{ employeesec.emp_ctgry_id }}</h3>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h2>Department</h2>
+                                <h3>{{ employeesec.emp_dept_id }}</h3>
+                            </div>
+
+                            <div class="col-md-5">
+                                <h2>Branch</h2>
+                                <h3>{{ employeesec.emp_branch_id }}</h3>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <!-- <div class="col-md-3">
+                                <h2>Company</h2>
+                                <h3>{{ employee.emp_company_id }}</h3>
+                            </div> -->
+
+                            <!-- <div class="col-md-4">
+                                
+                            </div> -->
+
+                            <div class="col-md-5">
+                                <h2>Posting Location</h2>
+                                <h3>{{employeesec.emp_posting_location}}</h3>
+                            </div>
+                          
+                        </div>
+
+                        <!-- <div *ngFor="let doc of expiredDocuments">
+                            <p>Document Name: {{ doc.name }}</p>
+                            <p>Expiration Date: {{ doc.expiryDate }}</p>
+                          </div> -->
+                    </div>
+                </div>
+            </div>
+  <div class="row mt-4">
+
+    <div class="col-md-12">
+        <div class="emp_tabs">
+                <mat-tab-group class="my-tabs" animationDuration="0ms">
+                    <mat-tab label="Personal Information">
+                        <div class="tab_content  mt-3">
+                            <div class="row">
+                                <div class="col-md-3" >
+                                    <h2>First Name</h2>
+                                    <h3>{{ employeesec.emp_first_name }} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Last Name</h2>
+                                    <h3>{{ employeesec.emp_last_name }} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Sex</h2>
+                                    <h3>{{employeesec.emp_gender}} </h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h2>Date of birth</h2>
+                                    <h3>{{employeesec.emp_date_of_birth}} </h3>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2>Contact</h2>
+                                    <h3>{{employeesec.emp_mobile_number_1}} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Contact 2</h2>
+                                    <h3>{{employeesec.emp_mobile_number_2}} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Personal email</h2>
+                                    <h3>{{employeesec.emp_personal_email}}</h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h2>Nationality</h2>
+                                    <h3>{{employeesec.emp_nationality}} </h3>
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2>State</h2>
+                                    <h3>Kerala </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>City</h2>
+                                    <h3>{{employeesec.emp_city}}</h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Permenent Address</h2>
+                                    <h3> {{employeesec.emp_permenent_address}}</h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h2>Present Address</h2>
+                                    <h3>{{employeesec.emp_present_address}}</h3>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2>Religion</h2>
+                                    <h3>{{employeesec.emp_relegion}} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Blood Group</h2>
+                                    <h3>{{employeesec.emp_blood_group}}</h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Marital Status </h2>
+                                    <h3>{{employeesec.emp_marital_status}}</h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Languages </h2>
+                                    <h3>{{employeesec.emp_languages}}</h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Active Date </h2>
+                                    <h3>{{employeesec.emp_active_date}}</h3>
+                                </div>
+                                
+
+                              
+                            </div>
+                        </div>
+
+                    
+                    </mat-tab>
+
+
+                    <mat-tab label="Employee Family"  *ngFor="let familyMember of employeesec.emp_family">
+                        <div class="tab_content  mt-3" >
+                            <div class="row">
+                                <div class="col-md-3" >
+                                    <h2>Employee Member Name</h2>
+                                    <h3>{{ familyMember.ef_member_name }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>Date Of Birth</h2>
+                                    <h3>{{ familyMember.ef_date_of_birth }} </h3>
+                                </div>
+
+                                <div class="col-md-3" >
+                                    <h2>Employee Relation</h2>
+                                    <h3>{{ familyMember.emp_relation }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>Employee Family Company Expense</h2>
+                                    <h3>{{ familyMember.ef_company_expence }} </h3>
+                                </div>
+
+                         
+                            </div>
+
+                           
+
+                         
+                        </div>
+                       
+                    </mat-tab>
+
+                    
+
+
+                    <mat-tab label="Qualification">
+                        <div class="tab_content  mt-3"  *ngFor="let Qualification of employeesec.emp_qualification">
+                            <div class="row">
+                                <div class="col-md-3" >
+                                    <h2>Employee Qualification</h2>
+                                    <h3>{{ Qualification.emp_qualification }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>Year</h2>
+                                    <h3>{{ Qualification.emp_qf_year }} </h3>
+                                </div>
+
+                                <div class="col-md-3" >
+                                    <h2>Subject</h2>
+                                    <h3>{{ Qualification.emp_qf_subject }} </h3>
+                                </div>
+                             
+
+                         
+                            </div>
+
+                         
+                        </div>
+                       
+                    </mat-tab>
+
+                    <mat-tab label="Job History">
+                        <div class="tab_content  mt-3"  *ngFor="let Jobhistory of employeesec.emp_job_history">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2>Company Name</h2>
+                                    <h3>{{ Jobhistory.emp_jh_company_name }}</h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>Designation</h2>
+                                    <h3>{{ Jobhistory.emp_jh_designation }} </h3>
+                                </div>
+                             
+                                <div class="col-md-3" >
+                                    <h2>From Date</h2>
+                                    <h3>{{ Jobhistory.emp_jh_from_date }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>End Date</h2>
+                                    <h3>{{ Jobhistory.emp_jh_end_date }} </h3>
+                                </div>
+
+                                <div class="col-md-3" >
+                                    <h2>Last Leaving Salary Per Month</h2>
+                                    <h3>{{ Jobhistory.emp_jh_leaving_salary_permonth }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2> Leaving Reason</h2>
+                                    <h3>{{ Jobhistory.emp_jh_reason }} </h3>
+                                </div>
+
+                                <div class="col-md-3" >
+                                    <h2> Total Experiance</h2>
+                                    <h3>{{ Jobhistory.emp_jh_years_experiance }} </h3>
+                                </div>
+                             
+                             
+
+                         
+                            </div>
+
+                         
+                        </div>
+                      
+                    </mat-tab>
+
+                    <mat-tab label="Emp Documents">
+                        <div class="tab_content  mt-3"  >
+                            <div class="row mt-3" *ngFor="let document of employeesec.emp_documents">
+                                <div class="col-md-2">
+                                    <h2>Document number</h2>
+                                    <h3>{{ document.emp_doc_number }}</h3>
+                                </div>
+                                <div class="col-md-2" >
+                                    <h2>issue Date</h2>
+                                    <h3> {{ document.emp_doc_issued_date }}</h3>
+                                </div>
+                             
+                             
+                                <div class="col-md-2" >
+                                    <h2>expired date</h2>
+                                    <h3>{{ document.emp_doc_expiry_date }} </h3>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <h2>Type</h2>
+                                    <h3>{{ document.document_type }}</h3>
+                                </div>
+
+                                <div class="col-md-1" >
+                                    <h2> Status</h2>
+                                    <h3> {{ document.is_active }}</h3>
+                                </div>
+
+                                
+
+                                <div class="col-md-3">
+                                    <h2>Employee Document</h2>
+
+                                    <div class="dec_sec" style="width: 100%;">
+                                    <!-- Display the document if it's an image -->
+                                    <img *ngIf="isImage(document.emp_doc_document)" [src]="document.emp_doc_document" alt="Employee Document" style="width: 150px; height:150px;">
+                                    <!-- Display a link to download the document if it's not an image -->
+                                    <a *ngIf="!isImage(document.emp_doc_document)" [href]="document.emp_doc_document" target="_blank">View Document</a>
+                                </div>
+                                </div>
+
+
+                                <!-- <div class="col-md-3" >
+                                    <h2>employee document</h2>
+                                    <img src="{{ document.emp_doc_document }}"  alt="Employee Document">
+                                </div> -->
+
+                                
+
+                               
+                             
+
+                         
+                            </div>
+
+                         
+                        </div>
+                      
+                        <!-- <div *ngIf="!employeeDocuments.length">No employee documents available.</div> -->
+                    </mat-tab>
+
+
+                    
+
+                    
+                  </mat-tab-group>
+
+
+
+
+            </div>
+            </div>
+          </div>
+
+
+          <div class="row mt-4">
+            <div class="col-md-7"></div>
+            <div class="col-md-5">
+                <div class="holiday_sec" >
+                    <h4>holidays</h4><hr>
+                    <div *ngFor="let Empholiday of employeesec.holidays">
+                    <div class="row" >
+                        <div class="col-md-4">
+                           <h2> {{Empholiday.start_date}}</h2>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>{{Empholiday.description}}</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>{{ calculateDaysLeft(Empholiday.start_date) }}</h3>
+                        </div>
+                    </div>
+
+</div>
+                </div>
+            </div>
+
+            
+        </div>
+
+      
+
+
+      
+    </div>
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,102 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>Create State</h2><hr>
+
+        <form >
+        <div class="row">
+            <div class="col-md-6" >
+               
+      <label>State Name</label>
+     <input type="text"  class="form-control" required  [(ngModel)]="state_name"  placeholder="Enter State Name"
+      [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !state_name}">
+     
+     <div *ngIf="registerButtonClicked && !state_name" class="error-message">State Name is required.</div>
+</div>
+
+
+
+       
+
+
+         
+           
+      
+
+        <div class="col-md-6">
+
+
+            <div class="custom-sel">
+                <label>Select Country</label>
+                <select class="form-control" id="deparmentsec" required [(ngModel)]="country"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !country}" >
+                    <option value="" >Select</option>
+                    <option *ngFor="let deparmentsec of Countries" [value]="deparmentsec.id">{{ deparmentsec.country_name     }} </option>
+                </select>
+                <div *ngIf="registerButtonClicked && !country" class="error-message">Please Select Your country</div>
+            </div>
+                        
+    
+        </div>
+    
+        
+   
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+
+            </div>
+
+            <div class="col-md-2">
+                <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerDepartment()">Save</button>  
+             </div>
+        </div>
+    </form>
+
+  
+
+
+        </div>
+
+        </div>
+
+
+        <table width="100%">     
+      
+          <thead>
+              <tr>
+                <th>No</th>
+                <th> State Name</th>
+               
+              </tr>
+            </thead>
+            
+            <tbody>
+                
+              <tr *ngFor="let state of States;let i = index">
+                <td>{{ i + 1 }}</td> 
+                <td>{{ state.state_name }}</td>
+           
+              </tr>
+          
+            </tbody>
+
+            
+          </table>
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+

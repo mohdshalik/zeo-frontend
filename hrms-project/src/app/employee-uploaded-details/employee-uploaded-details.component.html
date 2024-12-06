@@ -1,0 +1,408 @@
+<div mat-dialog-content class="">
+    <div class="cpm-sec">
+        <!-- 
+        <h1>Create Employee Family</h1><hr> -->
+
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Employee Family
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <!-- <mat-icon>account_circle</mat-icon> -->
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="from-sec">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <label> Family Member name</label>
+                                <input type="text" class="form-control" required [(ngModel)]="ef_member_name"
+                                    placeholder="Enter Member Name" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked && !ef_member_name}">
+
+                                <div *ngIf="registerButtonClicked && !ef_member_name" class="error-message">Department
+                                    Name is required.</div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label> Relationship</label>
+                                <input type="text" class="form-control" required [(ngModel)]="emp_relation"
+                                    placeholder="Enter Relationship" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked && !emp_relation}">
+
+                                <div *ngIf="registerButtonClicked && !emp_relation" class="error-message">Department
+                                    Name is required.</div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+
+                                <label> Family Company Expense</label>
+                                <input type="text" class="form-control" required [(ngModel)]="ef_company_expence"
+                                    placeholder="Enter Company Expense" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked && !ef_company_expence}">
+
+                                <div *ngIf="registerButtonClicked && !ef_company_expence" class="error-message">
+                                    Department Name is required.</div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label> Date of birth</label>
+                                <input type="date" class="form-control" required [(ngModel)]="ef_date_of_birth"
+                                    placeholder="Enter Date of birth" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked && !ef_date_of_birth}">
+
+                                <div *ngIf="registerButtonClicked && !ef_date_of_birth" class="error-message">date of birth is required.</div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+
+
+                                <div class="custom-sel">
+                                    <label>Select Employee ID</label>
+                                    <select class="form-control" id="country" required [(ngModel)]="emp_id"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [ngClass]="{'error-field': registerButtonClicked1 && !emp_id}">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let country of companies" [value]="country.id">{{
+                                            country.emp_first_name }} {{ country.emp_last_name }}</option>
+                                    </select>
+                                    <div *ngIf="registerButtonClicked1 && !emp_id" class="error-message">Please Select
+                                        Your Company</div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+
+                <mat-action-row>
+                    <button mat-button color="primary" (click)="CreateEmployeeFamily()">Next</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Qualification
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <!-- <mat-icon>map</mat-icon> -->
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <form>
+                    <div class="from-sec">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <label>Employee Qualification</label>
+                                <input type="text" class="form-control" required [(ngModel)]="emp_qualification"
+                                    placeholder="Enter Qualification" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked1 && !emp_qualification}">
+
+                                <div *ngIf="registerButtonClicked1 && !emp_qualification" class="error-message">
+                                    Qualification enter.</div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label>Institution name</label>
+                                <input type="text" class="form-control" required [(ngModel)]="emp_qf_instituition"
+                                    placeholder="Enter Institution Name" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked1 && !emp_qf_instituition}">
+
+                                <div *ngIf="registerButtonClicked1 && !emp_qf_instituition" class="error-message">
+                                    Department Name is required.</div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+
+                                <label>Employee qualification year</label>
+                                <input type="date" class="form-control" required [(ngModel)]="emp_qf_year"
+                                    placeholder="Enter Year " [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked1 && !emp_qf_year}">
+
+                                <div *ngIf="registerButtonClicked1 && !emp_qf_year" class="error-message">Department Name
+                                    is required.</div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label>Employee qualification subject</label>
+                                <input type="text" class="form-control" required [(ngModel)]="emp_qf_subject"
+                                    placeholder="Enter qualification subject " [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked1 && !emp_qf_subject}">
+
+                                <div *ngIf="registerButtonClicked1 && !emp_qf_subject" class="error-message">Department Name
+                                    is required.</div>
+                            </div>
+
+
+
+
+
+
+                            <div class="col-md-6">
+
+
+                                <div class="custom-sel">
+                                    <label>Select Employee ID</label>
+                                    <select class="form-control" id="country" required [(ngModel)]="emp_id"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [ngClass]="{'error-field': registerButtonClicked1 && !emp_id}">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let country of companies" [value]="country.id">{{
+                                            country.emp_first_name }} {{ country.emp_last_name }}</option>
+                                    </select>
+                                    <div *ngIf="registerButtonClicked1 && !emp_id" class="error-message">Please Select
+                                        Your Company</div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </form>
+
+                <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                    <button mat-button color="primary" (click)="createEmployeeQual()">Next</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Job History
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <mat-icon>map</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <form>
+                    <div class="from-sec">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <label>Employee job History From date</label>
+                                <input type="date" class="form-control" required [(ngModel)]="emp_jh_from_date"
+                                    placeholder="Enter From date" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked2 && !emp_jh_from_date}">
+
+                                <div *ngIf="registerButtonClicked2 && !emp_jh_from_date" class="error-message">
+                                    Qualification enter.</div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label>Employee job History to date</label>
+                                <input type="date" class="form-control" required [(ngModel)]="emp_jh_end_date"
+                                    placeholder="Enter to date" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked2 && !emp_jh_end_date}">
+
+                                <div *ngIf="registerButtonClicked2 && !emp_jh_end_date" class="error-message">
+                                    Qualification enter.</div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label>Company name</label>
+                                <input type="text" class="form-control" required [(ngModel)]="emp_jh_company_name"
+                                    placeholder="Enter Company Name" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked2 && !emp_jh_company_name}">
+
+                                <div *ngIf="registerButtonClicked2 && !emp_jh_company_name" class="error-message">
+                                    Department Name is required.</div>
+                            </div>
+
+
+
+                          
+
+                            <div class="col-md-6">
+
+                                <label>Employee Designation</label>
+                                <input type="text" class="form-control" required [(ngModel)]="emp_jh_designation"
+                                    placeholder="Enter Designation" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked2 && !emp_jh_designation}">
+
+                                <div *ngIf="registerButtonClicked2 && !emp_jh_designation" class="error-message">Department Name
+                                    is required.</div>
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label>Employee salary per month</label>
+                                <input type="text" class="form-control" required [(ngModel)]="emp_jh_leaving_salary_permonth"
+                                    placeholder="Enter salary per month" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked2 && !emp_jh_leaving_salary_permonth}">
+
+                                <div *ngIf="registerButtonClicked2 && !emp_jh_leaving_salary_permonth" class="error-message">Department Name
+                                    is required.</div>
+                            </div>
+
+
+                            
+                            <div class="col-md-6">
+
+                                <label>Leaving reason</label>
+                                <input type="text" class="form-control" required [(ngModel)]="emp_jh_reason"
+                                    placeholder="Enter reason" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked2 && !emp_jh_reason}">
+
+                                <div *ngIf="registerButtonClicked2 && !emp_jh_reason" class="error-message">Department Name
+                                    is required.</div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label>Employee work Experiance</label>
+                                <input type="number" class="form-control" required [(ngModel)]="emp_jh_years_experiance"
+                                    placeholder="Enter work Experiance" [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked2 && !emp_jh_years_experiance}">
+
+                                <div *ngIf="registerButtonClicked2 && !emp_jh_years_experiance" class="error-message">Department Name
+                                    is required.</div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+
+
+                                <div class="custom-sel">
+                                    <label>Select Employee ID</label>
+                                    <select class="form-control" id="country" required [(ngModel)]="emp_id"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [ngClass]="{'error-field': registerButtonClicked2 && !emp_id}">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let country of companies" [value]="country.id">{{
+                                            country.emp_first_name }} {{ country.emp_last_name }}</option>
+                                    </select>
+                                    <div *ngIf="registerButtonClicked2 && !emp_id" class="error-message">Please Select
+                                        Your Company</div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </form>
+
+                <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                    <button mat-button color="primary" (click)="createEmployeeJonHistory()">Next</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Employee Document Upload
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       
+                        <mat-icon>date_range</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+            
+                <form (ngSubmit)="uploadEmployeeDocument()" #documentForm="ngForm">
+                    <div class="from-sec">
+                        <div class="row">
+                         
+                            <div class="col-md-6">
+                                <label for="emp_doc_number">Document Number:</label>
+                                    <input type="number" class="form-control" id="emp_doc_number" name="emp_doc_number" placeholder="Enter document number" [(ngModel)]="emp_doc_number">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Issued date</label>
+                                <input type="date" class="form-control" required id="emp_doc_issued_date" [(ngModel)]="emp_doc_issued_date" name="emp_doc_issued_date">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Expired Date</label>
+                                <input type="date" class="form-control" required id="emp_doc_expiry_date" [(ngModel)]="emp_doc_expiry_date" name="emp_doc_expiry_date">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="emp_doc_document">Employee Document:</label>
+                                <input type="file" class="form-control" id="emp_doc_document" name="emp_doc_document" (change)="onFileSelected($event)">
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="custom-sel">
+                                    <label>Select Document Type</label>
+                                    <select class="form-control" required [(ngModel)]="document_type" name="document_type">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let country of DocumentTypes" [value]="country.id">
+                                            {{ country.type_name }} </option>
+                                    </select>
+                                    <div *ngIf="registerButtonClicked3 && !document_type" class="error-message">Please Select
+                                        document_type</div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="custom-sel">
+                                    <label>Select Employee ID</label>
+                                    <select class="form-control" required [(ngModel)]="emp_id" name="emp_id">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let country of companies" [value]="country.id">
+                                            {{ country.emp_first_name }} </option>
+                                    </select>
+                                    <div *ngIf="registerButtonClicked3 && !emp_id" class="error-message">Please Select
+                                         employee id</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-action-row>
+                        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                        <button mat-button color="primary" type="submit">Add</button>
+                    </mat-action-row>
+                </form>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+
+
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <button (click)="ClosePopup()" class="pull-right btn btn-danger btn-full mt-4">Close</button>
+
+            </div>
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" (click)="ClosePopup()" class="pull-right btn-full mt-4">Done</button>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div mat-dialog-action>
+
+</div>

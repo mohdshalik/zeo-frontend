@@ -1,0 +1,51 @@
+.mat-icon {
+    color: black;
+}
+
+.tree_child{
+    margin-left: 30px !important;
+}
+
+
+.user_selection_sec{
+    cursor: pointer;
+}
+
+.child_per{
+    margin-left: 5px;
+}
+
+.selection_checkmark_sec{
+    width: 100%;
+    border: solid 1px grey;
+    margin-bottom: 10px;
+    /* padding: 3px; */
+    /* margin-top: 10px; */
+}
+
+
+.main_check_sec{
+    margin-left: 13px;
+}
+.all_selection_Sec h2{
+
+    font-size: 12px;
+    margin-bottom: 0px;
+
+}
+
+.all_selection_Sec .mat-icon .mdc-checkbox__background{
+
+    height: 12px !important;
+    width: 12px !important;
+
+}
+
+/* .all_selection_Sec span{
+    border-right: solid 1px black;
+    margin-left: 20px;
+} */
+
+.all_selection_Sec .mat-mdc-checkbox label{
+    font-size: 10px !important;
+}

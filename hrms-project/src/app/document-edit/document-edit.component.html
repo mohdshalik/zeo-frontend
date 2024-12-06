@@ -1,0 +1,150 @@
+<div mat-dialog-content class="">
+
+    <div class="cpm-sec" *ngIf="documentData" >
+
+        <h1>Expired Document </h1><hr>
+
+<div class="document_Ex_dis">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Document number</h2>
+                <h3>{{documentData.emp_doc_number}}</h3>
+            </div>
+
+
+            <div class="col-md-4">
+                <h2>Issed Date</h2>
+                <h3>{{documentData.emp_doc_issued_date}}</h3>
+            </div>
+
+            <div class="col-md-4">
+                <h2>Employee</h2>
+                <h3>{{documentData.emp_id}} </h3>
+            </div>
+
+            <div class="col-md-4">
+                <h2>Document Type</h2>
+                <h3>{{documentData.document_type}} </h3>
+            </div>
+
+            <div class="col-md-4">
+                <h2><span style="color: red;">Expired Date </span></h2>
+                <h3><span style="color: red;">{{documentData.emp_doc_expiry_date}} </span></h3>
+            </div>
+
+            <div class="col-md-4">
+                <h2>Employee Document</h2>
+
+                <div class="dec_sec" style="width: 100%;">
+                <img *ngIf="isImage(documentData.emp_doc_document)" [src]="documentData.emp_doc_document" alt="Employee Document" style="width: 150px; height:150px;">
+                <a *ngIf="!isImage(documentData.emp_doc_document)" [href]="documentData.emp_doc_document" target="_blank">View Document</a>
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+        
+        <h1>Expired Document Update </h1><hr>
+
+        <form (ngSubmit)="updateDocument()" #documentForm="ngForm">
+        <div class="row" >
+
+            <div class="col-md-6" >
+               
+                <label>Document Number</label>
+               <input type="number"  class="form-control" required id="emp_doc_number" name="emp_doc_number"  [(ngModel)]="documentData.emp_doc_number"  
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_doc_number}">
+               
+               <div *ngIf="registerButtonClicked && !emp_doc_number" class="error-message">Description is required.</div>
+            </div>
+        
+
+
+<div class="col-md-6" >
+               
+    <label>Document Issued Date</label>
+   <input type="date"  class="form-control" required id="emp_doc_issued_date" name="emp_doc_issued_date"  [(ngModel)]="documentData.emp_doc_issued_date"  placeholder="Enter emp_doc_issued_date "
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_doc_issued_date}">
+   
+   <div *ngIf="registerButtonClicked && !emp_doc_issued_date" class="error-message">issued date is required.</div>
+</div>
+
+<div class="col-md-6" >
+               
+    <label>Document Expired Date</label>
+   <input type="date"  class="form-control" required id="emp_doc_expiry_date" name="emp_doc_expiry_date"  [(ngModel)]="documentData.emp_doc_expiry_date"  placeholder="Enter Expired date "
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_doc_expiry_date}">
+   
+   <div *ngIf="registerButtonClicked && !emp_doc_expiry_date" class="error-message">Expired date is required.</div>
+</div>
+
+
+
+
+
+<div class="col-md-6">
+
+
+    <div class="custom-sel">
+        <label>Select Employee</label>
+        <select class="form-control" id="emp_id" required [(ngModel)]="documentData.emp_id"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_id}" >
+            <option value="" >Select</option>
+            <option *ngFor="let deparmentsec of Employees" [value]="deparmentsec.id">{{ deparmentsec.emp_first_name     }} </option>
+        </select>
+        <div *ngIf="registerButtonClicked && !emp_id" class="error-message">Please Select Your Company</div>
+    </div>
+                
+
+</div>
+         
+
+<div class="col-md-6">
+
+
+    <div class="custom-sel">
+        <label>Select Document Type</label>
+        <select class="form-control" id="document_type" required [(ngModel)]="documentData.document_type"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !document_type}" >
+            <option value="" >Select</option>
+            <option *ngFor="let deparmentsec of DocsTypes" [value]="deparmentsec.id">{{ deparmentsec.type_name     }} </option>
+        </select>
+        <div *ngIf="registerButtonClicked && !document_type" class="error-message">Please Select Document Type</div>
+    </div>
+                
+
+</div>
+      
+<div class="col-md-6">
+    <label for="emp_doc_document">Update Document:</label>
+    <input type="file" class="form-control" id="emp_doc_document" name="emp_doc_document" (change)="onFileSelected($event)">
+</div>
+
+        
+        
+   
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <button type="button" (click)="ClosePopups()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+    
+            </div>
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" class="pull-right btn-full mt-4" type="submit">update</button>
+    
+            </div>
+        </div>
+    </form>
+
+ 
+
+
+        </div>
+</div>
+<div mat-dialog-action>
+    
+</div>

@@ -1,0 +1,786 @@
+<div class="container">
+    <div class="comapny_section" *ngIf="employee">
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-7">
+                    <h1> Employee Details </h1>
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right" *ngIf="!hideButton" >
+                        <!-- <button type="button"  class="btn-Create btn btn-success "><span class="header-btn-icon"><mat-icon>add_circle
+                        </mat-icon></span> Create</button> -->
+
+                        <button type="button" class="btn-Edit btn-info btn"  (click)="openEditEmpPopuss(employee.id)">
+                            <span class="header-btn-icon">
+                             <mat-icon>draw
+                        </mat-icon></span> Edit</button>
+                        <button type="button" class="btn-Delete btn btn-danger" (click)="onDeleteEmployee(employee.id)">
+                            <span class="header-btn-icon">
+                                <mat-icon> delete
+                           </mat-icon></span> Delete</button>
+                    </div>
+                </div>
+
+            </div>
+           
+           
+
+        </div>
+        <!-- <div class="list_company_sec mt-4">
+            
+        </div> -->
+       
+        <div class="emp_details mt-5"  >
+           
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-card">
+                        <div class="profile_img_emp d-block mx-auto">
+                            <!-- <img [src]="employee.emp_profile_pic" alt="Employee Photo" style="width: 100%;"> -->
+                            <img [src]="employee.emp_profile_pic"  (error)="handleImageError($event)" style="width: 150px; height: 150px;">
+                            <!-- <img *ngIf="employee.emp_profile_pic" [src]="employee.emp_profile_pic" alt="Profile Picture" class="img-fluid d-block mx-auto" style="width: 100%;"> -->
+                        </div>
+                  
+                        <div class="text-data">
+                          <span class="name">{{ employee.emp_first_name }} {{ employee.emp_last_name }} </span>
+                          <span class="job">{{employee.emp_desgntn_id}}
+                  </span>
+                        </div>
+                  
+                     
+                  
+                      
+                      </div>    
+                </div>
+
+                <div class="col-md-8">
+                    <div class="emp_additional_details">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h2>{{empCodeFieldName}}</h2>
+                                <h3>{{ employee.emp_code }}</h3>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h2>Employee Status</h2>
+                                <h3>{{employee.emp_status}}</h3>
+                                <!-- <h2>Employee Ess User</h2>
+                                <h3>{{employee.is_ess}}</h3> -->
+                            </div>
+
+                            <div class="col-md-5">
+                                <h2>{{desFieldName}}</h2>
+                                <h3>{{ employee.emp_desgntn_id }}</h3>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-3">
+                                <h2>{{catFieldName}}</h2>
+                                <h3>{{ employee.emp_ctgry_id }}</h3>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h2>{{deptFieldName}}</h2>
+                                <h3>{{ employee.emp_dept_id }}</h3>
+                            </div>
+
+                            <div class="col-md-5">
+                                <h2>{{brchFieldName}}</h2>
+                                <h3>{{ employee.emp_branch_id }}</h3>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <!-- <div class="col-md-3">
+                                <h2>Company</h2>
+                                <h3>{{ employee.emp_company_id }}</h3>
+                            </div> -->
+
+                            <!-- <div class="col-md-4">
+                                
+                            </div> -->
+
+                            <div class="col-md-5">
+                                <h2>{{locationFieldName}}</h2>
+                                <h3>{{employee.emp_posting_location}}</h3>
+                            </div>
+                          
+                        </div>
+
+                        <!-- <div *ngFor="let doc of expiredDocuments">
+                            <p>Document Name: {{ doc.name }}</p>
+                            <p>Expiration Date: {{ doc.expiryDate }}</p>
+                          </div> -->
+                    </div>
+                </div>
+            </div>
+  <div class="row mt-4">
+
+    <div class="col-md-12">
+        <div class="emp_tabs">
+                <mat-tab-group class="my-tabs" animationDuration="0ms">
+                    <mat-tab label="Personal Information">
+                        <div class="tab_content  mt-3">
+                            <div class="row">
+                                <div class="col-md-3" >
+                                    <h2>{{firstNameFieldName}}</h2>
+                                    <h3>{{ employee.emp_first_name }} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>{{lastNameFieldName}}</h2>
+                                    <h3>{{ employee.emp_last_name }} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>{{genderFieldName}}</h2>
+                                    <h3>{{employee.emp_gender}} </h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h2>{{dobFieldName}}</h2>
+                                    <h3>{{employee.emp_date_of_birth}} </h3>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2>{{cmpnoFieldName}}</h2>
+                                    <h3>{{employee.emp_mobile_number_1}} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>{{pernoFieldName}}</h2>
+                                    <h3>{{employee.emp_mobile_number_2}} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>{{emailFieldName}}</h2>
+                                    <h3>{{employee.emp_personal_email}}</h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h2>{{cityFieldName}}</h2>
+                                    <h3>{{employee.emp_nationality}} </h3>
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2>State</h2>
+                                    <h3>Kerala </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>{{cityFieldName}}</h2>
+                                    <h3>{{employee.emp_city}}</h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>{{peraddressFieldName}}</h2>
+                                    <h3> {{employee.emp_permenent_address}}</h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h2>{{preaddressFieldName}}</h2>
+                                    <h3>{{employee.emp_present_address}}</h3>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2>{{religionFieldName}}</h2>
+                                    <h3>{{employee.emp_relegion}} </h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>{{bloodFieldName}}</h2>
+                                    <h3>{{employee.emp_blood_group}}</h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>{{maritalFieldName}} </h2>
+                                    <h3>{{employee.emp_marital_status}}</h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>Languages </h2>
+                                    <h3>{{employee.emp_languages}}</h3>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h2>{{joinFieldName}} </h2>
+                                    <h3>{{employee.emp_active_date}}</h3>
+                                </div>
+                                
+
+                              
+                            </div>
+                        </div>
+
+                    
+                    </mat-tab>
+
+
+                    <mat-tab label="Employee Family">
+                        <div class="tab_content  mt-3" *ngFor="let member of emp_family_details">
+                            <div class="row">
+                                <div class="col-md-3" >
+                                    <h2>Employee Member Name</h2>
+                                    <h3>{{ member.ef_member_name }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>Date Of Birth</h2>
+                                    <h3>{{ member.ef_date_of_birth }} </h3>
+                                </div>
+
+                                <div class="col-md-3" >
+                                    <h2>Employee Relation</h2>
+                                    <h3>{{ member.emp_relation }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>Employee Family Company Expense</h2>
+                                    <h3>{{ member.ef_company_expence }} </h3>
+                                </div>
+
+                         
+                            </div>
+
+                           
+
+                         
+                        </div>
+                        <div class=" mt-5" >
+                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeefamAdd()">Add Family</button>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Qualification">
+                        <div class="tab_content  mt-3"  *ngFor="let Qualification of Qualifications">
+                            <div class="row">
+                                <div class="col-md-3" >
+                                    <h2>Employee Qualification</h2>
+                                    <h3>{{ Qualification.emp_qualification }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>Year</h2>
+                                    <h3>{{ Qualification.emp_qf_year }} </h3>
+                                </div>
+
+                                <div class="col-md-3" >
+                                    <h2>Subject</h2>
+                                    <h3>{{ Qualification.emp_qf_subject }} </h3>
+                                </div>
+                             
+
+                         
+                            </div>
+
+                         
+                        </div>
+                        <div class=" mt-5" >
+                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeefamAdd()">Add Qualification</button>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Job History">
+                        <div class="tab_content  mt-3"  *ngFor="let Jobhistory of Jobhistorys">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2>Company Name</h2>
+                                    <h3>{{ Jobhistory.emp_jh_company_name }}</h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>Designation</h2>
+                                    <h3>{{ Jobhistory.emp_jh_designation }} </h3>
+                                </div>
+                             
+                                <div class="col-md-3" >
+                                    <h2>From Date</h2>
+                                    <h3>{{ Jobhistory.emp_jh_from_date }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>End Date</h2>
+                                    <h3>{{ Jobhistory.emp_jh_end_date }} </h3>
+                                </div>
+
+                                <div class="col-md-3" >
+                                    <h2>Last Leaving Salary Per Month</h2>
+                                    <h3>{{ Jobhistory.emp_jh_leaving_salary_permonth }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2> Leaving Reason</h2>
+                                    <h3>{{ Jobhistory.emp_jh_reason }} </h3>
+                                </div>
+
+                                <div class="col-md-3" >
+                                    <h2> Total Experiance</h2>
+                                    <h3>{{ Jobhistory.emp_jh_years_experiance }} </h3>
+                                </div>
+                             
+                             
+
+                         
+                            </div>
+
+                         
+                        </div>
+                        <div class=" mt-5" >
+                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeefamAdd()">Add Job History</button>
+                        </div>
+                    </mat-tab>
+                    <!-- <mat-tab label="Leave Request">
+                        <div class="tab_content  mt-3"  *ngFor="let Leavereq of LeaveRequests">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2>Start Date</h2>
+                                    <h3>{{ Leavereq.start_date }}</h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>End Date</h2>
+                                    <h3>{{ Leavereq.end_date }} </h3>
+                                </div>
+                             
+                                <div class="col-md-3" >
+                                    <h2>Reason</h2>
+                                    <h3>{{ Leavereq.reason }} </h3>
+                                </div>
+                                <div class="col-md-3" >
+                                    <h2>Status</h2>
+                                    <h3>{{ Leavereq.status }} </h3>
+                                </div>
+
+                                
+
+                               
+                             
+
+                         
+                            </div>
+
+                         
+                        </div>
+                    </mat-tab> -->
+                  
+
+                     <mat-tab label="Emp Documents">
+                        <div class="tab_content  mt-3" *ngIf="employeeDocuments.length"  >
+                            <div class="row mt-3" *ngFor="let document of employeeDocuments">
+                                <div class="col-md-2">
+                                    <h2>Document number</h2>
+                                    <h3>{{ document.emp_doc_number }}</h3>
+                                </div>
+                                <div class="col-md-2" >
+                                    <h2>issue Date</h2>
+                                    <h3> {{ document.emp_doc_issued_date }}</h3>
+                                </div>
+                             
+                             
+                                <div class="col-md-2" >
+                                    <h2>expired date</h2>
+                                    <h3>{{ document.emp_doc_expiry_date }} </h3>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <h2>Type</h2>
+                                    <h3>{{ document.document_type }}</h3>
+                                </div>
+
+                                <div class="col-md-1" >
+                                    <h2> Status</h2>
+                                    <h3> {{ document.is_active }}</h3>
+                                </div>
+
+                                
+
+                                <div class="col-md-3">
+                                    <h2>Employee Document</h2>
+
+                                    <div class="dec_sec" style="width: 100%;">
+                                    <!-- Display the document if it's an image -->
+                                    <img *ngIf="isImage(document.emp_doc_document)" [src]="document.emp_doc_document" alt="Employee Document" style="width: 150px; height:150px;">
+                                    <!-- Display a link to download the document if it's not an image -->
+                                    <a *ngIf="!isImage(document.emp_doc_document)" [href]="document.emp_doc_document" target="_blank">View Document</a>
+                                </div>
+                                </div>
+
+
+                                <!-- <div class="col-md-3" >
+                                    <h2>employee document</h2>
+                                    <img src="{{ document.emp_doc_document }}"  alt="Employee Document">
+                                </div> -->
+
+                                
+
+                               
+                             
+
+                         
+                            </div>
+
+                         
+                        </div>
+                        <div class=" mt-5" >
+                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeefamAdd()">Add Document</button>
+                        </div>
+                        <div *ngIf="!employeeDocuments.length">No employee documents available.</div>
+                    </mat-tab>
+                  
+                    <mat-tab label="Emp Language">
+                        <div class="tab_content  mt-3"   >
+                            <!-- <div class="row mt-3" >
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <h2>Languages </h2>
+                                            <h3>{{employee.emp_languages}}</h3>
+                                        </div>
+        
+                                        <div class="col-md-6">
+                                            <h2>Percentage: {{ progressBarValue }} %</h2>
+                                            <mat-progress-bar mode="determinate" [value]="progressBarValue"></mat-progress-bar>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="emp_lang_add" *ngIf="langSe">
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <label>Language</label>
+                                                <input type="text" class="form-control" placeholder="enter langauge">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Percentage</label>
+                                                <input type="number" class="form-control" placeholder="enter Percentage">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-3">
+                                                <button type="button" class="btn-danger btn btn-full mt-3" (click)="langSecClose()">Cancel</button>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <button type="button" class="btn-info btn btn-full mt-3">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                               
+                             
+                                
+                               
+
+
+                           
+                                
+
+                               
+                             
+
+                         
+                            </div> -->
+
+                            <main class="">
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <section class="card cyan" >
+                                            <h2 class="card_title">Language</h2><hr>
+
+                                            <div class="skill_Sec" *ngFor="let member of EmpLangSkills">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <h6>{{member.value}}</h6>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <mat-icon (click)="onDeleteEmployeeLanguage(member.id)">delete</mat-icon>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="perce_Sec">
+                                                            <div class="percentage-bar-container">
+                                                                <div class="percentage-bar" [style.width.%]="member.percentage" ></div>
+                                                            </div>
+                                                            <h6>{{member.percentage}}%</h6>
+                                                        </div>
+                                                        
+
+                                                    </div>
+                                                </div><hr>
+                                                
+                                            </div>
+                                            <button type="button" class="btn-info btn mx-auto d-block" (click)="empLanguageOpen()">Add  </button>
+
+                                          
+                                        </section>
+
+                                        </div>
+
+
+                                        <div class="col-md-4">
+
+                                            <section class="card red">
+                                                <h2 class="card_title">Programming Language</h2><hr>
+
+                                                <div class="skill_Sec" *ngFor="let program of EmpPrgmSkills">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <h6>{{program.program_skill}}</h6>
+                                                        </div>
+    
+                                                        <div class="col-md-3">
+                                                            <mat-icon (click)="onDeleteEmployeeProgramLanguage(program.id)">delete</mat-icon>
+                                                        </div>
+    
+                                                        <div class="col-md-12">
+                                                            <div class="perce_Sec">
+                                                                <div class="percentage-bar-container">
+                                                                    <div class="percentage-bar" [style.width.%]="program.percentage" ></div>
+                                                                </div>
+                                                                <h6>{{program.percentage}}%</h6>
+                                                            </div>
+                                                            
+    
+                                                        </div>
+                                                    </div><hr>
+                                                    
+                                                </div>
+                                                <button type="button" class="btn-info btn mx-auto d-block" (click)="openAddFieldsModal()">Add  </button>
+    
+                                              </section>
+
+                                        </div>
+
+                                        <div class="col-md-4">
+
+                                            <section class="card blue">
+                                                <h2 class="card_title">Marketing</h2><hr>
+                                                <div class="skill_Sec" *ngFor="let market of EmpMarkkills">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <h6>{{market.marketing_skill}}</h6>
+                                                        </div>
+    
+                                                        <div class="col-md-3">
+                                                            <mat-icon (click)="onDeleteEmployeeMarketLanguage(market.id)">delete</mat-icon>
+                                                        </div>
+    
+                                                        <div class="col-md-12">
+                                                            <div class="perce_Sec">
+                                                                <div class="percentage-bar-container">
+                                                                    <div class="percentage-bar" [style.width.%]="market.percentage" ></div>
+                                                                </div>
+                                                                <h6>{{market.percentage}}%</h6>
+                                                            </div>
+                                                            
+    
+                                                        </div>
+                                                    </div><hr>
+                                                    
+                                                </div>
+                                                <button type="button" class="btn-info btn mx-auto d-block" (click)="openMarketingModal()">Add  </button>
+
+                                              </section>
+                                            
+                                        </div>
+
+
+                                        <!-- <div class="col-md-3">
+
+                                            <section class="card orange">
+                                                <h2 class="card_title">Calculator</h2>
+                                                <p class="card_content">Uses data from past projects to provide better delivery estimates</p>
+                                              </section>
+                                            
+                                        </div> -->
+                                </div>
+                               
+                            
+                              
+                            
+                               
+                            
+                              
+                              </main>
+                         
+                        </div>
+                        <!-- <div class=" mt-5" >
+                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeeLang()">Add Language</button>
+                        </div> -->
+                    </mat-tab>
+                  </mat-tab-group>
+
+
+
+
+            </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- modals -->
+
+
+        <!-- Modal Popup for add program language skill -->
+        <div *ngIf="isAddFieldsModalOpen" class="modal">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-10">
+                  <h2>Add Programming Langauge</h2>
+                  <hr>
+                </div>
+                <div class="col-md-2">
+                  <span class="close pull-right" (click)="closeAddFieldsModal()">&times;</span>
+                </div>
+              </div>
+
+
+
+              <form >
+                <div class="row">
+                   
+        
+                    <div class="col-md-6">
+        
+        
+                        <div class="custom-sel">
+                            <label>Select Employee Langauge</label>
+                            <select class="form-control" id="program_skill" required [(ngModel)]="program_skill"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !program_skill}" >
+                                <option value="" >Select</option>
+                                <option *ngFor="let deparmentsec of PrgmLangaguesSkills" [value]="deparmentsec.id">{{ deparmentsec.programming_language     }} </option>
+                            </select>
+                            <div *ngIf="registerButtonClicked && !program_skill" class="error-message">Please Select language</div>
+                        </div>
+                                    
+                    
+                    </div>
+                   
+                    <div class="col-md-6" >
+                       
+              <label>Percentage</label>
+             <input type="number"  class="form-control" required  [(ngModel)]="percentage"  placeholder="Enter Language Skill"
+              [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !percentage}">
+             
+             <div *ngIf="registerButtonClicked && !percentage" class="error-message">Language Skill is required.</div>
+        </div>
+        
+        
+        
+                 
+              
+                
+                
+           
+        
+        
+                </div>
+            </form>
+        
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-2">
+                    <button (click)="closeAddFieldsModal()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+        
+                </div>
+                <div class="col-md-2">
+                    <button type="button" (click)="registerlanguage()"  mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
+        
+                </div>
+            </div>
+          
+             
+            </div>
+          </div>
+
+
+              <!-- Modal Popup for add marketing language skill -->
+        <div *ngIf="isMArketingModalOpen" class="modal">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-10">
+                  <h2>Add Programming Langauge</h2>
+                  <hr>
+                </div>
+                <div class="col-md-2">
+                  <span class="close pull-right" (click)="closemarketModal()">&times;</span>
+                </div>
+              </div>
+
+
+
+              <form >
+                <div class="row">
+                   
+        
+                    <div class="col-md-6">
+        
+        
+                        <div class="custom-sel">
+                            <label>Select Employee Langauge</label>
+                            <select class="form-control" id="marketing_skill" required [(ngModel)]="marketing_skill"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !marketing_skill}" >
+                                <option value="" >Select</option>
+                                <option *ngFor="let deparmentsec of MarlangaguesSkills" [value]="deparmentsec.id">{{ deparmentsec.marketing     }} </option>
+                            </select>
+                            <div *ngIf="registerButtonClicked && !marketing_skill" class="error-message">Please Select language</div>
+                        </div>
+                                    
+                    
+                    </div>
+                   
+                    <div class="col-md-6" >
+                       
+              <label>Percentage</label>
+             <input type="number"  class="form-control" required  [(ngModel)]="percentage"  placeholder="Enter Language Skill"
+              [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !percentage}">
+             
+             <div *ngIf="registerButtonClicked && !percentage" class="error-message">Language Skill is required.</div>
+        </div>
+        
+        
+        
+                 
+              
+                
+                
+           
+        
+        
+                </div>
+            </form>
+        
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-2">
+                    <button (click)="closemarketModal()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+        
+                </div>
+
+                <div class="col-md-2">
+                    <button type="button" (click)="registerMarlanguage()"  mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
+        
+                </div>
+                
+            </div>
+          
+        
+             
+            </div>
+          </div>
+
+
+      
+
+
+      
+    </div>
+</div>

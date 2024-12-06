@@ -1,0 +1,63 @@
+<div mat-dialog-content class="">
+    <div class="cpm-sec">
+
+        <h1>Employee Language</h1><hr>
+
+        <form >
+        <div class="row">
+           
+
+            <div class="col-md-6">
+
+
+                <div class="custom-sel">
+                    <label>Select Employee Langauge</label>
+                    <select class="form-control" id="language_skill" required [(ngModel)]="language_skill"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !language_skill}" >
+                        <option value="" >Select</option>
+                        <option *ngFor="let deparmentsec of LangaguesSkills" [value]="deparmentsec.id">{{ deparmentsec.language     }} </option>
+                    </select>
+                    <div *ngIf="registerButtonClicked && !language_skill" class="error-message">Please Select language</div>
+                </div>
+                            
+            
+            </div>
+           
+            <div class="col-md-6" >
+               
+      <label>Percentage</label>
+     <input type="number"  class="form-control" required  [(ngModel)]="percentage"  placeholder="Enter Language Skill"
+      [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !percentage}">
+     
+     <div *ngIf="registerButtonClicked && !percentage" class="error-message">Language Skill is required.</div>
+</div>
+
+
+
+         
+      
+        
+        
+   
+
+
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div>
+        <div class="col-md-2">
+            <button type="button" (click)="registerlanguage()"  mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
+
+        </div>
+    </div>
+
+
+        </div>
+</div>
+<div mat-dialog-action>
+    
+</div>

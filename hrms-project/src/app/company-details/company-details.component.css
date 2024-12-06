@@ -1,0 +1,105 @@
+
+.comapny_section{
+
+    margin-top: 100px;
+    margin-left: 50px;
+    
+}
+
+.header_section{
+    background: white;
+    padding: 24px 20px 15px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    width: 100%;
+    border-bottom: solid 3px navy;
+}
+
+.header_section h1{
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+
+}
+
+.btn-Create{
+     /* padding: 5px 15px; */
+     /* border: none; */
+margin-right: 10px;     
+   
+}
+
+.btn-Edit{
+    margin-right: 10px;
+}
+
+.btn-Delete{
+    margin-right: 10px;
+}
+
+.header-btn-icon{
+    vertical-align: middle;
+}
+
+.btn-Create .mat-icon{
+    margin-top: 4px;
+}
+.btn-Create .mat-icon{
+    margin-top: 2px;
+}
+
+
+
+
+
+.wrapper .sidebar{
+    width: 200px;
+    height: 100%;
+    background:whitesmoke;
+    padding: 30px 0px;
+    position: fixed;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; ;
+    padding: 20px;
+
+    
+  }
+
+  .cmp_sc{
+    padding:15px 15px 10px;
+    box-shadow: inset 0 0 8px 0 #c7c7c7;
+
+  }
+
+
+  .cmp_sc:hover{
+    box-shadow: inset 0 0 20px 0 #c7c7c7;
+  }
+  
+
+  .cmp_sc h3{
+    font-size: 12px;
+    text-align: center;
+    color: grey;
+    text-transform: capitalize;
+  }
+  
+
+  .comdet_sec{
+
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+    background:whitesmoke;
+  }
+  
+
+  .comdet_sec h4{
+    font-size: 14px;
+    color: grey;
+  }
+
+  .comdet_sec h5{
+    font-size: 16px;
+    color:black;
+    margin-bottom: 30px;
+  }

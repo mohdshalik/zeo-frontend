@@ -1,0 +1,230 @@
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" [class.menu-open]="isMenuOpen"
+  [class.menu-close]="!isMenuOpen" >
+  <div class="position-sticky">
+    <div class="list-group list-group-flush  mt-5">
+
+      <!-- <a routerLink="/main-sidebar" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="list-group-item list-group-item-action py-2 ripple ">
+        <span><mat-icon>home</mat-icon> <span class="sidenav-opt"> Dashboard
+
+          </span></span>
+
+      </a> -->
+
+      <a routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple"
+      aria-current="true"  >
+      <span><mat-icon>home</mat-icon> <span class="sidenav-opt" routerLink="/main-sidebar/dashboard-contents"> Dashboard</span></span>
+    </a>
+      <a routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple"
+        aria-current="true" routerLink="/main-sidebar/sub-sidebar" (click)="onToolbarMenuToggle()">
+        <span><mat-icon>peoples</mat-icon> <span class="sidenav-opt" > Employee Management</span></span>
+      </a>
+
+      <a  routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" (click)="onToolbarMenuToggle()">
+        <span><mat-icon>account_tree</mat-icon> <span class="sidenav-opt" routerLink="/main-sidebar/leave-options"> Leave Management</span></span>
+
+
+      </a>
+      <a routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple" *ngIf="!hideButton" routerLink="/main-sidebar/settings" (click)="onToolbarMenuToggle()">
+        <span><mat-icon>settings</mat-icon> <span class="sidenav-opt" > Settings</span></span>
+      </a>
+     
+
+       
+    </div>
+  </div>
+</nav>
+<!-- Sidebar -->
+
+<!-- Navbar -->
+<nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <!-- <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
+      aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button> -->
+
+    <!-- Brand -->
+ 
+    <a class="navbar-brand">
+      <div *ngIf="selectedCompany">
+        <!-- Check if the company_logo is available -->
+        <img *ngIf="selectedCompany.logo; else defaultLogo"
+             [src]="selectedCompany.logo" 
+             alt="Company Logo" 
+             height="70" 
+             width="100%" 
+             loading="lazy">
+      
+        <!-- Default logo to display if company_logo is not available -->
+        <ng-template #defaultLogo>
+          <img src="assets/zeo_logo_new.png" 
+               height="70" 
+               width="100%" 
+               alt="Default Company Logo" 
+               loading="lazy">
+        </ng-template>
+      </div>
+      
+      
+      <!-- <img src="assets/zeo_logo_new.png" height="70" width="100%" alt="MDB Logo" 
+        loading="lazy" /> -->
+    </a>
+
+
+    <!-- Right links -->
+    <ul class="navbar-nav ms-auto d-flex flex-row">
+      <!-- Notification dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" (click)="redirectToExpiredDocuments()" role="button"
+        data-mdb-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+         <mat-icon class="mt-2">notifications</mat-icon>
+         <span class="badge rounded-pill badge-notification bg-danger" *ngIf="expiredDocumentsCount > 0"
+               style="position: absolute; margin-left: -10px; color: white;">{{ expiredDocumentsCount }}</span>
+     </a>
+       
+   
+      <li class="nav-item dropdown" *ngIf="schemas.length > 0">
+        <div class="Company_pro" >
+          <div class="custom-sel drop_chosse opened" >
+            <select class="form-control form_conrtl_height" (change)="selectSchema($event)">
+              <option value="">Select Company</option>
+              <option *ngFor="let schema of schemas" [value]="schema">{{ schema }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="Company_pro company_bor" *ngIf="selectedSchema">
+          <div class="cmp_drop">
+            <mat-icon>apartment</mat-icon>
+            <h1>{{ selectedSchema }}</h1>
+            <mat-icon style="margin-left: 10px;">expand_more</mat-icon>
+          </div>
+        </div>
+        
+      </li>
+
+    
+
+     
+      
+<!-- 
+      <div class="board_user" *ngIf="showboard">
+
+      
+
+      
+    </div> -->
+
+    <li>
+      <div class="user_logged_outer" *ngIf="userDetails">
+        <div class="user_logged_in">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="user_logged_out">
+          <h1>{{ userDetails.username }}</h1>
+        </div>
+
+      </div>
+    </li>
+      
+     
+      <!-- <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon style="margin-bottom: 3px;">apartment</mat-icon>
+          <span class="cmp_list">Company 1
+            
+          </span>
+        </button>
+     
+     
+      </mat-menu> -->
+  
+    
+
+      <!-- Avatar -->
+      <li class="nav-item dropdown">
+
+      
+        <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"  id="navbarDropdownMenuLink"
+          role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+          <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" class="rounded-circle" height="22"
+            alt="Avatar" loading="lazy" /> -->
+            <button type="button" (click)="logout()"  class="btn btn-danger" style="    border-radius: 0px;">Logout</button>
+
+        </a>
+
+      </li>
+    </ul>
+
+   
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- <div class="row">
+  <div class="col-md-8"></div>
+  <div class="col-md-4">
+    <div class="company_change">
+      
+    </div>
+  </div>
+</div> -->
+<!-- <div class="" style="overflow-x: hidden;padding: 20px; background: whitesmoke;">
+  <div class="content-dash ">
+ 
+
+    <div class="row">
+      <div class="col-md-4 col-12">
+        <div class="admin-det" routerLink="/branch-creation">
+          <div class="detail_ico">
+            <mat-icon class="icon-det" >apartment</mat-icon>
+          </div>
+          <div class="details_con">
+            <h2>Branches</h2>
+            <h2>02</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-12">
+        <div class="admin-det admin-emp-clr">
+          <div class="detail_ico ">
+            <mat-icon class="icon-det">diversity_2
+
+            </mat-icon>
+          </div>
+          <div class="details_con">
+            <h2>Employees</h2>
+            <h2>100</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-12">
+        <div class="admin-det admin-lev-clr">
+          <div class="detail_ico ">
+            <mat-icon class="icon-det"> reduce_capacity
+
+            </mat-icon>
+
+          </div>
+
+          <div class="details_con">
+            <h2>Leaves</h2>
+            <h2>12</h2>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div> -->
+<router-outlet></router-outlet>
+
+
+    <!-- Loader -->
+    <div class="loader-container" [class.show]="isLoading">
+      <div class="loader"></div>
+    </div>

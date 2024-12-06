@@ -1,0 +1,179 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>General Request</h2><hr>
+
+        <form >
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+
+                    <div class="custom-sel">
+                        <label>Select Employee</label>
+                        <select class="form-control" id="employee" required [(ngModel)]="employee"  [ngModelOptions]="{standalone: true}"
+                         [ngClass]="{'error-field': registerButtonClicked && !employee}" (change)="onEmployeeChange($event)" >
+                            <option value="" >Select</option>
+                            <option *ngFor="let deparmentsec of employees" [value]="deparmentsec.id">{{ deparmentsec.emp_first_name     }} </option>
+                        </select>
+                        <div *ngIf="registerButtonClicked && !employee" class="error-message">Please Select Your Employee</div>
+                    </div>
+                                
+            
+                </div>
+
+                <div class="col-md-3">
+                    <div class="custom-sel">
+                        <label>Select Branches</label>
+                        <select class="form-control" id="branch" required [(ngModel)]="branch" (change)="onBranchChange($event)" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch}">
+                            <option value="">Select</option>
+                            <option *ngFor="let deparmentsec of branches" [value]="deparmentsec.id">{{ deparmentsec.branch_name }}</option>
+                        </select>
+                        <div *ngIf="registerButtonClicked && !branch" class="error-message">Please Select Your Branch</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Document Number</label>
+                    <input type="number" class="form-control" required [(ngModel)]="doc_number" placeholder="Enter document number"
+                        [disabled]="automaticNumbering" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !doc_number && !automaticNumbering}">
+                    <div *ngIf="registerButtonClicked && !doc_number && !automaticNumbering" class="error-message">Document number is required.</div>
+                </div>
+                
+
+              <div class="col-md-3" >
+               
+                <label>Reason</label>
+               <input type="text"  class="form-control" required  [(ngModel)]="reason"  placeholder="Enter Reason"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !reason}">
+               
+               <div *ngIf="registerButtonClicked && !reason" class="error-message">reason is required.</div>
+          </div>
+
+
+          
+          <div class="col-md-3" >
+               
+            <label>Total</label>
+           <input type="number"  class="form-control" required  [(ngModel)]="total"  placeholder="Enter total"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !total}">
+           
+           <div *ngIf="registerButtonClicked && !total" class="error-message">total is required.</div>
+      </div>
+
+    
+
+    
+    <div class="col-md-3">
+
+
+        <div class="custom-sel">
+            <label>Select Request Type</label>
+            <select class="form-control" id="request_type" required [(ngModel)]="request_type"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !request_type}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of RequestType" [value]="deparmentsec.id">{{ deparmentsec.name     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !request_type" class="error-message">Please Select Your Req type</div>
+        </div>
+                    
+
+    </div>
+
+
+   
+
+
+    <div class="col-md-3">
+
+
+        <div class="custom-sel">
+            <label>Created by</label>
+            <select class="form-control" id="created_by" required [(ngModel)]="created_by"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !created_by}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of Users" [value]="deparmentsec.id">{{ deparmentsec.username     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !created_by" class="error-message">Please Select Created by </div>
+        </div>
+                    
+
+    </div>
+
+    
+
+    <div class="col-md-3">
+        <div class="check-box-selection-sec form-control">
+            <div class="mat-set">
+                <mat-checkbox [(ngModel)]="approved" [ngModelOptions]="{standalone: true}">Approved</mat-checkbox>
+            </div>
+           
+        </div>
+    </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-10">
+    
+                </div>
+    
+                <div class="col-md-2">
+                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerGeneralreq()">Save</button>  
+                 </div>
+
+                 
+            </div>
+            
+       
+    </form>
+
+
+
+    
+
+  
+
+
+        </div>
+
+        </div>
+
+
+
+        
+        <table width="100%">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th> Employee</th>
+                <th>Branch</th>
+                <th>Document Number</th>
+                <th>Request type</th>
+                <th>Reason</th>
+                <th>Total</th>
+                <th>Approval Status</th>
+
+               
+              </tr>
+            </thead>
+            <tbody>
+                
+              <tr *ngFor="let docs of GeneralReq;let i = index">
+                <td>{{ i + 1 }}</td> 
+                <td>{{ docs.employee }}</td>
+                <td>{{ docs.branch }}</td>
+                <td>{{ docs.doc_number }}</td>
+                <td>{{ docs.request_type }}</td>
+                <td>{{ docs.reason }}</td>
+                <td>{{ docs.total }}</td>
+                <td>{{ docs.approved }}</td>
+           
+              </tr>
+          
+            </tbody>
+          </table>
+
+        </div>
+        </div>
+        

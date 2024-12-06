@@ -1,0 +1,106 @@
+<div class="container" *ngFor="let employee  of employees">
+    <!-- Loop through each request -->
+    <div class="comapny_section"   >
+  
+      
+        <div class="row">
+            <div class="col-md-5">
+        <div class="orderStatus" >
+         <h2>General Request Approval Status</h2> <hr>
+        <ul  >
+            <li *ngFor="let request of employee.requests"   
+            > 
+            <div  style="display: flex;">
+             <div class="appr_det"  *ngFor="let approval of request.approvals" [ngClass]="{
+                'done': approval.status === 'Approved',
+                'pending': approval.status === 'Pending',
+                'rejected': approval.status === 'Rejected'
+            }"  (click)="ShowRequestDetails(approval)">
+         
+             <h2  [ngClass]="{
+                'approved-text': approval.status === 'Approved',
+                'pending-text': approval.status === 'Pending',
+                'rejected-text': approval.status === 'Rejected'
+              }"> {{ approval.status }} </h2>
+              <h2>{{ approval.general_request }}</h2>
+              </div>
+              <div class="lvl_wise" *ngFor="let approval of request.approvals" >
+              {{ approval.role }}
+            </div>
+
+            <div class="status-icon" *ngFor="let approval of request.approvals">
+                <mat-icon *ngIf="approval.status === 'Approved'">check</mat-icon>
+                <mat-icon *ngIf="approval.status === 'Pending'">priority_high</mat-icon>
+                <mat-icon *ngIf="approval.status === 'Rejected'">close</mat-icon>
+              </div>
+            </div>
+            </li>
+       
+          </ul>
+          </div>
+          </div>
+
+          <div class="col-md-7">
+            <div class="Req_det">
+                <h2>General Request Details</h2><hr>
+                <div *ngIf="selectedApproval">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>General Request</h4>
+                            <h5>{{ selectedApproval.general_request }}</h5>
+
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Approver</h4>
+                            <h5>{{ selectedApproval.approver }}</h5>
+                            
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <h4>Approver Role</h4>
+                            <h5>{{ selectedApproval.role }}</h5>
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Approving Level</h4>
+                            <h5>{{ selectedApproval.level }}</h5>
+                            
+                        </div>
+
+                        <div class="col-md-4">
+                            <h4>Status</h4>
+                            <h5 
+                            [ngClass]="{
+                              'approved-text': selectedApproval.status === 'Approved',
+                              'pending-text': selectedApproval.status === 'Pending',
+                              'rejected-text': selectedApproval.status === 'Rejected'
+                            }"> {{ selectedApproval.status }}</h5>
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Remark</h4>
+                            <h5>{{ selectedApproval.note }}</h5>
+                            
+                        </div>
+                    </div>
+                 
+                    
+                  
+             
+
+                   
+                </div>
+            </div>
+          </div>
+          </div>
+          
+      
+
+     
+      
+    </div>
+
+
+
+  </div>
+  

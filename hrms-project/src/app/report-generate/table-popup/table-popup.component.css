@@ -1,0 +1,14 @@
+.larger-table {
+    font-size: 24px; /* Increase font size */
+    width: 400%; /* Make the table width 150% of its container */
+  }
+  
+  .larger-table th,
+  .larger-table td {
+    padding: 30px; /* Increase padding */
+  }
+  
+  .larger-table th {
+    background-color: #f0f0f0; /* Light gray background for header */
+  }
+  

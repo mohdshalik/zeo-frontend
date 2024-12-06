@@ -1,0 +1,439 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script);
+.container{
+    /* margin-left: 85px; */
+    margin-right: 3.5%;
+  }
+
+.comapny_section{
+
+    margin-top: 120px;
+    margin-left: 170px;
+    /* background: #1f2125;
+    padding: 25px; */
+}
+
+.header_section{
+    background: white;
+    padding: 24px 20px 15px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    width: 100%;
+    border-bottom: solid 3px navy;
+}
+
+.header_section h1{
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+
+}
+
+
+.com_list{
+    padding: 20px;
+    width: 100%;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-top: solid 3px navy;
+    margin-bottom: 20px;
+
+
+}
+
+.com_list h2{
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+}
+
+
+
+  
+table thead th {
+    color: #ffffff;
+    background: #004976;
+    padding: 15px;
+    border: 1px solid #ebebec;
+    font-weight: 500;
+  }
+  
+  table tr {
+    background: #ffffff;
+  }
+  
+  table tr td {
+    border: 1px solid #e6edf1;
+    padding: 15px;
+  }
+  
+  @media only screen and (max-width: 640px) {
+    table thead {
+      display: none;
+    }
+  
+    table tbody {
+      display: block;
+    }
+  
+    table tbody tr td {
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+  
+    table tbody tr {
+      margin-bottom: 20px;
+      display: block;
+      border: 1px solid #004976;
+      background: #f9f9f9;
+      overflow: hidden;
+    }
+  
+    table tbody td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      width: 30%;
+      display: flex;
+      background: #004976;
+      color: #fff;
+      padding: 15px;
+      margin-inline-end: 10px;
+    }
+  }
+  
+
+
+
+  p{
+    margin-bottom: 0px;
+  }
+
+
+  .form-control-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ::ng-deep .form-control-wrapper mat-form-field {
+    width: 100%;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-wrapper {
+    padding: 0;
+    margin: 0;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-flex {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-underline {
+    display: none;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    height: auto;
+    line-height: 1.5;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select-trigger {
+    height: auto;
+    padding: 0;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select-value-text {
+    padding: 0;
+    margin: 0;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-infix {
+    padding: 0;
+    border: none;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select-placeholder {
+    transform: translateY(-50%);
+    top: 50%;
+  }
+
+
+  ::ng-deep .form-control-wrapper  .mat-mdc-form-field-infix{
+    margin-top: -14px;
+}
+
+::ng-deep .form-control-wrapper .mdc-text-field--filled:not(.mdc-text-field--disabled){
+
+  background-color: white;
+}
+
+::ng-deep .form-control-wrapper .mdc-text-field{
+  padding: 0px;
+}
+
+::ng-deep .form-control-wrapper .mat-mdc-form-field-infix:focus-visible{
+  outline: none-webkit-focus-ring-color auto 0px;
+  
+
+}
+
+
+/* Remove :focus-visible style from all input elements */
+input:focus-visible {
+  outline: none;
+}
+
+/* Remove :focus-visible style from mat-select */
+.mat-select:focus-visible {
+  outline: none;
+}
+
+/* Use !important to ensure the outline is removed */
+::ng-deep .form-control-wrapper:focus-visible {
+  outline: none !important;
+}
+
+
+::ng-deep .mat-select:focus-visible {
+  outline: none;
+}
+
+/* Optionally, you can also override other styles */
+::ng-deep .mat-select:focus-visible .mat-select-value {
+  outline: none;
+}
+
+::ng-deep .mdc-text-field--no-label{
+  border:1px solid #ced4da;
+}
+
+::ng-deep .mat-mdc-form-field-flex {
+  padding: 4px 7px;
+  height: 35px;
+}
+
+
+
+
+.card-list {
+    width: 100%;
+}
+.card-list:before, .card-list:after {
+    content: " ";
+    display: table;
+}
+.card-list:after {
+    clear: both;
+}
+.card {
+    border-radius: 8px;
+    color: white;
+    padding: 10px;
+    position: relative;
+}
+.card:hover{
+    /* transform: scale(1.1); */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-7px);
+
+}
+.card .zmdi {
+    color: white;
+    font-size: 28px;
+    opacity: 0.3;
+    position: absolute;
+    right: 13px;
+    top: 13px;
+}
+.card .stat {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 8px;
+    margin-top: 25px;
+    padding: 10px 10px 0;
+    text-transform: uppercase;
+}
+.card .title {
+    display: inline-block;
+    font-size: 12px;
+    padding: 10px 10px 0;
+    text-transform: uppercase;
+    font-weight: 500;
+
+}
+.card .value {
+    font-size: 28px;
+    padding: 0 10px;
+}
+.card.blue {
+    background-color: #2298f1;
+}
+.card.green {
+    background-color: #66b92e;
+}
+.card.orange {
+    background-color: #da932c;
+}
+.card.red {
+    background-color: #d65b4a;
+}
+
+.card{
+    width: 90%;
+    position:absolute;
+    margin-top: -25px;
+}
+
+.comapny_section h2{
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.comapny_section h3{
+    color: white;
+    font-size: 35px;
+    font-weight: 500;
+    /* margin-bottom: 45px; */
+    font-family: 'Dancing Script';
+    text-transform: capitalize;
+    letter-spacing: 2px;
+}
+
+.userdisname{
+    font-size: 24px !important;
+
+}
+
+
+
+.comapny_section{
+    padding: 0px !important;
+}
+.content_sec{
+    background: #1f2125;
+    padding: 25px;
+}
+
+.content_sec_last{
+    margin-top: 100px;
+}
+
+.dash_holidays{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.dash_holidays h6{
+     
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.holi_date_sec{
+
+    background: #d1a7a8;
+    padding: 5px;
+    border-radius: 10px;
+
+}
+.holi_date_sec h2{
+
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    margin-bottom: 5px;
+
+}
+
+.dash_holidays h5{
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 3px;
+
+
+}
+.dash_holidays h4{
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(35, 34, 34)
+
+
+}
+
+.drop_list{
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+.drop_list:focus-visible{
+
+    outline: 0px !important;
+}
+
+.policy_sec h1{
+    font-size: 16px;
+    font-weight: 400;
+    
+}
+
+.policy_sec h2{
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(44, 43, 43);
+    margin-bottom: 20px;
+}
+
+.btn-ess {
+    background: transparent;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: solid 2px white;
+    color: white;
+    font-weight: 400;
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Adjust the button width */
+    height: 40px; /* Adjust the button height */
+    text-align: center;
+}
+
+.btn-ess:hover{
+    background: white;
+    color: black;
+    font-weight: 600;
+
+}
+
+/* .btn-ess .animated-text {
+    display: inline-block;
+  
+    animation: slideText s linear infinite;
+    left: 100%;
+}
+
+@keyframes slideText {
+    from {
+        transform: translateX(-50%); 
+    }
+    to {
+        transform: translateX(-100%); 
+    }
+} */
+
+.mat-icon {
+   
+    vertical-align: middle;
+}

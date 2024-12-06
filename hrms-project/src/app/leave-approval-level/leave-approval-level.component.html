@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="comapny_section">
+        <div class="com_list ">
+            <div class="cpm-sec">
+
+                <h2>Leave Approval Level</h2>
+                <hr>
+                
+            
+                <form (ngSubmit)="SetLeaveApprovaLevel()" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Level</label>
+                        <input type="number" class="form-control" required [(ngModel)]="level" placeholder="Enter level"
+                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !level}">
+                        <div *ngIf="registerButtonClicked && !level" class="error-message">Level field is required.</div>
+                      </div>
+                  
+                      <div class="col-md-6">
+                        <label>Role</label>
+                        <input type="text" class="form-control" required [(ngModel)]="role" placeholder="Enter role"
+                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !role}">
+                        <div *ngIf="registerButtonClicked && !role" class="error-message">role field is required.</div>
+                      </div>
+                  
+                    
+
+                 
+
+                 
+                      <div class="col-md-6">
+                        <label></label>
+                        <div class="check-box-selection-sec form-control mt-3">
+                          <div class="mat-set">
+                            <mat-checkbox [(ngModel)]="is_compensatory" [ngModelOptions]="{standalone: true}">Is Compensatory</mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      
+              
+
+                      <!-- Conditionally hide this section based on the is_compensatory value -->
+    <div class="col-md-6" *ngIf="!is_compensatory">
+        <label>Leave Type</label>
+        <div class="custom-sel">
+          <select
+            class="form-control"
+            id="request_type"
+            name="request_type"
+            [(ngModel)]="request_type"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option *ngFor="let leavetype of LeaveTypes" [value]="leavetype.id">
+              {{ leavetype.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+
+
+                
+                      <div class="col-md-6">
+                        <label>Approver</label>
+                        <div class="custom-sel">
+                          <select class="form-control" id="approver" name="approver" [(ngModel)]="approver" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let approver of Users" [value]="approver.id">{{ approver.email }}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                  
+                 
+                  
+                 
+                    </div>
+                  
+                    <div class="row">
+                      <div class="col-md-9"></div>
+                      <div class="col-md-3">
+                        <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Aproval Level</button>
+                      </div>
+                    </div>
+                  </form>
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+</div>

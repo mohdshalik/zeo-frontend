@@ -1,0 +1,304 @@
+<div class="sub-sidebar clickOutside"  >
+   
+
+    <mat-sidenav-container >
+        <mat-sidenav class="sidnav_scrolling" #sidenav opened="true" mode="side">
+            <mat-nav-list class="calender">
+        
+            
+                  
+
+                  
+<style>
+  .mat-expansion-panel{
+    background: transparent;
+   
+  }
+
+  .calender{
+    margin-top: 30px;
+  }
+
+</style>
+    
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header class="mar-expantion-span">
+                            
+                                <a mat-list-item> <mat-icon>peoples</mat-icon>
+                                    <span class="con_clr"> Common Settings</span></a>
+                        
+                            <!-- <mat-panel-description>
+                            
+                            </mat-panel-description> -->
+                          </mat-expansion-panel-header>
+                          <!-- <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/company-master">
+                            <a class="set_siding" mat-list-item  ><span class="side_option"> Company Master</span>  </a>
+                          </div> -->
+                          <div class="mat-expansion-panel-body " *ngIf="hasViewPermissionBranch">
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/branch-master"><span class="side_option" > Branch Master</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+                        <div *ngIf="!hasViewPermissionBranch">
+
+                        </div>
+                        
+                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/user-master" *ngIf="hasViewPermissionUsers">
+                            <a class="set_siding" mat-list-item  ><span class="side_option">Users</span> </a>
+                            <!-- <p class="side_option">I'm visible because I am open</p> -->
+                          </div>
+                          <div *ngIf="!hasViewPermissionUsers">
+
+                          </div>
+
+                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/user-grouping-master" *ngIf="hasViewPermissionGroups">
+                            <a class="set_siding" mat-list-item  ><span class="side_option">User Grouping</span> </a>
+                            <!-- <p class="side_option">I'm visible because I am open</p> -->
+                          </div>
+
+                          <div *ngIf="!hasViewPermissionGroups">
+
+                          </div>
+                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/permission-assigned" *ngIf="hasViewPermissionAssignPermission">
+                            <a class="set_siding" mat-list-item  ><span class="side_option">Assign Permission for  user</span> </a>
+                            <!-- <p class="side_option">I'm visible because I am open</p> -->
+                          </div>
+                          <div *ngIf="!hasViewPermissionAssignPermission"></div>
+
+                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/state-master" *ngIf="hasViewStateMaster">
+                            <a class="set_siding" mat-list-item  ><span class="side_option">State Master</span> </a>
+                            <!-- <p class="side_option">I'm visible because I am open</p> -->
+                          </div>
+                          <div *ngIf="!hasViewStateMaster"></div>
+                      
+                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/document-type-master" *ngIf="hasViewPermissionDocType">
+                            <a class="set_siding" mat-list-item  ><span class="side_option">Document Type </span> </a>
+                            <!-- <p class="side_option">I'm visible because I am open</p> -->
+                          </div>
+
+                          <div *ngIf="!hasViewPermissionDocType">
+
+                          </div>
+
+                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/document-expired" *ngIf="hasViewNotification">
+                            <a class="set_siding" mat-list-item  ><span class="side_option">Expired Documents </span> </a>
+                            <!-- <p class="side_option">I'm visible because I am open</p> -->
+                          </div>
+                          <div *ngIf="!hasViewNotification">
+
+                          </div>
+
+                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/location-master" *ngIf="hasAddCompanyMaster">
+                            <a class="set_siding" mat-list-item  ><span class="side_option">Location Master</span> </a>
+                            <!-- <p class="side_option">I'm visible because I am open</p> -->
+                          </div>
+
+                          <div *ngIf="!hasAddCompanyMaster">
+
+                          </div>
+
+
+                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/document-numbering" *ngIf="hasAddCompanyMaster">
+                            <a class="set_siding" mat-list-item  ><span class="side_option">Document Numbering</span> </a>
+                            <!-- <p class="side_option">I'm visible because I am open</p> -->
+                          </div>
+
+                          <div *ngIf="!hasAddCompanyMaster">
+
+                          </div>
+                        </mat-expansion-panel>
+
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header class="mar-expantion-span">
+                          
+                                <a mat-list-item> <mat-icon>calendar_month</mat-icon>
+                                    <span class="con_clr"> Calendars</span></a>
+                       
+                          
+                          </mat-expansion-panel-header>
+                     
+                          <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/weelcalendar"><span class="side_option" > Week Calendar</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+
+                        <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/assign-weekcalendar"><span class="side_option" > Assign calendar</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+                        <!-- <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/assignweek-calendar-days"><span class="side_option" > Assign Week calendar Days</span> </a>
+                        </div> -->
+
+                        <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/holiday-calendar"><span class="side_option" > Holiday Calendar</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+
+                        <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/assign-holiday-calendar"><span class="side_option" >Assign Holiday Calendar</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+                      
+                      
+                      
+                        
+                         
+                        </mat-expansion-panel>
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header class="mar-expantion-span">
+                          
+                                <a mat-list-item> <mat-icon>assignment</mat-icon>
+                                    <span class="con_clr"> Report List</span></a>
+                       
+                          
+                          </mat-expansion-panel-header>
+                     
+                          <div class="mat-expansion-panel-body "   *ngIf="hasViewPermissionempreport" >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/report-generate"><span class="side_option" > Employee Master Report</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+
+                        <div *ngIf="!hasViewPermissionempreport">
+
+                        </div>
+
+                        <div class="mat-expansion-panel-body "  *ngIf="hasViewPermissiondocreport">
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/document-report"><span class="side_option" > Document Master Report</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+
+                        <div *ngIf="!hasViewPermissiondocreport">
+                          </div>
+                        <!-- <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/assignweek-calendar-days"><span class="side_option" > Assign Week calendar Days</span> </a>
+                        </div> -->
+
+                        <div class="mat-expansion-panel-body " *ngIf="hasViewPermissiongenreport" >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/general-request-report"><span class="side_option" > General Request Report</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+                        <div *ngIf="!hasViewPermissiongenreport">
+                         </div>
+
+                        <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/department-report"><span class="side_option" >Department Report</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+                      
+                      
+                        <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/designation-report"><span class="side_option" >Designation Report</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+
+                           
+                        <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/leave-report"><span class="side_option" >Leave Report</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+                        
+                         
+                        </mat-expansion-panel>
+
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header class="mar-expantion-span">
+                          
+                                <a mat-list-item> <mat-icon>dashboard_customize
+
+
+                                </mat-icon>
+                                    <span class="con_clr"> Customization</span></a>
+                       
+                          
+                          </mat-expansion-panel-header>
+                     
+                          <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/from-designer"><span class="side_option" >Employee-form</span> </a>
+                        </div>
+
+                    
+                      
+                      
+                        
+                         
+                        </mat-expansion-panel>
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/email-template">
+                          
+                                <a mat-list-item> <mat-icon>dashboard_customize
+
+
+                                </mat-icon>
+                                    <span class="con_clr"> Email Template</span></a>
+                       
+                          
+                          </mat-expansion-panel-header>
+                     
+                          <!-- <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/from-designer"><span class="side_option" >Employee-form</span> </a>
+                        </div> -->
+
+                    
+                      
+                      
+                        
+                         
+                        </mat-expansion-panel>
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/company-policy">
+                          
+                                <a mat-list-item> <mat-icon>dashboard_customize
+
+
+                                </mat-icon>
+                                    <span class="con_clr"> Company Policy</span></a>
+                       
+                          
+                          </mat-expansion-panel-header>
+                     
+                          <!-- <div class="mat-expansion-panel-body " >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/from-designer"><span class="side_option" >Employee-form</span> </a>
+                        </div> -->
+
+                    
+                      
+                      
+                        
+                         
+                        </mat-expansion-panel>
+               
+    <style>
+    .mat-expansion-panel-body {
+        padding: 0 0px 16px !important;
+    }
+    </style>
+    
+     
+                   
+    
+                        <div >
+                
+            
+                      
+                        </div>
+    
+    
+                      
+    
+            </mat-nav-list>
+    
+            
+    
+    
+    
+            
+        </mat-sidenav>
+    
+    
+      
+        <router-outlet></router-outlet>
+    
+    </mat-sidenav-container>
+ 
+      </div>
+    

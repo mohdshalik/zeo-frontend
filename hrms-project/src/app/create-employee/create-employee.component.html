@@ -1,0 +1,933 @@
+
+<div mat-dialog-content class="">
+    <div class="cpm-sec" >
+
+        <h1>Create Employee</h1><hr>
+
+        <form (ngSubmit)="uploadEmployeeDocument()" #documentForm="ngForm">
+        <div class="row">
+
+            <div class="col-md-6">
+                <label>{{empCodeFieldName}}</label>
+            
+                <!-- Hidden input to store the final value to be posted -->
+                <input type="text" class="form-control" [(ngModel)]="emp_code" [ngModelOptions]="{standalone: true}" style="display: none;">
+            
+                <ng-container [ngSwitch]="selectedDataType">
+                    <!-- Text Box -->
+                    <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+                           required placeholder="{{empCodeFieldName}}" 
+                           [(ngModel)]="temp_emp_code" 
+                           (ngModelChange)="syncEmpCode($event)"  [ngModelOptions]="{standalone: true}"
+                           [ngClass]="{'error-field': registerButtonClicked && !emp_code}">
+                    <div *ngIf="registerButtonClicked && !emp_code" class="error-message">{{empCodeFieldName}} is required.</div>
+            
+                    <!-- Dropdown -->
+                    <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+                        <select class="form-control" [(ngModel)]="temp_emp_code" (ngModelChange)="syncEmpCode($event)" [ngModelOptions]="{standalone: true}">
+                            <option value="">Select an option</option>
+                            <option *ngFor="let option of dropdownOptions" [value]="option">{{option}}</option>
+                        </select>
+                        <div *ngIf="registerButtonClicked && !emp_code" class="error-message">{{empCodeFieldName}} is required.</div>
+                    </div>
+                </ng-container>
+            </div>
+            
+            
+            <div class="col-md-6" *ngIf="!isFirstNameFieldHidden">
+                <label>{{firstNameFieldName}}</label>
+                <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" 
+                       [(ngModel)]="emp_first_name" placeholder="{{firstNameFieldName}}"
+                       [required]="isFirstNameMandatory" 
+                       [ngModelOptions]="{standalone: true}" 
+                       [ngClass]="{'error-field': registerButtonClicked && isFirstNameMandatory && !emp_first_name}">
+            
+                <div *ngIf="registerButtonClicked && isFirstNameMandatory && !emp_first_name" class="error-message">
+                    {{firstNameFieldName}} is required.
+                </div>
+            </div>
+
+            <div class="col-md-6" *ngIf="!isLasstNameFieldHidden" >
+               
+                <label>{{lastNameFieldName}}</label>
+               <input type="text"  class="form-control" required id="emp_last_name" name="emp_last_name"  [(ngModel)]="emp_last_name"  placeholder="Enter {{lastNameFieldName}}"
+                [ngModelOptions]="{standalone: true}" [required]="isLastNameMandatory" [ngClass]="{'error-field': registerButtonClicked && isLastNameMandatory && !emp_last_name}"  >
+                <div *ngIf="registerButtonClicked && isLastNameMandatory && !emp_last_name" class="error-message">
+                    {{lastNameFieldName}} is required.
+                </div>
+            </div>
+
+
+<div class="col-md-6" *ngIf="!isGernderNameFieldHidden">
+    <label>{{genderFieldName}}</label>
+
+    
+    
+    <!-- Hidden input to store the final value to be posted -->
+    <div class="custom-sel">
+                  
+        <select class="form-control"  [(ngModel)]="emp_gender"  [required]="isGenderMandatory"  [ngModelOptions]="{standalone: true}" style="display: none;"
+        [ngClass]="{'error-field': registerButtonClicked && isGenderMandatory && !emp_gender}" >
+                  
+                  <div *ngIf="registerButtonClicked && isGenderMandatory&& !emp_gender" class="error-message">
+                            {{genderFieldName}} is required.
+                        </div>
+                </select>
+    </div>
+    <!-- <input type="text" class="form-control" [(ngModel)]="emp_gender" [ngModelOptions]="{standalone: true}" style="display: none;"> -->
+
+    <ng-container [ngSwitch]="genderDataType">
+        <!-- Text Box for Gender -->
+        <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+               required placeholder="{{genderFieldName}}" 
+               [(ngModel)]="temp_emp_gender" 
+               (ngModelChange)="syncGender($event)" [ngModelOptions]="{standalone: true}">
+        
+        <!-- Dropdown for Gender -->
+        <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+            <select class="form-control" [(ngModel)]="temp_emp_gender" (ngModelChange)="syncGender($event)" [ngModelOptions]="{standalone: true}">
+
+                <option >Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+    </ng-container>
+</div>
+
+
+<div class="col-md-6">
+               
+    <label>{{dobFieldName}}</label>
+   <input type="date"  class="form-control" required id="emp_date_of_birth" name="emp_date_of_birth"  [(ngModel)]="emp_date_of_birth"  placeholder="Enter {{dobFieldName}}"
+    [ngModelOptions]="{standalone: true}" >
+   
+   <div *ngIf="registerButtonClicked && !emp_date_of_birth" class="error-message">Description is required.</div>
+</div>
+
+<div class="col-md-6"  *ngIf="!isEmailNameFieldHidden">
+               
+    <label>{{emailFieldName}}</label>
+    <input type="text"  class="form-control" required  [(ngModel)]="emp_personal_email"  placeholder="Enter {{emailFieldName}}"
+    [ngModelOptions]="{standalone: true}" [required]="isEmailMandatory" 
+[ngClass]="{'error-field': registerButtonClicked && isEmailMandatory && !emp_personal_email}" >
+
+<div *ngIf="registerButtonClicked && isEmailMandatory && !emp_personal_email" class="error-message">
+                    {{emailFieldName}} is required.
+                </div>
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_personal_email" class="error-message">Description is required.</div> -->
+</div>
+
+
+
+
+<div class="col-md-6" *ngIf="!isCmpNoNameFieldHidden" >
+               
+    <label>{{cmpnoFieldName}}</label>
+    <input type="text"  class="form-control" required  [(ngModel)]="emp_mobile_number_1"  placeholder="Enter {{cmpnoFieldName}}"
+    [ngModelOptions]="{standalone: true}" [required]="isCmpnoMandatory"  [ngClass]="{'error-field': registerButtonClicked && isCmpnoMandatory && !emp_mobile_number_1}" >
+   
+          
+          <div *ngIf="registerButtonClicked && isCmpnoMandatory&& !emp_mobile_number_1" class="error-message">
+                    {{cmpnoFieldName}} is required.
+                </div>
+   <!-- <div *ngIf="registerButtonClicked && !emp_mobile_number_1" class="error-message">Description is required.</div> -->
+</div>
+
+
+
+<div class="col-md-6"  *ngIf="!isPerNoNameFieldHidden">
+               
+    <label>{{pernoFieldName}}</label>
+    <input type="text"  class="form-control" required  [(ngModel)]="emp_mobile_number_2"  placeholder="Enter {{pernoFieldName}}"
+    [ngModelOptions]="{standalone: true}" 
+[required]="isPernoMandatory" [ngClass]="{'error-field': registerButtonClicked && isPernoMandatory && !emp_mobile_number_2}" >
+     <div *ngIf="registerButtonClicked && isPernoMandatory && !emp_mobile_number_2" class="error-message">
+                    {{pernoFieldName}} is required.
+                </div>
+   <!-- <div *ngIf="registerButtonClicked && !emp_mobile_number_2" class="error-message">Description is required.</div> -->
+</div>
+
+
+
+
+<div class="col-md-6"  *ngIf="!isPermaddNameFieldHidden">
+               
+    <label>{{peraddressFieldName}}</label>
+    <textarea class="form-control" required   [(ngModel)]="emp_permenent_address"  placeholder="Enter {{peraddressFieldName}}"
+    [required]="isPeraddMandatory" [ngClass]="{'error-field': registerButtonClicked && isPeraddMandatory && !emp_permenent_address}" 
+        [ngModelOptions]="{standalone: true}" >  </textarea>
+    <div *ngIf="registerButtonClicked && isPeraddMandatory && !emp_permenent_address" class="error-message">
+                        {{peraddressFieldName}} is required.
+                    </div>
+    
+
+
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_permenent_address" class="error-message">Description is required.</div> -->
+</div>
+
+
+<div class="col-md-6"   *ngIf="!isPresentaddNameFieldHidden">
+               
+    <label>{{preaddressFieldName}}</label>
+    <textarea class="form-control" required [(ngModel)]="emp_present_address"  placeholder="Enter {{preaddressFieldName}}"
+    [ngModelOptions]="{standalone: true}" [required]="isPresaddMandatory" 
+    [ngClass]="{'error-field': registerButtonClicked && isPresaddMandatory && !emp_present_address}"  ></textarea>
+    
+    <div *ngIf="registerButtonClicked && isPresaddMandatory && !emp_present_address" class="error-message">
+                        {{preaddressFieldName}} is required.
+                    </div>
+
+   
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_present_address" class="error-message">Description is required.</div> -->
+</div>
+
+<div class="col-md-6" *ngIf="!isCityFieldHidden">
+               
+    <label>{{cityFieldName}}</label>
+    <input type="text"  class="form-control" required [(ngModel)]="emp_city"  placeholder="Enter {{cityFieldName}}"
+    [ngModelOptions]="{standalone: true}" [required]="isCityMandatory" 
+[ngClass]="{'error-field': registerButtonClicked && isCityMandatory && !emp_city}"  >
+
+<div *ngIf="registerButtonClicked && isCityMandatory && !emp_city" class="error-message">
+                    {{cityFieldName}} is required.
+                </div>
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_city" class="error-message">Description is required.</div> -->
+</div>
+
+
+<!-- <div class="col-md-6" >
+               
+    <label>Religion</label>
+   <input type="text"  class="form-control" required id="emp_relegion" name="emp_relegion"  [(ngModel)]="emp_relegion"  placeholder="Enter Religion"
+    [ngModelOptions]="{standalone: true}" >
+   
+</div> -->
+   <!-- <div *ngIf="registerButtonClicked && !emp_relegion" class="error-message">Description is required.</div> -->
+
+<div class="col-md-6" *ngIf="!isReliFieldHidden">
+    <label>{{religionFieldName}}</label>
+
+
+    <!-- Hidden input to store the final value to be posted -->
+
+    <input type="text"  class="form-control" required   [(ngModel)]="emp_relegion"  placeholder="Enter {{religionFieldName}}"
+    [ngModelOptions]="{standalone: true}"  style="display: none;" [required]="isRelMandatory" 
+[ngClass]="{'error-field': registerButtonClicked && isRelMandatory && !emp_relegion}" >
+
+<div *ngIf="registerButtonClicked && isRelMandatory && !emp_relegion" class="error-message">
+                    {{religionFieldName}} is required.
+                </div>
+
+    <ng-container [ngSwitch]="selectedDataTypereligion">
+        <!-- Text Box -->
+        <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+               required placeholder="{{religionFieldName}}" 
+               [(ngModel)]="temp_religion" 
+               (ngModelChange)="syncReligion($event)"  [ngModelOptions]="{standalone: true}"
+               [ngClass]="{'error-field': registerButtonClicked && !temp_religion}">
+        <div *ngIf="registerButtonClicked && !temp_religion" class="error-message">{{religionFieldName}} is required.</div>
+
+        <!-- Dropdown -->
+        <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+            <select class="form-control" [(ngModel)]="temp_religion" (ngModelChange)="syncReligion($event)" [ngModelOptions]="{standalone: true}">
+                <option value="">Select an option</option>
+                <option *ngFor="let option of ReligionDropdownOptions" [value]="option">{{option}}</option>
+            </select>
+            <div *ngIf="registerButtonClicked && !temp_religion" class="error-message">{{religionFieldName}} is required.</div>
+        </div>
+    </ng-container>
+</div>
+
+
+<!-- <div class="col-md-6" >
+               
+    <label>Blood Group</label>
+   <input type="text"  class="form-control" required id="emp_blood_group" name="emp_blood_group"  [(ngModel)]="emp_blood_group"  placeholder="Enter Blood Group"
+    [ngModelOptions]="{standalone: true}" >
+   
+</div> -->
+
+ 
+<div class="col-md-6" *ngIf="!isBloodFieldHidden">
+    <label>{{bloodFieldName}}</label>
+
+
+    <!-- Hidden input to store the final value to be posted -->
+    <input type="text"  class="form-control" required   [(ngModel)]="emp_blood_group"  placeholder="Enter {{bloodFieldName}}"
+    [ngModelOptions]="{standalone: true}"  style="display: none;" [required]="isBloodMandatory" 
+[ngClass]="{'error-field': registerButtonClicked && isBloodMandatory && !emp_blood_group}" >
+
+<div *ngIf="registerButtonClicked && isBloodMandatory && !emp_blood_group" class="error-message">
+                    {{bloodFieldName}} is required.
+                </div>
+    <ng-container [ngSwitch]="selectedDataTypeblood">
+        <!-- Text Box -->
+        <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+               required placeholder="{{bloodFieldName}}" 
+               [(ngModel)]="temp_blood" 
+               (ngModelChange)="syncblood($event)"  [ngModelOptions]="{standalone: true}"
+               [ngClass]="{'error-field': registerButtonClicked && !temp_blood}">
+        <div *ngIf="registerButtonClicked && !temp_religion" class="error-message">{{bloodFieldName}} is required.</div>
+
+        <!-- Dropdown -->
+        <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+            <select class="form-control" [(ngModel)]="temp_blood" (ngModelChange)="syncblood($event)" [ngModelOptions]="{standalone: true}">
+                <option value="">Select an option</option>
+                <option *ngFor="let option of bloodDropdownOptions" [value]="option">{{option}}</option>
+            </select>
+            <div *ngIf="registerButtonClicked && !temp_blood" class="error-message">{{bloodFieldName}} is required.</div>
+        </div>
+    </ng-container>
+</div>
+
+
+<div class="col-md-6"   *ngIf="!isNationFieldHidden">
+               
+    <label>{{nationFieldName}}</label>
+    <input type="text"  class="form-control" required   [(ngModel)]="emp_nationality"  placeholder="Enter {{nationFieldName}}"
+     [ngModelOptions]="{standalone: true}" [required]="isNatMandatory" 
+ [ngClass]="{'error-field': registerButtonClicked && isNatMandatory && !emp_nationality}" >
+ 
+ <div *ngIf="registerButtonClicked && isNatMandatory && !emp_nationality" class="error-message">
+                     {{nationFieldName}} is required.
+                 </div>
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_nationality" class="error-message">Description is required.</div> -->
+</div>
+
+
+
+
+    <div class="col-md-6"  *ngIf="!isMaritalFieldHidden">
+        <label>{{maritalFieldName}}</label>
+    
+        
+        
+        <!-- Hidden input to store the final value to be posted -->
+     
+                      
+        <select class="form-control"  [(ngModel)]="emp_marital_status"  [ngModelOptions]="{standalone: true}" style="display: none;"
+
+        [required]="isMariMandatory" 
+        [ngClass]="{'error-field': registerButtonClicked && isMariMandatory && !emp_marital_status}" >
+                      
+                     
+                    </select>
+        
+        <div *ngIf="registerButtonClicked && isMariMandatory && !emp_marital_status" class="error-message">
+                            {{maritalFieldName}} is required.
+                        </div>
+    
+        <!-- <input type="text" class="form-control" [(ngModel)]="emp_gender" [ngModelOptions]="{standalone: true}" style="display: none;"> -->
+    
+        <ng-container [ngSwitch]="maritalDataType">
+            <!-- Text Box for Gender -->
+            <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+                   required placeholder="{{maritalFieldName}}" 
+                   [(ngModel)]="temp_emp_marital" 
+                   (ngModelChange)="syncMarital($event)" [ngModelOptions]="{standalone: true}">
+            
+            <!-- Dropdown for Gender -->
+            <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+                <select class="form-control" [(ngModel)]="temp_emp_marital" (ngModelChange)="syncMarital($event)" [ngModelOptions]="{standalone: true}">
+    
+                    <option >Married</option>
+                    <option>Single</option>
+                    <option>Divorced</option>
+                    <option>Widow</option>
+                </select>
+            </div>
+        </ng-container>
+    </div>
+    
+    <!-- <div class="custom-sel">
+              
+        <label>marital Status</label>
+        <select class="form-control" id="emp_marital_status" name="emp_marital_status"  [(ngModel)]="emp_marital_status"  [ngModelOptions]="{standalone: true}" >
+          
+            <option >Married</option>
+            <option>Single</option>
+            <option>Divorced</option>
+            <option>Widow</option>
+            
+        </select>
+    </div> -->
+    <!-- <label>Last Name</label>
+   <input type="radio"  class="form-control" required  [(ngModel)]="emp_gender"  placeholder="Enter Department Name"
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_gender}">
+   
+   <div *ngIf="registerButtonClicked && !emp_gender" class="error-message">Department Name is required.</div> -->
+
+
+<div class="col-md-6"   *ngIf="!isFatherFieldHidden">
+               
+    <label>{{fatherFieldName}}</label>
+    <input type="text"  class="form-control" required  [(ngModel)]="emp_father_name"  placeholder="Enter {{fatherFieldName}}"
+    [ngModelOptions]="{standalone: true}" 
+[required]="isFatherMandatory" 
+[ngClass]="{'error-field': registerButtonClicked && isFatherMandatory && !emp_father_name}" >
+
+<div *ngIf="registerButtonClicked && isFatherMandatory && !emp_father_name" class="error-message">
+                    {{fatherFieldName}} is required.
+                </div>
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_father_name" class="error-message">Description is required.</div> -->
+</div>
+
+<div class="col-md-6"   *ngIf="!isMotherFieldHidden">
+               
+    <label>{{motherFieldName}}</label>
+    <input type="text"  class="form-control" required   [(ngModel)]="emp_mother_name"  placeholder="Enter {{motherFieldName}}"
+    [ngModelOptions]="{standalone: true}" [required]="isMotherMandatory" 
+[ngClass]="{'error-field': registerButtonClicked && isMotherMandatory && !emp_mother_name}" >
+
+<div *ngIf="registerButtonClicked && isMotherMandatory && !emp_mother_name" class="error-message">
+                    {{motherFieldName}} is required.
+                </div>
+   
+   <!-- <div *ngIf="registerButtonClicked && !emp_mother_name" class="error-message">Description is required.</div> -->
+</div>
+
+<!-- <div class="col-md-6">
+
+
+    <div class="custom-sel">
+        <label>Select Location</label>
+        <select class="form-control" id="emp_posting_location" name="emp_posting_location" required [(ngModel)]="emp_posting_location"  [ngModelOptions]="{standalone: true}"
+         >
+            <option value="" >Select</option>
+            <option *ngFor="let emp_branch_id of branches" [value]="emp_branch_id.id">{{ emp_branch_id.branch_name }}</option>
+        </select>
+    </div>
+                
+
+</div> -->
+
+
+<div class="col-md-6"  *ngIf="!isLocationFieldHidden">
+    <label>{{locationFieldName}}</label>
+
+    
+    
+    <!-- Hidden input to store the final value to be posted -->
+ 
+                  
+    <select class="form-control"  [(ngModel)]="emp_posting_location"  [ngModelOptions]="{standalone: true}" style="display: none;"
+    [required]="isLocationMandatory" 
+    [ngClass]="{'error-field': registerButtonClicked && isLocationMandatory && !emp_posting_location}" >
+              
+             
+            </select>
+    
+    <div *ngIf="registerButtonClicked && isLocationMandatory && !emp_posting_location" class="error-message">
+                        {{locationFieldName}} is required.
+                    </div>
+
+    <!-- <input type="text" class="form-control" [(ngModel)]="emp_gender" [ngModelOptions]="{standalone: true}" style="display: none;"> -->
+
+    <ng-container [ngSwitch]="locationDataType">
+        <!-- Text Box for Gender -->
+        <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+               required placeholder="{{locationFieldName}}" 
+               [(ngModel)]="temp_emp_location" 
+               (ngModelChange)="synclocation($event)" [ngModelOptions]="{standalone: true}">
+        
+        <!-- Dropdown for Gender -->
+        <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+            <select class="form-control" [(ngModel)]="temp_emp_location" (ngModelChange)="synclocation($event)" [ngModelOptions]="{standalone: true}">
+
+                <option *ngFor="let emp_branch_id of branches" [value]="emp_branch_id.id">{{ emp_branch_id.branch_name }}</option>
+
+            </select>
+        </div>
+    </ng-container>
+</div>
+
+
+
+     <!-- <div class="col-md-6">
+
+
+            <div class="custom-sel">
+                <label>Country</label>
+                <select class="form-control" id="emp_country_id" name="emp_country_id" required [(ngModel)]="emp_country_id" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}" >
+                    <option value="" >Select</option>
+                    <option *ngFor="let emp_country_id of countries" [value]="emp_country_id.id">{{ emp_country_id.country_name }}</option>
+                </select>
+            </div>
+                        
+
+        </div> -->
+
+
+        <div class="col-md-6"  *ngIf="!isCountryFieldHidden">
+            <label>{{cntryFieldName}}</label>
+        
+            
+            
+            <!-- Hidden input to store the final value to be posted -->
+         
+                          
+            <select class="form-control"  [(ngModel)]="emp_country_id"  [ngModelOptions]="{standalone: true}" style="display: none;" 
+
+            [required]="isLCountryMandatory" 
+            [ngClass]="{'error-field': registerButtonClicked && isLCountryMandatory && !emp_country_id}" >
+                              
+                             
+                            </select>
+            
+            <div *ngIf="registerButtonClicked && isLCountryMandatory && !emp_country_id" class="error-message">
+                                {{cntryFieldName}} is required.
+                            </div>
+        
+            <!-- <input type="text" class="form-control" [(ngModel)]="emp_gender" [ngModelOptions]="{standalone: true}" style="display: none;"> -->
+        
+            <ng-container [ngSwitch]="cntryDataType">
+                <!-- Text Box for Gender -->
+                <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+                       required placeholder="{{cntryFieldName}}" 
+                       [(ngModel)]="temp_emp_cntry" 
+                       (ngModelChange)="synccntry($event)" [ngModelOptions]="{standalone: true}">
+                
+                <!-- Dropdown for Gender -->
+                <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+                    <select class="form-control" [(ngModel)]="temp_emp_cntry" (ngModelChange)="synccntry($event)" [ngModelOptions]="{standalone: true}" (change)="onCountryChange()">
+        
+                        <option *ngFor="let emp_country_id of countries" [value]="emp_country_id.id">{{ emp_country_id.country_name }}</option>
+        
+                    </select>
+                </div>
+            </ng-container>
+        </div>
+        
+
+        <div class="col-md-6" *ngIf="states && states.length > 0">
+               
+        
+            <div class="custom-sel" >
+                <label>State</label>
+                <select class="form-control" id="emp_state_id" name="emp_state_id" required [(ngModel)]="emp_state_id"  [ngModelOptions]="{standalone:true}" >
+                    <option value=""> select</option>
+                    <option  *ngFor="let emp_state_id of states" [value]="emp_state_id.id">{{ emp_state_id.state_name }}</option>
+                </select>
+                <!-- <div *ngIf="registerButtonClicked && !emp_state_id" class="error-message">Please Select your State.</div> -->
+            </div>
+                             
+
+        
+    </div>
+
+
+    
+    <!-- <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select Branch</label>
+            <select class="form-control" id="emp_branch_id" name="emp_branch_id" required [(ngModel)]="emp_branch_id"  [ngModelOptions]="{standalone: true}"
+            [ngClass]="{'error-field': registerButtonClicked && !emp_branch_id}" >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_branch_id of branches" [value]="emp_branch_id.id">{{ emp_branch_id.branch_name }}</option>
+            </select>
+            <div *ngIf="registerButtonClicked && !emp_branch_id" class="error-message">Please Select Your Branch</div>
+        </div>
+                    
+
+    </div> -->
+
+    <div class="col-md-6">
+        <label>{{brchFieldName}}</label>
+    
+        
+        
+        <!-- Hidden input to store the final value to be posted -->
+     
+                      
+        <select class="form-control"  [(ngModel)]="emp_branch_id"  [ngModelOptions]="{standalone: true}" style="display: none;"
+        [required]="isLBranchMandatory" 
+        [ngClass]="{'error-field': registerButtonClicked && isLBranchMandatory && !emp_branch_id}"  >
+                      
+                     
+                    </select>
+        
+        <div *ngIf="registerButtonClicked && isLBranchMandatory && !emp_branch_id" class="error-message">
+                            {{brchFieldName}} is required.
+                        </div>
+    
+        <!-- <input type="text" class="form-control" [(ngModel)]="emp_gender" [ngModelOptions]="{standalone: true}" style="display: none;"> -->
+    
+        <ng-container [ngSwitch]="brchDataType">
+            <!-- Text Box for Gender -->
+            <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+                   required placeholder="{{brchFieldName}}" 
+                   [(ngModel)]="temp_emp_brch" 
+                   (ngModelChange)="syncbrch($event)" [ngModelOptions]="{standalone: true}">
+            
+            <!-- Dropdown for Gender -->
+            <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+                <select class="form-control" [(ngModel)]="temp_emp_brch" (ngModelChange)="syncbrch($event)" [ngModelOptions]="{standalone: true}" >
+    
+                    <option *ngFor="let emp_branch_id of branches" [value]="emp_branch_id.id">{{ emp_branch_id.branch_name }}</option>
+    
+                </select>
+            </div>
+        </ng-container>
+    </div>
+    
+<!--     
+    <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select Departments</label>
+            <select class="form-control" id="emp_dept_id" name="emp_dept_id" required [(ngModel)]="emp_dept_id"  [ngModelOptions]="{standalone: true}"
+             >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_dept_id of departments" [value]="emp_dept_id.id">{{ emp_dept_id.dept_name }}</option>
+            </select>
+        </div>
+                    
+
+    </div> -->
+        
+
+    
+    <div class="col-md-6"  *ngIf="!isDepartFieldHidden">
+        <label>{{deptFieldName}}</label>
+    
+        
+        
+        <!-- Hidden input to store the final value to be posted -->
+     
+                      
+        <select class="form-control"  [(ngModel)]="emp_dept_id"  [ngModelOptions]="{standalone: true}" style="display: none;" 
+        [required]="isLDepartmentMandatory" 
+        [ngClass]="{'error-field': registerButtonClicked && isLDepartmentMandatory && !emp_dept_id}" >
+                      
+                     
+                    </select>
+        
+        <div *ngIf="registerButtonClicked && isLDepartmentMandatory && !emp_dept_id" class="error-message">
+                            {{deptFieldName}} is required.
+                        </div>
+    
+        <!-- <input type="text" class="form-control" [(ngModel)]="emp_gender" [ngModelOptions]="{standalone: true}" style="display: none;"> -->
+    
+        <ng-container [ngSwitch]="deptDataType">
+            <!-- Text Box for Gender -->
+            <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+                   required placeholder="{{deptFieldName}}" 
+                   [(ngModel)]="temp_emp_dept" 
+                   (ngModelChange)="syncdept($event)" [ngModelOptions]="{standalone: true}">
+            
+            <!-- Dropdown for Gender -->
+            <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+                <select class="form-control" [(ngModel)]="temp_emp_dept" (ngModelChange)="syncdept($event)" [ngModelOptions]="{standalone: true}" >
+    
+                    <option *ngFor="let emp_dept_id of departments" [value]="emp_dept_id.id">{{ emp_dept_id.dept_name }}</option>
+    
+                </select>
+            </div>
+        </ng-container>
+    </div>
+   
+   
+    <!-- <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select Designation</label>
+            <select class="form-control" id="emp_desgntn_id" name="emp_desgntn_id" required [(ngModel)]="emp_desgntn_id"  [ngModelOptions]="{standalone: true}"
+             >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_desgntn_id of designations" [value]="emp_desgntn_id.id">{{ emp_desgntn_id.job_title }}</option>
+            </select>
+        </div>
+                    
+
+    </div> -->
+
+    <div class="col-md-6"  *ngIf="!isDesignationFieldHidden">
+        <label>{{desFieldName}}</label>
+    
+        
+        
+        <!-- Hidden input to store the final value to be posted -->
+     
+                      
+        <select class="form-control"  [(ngModel)]="emp_desgntn_id"  [ngModelOptions]="{standalone: true}" style="display: none;" 
+        [required]="isLDesignationMandatory" 
+        [ngClass]="{'error-field': registerButtonClicked && isLDesignationMandatory && !emp_desgntn_id}" >
+                      
+                     
+                    </select>
+        
+        <div *ngIf="registerButtonClicked && isLDesignationMandatory && !emp_desgntn_id" class="error-message">
+                            {{desFieldName}} is required.
+                        </div>
+    
+        <!-- <input type="text" class="form-control" [(ngModel)]="emp_gender" [ngModelOptions]="{standalone: true}" style="display: none;"> -->
+    
+        <ng-container [ngSwitch]="desDataType">
+            <!-- Text Box for Gender -->
+            <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+                   required placeholder="{{desFieldName}}" 
+                   [(ngModel)]="temp_emp_des" 
+                   (ngModelChange)="syncdes($event)" [ngModelOptions]="{standalone: true}">
+            
+            <!-- Dropdown for Gender -->
+            <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+                <select class="form-control" [(ngModel)]="temp_emp_des" (ngModelChange)="syncdes($event)" [ngModelOptions]="{standalone: true}">
+    
+                    <option *ngFor="let emp_desgntn_id of designations" [value]="emp_desgntn_id.id">{{ emp_desgntn_id.desgntn_job_title }}</option>
+    
+                </select>
+            </div>
+        </ng-container>
+    </div>
+        
+
+    <!-- <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select catogory</label>
+            <select class="form-control" id="emp_ctgry_id" name="emp_ctgry_id" required [(ngModel)]="emp_ctgry_id"  [ngModelOptions]="{standalone: true}"
+           >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_ctgry_id of catogories" [value]="emp_ctgry_id.id">{{ emp_ctgry_id.ctgry_title }}</option>
+            </select>
+        </div>
+                    
+
+    </div> -->
+
+
+    <div class="col-md-6"  *ngIf="!isCatFieldHidden">
+        <label>{{catFieldName}}</label>
+    
+        
+        
+        <!-- Hidden input to store the final value to be posted -->
+     
+                      
+        <select class="form-control"  [(ngModel)]="emp_ctgry_id"  [ngModelOptions]="{standalone: true}" style="display: none;" 
+
+        [required]="isLCatogoryMandatory" 
+        [ngClass]="{'error-field': registerButtonClicked && isLCatogoryMandatory && !emp_ctgry_id}" >
+                      
+                     
+                    </select>
+        
+        <div *ngIf="registerButtonClicked && isLCatogoryMandatory && !emp_ctgry_id" class="error-message">
+                            {{catFieldName}} is required.
+                        </div>
+    
+        <!-- <input type="text" class="form-control" [(ngModel)]="emp_gender" [ngModelOptions]="{standalone: true}" style="display: none;"> -->
+    
+        <ng-container [ngSwitch]="catDataType">
+            <!-- Text Box for Gender -->
+            <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
+                   required placeholder="{{catFieldName}}" 
+                   [(ngModel)]="temp_emp_cat" 
+                   (ngModelChange)="synccat($event)" [ngModelOptions]="{standalone: true}">
+            
+            <!-- Dropdown for Gender -->
+            <div *ngSwitchCase="'Dropdown'" class="custom-sel">
+                <select class="form-control" [(ngModel)]="temp_emp_cat" (ngModelChange)="synccat($event)" [ngModelOptions]="{standalone: true}">
+    
+                    <option *ngFor="let emp_ctgry_id of catogories" [value]="emp_ctgry_id.id">{{ emp_ctgry_id.ctgry_title }}</option>
+    
+                </select>
+            </div>
+        </ng-container>
+    </div>
+
+<!-- 
+    <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Select Language</label>
+            <select class="form-control" id="emp_languages"  required [(ngModel)]="emp_languages" name="emp_languages" multiple
+            [ngClass]="{'error-field': registerButtonClicked && !emp_languages}">
+            <option value="">Select</option>
+            <option *ngFor="let language  of languages" [value]="language.id">{{ language.language }}</option>
+         </select>
+         
+            <div *ngIf="registerButtonClicked && !emp_languages" class="error-message">Please Select Your Language</div>
+        </div>
+                    
+
+    </div> -->
+
+    <!-- <div class="col-md-6">
+               
+        <label>Hired date</label>
+       <input type="date"  class="form-control" required id="emp_hired_date" name="emp_hired_date"  [(ngModel)]="emp_hired_date"  placeholder="Enter hired Date "
+        [ngModelOptions]="{standalone: true}" >
+       
+    </div> -->
+
+    <div class="col-md-6"  *ngIf="!isHireFieldHidden">
+               
+        <label>{{hiredFieldName}}</label>
+  
+<input type="date"  class="form-control" required   [(ngModel)]="emp_hired_date"  placeholder="Enter {{hiredFieldName}}"
+[ngModelOptions]="{standalone: true}" [required]="isHiringMandatory" 
+[ngClass]="{'error-field': registerButtonClicked && isHiringMandatory && !emp_hired_date}" >
+
+<div *ngIf="registerButtonClicked && isHiringMandatory && !emp_hired_date" class="error-message">
+            {{hiredFieldName}} is required.
+        </div>
+       <!-- <div *ngIf="registerButtonClicked && !emp_mother_name" class="error-message">Description is required.</div> -->
+    </div>
+
+    <div class="col-md-6">
+               
+        <label>{{joinFieldName}}</label>
+       <input type="date"  class="form-control" required id="emp_active_date" name="emp_active_date"  [(ngModel)]="emp_active_date"  placeholder="Enter {{joinFieldName}}"
+        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_active_date}">
+       
+       <div *ngIf="registerButtonClicked && !emp_active_date" class="error-message">Active date .</div>
+    </div>
+
+ 
+
+   
+
+
+    <div class="col-md-6">
+        <label for="emp_profile_pic">Employee Profile Picture:</label>
+        <input type="file" class="form-control" id="emp_profile_pic " name="emp_profile_pic" (change)="onFileSelected($event)" >
+       
+        </div>
+
+
+
+     
+
+    </div>
+    <div class="row" >
+        <div class="col-md-6" *ngFor="let field of custom_fields">
+            <label>{{ field.emp_custom_field }}</label>
+            <ng-container [ngSwitch]="field.data_type">
+                <!-- Dropdown -->
+                <select *ngSwitchCase="'dropdown'" class="form-control" 
+                        [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}"
+                        [required]="field.mandatory">
+                    <option *ngFor="let value of field.dropdown_values" [value]="value">{{ value }}</option>
+                </select>
+                <!-- Radio -->
+                <div class="radio-sec form-control" *ngSwitchCase="'radio'">
+                    <div *ngFor="let value of field.radio_values" class="form-check">
+                        <input type="radio" class="form-check-input" [id]="value + field.id" 
+                               [(ngModel)]="field.field_value" [value]="value" 
+                               [ngModelOptions]="{standalone: true}" [required]="field.mandatory">
+                        <label class="form-check-label" [for]="value + field.id">{{ value }}</label>
+                    </div>
+                </div>
+                <!-- Date -->
+                <input *ngSwitchCase="'date'" type="date" class="form-control" 
+                       [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}" 
+                       [required]="field.mandatory" />
+                <!-- Default for other or empty data_type -->
+                <input *ngSwitchDefault type="text" class="form-control" 
+                       [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}" 
+                       [required]="field.mandatory" />
+            </ng-container>
+        </div>
+        
+    </div>
+    
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+         
+              
+
+
+                  <div class="toggle-container">
+                    <span> Is Ess User</span>
+                    <input type="checkbox" id="is_ess"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="is_ess" name="is_ess" class="toggle">
+                    
+                    <label for="is_ess" class="label">
+                      <div class="ball"></div>
+                      <div class="background">
+                        <div class="fill"></div>
+                      </div>
+                      <div class="checked"><i class="fa-solid fa-check"></i></div>
+                    </label>
+                  
+                  </div>
+        
+        </div>
+    </div>
+    
+
+    <!-- <div class="col-md-6">
+        <label for="emp_doc_document">Employee Document:</label>
+        <input type="file" id="emp_doc_document" name="emp_doc_document" (change)="onFileSelected($event)">
+    </div> -->
+ 
+    
+
+       
+    </form>
+
+
+<!-- Section for editing field names -->
+<!-- <div class="mt-4">
+    <h3>Edit Field Names</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="emp_code_name">Employee Code Field Name:</label>
+            <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empCodeFieldName">
+        </div>
+        <div class="col-md-6">
+            <label for="emp_first_name_name">First Name Field Name:</label>
+            <input type="text" id="emp_first_name_name" class="form-control" [(ngModel)]="firstNameFieldName">
+        </div>
+    </div>
+    <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+</div> -->
+
+
+    
+ 
+
+
+
+    <!-- <button type="button"  class="btn" (click)="addEmployeeField()">Add More Fields</button> -->
+
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div>
+        <div class="col-md-2">
+            <button  type="submit" (click)="uploadEmployeeDocument()"
+               mat-raised-button color="primary" class="pull-right btn-full mt-4" >Next</button>
+
+        </div>
+    </div>
+
+
+        </div>
+
+ 
+
+        
+</div>
+<div mat-dialog-action>
+    
+</div>
+
+

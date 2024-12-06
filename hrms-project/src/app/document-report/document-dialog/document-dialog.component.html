@@ -1,0 +1,103 @@
+<h1 mat-dialog-title>Generated Report</h1>
+<div mat-dialog-content class="report-common-box table-outer-new">
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
+    <!-- <button mat-raised-button color="primary" (click)="showTableSection()">Back</button> -->
+  </div>
+  <div *ngIf="showTable">
+  <div *ngIf="groupfalse">
+    <div class="grouping-options">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="groupFields">Group by Fields:</label>
+          <mat-select multiple [(ngModel)]="selectedGroupFields" style="background: whitesmoke; padding: 10px;">
+            <mat-option *ngFor="let field of tableHeaders" [value]="field">
+              
+            {{ display_names[field.toUpperCase()] || field.toUpperCase() }}
+              <!-- {{ display_names[field] || field }} -->
+            </mat-option>
+          </mat-select>
+          
+          
+        </div>
+    
+      </div>
+    </div>
+    
+    <button mat-raised-button color="primary" class="mt-2" style="margin-right: 30px;" (click)="groupData()">Group Data</button>
+    <button mat-raised-button color="accent" class="mt-2" (click)="downloadGroupedData()">Download Excel</button>
+    
+    <div *ngIf="groupedData.length > 0">
+      <div class="row mt-5">
+        <div class="col-md-9">
+          <h4 class="gru_hd">Grouped Data:{{ getSelectedFieldsDisplayNames() }}</h4>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+      <table mat-table *ngIf="dataSource && dataSource.data.length > 0" [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="custom-table">
+
+      <!-- <table mat-table [dataSource]="filteredData" matSort (matSortChange)="announceSortChange($event)" class="custom-table"> -->
+        <ng-container *ngFor="let column of tableHeaders" [matColumnDef]="column">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ display_names[column.toUpperCase()] || column.toUpperCase() }}
+          </th>
+          <td mat-cell *matCellDef="let item"> {{ item[column.toLowerCase()] }} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+      
+        <tr mat-row *matRowDef="let row; columns: tableHeaders;"></tr>
+      </table>
+    </div>
+    
+    
+    
+  </div>
+  
+  <div *ngIf="showTable" class="table-responsive table-new">
+    <div class="row mb-3">
+      <div class="col-md-8"></div>
+      <div class="col-md-4 text-center">
+        
+        <button mat-raised-button color="warn" class="pull-right"    (click)="onNoClick()">Cancel</button>
+        <span class="button-space"></span>
+
+        <button mat-raised-button color="primary" class="pull-right" (click)="postSelectedFields()" style="margin-right: 30px;" *ngIf="displaygroup">Apply Filter</button>
+
+      </div>
+    </div>
+
+
+ 
+
+
+  
+
+
+
+    <table class="table table-bordered table-hover" *ngIf="displaygroup">
+      <thead>
+        <tr>
+          <th *ngFor="let entry of jsonDatas">
+            {{ display_names[entry.key.toUpperCase()] || entry.key.toUpperCase() }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rowIndex of getMaxRowLength()">
+          <td *ngFor="let entry of jsonDatas">
+            <div class="form-check" *ngIf="entry.values && entry.values.length > rowIndex">
+              <input type="checkbox" [id]="entry.key + rowIndex" [checked]="isChecked(entry.key, rowIndex)"
+                     (change)="toggleSelection(entry.key, rowIndex, $event)">
+              <label [for]="entry.key + rowIndex">
+                {{ entry.values[rowIndex] }}
+              </label>
+            </div>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+   

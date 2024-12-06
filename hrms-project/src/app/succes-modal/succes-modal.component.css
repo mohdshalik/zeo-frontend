@@ -1,0 +1,33 @@
+
+
+.success-header{
+    background: #47c9a2;
+    height: 250px;
+    width: 250px;
+    padding: 10px;
+}
+.succes-ico{
+    margin-left: auto;
+    margin-right: auto;
+     text-align: center;   
+      
+}
+
+.mat_success{
+    height: 100px;
+    width: 150px;
+    font-size: 80px;
+    margin-top: 30px;
+}
+
+.success-header h1{
+    font-size: 22px;
+    color: white;
+    font-family: "Poppins";
+}
+
+.btn-continue{
+    background: #45b86b;
+    color: white;
+    
+}

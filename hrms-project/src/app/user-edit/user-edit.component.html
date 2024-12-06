@@ -1,0 +1,114 @@
+<div mat-dialog-content class="">
+
+    <div class="cpm-sec" *ngIf="Emp" >
+
+        <h1>User Details</h1><hr>
+
+        <form (submit)="updateEmp">
+            <div class="row">
+                <div class="col-md-6" >
+                   
+          <label>User Name</label>
+         <input type="text"  class="form-control" required id="username" name="username"  [(ngModel)]="Emp.username"  placeholder="Enter User Name"
+          [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !username}">
+         
+         <div *ngIf="registerButtonClicked && !username" class="error-message">Department Name is required.</div>
+    </div>
+    
+  
+    
+   
+    
+    
+    <div class="col-md-6" >
+                   
+        <label>Email</label>
+       <input type="text"  class="form-control" required id="email" name="email"  [(ngModel)]="Emp.email"  placeholder="Enter Email ID"
+        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !email}">
+       
+       <div *ngIf="registerButtonClicked && !email" class="error-message">Description is required.</div>
+    </div>
+    
+    
+    
+    
+   
+    
+    
+  
+    
+    
+    
+    
+ 
+
+    
+
+   
+
+ 
+    
+    
+    
+   
+    
+   
+    
+    
+    
+    
+        
+    
+    <div class="col-md-6">
+    
+    
+        <div class="custom-sel">
+            <label>Select Company</label>
+            <select class="form-control" id="country" multiple required [(ngModel)]="Emp.tenants" 
+             [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !tenants}" >
+                <option value="" >Select</option>
+                <option *ngFor="let country of companies" [value]="country.id">{{ country.schema_name }}</option>
+            </select>
+            <div *ngIf="registerButtonClicked && !tenants" class="error-message">Please Select Your Company</div>
+        </div>
+                    
+
+    </div>
+
+
+    
+
+
+        <div class="col-md-6" >
+                   
+            <label>password</label>
+           <input type="text"  class="form-control" required id="password" name="password"  [(ngModel)]="Emp.password"  placeholder="Enter password"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !password}">
+           
+           <div *ngIf="registerButtonClicked && !password" class="error-message">Description is required.</div>
+        </div>
+        
+     
+    
+            </div>
+        </form>
+    
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div>
+        <div class="col-md-2">
+            <button   mat-raised-button color="primary" class="pull-right btn-full mt-4" type="submit" (click)="updateEmp()" >Save</button>
+
+        </div>
+    </div>
+
+
+        </div>
+</div>
+<div mat-dialog-action>
+    
+</div>

@@ -1,0 +1,70 @@
+<div mat-dialog-content class="">
+
+    <div class="cpm-sec">
+
+        <h1>Category</h1><hr>
+
+        <form>
+            <div class="form-group">
+              <label>Template Type</label>
+              <select class="form-control" [(ngModel)]="templateData.template_type" [ngModelOptions]="{standalone: true}">
+                <option value="request_created">Request Created</option>
+                <option value="request_approved">Request Approved</option>
+                <option value="request_rejected">Request Rejected</option>
+              </select>
+            </div>
+          
+            <div class="form-group">
+              <label>Subject</label>
+              <input type="text" class="form-control" [(ngModel)]="templateData.subject" [ngModelOptions]="{standalone: true}" placeholder="Enter subject">
+            </div>
+          
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-8">
+                        <label>Body</label>
+                        <div id="summernote" [(ngModel)]="templateData.body" [ngModelOptions]="{standalone: true}"></div>
+                    </div>
+
+
+
+                    
+               
+                        <div class="col-md-4">
+                            <label>Select Field names</label>
+                            <div class="email_placeholdername">
+                              <div class="on_by_placeholders" *ngFor="let placeholder of EmailPlaceHolders" (click)="selectPlaceholder(placeholder)">
+                                <h4>{{ placeholder }}</h4> <!-- Display the placeholder value -->
+                              </div>
+                            </div>
+                          </div>
+                        
+ 
+
+                     
+                
+                </div>
+              
+            </div>
+
+            <div class="form-group">
+                <div class="custom-sel">
+                    <label>Select Request Type</label>
+                    <select class="form-control"  required [(ngModel)]="templateData.request_type"  [ngModelOptions]="{standalone: true}"  >
+                        <option value="" >Select</option>
+                        <option *ngFor="let deparmentsec of RequestType" [value]="deparmentsec.id">{{ deparmentsec.name     }} </option>
+                    </select>
+                </div> 
+            </div>
+          
+            <div class="form-group">
+              <button type="button" class="btn btn-success" (click)="updateTemplate()">Update</button>
+            </div>
+          </form>
+
+
+        </div>
+</div>
+<div mat-dialog-action>
+    
+</div>

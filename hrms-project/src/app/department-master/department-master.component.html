@@ -1,0 +1,122 @@
+
+<div class="container" *ngIf="hasViewPermission">
+
+    <div class="comapny_section">
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h1> Department Details</h1>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="search-box">
+                        <input class="search-input form-control mt-1" type="text" placeholder="Search by name."
+                        [(ngModel)]="searchQuery" (input)="filterEmployees()">
+                        <!-- <mat-icon class="search-btn" style="color: black;">search</mat-icon> -->
+                        <!-- <button class="search-btn"><i class="fas fa-search"></i></button> -->
+                      </div>
+                    
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+                        <button type="button" (click)="openPopus()" class="btn-Create btn btn-success " *ngIf="hasAddPermission"> <span class="header-btn-icon"><mat-icon>add_circle
+                        </mat-icon></span> Create</button>
+                        <span *ngIf="!hasAddPermission"></span>
+
+                        <button type="button" class="btn-Edit btn-info btn"  (click)="EditShowButtons()" *ngIf="hasEditPermission">
+                            <span class="header-btn-icon">
+                             <mat-icon>draw
+                        </mat-icon></span> Edit</button>
+                        <span *ngIf="hasEditPermission"></span>
+                        <button type="button" class="btn-Delete btn btn-danger" (click)="toggleCheckboxes()" *ngIf="hasDeletePermission">
+                            <span class="header-btn-icon">
+                                <mat-icon> delete
+                           </mat-icon></span> {{ Delete ? 'Cancel' : 'Delete' }}</button>
+                           <span *ngIf="!hasDeletePermission"></span>
+                    </div>
+                </div>
+            </div>
+           
+           
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                
+                <button  class=" mt-3 btn-danger btn " style="width: 100%;" color="warn" *ngIf="Delete" (click)="toggleSelectAllEmployees()">Select All</button>
+
+            </div>
+            <div class="col-md-3">
+                <button class=" mt-3 btn-danger btn"  color="warn" *ngIf="Delete" (click)="deleteSelectedEmployees()">Delete Selected </button>
+
+            </div>
+        </div>
+        <!-- <div class="list_company_sec mt-4">
+            
+        </div> -->
+
+        <div class="row mt-4">
+            <div class="col-md-12 col-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        <p>Departments</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <p>Description</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>Department code</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>Branch</p>
+                    </div>
+                </div>
+                <div class="com_list" *ngFor="let departmentsec of filteredDepartment" [ngClass]="{ 'selected-item': departmentsec.selected }">
+                    <mat-checkbox *ngIf="Delete" [(ngModel)]="departmentsec.selected" (change)="onCheckboxChange(departmentsec.id)"></mat-checkbox>
+
+                  <div class="row">
+                  
+                    <div class="col-md-3">
+                        <h2 class="text-center">{{ departmentsec.dept_name }}</h2>
+                    </div>
+
+                    <div class="col-md-3">
+                        <h2 class="text-center">{{ departmentsec.dept_description }}</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <h2 class="text-center">{{ departmentsec.dept_code }}</h2>
+
+                    </div>
+                    <div class="col-md-2">
+                        <h2 class="text-center">
+                            {{ departmentsec.branch_id }}
+                            </h2>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-Edit btn-info" (click)="openEditPopuss(departmentsec.id)" *ngIf="showEditBtn">Edit</button>
+                        
+                    </div>
+                  </div>
+                </div>
+
+
+
+                
+
+                
+            </div>
+        </div>
+
+      
+    </div>
+</div>
+
+<div *ngIf="!hasViewPermission">
+    <!-- Message for users without permission -->
+    <p class="text-center " style="margin-top: 150px;" >You don't have permission to view this component.</p>
+  </div>

@@ -1,0 +1,242 @@
+
+
+<div mat-dialog-content class="">
+
+
+    <div class="cpm-sec">
+    
+        <h1>Create  Branch</h1><hr>
+        <form >
+        <div class="row">
+            <div class="col-md-6" >
+               
+                <label>Branch Name</label>
+               <input type="text"  class="form-control" required  [(ngModel)]="branch_name"  placeholder="Enter Branch Name" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch_name}">
+               
+               <div *ngIf="registerButtonClicked && !branch_name" class="error-message">Branch Name is required.</div>
+    </div>
+    
+    
+    <div class="col-md-6" >
+               
+        <label>Branch Code</label>
+       <input type="text"  class="form-control" required  [(ngModel)]="branch_code"  placeholder="Enter Branch Code" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch_code}">
+       
+       <div *ngIf="registerButtonClicked && !branch_code" class="error-message">Branch Code is required.</div>
+    </div>
+    
+    <div class="col-md-6" >
+               
+        <label>Notification Periods Days</label>
+       <input type="number"  class="form-control" required  [(ngModel)]="notification_period_days"  placeholder="Enter Branch Name" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !notification_period_days}">
+       
+       <div *ngIf="registerButtonClicked && !notification_period_days" class="error-message">notification period days is required.</div>
+    </div>
+        
+                   
+                     
+                    <div class="col-md-6">
+    
+    
+                      <div class="custom-sel">
+                          <label>Country</label>
+                          <select class="form-control" id="country" required [(ngModel)]="br_country" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}"  >
+                              <option value="" >Select</option>
+                              <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+                          </select>
+                         
+                      </div>
+                                  
+    
+           
+                         
+                         
+                      
+                  </div>
+    
+                  
+                  <div class="col-md-6" *ngIf="states && states.length > 0">
+                         
+                  
+                      <div class="custom-sel" >
+                          <label>State</label>
+                          <select class="form-control" id="state" required [(ngModel)]="br_state_id"  [ngModelOptions]="{standalone:true}" >
+                              <option value=""> select</option>
+                              <option  *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
+                          </select>
+                          <!-- <div *ngIf="registerButtonClicked && !cmpny_state_id" class="error-message">Please Select your State.</div> -->
+                      </div>
+                                       
+    
+                  
+              </div>
+    
+              <div class="col-md-6">
+                         
+                  
+                      <label>City</label>
+                      <input type="text" [(ngModel)]="br_city" required [ngModelOptions]="{standalone: true}" class="form-control" placeholder="enter city" 
+                      [ngClass]="{'error-field': registerButtonClicked && !br_city}" >
+                      <div *ngIf="registerButtonClicked && !br_city" class="error-message">Please Select your City.</div>
+    
+                 
+          </div>
+          <div class="col-md-6">
+                         
+                  
+              <label>pincode</label>
+              <input type="text" [(ngModel)]="br_pincode" required [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter Branch pincode"
+              [ngClass]="{'error-field': registerButtonClicked && !br_pincode}" >
+              <div *ngIf="registerButtonClicked && !br_pincode" class="error-message">Please enter your pincode</div>
+    
+          
+          </div>
+          <div class="col-md-6">
+                         
+                  
+              <label>Email</label>
+              <input type="text" [(ngModel)]="br_branch_mail" required [ngModelOptions]="{standalone: true}" class="form-control" placeholder="example@gmail.com"
+              [ngClass]="{'error-field': registerButtonClicked && !br_branch_mail}" >
+              <div *ngIf="registerButtonClicked && !br_branch_mail" class="error-message">Please enter your email.</div>
+    
+         
+    </div>
+    
+    
+    <div class="col-md-6">
+                         
+                  
+      <label>Company number 1</label>
+      <input type="text" [(ngModel)]="br_branch_nmbr_1" required [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter Contact number"
+      [ngClass]="{'error-field': registerButtonClicked && !br_branch_nmbr_1}" >
+      <div *ngIf="registerButtonClicked && !br_branch_nmbr_1" class="error-message">Please enter your contact.</div>
+    
+    
+    </div>
+    
+    <div class="col-md-6">
+                         
+                  
+    <label>Company number 2 (optional)</label>
+    <input type="text" [(ngModel)]="br_branch_nmbr_2" required [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter Contact number " >
+    
+    
+    </div>
+    
+    
+    <div class="col-md-6">
+    
+    
+        <div class="custom-sel">
+            <label>Select User</label>
+            <select class="form-control" id="branch_users" name="branch_users" required multiple [(ngModel)]="branch_users"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch_users}" >
+                <option value="" >Select</option>
+                <option *ngFor="let branch_users of companies" [value]="branch_users.id">{{ branch_users.username }}</option>
+            </select>
+            <div *ngIf="registerButtonClicked && !branch_users" class="error-message">Please Select any user</div>
+        </div>
+                    
+    
+    </div>
+    <!-- branch_logo -->
+    
+    <div class="col-md-6"> 
+        <label for="branch_logo">Branch Logo :</label>
+        <input type="file" class="form-control" id="branch_logo" name="branch_logo" (change)="onFileSelected($event)">
+        <div *ngIf="registerButtonClicked && !branch_logo" class="error-message">
+          No file was selected for the Branch Logo.
+        </div>
+      </div>
+      
+      
+    
+    
+         
+    
+    
+    
+        </div>
+    </form>
+    
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+    
+        </div>
+        <div class="col-md-2">
+            <button (click)="registerBranch()"   mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
+    
+        </div>
+    </div>
+    
+    
+        </div>
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- <div class="container">
+    
+        <div class="cmp-outer">
+    
+            <div class="row">
+                <div class="col-md-10">
+                    <h1>Branch Details</h1>
+                </div>
+    
+                <div class="col-md-2">
+                    <button mat-stroked-button class="btn-full" routerLink="/main-sidebar"> <mat-icon style="color: black;">arrow_back</mat-icon>Back  </button>
+                </div>
+            </div>
+           
+        </div>
+    
+        <div class="cmp-outer">
+            <mat-tab-group>
+                <mat-tab label="Branch Selection"> 
+                     <div class="cpm-sec">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="custom-sec">
+                                    <label>Select Branch</label>
+                                    <select class="form-control" id="branchsec" [(ngModel)]="selectedBranchsecId"  [ngModelOptions]="{standalone: true}" >
+                                      
+                                        <option *ngFor="let branchsec of branches" [value]="branchsec.id">{{ branchsec.branch_name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+    
+                            </div>
+                            <div class="col-md-2">
+                                <button routerLink="/main-sidebar"  class="btn-full pull-right mt-5" mat-raised-button color="primary">NEXT</button>
+    
+                            </div>
+                        </div>
+    
+                     </div>
+    
+                </mat-tab>
+                <mat-tab label="Branch Creation">
+                    
+                    </mat-tab>
+    
+              
+              </mat-tab-group>
+        </div>
+    </div> -->
+    
+    
+    
+    

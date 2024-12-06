@@ -1,0 +1,129 @@
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    width: 230px;
+    margin-bottom: 20px;
+  }
+  
+  .toggle {
+    visibility: hidden;
+  }
+  
+  .label {
+    position: relative;
+    width: 63px;
+    height: 20px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 2px 0;
+    transition: 0.3s linear;
+  }
+  
+  .label .background {
+    position: relative;
+    background-color: #d0d0d0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  
+  .label .checked {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    color: #fff;
+    transform: translateY(-50%);
+  }
+  
+  .label .background .fill {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #a876aa;
+    transform: translateX(-100%);
+    transition: 0.3s linear;
+  }
+  
+  .toggle:checked + .label .fill {
+    transform: translateX(0);
+  }
+  
+  .ball {
+    background: #fff;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    animation: slideOff 0.3s linear forwards;
+    z-index: 100;
+  }
+  
+  .toggle:checked + .label .ball {
+    animation: slideOn 0.3s linear forwards;
+  }
+  
+  @keyframes slideOn {
+    0% {
+      transform: translateX(0);
+    }
+  
+    50% {
+      transform: translateX(22px);
+    }
+  
+    100% {
+      transform: translateX(42px);
+    }
+  }
+  
+  @keyframes slideOff {
+    0% {
+      transform: translateX(42px) scale(1);
+    }
+  
+    50% {
+      transform: translateX(22px);
+    }
+  
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .grou-item_new{
+    display: flex;
+  }
+  .choosing{
+    background: whitesmoke;
+    /* height: 35px; */
+    margin-top: 52px;
+    width: 25%;
+    border: 1px solid #ced4da;
+    padding: 8px 0px 0px 0px;
+    cursor: pointer;
+  
+  }
+  
+  .choosing h6{
+    font-size: 14px;
+    text-align: center;
+    font-weight: 400;
+  
+    
+  }
+  
+  .drop_wid{
+    width: 75%;
+  }
+  
+  .form-cont-bor{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }

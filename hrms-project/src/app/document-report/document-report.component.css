@@ -1,0 +1,754 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+    overflow: hidden;
+  }
+  /* Small card container */
+  .small-card {
+    border: 1px solid #dcdcdc; /* Light gray border */
+    border-radius: 5px; /* Slightly rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    overflow: hidden; /* Clip overflow */
+    max-width: 200px; /* Restrict maximum width */
+    margin: 10px auto; /* Center horizontally with margin */
+    background-color: #f8f8f8; /* Light gray background */
+  }
+  
+  /* Small card header */
+  .small-card-header {
+    background-color: #007bff; /* Primary blue color */
+    color: white; /* White text */
+    padding: 5px 10px; /* Padding for header */
+    font-size: 0.85rem; /* Smaller font size */
+    text-align: center; /* Center-align text */
+    border-bottom: 1px solid #dcdcdc; /* Border to separate header */
+  }
+  
+  /* Small card body */
+  .small-card-body {
+    padding: 5px 10px; /* Padding for body */
+    font-size: 0.8rem; /* Smaller font size */
+  }
+  
+  /* List within the small card body */
+  .small-card-list {
+    padding-left: 15px; /* Padding for list */
+    margin: 0; /* No margin */
+    list-style: none; /* Remove default list styling */
+  }
+  
+  /* List items within the small card */
+  .small-card-list li {
+    padding: 3px 0; /* Vertical padding for list items */
+    border-bottom: 1px solid #ececec; /* Light border for separation */
+    font-size: 0.75rem; /* Even smaller font size */
+  }
+  .date-range-form-field {
+    width: 100%;
+  }
+  
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0 12px;
+  }
+  
+  .mat-form-field-appearance-fill .mat-form-field-outline-start {
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .mat-form-field-appearance-fill .mat-form-field-outline-end {
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .mat-form-field-label {
+    font-size: 1rem;
+    color: #616161;
+    white-space: nowrap; /* Prevent the label from overflowing */
+    top: -1.5em; /* Adjust this value as needed */
+  }
+  
+  
+  .mat-input-element {
+    padding: 12px 0;
+  }
+  
+  .mat-datepicker-toggle {
+    margin-right: 12px;
+  }
+  
+  
+  /* Responsive adjustments for small screens */
+  @media (max-width: 400px) {
+    .small-card {
+      max-width: 100%; /* Full width on small screens */
+      margin: 5px; /* Reduce margin */
+    }
+  
+    .small-card-header {
+      font-size: 0.8rem; /* Slightly smaller font size */
+    }
+  
+    .small-card-body {
+      font-size: 0.75rem; /* Smaller font size */
+    }
+  
+    .small-card-list li {
+      font-size: 0.7rem; /* Smaller font size */
+    }
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-title {
+    margin: 0; /* Remove any default margin */
+  }
+  .card-header {
+    background-color: #f0f0f0;
+    /* padding: 10px; */
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    /* padding: 10px; */
+    max-height: 300px; /* Example height for the card body */
+    overflow-y: auto; /* Enable vertical scrolling for the card body */
+    width: fit-content;
+  }
+  
+  .table-container {
+    max-height: 250px; /* Example height for the table container */
+    overflow: auto; /* Enable vertical scrolling for the table container */
+  }
+  
+  .mat-table-scroll {
+    width: 100%;
+    table-layout: auto;
+  }
+  
+  .mat-header-row, .mat-row {
+    display: table-row;
+  }
+  
+  .mat-header-cell, .mat-cell {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    /* border: 1px solid #ccc;  */
+  }
+  
+  table.mat-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th.mat-header-cell {
+    border: 1px solid #ddd; /* Header cell border */
+    border-bottom: none; /* Remove bottom border */
+    background-color: #f0f0f0; /* Header background color */
+    padding: 8px; /* Padding inside header cells */
+    text-align: left; /* Adjust text alignment as needed */
+  }
+  .preview-panel {
+    width: 100%;
+    padding: 40px;
+    margin: 40px 0;
+    background-color: #fafafa;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .preview-heading {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+    padding-right: 20px;
+  }
+  
+  .divider {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc;
+    border: none;
+    margin: 0 20px;
+  }
+  
+  .close-button {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+  }
+  
+  .preview-table {
+    width: 100%;
+    font-size: 20px;
+    border-collapse: collapse;
+  }
+  
+  .preview-table th,
+  .preview-table td {
+    padding: 15px;
+    text-align: left;
+    border: 2px solid #ddd;
+  }
+  
+  .preview-table th {
+    background-color: #f2f2f2;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  
+  
+  td.mat-cell {
+    border: 1px solid #ddd; /* Data cell border */
+    padding: 8px; /* Padding inside data cells */
+    text-align: left; /* Adjust text alignment as needed */
+  }
+  
+  tr.mat-header-row,
+  tr.mat-row {
+    background-color: #f9f9f9; /* Row background color */
+  }
+  
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .me-2 {
+    margin-right: 0.5rem; /* Adjust the margin as needed */
+  }
+  
+    .centered-button {
+      margin-top: 20px; /* Add margin above the button */
+    }
+    .options-container {
+      margin-top: 20px; /* Add some space above the options bar */
+    }
+    
+  
+  
+    .filter-options h3, .column-options h3 {
+      margin-right: 10px;
+    }
+    
+    .filter-options div, .column-options div {
+      background-color: #fff;
+      padding: 5px;
+      margin-right: 5px;
+     
+    }
+    
+    .filter-options {
+      border-right: 1px solid #ccc; /* Add border between filter and column options */
+    }
+    .container {
+      padding: 20px;
+    }
+    
+    .options-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .options-bar {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .filter-options, .column-options {
+      border: 1px solid #ccc;
+      padding: 5px;
+      border-radius: 5px;
+      /* width: 30%; */
+    }
+    
+    .centered-button {
+      display: block;
+      margin: 20px auto;
+    }
+    
+    .save-message {
+      margin-top: 20px;
+      color: green;
+      text-align: center;
+      font-weight: bold;
+    }
+    /* General Container */
+  .container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #f9f9f9;
+  }
+  
+  /* Header Section */
+  .header_section {
+    background: white;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid navy;
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header_section h1 {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .button-group button {
+    margin-right: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: navy;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-group button:hover {
+    background-color: darkblue;
+  }
+  
+  /* Report Section */
+  .report_sec {
+    background: whitesmoke;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    overflow: auto;
+    height: 400px;
+  }
+  
+  .report_list_show {
+    background: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .report_list_show:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .selected-item-user {
+    border-left: 5px solid navy;
+    background-color: #e7f0fe;
+  }
+  
+  .user_img_sec {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .user_lis_name h5 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .mat-icon {
+    color: grey;
+  }
+  
+  /* Centered Button */
+  .centered-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .centered-button:hover {
+    background-color: #f0f0f0;
+    color: #000;
+  }
+  
+  /* Cards */
+  .card {
+    max-width: 100%;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
+    /* padding: 10px; */
+  }
+  .padding{
+    padding: 10px;
+  }
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-body {
+    padding: 15px;
+    width: 100%;
+    border: solid 0px white !important;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Table */
+  .table-container {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .table-container {
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 10px;
+  }
+  
+  .table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+  }
+  
+  .table th {
+    border: 1px solid #ddd;
+    padding: 20px; /* Extraordinary cell padding */
+    background-color: #f8f8f8;
+  }
+  
+  .table td {
+    border: 1px solid #ddd;
+    padding: 20px; /* Extraordinary cell padding */
+  }
+  
+  
+  .table th {
+    background-color: #f8f8f8;
+  }
+  
+  .table thead th {
+    background-color: #f2f2f2; /* Alternate header color */
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .table-bordered {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ddd;
+  }
+  /* Apply styles to the dropdown */
+  select {
+    padding: 8px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    border: 1px solid #ccc; /* Adjust border color and width as needed */
+    border-radius: 4px; /* Adjust border radius as needed */
+    background-color: #fff; /* Adjust background color as needed */
+  }
+  
+  /* Apply styles to the options */
+  select option {
+    font-size: 14px; /* Adjust font size as needed */
+    padding: 8px; /* Adjust padding as needed */
+    background-color: #fff; /* Adjust background color as needed */
+    color: #333; /* Adjust text color as needed */
+  }
+  
+  /* Style the selected option */
+  select option:checked {
+    background-color: #007bff; /* Adjust background color of selected option */
+    color: gray; /* Adjust text color of selected option */
+  }
+  .field-list {
+    display: flex;
+    flex-direction: column;  /* Make the list display in a column */
+    gap: 1px;  /* Add space between each row */
+  }
+  
+  .field-item {
+    display: flex;
+    align-items: center;  /* Align items vertically */
+  }
+  
+  .field-label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    background: #f9f9f9;  /* Light background for each row */
+    border-radius: 4px;  /* Rounded corners */
+    cursor: pointer;  /* Pointer cursor on hover */
+  }
+  
+  .field-label input {
+    margin-right: 10px;  /* Space between checkbox and label */
+  }
+  .table-bordered {
+    border: 1px solid #dee2e6;
+  }
+  
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #dee2e6;
+  }
+  .card-title.active-file {
+    color: #007bff; /* Change this color to your preferred color */
+    font-weight: bold;
+  }
+  
+  .card:hover .card-title {
+    color: #0056b3; /* Slightly darker shade for hover effect */
+  }
+  .table-bordered thead th,
+  .table-bordered thead td {
+    border-bottom-width: 2px;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  
+  .table_outer_new{
+    width: 100%;
+    overflow: hidden;
+    padding: 20px;
+  
+  }
+  
+  .table_new{
+  
+    overflow-y: scroll;
+    overflow-x: scroll;
+    width: 100%;
+    display: block;
+  
+  }
+  
+  
+  .card-title{
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  
+  .table-bordered thead  th, 
+  .table-bordered thead td {
+    border-bottom-width: 2px;
+    text-wrap: nowrap;
+  }
+  
+  .report_common_box{
+  
+    background: whitesmoke;
+    height: 500px;
+  
+  
+  }
+  
+  .card-body{
+    max-height: 430px;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  .report-section-main{
+    padding: 20px;
+  }
+  
+  .table-bordered thead th{
+    font-size: 14px;
+    font-weight: 400;
+  }
+  
+  table td{
+    font-size: 14px;
+    font-weight: 400;
+  }
+  
+  .preview-heading{
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .card-titles{
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  
+  .broder_side{
+    border-right: solid 1px grey;
+    height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  
+  .field-list{
+    cursor: -webkit-grab; 
+    cursor: grab;
+  }
+  
+  ::ng-deep .mat-mdc-checkbox .mdc-form-field label{
+    cursor: grab;
+  }
+  
+  
+  /* Add your CSS styles here */
+  .modal.show.d-block {
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-dialog.modal-xl {
+    max-width: 90%; /* Adjust width as needed */
+  }
+  .invisible-button {
+    visibility: hidden; /* Makes the button invisible but still occupies space */
+    /* display: none;  This will completely remove the button from the layout, so use visibility: hidden if you want to keep the space occupied */
+  }
+  
+  
+  .modal-content {
+    padding: 30px; /* Increase padding for a spacious feel */
+  }
+  
+  .modal-header .close {
+    font-size: 1.5rem;
+  }
+  
+  .field-list {
+    max-height: 400px; /* Increase height for more content */
+    overflow-y: auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .field-item {
+    margin-bottom: 10px;
+  }
+  
+  .modal-body {
+    font-size: 1.2rem; /* Increase font size for better readability */
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: right;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .modal.show.d-block {
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Adds a dark background overlay */
+  }
+  
+  .modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ensure the modal is centered vertically */
+  }
+  
+  .modal-dialog {
+    max-width: 600px; /* Adjust the max-width as needed */
+  }
+  
+  .field-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px; /* Reduced space between field items */
+    max-height: 300px; /* Add a max-height if you want to limit the overall height of the field list */
+    overflow-y: auto; /* Enable scrolling if the content exceeds max-height */
+  }
+  
+  .field-item {
+    padding: 2px; /* Reduced padding */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 0.65rem; /* Further reduced font size */
+  }
+  
+  .field-label {
+    display: flex;
+    align-items: center;
+    font-size: 0.65rem; /* Further reduced font size */
+  }
+  

@@ -1,0 +1,167 @@
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" [class.menu-open]="isMenuOpen"
+  [class.menu-close]="!isMenuOpen" >
+  <div class="position-sticky">
+    <div class="list-group list-group-flush  mt-5">
+<!-- 
+      <a routerLink="/main-sidebar" class="list-group-item list-group-item-action py-2 ripple ">
+        <span><mat-icon>home</mat-icon> <span class="sidenav-opt"> Dashboard
+
+          </span></span>
+
+      </a> -->
+
+
+      <a  class="list-group-item list-group-item-action py-2 ripple"
+        aria-current="true" routerLink="/employee-dashboard/employee-sction" >
+        <span><mat-icon>peoples</mat-icon> <span class="sidenav-opt" > Employee Dashboard</span></span>
+      </a>
+
+      <a  class="list-group-item list-group-item-action py-2 ripple"
+      aria-current="true" routerLink="/employee-dashboard/employee-approvals">
+      <span><mat-icon>peoples</mat-icon> <span class="sidenav-opt" > Approvals</span></span>
+    </a>
+
+    <a  class="list-group-item list-group-item-action py-2 ripple"
+    aria-current="true" routerLink="/employee-dashboard/employee-leave">
+    <span><mat-icon>peoples</mat-icon> <span class="sidenav-opt" > Leave Management</span></span>
+  </a>
+      <!-- <a  class="list-group-item list-group-item-action py-2 ripple">
+        <span><mat-icon>account_tree</mat-icon> <span class="sidenav-opt" routerLink="/main-sidebar"> Leave Management</span></span>
+
+
+      </a>
+      <a  class="list-group-item list-group-item-action py-2 ripple" *ngIf="!hideButton" routerLink="/main-sidebar/settings">
+        <span><mat-icon>settings</mat-icon> <span class="sidenav-opt" > Settings</span></span>
+      </a>
+      -->
+    </div>
+  </div>
+</nav>
+<!-- Sidebar -->
+
+<!-- Navbar -->
+<nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <!-- <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
+      aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button> -->
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">
+      <img src="assets/zeo_logo_new.png" height="70" width="100%" alt="MDB Logo"
+        loading="lazy" />
+    </a>
+
+
+    <!-- Right links -->
+    <ul class="navbar-nav ms-auto d-flex flex-row">
+      <!-- Notification dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" (click)="redirectToExpiredDocuments()" role="button"
+        data-mdb-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+         <mat-icon class="mt-2">notifications</mat-icon>
+         <span class="badge rounded-pill badge-notification bg-danger" *ngIf="expiredDocumentsCount > 0"
+               style="position: absolute; margin-left: -10px; color: white;">{{ expiredDocumentsCount }}</span>
+     </a>
+       
+<!--    
+      <li>
+        <div class="Company_pro" *ngIf="schemas.length > 0">
+          <div class="custom-sel drop_chosse opened">
+            <select class="form-control form_conrtl_height" (change)="selectSchema($event)">
+              <option value="">Select Company</option>
+              <option *ngFor="let schema of schemas" [value]="schema">{{ schema }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="Company_pro company_bor" *ngIf="selectedSchema">
+          <div class="cmp_drop">
+            <mat-icon>apartment</mat-icon>
+            <h1>{{ selectedSchema }}</h1>
+            <mat-icon style="margin-left: 10px;">expand_more</mat-icon>
+          </div>
+        </div>
+        
+      </li> -->
+
+    
+
+     
+      
+<!-- 
+      <div class="board_user" *ngIf="showboard">
+
+      
+
+      
+    </div> -->
+
+    <li>
+      <div class="user_logged_outer" *ngIf="userDetails">
+        <div class="user_logged_in">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="user_logged_out">
+          <h1>{{ userDetails.username }}</h1>
+        </div>
+
+      </div>
+    </li>
+      
+     
+    
+  
+    
+
+      <!-- Avatar -->
+      <li class="nav-item dropdown">
+
+      
+        <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"  id="navbarDropdownMenuLink"
+          role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+          <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" class="rounded-circle" height="22"
+            alt="Avatar" loading="lazy" /> -->
+            <button type="button" (click)="logout()"  class="btn btn-danger" style="    border-radius: 0px;">Logout</button>
+
+        </a>
+
+      </li>
+    </ul>
+
+   
+  </div>
+  <!-- Container wrapper -->
+ 
+
+
+
+
+</nav>
+
+<div class="container" >
+
+    <!-- <div class="comapny_section">
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h1> Employee Details</h1>
+                </div>
+
+             
+            </div>
+           
+           
+
+        </div>
+
+    
+
+      
+    </div> -->
+</div>
+
+<router-outlet></router-outlet>

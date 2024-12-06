@@ -1,0 +1,126 @@
+
+<div [class.blur-background]="isLoading">
+
+<div class="navbar">
+    <!-- <div class="nav-logo">
+      <a >Logo</a>
+    </div> -->
+    <div class="nav-items">
+      <ul>
+        <li><a > Home </a></li>
+        <!-- <li><a href="#"> Services </a></li>
+        <li><a href="#"> About </a></li>
+        <li><a href="#"> Contact </a></li>
+        <li><a href="#"> Home </a></li> -->
+      </ul>
+    </div>
+    <!-- <div class="nav-button" (click)="showbaordlist()">
+
+        <div class="grou-item"  *ngIf="userDetails">
+            <div class="user_dis">
+                <mat-icon>person
+
+                </mat-icon>
+            </div>
+      
+            <a >{{ userDetails.username }}</a>
+        </div>
+     
+    </div> -->
+
+
+    <div class="user_logged_outer" *ngIf="userDetails" (click)="showbaordlist()">
+      <div class="user_logged_in">
+        <mat-icon>person</mat-icon>
+      </div>
+      <div class="user_logged_out">
+        <h1>{{ userDetails.username }}</h1>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="mobile-menu">
+    <div class="mobile-nav-items">
+      <ul>
+        <li><a > Home </a></li>
+        <!-- <li><a href="#"> Services </a></li>
+        <li><a href="#"> About </a></li>
+        <li><a href="#"> Contact </a></li>
+        <li><a href="#"> Home </a></li> -->
+      </ul>
+    </div>
+    <div class="mobile-nav-button">
+      <div class="anim-layer"></div>
+      <a href="#">Sign Up</a>
+    </div>
+    <div id="hamburger-cross">&#10006;</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9"></div>
+    <div class="col-md-2">
+        <div class="board_user" *ngIf="showboard">
+
+            <div class="log_out" (click)="logout()">
+                <h1>LogOut</h1>
+            </div>
+        
+        </div>
+    </div>
+  </div>
+
+
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="schema_Sec" >
+
+          <div class="row">
+            <div class="col-md-10">
+              <h1 class="mt-2">Choose Company</h1>
+
+            </div>
+
+            <div class="col-md-2">
+              <button type="button" class="btn-Create btn-full btn-success btn" (click)="openPopuss()">Create</button>
+            </div>
+          </div> <hr>
+            
+
+
+
+          <div class="custom-sel">
+            <label>Select Company</label>
+            <select class="form-control" [(ngModel)]="selectedSchema" (change)="selectSchema($event)">
+              <option value="">select</option>
+              <option *ngFor="let schema of schemas" [value]="schema">{{ schema }}</option>
+            </select>
+          </div>
+          
+          <!-- <button class="btn btn-connect pull-right mt-2" (click)="connect()">connect</button> -->
+        
+            </div>
+
+       
+
+</div>
+ 
+</div>
+</div>
+
+     <!-- Loader -->
+     <!-- <div class="loader-container" [class.show]="isLoading">
+      <div class="loader"></div>
+    </div> -->
+
+    <!-- Loader -->
+    <div class="loader-container" [class.show]="isLoading">
+      <button class="btn_load loader">
+        <img  src="assets/zeo_logo_new.png" height="70" width="100%" alt="MDB Logo" loading="lazy" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      
+    </button>
+
+    </div>
+

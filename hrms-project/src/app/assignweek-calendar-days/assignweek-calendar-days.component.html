@@ -1,0 +1,279 @@
+<!-- <div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>Create Weekend Calendar</h2><hr>
+
+        <mat-tab-group>
+            <mat-tab label="Create Weekend Calendar"> 
+                <form >
+
+                    <div class="row">
+
+                        <div class="col-md-4" >
+                       
+                            <label>Week of month</label>
+                        
+                            <div class="custom-sel">
+                                <select class="form-control" [(ngModel)]="week_of_month" [ngModelOptions]="{standalone: true}">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                            
+                                   
+                                </select>
+                            </div>
+                      
+                        </div>
+
+                        <div class="col-md-4" >
+                       
+                            <label>Month of year</label>
+                        
+                            <div class="custom-sel">
+                                <select class="form-control" [(ngModel)]="year" [ngModelOptions]="{standalone: true}">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+
+                            
+                                   
+                                </select>
+                            </div>
+                          
+                        </div>
+
+                        <div class="col-md-4" >
+                       
+                            <label>Weekday</label>
+                        
+                            <div class="custom-sel">
+                                <select class="form-control" [(ngModel)]="year" [ngModelOptions]="{standalone: true}">
+                                    <option>Monday</option>
+                                    <option>Tuesday</option>
+                                    <option>wednesday</option>
+                                    <option>Thursday</option>
+                                    <option>Friday</option>
+                                    <option>Saturday</option>
+                                    <option>Sunday</option>
+                                
+
+                            
+                                   
+                                </select>
+                            </div>
+                          
+                        </div>
+                  
+                        <div class="col-md-4">
+                            <label>Day type</label>
+                            <div class="custom-sel">
+                                <select class="form-control" id="monday" name="monday"  [(ngModel)]="monday"  [ngModelOptions]="{standalone: true}">
+                                    <option>Leave</option>
+                                    <option>Work</option>
+                                    <option>Holiday</option>
+                                </select>
+                            </div>
+                        </div>
+                  
+        
+        
+                  
+        
+      
+        </div>
+        
+        <div class="row">
+            <div class="col-md-10">
+        
+            </div>
+        
+            <div class="col-md-2">
+                <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerweekCalendar()">Save</button>  
+             </div>
+        </div>
+             
+            </form>
+
+
+            <div>
+        
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <label>Weekend Calendar</label>
+                        <div class="custom-sel">
+                            <select class="form-control" (change)="selectCalendar($event)">
+                                <option>select</option>
+                                <option *ngFor="let calendar of calendars" [value]="calendar.id">
+                                  {{ calendar.calander_title }} ({{ calendar.year }})
+                                </option>
+                              </select>
+                              
+        
+                        </div>
+                    </div>
+                </div>
+          
+                  <div *ngIf="selectedCalendar">
+        
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <p>Calendar Tittle</p>
+                            <h1>{{ selectedCalendar.calander_title }}</h1>
+        
+                        </div>
+        
+                        <div class="col-md-4">
+                            <p>Calendar Year</p>
+                            <h1>{{ selectedCalendar.year }}</h1>
+        
+                        </div>
+                        <div class="col-md-4">
+                            <p>Calendar Description</p>
+                            <h1>{{ selectedCalendar.description }}</h1>
+        
+                        </div>
+                    </div>
+                 
+                    <div class="mt-4">
+                        <mat-accordion >
+                          <mat-expansion-panel *ngFor="let month of months">
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                {{ month.name }}
+                              </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <table class="mt-2">
+                              <thead>
+                                <tr>
+                                  <th>Date</th>
+                                  <th>Day</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let day of month.days">
+                                  <td>{{ day.date | date: 'yyyy-MM-dd' }}</td>
+                                  <td>{{ day.dayName }}</td>
+                                  <td>{{ day.status }}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                      </div>
+                      
+                  </div>
+            
+            
+                </div>
+            </mat-tab>
+        
+        
+        
+        
+            <mat-tab label="Second"> 
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Week of month</label>
+                            <div class="custom-sel">
+                                <select class="form-control" id="week_of_month" name="week_of_month"  [(ngModel)]="weekday"  [ngModelOptions]="{standalone: true}">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                 
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-4">
+                            <label>Month of year</label>
+                            <div class="custom-sel">
+                                <select class="form-control" id="month_of_year" name="month_of_year"  [(ngModel)]="month_of_year"  [ngModelOptions]="{standalone: true}">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-md-4">
+                            <label>Weekday</label>
+                            <div class="custom-sel">
+                                <select class="form-control" id="weekday" name="weekday"  [(ngModel)]="weekday"  [ngModelOptions]="{standalone: true}">
+                                    <option>Monday</option>
+                                    <option>Tuesday</option>
+                                    <option >wednesday</option>
+                                    <option>Thursday</option>
+                                    <option>Friday</option>
+                                    <option>Saturday</option>
+                                    <option>Sunday</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Day Type</label>
+                            <div class="custom-sel">
+                                <select class="form-control" id="day_type" name="day_type"  [(ngModel)]="day_type"  [ngModelOptions]="{standalone: true}">
+                                    <option>Leave</option>
+                                    <option>Work</option>
+                                    <option>Halfday</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-tab>
+          </mat-tab-group>
+
+    
+
+
+    
+
+
+  
+
+  
+
+
+        </div>
+
+        </div>
+
+
+  
+
+</div>
+</div>
+
+
+ -->

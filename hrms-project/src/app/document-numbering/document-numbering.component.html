@@ -1,0 +1,188 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>Document Numbering</h2><hr>
+
+        <form >
+
+            <div class="row">
+                <div class="col-md-3" >
+               
+                    <label>Preffix</label>
+                   <input type="text"  class="form-control" required  [(ngModel)]="preffix"  placeholder="Enter Preffix
+                   
+                   "
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !preffix}">
+                   
+                   <div *ngIf="registerButtonClicked && !preffix" class="error-message">Preffix is required.</div>
+              </div>
+              
+
+              <div class="col-md-3" >
+               
+                <label>Suffix</label>
+               <input type="text"  class="form-control" required  [(ngModel)]="suffix"  placeholder="Enter Suffix"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !suffix}">
+               
+               <div *ngIf="registerButtonClicked && !suffix" class="error-message">Suffix is required.</div>
+          </div>
+
+
+          
+          <div class="col-md-3" >
+               
+            <label>Year</label>
+           <input type="date"  class="form-control" required  [(ngModel)]="year"  placeholder="Enter year"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !year}">
+           
+           <div *ngIf="registerButtonClicked && !year" class="error-message">year is required.</div>
+      </div>
+
+      <div class="col-md-3" >
+               
+        <label>Start Number</label>
+       <input type="number"  class="form-control" required  [(ngModel)]="start_number"  placeholder="Enter Start number"
+        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !start_number}">
+       
+       <div *ngIf="registerButtonClicked && !start_number" class="error-message">start number is required.</div>
+  </div>
+
+  <div class="col-md-3" >
+               
+    <label>Current Number</label>
+   <input type="number"  class="form-control" required  [(ngModel)]="current_number"  placeholder="Enter current number"
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !current_number}">
+   
+   <div *ngIf="registerButtonClicked && !current_number" class="error-message">current number is required.</div>
+</div>
+
+
+<div class="col-md-3" >
+               
+    <label>End Number</label>
+   <input type="number"  class="form-control" required  [(ngModel)]="end_number"  placeholder="Enter end number"
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !end_number}">
+   
+   <div *ngIf="registerButtonClicked && !end_number" class="error-message">End number is required.</div>
+</div>
+
+      <div class="col-md-3">
+
+
+        <div class="custom-sel">
+            <label>Select Branches</label>
+            <select class="form-control" id="branch_id" required [(ngModel)]="branch_id"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch_id}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of branches" [value]="deparmentsec.id">{{ deparmentsec.branch_name     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !branch_id" class="error-message">Please Select Your Branch</div>
+        </div>
+                    
+
+    </div>
+
+    <div class="col-md-3">
+
+
+        <div class="custom-sel">
+            <label>Category</label>
+            <select class="form-control" id="category" required [(ngModel)]="category"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !category}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of Categories" [value]="deparmentsec.id">{{ deparmentsec.ctgry_title     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !category" class="error-message">Please Select Category </div>
+        </div>
+                    
+
+    </div>
+
+
+    <div class="col-md-3">
+
+
+        <div class="custom-sel">
+            <label>Users</label>
+            <select class="form-control" id="user" required [(ngModel)]="user"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !user}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of Users" [value]="deparmentsec.id">{{ deparmentsec.username     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !user" class="error-message">Please Select user </div>
+        </div>
+                    
+
+    </div>
+
+    
+    <div class="col-md-4">
+        <div class="check-box-selection-sec form-control">
+            <div class="mat-set">
+                <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                <mat-checkbox [(ngModel)]="automatic_numbering">Automatic numbering</mat-checkbox>
+                <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+            </div>
+           
+        </div>
+    </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-10">
+    
+                </div>
+    
+                <div class="col-md-2">
+                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerGeneralreq()">Save</button>  
+                 </div>
+            </div>
+            
+       
+    </form>
+
+  
+
+
+        </div>
+
+        </div>
+
+
+        <table width="100%">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th> Preffix</th>
+                <th>Suffix</th>
+                <th>Year</th>
+                <th>start No</th>
+                <th>current No</th>
+                <th>End No</th>
+                <th>Branch</th>
+                <th>Category</th>
+
+               
+              </tr>
+            </thead>
+            <tbody>
+                
+              <tr *ngFor="let docs of docsNumbers;let i = index">
+                <td>{{ i + 1 }}</td> 
+                <td>{{ docs.preffix }}</td>
+                <td>{{ docs.suffix }}</td>
+                <td>{{ docs.year }}</td>
+                <td>{{ docs.start_number }}</td>
+                <td>{{ docs.current_number }}</td>
+                <td>{{ docs.end_number }}</td>
+                <td>{{ docs.branch_id }}</td>
+                <td>{{ docs.category }}</td>
+           
+              </tr>
+          
+            </tbody>
+          </table>
+
+        </div>
+        </div>
+        

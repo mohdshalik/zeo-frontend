@@ -1,0 +1,157 @@
+/* General styles for the report box */
+.report_common_box {
+    background: whitesmoke;
+    max-height: 80vh; /* Set maximum height to 80% of the viewport height */
+    width: 80%; /* Set width to 80% of the parent container */
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-spacing {
+    margin: 0 20px; /* Adds a margin of 20px on both left and right */
+  }
+  /* Ensure buttons stay in the same row and handle overflow gracefully */
+  /* .row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+  } */
+  .button-space {
+    margin-left: 36px; /* Adjust as needed */
+  }
+  
+  /* Add margin for spacing between buttons */
+  .btn {
+    margin: 0 10px; /* Adjust the value to suit your spacing needs */
+  }
+  
+  /* Adjust padding and margins to ensure content does not overflow */
+  .btn-danger, .btn-primary {
+    white-space: nowrap; /* Prevent buttons from wrapping text */
+  }
+  .mat-table-scroll {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px; /* Increase font size to 16px */
+  }
+  
+  .mat-header-cell, .mat-cell {
+    border: 1px solid #ddd; /* Border for header cells and data cells */
+    padding: 16px; /* Increased padding inside cells */
+    text-align: left; /* Adjust text alignment as needed */
+    font-weight: bold; /* Make text bold */
+    font-size: 18px; /* Further increase font size for header and cell text */
+  }
+  
+  .mat-header-row, .mat-row {
+    background-color: #f9f9f9; /* Row background color */
+  }
+  
+  /* Make sure columns don't overflow on smaller screens */
+  @media (max-width: 767px) {
+    .col-md-2, .col-md-8 {
+      flex: 1; /* Allows flexible resizing on smaller screens */
+      max-width: 100%; /* Prevents overflow */
+    }
+  
+    /* Adjust button margins for smaller screens */
+    .btn {
+      margin: 5px 0;
+    }
+  }
+  
+  /* Table styles */
+  .table-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  .table-bordered {
+    border: 1px solid #dee2e6;
+  }
+  
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table-bordered thead th {
+    border-bottom-width: 2px;
+    background-color: #f8f9fa;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Custom styling for the table container */
+  .table_outer_new {
+    width: 100%;
+    padding: 20px;
+    background: whitesmoke;
+  }
+  
+  .table_new {
+    max-height: 400px; /* Set the max height of the scrollable area */
+    overflow-y: auto; /* Enable vertical scroll */
+    overflow-x: auto; /* Enable horizontal scroll */
+  }
+  
+  /* Align buttons at the bottom */
+  .d-flex {
+    display: flex;
+  }
+  
+  .mt-3 {
+    margin-top: 1rem;
+  }
+  
+  .justify-content-between {
+    justify-content: space-between;
+  }
+  
+  /* Button styles */
+  .btn-link {
+    margin-left: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+  }
+  
+  
+  ::ng-deep .grouping-options .mat-select{
+  
+    background: whitesmoke !important;
+  
+    padding-left: 10px !important;
+  
+  
+    
+  }
+  
+  .gru_hd{
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,199 @@
+<div class="container">
+    <div class="comapny_section" *ngIf="Companies">
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-7">
+                    <h1> company Details </h1>
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+                        <!-- <button type="button"  class="btn-Create btn btn-success "><span class="header-btn-icon"><mat-icon>add_circle
+                        </mat-icon></span> Create</button> -->
+
+                        <button type="button" class="btn-Edit btn-info btn"  (click)="openEditEmpPopuss(Companies.id)">
+                            <span class="header-btn-icon">
+                             <mat-icon>draw
+                        </mat-icon></span> Edit</button>
+                        <button type="button" class="btn-Delete btn btn-danger" (click)="onDeleteEmployee(Companies.id)">
+                            <span class="header-btn-icon">
+                                <mat-icon> delete
+                           </mat-icon></span> Delete</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+        <div class="body-section mt-4">
+            <div class="company-det-dec wrapper">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="sidebar">
+                           
+                            <div class="cmp_sc">
+
+                                <h3>
+                                    General Informations
+                                </h3>
+
+                            </div>
+                          
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="comdet_sec">
+                           
+                          
+                          <div class="row">
+                            <div class="col-md-4">
+                                <h4>Company Name</h4>
+                                <h5>{{ Companies.cmpny_name }}</h5>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4>Company Email</h4>
+                                <h5>{{ Companies.cmpny_mail }}</h5>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4>Company Contact</h4>
+                                <h5>{{ Companies.cmpny_nmbr_1 }}</h5>
+                            </div>
+
+
+
+                            <div class="col-md-4">
+                                <h4>Company Gst/Fax</h4>
+                                <h5>{{ Companies.cmpny_gst }} {{ Companies.cmpny_fax }}</h5>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4>Company Gst/Fax</h4>
+                                <h5>{{ Companies.cmpny_country }}</h5>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <h4>Company Gst/Fax</h4>
+                                <h5>{{ Companies.cmpny_state_id }}</h5>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <h4>Company Gst/Fax</h4>
+                                <h5>{{ Companies.cmpny_city }}</h5>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4>Company Gst/Fax</h4>
+                                <h5>{{ Companies.cmpny_pincode }}</h5>
+                            </div>
+                          </div>
+                          
+                          
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!-- <div class="com-det-lef">
+                    <div class="left-com-det-sec cod1">
+                        <h1>{{ Companies.cmpny_mail }}</h1>
+                        <div class="rounder-ico-sec">
+                            <mat-icon>mail</mat-icon>
+                        </div>
+                    </div>
+
+                    <div class="left-com-det-sec cod2">
+                        <h1>{{ Companies.cmpny_nmbr_1 }}</h1>
+                        <div class="rounder-ico-sec">
+                            <mat-icon>call</mat-icon>
+                        </div>
+                    </div>
+
+
+                    <div class="left-com-det-sec cod3">
+                        <h1>+91 9956874578</h1>
+                        <div class="rounder-ico-sec">
+                            <mat-icon>mail</mat-icon>
+                        </div>
+                    </div>
+
+
+                    <div class="left-com-det-sec cod4">
+                        <h1>GST/Fax - {{ Companies.cmpny_gst }} {{ Companies.cmpny_fax }} </h1>
+                        <div class="rounder-ico-sec">
+                            <mat-icon>payments
+                            </mat-icon>
+                        </div>
+                    </div>
+             
+
+                </div>
+                <div class="round-setting d-block mx-auto">
+
+                 
+                    <mat-icon>apartment
+                    </mat-icon>
+
+                    <h2>{{ Companies.cmpny_name }}</h2>
+
+                </div>
+
+                <div class="com-det-right">
+                  
+
+                    <div class="left-com-det-sec cod5">
+                        <div class="rounder-ico-sec">
+                            <mat-icon>public</mat-icon>
+                        </div>
+                        <h1>Country - {{ Companies.cmpny_country }}</h1>
+                      
+                    </div>
+
+                    
+                    <div class="left-com-det-sec cod6">
+                        <div class="rounder-ico-sec">
+                            <mat-icon>location_on
+                            </mat-icon>
+                        </div>
+                        <h1>State - {{ Companies.cmpny_state_id }}</h1>
+                      
+                    </div>
+
+                    <div class="left-com-det-sec cod7">
+                        <div class="rounder-ico-sec">
+                            <mat-icon>pin_drop
+                            </mat-icon>
+                        </div>
+                        <h1>City - {{ Companies.cmpny_city }}</h1>
+                      
+                    </div>
+                 
+                    <div class="left-com-det-sec cod8">
+                        <div class="rounder-ico-sec">
+                            <mat-icon>signpost
+
+
+                            </mat-icon>
+                        </div>
+                        <h1> pincode - {{ Companies.cmpny_pincode }}</h1>
+                      
+                    </div>
+                    
+                </div> -->
+               
+            </div>
+        </div>
+    </div>

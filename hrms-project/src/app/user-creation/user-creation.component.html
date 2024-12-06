@@ -1,0 +1,216 @@
+<div mat-dialog-content class="">
+    <div class="cpm-sec">
+
+        <h1>Add User</h1>
+        <hr>
+
+   
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+
+                    <label>User Name</label>
+                    <input type="text" class="form-control" required [(ngModel)]="username"
+                        placeholder="Enter user Name" [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'error-field': registerButtonClicked && !username}">
+
+                    <div *ngIf="registerButtonClicked && !username" class="error-message">Department Name is required.
+                    </div>
+                </div>
+
+
+                <!-- <div class="col-md-6">
+
+                    <label>first Name</label>
+                    <input type="text" class="form-control" required [(ngModel)]="first_name"
+                        placeholder="Enter First name " [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'error-field': registerButtonClicked && !first_name}">
+
+                    <div *ngIf="registerButtonClicked && !first_name" class="error-message">Description is required.
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" required [(ngModel)]="last_name"
+                        placeholder="Enter Last name " [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'error-field': registerButtonClicked && !last_name}">
+
+                    <div *ngIf="registerButtonClicked && !last_name" class="error-message">Description is required.
+                    </div>
+                </div> -->
+
+                <div class="col-md-6">
+
+                    <label>email Id</label>
+                    <input type="text" class="form-control" required [(ngModel)]="email" placeholder="Enter Email "
+                        [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'error-field': registerButtonClicked && !email}">
+
+                    <div *ngIf="registerButtonClicked && !email" class="error-message">Description is required.</div>
+                </div>
+
+
+                <!-- <div class="col-md-6">
+
+                    <label>Company Role</label>
+                    <input type="text" class="form-control" required [(ngModel)]="CompanyRole"
+                        placeholder="Enter company roll " [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'error-field': registerButtonClicked && !CompanyRole}">
+
+                    <div *ngIf="registerButtonClicked && !CompanyRole" class="error-message">Description is required.
+                    </div>
+                </div> -->
+
+
+                <!-- <div class="col-md-6">
+
+                    <label>Contact</label>
+                    <input type="text" class="form-control" required [(ngModel)]="contact_number
+                    "
+                        placeholder="Enter Contact " [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'error-field': registerButtonClicked && !contact_number
+                    }">
+
+                    <div *ngIf="registerButtonClicked && !contact_number
+                    " class="error-message">Description is required.
+                    </div>
+                </div> -->
+
+
+
+                <div class="col-md-6">
+
+                    <label>Password</label>
+                    <input type="text" class="form-control" required [(ngModel)]="password" placeholder="Enter Password "
+                        [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'error-field': registerButtonClicked && !password}">
+
+                    <div *ngIf="registerButtonClicked && !password" class="error-message">Description is required.</div>
+                </div>
+
+                <!-- <div class="col-md-6">
+               
+                    <label>last Login date</label>
+                   <input type="date"  class="form-control" required  [(ngModel)]="last_login"  placeholder="last login"
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !last_login}">
+                   
+                   <div *ngIf="registerButtonClicked && !last_login" class="error-message">last login.</div>
+                </div>
+
+                <div class="col-md-6">
+               
+                    <label>date joined</label>
+                   <input type="date"  class="form-control" required  [(ngModel)]="date_joined"  placeholder="Joined date"
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !date_joined}">
+                   
+                   <div *ngIf="registerButtonClicked && !date_joined" class="error-message">joined date.</div>
+                </div>
+
+
+                <div class="col-md-6">
+
+
+                    <div class="custom-sel">
+                        <label>User Group</label>
+                        <select class="form-control" id="group" required [(ngModel)]="groups"  [ngModelOptions]="{standalone: true}" 
+                        name="group" multiple  [ngClass]="{'error-field': registerButtonClicked && !groups}" >
+                            <option value="" >Select</option>
+                            <option *ngFor="let group of group" [value]="group.id">{{ group.name }}</option>
+                        </select>
+                        <div *ngIf="registerButtonClicked && !groups" class="error-message">Please Select User permission</div>
+                    </div>
+                                
+            
+                </div> -->
+
+
+                <div class="col-md-6">
+                    <div class="check-box-selection-sec form-control">
+                        <div class="mat-set">
+                            <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                            <mat-checkbox [(ngModel)]="is_superuser" [ngModelOptions]="{standalone: true}">Is_Super User</mat-checkbox>
+                            <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                        </div>
+                       
+                    </div>
+                </div>
+
+     
+                <div class="col-md-6">
+
+
+                    <div class="custom-sel">
+                        <label>Select Company</label>
+                        <select class="form-control" id="tenants" multiple required [(ngModel)]="tenants"  [ngModelOptions]="{standalone: true}" 
+                        name="companys"   [ngClass]="{'error-field': registerButtonClicked && !tenants}" >
+                            <option value="" >Select</option>
+                            <option *ngFor="let country of companys" [value]="country.id">{{ country.schema_name }}</option>
+                        </select>
+                       
+                        <div *ngIf="registerButtonClicked && !tenants" class="error-message">Please Select Your Company</div>
+                    </div>
+               
+                                
+            
+                </div>
+            
+            
+                
+          
+
+
+
+
+
+
+
+
+
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <button (click)="ClosePopup()" class="pull-right btn btn-danger btn-full mt-4">Cancel</button>
+
+            </div>
+            <div class="col-md-2">
+                <button (click)="registeruser()" mat-raised-button color="primary"
+                    class="pull-right btn-full mt-4">Add</button>
+
+            </div>
+        </div>
+  
+
+    </div>
+</div>
+
+
+        <!-- Modal Popup for add program language skill -->
+        <div *ngIf="isAddFieldsModalOpen" class="modal">
+            <div class="modal-content">
+                <h2>Do you want to connect the created user to the employee?</h2>
+            
+            <div class="row">
+              
+                <div class="col-md-6">
+                    <button (click)="closeAddFieldsModal()"   class="pull-right btn btn-danger btn-full mt-4" >No</button>
+        
+                </div>
+                <div class="col-md-6">
+                    <button type="button" (click)="openPopus(createdUserId)"    mat-raised-button color="primary" class="pull-right btn-full mt-4" >Yes</button>
+        
+                </div>
+            </div>
+          
+             
+            </div>
+          </div>
+
+<div mat-dialog-action>
+
+</div>

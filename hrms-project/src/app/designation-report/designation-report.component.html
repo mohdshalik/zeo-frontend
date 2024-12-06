@@ -1,0 +1,189 @@
+<style>
+    /* Define fixed dimensions for the table */
+    #reportTable {
+      width: 100%; /* Adjust as needed */
+      height: 300px; /* Adjust as needed */
+      overflow: auto; /* Add scrollbar if content overflows */
+    }
+  
+    /* Define fixed dimensions for table cells */
+    #reportTable th {
+     
+      border: 1px solid #ddd; /* Add border to each table header cell */
+      background-color: #f9f9f9; /* Add background color */
+      text-align: center; /* Center-align content */
+      font-size: 14px; /* Set font size */
+      /* You can also add more styles as needed */
+    }
+  
+  
+    #reportTable td {
+      width: 100px; /* Adjust as needed */
+      height: 50px; /* Adjust as needed */
+      padding: 10px; /* Add padding around the content */
+      border: 1px solid #ddd; /* Add border */
+      background-color: #f9f9f9; /* Add background color */
+      text-align: center; /* Center-align content */
+      font-size: 14px; /* Set font size */
+      /* You can also add more styles as needed */
+    }
+  
+    .inside_body{
+      padding: 20px 30px 20px 55px;
+    }
+  </style>
+  
+    <div class="container" style="margin-top: 50px; margin-right: 0px;" >
+      <div class="comapny_section inside_body">
+          <div class="header_section">
+            <div class="row">
+              <div class="col-md-7">
+                <h4 class="mr-3">Designation Master Report</h4><hr> 
+              </div>
+        
+          </div>
+          <mat-tab-group>
+            <mat-tab label="Designation Standard Report ">
+  
+              <div class="report-section-main">
+  
+              <div class="row" >
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-success btn-full"  (click)="toggleCard()" >View Standard Report </button>
+                </div>
+              </div>
+  
+              
+            <div class="card">
+              <!-- <div class="card-header">
+                <h6>Standard Report</h6>
+                
+              </div> -->
+              <div class="card-body" >
+                <div class="header-container">
+                  <h6 class="header-title">Standard Report Data</h6>
+                  <div class="row">
+                    <div class="col-md-12 text-center">
+                      <!-- <button mat-raised-button color="success" class="btn btn-success me-2" (click)="Filter()">Field Filter</button> -->
+                    </div>
+                  </div>
+                  <button mat-raised-button color="primary" (click)="StandardDownload()">Download Excel</button>
+                </div>
+                <hr>
+                <table  class="mat-table-scroll">
+          
+          
+                <div *ngIf="departmentData.length > 0">
+  <table mat-table [dataSource]="departmentData" class="mat-elevation-z8">
+    <ng-container matColumnDef="Designation">
+      <th mat-header-cell *matHeaderCellDef> Designation </th>
+      <td mat-cell *matCellDef="let element"> {{ element.Designation }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Designation Code">
+      <th mat-header-cell *matHeaderCellDef> Designation Code </th>
+      <td mat-cell *matCellDef="let element"> {{ element['Designation Code'] }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{ element.Description }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Active">
+      <th mat-header-cell *matHeaderCellDef> Active </th>
+      <td mat-cell *matCellDef="let element"> {{ element.Active }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+                  
+          
+             
+              
+              
+               
+              
+               
+              
+               
+              
+              
+              
+                  <!-- Religion Column -->
+              
+              
+               
+              
+              
+              
+                  <!-- Marital Status Column -->
+                  
+                  <!-- Father Name Column -->
+           
+                  <!-- Mother Name Column -->
+               
+            
+              
+                  <!-- Active Column -->
+               
+              
+               
+            
+              
+                 
+              
+                  <!-- Table Rows -->
+                  <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+                </table>
+               
+              </div>
+              <!-- <div  class="padding" *ngIf="!cardOpen">
+                <p>View Standard List</p>
+              </div>
+               -->
+            
+            </div>
+            
+          </div>
+              
+              </mat-tab>
+        
+          </mat-tab-group>
+  
+            </div>
+            
+  
+            
+             
+             
+  
+          </div>
+  
+          </div>
+          <!-- report.component.html -->
+          
+        
+          
+          
+  
+  
+  
+  
+  
+  
+         
+         
+        
+       
+       
+          
+        
+       
+      
+  
+  

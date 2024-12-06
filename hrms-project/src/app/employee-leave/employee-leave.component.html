@@ -1,0 +1,208 @@
+<div class="container" >
+    <div class="comapny_section " >
+      
+        <div class="tab_back ">
+            <mat-tab-group> 
+                <mat-tab label="Leave Request">
+                    
+                    <div class="tab_boddy">
+
+                        <form (ngSubmit)="requestLeave()" enctype="multipart/form-data">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label>Start Date</label>
+                                <input type="date" class="form-control" required [(ngModel)]="start_date" placeholder="Enter Start Date"
+                                       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !start_date}">
+                                <div *ngIf="registerButtonClicked && !start_date" class="error-message">start date is required.</div>
+                              </div>
+                          
+                              <div class="col-md-6">
+                                <label>End Date</label>
+                                <input type="date" class="form-control" required [(ngModel)]="end_date" placeholder="Enter End Date"
+                                       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !end_date}">
+                                <div *ngIf="registerButtonClicked && !end_date" class="error-message">End Date is required.</div>
+                              </div>
+                          
+                              <div class="col-md-12">
+                                <label>Reason</label>
+                                <textarea class="form-control" [(ngModel)]="reason" [ngModelOptions]="{standalone: true}"></textarea>
+                              </div>
+        
+        
+                         
+        
+                              <div class="col-md-6">
+                                <label>Approved On</label>
+                                <input type="date" class="form-control" required [(ngModel)]="approved_on" placeholder="Enter date of approved on"
+                                       [ngModelOptions]="{standalone: true}" >
+                              </div>
+        
+                              <div class="col-md-6">
+                                <label></label>
+                                <div class="check-box-selection-sec form-control mt-3">
+                                  <div class="mat-set">
+                                    <mat-checkbox [(ngModel)]="dis_half_day" [ngModelOptions]="{standalone: true}">Dis Half Day</mat-checkbox>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div class="col-md-6">
+                                <label>Half Day Period</label>
+                                <div class="custom-sel">
+                                  <select class="form-control" id="half_day_period" name="half_day_period" [(ngModel)]="half_day_period" [ngModelOptions]="{standalone: true}">
+                                    <option value="first_half">First Half</option>
+                                    <option value="second_half">Second Half</option>
+                                  </select>
+                                </div>
+                              </div>
+        
+        
+                              <div class="col-md-6">
+                                <label>Leave Type</label>
+                                <div class="custom-sel">
+                                  <select class="form-control" id="leave_type" name="leave_type" [(ngModel)]="leave_type" [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let leavetype of LeaveTypes" [value]="leavetype.id">{{ leavetype.name }}</option>
+                                  </select>
+                                </div>
+                              </div>
+        
+        
+        
+                              <div class="col-md-6" style="display: none;">
+                                <label>Employee</label>
+                                <div class="custom-sel">
+                                  <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}" >
+                                    <option *ngFor="let employee of Employees" [value]="employee.id">{{ employee.emp_code }}</option>
+                                  </select>
+                                </div>
+
+                              
+                              </div>
+        
+                              <!-- <div class="col-md-6">
+                                <label>Approved By</label>
+                                <div class="custom-sel">
+                                  <select class="form-control" id="approved_by" name="approved_by" [(ngModel)]="approved_by" [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let approver of Users" [value]="approver.id">{{ approver.email }}</option>
+                                  </select>
+                                </div>
+                              </div>
+         -->
+                          
+                         
+                          
+                         
+                            </div>
+                          
+                            <div class="row">
+                              <div class="col-md-9"></div>
+                              <div class="col-md-3">
+                                <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Type</button>
+                              </div>
+                            </div>
+                          </form>
+        
+                     
+                </div>
+              </mat-tab>
+                  <mat-tab label="Requested Leaves Status">
+       
+
+
+                    <div class="tab_boddy">
+                        <div *ngFor="let employee of Employees" class="row">
+                          <div class="col-md-12">
+                            <div class="">
+                              <!-- Check if there are any leave requests -->
+                              <div *ngIf="employee.leave_rqsts && employee.leave_rqsts.length > 0; else noLeaveRequests">
+                                <!-- Loop through leave requests -->
+                                <div  class="">
+                                  <div class="row">
+                                    <div class="col-md-5">
+                                      <div class="leave_box" *ngFor="let request of employee.leave_rqsts" (click)="selectRequest(request.id)"
+                                      [ngClass]="{'selected-request': selectedRequestId === request.id}">
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                            <label>Leave Type</label>
+                                            <h6>{{ request.leave_type || 'N/A' }}</h6>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <label>Start Date</label>
+                                            <h6>{{ request.start_date }}</h6>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <label>End Date</label>
+                                            <h6>{{ request.end_date }}</h6>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                      
+                                    <div class="col-md-7" >
+                                        <div *ngFor="let request of employee.leave_rqsts">
+                                        
+                                      <div class="leave_box"  *ngIf="selectedRequestId === request.id">
+                                        <!-- Loop through approvals for the leave request -->
+                                        <div class="approval-steps" *ngIf="request.approvals && request.approvals.length > 0">
+                                          <h5>Leave Approval Status</h5><hr>
+                                          <div *ngFor="let approval of request.approvals" class="row">
+                                            <div class="col-md-3">
+                                              <label>Status</label>
+                                              <h6>{{ approval.status }}</h6>
+                                            </div>
+                                            <div class="col-md-3">
+                                              <label>Role</label>
+                                              <h6>{{ approval.role }}</h6>
+                                            </div>
+                                            <div class="col-md-3">
+                                              <label>Approver</label>
+                                              <h6>{{ approval.approver || 'N/A' }}</h6>
+                                            </div>
+                                            <div class="col-md-3">
+                                              <label>Note</label>
+                                              <h6>{{ approval.note || 'N/A' }}</h6>
+                                            </div>
+                                            <!-- <div class="col-md-2">
+                                              <label>Updated At</label>
+                                              <h6>{{ approval.updated_at }}</h6>
+                                            </div> -->
+                                          </div>
+                                        </div>
+                                      </div>
+                                      </div>
+                                    </div>
+                                  </div>  
+                                </div>
+                              </div>
+                              <!-- Template to show if no leave requests are present -->
+                              <ng-template #noLeaveRequests>
+                                <p>No leave requests available for this employee.</p>
+                              </ng-template>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      
+                      </mat-tab>
+      
+                 
+                      </mat-tab-group> 
+      
+                      </div>
+       
+       
+
+
+
+      
+    </div>
+</div>
+
+
+
+
+
+
+

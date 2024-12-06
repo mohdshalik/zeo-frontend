@@ -1,0 +1,232 @@
+
+<div mat-dialog-content class="">
+    <div class="cpm-sec">
+
+        <h1>Create  Company</h1><hr>
+
+        <form >
+        <div class="row">
+            <div class="col-md-6" >
+               
+      <label>Company Name</label>
+     <input type="text"  class="form-control" required  [(ngModel)]="cmpny_name"  placeholder="Enter Company Name" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_name}">
+     
+     <div *ngIf="registerButtonClicked && !cmpny_name" class="error-message">Company Name is required.</div>
+</div>
+         
+           
+          <div class="col-md-6">
+
+
+            <div class="custom-sel">
+                <label>Country</label>
+                <select class="form-control" id="country" required [(ngModel)]="cmpny_country" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_country}" >
+                    <option value="" >Select</option>
+                    <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+                </select>
+                <div *ngIf="registerButtonClicked && !cmpny_country" class="error-message">Please Select Your Country</div>
+            </div>
+                        
+
+ 
+               
+               
+            
+        </div>
+
+        
+        <div class="col-md-6" *ngIf="states && states.length > 0">
+               
+        
+            <div class="custom-sel" >
+                <label>State</label>
+                <select class="form-control" id="state" required [(ngModel)]="cmpny_state_id"  [ngModelOptions]="{standalone:true}" [ngClass]="{'error-field': registerButtonClicked && !cmpny_name}">
+                    <option value=""> select</option>
+                    <option  *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
+                </select>
+                <div *ngIf="registerButtonClicked && !cmpny_state_id" class="error-message">Please Select your State.</div>
+            </div>
+                             
+
+        
+    </div>
+
+    <div class="col-md-6">
+               
+        
+            <label>City</label>
+            <input type="text" [(ngModel)]="cmpny_city" required [ngModelOptions]="{standalone: true}" class="form-control" placeholder="enter city" 
+            [ngClass]="{'error-field': registerButtonClicked && !cmpny_city}" >
+            <div *ngIf="registerButtonClicked && !cmpny_city" class="error-message">Please Select your City.</div>
+
+       
+</div>
+<div class="col-md-6">
+               
+        
+    <label>pincode</label>
+    <input type="text" [(ngModel)]="cmpny_pincode" required [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter Company pincode"
+    [ngClass]="{'error-field': registerButtonClicked && !cmpny_pincode}" >
+    <div *ngIf="registerButtonClicked && !cmpny_pincode" class="error-message">Please enter your pincode</div>
+
+
+</div>
+<div class="col-md-6">
+               
+        
+    <label>Email</label>
+    <input type="text" [(ngModel)]="cmpny_mail" required [ngModelOptions]="{standalone: true}" class="form-control" placeholder="example@gmail.com"
+    [ngClass]="{'error-field': registerButtonClicked && !cmpny_mail}" >
+    <div *ngIf="registerButtonClicked && !cmpny_mail" class="error-message">Please enter your email.</div>
+
+
+</div>
+
+
+<div class="col-md-6">
+               
+        
+<label>Company number 1</label>
+<input type="text" [(ngModel)]="cmpny_nmbr_1" required [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter Contact number"
+[ngClass]="{'error-field': registerButtonClicked && !cmpny_nmbr_1}" >
+<div *ngIf="registerButtonClicked && !cmpny_nmbr_1" class="error-message">Please enter your contact.</div>
+
+
+</div>
+
+<div class="col-md-6">
+               
+        
+<label>Company number 2 (optional)</label>
+<input type="text" [(ngModel)]="cmpny_nmbr_2" required [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter Contact number " >
+
+
+</div>
+
+
+
+
+<!-- <div class="col-md-6">
+<label>Upload company logo</label>
+<input type="file" class="form-control" required (change)="onFileSelected($event)" accept="image/*" name="cmpny_logo">
+</div>     -->
+
+
+
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="selectOption">Select an option:</label>
+        <select class="form-control" id="selectOption" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedOption" (change)="onSelectChange()">
+          <option value="">Select</option>
+          <option value="gst">GST</option>
+          <option value="fax">Fax</option>
+        </select>
+      </div>
+</div>
+
+<div class="col-md-6" *ngIf="showFaxInput">
+               
+        
+<label>Fax</label>
+<input type="text" [(ngModel)]="cmpny_fax" [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter Fax No" >
+
+
+</div>
+
+
+<div class="col-md-6"  *ngIf="showGSTInput">
+               
+        
+    <label>GST</label>
+    <input type="text" [(ngModel)]="cmpny_gst" [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="enter GST No" >
+    
+    
+    </div>
+    
+
+
+    <!-- <div class="col-md-6">
+        <label for="emp_profile_pic">Employee Profile Picture:</label>
+        <input type="file" id="cmpny_logo " name="cmpny_logo" (change)="onFileSelected($event)" >
+
+        </div> -->
+
+
+ 
+    
+    <!-- 
+
+<div class="col-md-6">
+               
+    <label>Email</label>
+    <input type="text" class="form-control" placeholder="Enter Email address">
+
+</div>
+<div class="col-md-6">
+               
+<label>Pincode</label>
+<input type="text" class="form-control" placeholder="Enter Company Name">
+
+</div>
+<div class="col-md-6">
+               
+<label>Contact </label>
+<input type="text" class="form-control" placeholder="Enter Company Name">
+
+</div>
+<div class="col-md-6">
+               
+
+<label>Company Logo</label>
+<input type="file" class="form-control" placeholder="upload company logo">
+</div>
+
+<div class="col-md-6">
+               
+<label>Fax No</label>
+<input type="text" class="form-control" placeholder="Enter Company Fax No">
+
+</div>
+<div class="col-md-6">
+               
+<label>GST NO</label>
+<input type="text" class="form-control" placeholder="Enter Company GS no">
+
+</div>
+<div class="col-md-6">
+               
+<label>Tax No</label>
+<input type="text" class="form-control" placeholder="Enter Company Tax No">
+
+</div>
+<div class="col-md-6">
+               
+<label>Admin User ID</label>
+<input type="text" class="form-control" placeholder="Enter Admin User Id">
+
+</div> -->
+
+
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div>
+        <div class="col-md-2">
+            <button (click)="registerCompany()"  mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
+
+        </div>
+    </div>
+
+
+        </div>
+</div>
+<div mat-dialog-action>
+    
+</div>
+
+

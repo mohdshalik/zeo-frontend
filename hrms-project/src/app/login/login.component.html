@@ -1,0 +1,126 @@
+<!-- <div class="login-container">
+    <h2>Login</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" [(ngModel)]="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+   -->
+
+
+
+
+<!-- <h1>lerning</h1>
+<router-outlet></router-outlet> -->
+
+
+
+<!-- <h1 style="text-align: center;">Login</h1> -->
+
+<style>
+  body {
+    overflow: hidden !important;
+  }
+</style>
+
+
+<!-- <div class="buble-one"></div>
+  <div class="buble-two"></div> -->
+<div class="mt-5"></div>
+<div class="container" id="container">
+
+  <h3></h3>
+
+  <div class="form-container sign-in" *ngIf="showCurrentDiv">
+    <!--  -->
+
+    
+    <form (submit)="login()">
+      <h1>Sign In</h1>
+
+      <input type="text" id="email" class="form-control" [(ngModel)]="username" name="username" placeholder="enter user id" required 
+       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !username}">
+     
+      <div *ngIf="registerButtonClicked && !username" class="error-message">email or user ID is required.</div>
+
+
+
+    
+        <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" placeholder="enter password" required
+        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !password}">
+     
+        <div *ngIf="registerButtonClicked && !password" class="error-message">Password is required.</div>
+
+      <a href="#">Forget your Password?</a>
+      <button class="btn-log" type="submit" >Login</button>
+
+    </form >
+
+  </div>
+
+  <div class="form-container sign-in" *ngIf="!showCurrentDiv">
+
+    <form (submit)="registerUser()">
+      <h1 class="">Sign Up</h1>
+      <input [(ngModel)]="register.username" id="username" [ngModelOptions]="{standalone:true}" type="text" class="form-control"
+        placeholder="User Name" required [ngClass]="{'error-field': registerButtonClicked && !username}">
+        <div *ngIf="registerButtonClicked && !username" class="error-message">username is required.</div>
+
+
+      <input [(ngModel)]="register.first_name" [ngModelOptions]="{standalone:true}" type="text" class="form-control"
+        placeholder="First Name" required [ngClass]="{'error-field': registerButtonClicked && !first_name}">
+        <div *ngIf="registerButtonClicked && !first_name" class="error-message">first_name is required.</div>
+
+
+      <input [(ngModel)]="register.last_name" [ngModelOptions]="{standalone: true}" type="text" class="form-control"
+        placeholder="Last Name" required>
+
+      <input [(ngModel)]="register.email" [ngModelOptions]="{standalone: true}" type="email" class="form-control"
+        placeholder="Email" required [ngClass]="{'error-field': registerButtonClicked && !email}">
+        <div *ngIf="registerButtonClicked && !email" class="error-message">email is required.</div> 
+
+
+      <input [(ngModel)]="register.contact_number" [ngModelOptions]="{standalone: true}" type="email"
+        class="form-control" placeholder="Contact Number" required [ngClass]="{'error-field': registerButtonClicked && !contact_number}">
+        <div *ngIf="registerButtonClicked && !contact_number" class="error-message">contact_number is required.</div> 
+
+
+      <input [(ngModel)]="register.password" [ngModelOptions]="{standalone: true}" type="password" class="form-control"
+        placeholder="password" required [ngClass]="{'error-field': registerButtonClicked && !password}">
+        <div *ngIf="registerButtonClicked && !password" class="error-message">password is required.</div> 
+
+
+      <button class="btn-log" type="submit">Sign Up</button>
+    </form>
+
+
+
+
+
+  </div>
+  <div class="toggle-container">
+    <div class="toggle">
+      <div class="toggle-panel toggle-left">
+        <h1>Welcome Back!</h1>
+        <p>Enter your Personal details to use all of site features</p>
+        <button class="hidden" id="login">Sign In</button>
+      </div>
+      <div class="toggle-panel toggle-right">
+
+
+        <h1>Hello, Friend!</h1>
+        <p>Register with your Personal details to use all of site features</p>
+        <button  class="hidden btn-log" id="register" *ngIf="showButton" (click)="toggleDivs()"> {{ showCurrentDiv ? 'Sign Up' :
+          'Sign In' }}</button>
+      </div>
+    </div>
+  </div>
+
+</div>

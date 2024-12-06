@@ -1,0 +1,141 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>Create Location</h2><hr>
+
+        <form >
+            <div class="row">
+                <div class="col-md-6" >
+                   
+          <label>Location Name</label>
+         <input type="text"  class="form-control" required  [(ngModel)]="schema_name"  placeholder="Enter Catogary Name"
+          [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !schema_name}">
+         
+         <div *ngIf="registerButtonClicked && !schema_name" class="error-message">Company Name is required.</div>
+    </div>
+    
+    
+    <div class="col-md-6" >
+                   
+        <label>Name </label>
+       <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter Description "
+        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
+       
+       <div *ngIf="registerButtonClicked && !name" class="error-message">Name is required.</div>
+    </div>
+    
+    <div class="col-md-6">
+    
+    
+        <div class="custom-sel">
+            <label>Owner Name</label>
+            <select class="form-control" id="owner" required [(ngModel)]="owner"  [ngModelOptions]="{standalone: true}"  >
+                <option value="" >Select</option>
+                <option *ngFor="let user of users" [value]="user.id">{{ user.username }}</option>
+            </select>
+           
+        </div>
+              
+        
+        </div>
+
+        <div class="col-md-6">
+        <div class="custom-sel">
+            <label>Country</label>
+            <select class="form-control" id="country" required [(ngModel)]="country"  [ngModelOptions]="{standalone: true}"  >
+                <option value="" >Select</option>
+                <option *ngFor="let user of countries" [value]="user.id">{{ user.country_name }}</option>
+            </select>
+           
+        </div>
+        </div>
+
+        <div class="col-md-6">
+
+        <div class="custom-sel">
+            <label for="company_logo">Company Logo:</label>
+            <input
+              type="file"
+              class="form-control"
+              id="logo"
+              name="logo"
+              required
+              (change)="onFileSelected($event)"
+              [ngClass]="{'error-field': registerButtonClicked && !logo}"
+            />
+            <div *ngIf="registerButtonClicked && !logo" class="error-message">
+              No file was selected for the Company Logo.
+            </div>
+          </div>
+    
+           
+           
+        
+    </div>
+    
+    
+    
+    
+           
+             
+          
+            
+            
+       
+    
+    
+            </div>
+        </form>
+
+        
+    <div class="row">
+        <div class="col-md-10"></div>
+        <!-- <div class="col-md-2">
+            <button   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div> -->
+        <div class="col-md-2 col-12">
+                        <!-- <button type="button"   mat-raised-button color="primary" class="pull-right btn-full mt-4" style="background: #004976;" >Add</button> -->
+
+            <button type="button" (click)="registerCategory()"  mat-raised-button color="primary" class="pull-right btn-full mt-4" style="background: #004976;" >Add</button>
+
+        </div>
+    </div>
+
+
+  
+
+
+        </div>
+
+
+      
+        </div>
+
+
+        <table width="100%">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th> Company</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+                
+              <tr *ngFor="let schema of Schemas;let i = index">
+                <td>{{ i + 1 }}</td> 
+                <td>{{ schema.schema_name }}</td>
+           
+              </tr>
+          
+            </tbody>
+          </table>
+
+</div>
+</div>
+
+
+

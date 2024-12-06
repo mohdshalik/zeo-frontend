@@ -1,0 +1,147 @@
+
+<div class="container mt-5" *ngIf="hasViewPermission">
+    <div class="comapny_section   ">
+
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-7">
+                    <h1> Groups </h1>
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+                        <button type="button"  class="btn-Create btn btn-success " (click)="openPopus()" *ngIf="hasAddPermission" ><span class="header-btn-icon"><mat-icon>add_circle
+                        </mat-icon></span> Create</button>
+                        <span *ngIf="!hasAddPermission"></span>
+
+                        <button type="button" class="btn-Edit btn-info btn" (click)="EditShowButtons()"  *ngIf="hasEditPermission" >
+                            <span class="header-btn-icon">
+                             <mat-icon>draw
+                        </mat-icon></span> Edit</button>
+                        <span *ngIf="hasEditPermission"></span>
+                        <button type="button" class="btn-Delete btn btn-danger" (click)="toggleCheckboxes()" *ngIf="hasDeletePermission">
+                            <span class="header-btn-icon">
+                                <mat-icon> delete
+                           </mat-icon></span> {{ Delete ? 'Cancel' : 'Delete' }}</button>
+                           <span *ngIf="!hasDeletePermission"></span>
+                    </div>
+
+                </div>
+            </div>
+           
+           
+
+        </div>
+
+        <div class="row mt-1">
+            <div class="col-md-2">
+                
+                <button  class=" mt-3 btn-danger btn " style="width: 100%;" color="warn" *ngIf="Delete" (click)="toggleSelectAllEmployees()">Select All</button>
+
+            </div>
+            <div class="col-md-3">
+                <button class=" mt-3 btn-danger btn"  color="warn" *ngIf="Delete" (click)="deleteSelectedEmployees()">Delete Selected Employees</button>
+
+            </div>
+        </div>
+
+
+
+        <div class="row mt-4">
+
+            <div class="col-md-12">
+            
+
+                <table class="responsive-table">
+                    <!-- Responsive Table Header Section -->
+                    <thead class="responsive-table__head">
+                        <tr class="responsive-table__row">
+                            <!-- <th class="responsive-table__head__title responsive-table__head__title--name">Group Name -->
+                                <th>No</th>
+
+                            <th >Group Name
+                               
+                            </th>
+                            <th>Action</th>
+                          
+                        </tr>
+                    </thead>
+                    <!-- Responsive Table Body Section -->
+                    <tbody class="responsive-table__body">
+                        <tr class="responsive-table__row" *ngFor="let Rolegroup of Groups; let i = index" [ngClass]="{ 'selected-item': Rolegroup.selected }"  >
+
+                            <td>{{ i + 1 }}</td> 
+                            <td class="responsive-table__body__text responsive-table__body__text--name">
+                              
+                                {{ Rolegroup.name }}
+                            </td>
+                            <td class="responsive-table__body__text responsive-table__body__text--status">
+                               
+                                <button type="button" class="btn btn-Edit btn-info btn-list-edit" (click)="openEditPopuss(Rolegroup.id)"  *ngIf="showEditBtn">Edit</button>
+                                <mat-checkbox *ngIf="Delete" [(ngModel)]="Rolegroup.selected" (change)="onCheckboxChange(Rolegroup.id)"></mat-checkbox>
+
+                            </td>
+                          
+                        </tr>
+                   
+                    </tbody>
+                </table>
+              
+            </div>
+
+        </div>
+      
+
+        <!-- <div class="row">
+            <div class="col-md-6">
+
+                <label>Name</label>
+                <input type="text" class="form-control" required [(ngModel)]="name"
+                    placeholder="Enter Name " [ngModelOptions]="{standalone: true}"
+                    [ngClass]="{'error-field': registerButtonClicked && !name}">
+
+                <div *ngIf="registerButtonClicked && !name" class="error-message">name required
+                </div>
+            </div>
+            <div class="col-md-6">
+
+
+                <div class="custom-sel">
+                    <label>Select permissions</label>
+                    <select class="form-control" id="permissions" multiple name="permissions" required [(ngModel)]="permissions"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !permissions}" >
+                        <option value="" >Select</option>
+                        <option *ngFor="let permissions of companies" [value]="permissions.id">{{ permissions.name }}</option>
+                    </select>
+                    <div *ngIf="registerButtonClicked && !permissions" class="error-message">Please Select Your Company</div>
+                </div>
+                            
+            
+            </div>
+
+
+
+
+
+        </div> -->
+
+
+        <!-- <div class="row">
+            <div class="col-md-10"></div>
+
+            <div class="col-md-2">
+                <button (click)="registerGroupPermission()"  mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
+
+            </div>
+        </div> -->
+    
+        </div>
+
+    
+      
+    </div>
+
+
+    <div *ngIf="!hasViewPermission">
+        <!-- Message for users without permission -->
+        <p class="text-center " style="margin-top: 150px;" >You don't have permission to view this component.</p>
+      </div>

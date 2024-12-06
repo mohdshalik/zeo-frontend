@@ -1,0 +1,254 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>Assign Week Calendar</h2><hr>
+
+        <form >
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>Choose option</label><br>
+                    <mat-radio-group aria-label="Select an option" [(ngModel)]="related_to" [ngModelOptions]="{standalone: true}">
+                        <mat-radio-button  value="branch">branch</mat-radio-button>
+                        <mat-radio-button value="department"> department</mat-radio-button>
+                        <mat-radio-button value="category"> category</mat-radio-button>
+                        <mat-radio-button value="employee"> employee</mat-radio-button>
+
+
+                      </mat-radio-group>
+                </div>
+
+
+                <div class=" col-md-6">
+
+
+                    <style>
+                        .mat-mdc-form-field-infix{
+                            margin-top: -14px;
+                        }
+
+                        .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+                            background-color: wh;
+                        }
+                    </style>
+                </div>
+                
+                <div class="col-md-6" *ngIf="related_to === 'branch'">
+                    <label>Select Branches</label>
+                    <div class="custom-sel">
+                      <div class="form-control-wrapper">
+                        <!-- <mat-form-field>
+                          <mat-select class="form-control" placeholder="Select" [(ngModel)]="branch" [ngModelOptions]="{standalone: true}" multiple>
+                           <mat-option >Select All</mat-option>
+                            <mat-option *ngFor="let deparmentsec of branches" [value]="deparmentsec.id">
+                              {{ deparmentsec.branch_name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field> -->
+
+
+                        <mat-form-field>
+                            <!-- <mat-label>Favorite food</mat-label> -->
+                            <mat-select placeholder="Select" [(ngModel)]="branch" [ngModelOptions]="{standalone: true}" #select multiple>
+                              <div class="select-all">
+                                <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelection()">
+                                  Select All
+                                </mat-checkbox>
+                              </div>
+                              <mat-option *ngFor="let food of branches" [value]="food.id">
+                                {{ food.branch_name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          
+                          
+                      </div>
+                      <div *ngIf="registerButtonClicked && (!branch || branch.length === 0)" class="error-message">
+                        Please Select Your Branch
+                      </div>
+                    </div>
+
+              
+                    
+                  </div>
+                  
+                    
+                <div class="col-md-6" *ngIf="related_to === 'department'">
+                    <label>Department</label>
+                    <div class="custom-sel">
+                        <div class="form-control-wrapper">
+                          <mat-form-field>
+                            <mat-select  placeholder="Select" [(ngModel)]="department" [ngModelOptions]="{standalone: true}" #select  multiple>
+                              <div class="select-all">
+                                <mat-checkbox [(ngModel)]="allSelecteddept" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectiondept()">
+                                  Select All
+                                </mat-checkbox>
+                              </div>
+                              <mat-option *ngFor="let deparmentsec of Departments" [value]="deparmentsec.id">
+                                {{ deparmentsec.dept_name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div *ngIf="registerButtonClicked && (!department || department.length === 0)" class="error-message">
+                          Please Select Your department
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col-md-6" *ngIf="related_to === 'category'">
+                    <label>Category</label>
+                    <div class="custom-sel">
+                        <div class="form-control-wrapper">
+                          <mat-form-field>
+                            <mat-select  placeholder="Select" [(ngModel)]="category" [ngModelOptions]="{standalone: true}" #select multiple>
+                              <div class="select-all">
+                                <mat-checkbox [(ngModel)]="allSelectedcat" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectioncat()">
+                                  Select All
+                                </mat-checkbox>
+                              </div>
+                             
+                              <mat-option *ngFor="let deparmentsec of Categories" [value]="deparmentsec.id">
+                                {{ deparmentsec.ctgry_title }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div *ngIf="registerButtonClicked && (!category || category.length === 0)" class="error-message">
+                          Please Select Your category
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col-md-6" *ngIf="related_to === 'employee'">
+                  <label>Employee</label>
+                  <div class="custom-sel">
+                      <div class="form-control-wrapper">
+                        <mat-form-field>
+                          <mat-select  placeholder="Select" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}" #select multiple>
+                            <div class="select-all">
+                              <mat-checkbox [(ngModel)]="allSelectedEmp" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectionEmp()">
+                                Select All
+                              </mat-checkbox>
+                            </div>
+                           
+                            <mat-option *ngFor="let emp of Employee" [value]="emp.id">
+                              {{ emp.emp_first_name }}   {{ emp.emp_last_name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div *ngIf="registerButtonClicked && (!employee || employee.length === 0)" class="error-message">
+                        Please Select Your employee
+                      </div>
+                    </div>
+              </div>
+
+
+
+                <div class="col-md-6" >
+                    <div class="custom-sel">
+                        <label>Weekend Calendar</label>
+                        <select class="form-control" id="holiday_model" required [(ngModel)]="holiday_model"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !holiday_model}" >
+                            <option value="" >Select</option>
+                            <option *ngFor="let deparmentsec of WeekCalendar" [value]="deparmentsec.id">{{ deparmentsec.calendar_title     }}  ( {{ deparmentsec.year}} )</option>
+                        </select>
+                        <div *ngIf="registerButtonClicked && !holiday_model" class="error-message">Please Select calendar </div>
+                    </div>
+                </div>
+                
+
+
+                </div>
+
+        
+
+<div class="row">
+    <div class="col-md-10">
+
+    </div>
+
+    <div class="col-md-2">
+        <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerAssignCalendar()">Save</button>  
+     </div>
+</div>
+     
+    </form>
+
+
+    <div>
+        <!-- Calendar Dropdown List -->
+
+        <!-- <div class="row mt-4">
+            <div class="col-md-12">
+                <label>Weekend Calendar</label>
+                <div class="custom-sel">
+                    <select class="form-control" (change)="selectCalendar($event)">
+                        <option>select</option>
+                        <option *ngFor="let calendar of calendars" [value]="calendar.id">
+                          {{ calendar.calander_title }} ({{ calendar.year }})
+                        </option>
+                      </select>
+
+                </div>
+            </div>
+        </div>
+  
+          <div *ngIf="selectedCalendar">
+
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <p>Calendar Tittle</p>
+                    <h1>{{ selectedCalendar.calander_title }}</h1>
+
+                </div>
+
+                <div class="col-md-4">
+                    <p>Calendar Year</p>
+                    <h1>{{ selectedCalendar.year }}</h1>
+
+                </div>
+                <div class="col-md-4">
+                    <p>Calendar Description</p>
+                    <h1>{{ selectedCalendar.description }}</h1>
+
+                </div>
+            </div>
+         
+            <table class="mt-2">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Day</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let day of yearDays">
+                  <td>{{ day.date | date: 'yyyy-MM-dd' }}</td>
+                  <td>{{ day.dayName }}</td>
+                  <td>{{ day.status }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
+      </div>
+
+  
+
+
+        </div>
+
+        </div>
+
+
+  
+
+</div>
+</div>
+
+
+

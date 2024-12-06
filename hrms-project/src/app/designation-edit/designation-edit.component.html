@@ -1,0 +1,71 @@
+<div mat-dialog-content class="">
+
+    <div class="cpm-sec" *ngIf="designation" >
+
+        <h1>Catogary</h1><hr>
+
+        <form (submit)="updateDesignation()">
+        <div class="row" >
+
+            <div class="col-md-6" >
+               
+                <label>Description</label>
+               <input type="text"  class="form-control" required id="job_title" name="job_title"  [(ngModel)]="designation.job_title"  placeholder="Enter Description "
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !job_title}">
+               
+               <div *ngIf="registerButtonClicked && !job_title" class="error-message">Description is required.</div>
+            </div>
+
+            <div class="col-md-6" >
+               
+                <label>Designation Code</label>
+               <input type="text"  class="form-control" required  [(ngModel)]="designation.desgntn_code"  placeholder="Enter Code"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !desgntn_code}">
+               
+               <div *ngIf="registerButtonClicked && !desgntn_code" class="error-message">code is required.</div>
+            </div>
+            <!-- <div class="col-md-6"  >
+              
+      <label>Catogary Tittle</label>
+      <input type="text" [(ngModel)]="category.catogary_title" [ngModelOptions]="{standalone: true}" >
+
+</div> -->
+
+
+<div class="col-md-6" >
+               
+    <label>Description</label>
+   <input type="text"  class="form-control" required id="description" name="description"  [(ngModel)]="designation.description"  placeholder="Enter Description "
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !description}">
+   
+   <div *ngIf="registerButtonClicked && !description" class="error-message">Description is required.</div>
+</div>
+       
+         
+      
+        
+        
+   
+
+
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+
+        </div>
+        <div class="col-md-2">
+            <button   mat-raised-button color="primary" class="pull-right btn-full mt-4" type="submit" (click)="updateDesignation()" >Save</button>
+
+        </div>
+    </div>
+
+
+        </div>
+</div>
+<div mat-dialog-action>
+    
+</div>

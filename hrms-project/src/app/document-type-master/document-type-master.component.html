@@ -1,0 +1,91 @@
+<div class="container" *ngIf="hasViewPermission">
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <h2>Create Document Type</h2><hr>
+
+        <form >
+        <div class="row">
+            <div class="col-md-6" >
+               
+      <label>Type Name</label>
+     <input type="text"  class="form-control" required  [(ngModel)]="type_name"  placeholder="Enter type Name"
+      [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !type_name}">
+     
+     <div *ngIf="registerButtonClicked && !type_name" class="error-message">Type Name is required.</div>
+</div>
+
+
+
+<div class="col-md-6" >
+               
+    <label>Description</label>
+   <input type="text"  class="form-control" required  [(ngModel)]="description"  placeholder="Enter Description"
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !description}">
+   
+   <div *ngIf="registerButtonClicked && !description" class="error-message">Description is required.</div>
+</div>
+
+       
+
+
+         
+           
+      
+
+     
+        
+   
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+
+            </div>
+
+            <div class="col-md-2">
+                <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerDocumentType()">Save</button>  
+             </div>
+        </div>
+    </form>
+
+  
+
+
+        </div>
+
+        </div>
+
+
+
+        <table width="100%">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th> Document Type</th>
+                <th>Description</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+                
+              <tr *ngFor="let state of Documents;let i = index">
+                <td>{{ i + 1 }}</td> 
+                <td>{{ state.type_name }}</td>
+                <td>{{ state.description }}</td>
+           
+              </tr>
+          
+            </tbody>
+          </table>
+</div>
+</div>
+
+
+<div *ngIf="!hasViewPermission">
+    <!-- Message for users without permission -->
+    <p class="text-center " style="margin-top: 150px;" >You don't have permission to view this component.</p>
+  </div>

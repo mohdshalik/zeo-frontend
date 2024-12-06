@@ -1,0 +1,44 @@
+<div class="sub-sidebar clickOutside"  >
+   
+
+  <mat-sidenav-container >
+      <mat-sidenav class="sidnav_scrolling" #sidenav opened="true" mode="side">
+        <div class="wrapper">
+          <div class="sidebar">
+              <ul>
+                  <li routerLink="/main-sidebar/sub-sidebar/employee-master" *ngIf="hasViewPermissionEmp"><a><mat-icon>peoples</mat-icon> Employee Master </a></li>
+                  <li routerLink="/main-sidebar/sub-sidebar/department-master" *ngIf="hasViewPermissiondept"><a ><mat-icon>peoples</mat-icon> Department Master </a></li>
+                  <li routerLink="/main-sidebar/sub-sidebar/designation-master" *ngIf="hasViewPermissiondesg"><a ><mat-icon>peoples</mat-icon> Designation Master</a></li>
+                  <li routerLink="/main-sidebar/sub-sidebar/catogary-master" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Category Master</a></li>
+                  <li routerLink="/main-sidebar/sub-sidebar/general-request" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> General Request</a></li>
+                  <li routerLink="/main-sidebar/sub-sidebar/request-type" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Request Type</a></li>
+                  <li routerLink="/main-sidebar/sub-sidebar/approvals" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Approvals</a></li>
+                  <li routerLink="/main-sidebar/sub-sidebar/approval-level" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Approval Level</a></li>
+                  <li routerLink="/main-sidebar/sub-sidebar/attendace-marking" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Attendance Marking</a></li>
+  
+  
+              </ul> 
+              <!-- <div class="social_media">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div> -->
+          </div>
+    
+      </div>
+          
+  
+  
+  
+          
+      </mat-sidenav>
+  
+  
+      <router-outlet></router-outlet>
+  
+  <!-- <router-outlet></router-outlet> -->
+  
+  </mat-sidenav-container>
+  
+    </div>
+  

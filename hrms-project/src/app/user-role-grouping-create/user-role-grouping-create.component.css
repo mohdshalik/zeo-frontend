@@ -1,0 +1,128 @@
+/* Base styles */
+.mat-icon {
+    color: black;
+  }
+  
+  .tree_child {
+    margin-left: 30px !important;
+  }
+  
+  .minus-symbol::before {
+    content: "-";
+  }
+  
+  .tick-symbol::before {
+    content: "✓";
+  }
+  
+  .user_selection_sec {
+    cursor: pointer;
+  }
+  
+  .child_per {
+    margin-left: 5px;
+  }
+  
+  .selection_checkmark_sec {
+    width: 100%;
+    border: solid 1px grey;
+    margin-bottom: 10px;
+  }
+  
+  .main_check_sec {
+    margin-left: 13px;
+  }
+  
+  .all_selection_Sec h2 {
+    font-size: 5px;
+    margin-bottom: 0px;
+  }
+  
+  .all_selection_Sec .mat-icon .mdc-checkbox__background {
+    height: 8px !important;
+    width: 8px !important;
+  }
+  
+  .all_selection_Sec .mat-mdc-checkbox label {
+    font-size: 10px !important;
+  }
+  
+  .head_group_list {
+    font-weight: 500;
+    color: black;
+  }
+  
+  .mdc-label {
+    font-size: 14px;
+  }
+  
+  .mat-mdc-checkbox label {
+    font-size: 14px;
+  }
+  
+  .mdc-form-field label {
+    font-size: 14px !important;
+  }
+  
+  /* Media queries */
+  
+  /* For tablets and small desktops */
+  @media (min-width: 600px) and (max-width: 1200px) {
+    .row {
+      flex-direction: column;
+    }
+  
+    .col-md-3 , .col-md-4, .col-md-6, .col-md-8, .col-md-9 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  
+    .main_check_sec {
+      margin-left: 0;
+    }
+  
+    .selection_checkmark_sec {
+      padding: 10px;
+    }
+  }
+  
+  /* For mobile devices */
+  @media (max-width: 600px) {
+    .cpm-sec h1 {
+      font-size: 24px;
+    }
+  
+    .row {
+      flex-direction: column;
+    }
+  
+    .col-md-3, .col-md-4, .col-md-6, .col-md-8, .col-md-9 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  
+    .child_per {
+      margin-left: 0;
+    }
+  
+    .selection_checkmark_sec {
+      padding: 5px;
+      border-width: 1px;
+    }
+  
+    .head_group_list {
+      font-size: 18px;
+    }
+  
+    .all_selection_Sec h2 {
+      font-size: 12px;
+    }
+  
+    .all_selection_Sec .mat-mdc-checkbox label {
+      font-size: 12px !important;
+    }
+  
+    .mat-icon {
+      font-size: 18px;
+    }
+  }
