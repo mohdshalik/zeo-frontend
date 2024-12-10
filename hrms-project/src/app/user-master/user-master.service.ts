@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/ht
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Permissions } from '../catogary-master/permission';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class UserMasterService {
  
   // private baseUrl = 'http://127.0.0.1:8000/users/api';
 
-  private baseUrl = 'http://localhost:8000/users/api';
+  // private baseUrl = 'http://localhost:8000/users/api';
+
+  private baseUrl = environment.apiUrl; // Use the dynamic base URL from environment
 
 
   private user_permissions: Permissions[] = [];
@@ -35,6 +38,8 @@ export class UserMasterService {
     const url = `${this.baseUrl}/user/`;
     return this.http.get(url);
  
+
+    
   }
 
   getSChemaUsers(selectedSchema: string): Observable<any> {
@@ -275,19 +280,30 @@ return this.http.delete(apiUrl);
 
 
 
+  // registeruser(companyData: any): Observable<any> {
+  //   const url = `${this.baseUrl}/user/`; // Adjust the URL if needed
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  //   return this.http.post(url, companyData, { headers }).pipe(
+  //     catchError((error) => {
+  //       // Handle errors here (you can log, show a user-friendly message, etc.)
+  //       console.error('Error during company registration:', error);
+  //       return throwError(error);
+
+  //     })
+  //   );
+  //   }
   registeruser(companyData: any): Observable<any> {
-    const url = `${this.baseUrl}/user/`; // Adjust the URL if needed
+    const url = `${this.baseUrl}/user/`; // Combine base URL with endpoint
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(url, companyData, { headers }).pipe(
       catchError((error) => {
-        // Handle errors here (you can log, show a user-friendly message, etc.)
         console.error('Error during company registration:', error);
         return throwError(error);
-
       })
     );
-    }
+  }
 
     deleteUser(DeptId: number): Observable<any> {
 
