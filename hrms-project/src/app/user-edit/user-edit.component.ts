@@ -136,44 +136,6 @@ export class UserEditComponent {
   }
 
   
-  loadbranches(): void {
-    this.CompanyRegistrationService.getBranches().subscribe(
-      (result: any) => {
-        this.branches = result;
-      },
-      (error: any) => {
-        console.error('Error fetching countries:', error);
-      }
-    );
-  }
-
-
-
-  loadGrouping(): void {
-    this.UserMasterService.getGrouping().subscribe(
-      (result: any) => {
-        this.group = result;
-        console.log(' fetching Grouping:');
-
-      },
-      (error) => {
-        console.error('Error fetching Grouping:', error);
-      }
-    );
-  }
-
-  loadPermission(): void {
-    this.UserMasterService.getPermission().subscribe(
-      (result: any) => {
-        this.user_permission = result;
-        console.log(' fetching permissions:');
-
-      },
-      (error) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-  }
 
 
 ClosePopup(){

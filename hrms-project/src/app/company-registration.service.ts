@@ -33,7 +33,7 @@ export class CompanyRegistrationService {
 
 
     getCompany(): Observable<any> {
-      const url = `http://localhost:8000/users/api/company/`;
+      const url = `http://80.65.208.178:8000/users/api/company/`;
       return this.http.get(url);
 
       

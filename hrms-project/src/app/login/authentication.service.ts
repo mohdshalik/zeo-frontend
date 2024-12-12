@@ -23,7 +23,7 @@ interface Permission {
 })
 export class AuthenticationService {
 
-  private apiUrl = 'http://localhost:8000/users';  // Update with your Django backend URL
+  private apiUrl = 'http://80.65.208.178:8000/users';  // Update with your Django backend URL
   private tokenKey = 'auth_token';
 
   private userPermissionsSubject: BehaviorSubject<Permission[]> = new BehaviorSubject<Permission[]>([]);

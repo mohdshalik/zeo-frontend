@@ -173,22 +173,7 @@ if (this.userId !== null) {
         }
 
 
-        // Extract group permissions from user details
-        // const groupPermissions = this.userDetails.groups.map((group: { permissions: any; }) => group.permissions).flat();
-        // console.log('Group Permissions:', groupPermissions);
-
-        // // Check permissions for various actions
-        // this.hasViewPermission = this.checkGroupPermission('view_customuser', groupPermissions);
-        // console.log('Has View Permission:', this.hasViewPermission);
-
-        // this.hasAddPermission = this.checkGroupPermission('add_customuser', groupPermissions);
-        // console.log('Has Add Permission:', this.hasAddPermission);
-
-        // this.hasDeletePermission = this.checkGroupPermission('delete_customuser', groupPermissions);
-        // console.log('Has Delete Permission:', this.hasDeletePermission);
-
-        // this.hasEditPermission = this.checkGroupPermission('change_customuser', groupPermissions);
-        // console.log('Has Edit Permission:', this.hasEditPermission);
+       
       }
     },
     (error) => {

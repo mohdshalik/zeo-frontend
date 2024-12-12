@@ -170,45 +170,7 @@ export class UserCreationComponent {
   // }
 
 
-  loadGrouping(): void {
-    this.UserMasterService.getGrouping().subscribe(
-      (result: any) => {
-        this.group = result;
-        console.log(' fetching Grouping:');
 
-      },
-      (error) => {
-        console.error('Error fetching Grouping:', error);
-      }
-    );
-  }
-
-  loadPermission(): void {
-    this.UserMasterService.getPermission().subscribe(
-      (result: any) => {
-        this.user_permission = result;
-        console.log(' fetching permissions:');
-
-      },
-      (error) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-  }
-
-
-  loadDeparmentBranch(): void {
-    this.companyRegistrationService.getBranches().subscribe(
-      (result: any) => {
-        this.Branches = result;
-        console.log(' fetching Companies:');
-
-      },
-      (error) => {
-        console.error('Error fetching Companies:', error);
-      }
-    );
-  }
 
   ClosePopup(){
     this.ref.close('Closed using function')
