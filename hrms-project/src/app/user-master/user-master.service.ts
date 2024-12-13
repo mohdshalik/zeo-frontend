@@ -39,7 +39,7 @@ export class UserMasterService {
 
   getSChemaUsers(selectedSchema: string): Observable<any> {
     // Construct the API URL with the selected schema
-    const apiUrl = `http://${selectedSchema}.80.65.208.178:8000/users/tenant-users/`;
+    const apiUrl = `http://80.65.208.178:8000/users/tenant-users/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
     return this.http.get(apiUrl);

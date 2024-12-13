@@ -39,7 +39,7 @@ export class DesignationService {
   
 
   getDesignationsPermission(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/permissions/`;
+    const apiUrl = `http://${selectedSchema}.80.65.208.178:8000/organisation/api/permissions/`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);

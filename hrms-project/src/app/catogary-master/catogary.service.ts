@@ -11,7 +11,7 @@ export class CatogaryService {
     throw new Error('Method not implemented.');
   }
  
-  private baseUrl = 'http://127.0.0.1:8000/organisation/api';
+  private baseUrl = 'http://80.65.208.178:8000/organisation/api';
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +22,7 @@ export class CatogaryService {
   }
   
   getcatogarys(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Catogory/`;
+    const apiUrl = `http://${selectedSchema}.80.65.208.178:8000/organisation/api/Catogory/`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -106,7 +106,7 @@ export class CatogaryService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Catogory/${categoryId}/`;
+    const apiUrl = `http://${selectedSchema}.80.65.208.178:8000/organisation/api/Catogory/${categoryId}/`;
    
     return this.http.delete(apiUrl);
 }
