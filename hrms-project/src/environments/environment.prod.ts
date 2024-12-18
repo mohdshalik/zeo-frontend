@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://your-live-api-url.com/users/api', // Production API URL
-  };
+    apiBaseUrl: 'http://80.65.208.178:8000', // Live API URL
+};

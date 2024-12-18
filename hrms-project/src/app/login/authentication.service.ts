@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { EmployeeDetailsComponent } from '../employee-details/employee-details.component';
 import { EmployeeService } from '../employee-master/employee.service';
+import { environment } from '../../environments/environment';
 
 interface Permission {
   id: number;
@@ -23,7 +24,9 @@ interface Permission {
 })
 export class AuthenticationService {
 
-  private apiUrl = 'http://80.65.208.178:8000/users';  // Update with your Django backend URL
+  // private apiUrl = 'http://80.65.208.178:8000/users';  // Update with your Django backend URL
+  private apiUrl = `${environment.apiBaseUrl}/users`; // Use the correct `apiBaseUrl`
+
   private tokenKey = 'auth_token';
 
   private userPermissionsSubject: BehaviorSubject<Permission[]> = new BehaviorSubject<Permission[]>([]);
@@ -109,6 +112,7 @@ export class AuthenticationService {
   }
 
   getDesignationsPermission(selectedSchema: string): Observable<any> {
+
     const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/permissions/`;
   
     // Fetch employees from the API
