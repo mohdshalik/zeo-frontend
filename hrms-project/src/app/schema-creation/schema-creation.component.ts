@@ -76,9 +76,9 @@ export class SchemaCreationComponent {
     
     companyData.append('country', this.country);
 
-    if (this.logo) {
-      companyData.append('logo', this.logo, this.logo.name);
-    }
+    // if (this.logo) {
+    //   companyData.append('logo', this.logo, this.logo.name);
+    // }
   
     // Make API call
     this.userService.getSchema(companyData).subscribe(

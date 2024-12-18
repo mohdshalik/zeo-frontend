@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class CountryService {
 
-  private baseUrl = 'http://localhost:8000/core/api/';
+  private baseUrl = 'http://80.65.208.178:8000/core/api/';
 
   private apiUrl = 'http://one.localhost:8000/calendars/api/weekend/';
 

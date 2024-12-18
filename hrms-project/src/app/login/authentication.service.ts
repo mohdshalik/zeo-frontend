@@ -25,8 +25,9 @@ interface Permission {
 export class AuthenticationService {
 
   // private apiUrl = 'http://80.65.208.178:8000/users';  // Update with your Django backend URL
-  private apiUrl = `${environment.apiBaseUrl}/users`; // Use the correct `apiBaseUrl`
+  private apiUrl = `${environment.apiBaseUrl}/users`; // Use the correct `apiBaseUrl` for live and local
 
+  //testing
   private tokenKey = 'auth_token';
 
   private userPermissionsSubject: BehaviorSubject<Permission[]> = new BehaviorSubject<Permission[]>([]);
