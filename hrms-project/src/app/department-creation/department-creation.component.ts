@@ -8,6 +8,7 @@ import { CompanyRegistrationService } from '../company-registration.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DepartmentServiceService } from '../department-master/department-service.service';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -16,6 +17,9 @@ import { DepartmentServiceService } from '../department-master/department-servic
   styleUrl: './department-creation.component.css'
 })
 export class DepartmentCreationComponent {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
   selectedFiles! : File;
   selectedFile!: File;
   file:any ='';
@@ -25,6 +29,8 @@ export class DepartmentCreationComponent {
   Departments: any[] = [];
 
   dept_name: string = '';
+  dept_code: string = '';
+
   dept_description:string ='';
   branch_id:any ='';
   visibilitys:boolean=false;
@@ -146,7 +152,7 @@ export class DepartmentCreationComponent {
     // return this.http.put(apiUrl, formData);
 
   
-    this.http.post(`http://${selectedSchema}.localhost:8000/organisation/api/Dept-bulkupload/bulk_upload/`, formData)
+    this.http.post(`${this.apiUrl}/organisation/api/Dept-bulkupload/bulk_upload/?schema=${selectedSchema}`, formData)
       .subscribe((response) => {
         // Handle successful upload
         console.log('bulkupload upload successful', response);
@@ -167,6 +173,7 @@ export class DepartmentCreationComponent {
       });
   
   }
+  
    registerDepartment(): void {
     this.registerButtonClicked = true;
 
@@ -187,7 +194,7 @@ export class DepartmentCreationComponent {
       dept_name: this.dept_name,
       dept_description:this.dept_description,
       branch_id:this.branch_id,
-   
+      dept_code: this.dept_code,
 
       // Add other form field values to the companyData object
     };

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +12,25 @@ export class CatogaryService {
     throw new Error('Method not implemented.');
   }
  
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
   private baseUrl = 'http://80.65.208.178:8000/organisation/api';
 
   constructor(private http: HttpClient) {}
 
   getcatogary(): Observable<any> {
-    const url = `${this.baseUrl}/Catogory/`;
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+    const url = `${this.apiUrl}/organisation/api/Catogory/?schema=${selectedSchema}`;
     return this.http.get(url);
  
   }
   
   getcatogarys(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.80.65.208.178:8000/organisation/api/Catogory/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Catogory/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -30,10 +38,10 @@ export class CatogaryService {
   }
 
   getWeekendcalendar(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/weekend/`;
+    const Url = `${this.apiUrl}/calendars/api/weekend/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
   
   }
 
@@ -66,7 +74,7 @@ export class CatogaryService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Catogory/${categoryId}/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Catogory/${categoryId}/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -89,7 +97,7 @@ export class CatogaryService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Catogory/${categoryId}/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Catogory/${categoryId}/?schema=${selectedSchema}`;
    
     return this.http.put(apiUrl, categoryData);
   }
@@ -106,7 +114,7 @@ export class CatogaryService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.80.65.208.178:8000/organisation/api/Catogory/${categoryId}/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Catogory/${categoryId}/?schema=${selectedSchema}`;
    
     return this.http.delete(apiUrl);
 }
@@ -135,7 +143,7 @@ export class CatogaryService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Catogory/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Catogory/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(apiUrl, companyData, { headers }).pipe(

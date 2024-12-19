@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/ht
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -18,6 +19,9 @@ export class EmployeeService {
   }) {
     throw new Error('Method not implemented.');
   }
+
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
 
   private baseUrl = 'http://localhost:8000/employee/api';
@@ -44,7 +48,7 @@ export class EmployeeService {
   }
 
   getEmployee(): Observable<any> {
-    const url = `${this.baseUrl}/Employee/`;
+    const url = `${this.apiUrl}/employee/api/Employee/`;
     return this.http.get(url);
  
   }
@@ -55,19 +59,19 @@ export class EmployeeService {
 
   getEmployees(selectedSchema: string): Observable<any> {
     // Construct the API URL with the selected schema
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/`;
+    const Url = `${this.apiUrl}/employee/api/Employee/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
   }
   
   getemployees(selectedSchema: string): Observable<any> {
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/Employee/`;
+    const url = `${this.apiUrl}/employee/api/Employee/?schema=${selectedSchema}`;
     return this.http.get(url);
   }
 
   getemployeescusValue(selectedSchema: string): Observable<any> {
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-custom-field/`;
+    const url = `${this.apiUrl}/employee/api/emp-custom-field/?schema=${selectedSchema}`;
     return this.http.get(url);
   }
 
@@ -81,7 +85,7 @@ export class EmployeeService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/general-request/`;
+    const apiUrl = `${this.apiUrl}/employee/api/general-request/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -96,7 +100,7 @@ export class EmployeeService {
 
 
     getAllgeneralRequest(selectedSchema: string): Observable<any> {
-      const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/general-request/`;
+      const apiUrl = `${this.apiUrl}/employee/api/general-request/?schema=${selectedSchema}`;
     
       // Fetch employees from the API
       return this.http.get(apiUrl);
@@ -113,7 +117,7 @@ export class EmployeeService {
      
   
       
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/document-numbering/`;
+      const apiUrl = `${this.apiUrl}/organisation/api/document-numbering/?schema=${selectedSchema}`;
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
       return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -129,7 +133,7 @@ export class EmployeeService {
 
 
       getAllDocnumbers(selectedSchema: string): Observable<any> {
-        const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/document-numbering/`;
+        const apiUrl = `${this.apiUrl}/organisation/api/document-numbering/?schema=${selectedSchema}`;
       
         // Fetch employees from the API
         return this.http.get(apiUrl);
@@ -148,7 +152,7 @@ export class EmployeeService {
      
   
       
-      const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/request-type/`;
+      const apiUrl = `${this.apiUrl}/employee/api/request-type/?schema=${selectedSchema}`;
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
       return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -172,10 +176,10 @@ export class EmployeeService {
        
     
         
-        const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/assign-weekend/`;
+        const Url = `${this.apiUrl}/calendars/api/assign-weekend/?schema=${selectedSchema}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     
-        return this.http.post(apiUrl, companyData, { headers }).pipe(
+        return this.http.post(Url, companyData, { headers }).pipe(
           catchError((error) => {
             // Handle errors here (you can log, show a user-friendly message, etc.)
             console.error('Error during company registration:', error);
@@ -212,7 +216,7 @@ export class EmployeeService {
 
 
   getDesignationsPermission(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/permissions/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/permissions/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -249,7 +253,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-Documents/${departmentId}/`;
+    const apiUrl = `${this.apiUrl}/employee/api/emp-Documents/${departmentId}/?schema=${selectedSchema}`;
    
     return this.http.delete(apiUrl);
   }
@@ -259,7 +263,7 @@ export class EmployeeService {
     // const url = `${this.baseUrl}/notification/`;
     // return this.http.get(url);
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/notification/`;
+    const apiUrl = `${this.apiUrl}/employee/api/notification/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -291,9 +295,9 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/`;
+    const Url = `${this.apiUrl}/employee/api/Employee/${employeeId}/?schema=${selectedSchema}`;
    
-    return this.http.delete(apiUrl);
+    return this.http.delete(Url);
 }
 
 
@@ -337,7 +341,8 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/?schema=${selectedSchema}
+`;
    
     return this.http.get(apiUrl);
   }
@@ -375,7 +380,7 @@ export class EmployeeService {
     // const url = `${this.baseUrl}/emp-Documents/`;
 
     // return this.http.get(url);
-    const apiUrl = `http://${selectedSchema}.localhost:8000/core/api/Documents/`;
+    const apiUrl = `${this.apiUrl}/core/api/Documents/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -397,7 +402,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_family/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_family/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -444,7 +449,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_languageskill/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_languageskill/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -457,7 +462,7 @@ export class EmployeeService {
       return throwError('No schema selected.');
     }
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-language-skill/${skillId}/`; // Adjust the URL as needed
+    const apiUrl = `${this.apiUrl}/employee/api/emp-language-skill/${skillId}/?schema=${selectedSchema}`; // Adjust the URL as needed
     return this.http.delete(apiUrl);
   }
 
@@ -468,7 +473,7 @@ export class EmployeeService {
       return throwError('No schema selected.');
     }
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-program-skill/${skillId}/`; // Adjust the URL as needed
+    const apiUrl = `${this.apiUrl}/employee/api/emp-program-skill/${skillId}/?schema=${selectedSchema}`; // Adjust the URL as needed
     return this.http.delete(apiUrl);
   }
 
@@ -479,7 +484,7 @@ export class EmployeeService {
       return throwError('No schema selected.');
     }
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-market-skill/${skillId}/`; // Adjust the URL as needed
+    const apiUrl = `${this.apiUrl}/employee/api/emp-market-skill/${skillId}/?schema=${selectedSchema}`; // Adjust the URL as needed
     return this.http.delete(apiUrl);
   }
 
@@ -495,7 +500,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_languageskill/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_languageskill/?schema=${selectedSchema}`;
    
     return this.http.delete(apiUrl);
   }
@@ -510,7 +515,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_programlangskill/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_programlangskill/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -526,7 +531,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_market_skills/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_market_skills/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -534,7 +539,7 @@ export class EmployeeService {
 
 
   getLangaugeSkill(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/language_skill/`;
+    const apiUrl = `${this.apiUrl}/employee/api/language_skill/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -543,7 +548,7 @@ export class EmployeeService {
   }
 
   getPrgmLangaugeSkill(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/programming-skill/`;
+    const apiUrl = `${this.apiUrl}/employee/api/programming-skill/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -553,7 +558,7 @@ export class EmployeeService {
 
 
   getMarLangaugeSkill(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/marketing-skill/`;
+    const apiUrl = `${this.apiUrl}/employee/api/marketing-skill/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -573,7 +578,7 @@ export class EmployeeService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-language-skill/`;
+    const apiUrl = `${this.apiUrl}/employee/api/emp-language-skill/?schema=${selectedSchema}`;
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -598,7 +603,7 @@ export class EmployeeService {
      
   
       
-      const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-program-skill/`;
+      const apiUrl = `${this.apiUrl}/employee/api/emp-program-skill/?schema=${selectedSchema}`;
   
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
@@ -623,7 +628,7 @@ export class EmployeeService {
        
     
         
-        const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-market-skill/`;
+        const apiUrl = `${this.apiUrl}/employee/api/emp-market-skill/?schema=${selectedSchema}`;
     
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     
@@ -653,7 +658,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_documents/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_documents/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -675,7 +680,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_qualification/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_qualification/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -692,7 +697,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_job_history/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_job_history/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -708,14 +713,19 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_leave/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_leave/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
 
 
   getProfilePicture(employeeId: number): Observable<Blob> {
-    const url = `${this.baseUrl}/Employee/${employeeId}/profile-picture/`;
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+    const url = `${this.apiUrl}/employee/api/Employee/${employeeId}/profile-picture/?schema=${selectedSchema}`;
     return this.http.get(url, { responseType: 'blob' });
   }
 
@@ -823,7 +833,7 @@ export class EmployeeService {
         return throwError('No schema selected.'); // Return an error observable if no schema is selected
       }
      
-      const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/`;
+      const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/?schema=${selectedSchema}`;
      
       return this.http.get(apiUrl);
       
@@ -858,7 +868,7 @@ export class EmployeeService {
      
 
       
-      const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/`;
+      const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/?schema=${selectedSchema}`;
      
       return this.http.put(apiUrl, empData);
     }
@@ -909,7 +919,8 @@ export class EmployeeService {
             return throwError('No schema selected.');
           }
       
-          const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_family/`;
+          const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_family/?schema=${selectedSchema}
+`;
           const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       
           return this.http.post(apiUrl, familyData, { headers }).pipe(
@@ -954,7 +965,7 @@ export class EmployeeService {
           return throwError('No schema selected.');
         }
     
-        const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_qualification/`;
+        const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_qualification/?schema=${selectedSchema}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     
         return this.http.post(apiUrl, familyData, { headers }).pipe(
@@ -996,7 +1007,7 @@ export class EmployeeService {
             return throwError('No schema selected.');
           }
       
-          const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_job_history/`;
+          const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_job_history/?schema=${selectedSchema}`;
           const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       
           return this.http.post(apiUrl, familyData, { headers }).pipe(
@@ -1041,7 +1052,7 @@ export class EmployeeService {
        
     
         
-        const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-leave-request/`;
+        const apiUrl = `${this.apiUrl}/employee/api/emp-leave-request/?schema=${selectedSchema}`;
           const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       
           return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -1062,7 +1073,7 @@ export class EmployeeService {
               return throwError('No schema selected.');
             }
         
-            const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/${employeeId}/emp_documents/`;
+            const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_documents/?schema=${selectedSchema}`;
             return this.http.post(apiUrl, formData).pipe(
               catchError((error) => {
                 console.error('Error during document upload:', error);
@@ -1113,7 +1124,7 @@ export class EmployeeService {
       return throwError('No schema selected.');
     }
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-custom-field/`;
+    const apiUrl = `${this.apiUrl}/employee/api/emp-custom-field/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(apiUrl, familyData, { headers }).pipe(
@@ -1131,7 +1142,7 @@ export class EmployeeService {
       return throwError('No schema selected.');
     }
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-custom-field-value/`;
+    const apiUrl = `${this.apiUrl}/employee/api/emp-custom-field-value/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(apiUrl, familyData, { headers }).pipe(
@@ -1164,10 +1175,10 @@ export class EmployeeService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-custom-field-value/`;
+    const Url = `${this.apiUrl}/employee/api/emp-custom-field-value/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
-    return this.http.post(apiUrl, fieldValues, { headers }).pipe(
+    return this.http.post(Url, fieldValues, { headers }).pipe(
       catchError((error) => {
         console.error('Error submitting custom field values:', error);
         return throwError(error);
@@ -1182,7 +1193,7 @@ export class EmployeeService {
     // const url = `${this.baseUrl}/Branch/`;
     // return this.http.get(url);
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-custom-field/`;
+    const apiUrl = `${this.apiUrl}/employee/api/emp-custom-field/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -1210,7 +1221,7 @@ export class EmployeeService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/request-approvals-levels/`;
+    const apiUrl = `${this.apiUrl}/employee/api/request-approvals-levels/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -1260,7 +1271,7 @@ export class EmployeeService {
        
     
         
-        const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/attendance/`;
+        const apiUrl = `${this.apiUrl}/calendars/api/attendance/?schema=${selectedSchema}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     
         return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -1275,17 +1286,17 @@ export class EmployeeService {
 
 
     getApprovalslist(selectedSchema: string, userId: number): Observable<any> {
-      const apiUrl = `http://${selectedSchema}.localhost:8000/users/api/user/${userId}/approvals/`;
+      const apiUrl = `${this.apiUrl}/users/api/user/${userId}/approvals/?schema=${selectedSchema}`;
   
       // Fetch approvals for the user from the API
       return this.http.get(apiUrl);
   }
 
   getSChemadatas(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/schema-data/`;
+    const url = `${this.apiUrl}/organisation/api/schema-data/?schema=${selectedSchema}`;
 
     // Fetch approvals for the user from the API
-    return this.http.get(apiUrl);
+    return this.http.get(url);
 }
   getApprovalDetails(apiUrl: string): Observable<any> {
     return this.http.get(apiUrl);

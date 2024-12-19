@@ -66,9 +66,9 @@ export class StateMasterComponent {
   ngOnInit(): void {
     this.loadDeparmentBranch();
 
-    this.loadCompanies();
+    // this.loadCompanies();
     
-
+this.loadstates();
    
   }
 
@@ -91,25 +91,44 @@ export class StateMasterComponent {
     }
   }
 
-
-
-  loadCompanies(): void { 
+  
+  loadstates(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
     console.log('schemastore',selectedSchema )
     // Check if selectedSchema is available
     if (selectedSchema) {
-    this.countryService.getAllStatesList(selectedSchema).subscribe(
+  
+    this.countryService.getstatescreated(selectedSchema).subscribe(
       (result: any) => {
-        console.log(result); // Log the API response
-        this.States = result; // Assuming the data is directly in the result without a 'data' property
+        this.States = result;
       },
-      (error) => {
-        console.error('Error fetching states:', error);
+      (error: any) => {
+        console.error('Error fetching countries:', error);
       }
     );
     }
   }
+
+
+
+  // loadCompanies(): void { 
+  //   const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+  //   console.log('schemastore',selectedSchema )
+  //   // Check if selectedSchema is available
+  //   if (selectedSchema) {
+  //   this.countryService.getAllStatesList(selectedSchema).subscribe(
+  //     (result: any) => {
+  //       console.log(result); // Log the API response
+  //       this.States = result; // Assuming the data is directly in the result without a 'data' property
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching states:', error);
+  //     }
+  //   );
+  //   }
+  // }
 
 
 }

@@ -238,57 +238,54 @@
 
     <div>
         <!-- Calendar Dropdown List -->
-
         <div class="row mt-4">
-            <div class="col-md-6">
-                <label>Weekend Calendar</label>
-                <div class="custom-sel">
-                    <select class="form-control" (change)="selectCalendar($event)">
-                        <option>select</option>
-                        <option *ngFor="let calendar of calendars" [value]="calendar.id">
-                          {{ calendar.description }} ({{ calendar.year }})
-                        </option>
-                      </select>
-
-                </div>
+          <div class="col-md-6">
+            <label>Weekend Calendar</label>
+            <div class="custom-sel">
+              <select class="form-control" (change)="selectCalendar($event)">
+                <option>select</option>
+                <option *ngFor="let calendar of calendars" [value]="calendar.id">
+                  {{ calendar.description }} ({{ calendar.year }})
+                </option>
+              </select>
             </div>
+          </div>
         </div>
-
+      
         <div class="calendar_view_sec" *ngIf="selectedCalendar">
-            <div class="row mt-5">
-                <div class="col-md-4">
-                    <h4>Calendar Description</h4>
-                    <h5>{{ selectedCalendar.description }} </h5>
-                </div>
-                <div class="col-md-4">
-                    <h4>Calendar Year</h4>
-                    <h5>{{ selectedCalendar.year }} </h5>
-                </div>
-                <div class="col-md-4">
-                    <h4>Calendar Code</h4>
-                    <h5>{{ selectedCalendar.calendar_code }} </h5>
-                </div>
+          <div class="row mt-5">
+            <div class="col-md-4">
+              <h4>Calendar Description</h4>
+              <h5>{{ selectedCalendar.description }} </h5>
             </div>
-           
-
-           
-           
-            <table class="table mt-4">
+            <div class="col-md-4">
+              <h4>Calendar Year</h4>
+              <h5>{{ selectedCalendar.year }} </h5>
+            </div>
+            <div class="col-md-4">
+              <h4>Calendar Code</h4>
+              <h5>{{ selectedCalendar.calendar_code }} </h5>
+            </div>
+          </div>
+      
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let month of getMonthKeys()">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ month }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <table class="table mt-4">
                 <thead>
                   <tr>
-                    <th>Month</th>
-                    <th><span>Date <mat-icon class="pull-right mt-1" (click)="toggleSearchDisplay()">search</mat-icon> </span><br>
-                        <input type="text" *ngIf="isSearchVisible" placeholder="Search by Date" [(ngModel)]="searchQuery" class="search-input" />
-
-                    </th>
+                    <th>Date</th>
                     <th>Day</th>
                     <th>Day Type</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let detail of filteredDetails()">
-                    <td>{{ getMonthName(detail.month_of_year) }}</td>
+                  <tr *ngFor="let detail of groupDetailsByMonth()[month]">
                     <td>{{ formatDate(detail.date) }}</td>
                     <td>{{ getDayName(detail.date) }}</td>
                     <td class="leave_type_clm" (click)="openEditModal(detail)">{{ detail.day_type }}</td>
@@ -302,93 +299,38 @@
                   </tr>
                 </tbody>
               </table>
-              
-              
+            </mat-expansion-panel>
+          </mat-accordion>
         </div>
-
+      
         <!-- Modal Popup -->
-<div *ngIf="isEditModalOpen" class="modal">
-    <div class="modal-content">
-        <div class="row">
-            <div class="col-md-10">
-                <h2>Edit Day Type</h2><hr>
-            </div>
-            <div class="col-md-2">
+        <div *ngIf="isEditModalOpen" class="modal">
+          <div class="modal-content">
+            <div class="row">
+              <div class="col-md-10">
+                <h2>Edit Day Type</h2>
+                <hr>
+              </div>
+              <div class="col-md-2">
                 <span class="close pull-right" (click)="closeEditModal()">&times;</span>
-
+              </div>
             </div>
-        </div>
-       
-        <form (submit)="updateDate()">
-            <label for="dayType">Day Type</label>
-            <div class="custom-sel input-group"  >
+      
+            <form (submit)="updateDate()">
+              <label for="dayType">Day Type</label>
+              <div class="custom-sel input-group">
                 <select class="form-control" id="dayType" [(ngModel)]="editDateDetails.day_type" name="dayType">
-                    <option value="leave">leave</option>
-                    <option value="work">work</option>
-                    <option value="halfday">halfday</option>
+                  <option value="leave">leave</option>
+                  <option value="work">work</option>
+                  <option value="halfday">halfday</option>
                 </select>
                 <button type="submit" class="update-btn btn btn-info">Update</button>
-            </div>
-            <!-- <input type="text" id="dayType" [(ngModel)]="editDateDetails.day_type" name="dayType"> -->
-           
-        </form>
-    </div>
-</div>
-  
-          <!-- <div *ngIf="selectedCalendar">
-
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <p>Calendar Tittle</p>
-                    <h1>{{ selectedCalendar.calander_title }}</h1>
-
-                </div>
-
-                <div class="col-md-4">
-                    <p>Calendar Year</p>
-                    <h1>{{ selectedCalendar.year }}</h1>
-
-                </div>
-                <div class="col-md-4">
-                    <p>Calendar Description</p>
-                    <h1>{{ selectedCalendar.description }}</h1>
-
-                </div>
-            </div>
-         
-            <div class="mt-4">
-                <mat-accordion >
-                  <mat-expansion-panel *ngFor="let month of months">
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        {{ month.name }}
-                      </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <table class="mt-2">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Day</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let day of month.days">
-                          <td>{{ day.date | date: 'yyyy-MM-dd' }}</td>
-                          <td>{{ day.dayName }}</td>
-                          <td>{{ day.status }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-expansion-panel>
-                </mat-accordion>
               </div>
-              
-          </div> -->
-      
-      
+            </form>
+          </div>
         </div>
-
+      </div>
+      
   
 
 
@@ -402,5 +344,5 @@
 </div>
 </div>
 
-
+    
 

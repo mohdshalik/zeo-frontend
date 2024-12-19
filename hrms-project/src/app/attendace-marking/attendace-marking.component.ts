@@ -68,7 +68,7 @@ ngOnInit(): void {
 
     this.employeeService.registerEmployeeAttendence(companyData).subscribe(
       (response) => {
-        console.log('Registration successful', response);
+        console.log('Attendance Marking successful', response);
       
             alert('Registration successful ');
             window.location.reload();

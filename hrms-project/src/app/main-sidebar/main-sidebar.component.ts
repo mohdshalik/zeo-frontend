@@ -162,43 +162,6 @@ export class MainSidebarComponent {
 
 
   
-
-  // loadExpiredDocuments(): void {
-  //   const selectedSchema = this.authService.getSelectedSchema();
-  
-  //   if (selectedSchema) {
-  //     this.EmployeeService.getAllCompanies().subscribe(
-  //       (companies: any[]) => {
-  //         this.selectedCompany = companies.find(company => company.schema_name === selectedSchema);
-  
-  //         if (this.selectedCompany) {
-  //           console.log('Selected Schema Details:', this.selectedCompany);
-  
-  //           // Fetch expired documents for the selected schema
-  //           this.EmployeeService.getExpiredDocuments(selectedSchema).subscribe(
-  //             (result: any) => {
-  //               this.expiredDocuments = result;
-  //               this.expiredDocumentsCount = this.expiredDocuments.length;
-  //               console.log('Fetching expired documents:', this.expiredDocuments);
-  //               console.log('Fetching expired documents count:', this.expiredDocumentsCount);
-  //             },
-  //             (error) => {
-  //               console.error('Error fetching expired documents:', error);
-  //             }
-  //           );
-  //         } else {
-  //           console.warn('Selected schema not found in company list.');
-  //         }
-  //       },
-  //       (error) => {
-  //         console.error('Error fetching company schemas:', error);
-  //       }
-  //     );
-  //   } else {
-  //     console.warn('No selected schema found.');
-  //   }
-  // }
-
   redirectToExpiredDocuments(): void {
     this.router.navigate(['/main-sidebar/settings/document-expired']);
     this.expiredDocumentsCount = 0;

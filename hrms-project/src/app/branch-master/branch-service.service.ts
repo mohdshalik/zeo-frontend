@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BranchServiceService {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
 
   private baseUrl = 'http://127.0.0.1:8000/organisation/api';
 
@@ -30,9 +34,9 @@ export class BranchServiceService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Branch/${employeeId}/`;
+    const Url = `${this.apiUrl}/organisation/api/Branch/${employeeId}/?schema=${selectedSchema}`;
    
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
     
   }
 
@@ -54,7 +58,13 @@ export class BranchServiceService {
   }
   
   updateBranch(employeeId: number, empData: any): Observable<any> {
-    const url = `${this.baseUrl}/Branch/${employeeId}/`;
+    
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+    const url = `${this.apiUrl}/organisation/api/Branch/${employeeId}/?schema=${selectedSchema}`;
     return this.http.put(url, empData);
     
   }

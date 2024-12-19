@@ -246,7 +246,7 @@ export class EmployeeEditComponent {
    
     
     // Append other employee details
-    formData.append('emp_code', this.Emp.emp_first_name);
+    formData.append('emp_code', this.Emp.emp_code);
 
     formData.append('emp_first_name', this.Emp.emp_first_name);
     formData.append('emp_last_name', this.Emp.emp_last_name);

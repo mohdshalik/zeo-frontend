@@ -171,9 +171,9 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
     localStorage.setItem('empCodeFieldName', this.empCodeFieldName);
     localStorage.setItem('firstNameFieldName', this.firstNameFieldName);
     localStorage.setItem('lastNameFieldName', this.lastNameFieldName);
-    localStorage.setItem('emailFieldName', this.lastNameFieldName);
+    localStorage.setItem('emailFieldName', this.emailFieldName);
     localStorage.setItem('dobFieldName', this.dobFieldName);
-    localStorage.setItem('cmpnoFieldName', this.dobFieldName);
+    localStorage.setItem('cmpnoFieldName', this.cmpnoFieldName);
 
     localStorage.setItem('pernoFieldName', this.pernoFieldName);
     localStorage.setItem('peraddressFieldName', this.peraddressFieldName);

@@ -28,7 +28,7 @@
 <div class="col-md-6" >
                
     <label>Description</label>
-   <input type="text"  class="form-control" required id="dept_description" name="dept_description"  [(ngModel)]="department.description"  placeholder="Enter Description "
+   <input type="text"  class="form-control" required id="dept_description" name="dept_description"  [(ngModel)]="department.dept_description"  placeholder="Enter Description "
     [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !dept_description}">
    
    <div *ngIf="registerButtonClicked && !dept_description" class="error-message">Description is required.</div>

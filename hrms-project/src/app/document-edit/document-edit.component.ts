@@ -11,6 +11,7 @@ import { DepartmentServiceService } from '../department-master/department-servic
 import { EmployeeFamilyComponent } from '../employee-family/employee-family.component';
 import { EmployeeService } from '../employee-master/employee.service';
 import { CountryService } from '../country.service';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -19,6 +20,8 @@ import { CountryService } from '../country.service';
   styleUrl: './document-edit.component.css'
 })
 export class DocumentEditComponent {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
 
   Departments: any[] = [];
@@ -96,7 +99,7 @@ this.route.params.subscribe(params => {
       return;
     }
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-Documents/${this.departmentId}`;
+    const apiUrl = `${this.apiUrl}/employee/api/emp-Documents/${this.departmentId}/?schema=${selectedSchema}`;
     this.http.get(apiUrl).subscribe(
       (data: any) => {
         this.documentData = data;

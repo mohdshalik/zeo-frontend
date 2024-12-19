@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CountryService } from '../country.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-weelcalendar',
@@ -9,6 +10,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './weelcalendar.component.css'
 })
 export class WeelcalendarComponent {
+
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
 
   registerButtonClicked = false;
@@ -49,11 +53,10 @@ export class WeelcalendarComponent {
 
 
   ngOnInit(): void {
-    // this.countryService.getWeekendCalendars().subscribe(data => {
-    //   this.calendars = data;
-    // });
-
-    this.loadWeekendCalendar();
+    
+    this.countryService.getWeekendCalendars().subscribe(data => {
+      this.calendars = data;
+    });
   }
 
   // selectCalendar(event: Event): void {
@@ -69,37 +72,36 @@ export class WeelcalendarComponent {
     this.selectedCalendar = this.calendars.find(calendar => calendar.id == selectedId);
   }
 
-
-  // load Weekend calendar
-  loadWeekendCalendar(): void {
-    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-       
-  this.countryService.getWeekendCalendarList(selectedSchema).subscribe(
-    (result: any) => {
-        this.calendars = result
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
-  }
-
   filteredDetails(): any[] {
     if (!this.searchQuery) {
       return this.selectedCalendar.details;
     }
   
     const query = this.searchQuery.toLowerCase();
-    return this.selectedCalendar.details.filter((detail: { date: string; }) => {
+    return this.selectedCalendar.details.filter((detail: { date: string }) => {
       const formattedDate = this.formatDate(detail.date).toLowerCase();
       return formattedDate.includes(query);
     });
   }
+
+  groupDetailsByMonth(): any {
+    if (!this.selectedCalendar) return {};
+
+    return this.selectedCalendar.details.reduce((acc: any, detail: any) => {
+      const month = this.getMonthName(detail.month_of_year);
+      if (!acc[month]) {
+        acc[month] = [];
+      }
+      acc[month].push(detail);
+      return acc;
+    }, {});
+  }
+
+  getMonthKeys(): string[] {
+    const groupedDetails = this.groupDetailsByMonth();
+    return Object.keys(groupedDetails);
+  }
+
   getMonthName(monthIndex: string): string {
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
@@ -109,7 +111,7 @@ if (selectedSchema) {
     const index = parseInt(monthIndex, 10) - 1;
     return monthNames[index] || "Unknown";
   }
-  
+
   formatDate(dateString: string): string {
     const options: Intl.DateTimeFormatOptions = { 
       year: 'numeric', 
@@ -119,14 +121,12 @@ if (selectedSchema) {
     const date = new Date(dateString + 'T00:00:00');
     return date.toLocaleDateString('en-US', options);
   }
-  
+
   getDayName(dateString: string): string {
     const options: Intl.DateTimeFormatOptions = { weekday: 'long' };
     const date = new Date(dateString + 'T00:00:00');
     return date.toLocaleDateString('en-US', options);
   }
-
-
   toggleSearchDisplay(): void {
     this.isSearchVisible = !this.isSearchVisible;  // Add this method
   }
@@ -204,7 +204,7 @@ if (selectedSchema) {
       console.error('No schema selected.');
       // return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
-    this.http.get<any>(`http://${selectedSchema}.localhost:8000/calendars/api/assign-days/${detail.id}/`)
+    this.http.get<any>(`${this.apiUrl}/calendars/api/assign-days/${detail.id}/?schema=${selectedSchema}`)
       .subscribe(data => {
         this.editDateDetails = data;
       });
@@ -224,7 +224,7 @@ if (selectedSchema) {
       // return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    this.http.put(`http://${selectedSchema}.localhost:8000/calendars/api/assign-days/${this.editDateDetails.id}/`, this.editDateDetails)
+    this.http.put(`${this.apiUrl}/calendars/api/assign-days/${this.editDateDetails.id}/?schema=${selectedSchema}`, this.editDateDetails)
       .subscribe(() => {
         // Update the local data to reflect the changes
         const updatedDetail = this.selectedCalendar.details.find((detail: any) => detail.id === this.editDateDetails.id);

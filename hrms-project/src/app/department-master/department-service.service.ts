@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import { catchError } from 'rxjs/operators';
 export class DepartmentServiceService {
 
 
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
 
   private baseUrl = 'http://127.0.0.1:8000/organisation/api';
@@ -22,7 +25,7 @@ export class DepartmentServiceService {
   }
 
   getDepartments(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Department/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Department/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -50,23 +53,23 @@ export class DepartmentServiceService {
   }
 
     getDeptBranchList(selectedSchema: string): Observable<any> {
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Branch/`;
+      const Url = `${this.apiUrl}/organisation/api/Branch/?schema=${selectedSchema}`;
     
       // Fetch employees from the API
-      return this.http.get(apiUrl);
+      return this.http.get(Url);
 
       
     }
 
     getBranchPolicies(branchId: string,selectedSchema: string): Observable<any> {
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Branch/${branchId}/companypolicies/`;
+      const apiUrl = `${this.apiUrl}/organisation/api/Branch/${branchId}/companypolicies/?schema=${selectedSchema}`;
       return this.http.get(apiUrl);
     }
 
   
 
   getReqType(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/request-type/`;
+    const apiUrl = `${this.apiUrl}/employee/api/request-type/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -75,7 +78,7 @@ export class DepartmentServiceService {
   }
 
   getUserforPermission(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/users/tenant-users/`;
+    const apiUrl = `${this.apiUrl}/users/tenant-users/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -101,9 +104,9 @@ export class DepartmentServiceService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Department/${departmentId}/`;
+    const Url = `${this.apiUrl}/organisation/api/Department/${departmentId}/?schema=${selectedSchema}`;
    
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
 
   }
 
@@ -126,7 +129,7 @@ export class DepartmentServiceService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Department/${departmentId}/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Department/${departmentId}/?schema=${selectedSchema}`;
    
     return this.http.put(apiUrl, categoryData);
   }
@@ -148,7 +151,7 @@ export class DepartmentServiceService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Department/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Department/?schema=${selectedSchema}`;
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -201,7 +204,7 @@ export class DepartmentServiceService {
         return throwError('No schema selected.'); // Return an error observable if no schema is selected
       }
      
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Department/${DeptId}/`;
+      const apiUrl = `${this.apiUrl}/organisation/api/Department/${DeptId}/?schema=${selectedSchema}`;
      
       return this.http.delete(apiUrl);
   }

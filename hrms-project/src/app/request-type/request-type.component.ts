@@ -3,6 +3,7 @@ import { Component, AfterViewInit, ElementRef } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { EmployeeService } from '../employee-master/employee.service';
 import { UserMasterService } from '../user-master/user-master.service';
+import { SessionService } from '../login/session.service';
 
 declare var $: any;
 
@@ -69,6 +70,12 @@ export class RequestTypeComponent implements  AfterViewInit {
 
 
 
+  userId: number | null | undefined;
+  userDetails: any;
+  userDetailss: any[] = [];
+  username: any;
+
+  schemas: string[] = []; // Array to store schema names
 
 
 
@@ -81,7 +88,9 @@ export class RequestTypeComponent implements  AfterViewInit {
     private authService: AuthenticationService,
     private employeeService: EmployeeService,
     private userService: UserMasterService,
-    private el: ElementRef
+    private el: ElementRef,
+    private sessionService: SessionService,
+
     
 
 
@@ -92,7 +101,33 @@ ngOnInit(): void {
   this.loadUsers();
 
 
+  this.userId = this.sessionService.getUserId();
   
+  if (this.userId !== null) {
+    this.authService.getUserData(this.userId).subscribe(
+      (userData: any) => {
+        this.userDetails = userData;
+        this.created_by = this.userId; // Automatically set the owner to logged-in user ID
+
+      },
+      (error) => {
+        console.error('Failed to fetch user details:', error);
+      }
+    );
+
+    this.authService.getUserSchema(this.userId).subscribe(
+      (userData: any) => {
+        this.userDetailss = userData; // Store user schemas in userDetailss
+
+        this.schemas = userData.map((schema: any) => schema.schema_name);
+      },
+      (error) => {
+        console.error('Failed to fetch user schemas:', error);
+      }
+    );
+  } else {
+    console.error('User ID is null.');
+  }
 
  
 }

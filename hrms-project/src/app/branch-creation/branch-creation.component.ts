@@ -6,6 +6,7 @@ import { BrachRegistrationService } from './brach-registration.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from '../login/authentication.service';
 import { DepartmentServiceService } from '../department-master/department-service.service';
+import { environment } from '../../environments/environment';
 
 
 
@@ -15,6 +16,9 @@ import { DepartmentServiceService } from '../department-master/department-servic
   styleUrl: './branch-creation.component.css'
 })
 export class BranchCreationComponent {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
   selectedFile!: File;
 
   registerButtonClicked = false;
@@ -217,7 +221,7 @@ registerBranch(): void {
       // return this.http.put(apiUrl, formData);
   
     
-      this.http.post(`http://${selectedSchema}.localhost:8000/organisation/api/Branch/`, formData).subscribe(
+      this.http.post(`${this.apiUrl}/organisation/api/Branch/?schema=${selectedSchema}`, formData).subscribe(
   // this.http.post('http://abc.localhost:8000/organisation/api/Branch/', formData).subscribe(
     response => {
       console.log('Registration successful', response);

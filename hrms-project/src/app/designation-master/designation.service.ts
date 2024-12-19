@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DesignationService {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
 
   
   private baseUrl = 'http://127.0.0.1:8000/organisation/api';
@@ -20,7 +24,7 @@ export class DesignationService {
   }
 
   getDesignations(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Designation/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Designation/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -39,7 +43,7 @@ export class DesignationService {
   
 
   getDesignationsPermission(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.80.65.208.178:8000/organisation/api/permissions/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/permissions/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -70,7 +74,7 @@ export class DesignationService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Designation/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Designation/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -92,7 +96,7 @@ export class DesignationService {
         return throwError('No schema selected.'); // Return an error observable if no schema is selected
       }
      
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Designation/${DeptId}/`;
+      const apiUrl = `${this.apiUrl}/organisation/api/Designation/${DeptId}/?schema=${selectedSchema}`;
      
       return this.http.delete(apiUrl);
       
@@ -111,7 +115,7 @@ export class DesignationService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Designation/${desigId}/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Designation/${desigId}/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -134,7 +138,7 @@ export class DesignationService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Designation/${desigId}/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Designation/${desigId}/?schema=${selectedSchema}`;
    
     return this.http.put(apiUrl, categoryData);
   }

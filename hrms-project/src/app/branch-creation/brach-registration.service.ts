@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,10 @@ export class BrachRegistrationService {
   getBranchCity() {
     throw new Error('Method not implemented.');
   }
+
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
   private baseUrl = 'http://127.0.0.1:8000/organisation/api'; // Update this URL according to your backend API
 
   constructor(private http: HttpClient) {}
@@ -47,15 +52,16 @@ getBranches(): Observable<any> {
 }
 
 getBranchess(selectedSchema: string): Observable<any> {
-  const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Branch/`;
+  const Url = `${this.apiUrl}/organisation/api/Branch/?schema=${selectedSchema}
+`;
 
   // Fetch employees from the API
-  return this.http.get(apiUrl);
+  return this.http.get(Url);
 
 }
 
 getDesignationsPermission(selectedSchema: string): Observable<any> {
-  const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/permissions/`;
+  const apiUrl = `${this.apiUrl}/organisation/api/permissions/?schema=${selectedSchema}`;
 
   // Fetch employees from the API
   return this.http.get(apiUrl);
@@ -109,7 +115,7 @@ deleteBranch(categoryId: number): Observable<any> {
     return throwError('No schema selected.'); // Return an error observable if no schema is selected
   }
  
-  const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Branch/${categoryId}/`;
+  const apiUrl = `${this.apiUrl}/organisation/api/Branch/${categoryId}/?schema=${selectedSchema}`;
  
   return this.http.delete(apiUrl);
 }

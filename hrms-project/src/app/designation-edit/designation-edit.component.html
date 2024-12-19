@@ -2,14 +2,14 @@
 
     <div class="cpm-sec" *ngIf="designation" >
 
-        <h1>Catogary</h1><hr>
+        <h1>Designation</h1><hr>
 
         <form (submit)="updateDesignation()">
         <div class="row" >
 
             <div class="col-md-6" >
                
-                <label>Description</label>
+                <label>Job Title</label>
                <input type="text"  class="form-control" required id="job_title" name="job_title"  [(ngModel)]="designation.job_title"  placeholder="Enter Description "
                 [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !job_title}">
                
@@ -35,10 +35,10 @@
 <div class="col-md-6" >
                
     <label>Description</label>
-   <input type="text"  class="form-control" required id="description" name="description"  [(ngModel)]="designation.description"  placeholder="Enter Description "
-    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !description}">
+   <input type="text"  class="form-control" required id="desgntn_description" name="desgntn_description"  [(ngModel)]="designation.desgntn_description"  placeholder="Enter Description "
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !desgntn_description}">
    
-   <div *ngIf="registerButtonClicked && !description" class="error-message">Description is required.</div>
+   <div *ngIf="registerButtonClicked && !desgntn_description" class="error-message">Description is required.</div>
 </div>
        
          

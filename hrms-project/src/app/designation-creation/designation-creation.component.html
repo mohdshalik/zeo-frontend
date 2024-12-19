@@ -101,6 +101,14 @@
      <div *ngIf="registerButtonClicked && !desgntn_job_title" class="error-message">Department Name is required.</div>
 </div>
 
+<div class="col-md-6" >
+               
+    <label>Designation Code</label>
+   <input type="text"  class="form-control" required  [(ngModel)]="desgntn_code"  placeholder="Enter Code"
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !desgntn_code}">
+   
+   <div *ngIf="registerButtonClicked && !desgntn_code" class="error-message">code is required.</div>
+</div>
 
 <div class="col-md-6" >
                

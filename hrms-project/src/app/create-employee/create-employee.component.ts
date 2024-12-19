@@ -13,6 +13,7 @@ import { SuccesModalComponent } from '../succes-modal/succes-modal.component';
 import { throwError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeAddMoreFieldComponent } from '../employee-add-more-field/employee-add-more-field.component';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-create-employee',
@@ -20,6 +21,9 @@ import { EmployeeAddMoreFieldComponent } from '../employee-add-more-field/employ
   styleUrl: './create-employee.component.css'
 })
 export class CreateEmployeeComponent implements OnInit {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
 
   selectedFile!: File | null;
 
@@ -731,7 +735,7 @@ if (this.isHiringMandatory && !this.emp_hired_date) {
     // return this.http.put(apiUrl, formData);
 
   
-    this.http.post(`http://${selectedSchema}.localhost:8000/employee/api/Employee/`, formData)
+    this.http.post(`${this.apiUrl}/employee/api/Employee/?schema=${selectedSchema}`, formData)
     .subscribe(
       (response: any) => {
         // Handle successful upload
@@ -776,7 +780,12 @@ if (this.isHiringMandatory && !this.emp_hired_date) {
 
     // Make API calls to post each custom field value
     customFieldValues.forEach(fieldValue => {
-        this.http.post('http://one.localhost:8000/employee/api/emp-custom-field-value/', fieldValue)
+      const selectedSchema = localStorage.getItem('selectedSchema');
+      if (!selectedSchema) {
+        console.error('No schema selected.');
+        // return throwError('No schema selected.'); // Return an error observable if no schema is selected
+      }
+        this.http.post(`${this.apiUrl}/employee/api/emp-custom-field-value/?schema=${selectedSchema}`, fieldValue)
             .subscribe(
                 (response: any) => {
                     console.log('Custom field value posted successfully', response);

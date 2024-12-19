@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,9 @@ export class CompanyRegistrationService {
   registerBranch(companyData: { branch_name: string; br_city: string; br_branch_mail: any; br_branch_nmbr_1: any; br_branch_nmbr_2: any; br_pincode: any; }) {
     throw new Error('Method not implemented.');
   }
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
   private baseUrl = 'http://127.0.0.1:8000/organisation/api'; // Update this URL according to your backend API
 
   constructor(private http: HttpClient) {}
@@ -33,7 +37,7 @@ export class CompanyRegistrationService {
 
 
     getCompany(): Observable<any> {
-      const url = `http://80.65.208.178:8000/users/api/company/`;
+      const url = `${this.apiUrl}/users/api/company/`;
       return this.http.get(url);
 
       
@@ -55,7 +59,7 @@ export class CompanyRegistrationService {
       // const url = `${this.baseUrl}/Branch/`;
       // return this.http.get(url);
 
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Branch/`;
+      const apiUrl = `${this.apiUrl}/organisation/api/Branch/?schema=${selectedSchema}`;
   
       // Fetch employees from the API
       return this.http.get(apiUrl);
@@ -66,7 +70,7 @@ export class CompanyRegistrationService {
       // const url = `${this.baseUrl}/Branch/`;
       // return this.http.get(url);
 
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Department/`;
+      const apiUrl = `${this.apiUrl}/organisation/api/Department/?schema=${selectedSchema}`;
   
       // Fetch employees from the API
       return this.http.get(apiUrl);
@@ -87,10 +91,10 @@ export class CompanyRegistrationService {
       // const url = `${this.baseUrl}/Branch/`;
       // return this.http.get(url);
 
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Designation/`;
+      const Url = `${this.apiUrl}/organisation/api/Designation/?schema=${selectedSchema}`;
   
       // Fetch employees from the API
-      return this.http.get(apiUrl);
+      return this.http.get(Url);
     }
 
 
@@ -104,10 +108,10 @@ export class CompanyRegistrationService {
       // const url = `${this.baseUrl}/Branch/`;
       // return this.http.get(url);
 
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Catogory/`;
+      const Url = `${this.apiUrl}/organisation/api/Catogory/?schema=${selectedSchema}`;
   
       // Fetch employees from the API
-      return this.http.get(apiUrl);
+      return this.http.get(Url);
     }
 
 

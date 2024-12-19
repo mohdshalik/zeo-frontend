@@ -40,6 +40,12 @@ export class BranchEditComponent {
   branch_code:any='';
   notification_period_days:any='';
   branch_users:any='';
+  // branch_logo: File | null = null;
+  branch_logo: string | undefined;
+
+
+  selectedFile!: File | null;
+
 
 
   constructor(
@@ -85,11 +91,26 @@ this. loadBranchUser();
 
   }
 
-
-
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files.length > 0 ? event.target.files[0] : null;
+  }
+  
   updateBranch(): void {
     // Update category
-    this.BranchServiceService.updateBranch(this.data.employeeId, this.Emp).subscribe(
+
+      // Create a FormData object to handle file uploads
+  const formData = new FormData();
+
+  // Append the profile picture only if it's selected
+  if (this.selectedFile) {
+    formData.append('branch_logo', this.selectedFile);
+  } else {
+    // Append a null or empty value to indicate no file was selected
+    formData.append('branch_logo', '');
+  }
+  
+
+    this.BranchServiceService.updateBranch(this.data.employeeId, this.Emp,).subscribe(
       (response) => {
         console.log('Branches updated successfully:', response);
         // Close the dialog when category is updated

@@ -8,12 +8,17 @@ import { CompanyRegistrationService } from '../company-registration.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DesignationService } from '../designation-master/designation.service';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-designation-creation',
   templateUrl: './designation-creation.component.html',
   styleUrl: './designation-creation.component.css'
 })
 export class DesignationCreationComponent {
+
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
   selectedFiles! : File;
   selectedFile!: File;
   file:any ='';
@@ -24,6 +29,8 @@ export class DesignationCreationComponent {
 
   desgntn_job_title: string = '';
   desgntn_description:string ='';
+  desgntn_code:string ='';
+
   visibilitys:boolean=false;
   visibles:boolean=true;
   ReadMore:boolean=false;
@@ -141,7 +148,7 @@ export class DesignationCreationComponent {
     // return this.http.put(apiUrl, formData);
 
   
-    this.http.post(`http://${selectedSchema}.localhost:8000/organisation/api/Desigtn-bulkupload/bulk_upload/`, formData)
+    this.http.post(`${this.apiUrl}/organisation/api/Desigtn-bulkupload/bulk_upload/?schema=${selectedSchema}`, formData)
       .subscribe((response) => {
         // Handle successful upload
         console.log('bulkupload upload successful', response);
@@ -181,7 +188,7 @@ export class DesignationCreationComponent {
     const companyData = {
       desgntn_job_title: this.desgntn_job_title,
       desgntn_description:this.desgntn_description,
-  
+      desgntn_code:this.desgntn_code,
    
 
       // Add other form field values to the companyData object

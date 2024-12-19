@@ -4,7 +4,7 @@
   
         <h1>Company Details Edit</h1><hr>
   
-        <form (submit)="updateBranch">
+        <form (submit)="updateBranch()" enctype="multipart/form-data">
            <div class="row">
 
             <div class="col-md-6" >
@@ -140,6 +140,11 @@
         
         </div>
     
+        <div class="col-md-6"> 
+            <label for="branch_logo">Branch Logo :</label>
+            <input type="file" class="form-control" id="branch_logo" name="branch_logo" (change)="onFileSelected($event)">
+          
+          </div>
         
               
            </div>

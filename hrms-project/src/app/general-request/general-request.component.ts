@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CompanyRegistrationService } from '../company-registration.service';
 import { EmployeeService } from '../employee-master/employee.service';
 import { UserMasterService } from '../user-master/user-master.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-general-request',
@@ -44,7 +45,8 @@ export class GeneralRequestComponent {
 
   registerButtonClicked = false;
 
-  private apiUrl = 'http://one.localhost:8000/organisation/api/fiscal-years/';
+  // private apiUrl = 'http://one.localhost:8000/organisation/api/fiscal-years/';
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
 
   constructor(private DepartmentServiceService: DepartmentServiceService ,
@@ -97,7 +99,7 @@ ngOnInit(): void {
       const selectedSchema = localStorage.getItem('selectedSchema'); // Retrieve the selected schema from local storage or any other storage method
   
       if (selectedBranchId && selectedSchema) {
-        const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/general-request/document_numbering_by_branch/?branch_id=${selectedBranchId}`;
+        const apiUrl = `${this.apiUrl}/employee/api/general-request/document_numbering_by_branch/?branch_id=${selectedBranchId}/?schema=${selectedSchema}`;
         this.http.get(apiUrl).subscribe(
           (response: any) => {
             this.automaticNumbering = response.automatic_numbering;

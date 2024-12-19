@@ -270,7 +270,8 @@ import { DashboardContentsComponent } from './dashboard-contents/dashboard-conte
     DragDropModule,
     MatMenuModule,
     MatTabsModule,
-    MatSortModule
+    MatSortModule,
+    
     
   ],
   providers: [AuthGuard, CompanyRegistrationService,AuthenticationService,NotificationServiceService,DatePipe,

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 
 
@@ -12,23 +13,45 @@ export class CountryService {
 
   private baseUrl = 'http://80.65.208.178:8000/core/api/';
 
-  private apiUrl = 'http://one.localhost:8000/calendars/api/weekend/';
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
+
+  // private apiUrl = 'http://one.localhost:8000/calendars/api/weekend/';
 
 
   constructor(private http: HttpClient) {}
 
 
+  // getWeekendCalendars(): Observable<any> {
+  //   return this.http.get<any>(this.apiUrl);
+  // }
+
   getWeekendCalendars(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    // const url = `${this.baseUrl}/permissions/`;
+    // return this.http.get(url);
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+    const Url = `${this.apiUrl}/calendars/api/weekend/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(Url);
+
+    
+
   }
 
   getWeekendCalendarList(selectedSchema: string): Observable<any> {
     // const url = `${this.baseUrl}/permissions/`;
     // return this.http.get(url);
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/weekend/`;
+    const Url = `${this.apiUrl}/calendars/api/weekend/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
+
+    
 
   }
   
@@ -110,7 +133,7 @@ export class CountryService {
 
   
   getCountries(): Observable<any> {
-    const url = `${this.baseUrl}Country/`;
+    const url = `${this.apiUrl}/core/api/Country/`;
     return this.http.get(url);
   }
 
@@ -118,21 +141,32 @@ export class CountryService {
     // const url = `${this.baseUrl}/Branch/`;
     // return this.http.get(url);
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/core/api/Country/`;
+    const Url = `${this.apiUrl}/core/api/Country/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
   }
+
+  getstatescreated(selectedSchema: string): Observable<any> {
+    // const url = `${this.baseUrl}/Branch/`;
+    // return this.http.get(url);
+
+    const Url = `${this.apiUrl}/core/api/State/?schema=${selectedSchema}`;
+
+    // Fetch employees from the API
+    return this.http.get(Url);
+  }
+
 
 
   getholidayCalendars(selectedSchema: string): Observable<any> {
     // const url = `${this.baseUrl}/Branch/`;
     // return this.http.get(url);
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/holiday-calendar/`;
+    const Url = `${this.apiUrl}/calendars/api/holiday-calendar/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
   }
 
 
@@ -156,10 +190,10 @@ export class CountryService {
     // const url = `${this.baseUrl}/Branch/`;
     // return this.http.get(url);
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/core/api/language/`;
+    const Url = `${this.apiUrl}/core/api/language/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
   }
 
   
@@ -173,10 +207,10 @@ export class CountryService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/core/api/State/`;
+    const Url = `${this.apiUrl}/core/api/State/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.post(apiUrl, companyData, { headers }).pipe(
+    return this.http.post(Url, companyData, { headers }).pipe(
       catchError((error) => {
         // Handle errors here (you can log, show a user-friendly message, etc.)
         console.error('Error during company registration:', error);
@@ -196,7 +230,7 @@ export class CountryService {
      
   
       
-      const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/weekend/`;
+      const apiUrl = `${this.apiUrl}/calendars/api/weekend/?schema=${selectedSchema}`;
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
       return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -219,10 +253,10 @@ export class CountryService {
        
     
         
-        const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/holiday/`;
+        const Url = `${this.apiUrl}/calendars/api/holiday/?schema=${selectedSchema}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     
-        return this.http.post(apiUrl, companyData, { headers }).pipe(
+        return this.http.post(Url, companyData, { headers }).pipe(
           catchError((error) => {
             // Handle errors here (you can log, show a user-friendly message, etc.)
             console.error('Error during company registration:', error);
@@ -241,7 +275,7 @@ export class CountryService {
          
       
           
-          const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/holiday-calendar/`;
+          const apiUrl = `${this.apiUrl}/calendars/api/holiday-calendar/?schema=${selectedSchema}`;
           const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       
           return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -287,7 +321,7 @@ export class CountryService {
      
   
       
-      const apiUrl = `http://${selectedSchema}.localhost:8000/core/api/Documents/`;
+      const apiUrl = `${this.apiUrl}Documents/?schema=${selectedSchema}`;
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
       return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -304,10 +338,10 @@ export class CountryService {
         // const url = `${this.baseUrl}/Branch/`;
         // return this.http.get(url);
     
-        const apiUrl = `http://${selectedSchema}.localhost:8000/core/api/Documents/`;
+        const Url = `${this.apiUrl}/core/api/Documents/?schema=${selectedSchema}`;
     
         // Fetch employees from the API
-        return this.http.get(apiUrl);
+        return this.http.get(Url);
       }
 
 
@@ -322,7 +356,7 @@ export class CountryService {
   
 
   getAllStates(): Observable<any> {
-    const url = `${this.baseUrl}State/`;
+    const url = `${this.apiUrl}/core/api/State/`;
     return this.http.get(url);
   }
 
@@ -330,12 +364,21 @@ export class CountryService {
     // const url = `${this.baseUrl}/Branch/`;
     // return this.http.get(url);
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/core/api/State/`;
+    const Url = `${this.apiUrl}/core/api/State/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
   }
 
+  getAllStatesListss(selectedSchema: string): Observable<any> {
+    // const url = `${this.baseUrl}/Branch/`;
+    // return this.http.get(url);
+
+    const Url = `${this.apiUrl}/core/api/State/?schema=${selectedSchema}`;
+
+    // Fetch employees from the API
+    return this.http.get(Url);
+  }
   getStatesByCountryId(countryId: number): Observable<any> {
  
 
@@ -345,7 +388,7 @@ export class CountryService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/core/api/Country/${countryId}/states/`;
+    const apiUrl = `${this.apiUrl}/core/api/Country/${countryId}/states/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
@@ -358,10 +401,10 @@ export class CountryService {
     // const url = `${this.baseUrl}/Group/`;
     // return this.http.get(url);
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/core/api/Documents/`;
+    const Url = `${this.apiUrl}/core/api/Documents/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
-    return this.http.get(apiUrl);
+    return this.http.get(Url);
 
 
   }

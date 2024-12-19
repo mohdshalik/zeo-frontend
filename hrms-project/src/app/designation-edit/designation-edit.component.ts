@@ -23,7 +23,7 @@ export class DesignationEditComponent {
   Catogaries: any[] = [];
 
   job_title: string = '';
-  description:string ='';
+  desgntn_description:string ='';
   desgntn_code:string ='';
 
 
