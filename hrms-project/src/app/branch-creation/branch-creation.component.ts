@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from '../login/authentication.service';
 import { DepartmentServiceService } from '../department-master/department-service.service';
 import { environment } from '../../environments/environment';
+import { SessionService } from '../login/session.service';
 
 
 
@@ -46,6 +47,15 @@ notification_period_days:any='';
 branch_users:any='';
 branch_logo: File | null = null;
 
+
+schemas: string[] = []; // Array to store schema names
+
+  
+userId: number | null | undefined;
+userDetails: any;
+userDetailss: any[] = [];
+username: any;
+
 // formData.append('emp_profile_pic', this.selectedFile);
 
 
@@ -55,6 +65,8 @@ constructor(private countryService: CountryService ,
   private http: HttpClient,
   private BrachRegistrationService:BrachRegistrationService,
   private DepartmentServiceService:DepartmentServiceService,
+  private sessionService: SessionService,
+
   private ref:MatDialogRef<BranchCreationComponent>
   ) {}
 
@@ -69,6 +81,35 @@ ngOnInit(): void {
  
   // this.loadStates();
   // this.loadBranch();
+  this.userId = this.sessionService.getUserId();
+
+  
+  if (this.userId !== null) {
+    this.authService.getUserData(this.userId).subscribe(
+      (userData: any) => {
+        this.userDetails = userData;
+        this.branch_users = this.userId; // Automatically set the owner to logged-in user ID
+
+      },
+      (error) => {
+        console.error('Failed to fetch user details:', error);
+      }
+    );
+
+    this.authService.getUserSchema(this.userId).subscribe(
+      (userData: any) => {
+        this.userDetailss = userData; // Store user schemas in userDetailss
+
+        this.schemas = userData.map((schema: any) => schema.schema_name);
+      },
+      (error) => {
+        console.error('Failed to fetch user schemas:', error);
+      }
+    );
+  } else {
+    console.error('User ID is null.');
+  }
+
 
   this.loadCountries();
   this.loadBranchUser();
