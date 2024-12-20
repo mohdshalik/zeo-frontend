@@ -1,15 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../employee-master/employee.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../login/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-from-designer',
   templateUrl: './from-designer.component.html',
-  styleUrl: './from-designer.component.css'
+  styleUrl: './from-designer.component.css',
+  
+
 })
 export class FromDesignerComponent {
+
+  isLinear = true;
+  firstFormGroup!: FormGroup;
+  secondFormGroup!: FormGroup;
+
+
 
   field_name: any
   field_value: any;
@@ -51,6 +61,32 @@ export class FromDesignerComponent {
    joinFieldName: string = 'joining Date';
 
 
+
+   isFirstNameMandatory: boolean = false; // New property to store the checkbox state
+   isLastNameMandatory: boolean = false; // New property to store the checkbox state
+   isGenderMandatory: boolean = false; // New property to store the checkbox state
+   isEmailMandatory: boolean = false; // New property to store the checkbox state
+
+   isCmpnoMandatory: boolean = false; // New property to store the checkbox state
+   isPernoMandatory: boolean = false; // New property to store the checkbox state
+   isPeraddMandatory: boolean = false; // New property to store the checkbox state
+   isPresaddMandatory: boolean = false; // New property to store the checkbox state
+   isCityMandatory: boolean = false; // New property to store the checkbox state
+   isRelMandatory: boolean = false; // New property to store the checkbox state
+   isBloodMandatory: boolean = false; // New property to store the checkbox state
+
+   isNatMandatory: boolean = false; // New property to store the checkbox state
+   isMariMandatory: boolean = false; // New property to store the checkbox state
+   isFatherMandatory: boolean = false; // New property to store the checkbox state
+   isMotherMandatory: boolean = false; // New property to store the checkbox state
+   isLocationMandatory: boolean = false; // New property to store the checkbox state
+   isLCountryMandatory: boolean = false; // New property to store the checkbox state
+   isLBranchMandatory: boolean = false; // New property to store the checkbox state
+
+   isLDepartmentMandatory: boolean = false; // New property to store the checkbox state
+   isLDesignationMandatory: boolean = false; // New property to store the checkbox state
+   isLCatogoryMandatory: boolean = false; // New property to store the checkbox state
+   isHiringMandatory: boolean = false; // New property to store the checkbox state
 
 
 
@@ -133,6 +169,7 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
     private http: HttpClient,
     private authService: AuthenticationService,
     private dialog: MatDialog,
+    private _formBuilder: FormBuilder
 
   
    ) {}
@@ -141,6 +178,10 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
    ngOnInit(): void {
     this.loadFormFields();
     this.loadFieldNames();
+    this.loadFieldDisplay();
+    this.loadFamilyFieldNames();
+
+    
     this.selectedDataType = localStorage.getItem('selectedDataType') || this.selectedDataType;
 
     this.genderDataType = localStorage.getItem('genderDataType') || this.genderDataType;
@@ -165,27 +206,382 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
 
 
    }
+
+
+
+   isFirstNameFieldHidden: boolean = false; // New variable to track if the field is disabled
+   isLasstNameFieldHidden: boolean = false;
+   isGernderNameFieldHidden: boolean = false;
+   isEmailNameFieldHidden: boolean = false;
+   isCmpNoNameFieldHidden: boolean = false;
+   isPerNoNameFieldHidden: boolean = false;
+   isPermaddNameFieldHidden: boolean = false;
+   isPresentaddNameFieldHidden: boolean = false;
+   isCityFieldHidden: boolean = false;
+   isReliFieldHidden: boolean = false;
+   isBloodFieldHidden: boolean = false;
+   isNationFieldHidden: boolean = false;
+   isMaritalFieldHidden: boolean = false;
+   isFatherFieldHidden: boolean = false;
+   isMotherFieldHidden: boolean = false;
+   isLocationFieldHidden: boolean = false;
+   isCountryFieldHidden: boolean = false;
+   isBranchFieldHidden: boolean = false;
+   isDepartFieldHidden: boolean = false;
+   isDesignationFieldHidden: boolean = false;
+   isCatFieldHidden: boolean = false;
+   isHireFieldHidden: boolean = false;
+ 
+
+
+   loadFieldDisplay():void{
+    const savedFirstNameFieldVisibility = localStorage.getItem('isFirstNameFieldHidden');
+    if (savedFirstNameFieldVisibility) {
+        this.isFirstNameFieldHidden = JSON.parse(savedFirstNameFieldVisibility);
+    }
+
+    const isLasstNameFieldHidden = localStorage.getItem('isLasstNameFieldHidden');
+    if (isLasstNameFieldHidden) {
+        this.isLasstNameFieldHidden = JSON.parse(isLasstNameFieldHidden);
+    }
+
+    const isGernderNameFieldHidden = localStorage.getItem('isGernderNameFieldHidden');
+    if (isGernderNameFieldHidden) {
+        this.isGernderNameFieldHidden = JSON.parse(isGernderNameFieldHidden);
+    }
+
+    const isEmailNameFieldHidden = localStorage.getItem('isEmailNameFieldHidden');
+    if (isEmailNameFieldHidden) {
+        this.isEmailNameFieldHidden = JSON.parse(isEmailNameFieldHidden);
+    }
+
+    const isCmpNoNameFieldHidden = localStorage.getItem('isCmpNoNameFieldHidden');
+    if (isCmpNoNameFieldHidden) {
+        this.isCmpNoNameFieldHidden = JSON.parse(isCmpNoNameFieldHidden);
+    }
+
+    const isPerNoNameFieldHidden = localStorage.getItem('isPerNoNameFieldHidden');
+    if (isPerNoNameFieldHidden) {
+        this.isPerNoNameFieldHidden = JSON.parse(isPerNoNameFieldHidden);
+    }
+
+    const isPermaddNameFieldHidden = localStorage.getItem('isPermaddNameFieldHidden');
+    if (isPermaddNameFieldHidden) {
+        this.isPermaddNameFieldHidden = JSON.parse(isPermaddNameFieldHidden);
+    }
+
+
+    const isPresentaddNameFieldHidden = localStorage.getItem('isPresentaddNameFieldHidden');
+    if (isPresentaddNameFieldHidden) {
+        this.isPresentaddNameFieldHidden = JSON.parse(isPresentaddNameFieldHidden);
+    }
+
+
+    const isCityFieldHidden = localStorage.getItem('isCityFieldHidden');
+    if (isCityFieldHidden) {
+        this.isCityFieldHidden = JSON.parse(isCityFieldHidden);
+    }
+
+    const isReliFieldHidden = localStorage.getItem('isReliFieldHidden');
+    if (isReliFieldHidden) {
+        this.isReliFieldHidden = JSON.parse(isReliFieldHidden);
+    }
+
+    const isBloodFieldHidden = localStorage.getItem('isBloodFieldHidden');
+    if (isBloodFieldHidden) {
+        this.isBloodFieldHidden = JSON.parse(isBloodFieldHidden);
+    }
+
+    const isNationFieldHidden = localStorage.getItem('isNationFieldHidden');
+    if (isNationFieldHidden) {
+        this.isNationFieldHidden = JSON.parse(isNationFieldHidden);
+    }
+
+    const isMaritalFieldHidden = localStorage.getItem('isMaritalFieldHidden');
+    if (isMaritalFieldHidden) {
+        this.isMaritalFieldHidden = JSON.parse(isMaritalFieldHidden);
+    }
+
+
+
+    const isFatherFieldHidden = localStorage.getItem('isFatherFieldHidden');
+    if (isFatherFieldHidden) {
+        this.isFatherFieldHidden = JSON.parse(isFatherFieldHidden);
+    }
+
+    const isMotherFieldHidden = localStorage.getItem('isMotherFieldHidden');
+    if (isMotherFieldHidden) {
+        this.isMotherFieldHidden = JSON.parse(isMotherFieldHidden);
+    }
+
+    const isLocationFieldHidden = localStorage.getItem('isLocationFieldHidden');
+    if (isLocationFieldHidden) {
+        this.isLocationFieldHidden = JSON.parse(isLocationFieldHidden);
+    }
+
+    const isCountryFieldHidden = localStorage.getItem('isCountryFieldHidden');
+    if (isCountryFieldHidden) {
+        this.isCountryFieldHidden = JSON.parse(isCountryFieldHidden);
+    }
+
+    const isDepartFieldHidden = localStorage.getItem('isDepartFieldHidden');
+    if (isDepartFieldHidden) {
+        this.isDepartFieldHidden = JSON.parse(isDepartFieldHidden);
+    }
+
+    const isDesignationFieldHidden = localStorage.getItem('isDesignationFieldHidden');
+    if (isDesignationFieldHidden) {
+        this.isDesignationFieldHidden = JSON.parse(isDesignationFieldHidden);
+    }
+
+    const isCatFieldHidden = localStorage.getItem('isCatFieldHidden');
+    if (isCatFieldHidden) {
+        this.isCatFieldHidden = JSON.parse(isCatFieldHidden);
+    }
+
+    const isHireFieldHidden = localStorage.getItem('isHireFieldHidden');
+    if (isHireFieldHidden) {
+        this.isHireFieldHidden = JSON.parse(isHireFieldHidden);
+    }
+
+
+
+
+
+  }
+       
+
+
+   toggleFieldDisabled(): void {
+    this.isFirstNameFieldHidden = !this.isFirstNameFieldHidden;
+    localStorage.setItem('isFirstNameFieldHidden', JSON.stringify(this.isFirstNameFieldHidden));
+
    
+  
+
+  }
+
+  toggleFieldDisabledLastname():void{
+
+    this.isLasstNameFieldHidden = !this.isLasstNameFieldHidden;
+    localStorage.setItem('isLasstNameFieldHidden', JSON.stringify(this.isLasstNameFieldHidden));
+  }
+
+  
+  toggleFieldDisabledGender():void{
+
+    this.isGernderNameFieldHidden = !this.isGernderNameFieldHidden;
+    localStorage.setItem('isGernderNameFieldHidden', JSON.stringify(this.isGernderNameFieldHidden));
+  }
+
+  toggleFieldDisabledEmail():void{
+
+    this.isEmailNameFieldHidden = !this.isEmailNameFieldHidden;
+    localStorage.setItem('isEmailNameFieldHidden', JSON.stringify(this.isEmailNameFieldHidden));
+  }
+  
+  toggleFieldDisabledCmpNo():void{
+
+    this.isCmpNoNameFieldHidden = !this.isCmpNoNameFieldHidden;
+    localStorage.setItem('isCmpNoNameFieldHidden', JSON.stringify(this.isCmpNoNameFieldHidden));
+  }
+  
+  
+  toggleFieldDisabledPerNo():void{
+
+    this.isPerNoNameFieldHidden = !this.isPerNoNameFieldHidden;
+    localStorage.setItem('isPerNoNameFieldHidden', JSON.stringify(this.isPerNoNameFieldHidden));
+  }
+  
+
+  toggleFieldDisabledPermadd():void{
+
+    this.isPermaddNameFieldHidden = !this.isPermaddNameFieldHidden;
+    localStorage.setItem('isPermaddNameFieldHidden', JSON.stringify(this.isPermaddNameFieldHidden));
+  }
+  
+
+  toggleFieldDisabledPresentadd():void{
+
+    this.isPresentaddNameFieldHidden = !this.isPresentaddNameFieldHidden;
+    localStorage.setItem('isPresentaddNameFieldHidden', JSON.stringify(this.isPresentaddNameFieldHidden));
+  }
+  
+
+  toggleFieldDisabledCity():void{
+
+    this.isCityFieldHidden = !this.isCityFieldHidden;
+    localStorage.setItem('isCityFieldHidden', JSON.stringify(this.isCityFieldHidden));
+  }
+  
+
+  
+  toggleFieldDisabledReli():void{
+
+    this.isReliFieldHidden = !this.isReliFieldHidden;
+    localStorage.setItem('isReliFieldHidden', JSON.stringify(this.isReliFieldHidden));
+  }
+
+
+  
+  toggleFieldDisabledBlood():void{
+
+    this.isBloodFieldHidden = !this.isBloodFieldHidden;
+    localStorage.setItem('isBloodFieldHidden', JSON.stringify(this.isBloodFieldHidden));
+  }
+  
+
+  
+
+  toggleFieldDisabledNation():void{
+
+    this.isNationFieldHidden = !this.isNationFieldHidden;
+    localStorage.setItem('isNationFieldHidden', JSON.stringify(this.isNationFieldHidden));
+  }
+  
+  
+    
+
+  toggleFieldDisablemarital():void{
+
+    this.isMaritalFieldHidden = !this.isMaritalFieldHidden;
+    localStorage.setItem('isMaritalFieldHidden', JSON.stringify(this.isMaritalFieldHidden));
+  }
+  
+  
+
+
+  toggleFieldDisableFather():void{
+
+    this.isFatherFieldHidden = !this.isFatherFieldHidden;
+    localStorage.setItem('isFatherFieldHidden', JSON.stringify(this.isFatherFieldHidden));
+  }
+  
+
+  toggleFieldDisableMother():void{
+
+    this.isMotherFieldHidden = !this.isMotherFieldHidden;
+    localStorage.setItem('isMotherFieldHidden', JSON.stringify(this.isMotherFieldHidden));
+  }
+   
+
+  toggleFieldDisableLocation():void{
+
+    this.isLocationFieldHidden = !this.isLocationFieldHidden;
+    localStorage.setItem('isLocationFieldHidden', JSON.stringify(this.isLocationFieldHidden));
+  }
+   
+
+
+
+  
+
+  
+  toggleFieldDisableCountry():void{
+
+    this.isCountryFieldHidden = !this.isCountryFieldHidden;
+    localStorage.setItem('isCountryFieldHidden', JSON.stringify(this.isCountryFieldHidden));
+  }
+
+
+    
+
+  toggleFieldDisableBranch():void{
+
+    this.isBranchFieldHidden = !this.isBranchFieldHidden;
+    localStorage.setItem('isBranchFieldHidden', JSON.stringify(this.isBranchFieldHidden));
+  }
+
+
+
+  
+  toggleFieldDisableDepart():void{
+
+    this.isDepartFieldHidden = !this.isDepartFieldHidden;
+    localStorage.setItem('isDepartFieldHidden', JSON.stringify(this.isDepartFieldHidden));
+  }
+
+
+  
+  
+  toggleFieldDisableDesignation():void{
+
+    this.isDesignationFieldHidden = !this.isDesignationFieldHidden;
+    localStorage.setItem('isDesignationFieldHidden', JSON.stringify(this.isDesignationFieldHidden));
+  }
+
+  
+  toggleFieldDisableCat():void{
+
+    this.isCatFieldHidden = !this.isCatFieldHidden;
+    localStorage.setItem('isCatFieldHidden', JSON.stringify(this.isCatFieldHidden));
+  }
+
+
+  
+  toggleFieldDisableHire():void{
+
+    this.isHireFieldHidden = !this.isHireFieldHidden;
+    localStorage.setItem('isHireFieldHidden', JSON.stringify(this.isHireFieldHidden));
+  }
+
+
+
+
+
+
+
    updateFieldNames(): void {
     // Save updated field names to localStorage
     localStorage.setItem('empCodeFieldName', this.empCodeFieldName);
     localStorage.setItem('firstNameFieldName', this.firstNameFieldName);
+    localStorage.setItem('isFirstNameMandatory', JSON.stringify(this.isFirstNameMandatory)); // Convert boolean to string for storage
+  
+
+
     localStorage.setItem('lastNameFieldName', this.lastNameFieldName);
-    localStorage.setItem('emailFieldName', this.emailFieldName);
+    localStorage.setItem('isLastNameMandatory', JSON.stringify(this.isLastNameMandatory)); // Convert boolean to string for storage
+
     localStorage.setItem('dobFieldName', this.dobFieldName);
+
+
+    localStorage.setItem('emailFieldName', this.emailFieldName);
+    localStorage.setItem('isEmailMandatory', JSON.stringify(this.isEmailMandatory)); // Convert boolean to string for storage
+
+
+    
     localStorage.setItem('cmpnoFieldName', this.cmpnoFieldName);
+        localStorage.setItem('isCmpnoMandatory', JSON.stringify(this.isCmpnoMandatory)); // Convert boolean to string for storage
+
 
     localStorage.setItem('pernoFieldName', this.pernoFieldName);
+    localStorage.setItem('isPernoMandatory', JSON.stringify(this.isPernoMandatory)); // Convert boolean to string for storage
+
     localStorage.setItem('peraddressFieldName', this.peraddressFieldName);
+    localStorage.setItem('isPeraddMandatory', JSON.stringify(this.isPeraddMandatory)); // Convert boolean to string for storage
+
+    
 
     localStorage.setItem('preaddressFieldName', this.preaddressFieldName);
+    localStorage.setItem('isPresaddMandatory', JSON.stringify(this.isPresaddMandatory)); // Convert boolean to string for storage
+
     localStorage.setItem('cityFieldName', this.cityFieldName);
+    localStorage.setItem('isCityMandatory', JSON.stringify(this.isCityMandatory)); // Convert boolean to string for storage
+
     localStorage.setItem('nationFieldName', this.nationFieldName);
+    localStorage.setItem('isNatMandatory', JSON.stringify(this.isNatMandatory)); // Convert boolean to string for storage
+
     localStorage.setItem('fatherFieldName', this.fatherFieldName);
+    localStorage.setItem('isFatherMandatory', JSON.stringify(this.isFatherMandatory)); // Convert boolean to string for storage
+
 
     localStorage.setItem('motherFieldName', this.motherFieldName);
+    localStorage.setItem('isMotherMandatory', JSON.stringify(this.isMotherMandatory)); // Convert boolean to string for storage
+
 
     localStorage.setItem('hiredFieldName', this.hiredFieldName);
+    localStorage.setItem('isHiringMandatory', JSON.stringify(this.isHiringMandatory)); // Convert boolean to string for storage
+
 
     localStorage.setItem('joinFieldName', this.joinFieldName);
 
@@ -200,6 +596,8 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
 
     // Save updated field names to localStorage
     localStorage.setItem('genderFieldName', this.genderFieldName);
+    localStorage.setItem('isGenderMandatory', JSON.stringify(this.isGenderMandatory)); // Convert boolean to string for storage
+    
     localStorage.setItem('genderDataType', this.genderDataType);
 
     if (this.genderDataType === 'Dropdown') {
@@ -208,7 +606,11 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
         localStorage.removeItem('genderDropdownValues');
     }
 
+
+
     localStorage.setItem('religionFieldName', this.religionFieldName);
+    localStorage.setItem('isRelMandatory', JSON.stringify(this.isRelMandatory)); // Convert boolean to string for storage
+
     localStorage.setItem('selectedDataTypereligion', this.selectedDataTypereligion);
 
     if (this.selectedDataTypereligion === 'Dropdown') {
@@ -219,7 +621,11 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
     }
 
 
+
+
     localStorage.setItem('bloodFieldName', this.bloodFieldName);
+    localStorage.setItem('isBloodMandatory', JSON.stringify(this.isBloodMandatory)); // Convert boolean to string for storage
+
     localStorage.setItem('selectedDataTypeblood', this.selectedDataTypeblood);
 
     if (this.selectedDataTypeblood === 'Dropdown') {
@@ -229,8 +635,13 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
       localStorage.removeItem('dropdownValuesblood'); // Clear dropdown values if not using dropdown
     }
 
+
+
+
    // Save updated field names to localStorage marital status
    localStorage.setItem('maritalFieldName', this.maritalFieldName);
+   localStorage.setItem('isMariMandatory', JSON.stringify(this.isMariMandatory)); // Convert boolean to string for storage
+
    localStorage.setItem('maritalDataType', this.maritalDataType);
 
    if (this.maritalDataType === 'Dropdown') {
@@ -241,8 +652,12 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
 
    
 
+
+
       // Save updated field names to localStorage marital status
       localStorage.setItem('locationFieldName', this.locationFieldName);
+      localStorage.setItem('isLocationMandatory', JSON.stringify(this.isLocationMandatory)); // Convert boolean to string for storage
+
       localStorage.setItem('locationDataType', this.locationDataType);
    
       if (this.locationDataType === 'Dropdown') {
@@ -251,8 +666,13 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
           localStorage.removeItem('locationDropdownValues');
       }
    
+
+
+
          // Save updated field names to localStorage marital status
-         localStorage.setItem('cntryFieldName', this.cntryFieldName);
+         localStorage.setItem('cntryFieldName', this.cntryFieldName);   
+         localStorage.setItem('isLCountryMandatory', JSON.stringify(this.isLCountryMandatory)); // Convert boolean to string for storage
+
          localStorage.setItem('cntryDataType', this.cntryDataType);
       
          if (this.cntryDataType === 'Dropdown') {
@@ -261,8 +681,13 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
              localStorage.removeItem('cntryDropdownValues');
          }
 
+
+
+
                // Save updated field names to localStorage marital status
                localStorage.setItem('brchFieldName', this.brchFieldName);
+               localStorage.setItem('isLBranchMandatory', JSON.stringify(this.isLBranchMandatory)); // Convert boolean to string for storage
+
                localStorage.setItem('brchDataType', this.brchDataType);
             
                if (this.brchDataType === 'Dropdown') {
@@ -273,8 +698,12 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
             
       
 
+
+
                        // Save updated field names to localStorage marital status
                        localStorage.setItem('deptFieldName', this.deptFieldName);
+                       localStorage.setItem('isLDepartmentMandatory', JSON.stringify(this.isLDepartmentMandatory)); // Convert boolean to string for storage
+
                        localStorage.setItem('deptDataType', this.deptDataType);
                     
                        if (this.deptDataType === 'Dropdown') {
@@ -284,8 +713,12 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
                        }
 
 
-                            // Save updated field names to localStorage marital status
+                  
+                  
+                       // Save updated field names to localStorage marital status
                             localStorage.setItem('desFieldName', this.desFieldName);
+                            localStorage.setItem('isLDesignationMandatory', JSON.stringify(this.isLDesignationMandatory)); // Convert boolean to string for storage
+
                             localStorage.setItem('desDataType', this.desDataType);
                          
                             if (this.desDataType === 'Dropdown') {
@@ -293,10 +726,14 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
                             } else {
                                 localStorage.removeItem('desDropdownValues');
                             }
-                         
+                 
+                            
+                            
                     
      // Save updated field names to localStorage marital status
      localStorage.setItem('catFieldName', this.catFieldName);
+     localStorage.setItem('isLCatogoryMandatory', JSON.stringify(this.isLCatogoryMandatory)); // Convert boolean to string for storage
+
      localStorage.setItem('catDataType', this.catDataType);
   
      if (this.catDataType === 'Dropdown') {
@@ -310,9 +747,189 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
     console.log('Field names updated:', this.empCodeFieldName, this.firstNameFieldName, this.religionFieldName,this.cntryDataType);
   }
 
+  empFamilynameFieldName: string = 'Family Member Name';
+  empRelationnameFieldName: string = 'Relationship Name';
+  empExpencenameFieldName: string = 'Family Company Expense';
+  empmemDobnameFieldName: string = 'Member Date Of Birth';
+
+
+  empQualificationnameFieldName: string = 'Qualification';
+  empInstitutionnameFieldName: string = 'Institution Name';
+  empQuaYearnameFieldName: string = 'Qualification Year';
+  empQuaSubjectFieldName: string = 'Employee qualification subject';
+
+  
+  empJobFromDatenameFieldName: string = 'Employee job History From date';
+  empJobendDatenameFieldName: string = 'Employee job History to date';
+  empComapanyameFieldName: string = 'Comapany Name';
+  empJobDesignationFieldName: string = 'Employee Designation';
+  empSalarypermonthFieldName: string = 'Employee salary per month';
+  empLeavingReasonFieldName: string = 'Leaving reason';
+  empWorkExpFieldName: string = 'Employee work Experiance';
+
+
+  empDocmentNoFieldName: string = 'Document Number';
+  empIssueDateFieldName: string = 'Issued date';
+  empExpDateFieldName: string = 'Expired Date';
+  empEmpdocumentFieldName: string = 'Employee Document';
+  empEmpdocumentDatatypeFieldName: string = 'Document Type';
+
+
+  updateEmployeeFamily():void{
+        localStorage.setItem('empFamilynameFieldName', this.empFamilynameFieldName);
+        localStorage.setItem('empRelationnameFieldName', this.empRelationnameFieldName);
+        localStorage.setItem('empExpencenameFieldName', this.empExpencenameFieldName);
+        localStorage.setItem('empmemDobnameFieldName', this.empmemDobnameFieldName);
 
 
 
+        localStorage.setItem('empQualificationnameFieldName', this.empQualificationnameFieldName);
+        localStorage.setItem('empInstitutionnameFieldName', this.empInstitutionnameFieldName);
+        localStorage.setItem('empQuaYearnameFieldName', this.empQuaYearnameFieldName);
+        localStorage.setItem('empQuaSubjectFieldName', this.empQuaSubjectFieldName);
+
+
+        localStorage.setItem('empJobFromDatenameFieldName', this.empJobFromDatenameFieldName);
+        localStorage.setItem('empJobendDatenameFieldName', this.empJobendDatenameFieldName);
+        localStorage.setItem('empComapanyameFieldName', this.empComapanyameFieldName);
+        localStorage.setItem('empJobDesignationFieldName', this.empJobDesignationFieldName);
+        localStorage.setItem('empSalarypermonthFieldName', this.empSalarypermonthFieldName);
+        localStorage.setItem('empLeavingReasonFieldName', this.empLeavingReasonFieldName);
+        localStorage.setItem('empWorkExpFieldName', this.empWorkExpFieldName);
+
+
+
+        
+        localStorage.setItem('empDocmentNoFieldName', this.empDocmentNoFieldName);
+        localStorage.setItem('empIssueDateFieldName', this.empIssueDateFieldName);
+        localStorage.setItem('empExpDateFieldName', this.empExpDateFieldName);
+        localStorage.setItem('empEmpdocumentFieldName', this.empEmpdocumentFieldName);
+        localStorage.setItem('empEmpdocumentDatatypeFieldName', this.empEmpdocumentDatatypeFieldName);
+
+
+  }
+
+
+  
+  loadFamilyFieldNames(): void {
+    // Load field names from localStorage
+
+    const savedFamilyNameFieldName = localStorage.getItem('empFamilynameFieldName');
+    if (savedFamilyNameFieldName) {
+      this.empFamilynameFieldName = savedFamilyNameFieldName;
+    }
+
+    const empRelationnameFieldName = localStorage.getItem('empRelationnameFieldName');
+    if (empRelationnameFieldName) {
+      this.empRelationnameFieldName = empRelationnameFieldName;
+    }
+
+    const empExpencenameFieldName = localStorage.getItem('empExpencenameFieldName');
+    if (empExpencenameFieldName) {
+      this.empExpencenameFieldName = empExpencenameFieldName;
+    }
+
+    const empmemDobnameFieldName = localStorage.getItem('empmemDobnameFieldName');
+    if (empmemDobnameFieldName) {
+      this.empmemDobnameFieldName = empmemDobnameFieldName;
+    }
+
+
+
+    const empQualificationnameFieldName = localStorage.getItem('empQualificationnameFieldName');
+    if (empQualificationnameFieldName) {
+      this.empQualificationnameFieldName = empQualificationnameFieldName;
+    }
+    const empInstitutionnameFieldName = localStorage.getItem('empInstitutionnameFieldName');
+    if (empInstitutionnameFieldName) {
+      this.empInstitutionnameFieldName = empInstitutionnameFieldName;
+    }
+
+    const empQuaYearnameFieldName = localStorage.getItem('empQuaYearnameFieldName');
+    if (empQuaYearnameFieldName) {
+      this.empQuaYearnameFieldName = empQuaYearnameFieldName;
+    }
+
+    const empQuaSubjectFieldName = localStorage.getItem('empQuaSubjectFieldName');
+    if (empQuaSubjectFieldName) {
+      this.empQuaSubjectFieldName = empQuaSubjectFieldName;
+    }
+
+
+
+
+    const empJobFromDatenameFieldName = localStorage.getItem('empJobFromDatenameFieldName');
+    if (empJobFromDatenameFieldName) {
+      this.empJobFromDatenameFieldName = empJobFromDatenameFieldName;
+    }
+
+
+    const empJobendDatenameFieldName = localStorage.getItem('empJobendDatenameFieldName');
+    if (empJobendDatenameFieldName) {
+      this.empJobendDatenameFieldName = empJobendDatenameFieldName;
+    }
+
+    
+    const empComapanyameFieldName = localStorage.getItem('empComapanyameFieldName');
+    if (empComapanyameFieldName) {
+      this.empComapanyameFieldName = empComapanyameFieldName;
+    }
+
+
+    const empJobDesignationFieldName = localStorage.getItem('empJobDesignationFieldName');
+    if (empJobDesignationFieldName) {
+      this.empJobDesignationFieldName = empJobDesignationFieldName;
+    }
+
+    const empSalarypermonthFieldName = localStorage.getItem('empSalarypermonthFieldName');
+    if (empSalarypermonthFieldName) {
+      this.empSalarypermonthFieldName = empSalarypermonthFieldName;
+    }
+
+    const empLeavingReasonFieldName = localStorage.getItem('empLeavingReasonFieldName');
+    if (empLeavingReasonFieldName) {
+      this.empLeavingReasonFieldName = empLeavingReasonFieldName;
+    }
+
+
+    const empWorkExpFieldName = localStorage.getItem('empWorkExpFieldName');
+    if (empWorkExpFieldName) {
+      this.empWorkExpFieldName = empWorkExpFieldName;
+    }
+
+
+
+    
+    const empDocmentNoFieldName = localStorage.getItem('empDocmentNoFieldName');
+    if (empDocmentNoFieldName) {
+      this.empDocmentNoFieldName = empDocmentNoFieldName;
+    }
+
+
+    const empIssueDateFieldName = localStorage.getItem('empIssueDateFieldName');
+    if (empIssueDateFieldName) {
+      this.empIssueDateFieldName = empIssueDateFieldName;
+    }
+
+    const empExpDateFieldName = localStorage.getItem('empExpDateFieldName');
+    if (empExpDateFieldName) {
+      this.empExpDateFieldName = empExpDateFieldName;
+    }
+
+    const empEmpdocumentFieldName = localStorage.getItem('empEmpdocumentFieldName');
+    if (empEmpdocumentFieldName) {
+      this.empEmpdocumentFieldName = empEmpdocumentFieldName;
+    }
+
+
+    const empEmpdocumentDatatypeFieldName = localStorage.getItem('empEmpdocumentDatatypeFieldName');
+    if (empEmpdocumentDatatypeFieldName) {
+      this.empEmpdocumentDatatypeFieldName = empEmpdocumentDatatypeFieldName;
+    }
+
+
+
+  }
 
 
 
@@ -320,6 +937,8 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
     // Load field names from localStorage
     const savedEmpCodeFieldName = localStorage.getItem('empCodeFieldName');
     const savedFirstNameFieldName = localStorage.getItem('firstNameFieldName');
+    const savedIsFirstNameDisabled = localStorage.getItem('isFirstNameDisabled');
+
     const savedLastNameFieldName = localStorage.getItem('lastNameFieldName');
     const savedEmailFieldName = localStorage.getItem('emailFieldName');
 
@@ -332,6 +951,11 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
 
     const savednationFieldName = localStorage.getItem('nationFieldName');
 
+    const savedIsFirstNameMandatory = localStorage.getItem('isFirstNameMandatory');
+    if (savedIsFirstNameMandatory) {
+      this.isFirstNameMandatory = JSON.parse(savedIsFirstNameMandatory); // Convert string back to boolean
+  }
+
 
 
     if (savedEmpCodeFieldName) {
@@ -340,6 +964,13 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
     if (savedFirstNameFieldName) {
       this.firstNameFieldName = savedFirstNameFieldName;
     }
+    // const savedFirstNameFieldVisibility = localStorage.getItem('isFirstNameFieldHidden');
+    // if (savedFirstNameFieldVisibility) {
+    //     this.isFirstNameFieldHidden = JSON.parse(savedFirstNameFieldVisibility);
+    // }
+
+
+
     if (savedLastNameFieldName) {
       this.lastNameFieldName = savedLastNameFieldName;
     }
@@ -457,6 +1088,7 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
 
   }
 
+
   
 
 
@@ -468,41 +1100,76 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
     this.isMArketingModalOpen=false;
   }
 
-  CreateEmployeeFeild(): void {
-    this.registerButtonClicked = true;
+//   CreateEmployeeFeild(): void {
+//     this.registerButtonClicked = true;
 
-    // Convert the dropdown_values string into an array
-    const dropdownValuesArray = this.dropdown_values
-        ? this.dropdown_values.split(',').map((value: any) => value.trim())
-        : [];
+//     // Convert the dropdown_values string into an array
+//     const dropdownValuesArray = this.dropdown_values
+//         ? this.dropdown_values.split(',').map((value: any) => value.trim())
+//         : [];
         
-   // Convert the dropdown_values string into an array
-   const radio_valuesArray = this.radio_values
-   ? this.radio_values.split(',').map((value: any) => value.trim())
-   : [];
+//    // Convert the dropdown_values string into an array
+//    const radio_valuesArray = this.radio_values
+//    ? this.radio_values.split(',').map((value: any) => value.trim())
+//    : [];
 
-    const fieldData = {
-      emp_custom_field: this.field_name,
-        field_value: this.field_value,
-        data_type: this.data_type,
-        dropdown_values: dropdownValuesArray,
-        radio_values: radio_valuesArray,
-    };
+//     const fieldData = {
+//       emp_custom_field: this.field_name,
+//         field_value: this.field_value,
+//         data_type: this.data_type,
+//         dropdown_values: dropdownValuesArray,
+//         radio_values: radio_valuesArray,
+//     };
 
-    this.EmployeeService.registerEmpAddMoreFeild(fieldData).subscribe(
-        (response) => {
-            console.log('Field added successfully', response);
-            alert('Field added successfully');
+//     this.EmployeeService.registerEmpAddMoreFeild(fieldData).subscribe(
+//         (response) => {
+//             console.log('Field added successfully', response);
+//             alert('Field added successfully');
 
        
-        },
-        (error) => {
-            console.error('Field addition failed', error);
-            alert('Enter all fields!');
-        }
-    );
-}
+//         },
+//         (error) => {
+//             console.error('Field addition failed', error);
+//             alert('Enter all fields!');
+//         }
+//     );
+// }
 
+mandatory: boolean = false;
+
+CreateEmployeeFeild(): void {
+  this.registerButtonClicked = true;
+
+  // Convert the dropdown_values string into an array
+  const dropdownValuesArray = this.dropdown_values
+      ? this.dropdown_values.split(',').map((value: any) => value.trim())
+      : [];
+      
+ // Convert the radio_values string into an array
+ const radio_valuesArray = this.radio_values
+ ? this.radio_values.split(',').map((value: any) => value.trim())
+ : [];
+
+  const fieldData = {
+      emp_custom_field: this.field_name,
+      field_value: this.field_value,
+      data_type: this.data_type,
+      dropdown_values: dropdownValuesArray,
+      radio_values: radio_valuesArray,
+      mandatory: this.mandatory  // Capture the mandatory field status
+  };
+
+  this.EmployeeService.registerEmpAddMoreFeild(fieldData).subscribe(
+      (response) => {
+          console.log('Field added successfully', response);
+          alert('Field added successfully');
+      },
+      (error) => {
+          console.error('Field addition failed', error);
+          alert('Enter all fields!');
+      }
+  );
+}
 
 updateCustomField(field: any): void {
   // Convert the dropdown_values and radio_values only if they are strings
@@ -567,5 +1234,7 @@ deleteCustomField(fieldId: number): void {
     );
   }
 }
+
+
 
 }

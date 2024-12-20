@@ -99,7 +99,7 @@
     </div>
 
 
-    <div class="col-md-3">
+    <div class="col-md-3" *ngIf="!user">
 
 
         <div class="custom-sel">
@@ -119,7 +119,7 @@
         <div class="check-box-selection-sec form-control">
             <div class="mat-set">
                 <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
-                <mat-checkbox [(ngModel)]="automatic_numbering">Automatic numbering</mat-checkbox>
+                <mat-checkbox [(ngModel)]="automatic_numbering"  [ngModelOptions]="{standalone: true}">Automatic numbering</mat-checkbox>
                 <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
             </div>
            
@@ -161,6 +161,8 @@
                 <th>End No</th>
                 <th>Branch</th>
                 <th>Category</th>
+                <th>Authomatic numbering</th>
+
 
                
               </tr>
@@ -177,6 +179,8 @@
                 <td>{{ docs.end_number }}</td>
                 <td>{{ docs.branch_id }}</td>
                 <td>{{ docs.category }}</td>
+                <td>{{ docs.automatic_numbering }}</td>
+
            
               </tr>
           

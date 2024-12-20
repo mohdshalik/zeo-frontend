@@ -200,7 +200,7 @@ export class EmployeeService {
        
     
         
-        const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/assign-holiday/`;
+        const apiUrl = `${this.apiUrl}/calendars/api/assign-holiday/?schema=${selectedSchema}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     
         return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -1163,7 +1163,7 @@ export class EmployeeService {
     }
    
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-custom-field/${field.id}/`; // Replace with your actual API URL
+    const apiUrl = `${this.apiUrl}/employee/api/emp-custom-field/${field.id}/?schema=${selectedSchema}`; // Replace with your actual API URL
     return this.http.put(apiUrl, field);
   }
 
@@ -1205,7 +1205,7 @@ export class EmployeeService {
       console.error('No schema selected.');
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-custom-field/${fieldId}/`;
+    const url = `${this.apiUrl}/employee/api/emp-custom-field/${fieldId}/?schema=${selectedSchema}`;
     return this.http.delete(url);
   }
   
@@ -1248,7 +1248,7 @@ export class EmployeeService {
      
   
       
-      const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/email-template/`;
+      const apiUrl = `${this.apiUrl}/employee/api/email-template/?schema=${selectedSchema}`;
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
       return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -1315,7 +1315,7 @@ export class EmployeeService {
 
 
   getEmailPlaceholder(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/email-template/placeholders/`;
+    const apiUrl = `${this.apiUrl}/employee/api/email-template/placeholders/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -1331,7 +1331,7 @@ export class EmployeeService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/email-template/${updatedTemplate.id}/`;
+    const apiUrl = `${this.apiUrl}/employee/api/email-template/${updatedTemplate.id}/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
     return this.http.put(apiUrl, updatedTemplate, { headers }).pipe(

@@ -47,7 +47,7 @@ export class CatogaryService {
 
 
   getHolidayCalendar(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/holiday-calendar/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/holiday-calendar/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);

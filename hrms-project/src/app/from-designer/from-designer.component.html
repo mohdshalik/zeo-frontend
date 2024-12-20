@@ -1,1040 +1,1972 @@
 <div class="container" >
-    <div class="comapny_section">
-        <div class="com_list ">
-    <div class="cpm-sec">
+  <div class="comapny_section">
+      <div class="com_list ">
+  <div class="cpm-sec">
 
-        <h2>Forms</h2><hr>
+      <h2>Forms</h2><hr>
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+<mat-step [stepControl]="firstFormGroup">
+  <ng-template matStepLabel>Employee Form</ng-template>
+  <div class="all_fields">
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+         
+                  <div class="col-md-12">
+                      Field name - {{empCodeFieldName}}
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
 
-        <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-           
-                    <div class="col-md-12">
-                        Field name - {{empCodeFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-           <div class="col-md-6">
-      <label for="emp_code_name">Employee Code Field Name:</label>
-      <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empCodeFieldName">
-    </div>
-    <div class="col-md-6">
-        <label>Data type</label>
-        <div class="custom-sel">
-          <select class="form-control" [(ngModel)]="selectedDataType">
-            <option>Text Box</option>
-            <option>Dropdown</option>
-          </select>
-        </div>
+            <div class="inside_udf">
+             <!-- Collapsible panel content for editing the field -->
+         <div class="col-md-6">
+    <label for="emp_code_name">Employee Code Field Name:</label>
+    <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empCodeFieldName">
+  </div>
+  <div class="col-md-6">
+      <label>Data type</label>
+      <div class="custom-sel">
+        <select class="form-control" [(ngModel)]="selectedDataType">
+          <option>Text Box</option>
+          <option>Dropdown</option>
+        </select>
       </div>
-      <div class="col-md-6" *ngIf="selectedDataType === 'Dropdown'">
-        <label>Dropdown Values (comma separated)</label>
-        <input type="text" class="form-control" [(ngModel)]="dropdownValues" placeholder="Enter Dropdown Values">
     </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+    <div class="col-md-6" *ngIf="selectedDataType === 'Dropdown'">
+      <label>Dropdown Values (comma separated)</label>
+      <input type="text" class="form-control" [(ngModel)]="dropdownValues" placeholder="Enter Dropdown Values">
+  </div>
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
 
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-        
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{firstNameFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="emp_first_name_name">First Name Field Name:</label>
-                <input type="text" id="emp_first_name_name" class="form-control" [(ngModel)]="firstNameFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{lastNameFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="emp_first_name_name"> Field Name:</label>
-                <input type="text" id="emp_last_name_name" class="form-control" [(ngModel)]="lastNameFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <div class="col-md-12">
-                        Field name - {{genderFieldName}}
-                    </div>
-                    <mat-panel-title>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-        
-                <div class="inside_udf">
-                    <!-- Gender Field Name Input -->
-                    <div class="col-md-6">
-                        <label for="gender_field_name">Gender Field Name:</label>
-                        <input type="text" id="gender_field_name" class="form-control" [(ngModel)]="genderFieldName">
-                    </div>
-        
-                    <!-- Gender Data Type Selection -->
-                    <div class="col-md-6">
-                        <label>Data type</label>
-                        <div class="custom-sel">
-                            <select class="form-control" [(ngModel)]="genderDataType">
-                                <option>Text Box</option>
-                                <option>Dropdown</option>
-                            </select>
-                        </div>
-                    </div>
-        
-                    <!-- Gender Dropdown Values (if Dropdown is selected) -->
-                    <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
-                        <label>Dropdown Values (comma separated)</label>
-                        <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
-                    </div> -->
-                    
-                    <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-                </div>    
-            </mat-expansion-panel>
+            </div>    
+      
+          </mat-expansion-panel>
         </mat-accordion>
-
+      
         <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{dobFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{firstNameFieldName}}
 
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="dob_name"> Field Name:</label>
-                <input type="text" id="dob_name" class="form-control" [(ngModel)]="dobFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
-
-              </div>    
+                          <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabled()">{{ isFirstNameFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+                          <!-- {{ isFirstNameFieldHidden ? 'Enable' : 'Disable' }} -->
+                                        
+                  </div>
+              <mat-panel-title>
         
-            </mat-expansion-panel>
-          </mat-accordion>
-        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
 
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{emailFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+            <div class="inside_udf">
+             <!-- Collapsible panel content for editing the field -->
 
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="email_name_name"> Field Name:</label>
-                <input type="text" id="email_name_name" class="form-control" [(ngModel)]="emailFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
-
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{cmpnoFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="cpmno_name"> Field Name:</label>
-                <input type="text" id="cpmno_name" class="form-control" [(ngModel)]="cmpnoFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
-
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-        
-        
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{pernoFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="perno_name"> Field Name:</label>
-                <input type="text" id="perno_name" class="form-control" [(ngModel)]="pernoFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
-
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-
-
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{peraddressFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="peraddress_name"> Field Name:</label>
-                <input type="text" id="peraddress_name" class="form-control" [(ngModel)]="peraddressFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
-
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{preaddressFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="preaddress_name"> Field Name:</label>
-                <input type="text" id="preaddress_name" class="form-control" [(ngModel)]="preaddressFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
-
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-
-
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{cityFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="city_name"> Field Name:</label>
-                <input type="text" id="city_name" class="form-control" [(ngModel)]="cityFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
-
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-
-
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
+             <div class="row">
+              <div class="col-md-6">
+                  <label for="emp_first_name_name">First Name Field Name:</label>
+                  <input type="text" id="emp_first_name_name" class="form-control" [(ngModel)]="firstNameFieldName">
+              </div>
+  
+              <div class="col-md-6">
+                  <label></label>
+                  <div class="check-box-selection-sec mt-2">
+                      <div class="mat-set">
+                          <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                          <mat-checkbox [(ngModel)]="isFirstNameMandatory">Mandatory Field</mat-checkbox>
+                          <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                      </div>
+                     
+                  </div>
+                  </div>
+  
+             </div>
            
-                    <div class="col-md-12">
-                        Field name - {{religionFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
 
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-           <div class="col-md-6">
-      <label for="religion_name"> Field Name:</label>
-      <input type="text" id="religion_name" class="form-control" [(ngModel)]="religionFieldName">
-    </div>
-    <div class="col-md-6">
-        <label>Data type</label>
-        <div class="custom-sel">
-          <select class="form-control" [(ngModel)]="selectedDataTypereligion">
-            <option>Text Box</option>
-            <option>Dropdown</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-6" *ngIf="selectedDataTypereligion === 'Dropdown'">
-        <label>Dropdown Values (comma separated)</label>
-        <input type="text" class="form-control" [(ngModel)]="dropdownValuesreligion" placeholder="Enter Dropdown Values">
-    </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
 
-              </div>    
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{lastNameFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledLastname()">{{ isLasstNameFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
         
-            </mat-expansion-panel>
-          </mat-accordion>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
 
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
+            <div class="inside_udf">
+             <!-- Collapsible panel content for editing the field -->
+
+             <div class="row">
+              <div class="col-md-6">
+                  <label for="emp_first_name_name"> Field Name:</label>
+                  <input type="text" id="emp_last_name_name" class="form-control" [(ngModel)]="lastNameFieldName">
+              </div>
+              <div class="col-md-6">
+                  <label></label>
+                  <div class="check-box-selection-sec mt-2">
+                      <div class="mat-set">
+                          <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                          <mat-checkbox [(ngModel)]="isLastNameMandatory">Mandatory Field</mat-checkbox>
+                          <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                      </div>
+                     
+                  </div>
+                  </div>
+
+             </div>
            
-                    <div class="col-md-12">
-                        Field name - {{bloodFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
 
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <div class="col-md-12">
+                      Field name - {{genderFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledGender()">{{ isGernderNameFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+                  <mat-panel-title>
+                  </mat-panel-title>
+              </mat-expansion-panel-header>
+      
               <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-           <div class="col-md-6">
-      <label for="blood_name"> Field Name:</label>
-      <input type="text" id="blood_name" class="form-control" [(ngModel)]="bloodFieldName" placeholder="{{bloodFieldName}}">
-    </div>
-    <div class="col-md-6">
-        <label>Data type</label>
-        <div class="custom-sel">
-          <select class="form-control" [(ngModel)]="selectedDataTypeblood">
-            <option>Text Box</option>
-            <option>Dropdown</option>
-          </select>
-        </div>
+                  <!-- Gender Field Name Input -->
+<div class="row">
+  <div class="col-md-6">
+      <label for="gender_field_name"> Field Name:</label>
+      <input type="text" id="gender_field_name" class="form-control" [(ngModel)]="genderFieldName">
+  </div>
+
+  <div class="col-md-6">
+      <label></label>
+      <div class="check-box-selection-sec mt-2">
+          <div class="mat-set">
+              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+              <mat-checkbox [(ngModel)]="isGenderMandatory">Mandatory Field</mat-checkbox>
+              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+          </div>
+         
       </div>
-      <div class="col-md-6" *ngIf="selectedDataTypeblood === 'Dropdown'">
-        <label>Dropdown Values (comma separated)</label>
-        <input type="text" class="form-control" [(ngModel)]="dropdownValuesblood" placeholder="Enter Dropdown Values">
+      </div>
+
+      <div class="col-md-6">
+          <label>Data type</label>
+          <div class="custom-sel">
+              <select class="form-control" [(ngModel)]="genderDataType">
+                  <option>Text Box</option>
+                  <option>Dropdown</option>
+              </select>
+          </div>
+      </div>
+</div>
+
+              
+                  
+                  
+                  <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+              </div>    
+          </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{dobFieldName}}
+                      
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+
+              <div class="row">
+                      <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="dob_name"> Field Name:</label>
+              <input type="text" id="dob_name" class="form-control" [(ngModel)]="dobFieldName">
+          </div>
+                 
+              </div>
+         
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+            
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{emailFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledEmail()">{{ isEmailNameFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="email_name_name"> Field Name:</label>
+              <input type="text" id="email_name_name" class="form-control" [(ngModel)]="emailFieldName">
+          </div>
+          <div class="col-md-6">
+              <label></label>
+              <div class="check-box-selection-sec mt-2">
+                  <div class="mat-set">
+                      <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                      <mat-checkbox [(ngModel)]="isEmailMandatory">Mandatory Field</mat-checkbox>
+                      <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                  </div>
+                 
+              </div>
+              </div>
+              </div>
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{cmpnoFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledCmpNo()">{{ isCmpNoNameFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="cpmno_name"> Field Name:</label>
+              <input type="text" id="cpmno_name" class="form-control" [(ngModel)]="cmpnoFieldName">
+          </div>
+          <div class="col-md-6">
+              <label></label>
+              <div class="check-box-selection-sec mt-2">
+                  <div class="mat-set">
+                      <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                      <mat-checkbox [(ngModel)]="isCmpnoMandatory">Mandatory Field</mat-checkbox>
+                      <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                  </div>
+                 
+              </div>
+              </div>
+              </div>
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+      
+      
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{pernoFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledPerNo()">{{ isPerNoNameFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="perno_name"> Field Name:</label>
+              <input type="text" id="perno_name" class="form-control" [(ngModel)]="pernoFieldName">
+          </div>
+          <div class="col-md-6">
+              <label></label>
+              <div class="check-box-selection-sec mt-2">
+                  <div class="mat-set">
+                      <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                      <mat-checkbox [(ngModel)]="isPernoMandatory">Mandatory Field</mat-checkbox>
+                      <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                  </div>
+                 
+              </div>
+              </div>
+              </div>
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{peraddressFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledPermadd()">{{ isPermaddNameFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="peraddress_name"> Field Name:</label>
+              <input type="text" id="peraddress_name" class="form-control" [(ngModel)]="peraddressFieldName">
+          </div>
+
+          <div class="col-md-6">
+              <label></label>
+              <div class="check-box-selection-sec mt-2">
+                  <div class="mat-set">
+                      <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                      <mat-checkbox [(ngModel)]="isPeraddMandatory">Mandatory Field</mat-checkbox>
+                      <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                  </div>
+                 
+              </div>
+              </div>
+              </div>
+
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{preaddressFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledPresentadd()">{{ isPresentaddNameFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="preaddress_name"> Field Name:</label>
+              <input type="text" id="preaddress_name" class="form-control" [(ngModel)]="preaddressFieldName">
+          </div>
+          <div class="col-md-6">
+              <label></label>
+              <div class="check-box-selection-sec mt-2">
+                  <div class="mat-set">
+                      <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                      <mat-checkbox [(ngModel)]="isPresaddMandatory">Mandatory Field</mat-checkbox>
+                      <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                  </div>
+                 
+              </div>
+              </div>
+              </div>
+
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{cityFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledCity()">{{ isCityFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="city_name"> Field Name:</label>
+              <input type="text" id="city_name" class="form-control" [(ngModel)]="cityFieldName">
+          </div>
+
+          <div class="col-md-6">
+              <label></label>
+              <div class="check-box-selection-sec mt-2">
+                  <div class="mat-set">
+                      <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                      <mat-checkbox [(ngModel)]="isCityMandatory">Mandatory Field</mat-checkbox>
+                      <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                  </div>
+                 
+              </div>
+              </div>
+              </div>
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+         
+                  <div class="col-md-12">
+                      Field name - {{religionFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledReli()">{{ isReliFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+         <div class="col-md-6">
+    <label for="religion_name"> Field Name:</label>
+    <input type="text" id="religion_name" class="form-control" [(ngModel)]="religionFieldName">
+  </div>
+  <div class="col-md-6">
+      <label></label>
+      <div class="check-box-selection-sec mt-2">
+          <div class="mat-set">
+              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+              <mat-checkbox [(ngModel)]="isRelMandatory">Mandatory Field</mat-checkbox>
+              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+          </div>
+         
+      </div>
+      </div>
+  <div class="col-md-6">
+      <label>Data type</label>
+      <div class="custom-sel">
+        <select class="form-control" [(ngModel)]="selectedDataTypereligion">
+          <option>Text Box</option>
+          <option>Dropdown</option>
+        </select>
+      </div>
     </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+    <div class="col-md-6" *ngIf="selectedDataTypereligion === 'Dropdown'">
+      <label>Dropdown Values (comma separated)</label>
+      <input type="text" class="form-control" [(ngModel)]="dropdownValuesreligion" placeholder="Enter Dropdown Values">
+  </div>
+  </div>
 
-              </div>    
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+         
+                  <div class="col-md-12">
+                      Field name - {{bloodFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledBlood()">{{ isBloodFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
         
-            </mat-expansion-panel>
-          </mat-accordion>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
 
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
+            <div class="inside_udf">
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+         <div class="col-md-6">
+    <label for="blood_name"> Field Name:</label>
+    <input type="text" id="blood_name" class="form-control" [(ngModel)]="bloodFieldName" placeholder="{{bloodFieldName}}">
+  </div>
+  <div class="col-md-6">
+      <label></label>
+      <div class="check-box-selection-sec mt-2">
+          <div class="mat-set">
+              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+              <mat-checkbox [(ngModel)]="isBloodMandatory">Mandatory Field</mat-checkbox>
+              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+          </div>
+         
+      </div>
+      </div>
+  <div class="col-md-6">
+      <label>Data type</label>
+      <div class="custom-sel">
+        <select class="form-control" [(ngModel)]="selectedDataTypeblood">
+          <option>Text Box</option>
+          <option>Dropdown</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="selectedDataTypeblood === 'Dropdown'">
+      <label>Dropdown Values (comma separated)</label>
+      <input type="text" class="form-control" [(ngModel)]="dropdownValuesblood" placeholder="Enter Dropdown Values">
+  </div>
+  </div>
+
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{nationFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisabledNation()">{{ isNationFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="nation_name"> Field Name:</label>
+              <input type="text" id="nation_name" class="form-control" [(ngModel)]="nationFieldName">
+          </div>
+          <div class="col-md-6">
+              <label></label>
+              <div class="check-box-selection-sec mt-2">
+                  <div class="mat-set">
+                      <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                      <mat-checkbox [(ngModel)]="isNatMandatory">Mandatory Field</mat-checkbox>
+                      <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                  </div>
+                 
+              </div>
+              </div>
+              </div>
+
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
               <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{nationFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
+                  <div class="col-md-12">
+                      Field name - {{maritalFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisablemarital()">{{ isMaritalFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+                  <mat-panel-title>
+                  </mat-panel-title>
               </mat-expansion-panel-header>
-
+      
               <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="nation_name"> Field Name:</label>
-                <input type="text" id="nation_name" class="form-control" [(ngModel)]="nationFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+                  <div class="row">
+                  <!-- Gender Field Name Input -->
+                  <div class="col-md-6">
+                      <label for="marital_field_name"> Field Name:</label>
+                      <input type="text" id="marital_field_name" class="form-control" [(ngModel)]="maritalFieldName">
+                  </div>
+                  <div class="col-md-6">
+                      <label></label>
+                      <div class="check-box-selection-sec mt-2">
+                          <div class="mat-set">
+                              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                              <mat-checkbox [(ngModel)]="isMariMandatory">Mandatory Field</mat-checkbox>
+                              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                          </div>
+                         
+                      </div>
+                      </div>
+      
+                  <!-- Gender Data Type Selection -->
+                  <div class="col-md-6">
+                      <label>Data type</label>
+                      <div class="custom-sel">
+                          <select class="form-control" [(ngModel)]="maritalDataType">
+                              <option>Text Box</option>
+                              <option>Dropdown</option>
+                          </select>
+                      </div>
+                  </div>
+      </div>
 
+                  <!-- Gender Dropdown Values (if Dropdown is selected) -->
+                  <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
+                      <label>Dropdown Values (comma separated)</label>
+                      <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
+                  </div> -->
+                  
+                  <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
               </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
+          </mat-expansion-panel>
+      </mat-accordion>
 
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <div class="col-md-12">
-                        Field name - {{maritalFieldName}}
-                    </div>
-                    <mat-panel-title>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{fatherFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisableFather()">{{ isFatherFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
         
-                <div class="inside_udf">
-                    <!-- Gender Field Name Input -->
-                    <div class="col-md-6">
-                        <label for="marital_field_name"> Field Name:</label>
-                        <input type="text" id="marital_field_name" class="form-control" [(ngModel)]="maritalFieldName">
-                    </div>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+              <div class="row">
+                  <div class="col-md-6">
+                      <label for="fatherFieldName_name"> Field Name:</label>
+                      <input type="text" id="fatherFieldName_name" class="form-control" [(ngModel)]="fatherFieldName">
+                  </div>
+                  <div class="col-md-6">
+                      <label></label>
+                      <div class="check-box-selection-sec mt-2">
+                          <div class="mat-set">
+                              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                              <mat-checkbox [(ngModel)]="isFatherMandatory">Mandatory Field</mat-checkbox>
+                              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                          </div>
+                         
+                      </div>
+                      </div>
+              </div>
+             <!-- Collapsible panel content for editing the field -->
+         
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{motherFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisableMother()">{{ isMotherFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
         
-                    <!-- Gender Data Type Selection -->
-                    <div class="col-md-6">
-                        <label>Data type</label>
-                        <div class="custom-sel">
-                            <select class="form-control" [(ngModel)]="maritalDataType">
-                                <option>Text Box</option>
-                                <option>Dropdown</option>
-                            </select>
-                        </div>
-                    </div>
-        
-                    <!-- Gender Dropdown Values (if Dropdown is selected) -->
-                    <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
-                        <label>Dropdown Values (comma separated)</label>
-                        <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
-                    </div> -->
-                    
-                    <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-                </div>    
-            </mat-expansion-panel>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="motherFieldName_name"> Field Name:</label>
+              <input type="text" id="motherFieldName_name" class="form-control" [(ngModel)]="motherFieldName">
+          </div>
+          <div class="col-md-6">
+              <label></label>
+              <div class="check-box-selection-sec mt-2">
+                  <div class="mat-set">
+                      <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                      <mat-checkbox [(ngModel)]="isMotherMandatory">Mandatory Field</mat-checkbox>
+                      <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                  </div>
+                 
+              </div>
+              </div>
+              </div>
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
         </mat-accordion>
 
 
         <mat-accordion class="mt-3">
-            <mat-expansion-panel>
+          <mat-expansion-panel>
               <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{fatherFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
+                  <div class="col-md-12">
+                      Field name - {{locationFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisableLocation()">{{ isLocationFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+                  <mat-panel-title>
+                  </mat-panel-title>
               </mat-expansion-panel-header>
-
+      
               <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="fatherFieldName_name"> Field Name:</label>
-                <input type="text" id="fatherFieldName_name" class="form-control" [(ngModel)]="fatherFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
 
+                  <div class="row">
+                  <!-- Gender Field Name Input -->
+                  <div class="col-md-6">
+                      <label for="location_field_name"> Field Name:</label>
+                      <input type="text" id="location_field_name" class="form-control" [(ngModel)]="locationFieldName">
+                  </div>
+      
+                  <div class="col-md-6">
+                      <label></label>
+                      <div class="check-box-selection-sec mt-2">
+                          <div class="mat-set">
+                              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                              <mat-checkbox [(ngModel)]="isLocationMandatory">Mandatory Field</mat-checkbox>
+                              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                          </div>
+                         
+                      </div>
+                      </div>
+                  <!-- Gender Data Type Selection -->
+                  <div class="col-md-6">
+                      <label>Data type</label>
+                      <div class="custom-sel">
+                          <select class="form-control" [(ngModel)]="locationDataType">
+                              <option>Text Box</option>
+                              <option>Dropdown</option>
+                          </select>
+                      </div>
+                  </div>
+      </div>
+                  
+                  <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
               </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
+          </mat-expansion-panel>
+      </mat-accordion>
 
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
+
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
               <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{motherFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
+                  <div class="col-md-12">
+                      Field name - {{cntryFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisableCountry()">{{ isCountryFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+                  <mat-panel-title>
+                  </mat-panel-title>
               </mat-expansion-panel-header>
-
+      
               <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="motherFieldName_name"> Field Name:</label>
-                <input type="text" id="motherFieldName_name" class="form-control" [(ngModel)]="motherFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
-
+                  <div class="row">
+                  <!-- Gender Field Name Input -->
+                  <div class="col-md-6">
+                      <label for="cntry_field_name"> Field Name:</label>
+                      <input type="text" id="cntry_field_name" class="form-control" [(ngModel)]="cntryFieldName">
+                  </div>
+                  <div class="col-md-6">
+                      <label></label>
+                      <div class="check-box-selection-sec mt-2">
+                          <div class="mat-set">
+                              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                              <mat-checkbox [(ngModel)]="isLCountryMandatory">Mandatory Field</mat-checkbox>
+                              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                          </div>
+                         
+                      </div>
+                      </div>
+                  <!-- Gender Data Type Selection -->
+                  <div class="col-md-6">
+                      <label>Data type</label>
+                      <div class="custom-sel">
+                          <select class="form-control" [(ngModel)]="cntryDataType">
+                              <option>Text Box</option>
+                              <option>Dropdown</option>
+                          </select>
+                      </div>
+                  </div>
+                  </div>
+      
+                  <!-- Gender Dropdown Values (if Dropdown is selected) -->
+                  <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
+                      <label>Dropdown Values (comma separated)</label>
+                      <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
+                  </div> -->
+                  
+                  <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
               </div>    
+          </mat-expansion-panel>
+      </mat-accordion>
+
+
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <div class="col-md-12">
+                      Field name - {{brchFieldName}}
+                      <!-- <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisableBranch()">{{ isBranchFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon>  -->
+
+                  </div>
+                  <mat-panel-title>
+                  </mat-panel-title>
+              </mat-expansion-panel-header>
+      
+              <div class="inside_udf">
+                  <div class="row">
+                  <!-- Gender Field Name Input -->
+                  <div class="col-md-6">
+                      <label for="brch_field_name"> Field Name:</label>
+                      <input type="text" id="brch_field_name" class="form-control" [(ngModel)]="brchFieldName">
+                  </div>
+                  <div class="col-md-6">
+                      <label></label>
+                      <div class="check-box-selection-sec mt-2">
+                          <div class="mat-set">
+                              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                              <mat-checkbox [(ngModel)]="isLBranchMandatory">Mandatory Field</mat-checkbox>
+                              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                          </div>
+                         
+                      </div>
+                      </div>
+      
+                  <!-- Gender Data Type Selection -->
+                  <div class="col-md-6">
+                      <label>Data type</label>
+                      <div class="custom-sel">
+                          <select class="form-control" [(ngModel)]="brchDataType">
+                              <option>Text Box</option>
+                              <option>Dropdown</option>
+                          </select>
+                      </div>
+                  </div>
+      </div>
+                  <!-- Gender Dropdown Values (if Dropdown is selected) -->
+                  <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
+                      <label>Dropdown Values (comma separated)</label>
+                      <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
+                  </div> -->
+                  
+                  <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+              </div>    
+          </mat-expansion-panel>
+      </mat-accordion>
+
+
+
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <div class="col-md-12">
+                      Field name - {{deptFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisableDepart()">{{ isDepartFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+                  <mat-panel-title>
+                  </mat-panel-title>
+              </mat-expansion-panel-header>
+      
+              <div class="inside_udf">
+
+                  <div class="row">
+                  <!-- Gender Field Name Input -->
+                  <div class="col-md-6">
+                      <label for="dept_field_name"> Field Name:</label>
+                      <input type="text" id="dept_field_name" class="form-control" [(ngModel)]="deptFieldName">
+                  </div>
+
+                  <div class="col-md-6">
+                      <label></label>
+                      <div class="check-box-selection-sec mt-2">
+                          <div class="mat-set">
+                              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                              <mat-checkbox [(ngModel)]="isLDepartmentMandatory">Mandatory Field</mat-checkbox>
+                              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                          </div>
+                         
+                      </div>
+                      </div>
+      
+                  <!-- Gender Data Type Selection -->
+                  <div class="col-md-6">
+                      <label>Data type</label>
+                      <div class="custom-sel">
+                          <select class="form-control" [(ngModel)]="deptDataType">
+                              <option>Text Box</option>
+                              <option>Dropdown</option>
+                          </select>
+                      </div>
+                  </div>
+      </div>
+                
+                  
+                  <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+              </div>    
+          </mat-expansion-panel>
+      </mat-accordion>
+
+
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <div class="col-md-12">
+                      Field name - {{desFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisableDesignation()">{{ isDesignationFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+                  <mat-panel-title>
+                  </mat-panel-title>
+              </mat-expansion-panel-header>
+      
+              <div class="inside_udf">
+
+                  <div class="row">
+                  <!-- Gender Field Name Input -->
+                  <div class="col-md-6">
+                      <label for="des_field_name"> Field Name:</label>
+                      <input type="text" id="des_field_name" class="form-control" [(ngModel)]="desFieldName">
+                  </div>
+
+                  <div class="col-md-6">
+                      <label></label>
+                      <div class="check-box-selection-sec mt-2">
+                          <div class="mat-set">
+                              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                              <mat-checkbox [(ngModel)]="isLDesignationMandatory">Mandatory Field</mat-checkbox>
+                              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                          </div>
+                         
+                      </div>
+                      </div>
+      
+      
+                  <!-- Gender Data Type Selection -->
+                  <div class="col-md-6">
+                      <label>Data type</label>
+                      <div class="custom-sel">
+                          <select class="form-control" [(ngModel)]="desDataType">
+                              <option>Text Box</option>
+                              <option>Dropdown</option>
+                          </select>
+                      </div>
+                  </div>
+      
+            </div>
+                  <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+              </div>    
+          </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <div class="col-md-12">
+                      Field name - {{catFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisableCat()">{{ isCatFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+                  <mat-panel-title>
+                  </mat-panel-title>
+              </mat-expansion-panel-header>
+      
+              <div class="inside_udf">
+
+                  <div class="row">
+                  <!-- Gender Field Name Input -->
+                  <div class="col-md-6">
+                      <label for="cat_field_name"> Field Name:</label>
+                      <input type="text" id="cat_field_name" class="form-control" [(ngModel)]="catFieldName">
+                  </div>
+
+                  <div class="col-md-6">
+                      <label></label>
+                      <div class="check-box-selection-sec mt-2">
+                          <div class="mat-set">
+                              <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                              <mat-checkbox [(ngModel)]="isLCatogoryMandatory">Mandatory Field</mat-checkbox>
+                              <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                          </div>
+                         
+                      </div>
+                      </div>
+      
+      
+                  
+      
+                  <!-- Gender Data Type Selection -->
+                  <div class="col-md-6">
+                      <label>Data type</label>
+                      <div class="custom-sel">
+                          <select class="form-control" [(ngModel)]="catDataType">
+                              <option>Text Box</option>
+                              <option>Dropdown</option>
+                          </select>
+                      </div>
+                  </div>
+      
+                 </div>
+                  
+                  <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
+              </div>    
+          </mat-expansion-panel>
+      </mat-accordion>
+
+
+   
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{hiredFieldName}}
+                      <mat-icon class="mat_eye_emp pull-right" (click)="toggleFieldDisableHire()">{{ isHireFieldHidden ? 'visibility_off' : 'visibility' }}</mat-icon> 
+
+                  </div>
+              <mat-panel-title>
         
-            </mat-expansion-panel>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+              <div class="row">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="hiredFieldName_name"> Field Name:</label>
+              <input type="text" id="hiredFieldName_name" class="form-control" [(ngModel)]="hiredFieldName">
+          </div>
+
+          <div class="col-md-6">
+              <label></label>
+              <div class="check-box-selection-sec mt-2">
+                  <div class="mat-set">
+                      <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                      <mat-checkbox [(ngModel)]="isHiringMandatory">Mandatory Field</mat-checkbox>
+                      <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                  </div>
+                 
+              </div>
+              </div>
+              </div>
+
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              
+                  <div class="col-md-12">
+                      {{joinFieldName}}
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="inside_udf">
+             <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+              <label for="joinFieldName_name"> Field Name:</label>
+              <input type="text" id="joinFieldName_name" class="form-control" [(ngModel)]="joinFieldName">
+          </div>
+          <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+
+
+        <div class="calendar_view_sec mt-3" *ngFor="let field of custom_fields">
+          <mat-accordion>
+              <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                      <div class="col-md-6">
+                          Field Name - {{field.emp_custom_field}}
+                      </div>
+                      <div class="col-md-5">
+                          Data Type - {{field.data_type}}
+                      </div>
+                      <div class="col-md-1">
+                          <mat-icon class="trash" (click)="deleteCustomField(field.id)">delete</mat-icon>
+                      </div>
+                      <mat-panel-title></mat-panel-title>
+                  </mat-expansion-panel-header>
+      
+                  <div class="inside_udf">
+                      <!-- Collapsible panel content for editing the field -->
+                      <div class="row">
+                          <!-- Field Name -->
+                          <div class="col-md-6">
+                              <label>Field Name</label>
+                              <input type="text" class="form-control" [(ngModel)]="field.emp_custom_field" placeholder="Enter Field Name" [ngModelOptions]="{standalone: true}" />
+                          </div>
+      
+                          <!-- Data Type -->
+                          <div class="col-md-6">
+                              <label>Data Type</label>
+                              <div class="custom-sel">
+                                  <select class="form-control" [(ngModel)]="field.data_type" [ngModelOptions]="{standalone: true}">
+                                      <option value="dropdown">Dropdown</option>
+                                      <option value="radio">Radio</option>
+                                      <option value="date">Date</option>
+                                  </select>
+                              </div>
+                          </div>
+      
+                          <!-- Dropdown Values -->
+                          <div class="col-md-6" *ngIf="field.data_type === 'dropdown'">
+                              <label>Dropdown Values</label>
+                              <input type="text" class="form-control" [(ngModel)]="field.dropdown_values" placeholder="Enter Dropdown Values (comma separated)" [ngModelOptions]="{standalone: true}" />
+                          </div>
+      
+                          <!-- Radio Values -->
+                          <div class="col-md-6" *ngIf="field.data_type === 'radio'">
+                              <label>Radio Values</label>
+                              <input type="text" class="form-control" [(ngModel)]="field.radio_values" placeholder="Enter Radio Values (comma separated)" [ngModelOptions]="{standalone: true}" />
+                          </div>
+      
+                          <!-- Mandatory Field Checkbox -->
+                          <div class="col-md-6">
+                              <label></label>
+                              <div class="check-box-selection-sec mt-2">
+                                  <div class="mat-set">
+                                      <mat-checkbox [(ngModel)]="field.mandatory" [ngModelOptions]="{standalone: true}">Mandatory Field</mat-checkbox>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+      
+                      <!-- Update Button -->
+                      <div class="row">
+                          <div class="col-md-12 text-right">
+                              <button type="button" mat-raised-button color="primary" (click)="updateCustomField(field)">Update</button>
+                          </div>
+                      </div>
+                  </div>
+              </mat-expansion-panel>
           </mat-accordion>
+      </div>
+      
+      
 
+      <button type=" button" class="btn d-block mx-auto mt-4" (click)="openMarketingModal()">  Add More Fields</button>
+  
 
-          <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <div class="col-md-12">
-                        Field name - {{locationFieldName}}
-                    </div>
-                    <mat-panel-title>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-        
-                <div class="inside_udf">
-                    <!-- Gender Field Name Input -->
-                    <div class="col-md-6">
-                        <label for="location_field_name"> Field Name:</label>
-                        <input type="text" id="location_field_name" class="form-control" [(ngModel)]="locationFieldName">
-                    </div>
-        
-                    <!-- Gender Data Type Selection -->
-                    <div class="col-md-6">
-                        <label>Data type</label>
-                        <div class="custom-sel">
-                            <select class="form-control" [(ngModel)]="locationDataType">
-                                <option>Text Box</option>
-                                <option>Dropdown</option>
+            <!-- Modal Popup for add marketing language skill -->
+            <div *ngIf="isMArketingModalOpen" class="modal">
+              <div class="modal-content">
+                <div class="row">
+                  <div class="col-md-10">
+                    <h2>Add New Fields</h2>
+                    <hr>
+                  </div>
+                  <div class="col-md-2">
+                    <span class="close pull-right" (click)="ClosePopup()">&times;</span>
+                  </div>
+                </div>
+  
+  
+  
+                <form>
+                  <div class="row">
+                      <div class="col-md-6">
+      
+                          <label> Feild Name</label>
+                          <input type="text" class="form-control" required [(ngModel)]="field_name"
+                              placeholder="Enter Feild Name" [ngModelOptions]="{standalone: true}"
+                              [ngClass]="{'error-field': registerButtonClicked && !field_name}">
+      
+                          <div *ngIf="registerButtonClicked && !field_name" class="error-message">Feild
+                              Name is required.</div>
+                      </div>
+      
+                 
+      
+                      <div class="col-md-6">
+                          <label>Data Type</label>
+                          <div class="custom-sel">
+                            <select
+                              class="form-control"
+                              id="data_type"
+                              required
+                              [(ngModel)]="data_type"
+                              [ngModelOptions]="{ standalone: true }"
+                              [ngClass]="{ 'error-field': registerButtonClicked1 && !data_type }"
+                            >
+                              <option value="" disabled>Select Data Type</option>
+                              <option value="dropdown">Dropdown</option>
+                              <option value="radio">Radio</option>
+                              <option value="date">Date</option>
                             </select>
+                            <div *ngIf="registerButtonClicked1 && !data_type" class="error-message">
+                              Please select a type
+                            </div>
+                          </div>
                         </div>
-                    </div>
-        
-                    <!-- Gender Dropdown Values (if Dropdown is selected) -->
-                    <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
-                        <label>Dropdown Values (comma separated)</label>
-                        <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
-                    </div> -->
-                    
-                    <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-                </div>    
-            </mat-expansion-panel>
-        </mat-accordion>
-
-
-        <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <div class="col-md-12">
-                        Field name - {{cntryFieldName}}
-                    </div>
-                    <mat-panel-title>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-        
-                <div class="inside_udf">
-                    <!-- Gender Field Name Input -->
-                    <div class="col-md-6">
-                        <label for="cntry_field_name"> Field Name:</label>
-                        <input type="text" id="cntry_field_name" class="form-control" [(ngModel)]="cntryFieldName">
-                    </div>
-        
-                    <!-- Gender Data Type Selection -->
-                    <div class="col-md-6">
-                        <label>Data type</label>
-                        <div class="custom-sel">
-                            <select class="form-control" [(ngModel)]="cntryDataType">
-                                <option>Text Box</option>
-                                <option>Dropdown</option>
-                            </select>
+                        
+                        <!-- Dropdown values input field, displayed only if "dropdown" is selected -->
+                        <div class="col-md-6" *ngIf="data_type === 'dropdown'">
+                          <label>Dropdown Values</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            [(ngModel)]="dropdown_values"
+                            placeholder="Enter Dropdown Values (comma separated)"
+                            [ngModelOptions]="{ standalone: true }"
+                          />
                         </div>
-                    </div>
-        
-                    <!-- Gender Dropdown Values (if Dropdown is selected) -->
-                    <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
-                        <label>Dropdown Values (comma separated)</label>
-                        <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
-                    </div> -->
-                    
-                    <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-                </div>    
-            </mat-expansion-panel>
-        </mat-accordion>
-
-
-        <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <div class="col-md-12">
-                        Field name - {{brchFieldName}}
-                    </div>
-                    <mat-panel-title>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-        
-                <div class="inside_udf">
-                    <!-- Gender Field Name Input -->
-                    <div class="col-md-6">
-                        <label for="brch_field_name"> Field Name:</label>
-                        <input type="text" id="brch_field_name" class="form-control" [(ngModel)]="brchFieldName">
-                    </div>
-        
-                    <!-- Gender Data Type Selection -->
-                    <div class="col-md-6">
-                        <label>Data type</label>
-                        <div class="custom-sel">
-                            <select class="form-control" [(ngModel)]="brchDataType">
-                                <option>Text Box</option>
-                                <option>Dropdown</option>
-                            </select>
+                        
+                        <!-- Radio values input field, displayed only if "radio" is selected -->
+                        <div class="col-md-6" *ngIf="data_type === 'radio'">
+                          <label>Radio Values</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            [(ngModel)]="radio_values"
+                            placeholder="Enter Radio Values (comma separated)"
+                            [ngModelOptions]="{ standalone: true }"
+                          />
                         </div>
-                    </div>
-        
-                    <!-- Gender Dropdown Values (if Dropdown is selected) -->
-                    <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
-                        <label>Dropdown Values (comma separated)</label>
-                        <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
-                    </div> -->
-                    
-                    <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-                </div>    
-            </mat-expansion-panel>
-        </mat-accordion>
-
-
-
-        <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <div class="col-md-12">
-                        Field name - {{deptFieldName}}
-                    </div>
-                    <mat-panel-title>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-        
-                <div class="inside_udf">
-                    <!-- Gender Field Name Input -->
-                    <div class="col-md-6">
-                        <label for="dept_field_name"> Field Name:</label>
-                        <input type="text" id="dept_field_name" class="form-control" [(ngModel)]="deptFieldName">
-                    </div>
-        
-                    <!-- Gender Data Type Selection -->
-                    <div class="col-md-6">
-                        <label>Data type</label>
-                        <div class="custom-sel">
-                            <select class="form-control" [(ngModel)]="deptDataType">
-                                <option>Text Box</option>
-                                <option>Dropdown</option>
-                            </select>
+                        
+      
+      
+                        <div class="col-md-6">
+                          <label></label>
+                          <div class="check-box-selection-sec mt-2">
+                              <div class="mat-set">
+                                  <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                                  <mat-checkbox [(ngModel)]="mandatory">Mandatory Field</mat-checkbox>
+                                  <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                              </div>
+                             
+                          </div>
                         </div>
-                    </div>
-        
-                    <!-- Gender Dropdown Values (if Dropdown is selected) -->
-                    <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
-                        <label>Dropdown Values (comma separated)</label>
-                        <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
-                    </div> -->
-                    
-                    <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-                </div>    
-            </mat-expansion-panel>
-        </mat-accordion>
+                      
+      
+                  
+                  </div>
+                  <div class="row">
+                      <div class="col-md-8"></div>
+                      <div class="col-md-2">
+                          <button (click)="ClosePopup()" class="pull-right btn btn-danger btn-full mt-4">Close</button>
+          
+                      </div>
+                      <div class="col-md-2">
+                          <button mat-raised-button color="primary" (click)="CreateEmployeeFeild()" class="pull-right btn-full mt-4">Done</button>
+          
+                      </div>
+                  </div>
+              </form>
+          
+             
+          
+               
+              </div>
+            </div>
+  </div>
+  <div>
+      <button class="pull-right" mat-button matStepperNext>Next</button>
+    </div>
+</mat-step>
 
+<mat-step [stepControl]="secondFormGroup">
+  <ng-template matStepLabel>Family</ng-template>
 
-        <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <div class="col-md-12">
-                        Field name - {{desFieldName}}
-                    </div>
-                    <mat-panel-title>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-        
-                <div class="inside_udf">
-                    <!-- Gender Field Name Input -->
-                    <div class="col-md-6">
-                        <label for="des_field_name"> Field Name:</label>
-                        <input type="text" id="des_field_name" class="form-control" [(ngModel)]="desFieldName">
-                    </div>
-        
-                    <!-- Gender Data Type Selection -->
-                    <div class="col-md-6">
-                        <label>Data type</label>
-                        <div class="custom-sel">
-                            <select class="form-control" [(ngModel)]="desDataType">
-                                <option>Text Box</option>
-                                <option>Dropdown</option>
-                            </select>
-                        </div>
-                    </div>
-        
-                    <!-- Gender Dropdown Values (if Dropdown is selected) -->
-                    <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
-                        <label>Dropdown Values (comma separated)</label>
-                        <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
-                    </div> -->
-                    
-                    <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-                </div>    
-            </mat-expansion-panel>
-        </mat-accordion>
-
-        <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <div class="col-md-12">
-                        Field name - {{catFieldName}}
-                    </div>
-                    <mat-panel-title>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-        
-                <div class="inside_udf">
-                    <!-- Gender Field Name Input -->
-                    <div class="col-md-6">
-                        <label for="cat_field_name"> Field Name:</label>
-                        <input type="text" id="cat_field_name" class="form-control" [(ngModel)]="catFieldName">
-                    </div>
-        
-                    <!-- Gender Data Type Selection -->
-                    <div class="col-md-6">
-                        <label>Data type</label>
-                        <div class="custom-sel">
-                            <select class="form-control" [(ngModel)]="catDataType">
-                                <option>Text Box</option>
-                                <option>Dropdown</option>
-                            </select>
-                        </div>
-                    </div>
-        
-                    <!-- Gender Dropdown Values (if Dropdown is selected) -->
-                    <!-- <div class="col-md-6" *ngIf="genderDataType === 'Dropdown'">
-                        <label>Dropdown Values (comma separated)</label>
-                        <input type="text" class="form-control" [(ngModel)]="genderDropdownValues" placeholder="Enter Dropdown Values">
-                    </div> -->
-                    
-                    <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update Field Names</button>
-                </div>    
-            </mat-expansion-panel>
-        </mat-accordion>
-
-
+  <div class="mt-3">
+  <mat-accordion class="mt-3">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
      
-        <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{hiredFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+              <div class="col-md-12">
+                  Field name - {{empFamilynameFieldName}}
+              </div>
+          <mat-panel-title>
+    
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="hiredFieldName_name"> Field Name:</label>
-                <input type="text" id="hiredFieldName_name" class="form-control" [(ngModel)]="hiredFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
+        <div class="inside_udf">
+         <!-- Collapsible panel content for editing the field -->
+     <div class="col-md-6">
+<label for="emp_code_name">Field Name:</label>
+<input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empFamilynameFieldName">
+</div>
 
-              </div>    
+      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+
+        </div>    
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div class="mt-3">
+  <mat-accordion class="mt-3">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+     
+              <div class="col-md-12">
+                  Field name - {{empRelationnameFieldName}}
+              </div>
+          <mat-panel-title>
+    
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="inside_udf">
+         <!-- Collapsible panel content for editing the field -->
+     <div class="col-md-6">
+<label for="emp_code_name">Field Name:</label>
+<input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empRelationnameFieldName">
+</div>
+
+      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+
+        </div>    
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+
+</div>
+
+<div class="mt-3">
+    <mat-accordion class="mt-3">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+     
+              <div class="col-md-12">
+                  Field name - {{empExpencenameFieldName}}
+              </div>
+          <mat-panel-title>
+    
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="inside_udf">
+         <!-- Collapsible panel content for editing the field -->
+     <div class="col-md-6">
+<label for="emp_code_name">Field Name:</label>
+<input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empExpencenameFieldName">
+</div>
+
+      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+
+        </div>    
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+  
+</div>
+<div class="mt-3">
+    <mat-accordion class="mt-3" >
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+     
+              <div class="col-md-12">
+                  Field name - {{empmemDobnameFieldName}}
+              </div>
+          <mat-panel-title>
+    
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="inside_udf">
+         <!-- Collapsible panel content for editing the field -->
+     <div class="col-md-6">
+<label for="emp_code_name">Field Name:</label>
+<input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empmemDobnameFieldName">
+</div>
+
+      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+
+        </div>    
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<div class="pull-right">
+  <button mat-button matStepperPrevious>Back</button>
+  <button mat-button matStepperNext>Next</button>
+  </div>
+</mat-step>
+
+<mat-step >
+  <ng-template matStepLabel> Qualification</ng-template>
+
+  <div class="mt-3">
+  <mat-accordion class="mt-3">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+     
+              <div class="col-md-12">
+                  Field name - {{empQualificationnameFieldName}}
+              </div>
+          <mat-panel-title>
+    
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="inside_udf">
+         <!-- Collapsible panel content for editing the field -->
+     <div class="col-md-6">
+<label for="emp_code_name">Field Name:</label>
+<input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empQualificationnameFieldName">
+</div>
+
+      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+
+        </div>    
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div class="mt-3">
+  <mat-accordion class="mt-3">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+     
+              <div class="col-md-12">
+                  Field name - {{empInstitutionnameFieldName}}
+              </div>
+          <mat-panel-title>
+    
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="inside_udf">
+         <!-- Collapsible panel content for editing the field -->
+     <div class="col-md-6">
+<label for="emp_code_name">Field Name:</label>
+<input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empInstitutionnameFieldName">
+</div>
+
+      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+
+        </div>    
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+
+</div>
+
+
+<div class="mt-3">
+  <mat-accordion class="mt-3">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+     
+              <div class="col-md-12">
+                  Field name - {{empQuaYearnameFieldName}}
+              </div>
+          <mat-panel-title>
+    
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="inside_udf">
+         <!-- Collapsible panel content for editing the field -->
+     <div class="col-md-6">
+<label for="emp_code_name">Field Name:</label>
+<input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empQuaYearnameFieldName">
+</div>
+
+      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+
+        </div>    
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+
+</div>
+
+
+<div class="mt-3">
+  <mat-accordion class="mt-3">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+     
+              <div class="col-md-12">
+                  Field name - {{empQuaSubjectFieldName}}
+              </div>
+          <mat-panel-title>
+    
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="inside_udf">
+         <!-- Collapsible panel content for editing the field -->
+     <div class="col-md-6">
+<label for="emp_code_name">Field Name:</label>
+<input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empQuaSubjectFieldName">
+</div>
+
+      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+
+        </div>    
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+
+</div>
+
+
+
+<div class="pull-right">
+  <button mat-button matStepperPrevious>Back</button>
+  <button  mat-button matStepperNext>Next</button>
+  </div>
+</mat-step>
+
+<mat-step >
+  <ng-template matStepLabel> Job History</ng-template>
+
+  <div class="mt-3">
+  <mat-accordion class="mt-3">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+     
+              <div class="col-md-12">
+                  Field name - {{empJobFromDatenameFieldName}}
+              </div>
+          <mat-panel-title>
+    
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="inside_udf">
+         <!-- Collapsible panel content for editing the field -->
+     <div class="col-md-6">
+<label for="emp_code_name">Field Name:</label>
+<input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empJobFromDatenameFieldName">
+</div>
+
+      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+
+        </div>    
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div class="mt-3">
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+         
+                  <div class="col-md-12">
+                      Field name - {{empJobendDatenameFieldName}}
+                  </div>
+              <mat-panel-title>
         
-            </mat-expansion-panel>
-          </mat-accordion>
-
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <div class="inside_udf">
+             <!-- Collapsible panel content for editing the field -->
+         <div class="col-md-6">
+    <label for="emp_code_name">Field Name:</label>
+    <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empJobendDatenameFieldName">
+  </div>
+  
+          <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+  
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+  
+      <div class="mt-3">
           <mat-accordion class="mt-3">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                
-                    <div class="col-md-12">
-                        {{joinFieldName}}
-                    </div>
-                <mat-panel-title>
-          
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <div class="inside_udf">
-               <!-- Collapsible panel content for editing the field -->
-               <div class="col-md-6">
-                <label for="joinFieldName_name"> Field Name:</label>
-                <input type="text" id="joinFieldName_name" class="form-control" [(ngModel)]="joinFieldName">
-            </div>
-            <button (click)="updateFieldNames()" class="btn btn-primary mt-3">Update</button>
-
-              </div>    
-        
-            </mat-expansion-panel>
-          </mat-accordion>
-
-
-
-
-        <div class="calendar_view_sec mt-3"  *ngFor="let field of custom_fields">
-          
-        
-            <mat-accordion>
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
              
-                        <div class="col-md-6">
-                            Field Name - {{field.emp_custom_field}} 
-                        </div>
-
-                        <div class="col-md-5">
-                            Data Type - {{field.data_type}}
-                        </div>
-                        <div class="col-md-1">
-                            <mat-icon class="trash" (click)="deleteCustomField(field.id)">delete</mat-icon>
-
-                            </div>
+                      <div class="col-md-12">
+                          Field name - {{empComapanyameFieldName}}
+                      </div>
                   <mat-panel-title>
             
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-
+      
                 <div class="inside_udf">
                  <!-- Collapsible panel content for editing the field -->
-      <div class="row">
-        <!-- Field Name -->
-        <div class="col-md-6">
-          <label>Field Name</label>
-          <input type="text" class="form-control" [(ngModel)]="field.emp_custom_field" placeholder="Enter Field Name" [ngModelOptions]="{standalone: true}" />
-        </div>
-
-        <!-- Data Type -->
-        <div class="col-md-6">
-          <label>Data Type</label>
-          <div class="custom-sel">
-            <select class="form-control" [(ngModel)]="field.data_type" [ngModelOptions]="{standalone: true}">
-              <option value="dropdown">Dropdown</option>
-              <option value="radio">Radio</option>
-              <option value="date">Date</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Dropdown Values -->
-        <div class="col-md-6" *ngIf="field.data_type === 'dropdown'">
-          <label>Dropdown Values</label>
-          <input type="text" class="form-control" [(ngModel)]="field.dropdown_values" placeholder="Enter Dropdown Values (comma separated)" [ngModelOptions]="{standalone: true}" />
-        </div>
-
-        <!-- Radio Values -->
-        <div class="col-md-6" *ngIf="field.data_type === 'radio'">
-          <label>Radio Values</label>
-          <input type="text" class="form-control" [(ngModel)]="field.radio_values" placeholder="Enter Radio Values (comma separated)" [ngModelOptions]="{standalone: true}" />
-        </div>
+             <div class="col-md-6">
+        <label for="emp_code_name">Field Name:</label>
+        <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empComapanyameFieldName">
       </div>
-
-      <!-- Update Button -->
-      <div class="row">
-        <div class="col-md-12 text-right">
-          <button type="button" mat-raised-button color="primary" (click)="updateCustomField(field)">Update</button>
-        </div>
-      </div>
-
+      
+              <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+      
                 </div>    
           
               </mat-expansion-panel>
             </mat-accordion>
           </div>
-        
+      
 
-<!-- Section for editing field names -->
-<!-- <div class="mt-4">
-    <h3>Edit Field Names</h3>
-    <div class="row">
-        <div class="col-md-6">
-            <label for="emp_code_name">Employee Code Field Name:</label>
-            <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empCodeFieldName">
-        </div>
-        <div class="col-md-6">
-            <label for="emp_first_name_name">First Name Field Name:</label>
-            <input type="text" id="emp_first_name_name" class="form-control" [(ngModel)]="firstNameFieldName">
-        </div>
-    </div>
-</div> -->
-
-
-        <!-- <div class="row" >
-            <div class="col-md-6" *ngFor="let field of custom_fields">
-                <label>{{ field.emp_custom_field }}</label>
-                <ng-container [ngSwitch]="field.data_type">
-                    <select *ngSwitchCase="'dropdown'" class="form-control" >
-                        <option *ngFor="let value of field.dropdown_values" [value]="value">{{ value }}</option>
-                    </select>
-
-
-
-            <div class="radio-sec form-control" *ngSwitchCase="'radio'">
-                <div *ngFor="let value of field.radio_values" class="form-check">
-                    <input type="radio" class="form-check-input " [id]="value + field.id"
-                           [value]="value" 
-                          >
-                    <label class="form-check-label" [for]="value + field.id">{{ value }}</label>
-                </div>
-            </div>
-    
-
-
-                    <input *ngSwitchCase="'date'" type="date" class="form-control"/>
-    
-                    
-                    
-                    <input *ngSwitchDefault type="text" class="form-control" />
-                </ng-container>
-            </div>
-        </div> -->
-
-        <button type=" button" class="btn d-block mx-auto mt-4" (click)="openMarketingModal()">  Add More Fields</button>
-    
-
-              <!-- Modal Popup for add marketing language skill -->
-              <div *ngIf="isMArketingModalOpen" class="modal">
-                <div class="modal-content">
-                  <div class="row">
-                    <div class="col-md-10">
-                      <h2>Add New Fields</h2>
-                      <hr>
-                    </div>
-                    <div class="col-md-2">
-                      <span class="close pull-right" (click)="ClosePopup()">&times;</span>
-                    </div>
-                  </div>
-    
-    
-    
-                  <form>
-                    <div class="row">
-                        <div class="col-md-6">
-        
-                            <label> Feild Name</label>
-                            <input type="text" class="form-control" required [(ngModel)]="field_name"
-                                placeholder="Enter Feild Name" [ngModelOptions]="{standalone: true}"
-                                [ngClass]="{'error-field': registerButtonClicked && !field_name}">
-        
-                            <div *ngIf="registerButtonClicked && !field_name" class="error-message">Feild
-                                Name is required.</div>
-                        </div>
-        
-                   
-        
-                        <div class="col-md-6">
-                            <label>Data Type</label>
-                            <div class="custom-sel">
-                              <select
-                                class="form-control"
-                                id="data_type"
-                                required
-                                [(ngModel)]="data_type"
-                                [ngModelOptions]="{ standalone: true }"
-                                [ngClass]="{ 'error-field': registerButtonClicked1 && !data_type }"
-                              >
-                                <option value="" disabled>Select Data Type</option>
-                                <option value="dropdown">Dropdown</option>
-                                <option value="radio">Radio</option>
-                                <option value="date">Date</option>
-                              </select>
-                              <div *ngIf="registerButtonClicked1 && !data_type" class="error-message">
-                                Please select a type
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <!-- Dropdown values input field, displayed only if "dropdown" is selected -->
-                          <div class="col-md-6" *ngIf="data_type === 'dropdown'">
-                            <label>Dropdown Values</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              required
-                              [(ngModel)]="dropdown_values"
-                              placeholder="Enter Dropdown Values (comma separated)"
-                              [ngModelOptions]="{ standalone: true }"
-                            />
-                          </div>
-                          
-                          <!-- Radio values input field, displayed only if "radio" is selected -->
-                          <div class="col-md-6" *ngIf="data_type === 'radio'">
-                            <label>Radio Values</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              required
-                              [(ngModel)]="radio_values"
-                              placeholder="Enter Radio Values (comma separated)"
-                              [ngModelOptions]="{ standalone: true }"
-                            />
-                          </div>
-                          
-        
-        
-                        
-        
-                    
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8"></div>
-                        <div class="col-md-2">
-                            <button (click)="ClosePopup()" class="pull-right btn btn-danger btn-full mt-4">Close</button>
-            
-                        </div>
-                        <div class="col-md-2">
-                            <button mat-raised-button color="primary" (click)="CreateEmployeeFeild()" class="pull-right btn-full mt-4">Done</button>
-            
-                        </div>
-                    </div>
-                </form>
-            
-               
-            
+          <div class="mt-3">
+              <mat-accordion class="mt-3">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
                  
-                </div>
+                          <div class="col-md-12">
+                              Field name - {{empJobDesignationFieldName}}
+                          </div>
+                      <mat-panel-title>
+                
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+          
+                    <div class="inside_udf">
+                     <!-- Collapsible panel content for editing the field -->
+                 <div class="col-md-6">
+            <label for="emp_code_name">Field Name:</label>
+            <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empJobDesignationFieldName">
+          </div>
+          
+                  <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+          
+                    </div>    
+              
+                  </mat-expansion-panel>
+                </mat-accordion>
               </div>
-    
 
-    <div>
-   
-        </div>
+              <div class="mt-3">
+                  <mat-accordion class="mt-3">
+                      <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                     
+                              <div class="col-md-12">
+                                  Field name - {{empSalarypermonthFieldName}}
+                              </div>
+                          <mat-panel-title>
+                    
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+              
+                        <div class="inside_udf">
+                         <!-- Collapsible panel content for editing the field -->
+                     <div class="col-md-6">
+                <label for="emp_code_name">Field Name:</label>
+                <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empSalarypermonthFieldName">
+              </div>
+              
+                      <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+              
+                        </div>    
+                  
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </div>
 
+
+                  <div class="mt-3">
+                      <mat-accordion class="mt-3">
+                          <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                         
+                                  <div class="col-md-12">
+                                      Field name - {{empLeavingReasonFieldName}}
+                                  </div>
+                              <mat-panel-title>
+                        
+                              </mat-panel-title>
+                            </mat-expansion-panel-header>
+                  
+                            <div class="inside_udf">
+                             <!-- Collapsible panel content for editing the field -->
+                         <div class="col-md-6">
+                    <label for="emp_code_name">Field Name:</label>
+                    <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empLeavingReasonFieldName">
+                  </div>
+                  
+                          <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+                  
+                            </div>    
+                      
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                      </div>
+
+                      <div class="mt-3">
+                          <mat-accordion class="mt-3">
+                              <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                             
+                                      <div class="col-md-12">
+                                          Field name - {{empWorkExpFieldName}}
+                                      </div>
+                                  <mat-panel-title>
+                            
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                      
+                                <div class="inside_udf">
+                                 <!-- Collapsible panel content for editing the field -->
+                             <div class="col-md-6">
+                        <label for="emp_code_name">Field Name:</label>
+                        <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empWorkExpFieldName">
+                      </div>
+                      
+                              <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+                      
+                                </div>    
+                          
+                              </mat-expansion-panel>
+                            </mat-accordion>
+                          </div>
+<div class="pull-right">
+  <button mat-button matStepperPrevious>Back</button>
+  <button  mat-button matStepperNext>Next</button>
+</div>
+</mat-step>
+<mat-step>
+  <ng-template matStepLabel>Documents</ng-template>
   
 
-
-        </div>
-
-        </div>
-
-
   
+  <div class="mt-3">
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+         
+                  <div class="col-md-12">
+                      Field name - {{empDocmentNoFieldName}}
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <div class="inside_udf">
+             <!-- Collapsible panel content for editing the field -->
+         <div class="col-md-6">
+    <label for="emp_code_name">Field Name:</label>
+    <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empDocmentNoFieldName">
+  </div>
+  
+          <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+  
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+  
+
+       
+  <div class="mt-3">
+      <mat-accordion class="mt-3">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+         
+                  <div class="col-md-12">
+                      Field name - {{empIssueDateFieldName}}
+                  </div>
+              <mat-panel-title>
+        
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <div class="inside_udf">
+             <!-- Collapsible panel content for editing the field -->
+         <div class="col-md-6">
+    <label for="emp_code_name">Field Name:</label>
+    <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empIssueDateFieldName">
+  </div>
+  
+          <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+  
+            </div>    
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+
+      <div class="mt-3">
+          <mat-accordion class="mt-3">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+             
+                      <div class="col-md-12">
+                          Field name - {{empExpDateFieldName}}
+                      </div>
+                  <mat-panel-title>
+            
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+      
+                <div class="inside_udf">
+                 <!-- Collapsible panel content for editing the field -->
+             <div class="col-md-6">
+        <label for="emp_code_name">Field Name:</label>
+        <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empExpDateFieldName">
+      </div>
+      
+              <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+      
+                </div>    
+          
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+
+
+          <div class="mt-3">
+              <mat-accordion class="mt-3">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                 
+                          <div class="col-md-12">
+                              Field name - {{empEmpdocumentFieldName}}
+                          </div>
+                      <mat-panel-title>
+                
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+          
+                    <div class="inside_udf">
+                     <!-- Collapsible panel content for editing the field -->
+                 <div class="col-md-6">
+            <label for="emp_code_name">Field Name:</label>
+            <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empEmpdocumentFieldName">
+          </div>
+          
+                  <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+          
+                    </div>    
+              
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+
+              
+          <div class="mt-3">
+              <mat-accordion class="mt-3">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                 
+                          <div class="col-md-12">
+                              Field name - {{empEmpdocumentDatatypeFieldName}}
+                          </div>
+                      <mat-panel-title>
+                
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+          
+                    <div class="inside_udf">
+                     <!-- Collapsible panel content for editing the field -->
+                 <div class="col-md-6">
+            <label for="emp_code_name">Field Name:</label>
+            <input type="text" id="emp_code_name" class="form-control" [(ngModel)]="empEmpdocumentDatatypeFieldName">
+          </div>
+          
+                  <button (click)="updateEmployeeFamily()" class="btn btn-primary mt-3">Update Field Names</button>
+          
+                    </div>    
+              
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+  <div>
+    <button class="pull-right" mat-button matStepperPrevious>Back</button>
+  </div>
+</mat-step>
+</mat-horizontal-stepper>
+
+      
+
+
+  <div>
+ 
+      </div>
+
+
+
+
+      </div>
+
+      </div>
+
+
+
 
 </div>
 </div>

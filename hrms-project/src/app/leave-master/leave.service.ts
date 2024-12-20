@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeaveService {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
 
   constructor(private http: HttpClient) {}
 
@@ -19,7 +23,7 @@ export class LeaveService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-type/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-type/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
@@ -37,7 +41,7 @@ export class LeaveService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-entitlement/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-entitlement/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
@@ -55,7 +59,7 @@ export class LeaveService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/applicable_to/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/applicable_to/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
@@ -73,7 +77,7 @@ export class LeaveService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-request/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-request/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
@@ -90,7 +94,7 @@ export class LeaveService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/CompensatoryLeaveRequest/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/CompensatoryLeaveRequest/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
@@ -109,7 +113,7 @@ export class LeaveService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/emp-cmpnstry-lv-transaction/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/emp-cmpnstry-lv-transaction/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
@@ -129,7 +133,7 @@ export class LeaveService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-approval-levels/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-approval-levels/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
@@ -149,7 +153,7 @@ export class LeaveService {
    
 
     
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-template/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-template/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(apiUrl, companyData, { headers }).pipe(
@@ -173,7 +177,7 @@ export class LeaveService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-template/${updatedTemplate.id}/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-template/${updatedTemplate.id}/?schema=${selectedSchema}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
     return this.http.put(apiUrl, updatedTemplate, { headers }).pipe(
@@ -186,7 +190,7 @@ export class LeaveService {
   
 
   getApprovalslistLeave(selectedSchema: string, userId: number): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/users/api/user/${userId}/lvapprovals/`;
+    const apiUrl = `${this.apiUrl}/users/api/user/${userId}/lvapprovals/?schema=${selectedSchema}`;
 
     // Fetch approvals for the user from the API
     return this.http.get(apiUrl);
@@ -213,7 +217,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
 
     getEmailTemplatesLeave(selectedSchema: string): Observable<any> {
-      const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-template/`;
+      const apiUrl = `${this.apiUrl}/calendars/api/leave-template/?schema=${selectedSchema}`;
     
       // Fetch employees from the API
       return this.http.get(apiUrl);
@@ -223,7 +227,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
 
   getLeaveType(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-type/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-type/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -232,7 +236,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
 
   getEmployee(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -240,7 +244,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   }
 
   getUsers(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/users/api/user/`;
+    const apiUrl = `${this.apiUrl}/users/api/user/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -248,7 +252,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   }
 
   getLeaverejectionReasons(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-rejection-reason/`;
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-rejection-reason/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -265,7 +269,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
 
   getBranches(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Branch/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Branch/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -274,21 +278,21 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
   
   getDepartments(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Department/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Department/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
   
   }
   getDesignation(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Designation/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Designation/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
   
   }
   getCategory(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Catogory/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Catogory/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);

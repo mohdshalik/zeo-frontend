@@ -46,10 +46,13 @@
     </button> -->
 
     <!-- Brand -->
+     <a class="navbar-brand">
+      <img src="assets/zeo_logo_new.png" height="70" width="100%" alt="MDB Logo" 
+        loading="lazy" />
+     </a>
  
-    <a class="navbar-brand">
+    <!-- <a class="navbar-brand">
       <div *ngIf="selectedCompany">
-        <!-- Check if the company_logo is available -->
         <img *ngIf="selectedCompany.logo; else defaultLogo"
              [src]="selectedCompany.logo" 
              alt="Company Logo" 
@@ -57,7 +60,6 @@
              width="100%" 
              loading="lazy">
       
-        <!-- Default logo to display if company_logo is not available -->
         <ng-template #defaultLogo>
           <img src="assets/zeo_logo_new.png" 
                height="70" 
@@ -68,9 +70,8 @@
       </div>
       
       
-      <!-- <img src="assets/zeo_logo_new.png" height="70" width="100%" alt="MDB Logo" 
-        loading="lazy" /> -->
-    </a>
+    
+    </a> -->
 
 
     <!-- Right links -->

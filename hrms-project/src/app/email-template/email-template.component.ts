@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './email-template.component.html',
   styleUrl: './email-template.component.css'
 })
-export class EmailTemplateComponent {
+export class EmailTemplateComponent implements AfterViewInit {
 
 
   template_type: any = '';
@@ -157,6 +157,7 @@ this.ngAfterViewInit();
     }
   
     ngAfterViewInit(): void {
+      // Initialize Summernote
       $(this.el.nativeElement).find('#summernote').summernote({
         height: 150, // Set editor height
         placeholder: 'Type your text here...',
@@ -169,12 +170,11 @@ this.ngAfterViewInit();
           ['view', ['fullscreen', 'codeview', 'help']]
         ],
         callbacks: {
-          onChange: () => this.onContentChange() // Track content changes
+          onChange: () => this.onContentChange()
         }
       });
     }
-    
-    // Method to track content changes
+  
     onContentChange(): void {
       const currentContent = $(this.el.nativeElement).find('#summernote').summernote('code');
       if (this.selectedPlaceholder && !currentContent.includes(this.selectedPlaceholder)) {
@@ -182,7 +182,6 @@ this.ngAfterViewInit();
       }
     }
   
-    // Method to get the content of Summernote
     getTextContent(): void {
       this.body = $(this.el.nativeElement).find('#summernote').summernote('code');
       console.log(this.body); // Debugging: log the content

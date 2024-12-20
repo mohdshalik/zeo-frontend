@@ -220,7 +220,7 @@ export class DepartmentServiceService {
 
 
   getEmailTemplates(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/email-template/`;
+    const apiUrl = `${this.apiUrl}/employee/api/email-template/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);

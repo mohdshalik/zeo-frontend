@@ -76,18 +76,18 @@ export class BranchServiceService {
 
 
   getBranches(selectedSchema: string): Observable<any> {
-    const url = `http://${selectedSchema}.localhost:8000/organisation/api/Branch/`;
+    const url = `${this.apiUrl}/organisation/api/Branch/?schema=${selectedSchema}`;
     return this.http.get(url);
   }
 
   
   getDepartment(selectedSchema: string): Observable<any> {
-    const url = `http://${selectedSchema}.localhost:8000/organisation/api/Department/`;
+    const url = `${this.apiUrl}/organisation/api/Department/?schema=${selectedSchema}`;
     return this.http.get(url);
   }
 
   getCategory(selectedSchema: string): Observable<any> {
-    const url = `http://${selectedSchema}.localhost:8000/organisation/api/Catogory/`;
+    const url = `${this.apiUrl}/organisation/api/Catogory/?schema=${selectedSchema}`;
     return this.http.get(url);
   }
   
@@ -106,7 +106,7 @@ export class BranchServiceService {
         return throwError('No schema selected.');
       }
     
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/policies/`;
+      const apiUrl = `${this.apiUrl}/organisation/api/policies/?schema=${selectedSchema}`;
     
       return this.http.post(apiUrl, formData).pipe(
         catchError((error) => {

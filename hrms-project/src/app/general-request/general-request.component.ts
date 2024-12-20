@@ -6,6 +6,7 @@ import { CompanyRegistrationService } from '../company-registration.service';
 import { EmployeeService } from '../employee-master/employee.service';
 import { UserMasterService } from '../user-master/user-master.service';
 import { environment } from '../../environments/environment';
+import { SessionService } from '../login/session.service';
 
 @Component({
   selector: 'app-general-request',
@@ -38,7 +39,13 @@ export class GeneralRequestComponent {
   GeneralReq:any []=[];
 
 
+  schemas: string[] = []; // Array to store schema names
 
+  
+  userId: number | null | undefined;
+  userDetails: any;
+  userDetailss: any[] = [];
+  username: any;
 
 
 
@@ -55,6 +62,8 @@ export class GeneralRequestComponent {
     private authService: AuthenticationService,
     private employeeService: EmployeeService,
     private userService: UserMasterService,
+    private sessionService: SessionService,
+
     
 
 
@@ -67,6 +76,34 @@ ngOnInit(): void {
   this.loadUsers();
   this.loadgeneralReq();
 
+  this.userId = this.sessionService.getUserId();
+
+  
+  if (this.userId !== null) {
+    this.authService.getUserData(this.userId).subscribe(
+      (userData: any) => {
+        this.userDetails = userData;
+        this.created_by = this.userId; // Automatically set the owner to logged-in user ID
+
+      },
+      (error) => {
+        console.error('Failed to fetch user details:', error);
+      }
+    );
+
+    this.authService.getUserSchema(this.userId).subscribe(
+      (userData: any) => {
+        this.userDetailss = userData; // Store user schemas in userDetailss
+
+        this.schemas = userData.map((schema: any) => schema.schema_name);
+      },
+      (error) => {
+        console.error('Failed to fetch user schemas:', error);
+      }
+    );
+  } else {
+    console.error('User ID is null.');
+  }
 
 
   
@@ -99,7 +136,7 @@ ngOnInit(): void {
       const selectedSchema = localStorage.getItem('selectedSchema'); // Retrieve the selected schema from local storage or any other storage method
   
       if (selectedBranchId && selectedSchema) {
-        const apiUrl = `${this.apiUrl}/employee/api/general-request/document_numbering_by_branch/?branch_id=${selectedBranchId}/?schema=${selectedSchema}`;
+        const apiUrl = `${this.apiUrl}/employee/api/general-request/document_numbering_by_branch/?branch_id=${selectedBranchId}&schema=${selectedSchema}`;
         this.http.get(apiUrl).subscribe(
           (response: any) => {
             this.automaticNumbering = response.automatic_numbering;

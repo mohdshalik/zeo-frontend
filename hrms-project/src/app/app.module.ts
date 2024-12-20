@@ -137,6 +137,7 @@ import { LeaveReportComponent } from './leave-report/leave-report.component';
 import { LeaveDialogComponent } from './leave-report/leave-dialog/leave-dialog.component';
 import { EmployeeApprovalsComponent } from './employee-approvals/employee-approvals.component';
 import { DashboardContentsComponent } from './dashboard-contents/dashboard-contents.component';
+import { MatStepperModule } from '@angular/material/stepper';  
 
 @NgModule({
   declarations: [
@@ -232,12 +233,14 @@ import { DashboardContentsComponent } from './dashboard-contents/dashboard-conte
      LeaveDialogComponent,
      EmployeeLeaveComponent,
      EmployeeApprovalsComponent,
-     DashboardContentsComponent
+     DashboardContentsComponent,
+     
      
 
 
   ],
   imports: [
+    
     
     BrowserModule,
     AppRoutingModule,
@@ -271,6 +274,9 @@ import { DashboardContentsComponent } from './dashboard-contents/dashboard-conte
     MatMenuModule,
     MatTabsModule,
     MatSortModule,
+    MatStepperModule
+    
+    
     
     
   ],

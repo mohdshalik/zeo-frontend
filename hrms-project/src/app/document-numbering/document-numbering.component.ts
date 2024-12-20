@@ -6,6 +6,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { EmployeeService } from '../employee-master/employee.service';
 import { UserMasterService } from '../user-master/user-master.service';
 import { CatogaryService } from '../catogary-master/catogary.service';
+import { SessionService } from '../login/session.service';
 
 @Component({
   selector: 'app-document-numbering',
@@ -37,6 +38,15 @@ export class DocumentNumberingComponent {
   registerButtonClicked = false;
 
   
+  schemas: string[] = []; // Array to store schema names
+
+  
+  userId: number | null | undefined;
+  userDetails: any;
+  userDetailss: any[] = [];
+  username: any;
+
+  
   constructor(private DepartmentServiceService: DepartmentServiceService ,
     private companyRegistrationService: CompanyRegistrationService, 
     private http: HttpClient,
@@ -44,6 +54,8 @@ export class DocumentNumberingComponent {
     private categoryService: CatogaryService,
     private userService: UserMasterService,
     private employeeService: EmployeeService,
+    private sessionService: SessionService,
+
 
     
 
@@ -57,6 +69,34 @@ ngOnInit(): void {
   this.loaddocNumers();
 
 
+  this.userId = this.sessionService.getUserId();
+
+  
+  if (this.userId !== null) {
+    this.authService.getUserData(this.userId).subscribe(
+      (userData: any) => {
+        this.userDetails = userData;
+        this.user = this.userId; // Automatically set the owner to logged-in user ID
+
+      },
+      (error) => {
+        console.error('Failed to fetch user details:', error);
+      }
+    );
+
+    this.authService.getUserSchema(this.userId).subscribe(
+      (userData: any) => {
+        this.userDetailss = userData; // Store user schemas in userDetailss
+
+        this.schemas = userData.map((schema: any) => schema.schema_name);
+      },
+      (error) => {
+        console.error('Failed to fetch user schemas:', error);
+      }
+    );
+  } else {
+    console.error('User ID is null.');
+  }
 
   
 
@@ -155,7 +195,6 @@ ngOnInit(): void {
         
               // Add other form field values to the companyData object
             };
-          
         
             this.employeeService.registerDocNum(companyData).subscribe(
               (response) => {
