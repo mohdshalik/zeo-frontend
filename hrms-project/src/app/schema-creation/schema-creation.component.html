@@ -7,8 +7,8 @@
         <div class="row">
             <div class="col-md-6" >
                
-      <label>Location Name</label>
-     <input type="text"  class="form-control" required  [(ngModel)]="schema_name"  placeholder="Enter Catogary Name"
+      <label>Company Name</label>
+     <input type="text"  class="form-control" required  [(ngModel)]="schema_name"  placeholder="Enter Company Name"
       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !schema_name}">
      
      <div *ngIf="registerButtonClicked && !schema_name" class="error-message">Company Name is required.</div>
@@ -18,7 +18,7 @@
 <div class="col-md-6" >
                
     <label>Name </label>
-   <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter Description "
+   <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter Name "
     [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
    
    <div *ngIf="registerButtonClicked && !name" class="error-message">Name is required.</div>
