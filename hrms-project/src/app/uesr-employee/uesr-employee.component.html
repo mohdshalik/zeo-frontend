@@ -343,7 +343,7 @@
             <select class="form-control" id="emp_desgntn_id" name="emp_desgntn_id" required [(ngModel)]="emp_desgntn_id"  [ngModelOptions]="{standalone: true}"
              >
                 <option value="" >Select</option>
-                <option *ngFor="let emp_desgntn_id of designations" [value]="emp_desgntn_id.id">{{ emp_desgntn_id.job_title }}</option>
+                <option *ngFor="let emp_desgntn_id of designations" [value]="emp_desgntn_id.id">{{ emp_desgntn_id.desgntn_job_title }}</option>
             </select>
             <!-- <div *ngIf="registerButtonClicked && !emp_desgntn_id" class="error-message">Please Select Your Department</div> -->
         </div>
@@ -360,7 +360,7 @@
             <select class="form-control" id="emp_ctgry_id" name="emp_ctgry_id" required [(ngModel)]="emp_ctgry_id"  [ngModelOptions]="{standalone: true}"
            >
                 <option value="" >Select</option>
-                <option *ngFor="let emp_ctgry_id of catogories" [value]="emp_ctgry_id.id">{{ emp_ctgry_id.catogary_title }}</option>
+                <option *ngFor="let emp_ctgry_id of catogories" [value]="emp_ctgry_id.id">{{ emp_ctgry_id.ctgry_title }}</option>
             </select>
             <!-- <div *ngIf="registerButtonClicked && !emp_ctgry_id" class="error-message">Please Select Your Catogory</div> -->
         </div>

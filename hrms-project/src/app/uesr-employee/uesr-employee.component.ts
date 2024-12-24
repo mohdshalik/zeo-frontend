@@ -12,6 +12,7 @@ import { EmployeeFamilyComponent } from '../employee-family/employee-family.comp
 import { SuccesModalComponent } from '../succes-modal/succes-modal.component';
 import { catchError, map, of, throwError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 // import { EmployeeAddMoreFieldComponent } from '../employee-add-more-field/employee-add-more-field.component';
 export interface Employee {
   emp_code: string;
@@ -25,6 +26,10 @@ export interface Employee {
   styleUrl: './uesr-employee.component.css'
 })
 export class UesrEmployeeComponent {
+
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
 
   id: string = ''; // Default initializer
   employeeId: number | null = null;  // Ensure this is assigned correctly
@@ -293,7 +298,7 @@ fetchEmployees(): void {
     return;
   }
 
-  const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/Employee/filter_empty_user_non_ess/`;
+  const apiUrl = `${this.apiUrl}/employee/api/Employee/filter_empty_user_non_ess/?schema=${selectedSchema}`;
 
   this.http.get<Employee[]>(apiUrl).subscribe(
     (data) => {
@@ -444,9 +449,9 @@ createEmpCodeToIdMap(employees: Employee[]): { [key: string]: number } {
   
     if (this.selectedCompany) {
       const companyName = this.selectedCompany.schema_name;
-      console.log(`Submitting to: http://${companyName}.localhost:8000/employee/api/employees/`);
+      console.log(`Submitting to: ${this.apiUrl}/employee/api/employees/?schema=${companyName}`);
   
-      this.http.post(`http://${companyName}.localhost:8000/employee/api/employees/`, formData)
+      this.http.post(`${this.apiUrl}/employee/api/employees/?schema=${companyName}`, formData)
         .subscribe({
           next: (response) => {
             console.log('Response:', response);
@@ -556,7 +561,7 @@ uploaduserDocument(): void {
   formData.append('company', JSON.stringify(this.selectedCompany));
 
   const companyName = this.selectedCompany.schema_name;
-  const apiUrl = `http://${companyName}.localhost:8000/employee/api/add-employee/${empId}/`; // Updated to 'update-employee'
+  const apiUrl = `${this.apiUrl}/employee/api/add-employee/${empId}/?schema=${companyName}`; // Updated to 'update-employee'
 
   console.log(`Submitting to: ${apiUrl}`);
  

@@ -314,35 +314,35 @@ if (this.userId !== null) {
   }
 
 
-  registerGroupPermission(): void {
-    this.registerButtonClicked = true;
-    const companyData = {
-      name: this.name,
-      permissions:this.permissions,
+  // registerGroupPermission(): void {
+  //   this.registerButtonClicked = true;
+  //   const companyData = {
+  //     name: this.name,
+  //     permissions:this.permissions,
   
    
 
-      // Add other form field values to the companyData object
-    };
+  //     // Add other form field values to the companyData object
+  //   };
    
 
-    this.UserMasterService.registerGroupingRole(companyData).subscribe(
-      (response) => {
-        console.log('Registration successful', response);
+  //   this.UserMasterService.registerGroupingRole(companyData).subscribe(
+  //     (response) => {
+  //       console.log('Registration successful', response);
      
-            alert('User Grouping has been Registered ');
-            window.location.reload();
+  //           alert('User Grouping has been Registered ');
+  //           window.location.reload();
       
    
 
-      },
-      (error) => {
-        console.error('Registration failed', error);
-        alert('enter all field!')
-        // Handle the error appropriately, e.g., show a user-friendly error message.
-      }
-    );
-  }
+  //     },
+  //     (error) => {
+  //       console.error('Registration failed', error);
+  //       alert('enter all field!')
+  //       // Handle the error appropriately, e.g., show a user-friendly error message.
+  //     }
+  //   );
+  // }
 
 
 

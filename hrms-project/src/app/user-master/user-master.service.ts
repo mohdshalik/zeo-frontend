@@ -177,7 +177,7 @@ export class UserMasterService {
     // const url = `${this.baseUrl}/Group/`;
     // return this.http.get(url);
 
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Group/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Group/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -227,7 +227,7 @@ if (!selectedSchema) {
 }
 
 
-const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Group/${DeptId}/`;
+const apiUrl = `${this.apiUrl}/organisation/api/Group/${DeptId}/?schema=${selectedSchema}`;
 
 return this.http.delete(apiUrl);
 }
@@ -250,12 +250,12 @@ return this.http.delete(apiUrl);
 
   
   getEmpById(employeeId: number): Observable<any> {
-    const url = `${this.baseUrl}/user/${employeeId}/`;
+    const url = `${this.apiUrl}/users/api/user/${employeeId}/`;
     return this.http.get(url);
   }
 
   openEditEmpPopuss(employeeId: number): Observable<any> {
-    const url = `${this.baseUrl}/user/${employeeId}/`;
+    const url = `${this.apiUrl}/users/api/user/${employeeId}/`;
     return this.http.get(url);
   }
 
@@ -271,7 +271,7 @@ return this.http.delete(apiUrl);
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.80.65.208.178:8000/users/api/user/${employeeId}/`;
+    const apiUrl = `${this.apiUrl}/users/api/user/${employeeId}/`;
    
     return this.http.put(apiUrl, empData );
   }
@@ -286,7 +286,7 @@ return this.http.delete(apiUrl);
 
 
   registeruser(companyData: any): Observable<any> {
-    const url = `${this.baseUrl}/user/`; // Adjust the URL if needed
+    const url = `${this.apiUrl}/users/api/user/`; // Adjust the URL if needed
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(url, companyData, { headers }).pipe(
@@ -311,16 +311,18 @@ return this.http.delete(apiUrl);
         return throwError('No schema selected.'); // Return an error observable if no schema is selected
       }
      
-      const apiUrl = `http://${selectedSchema}.80.65.208.178:8000/users/api/user/${DeptId}/`;
+      const apiUrl = `${this.apiUrl}/users/api/user/${DeptId}/`;
      
       return this.http.delete(apiUrl);
+
+
   }
 
 
  
 
   registerGroupingRole(companyData: any): Observable<any> {
-    const url = `${this.baseUrl}/Role-Grouping/`; // Adjust the URL if needed
+    const url = `${this.apiUrl}users/api/Role-Grouping/`; // Adjust the URL if needed
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(url, companyData, { headers }).pipe(

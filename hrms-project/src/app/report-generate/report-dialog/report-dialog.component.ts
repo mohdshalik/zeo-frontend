@@ -11,6 +11,7 @@
  import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSortModule } from '@angular/material/sort';
+import { environment } from '../../../environments/environment';
 
  @Component({
    selector: 'app-report-dialog',
@@ -19,6 +20,9 @@ import { MatSortModule } from '@angular/material/sort';
  })
  export class ReportDialogComponent implements OnInit ,AfterViewInit {
    // export class ReportDialogComponent implements AfterViewInit {
+
+   private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
  
   //  dataSource = new MatTableDataSource<any>(); // Initialize data source for table
   @ViewChild(MatSort) sort!: MatSort;
@@ -341,7 +345,7 @@ display_names: { [key: string]: string } = {
        console.error('No schema selected.');
      }
    
-     const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/filter_existing_report/`;
+     const url = `${this.apiUrl}/employee/api/emp-report/filter_existing_report/?schema=${selectedSchema}`;
      const formData = new FormData();
      formData.append('report_id', reportId.toString());
  

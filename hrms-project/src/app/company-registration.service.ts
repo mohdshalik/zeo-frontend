@@ -44,7 +44,7 @@ export class CompanyRegistrationService {
     }
 
     getUsers(): Observable<any> {
-      const url = `http://localhost:8000/users/api/user/`;
+      const url = `${this.apiUrl}/users/api/user/`;
       return this.http.get(url);
 
       

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class ReportService {
   // }
   private baseUrl = 'http://127.0.0.1:8000/employee/api/emp-report/';
   // private apiUrl = 'http://127.0.0.1:8000/employee/api/emp-report/std_report/';
-  private apiUrl: string = '';
+  // private apiUrl: string = '';
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
 
 
   constructor(private http: HttpClient) { 
@@ -100,7 +103,7 @@ export class ReportService {
       console.error('No schema selected.');
       throw new Error('No schema selected.');
     }
-    this.apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/std_report/`;
+    this.apiUrl = `${this.apiUrl}/employee/api/emp-report/std_report/?schema=${selectedSchema}`;
   }
 
   getStandardReport(): Observable<any> {

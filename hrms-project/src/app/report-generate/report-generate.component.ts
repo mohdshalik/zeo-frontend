@@ -23,6 +23,7 @@ import { catchError, combineLatest, throwError } from 'rxjs';
 import { ReportGenerateService } from './report-generate.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { SessionService } from '../login/session.service';
+import { environment } from '../../environments/environment';
 
 
 
@@ -106,6 +107,8 @@ interface KeyValue {
 
 export class ReportGenerateComponent implements OnInit {
 // Initialize directly where they are declared
+private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
 
 
   @ViewChild('filteredReportModal') filteredReportModal!: ElementRef;
@@ -764,7 +767,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
   
     // const url = `http://${selectedSchema}.localhost:8000/employe
     // Replace with your actual API to fetch saved reports
-    this.http.get<any[]>(`http://${selectedSchema}.localhost:8000/employee/api/emp-report/`).subscribe(
+    this.http.get<any[]>(`${this.apiUrl}/employee/api/emp-report/?schema=${selectedSchema}`).subscribe(
       reports => {
         this.savedReports = reports;
       },
@@ -950,7 +953,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       console.error('No schema selected.');
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/`;
+    const url = `${this.apiUrl}/employee/api/emp-report/?schema=${selectedSchema}`;
     this.http.get<any[]>(url).subscribe(
       (reports: any[]) => {
         this.savedReports = reports;
@@ -987,7 +990,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       return;
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/select_filter_fields/?report_id=${reportId}`;
+    const url = `${this.apiUrl}/employee/api/emp-report/select_filter_fields/?report_id=${reportId}&schema=${selectedSchema}`;
   
     this.http.get<any>(url).subscribe(
       (response: { available_fields: { [key: string]: { value: string, name: string } }, selected_fields: string[] }) => {
@@ -1155,7 +1158,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       console.error('No schema selected.');
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/generate_employee_filter_table/`;
+    const url = `${this.apiUrl}/employee/api/emp-report/generate_employee_filter_table/?schema=${selectedSchema}`;
     const formData = new FormData();
     formData.append('report_id', this.selectedReportId.toString());
   
@@ -1232,7 +1235,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
     }
   
     // const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/`;
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/generate_employee_filter_table/`;
+    const url = `${this.apiUrl}/employee/api/emp-report/generate_employee_filter_table/?schema=${selectedSchema}`;
     const formData = new FormData();
     formData.append('report_id', this.selectedReportId.toString());
   
@@ -1381,7 +1384,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       return;
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/emp_select_report/`;
+    const url = `${this.apiUrl}/employee/api/emp-report/emp_select_report/?schema=${selectedSchema}`;
     const formData = new FormData();
     formData.append('file_name', this.fileName);
   
@@ -1493,7 +1496,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       return;
     }
 
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/`;
+    const url = `${this.apiUrl}/employee/api/emp-report/?schema=${selectedSchema}`;
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${authToken}`

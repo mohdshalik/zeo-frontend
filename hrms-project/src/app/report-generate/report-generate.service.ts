@@ -3,12 +3,16 @@ import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/ht
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportGenerateService {
+
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
   
 
@@ -32,7 +36,7 @@ export class ReportGenerateService {
       console.error('No schema selected.');
       return throwError('No schema selected.');
     }
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/select_employee_fields/`;
+    const url = `${this.apiUrl}/employee/api/emp-report/select_employee_fields/?schema=${selectedSchema}`;
 
     const token = localStorage.getItem('authToken'); // Use appropriate token logic
     const headers = new HttpHeaders({
