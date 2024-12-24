@@ -12,51 +12,11 @@ declare var $: any;
   templateUrl: './request-type.component.html',
   styleUrl: './request-type.component.css'
 })
-export class RequestTypeComponent implements  AfterViewInit {
+export class RequestTypeComponent    {
 
 
 
-  ngAfterViewInit(): void {
-    $('#summernote').summernote({
-      height: 300,  // Set editor height
-      placeholder: 'Type your text here...',
-      toolbar: [
-        // Add or remove buttons as needed
-        ['style', ['bold', 'italic', 'underline']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ],
-      hint: {
-        mentions: ['Jayden Smith', 'Peter Pan', 'Lorca', 'David Summer'],
-        match: /\B@(\w*)$/,
-        search: function (keyword: string, callback: Function) {
-          callback($.grep(this.mentions, function (item: string | string[]) {
-            return item.indexOf(keyword) == 0;
-          }));
-        },
-        content: function (item: string) {
-          return '@' + item;
-        }
-      }
-    });
-  }
-
-  getTextContent() {
-    const content = $('#summernote').summernote('code');
-    console.log(content);
-  }
-
-  getContent() {
-    const content = $(this.el.nativeElement).find('.summernote').summernote('code');
-    console.log(content);
-  }
-
-  setContent(content: string) {
-    $(this.el.nativeElement).find('.summernote').summernote('code', content);
-  }
+ 
 
   
   name: any = '';
