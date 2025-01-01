@@ -37,7 +37,7 @@ export class UserMasterService {
 
   getUsers(): Observable<any> {
     
-    const url = `${this.apiUrl}users/api/user/`;
+    const url = `${this.apiUrl}/users/api/user/`;
     return this.http.get(url);
  
   }
@@ -149,7 +149,7 @@ export class UserMasterService {
   getPermissionByRoleGrouping(selectedSchema: string): Observable<any> {
     // const url = `${this.baseUrl}/permissions/`;
     // return this.http.get(url);
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/perm/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/perm/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -277,7 +277,7 @@ return this.http.delete(apiUrl);
   }
   
   getEmployeeDetails(employeeId: number): Observable<any> {
-    const url = `${this.baseUrl}/user/${employeeId}/`;
+    const url = `${this.apiUrl}/users/api/user/${employeeId}/`;
     return this.http.get(url);
   }
 

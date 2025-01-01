@@ -189,8 +189,8 @@ export class AuthenticationService {
   }
 
   handleSessionExpiration(): void {
-    alert('Session expired. Please log in again.');
-    this.logout();  
+    // alert('Session expired. Please log in again.');
+    // this.logout();  
   }
 
   // isAuthenticated(): boolean {

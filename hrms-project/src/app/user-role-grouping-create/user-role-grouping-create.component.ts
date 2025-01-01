@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserMasterService } from '../user-master/user-master.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from '../login/authentication.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-user-role-grouping-create',
@@ -10,10 +11,28 @@ import { AuthenticationService } from '../login/authentication.service';
   styleUrls: ['./user-role-grouping-create.component.css'],
 })
 export class UserRoleGroupingCreateComponent implements OnInit {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
+  // permissions stored arrays for employeemaster
+  
   GrouppermissionsEmp: any[] = [];
   GrouppermissionsDept: any[] = [];
   GrouppermissionsDis: any[] = [];
   GrouppermissionsCat: any[] = [];
+  GrouppermissionsGen: any[] = [];
+  GrouppermissionsReqtype: any[] = [];
+  GrouppermissionsApr: any[] = [];
+  GrouppermissionsAprlvl: any[] = [];
+  GrouppermissionsAtd: any[] = [];
+
+
+
+
+
+
+  // permissions stored arrays for settings
+
   GrouppermissionsCmp: any[] = [];
   GrouppermissionsBrch: any[] = [];
   GrouppermissionsUser: any[] = [];
@@ -23,42 +42,108 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   Grouppermissionsdocumentype: any[] = [];
   Grouppermissionsexpirydocuments: any[] = [];
   GrouppermissionslocationMaster: any[] = [];
+  GrouppermissionsDnMaster: any[] = [];
+  GrouppermissionsFormdesMaster: any[] = [];
+
+
+
+    // permissions stored arrays for reports
+
   GrouppermissionsemployeeReport: any[] = [];
   GrouppermissionsdocumnetReport: any[] =[];
   GrouppermissiionsgeneralReport: any[]=[];
+
+
+
+
+  // permissions stored arrays for calendar
+
   Grouppermissionsaddweek:any[] =[];
   Grouppermisionsassignweek:any[]=[];
   Grouppermissionsaddholiday: any[]=[];
   Grouppermissionsassisgnholiday:any[]=[];
+
+
+
+  //creating group name declared variables.
+
   groupName: string = '';
   codename:string ='';
   profile:string ='';
   selectedPermissions: any[] = [];
+
+
+
+//selected employee master checkboxes.
   employeeMasterIndeterminate = false;
-departmentMasterInderminate= false;
-designationMasterInderminate = false;
-categoryMasterInderminate = false;
-branchMasterInderminate = false;
-userMasterInderminate = false;
-userGroupMasterInderminate= false;
-assignMasterInderminate= false;
-stateMasterInderminate= false;
-documentMasterInderminate= false;
-expiredMasterInderminate= false;
-locationMasterInderminate= false;
-emportReportInderminate= false;
-documentReportInderminate = false;
-generalReportInderminate= false;
-addweekInderminate=false;
-assignweekInderminate= false;
-addholidayInderminate= false;
-assignholidayInderminate= false;
-calenderdetailInderminate= false;
+  departmentMasterInderminate= false;
+  designationMasterInderminate = false;
+  categoryMasterInderminate = false;
+  GenMasterInderminate = false;
+  ReqtypeMasterInderminate = false;
+  AprMasterInderminate = false;
+  AprlvlMasterInderminate = false;
+  AtdMasterInderminate = false;
+
+
+
+
+
+
+
+  //selected settings checkboxes.
+
+  branchMasterInderminate = false;
+  userMasterInderminate = false;
+  userGroupMasterInderminate= false;
+  assignMasterInderminate= false;
+  stateMasterInderminate= false;
+  documentMasterInderminate= false;
+  expiredMasterInderminate= false;
+  locationMasterInderminate= false;
+  DnMasterInderminate= false;
+  FormdesMasterInderminate= false;
+
+
+
+  //selected reports checkboxes/
+
+  emportReportInderminate= false;
+  documentReportInderminate = false;
+  generalReportInderminate= false;
+
+
+  //selected calendars checkboxes.
+
+  addweekInderminate=false;
+  assignweekInderminate= false;
+  addholidayInderminate= false;
+  assignholidayInderminate= false;
+  calenderdetailInderminate= false;
+
+
   // Add these lines
+
+
+  //employeemaster checkbox checked values
   employeeMasterChecked: boolean = false;
   departmentMasterChecked: boolean = false;
   designationMasterChecked: boolean = false;
   categoryMasterChecked: boolean = false;
+  GenMasterChecked: boolean = false;
+  ReqtypeMasterChecked: boolean = false;
+  AprMasterChecked: boolean = false;
+  AprlvlMasterChecked: boolean = false;
+  AtdMasterChecked: boolean = false;
+
+
+
+
+
+
+
+  //settings checkbox checked values
+
   companyMasterChecked: boolean = false;
   branchMasterChecked: boolean = false;
   userMasterChecked: boolean = false;
@@ -68,17 +153,39 @@ calenderdetailInderminate= false;
   documenttypeMasterChecked:boolean = false;
   expireddocumnetsMasterChecked:boolean = false;
   locationMasterChecked:boolean = false;
+  DnMasterChecked:boolean = false;
+  FormdesMasterChecked:boolean = false;
+
+
+
+  
+  //Reports checkbox checked values
+
   emportReportChecked:boolean = false;
   documentReportChecked:boolean = false;
   generelReportChecked:boolean = false;
+
+  
+  
+  //Calendars checkbox checked values
+
   addweekChecked:boolean= false;
   assignweekChecked:boolean = false;
   addholidayChecked:boolean= false;
   assignholidayChecked:boolean = false;
+
+  
+
+
+// main headings values
+
   selectAllChecked: boolean = false;
   settingsChecked: boolean = false;
   reportchecked:boolean = false;
   calenderchecked:boolean = false;
+
+
+
   expandedMasters: boolean = true;
   expandedMastersvalue: boolean = true;
   reportMastersvalue:boolean =true;
@@ -86,6 +193,7 @@ calenderdetailInderminate= false;
 
   // Add this property
   registerButtonClicked: boolean = false;
+
   childCheckboxes = [
     'branchMasterChecked',
     'userMasterChecked',
@@ -121,7 +229,12 @@ calenderdetailInderminate= false;
     return this.employeeMasterChecked &&
       this.departmentMasterChecked &&
       this.designationMasterChecked &&
-      this.categoryMasterChecked;
+      this.categoryMasterChecked &&
+      this.GenMasterChecked &&
+      this.ReqtypeMasterChecked &&
+      this.AprMasterChecked &&
+      this.AprlvlMasterChecked &&
+      this.AtdMasterChecked;
   }
   
   isEmployeeMasterIndeterminate(): boolean {
@@ -152,6 +265,45 @@ calenderdetailInderminate= false;
     return selectedCatPermissions.length > 0 && selectedCatPermissions.length < this.GrouppermissionsCat.length;
   }
 
+  isGenMasterIndeterminate(): boolean {
+    const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsGen.map(p => p.id).includes(permission)
+    );
+    return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsGen.length;
+  }
+
+  isReqtypeMasterIndeterminate(): boolean {
+    const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsReqtype.map(p => p.id).includes(permission)
+    );
+    return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsReqtype.length;
+  }
+
+  isAprMasterIndeterminate(): boolean {
+    const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsApr.map(p => p.id).includes(permission)
+    );
+    return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsApr.length;
+  }
+  isAprlvlMasterIndeterminate(): boolean {
+    const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsAprlvl.map(p => p.id).includes(permission)
+    );
+    return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsAprlvl.length;
+  }
+
+  isAtdMasterIndeterminate(): boolean {
+    const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsAtd.map(p => p.id).includes(permission)
+    );
+    return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsAtd.length;
+  }
+
+
+
+
+
+
   isSettingsMasterChecked(): boolean {
     return this.branchMasterChecked &&
       this.userMasterChecked &&
@@ -160,18 +312,12 @@ calenderdetailInderminate= false;
       this.stationMasterChecked &&
       this.documenttypeMasterChecked &&
       this.expireddocumnetsMasterChecked &&
-      this.locationMasterChecked;
+      this.locationMasterChecked &&
+      this.DnMasterChecked &&
+      this.FormdesMasterChecked;
   }
   
   
-  
-  
-  // isCompanyMasterIndeterminate(): boolean {
-  //   const selectedComPermissions = this.selectedPermissions.filter(permission =>
-  //     this.GrouppermissionsCmp.map(p => p.id).includes(permission)
-  //   );
-  //   return selectedComPermissions.length > 0 && selectedComPermissions.length < this.GrouppermissionsCmp.length;
-  // }
    isBranchMasterIndeterminate(): boolean {
     const selectedBranchPermissions = this.selectedPermissions.filter(permission =>
       this.GrouppermissionsBrch.map(p => p.id).includes(permission)
@@ -222,12 +368,28 @@ calenderdetailInderminate= false;
     return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionslocationMaster.length;
   }
   
+  isDnmasterIndeterminate(): boolean {
+    const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsDnMaster.map(p => p.id).includes(permission)
+    );
+    return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsDnMaster.length;
+  }
+
+  isFormdesmasterIndeterminate(): boolean {
+    const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsFormdesMaster.map(p => p.id).includes(permission)
+    );
+    return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsFormdesMaster.length;
+  }
+
+
 
   
   isReportManagementMasterChecked(): boolean {
     return this.emportReportChecked &&
       this.documentReportChecked &&
-      this.generelReportChecked 
+      this.generelReportChecked ;
+      
   }
   
   isEmployeeReportIndeterminate(): boolean {
@@ -250,6 +412,12 @@ calenderdetailInderminate= false;
     );
     return selectedGenReportPermissions.length > 0 && selectedGenReportPermissions.length < this.GrouppermissiionsgeneralReport.length;
   }
+  
+
+
+
+
+
 
 
   isCalenderMangementMasterChecked():boolean{
@@ -284,6 +452,8 @@ calenderdetailInderminate= false;
     return selectedassignholidayPermissions.length > 0 && selectedassignholidayPermissions.length < this.Grouppermissionsassisgnholiday.length;
   }
  
+
+
   constructor(
     private UserMasterService: UserMasterService,
     private authService: AuthenticationService,
@@ -303,11 +473,21 @@ calenderdetailInderminate= false;
 
 
   }
+
   updateIndeterminateStates(): void {
     this.isEmployeeMasterIndeterminate();
     this.isDepartmentMasterIndeterminate();
     this.isDesignationMasterIndeterminate();
     this.isCategoryMasterIndeterminate();
+    this.isGenMasterIndeterminate();
+    this.isReqtypeMasterIndeterminate();
+    this.isAprMasterIndeterminate();
+    this.isAprlvlMasterIndeterminate();
+    this.isAtdMasterIndeterminate();
+
+
+
+
   }
 
   updateIndeterminateStatesvalue(): void{
@@ -320,6 +500,10 @@ calenderdetailInderminate= false;
     this.isdocumenttypeIndeterminate();
     this.isExpireddocumentsIndeterminate();
     this.isloactionmasterIndeterminate();
+    this.isDnmasterIndeterminate();
+    this.isFormdesmasterIndeterminate();
+
+
   
   }
 
@@ -341,6 +525,17 @@ updateInderminateCalenders():void{
     this.loadpermissionsDepartMaster();
     this.loadpermissionsDisgMaster();
     this.loadpermissionsCatgMaster();
+    this.loadpermissionsGenMaster();
+    this.loadpermissionsReqtypeMaster();
+    this.loadpermissionsAprMaster();
+    this.loadpermissionsAprlvlMaster();
+    this.loadpermissionsAtdMaster();
+
+
+
+
+
+
     // this.loadpermissionsCmpMaster();
    
   }
@@ -353,6 +548,10 @@ updateInderminateCalenders():void{
     this.loadpermissionsdocumnettype();
     this.loadpermissionexpirydocuments();
     this.loadpermissionlocationmaster();
+    this.loadpermissionDnmaster();
+    this.loadpermissionFormdesmaster();
+
+
   }
 
   loadReportPermissions():void{
@@ -371,6 +570,8 @@ updateInderminateCalenders():void{
   }
 //load employee master permissions 
 
+
+
   loadpermissionsEmpMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
@@ -380,7 +581,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsEmp = result.slice(96, 100);
+        this.GrouppermissionsEmp = result.slice(269, 273);
         
       },
       (error: any) => {
@@ -420,7 +621,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsDept = result.slice(221, 225);
+        this.GrouppermissionsDept = result.slice(391, 395);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -459,7 +660,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsDis = result.slice(225, 229);
+        this.GrouppermissionsDis = result.slice(395, 399);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -496,7 +697,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsCat = result.slice(217, 221);
+        this.GrouppermissionsCat = result.slice(387, 391);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -524,6 +725,207 @@ if (selectedSchema) {
   }
 
 
+   //load permission for General request master
+
+   loadpermissionsGenMaster(): void {
+    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+    console.log('schemastore',selectedSchema )
+
+if (selectedSchema) {
+     	
+  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+    (result: any) => {
+        this.GrouppermissionsGen = result.slice(313, 317);
+      },
+      (error: any) => {
+        console.error('Error fetching permissions:', error);
+      }
+    );
+}
+  }
+
+
+   //Display Name  add view delte code for General request master-------
+
+   getDisplayNameGen(permissionCodename: string): string {
+    switch (permissionCodename.trim().toLowerCase()) {
+      case 'add_generalrequest':
+        return 'Add';
+      case 'change_generalrequest':
+        return 'Edit';
+      case 'delete_generalrequest':
+        return 'Delete';
+      case 'view_generalrequest':
+        return 'View';
+      default:
+        return permissionCodename;
+    }
+  }
+
+    //load permission for  request type master
+
+    loadpermissionsReqtypeMaster(): void {
+      const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+      console.log('schemastore',selectedSchema )
+  
+  if (selectedSchema) {
+         
+    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+      (result: any) => {
+          this.GrouppermissionsReqtype = result.slice(339, 343);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+  }
+    }
+  
+  
+     //Display Name  add view delte code for category master-------
+  
+     getDisplayNameReqtype(permissionCodename: string): string {
+      switch (permissionCodename.trim().toLowerCase()) {
+        case 'add_requesttype':
+          return 'Add';
+        case 'change_requesttype':
+          return 'Edit';
+        case 'delete_requesttype':
+          return 'Delete';
+        case 'view_requesttype':
+          return 'View';
+        default:
+          return permissionCodename;
+      }
+    }
+
+
+
+      //load permission for General request master
+
+   loadpermissionsAprMaster(): void {
+    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+    console.log('schemastore',selectedSchema )
+
+if (selectedSchema) {
+     	
+  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+    (result: any) => {
+        this.GrouppermissionsApr = result.slice(224, 228);
+      },
+      (error: any) => {
+        console.error('Error fetching permissions:', error);
+      }
+    );
+}
+  }
+
+
+   //Display Name  add view delte code for General request master-------
+
+   getDisplayNameApr(permissionCodename: string): string {
+    switch (permissionCodename.trim().toLowerCase()) {
+      case 'add_approval':
+        return 'Add';
+      case 'change_approval':
+        return 'Edit';
+      case 'delete_approval':
+        return 'Delete';
+      case 'view_approval':
+        return 'View';
+      default:
+        return permissionCodename;
+    }
+  }
+
+
+      //load permission for General request master
+
+      loadpermissionsAprlvlMaster(): void {
+        const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+    
+        console.log('schemastore',selectedSchema )
+    
+    if (selectedSchema) {
+           
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any) => {
+            this.GrouppermissionsAprlvl = result.slice(228, 232);
+          },
+          (error: any) => {
+            console.error('Error fetching permissions:', error);
+          }
+        );
+    }
+      }
+    
+    
+       //Display Name  add view delte code for General request master-------
+    
+       getDisplayNameAprlvl(permissionCodename: string): string {
+        switch (permissionCodename.trim().toLowerCase()) {
+          case 'add_approvallevel':
+            return 'Add';
+          case 'change_approvallevel':
+            return 'Edit';
+          case 'delete_approvallevel':
+            return 'Delete';
+          case 'view_approvallevel':
+            return 'View';
+          default:
+            return permissionCodename;
+        }
+      }
+    
+
+         //load permission for General request master
+
+   loadpermissionsAtdMaster(): void {
+    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+    console.log('schemastore',selectedSchema )
+
+if (selectedSchema) {
+     	
+  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+    (result: any) => {
+        this.GrouppermissionsAtd = result.slice(32, 36);
+      },
+      (error: any) => {
+        console.error('Error fetching permissions:', error);
+      }
+    );
+}
+  }
+
+
+   //Display Name  add view delte code for General request master-------
+
+   getDisplayNameAtd(permissionCodename: string): string {
+    switch (permissionCodename.trim().toLowerCase()) {
+      case 'add_attendance':
+        return 'Add';
+      case 'change_attendance':
+        return 'Edit';
+      case 'delete_attendance':
+        return 'Delete';
+      case 'view_attendance':
+        return 'View';
+      default:
+        return permissionCodename;
+    }
+  }
+
+
+
+
+
+
+
+
 
 
 // load permission for company master---------
@@ -537,7 +939,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsCmp = result.slice(253, 259);
+        this.GrouppermissionsCmp = result.slice(423, 427);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -551,13 +953,13 @@ if (selectedSchema) {
 
      getDisplayNameCmp(permissionCodename: string): string {
       switch (permissionCodename.trim().toLowerCase()) {
-        case 'add_cmpny_master':
+        case 'add_company':
           return 'Add';
-        case 'change_cmpny_master':
+        case 'change_company':
           return 'Edit';
-        case 'delete_cmpny_master':
+        case 'delete_company':
           return 'Delete';
-        case 'view_cmpny_master':
+        case 'view_company':
           return 'View';
         default:
           return permissionCodename;
@@ -565,6 +967,7 @@ if (selectedSchema) {
     }
   
 
+    
 //load permission for branch master------------
 
   loadpermissionsBranchMaster(): void {
@@ -576,7 +979,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsBrch = result.slice(213, 217);
+        this.GrouppermissionsBrch = result.slice(379, 383);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -614,7 +1017,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsUser = result.slice(257, 261);
+        this.GrouppermissionsUser = result.slice(427, 431);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -728,7 +1131,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsstateMaster = result.slice(68, 72);
+        this.GrouppermissionsstateMaster = result.slice(196, 200);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -767,7 +1170,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.Grouppermissionsdocumentype= result.slice(185, 189);
+        this.Grouppermissionsdocumentype= result.slice(172, 176);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -805,7 +1208,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.Grouppermissionsexpirydocuments = result.slice(88, 92);
+        this.Grouppermissionsexpirydocuments = result.slice(261, 265);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -845,7 +1248,7 @@ if (selectedSchema) {
          
     this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
       (result: any) => {
-          this.GrouppermissionslocationMaster = result.slice(253, 257);
+          this.GrouppermissionslocationMaster = result.slice(423, 427);
         },
         (error: any) => {
           console.error('Error fetching permissions:', error);
@@ -870,6 +1273,88 @@ if (selectedSchema) {
             return permissionCodename;
         }
       }
+
+      loadpermissionDnmaster(): void {
+        const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+    
+        console.log('schemastore',selectedSchema )
+    
+    if (selectedSchema) {
+           
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any) => {
+            this.GrouppermissionsDnMaster = result.slice(399, 403);
+            // console.log('GrouppermissionsDnMaster',result )
+
+          },
+          (error: any) => {
+            console.error('Error fetching permissions:', error);
+          }
+        );
+    }
+      }
+    
+        //Display Name  add view delte code for Company master-------
+    
+        getDisplayNameDn(permissionCodename: string): string {
+          switch (permissionCodename.trim().toLowerCase()) {
+            case 'add_document_numbering':
+              return 'Add';
+            case 'change_document_numbering':
+              return 'Edit';
+            case 'delete_document_numbering':
+              return 'Delete';
+            case 'view_document_numbering':
+              return 'View';
+            default:
+              return permissionCodename;
+          }
+        }
+
+
+        loadpermissionFormdesmaster(): void {
+          const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+      
+          console.log('schemastore',selectedSchema )
+      
+      if (selectedSchema) {
+             
+        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+          (result: any) => {
+              this.GrouppermissionsFormdesMaster = result.slice(399, 403);
+              // console.log('GrouppermissionsDnMaster',result )
+  
+            },
+            (error: any) => {
+              console.error('Error fetching permissions:', error);
+            }
+          );
+      }
+        }
+      
+          //Display Name  add view delte code for Company master-------
+      
+          getDisplayNameFormdes(permissionCodename: string): string {
+            switch (permissionCodename.trim().toLowerCase()) {
+              case 'add_document_numbering':
+                return 'Add';
+              case 'change_document_numbering':
+                return 'Edit';
+              case 'delete_document_numbering':
+                return 'Delete';
+              case 'view_document_numbering':
+                return 'View';
+              default:
+                return permissionCodename;
+            }
+          }
+
+
+
+
+
+
+
       loadpermissionsEmpReport(): void {
         const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
     
@@ -879,7 +1364,7 @@ if (selectedSchema) {
            
       this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
         (result: any) => {
-            this.GrouppermissionsemployeeReport = result.slice(174, 179);
+            this.GrouppermissionsemployeeReport = result.slice(330, 335);
           },
           (error: any) => {
             console.error('Error fetching permissions:', error);
@@ -916,7 +1401,7 @@ if (selectedSchema) {
            
       this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
         (result: any) => {
-            this.GrouppermissionsdocumnetReport = result.slice(80, 85);
+            this.GrouppermissionsdocumnetReport = result.slice(236, 241);
           },
           (error: any) => {
             console.error('Error fetching permissions:', error);
@@ -935,7 +1420,7 @@ if (selectedSchema) {
               return 'Edit';
             case 'delete_doc_report':
               return 'Delete';
-            case 'export_doc_report':
+            case 'export_document_report':
               return 'Export';
               case 'view_doc_report':
                 return 'View';
@@ -952,7 +1437,7 @@ if (selectedSchema) {
              
         this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
           (result: any) => {
-              this.GrouppermissiionsgeneralReport = result.slice(153, 158);
+              this.GrouppermissiionsgeneralReport = result.slice(317, 322);
             },
             (error: any) => {
               console.error('Error fetching permissions:', error);
@@ -960,6 +1445,8 @@ if (selectedSchema) {
           );
       }
         }
+
+
       
           //Display Name  add view delte code for Company master-------
       
@@ -991,7 +1478,7 @@ if (selectedSchema) {
                  
             this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
               (result: any) => {
-                  this.Grouppermissionsaddweek = result.slice(36, 40);
+                  this.Grouppermissionsaddweek = result.slice(148, 152);
                 },
                 (error: any) => {
                   console.error('Error fetching permissions:', error);
@@ -1027,7 +1514,7 @@ if (selectedSchema) {
                    
               this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
                 (result: any) => {
-                    this.Grouppermisionsassignweek = result.slice(40,44);
+                    this.Grouppermisionsassignweek = result.slice(28,32);
                   },
                   (error: any) => {
                     console.error('Error fetching permissions:', error);
@@ -1064,7 +1551,7 @@ if (selectedSchema) {
                      
                 this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
                   (result: any) => {
-                      this.Grouppermissionsaddholiday = result.slice(54, 58);
+                      this.Grouppermissionsaddholiday = result.slice(73, 77);
                     },
                     (error: any) => {
                       console.error('Error fetching permissions:', error);
@@ -1100,7 +1587,7 @@ if (selectedSchema) {
                        
                   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
                     (result: any) => {
-                        this.Grouppermissionsassisgnholiday = result.slice(36, 40);
+                        this.Grouppermissionsassisgnholiday = result.slice(24, 28);
                       },
                       (error: any) => {
                         console.error('Error fetching permissions:', error);
@@ -1235,6 +1722,8 @@ if (selectedSchema) {
 
   }
 
+
+
   onCheckboxChangeDesg(permission: string): void {
     if (this.selectedPermissions.includes(permission)) {
       this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
@@ -1254,6 +1743,8 @@ if (selectedSchema) {
     this.designationMasterInderminate = this.isDesignationMasterIndeterminate();
   }
 
+
+
   onCheckboxChangeCat(permission: string): void {
     if (this.selectedPermissions.includes(permission)) {
       this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
@@ -1272,6 +1763,121 @@ if (selectedSchema) {
     this.categoryMasterInderminate = this.isCategoryMasterIndeterminate();
 
   }
+
+
+
+  onCheckboxChangeGen(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+    this.updateGenMasterCheckbox();
+    this.updateSelectAll();
+  }
+
+  updateGenMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsGen.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.GenMasterChecked = allPermissionsSelected;
+    this.GenMasterInderminate = this.isGenMasterIndeterminate();
+
+  }
+
+
+
+  
+  onCheckboxChangeReqtype(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+    this.updateReqtypeMasterCheckbox();
+    this.updateSelectAll();
+  }
+
+  updateReqtypeMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsReqtype.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.ReqtypeMasterChecked = allPermissionsSelected;
+    this.ReqtypeMasterInderminate = this.isReqtypeMasterIndeterminate();
+
+  }
+
+
+  onCheckboxChangeApr(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+    this.updateAprMasterCheckbox();
+    this.updateSelectAll();
+  }
+
+  updateAprMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsApr.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.AprMasterChecked = allPermissionsSelected;
+    this.AprMasterInderminate = this.isAprMasterIndeterminate();
+
+  }
+
+
+
+  
+  onCheckboxChangeAprlvl(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+    this.updateAprlvlMasterCheckbox();
+    this.updateSelectAll();
+  }
+
+  updateAprlvlMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsAprlvl.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.AprlvlMasterChecked = allPermissionsSelected;
+    this.AprlvlMasterInderminate = this.isAprlvlMasterIndeterminate();
+
+  }
+
+
+  
+  onCheckboxChangeAtd(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+    this.updateAtdMasterCheckbox();
+    this.updateSelectAll();
+  }
+
+  updateAtdMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsAtd.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.AtdMasterChecked = allPermissionsSelected;
+    this.AtdMasterInderminate = this.isAtdMasterIndeterminate();
+
+  }
+
+
+
+
+
+
+
+
+
   onCheckboxChangesBrch(permission: string): void {
     if (this.selectedPermissions.includes(permission)) {
       this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
@@ -1289,6 +1895,11 @@ if (selectedSchema) {
   // documentMasterInderminate= false;
   // expiredMasterInderminate= false;
   // locationMasterInderminate= false;
+
+
+
+
+
   updateBranchCheckbox(): void {
     const allPermissionsSelected = this.GrouppermissionsBrch.every(permission => 
       this.selectedPermissions.includes(permission.id)
@@ -1444,6 +2055,57 @@ if (selectedSchema) {
     this.locationMasterInderminate = this.isloactionmasterIndeterminate();
   }
 
+
+  onCheckboxChangesDn(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateDnMasterCheckbox();
+    this.updateSelectAlls();
+
+  }
+
+  updateDnMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsDnMaster.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.DnMasterChecked = allPermissionsSelected;
+    this.DnMasterInderminate = this.isDnmasterIndeterminate();
+  }
+
+
+  onCheckboxChangesFormdes(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateFormdesMasterCheckbox();
+    this.updateSelectAlls();
+
+  }
+
+  updateFormdesMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsFormdesMaster.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.FormdesMasterChecked = allPermissionsSelected;
+    this.FormdesMasterInderminate = this.isFormdesmasterIndeterminate();
+  }
+
+
+
+
+
+
   onCheckboxChangesEmpReport(permission: string): void {
     if (this.selectedPermissions.includes(permission)) {
       this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
@@ -1508,6 +2170,12 @@ if (selectedSchema) {
     this.generelReportChecked= allPermissionsSelected;
     this.generalReportInderminate = this.isGeneralReportIndeterminate();
   }
+
+
+
+
+
+
 
   onCheckboxChangesAddweek(permission: string): void {
     if (this.selectedPermissions.includes(permission)) {
@@ -1597,6 +2265,8 @@ if (selectedSchema) {
     this.assignholidayChecked= allPermissionsSelected;
     this.assignholidayInderminate= this.isAssignHolidayIndeterminate();
   }
+
+
   onCheckboxChange(permission: string): void {
     if (this.selectedPermissions.includes(permission)) {
       this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
@@ -1611,6 +2281,16 @@ if (selectedSchema) {
     this.updateDepartmentMasterCheckbox();
     this.updateDesgnationMasterCheckbox();
     this.updateCategoryMasterCheckbox();
+    this.updateGenMasterCheckbox();
+    this.updateReqtypeMasterCheckbox();
+    this.updateAprMasterCheckbox();
+    this.updateAprlvlMasterCheckbox();
+    this.updateAtdMasterCheckbox();
+
+
+
+
+
     this.updateBranchCheckbox();
     this.updateuserMasterCheckbox();
     this.updateUsergroupMasterCheckbox();
@@ -1619,13 +2299,22 @@ if (selectedSchema) {
     this.updatedoctypeMasterCheckbox();
     this.updateexpiryMasterCheckbox();
     this.updatelocMasterCheckbox();
+    this.updateDnMasterCheckbox();
+    this.updateFormdesMasterCheckbox();
+
+
+
     this.updateEmpReportCheckbox();
     this.updateGenReportCheckbox();
     this.updatedocReportCheckbox();
+
+
     this.updateAddHolidayCheckbox();
     this.updateAddWeekCheckbox();
     this.updateAssignHolidayCheckbox();
     this.updateAssignweekCheckbox();
+
+
     this.updateSelectAll();
     this.updateSelectAlls();
     this.updateReport();
@@ -1687,11 +2376,81 @@ if (selectedSchema) {
 
   }
 
+  onGenMasterChange(): void {
+    if (this.GenMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsGen.map(permission => permission.id));
+    } else {  
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsGen.map(p => p.id).includes(permission));
+    }
+  
+    // Update related checkboxes
+    this.updateEmployeeManagementCheckbox();
+    // this.selectAllChecked = this.categoryMasterChecked;
+
+  }
+
+  onReqtypeMasterChange(): void {
+    if (this.ReqtypeMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsReqtype.map(permission => permission.id));
+    } else {  
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsReqtype.map(p => p.id).includes(permission));
+    }
+  
+    // Update related checkboxes
+    this.updateEmployeeManagementCheckbox();
+    // this.selectAllChecked = this.categoryMasterChecked;
+
+  }
+
+  onAprMasterChange(): void {
+    if (this.AprMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsApr.map(permission => permission.id));
+    } else {  
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsApr.map(p => p.id).includes(permission));
+    }
+  
+    // Update related checkboxes
+    this.updateEmployeeManagementCheckbox();
+    // this.selectAllChecked = this.categoryMasterChecked;
+
+  }
+
+  onAprlvlMasterChange(): void {
+    if (this.AprlvlMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsAprlvl.map(permission => permission.id));
+    } else {  
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsAprlvl.map(p => p.id).includes(permission));
+    }
+  
+    // Update related checkboxes
+    this.updateEmployeeManagementCheckbox();
+    // this.selectAllChecked = this.categoryMasterChecked;
+
+  }
+
+  onAtdMasterChange(): void {
+    if (this.AtdMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsAtd.map(permission => permission.id));
+    } else {  
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsAtd.map(p => p.id).includes(permission));
+    }
+  
+    // Update related checkboxes
+    this.updateEmployeeManagementCheckbox();
+    // this.selectAllChecked = this.categoryMasterChecked;
+
+  }
+
   updateEmployeeManagementCheckbox() {
     this.selectAllChecked = this.employeeMasterChecked && 
                             this.departmentMasterChecked && 
                             this.designationMasterChecked && 
-                            this.categoryMasterChecked;
+                            this.categoryMasterChecked &&
+                            this.GenMasterChecked &&
+                            this.ReqtypeMasterChecked&&
+                            this.AprMasterChecked &&
+                            this.AprlvlMasterChecked&&
+                            this.AtdMasterChecked;
 }
 
 selectAll(): void {
@@ -1699,7 +2458,16 @@ selectAll(): void {
     ...this.GrouppermissionsEmp,
     ...this.GrouppermissionsDept,
     ...this.GrouppermissionsCat,
-    ...this.GrouppermissionsDis
+    ...this.GrouppermissionsDis,
+    ...this.GrouppermissionsGen,
+    ...this.GrouppermissionsReqtype,
+    ...this.GrouppermissionsApr,
+    ...this.GrouppermissionsAprlvl,
+    ...this.GrouppermissionsAtd,
+
+
+
+
 
     
   ].map(permission => permission.id);
@@ -1713,11 +2481,23 @@ selectAll(): void {
   this.updateDepartmentMasterCheckbox();
   this.updateDesgnationMasterCheckbox();
   this.updateCategoryMasterCheckbox();
+  this.updateGenMasterCheckbox();
+  this.updateReqtypeMasterCheckbox();
+  this.updateAprMasterCheckbox();
+  this.updateAprlvlMasterCheckbox();
+  this.updateAtdMasterCheckbox();
+
+
+
+
+
   this.updateEmployeeManagementCheckbox();
 }
 
 isEmpDeptDisCatPermission(permission: string): boolean {
-  return [...this.GrouppermissionsEmp, ...this.GrouppermissionsDept, ...this.GrouppermissionsDis, ...this.GrouppermissionsCat]
+  return [...this.GrouppermissionsEmp, ...this.GrouppermissionsDept, ...this.GrouppermissionsDis, 
+    ...this.GrouppermissionsCat, ...this.GrouppermissionsGen,...this.GrouppermissionsReqtype,
+    ...this.GrouppermissionsApr, ...this.GrouppermissionsAprlvl,...this.GrouppermissionsAtd,]
     .some(p => p.id === permission);
 }
 // this.updateBranchCheckbox();
@@ -1736,6 +2516,15 @@ updateSelectAll(): void {
   this.updateDepartmentMasterCheckbox();
   this.updateDesgnationMasterCheckbox();
   this.updateCategoryMasterCheckbox();
+  this.updateGenMasterCheckbox();
+  this.updateReqtypeMasterCheckbox();
+  this.updateAprMasterCheckbox();
+  this.updateAprlvlMasterCheckbox();
+  this.updateAtdMasterCheckbox();
+
+
+
+
   this.updateEmployeeManagementCheckbox();
 }
 isemployee(): boolean {
@@ -1744,10 +2533,21 @@ isemployee(): boolean {
   const departmentMasterInderminate = this.isDepartmentMasterIndeterminate();
   const designationMasterInderminate = this.isDesignationMasterIndeterminate();
   const categoryMasterInderminate = this.isCategoryMasterIndeterminate();
+  const GenMasterInderminate = this.isGenMasterIndeterminate();
+  const ReqtypeMasterInderminate = this.isReqtypeMasterIndeterminate();
+  const AprMasterInderminate = this.isAprMasterIndeterminate();
+  const AprlvlMasterInderminate = this.isAprlvlMasterIndeterminate();
+  const AtdMasterInderminate = this.isAtdMasterIndeterminate();
+
+
+
+
+
     const otherGroupIndeterminate = false; // Add indeterminate checks for other groups like Dept, Dis, Cat
 
     // Return true only if some but not all checkboxes are selected
-    return employeeMasterIndeterminate || departmentMasterInderminate || designationMasterInderminate || categoryMasterInderminate|| otherGroupIndeterminate;
+    return employeeMasterIndeterminate || departmentMasterInderminate || designationMasterInderminate || categoryMasterInderminate|| 
+    GenMasterInderminate|| ReqtypeMasterInderminate|| AprMasterInderminate|| AprlvlMasterInderminate|| AtdMasterInderminate||  otherGroupIndeterminate;
 }
 
 // branchMasterInderminate = false;
@@ -1767,10 +2567,15 @@ issettings(): boolean {
   const documentMasterInderminate = this.isdocumenttypeIndeterminate();
   const expiredMasterInderminate = this.isExpireddocumentsIndeterminate();
   const locationMasterInderminate = this.isloactionmasterIndeterminate();
+  const DnMasterInderminate = this.isDnmasterIndeterminate();
+  const FormdesMasterInderminate = this.isFormdesmasterIndeterminate();
+
+
     const otherGroupIndeterminate = false; // Add indeterminate checks for other groups like Dept, Dis, Cat
 
     // Return true only if some but not all checkboxes are selected
-    return branchMasterInderminate || userMasterInderminate || userGroupMasterInderminate || assignMasterInderminate||stateMasterInderminate || documentMasterInderminate || userGroupMasterInderminate || expiredMasterInderminate||locationMasterInderminate||  otherGroupIndeterminate;
+    return branchMasterInderminate || userMasterInderminate || userGroupMasterInderminate || assignMasterInderminate||stateMasterInderminate || documentMasterInderminate || userGroupMasterInderminate || expiredMasterInderminate||locationMasterInderminate||
+    DnMasterInderminate || FormdesMasterInderminate || otherGroupIndeterminate;
 }
 isreports(): boolean {
   const emportReportInderminate = this.isEmployeeReportIndeterminate();
@@ -1800,7 +2605,14 @@ isIndeterminate(): boolean {
     ...this.GrouppermissionsEmp,
     ...this.GrouppermissionsDept,
     ...this.GrouppermissionsDis,
-    ...this.GrouppermissionsCat
+    ...this.GrouppermissionsCat,
+    ...this.GrouppermissionsGen,
+    ...this.GrouppermissionsReqtype,
+    ...this.GrouppermissionsApr,
+    ...this.GrouppermissionsAprlvl,
+    ...this.GrouppermissionsAtd,
+
+
   ].some(permission => this.selectedPermissions.includes(permission.id));
     return hasSelectedPermissions && !this.isEmployeeManagementMasterChecked();
 
@@ -1975,6 +2787,38 @@ showexpandable(): void {
 
 
   }
+
+
+  onUserDnChange(): void {
+    if (this.DnMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsDnMaster.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsDnMaster.map(p => p.id).includes(permission));
+    }
+    this.updateSettingsCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+
+  onUserFormdesChange(): void {
+    if (this.FormdesMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsFormdesMaster.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsFormdesMaster.map(p => p.id).includes(permission));
+    }
+    this.updateSettingsCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+
+
+
   updateSettingsCheckbox(): void {
     this.settingsChecked = this.isSettingsMasterChecked();
   }
@@ -2020,6 +2864,8 @@ showexpandable(): void {
     this.reportchecked = this.isReportManagementMasterChecked();
   }
    
+
+
   onAddweekChange(): void {
     if (this.addweekChecked) {
       this.selectedPermissions = this.selectedPermissions.concat(this.Grouppermissionsaddweek.map(permission => permission.id));
@@ -2118,7 +2964,11 @@ showexpandable(): void {
       ...this.GrouppermissionsstateMaster,
       ...this.Grouppermissionsdocumentype,
       ...this.Grouppermissionsexpirydocuments,
-      ...this.GrouppermissionslocationMaster
+      ...this.GrouppermissionslocationMaster,
+      ...this.GrouppermissionsDnMaster,
+      ...this.GrouppermissionsFormdesMaster
+
+
       
     ].map(permission => permission.id);
   
@@ -2135,6 +2985,9 @@ showexpandable(): void {
     this.updatedoctypeMasterCheckbox();
     this.updateexpiryMasterCheckbox();
     this.updatelocMasterCheckbox();
+    this.updateDnMasterCheckbox();
+    this.updateFormdesMasterCheckbox();
+
     this.updateSettingsCheckbox();
   }
 
@@ -2147,6 +3000,11 @@ showexpandable(): void {
     this.updatedoctypeMasterCheckbox();
     this.updateexpiryMasterCheckbox();
     this.updatelocMasterCheckbox();
+    this.updateDnMasterCheckbox();
+    this.updateFormdesMasterCheckbox();
+
+
+
     this.updateSettingsCheckbox();
     this.updateIndeterminateStatesvalue();
   }
@@ -2159,7 +3017,11 @@ showexpandable(): void {
       ...this.GrouppermissionsstateMaster,
       ...this.Grouppermissionsdocumentype,
       ...this.Grouppermissionsexpirydocuments,
-      ...this.GrouppermissionslocationMaster
+      ...this.GrouppermissionslocationMaster,
+      ...this.GrouppermissionsDnMaster,
+      ...this.GrouppermissionsFormdesMaster
+
+
     ].some(permission => this.selectedPermissions.includes(permission.id));
       return hasSelectedPermissions && !this.isSettingsMasterChecked();
 
@@ -2317,28 +3179,31 @@ onSubmit(): void {
   }
 
   // Validate the form data
-  if (!this.profile || !this.selectedPermissions || this.selectedPermissions.length === 0) {
-    console.error('Codename and permissions are required.');
-    return;
-  }
+  // if (!this.profile || !this.selectedPermissions || this.selectedPermissions.length === 0) {
+  //   console.error('Codename and permissions are required.');
+  //   return;
+  // }
 
   // Construct the URL with the selected schema
-  const url = `http://${selectedSchema}.localhost:8000/organisation/api/permissions/`;
+  const url = `${this.apiUrl}/organisation/api/Group/?schema=${selectedSchema}`;
   
   const formData = {
-    profile: this.profile,
+    name: this.groupName,
     permissions: this.selectedPermissions
   };
 
   // Send POST request to the dynamically constructed URL
   this.http.post(url, formData).subscribe(response => {
     console.log('Data saved successfully:', response); 
+    alert('permission Gropu Added')
     // Optionally reset the form or handle the response
   }, error => {
     console.error('Failed to save data:', error);
+    alert(`fail to save data ! ${error}`)
     if (error.error.profile) {
       // Display the error message to the user, e.g., by setting a form error
       console.error('Codename error:', error.error.profile);
+
     }
   });
 }

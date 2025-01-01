@@ -249,11 +249,11 @@ if (this.userId !== null) {
       this.UserMasterService.getUsers().subscribe(
         (result: any) => {
           this.Users = result;
-          console.log(' fetching Companies:');
+          console.log(' fetching Users:');
   
         },
         (error) => {
-          console.error('Error fetching Companies:', error);
+          console.error('Error fetching Users:', error);
         }
       );
     }

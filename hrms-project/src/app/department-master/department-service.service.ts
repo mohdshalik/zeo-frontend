@@ -86,7 +86,7 @@ export class DepartmentServiceService {
 
 
   getUserforPermissionGroupSelection(selectedSchema: string): Observable<any> {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Group/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Group/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -177,7 +177,7 @@ export class DepartmentServiceService {
      
   
       
-      const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/permissions/`;
+      const apiUrl = `${this.apiUrl}/organisation/api/permissions/?schema=${selectedSchema}`;
   
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   

@@ -25,8 +25,6 @@ export class EmailTemplateComponent implements AfterViewInit {
 
 
   request_type: any = '';
-
-
   registerButtonClicked = false;
 
 

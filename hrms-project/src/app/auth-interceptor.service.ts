@@ -28,9 +28,9 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error) => {
         if (error.status === 403) {
           // Handle unauthorized access here, e.g., re-login or redirect to login page
-          console.error('Unauthorized access. Redirecting to login page...');
-          alert('Unauthorized access. Redirecting to login page...');
-          this.authService.handleSessionExpiration();
+          // console.error('Unauthorized access. Redirecting to login page...');
+          // alert('Unauthorized access. Redirecting to login page...');
+          // this.authService.handleSessionExpiration();
           // You may want to clear the user's session or perform other actions
         }
         // alert('Session expired. You will be redirected to the login page.');
