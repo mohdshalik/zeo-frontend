@@ -321,7 +321,7 @@ export class CountryService {
      
   
       
-      const apiUrl = `${this.apiUrl}Documents/?schema=${selectedSchema}`;
+      const apiUrl = `${this.apiUrl}/core/api/Documents/?schema=${selectedSchema}`;
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
       return this.http.post(apiUrl, companyData, { headers }).pipe(
