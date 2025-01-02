@@ -87,9 +87,9 @@
         <div *ngSwitchCase="'Dropdown'" class="custom-sel">
             <select class="form-control" [(ngModel)]="temp_emp_gender" (ngModelChange)="syncGender($event)" [ngModelOptions]="{standalone: true}">
 
-                <option >Male</option>
-                <option>Female</option>
-                <option>Other</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
             </select>
         </div>
     </ng-container>
@@ -336,10 +336,10 @@
             <div *ngSwitchCase="'Dropdown'" class="custom-sel">
                 <select class="form-control" [(ngModel)]="temp_emp_marital" (ngModelChange)="syncMarital($event)" [ngModelOptions]="{standalone: true}">
     
-                    <option >Married</option>
-                    <option>Single</option>
-                    <option>Divorced</option>
-                    <option>Widow</option>
+                    <option value="M" >Married</option>
+                    <option value="S">Single</option>
+                    <option value="divorced">Divorced</option>
+                    <option value="widow">Widow</option>
                 </select>
             </div>
         </ng-container>
@@ -778,11 +778,11 @@
                
         <label>{{hiredFieldName}}</label>
   
-<input type="date"  class="form-control" required   [(ngModel)]="emp_hired_date"  placeholder="Enter {{hiredFieldName}}"
+<input type="date"  class="form-control" required   [(ngModel)]="emp_joined_date"  placeholder="Enter {{hiredFieldName}}"
 [ngModelOptions]="{standalone: true}" [required]="isHiringMandatory" 
-[ngClass]="{'error-field': registerButtonClicked && isHiringMandatory && !emp_hired_date}" >
+[ngClass]="{'error-field': registerButtonClicked && isHiringMandatory && !emp_joined_date}" >
 
-<div *ngIf="registerButtonClicked && isHiringMandatory && !emp_hired_date" class="error-message">
+<div *ngIf="registerButtonClicked && isHiringMandatory && !emp_joined_date" class="error-message">
             {{hiredFieldName}} is required.
         </div>
        <!-- <div *ngIf="registerButtonClicked && !emp_mother_name" class="error-message">Description is required.</div> -->
@@ -791,10 +791,10 @@
     <div class="col-md-6">
                
         <label>{{joinFieldName}}</label>
-       <input type="date"  class="form-control" required id="emp_active_date" name="emp_active_date"  [(ngModel)]="emp_active_date"  placeholder="Enter {{joinFieldName}}"
-        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_active_date}">
+       <input type="date"  class="form-control" required id="emp_date_of_confirmation" name="emp_date_of_confirmation"  [(ngModel)]="emp_date_of_confirmation"  placeholder="Enter {{joinFieldName}}"
+        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_date_of_confirmation}">
        
-       <div *ngIf="registerButtonClicked && !emp_active_date" class="error-message">Active date .</div>
+       <div *ngIf="registerButtonClicked && !emp_date_of_confirmation" class="error-message">Active date .</div>
     </div>
 
  

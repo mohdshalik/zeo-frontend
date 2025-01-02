@@ -74,8 +74,8 @@ export class CreateEmployeeComponent implements OnInit {
   emp_ctgry_id:any='';
   // emp_languages: string[] = [];
   emp_languages: any='';
-  emp_active_date:any='';
-  emp_hired_date:any=''; 
+  emp_date_of_confirmation:any='';
+  emp_joined_date:any=''; 
   emp_profile_pic: string | undefined;
 
   is_ess: boolean = false;
@@ -650,7 +650,7 @@ if (this.isLCatogoryMandatory && !this.emp_ctgry_id) {
 }
 
 
-if (this.isHiringMandatory && !this.emp_hired_date) {
+if (this.isHiringMandatory && !this.emp_joined_date) {
   alert(`${this.hiredFieldName} is required.`);
   return; // Stop form submission if the field is mandatory and empty
 }
@@ -720,8 +720,8 @@ if (this.isHiringMandatory && !this.emp_hired_date) {
     // formData.append('emp_languages', this.emp_languages);
 
     // formData.append('emp_languages', JSON.stringify(this.emp_languages));
-    formData.append('emp_active_date', this.emp_active_date);
-    formData.append('emp_hired_date', this.emp_hired_date);
+    formData.append('emp_date_of_confirmation', this.emp_date_of_confirmation);
+    formData.append('emp_joined_date', this.emp_joined_date);
     formData.append('is_ess', this.is_ess ? '1' : '0');
     formData.append('emp_status', this.emp_status ? '1' : '0');
 

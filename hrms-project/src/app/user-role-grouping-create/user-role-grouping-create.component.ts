@@ -65,6 +65,13 @@ export class UserRoleGroupingCreateComponent implements OnInit {
 
 
 
+  //permission stored arrays for leaves
+  GrouppermissionsLeaveaprv:any[] =[];
+
+
+
+
+
   //creating group name declared variables.
 
   groupName: string = '';
@@ -115,11 +122,26 @@ export class UserRoleGroupingCreateComponent implements OnInit {
 
   //selected calendars checkboxes.
 
+  calenderdetailInderminate= false;
+
   addweekInderminate=false;
   assignweekInderminate= false;
   addholidayInderminate= false;
   assignholidayInderminate= false;
-  calenderdetailInderminate= false;
+
+
+
+
+
+  //selected leave checkboxes.
+
+  LeavedetailInderminate= false;
+
+
+  LeaveaprvInderminate=false;
+
+
+
 
 
   // Add these lines
@@ -174,6 +196,11 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   addholidayChecked:boolean= false;
   assignholidayChecked:boolean = false;
 
+
+
+    //Calendars checkbox checked values
+    LeaveaprvChecked:boolean= false;
+
   
 
 
@@ -183,6 +210,8 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   settingsChecked: boolean = false;
   reportchecked:boolean = false;
   calenderchecked:boolean = false;
+  Leavechecked:boolean = false;
+
 
 
 
@@ -190,6 +219,7 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   expandedMastersvalue: boolean = true;
   reportMastersvalue:boolean =true;
   calenderMastersvalue:boolean =true;
+  LeaveMastersvalue:boolean =true;
 
   // Add this property
   registerButtonClicked: boolean = false;
@@ -454,6 +484,20 @@ export class UserRoleGroupingCreateComponent implements OnInit {
  
 
 
+
+
+  isLeaveMangementMasterChecked():boolean{
+    return this.LeaveaprvChecked ;
+       
+  }
+
+  isLeaveaprvIndeterminate(): boolean {
+    const selectedLeaveaprvPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsLeaveaprv.map(p => p.id).includes(permission)
+    );
+    return selectedLeaveaprvPermissions.length > 0 && selectedLeaveaprvPermissions.length < this.GrouppermissionsLeaveaprv.length;
+  }
+
   constructor(
     private UserMasterService: UserMasterService,
     private authService: AuthenticationService,
@@ -466,10 +510,15 @@ export class UserRoleGroupingCreateComponent implements OnInit {
     this.loadSettingPermissions();
     this.loadReportPermissions();
     this.loadCalenderPermissions();
+    this.loadLeavePermissions();
+
+
     this.updateIndeterminateStates();
     this.updateIndeterminateStatesvalue();
     this.updateIndeterminateReports();
     this.updateInderminateCalenders();
+    this.updateInderminateLeave();
+
 
 
   }
@@ -520,6 +569,16 @@ updateInderminateCalenders():void{
   this.isAssignHolidayIndeterminate();
 }
 
+
+updateInderminateLeave():void{
+  this.isLeaveaprvIndeterminate();
+
+}
+
+
+
+
+
   loadPermissions(): void {
     this.loadpermissionsEmpMaster();
     this.loadpermissionsDepartMaster();
@@ -568,6 +627,16 @@ updateInderminateCalenders():void{
     this.loadpermissionsAddholidayDetail();
     this.loadpermissionsAssignholidayDetail();
   }
+
+
+  loadLeavePermissions():void{
+    this.loadpermissionsLeaveaprv();
+
+  }
+
+
+
+
 //load employee master permissions 
 
 
@@ -581,7 +650,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsEmp = result.slice(269, 273);
+        this.GrouppermissionsEmp = result.slice(291, 295);
         
       },
       (error: any) => {
@@ -621,7 +690,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsDept = result.slice(391, 395);
+        this.GrouppermissionsDept = result.slice(148, 152);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -660,7 +729,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsDis = result.slice(395, 399);
+        this.GrouppermissionsDis = result.slice(156, 160);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -697,7 +766,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsCat = result.slice(387, 391);
+        this.GrouppermissionsCat = result.slice(144, 148);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -736,7 +805,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsGen = result.slice(313, 317);
+        this.GrouppermissionsGen = result.slice(237, 241);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -774,7 +843,7 @@ if (selectedSchema) {
          
     this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
       (result: any) => {
-          this.GrouppermissionsReqtype = result.slice(339, 343);
+          this.GrouppermissionsReqtype = result.slice(263, 267);
         },
         (error: any) => {
           console.error('Error fetching permissions:', error);
@@ -814,7 +883,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsApr = result.slice(224, 228);
+        this.GrouppermissionsApr = result.slice(271, 275);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -853,7 +922,7 @@ if (selectedSchema) {
            
       this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
         (result: any) => {
-            this.GrouppermissionsAprlvl = result.slice(228, 232);
+            this.GrouppermissionsAprlvl = result.slice(275, 279);
           },
           (error: any) => {
             console.error('Error fetching permissions:', error);
@@ -892,7 +961,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsAtd = result.slice(32, 36);
+        this.GrouppermissionsAtd = result.slice(427, 431);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -939,7 +1008,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsCmp = result.slice(423, 427);
+        this.GrouppermissionsCmp = result.slice(4, 8);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -979,7 +1048,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsBrch = result.slice(379, 383);
+        this.GrouppermissionsBrch = result.slice(140, 144);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -1017,7 +1086,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsUser = result.slice(427, 431);
+        this.GrouppermissionsUser = result.slice(12, 16);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -1055,7 +1124,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsUsergroup = result.slice(4, 8);
+        this.GrouppermissionsUsergroup = result.slice(60,64);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -1093,7 +1162,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsassigneddUser = result.slice(8, 12);
+        this.GrouppermissionsassigneddUser = result.slice(56, 60);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -1131,7 +1200,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.GrouppermissionsstateMaster = result.slice(196, 200);
+        this.GrouppermissionsstateMaster = result.slice(48, 52);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -1170,7 +1239,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.Grouppermissionsdocumentype= result.slice(172, 176);
+        this.Grouppermissionsdocumentype= result.slice(24, 28);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -1208,7 +1277,7 @@ if (selectedSchema) {
      	
   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
     (result: any) => {
-        this.Grouppermissionsexpirydocuments = result.slice(261, 265);
+        this.Grouppermissionsexpirydocuments = result.slice(283, 287);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
@@ -1248,7 +1317,7 @@ if (selectedSchema) {
          
     this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
       (result: any) => {
-          this.GrouppermissionslocationMaster = result.slice(423, 427);
+          this.GrouppermissionslocationMaster = result.slice(4, 8);
         },
         (error: any) => {
           console.error('Error fetching permissions:', error);
@@ -1283,7 +1352,7 @@ if (selectedSchema) {
            
       this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
         (result: any) => {
-            this.GrouppermissionsDnMaster = result.slice(399, 403);
+            this.GrouppermissionsDnMaster = result.slice(160, 164);
             // console.log('GrouppermissionsDnMaster',result )
 
           },
@@ -1321,7 +1390,7 @@ if (selectedSchema) {
              
         this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
           (result: any) => {
-              this.GrouppermissionsFormdesMaster = result.slice(399, 403);
+              this.GrouppermissionsFormdesMaster = result.slice(189, 193);
               // console.log('GrouppermissionsDnMaster',result )
   
             },
@@ -1336,13 +1405,13 @@ if (selectedSchema) {
       
           getDisplayNameFormdes(permissionCodename: string): string {
             switch (permissionCodename.trim().toLowerCase()) {
-              case 'add_document_numbering':
+              case 'add_emp_customfield':
                 return 'Add';
-              case 'change_document_numbering':
+              case 'change_emp_customfield':
                 return 'Edit';
-              case 'delete_document_numbering':
+              case 'delete_emp_customfield':
                 return 'Delete';
-              case 'view_document_numbering':
+              case 'view_emp_customfield':
                 return 'View';
               default:
                 return permissionCodename;
@@ -1364,7 +1433,7 @@ if (selectedSchema) {
            
       this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
         (result: any) => {
-            this.GrouppermissionsemployeeReport = result.slice(330, 335);
+            this.GrouppermissionsemployeeReport = result.slice(254, 259);
           },
           (error: any) => {
             console.error('Error fetching permissions:', error);
@@ -1401,7 +1470,7 @@ if (selectedSchema) {
            
       this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
         (result: any) => {
-            this.GrouppermissionsdocumnetReport = result.slice(236, 241);
+            this.GrouppermissionsdocumnetReport = result.slice(172, 177);
           },
           (error: any) => {
             console.error('Error fetching permissions:', error);
@@ -1437,7 +1506,7 @@ if (selectedSchema) {
              
         this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
           (result: any) => {
-              this.GrouppermissiionsgeneralReport = result.slice(317, 322);
+              this.GrouppermissiionsgeneralReport = result.slice(241, 246);
             },
             (error: any) => {
               console.error('Error fetching permissions:', error);
@@ -1467,8 +1536,13 @@ if (selectedSchema) {
             }
           }
 
+
+
           
-            // loadpermissionsAddweekDetail
+        
+        
+        
+          // loadpermissionsAddweekDetail
             loadpermissionsAddweekDetail(): void {
               const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
           
@@ -1478,7 +1552,7 @@ if (selectedSchema) {
                  
             this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
               (result: any) => {
-                  this.Grouppermissionsaddweek = result.slice(148, 152);
+                  this.Grouppermissionsaddweek = result.slice(331, 335);
                 },
                 (error: any) => {
                   console.error('Error fetching permissions:', error);
@@ -1514,7 +1588,7 @@ if (selectedSchema) {
                    
               this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
                 (result: any) => {
-                    this.Grouppermisionsassignweek = result.slice(28,32);
+                    this.Grouppermisionsassignweek = result.slice(403,407);
                   },
                   (error: any) => {
                     console.error('Error fetching permissions:', error);
@@ -1551,7 +1625,7 @@ if (selectedSchema) {
                      
                 this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
                   (result: any) => {
-                      this.Grouppermissionsaddholiday = result.slice(73, 77);
+                      this.Grouppermissionsaddholiday = result.slice(351,355);
                     },
                     (error: any) => {
                       console.error('Error fetching permissions:', error);
@@ -1587,7 +1661,7 @@ if (selectedSchema) {
                        
                   this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
                     (result: any) => {
-                        this.Grouppermissionsassisgnholiday = result.slice(24, 28);
+                        this.Grouppermissionsassisgnholiday = result.slice(355, 359);
                       },
                       (error: any) => {
                         console.error('Error fetching permissions:', error);
@@ -1612,6 +1686,55 @@ if (selectedSchema) {
                           return permissionCodename;
                       }
                     }
+
+
+
+
+
+
+
+                    loadpermissionsLeaveaprv(): void {
+                      const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+                  
+                      console.log('schemastore',selectedSchema )
+                  
+                  if (selectedSchema) {
+                         
+                    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                      (result: any) => {
+                          this.GrouppermissionsLeaveaprv = result.slice(391, 395);
+                          
+                        },
+                        (error: any) => {
+                          console.error('Error fetching permissions:', error);
+                        }
+                      );
+                  }
+                    }
+                  
+                  
+                      //Display Name add view delte code for emplotee master-------
+                  
+                      getDisplayNameLeaveaprv(permissionCodename: string): string {
+                        switch (permissionCodename.trim().toLowerCase()) {
+                          case 'add_leaveapproval':
+                            return 'Add';
+                          case 'change_leaveapproval':
+                            return 'Edit';
+                          case 'delete_leaveapproval':
+                            return 'Delete';
+                          case 'view_leaveapproval':
+                            return 'View';
+                          default:
+                            return permissionCodename;
+                        }
+                      }
+
+
+
+
+
+
   //   onCheckboxChangeEmp(permission: string): void {
   //   if (this.selectedPermissions.includes(permission)) {
   //     this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
@@ -2267,6 +2390,37 @@ if (selectedSchema) {
   }
 
 
+
+
+
+
+  onCheckboxChangesLeaveaprv(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateLeaveaprvCheckbox();
+    this.updateLeave();
+
+  }
+
+  updateLeaveaprvCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsLeaveaprv.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.LeaveaprvChecked = allPermissionsSelected;
+    this.LeaveaprvInderminate = this.isLeaveaprvIndeterminate();
+  }
+
+
+
+
+
+
   onCheckboxChange(permission: string): void {
     if (this.selectedPermissions.includes(permission)) {
       this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
@@ -2315,10 +2469,14 @@ if (selectedSchema) {
     this.updateAssignweekCheckbox();
 
 
+    this.updateLeaveaprvCheckbox();
+
     this.updateSelectAll();
     this.updateSelectAlls();
     this.updateReport();
     this.updateCalender();
+    this.updateLeave();
+
   }
 
   
@@ -2597,6 +2755,16 @@ iscalenders(): boolean {
   const otherGroupIndeterminate = false;
   return addweekInderminate || assignweekInderminate || addholidayInderminate || assignholidayInderminate || otherGroupIndeterminate;
 }  
+
+isLeaves(): boolean {
+  const LeaveaprvInderminate = this.isLeaveaprvIndeterminate();
+  // const assignweekInderminate = this.isAssignWeekIndeterminate();
+  // const addholidayInderminate = this.isAddHolidayIndeterminate();
+  // const assignholidayInderminate = this.isAssignHolidayIndeterminate();
+
+  const otherGroupIndeterminate = false;
+  return LeaveaprvInderminate || otherGroupIndeterminate;
+} 
 // emportReportInderminate= false;
 // documentReportInderminate = false;
 // generalReportInderminate= false;
@@ -2918,8 +3086,30 @@ showexpandable(): void {
 
   }
 
+
+
+  onLeaveaprvChange(): void {
+    if (this.LeaveaprvChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsLeaveaprv.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsLeaveaprv.map(p => p.id).includes(permission));
+    }
+    this.updateLeaveCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+
+
   updateCalenderCheckbox(): void {
     this.calenderchecked = this.isCalenderMangementMasterChecked();
+  }
+
+
+  updateLeaveCheckbox(): void {
+    this.Leavechecked = this.isLeaveMangementMasterChecked();
   }
   // selectAlls(): void {
   //   const isSelected = this.settingsChecked;
@@ -3131,13 +3321,49 @@ selectCalender(): void {
 }
 
 
+selectLeave(): void {
+  const allPermissions = [
+    ...this.GrouppermissionsLeaveaprv,
+    // ...this.Grouppermisionsassignweek,
+    // ...this.Grouppermissionsaddholiday,
+    // ...this.Grouppermissionsassisgnholiday
+  ].map(permission => permission.id);
+
+  if (this.Leavechecked) {
+    this.selectedPermissions = Array.from(new Set([...this.selectedPermissions, ...allPermissions]));
+  } else {
+    this.selectedPermissions = this.selectedPermissions.filter(permission => !allPermissions.includes(permission));
+  }
+
+  this.updateLeaveaprvCheckbox();
+  // this.updateAddHolidayCheckbox();
+  // this.updateAssignHolidayCheckbox();
+  // this.updateAssignweekCheckbox();
+  // this.updateCalenderCheckbox();
+}
+
 updateCalender():void{
   this.updateAddHolidayCheckbox();
   this.updateAssignHolidayCheckbox();
   this.updateAddWeekCheckbox();
   this.updateAssignweekCheckbox();
+
   this.updateInderminateCalenders();
   this.updateCalenderCheckbox();
+
+}
+
+updateLeave():void{
+  this.updateLeaveaprvCheckbox();
+  // this.updateAssignHolidayCheckbox();
+  // this.updateAddWeekCheckbox();
+  // this.updateAssignweekCheckbox();
+  // this.updateInderminateCalenders();
+  // this.updateCalenderCheckbox();
+
+
+  this.updateInderminateLeave();
+  this.updateLeaveCheckbox();
 
 }
 
@@ -3150,6 +3376,19 @@ isCalenderInderminate(): boolean {
   ].some(permission => this.selectedPermissions.includes(permission.id));
 
   return hasSelectedPermissions && !this.isCalenderMangementMasterChecked();
+}
+
+
+
+isLeaveInderminate(): boolean {
+  const hasSelectedPermissions = [
+    ...this.GrouppermissionsLeaveaprv,
+    // ...this.Grouppermisionsassignweek,
+    // ...this.Grouppermissionsaddholiday,
+    // ...this.Grouppermissionsassisgnholiday
+  ].some(permission => this.selectedPermissions.includes(permission.id));
+
+  return hasSelectedPermissions && !this.isLeaveMangementMasterChecked();
 }
 
 // isReportInderminate(): boolean {
@@ -3169,6 +3408,11 @@ showreports(): void {
 
 showcalenders(): void{
   this.calenderMastersvalue =!this.calenderMastersvalue;
+}
+
+
+showLeaves(): void{
+  this.LeaveMastersvalue =!this.LeaveMastersvalue;
 }
 onSubmit(): void {
   const selectedSchema = localStorage.getItem('selectedSchema');

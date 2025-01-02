@@ -964,6 +964,98 @@
         
         
                 </div>
+
+                <div class="row mt-3">
+       
+                  <div class="col-md-4">
+                    <span class="head_group_list">
+                      <!-- [indeterminate]="isreports()" -->
+
+                      <mat-checkbox [(ngModel)]="Leavechecked" 
+                                    (change)="selectLeave()"
+                                    (change)="updateLeaveCheckbox()" 
+                                    [indeterminate]="isLeaveInderminate()"
+                                    [ngModelOptions]="{standalone: true}">
+                      </mat-checkbox>
+                      <span (click)="showLeaves()">Leave Managment</span>
+                    </span>
+                  </div>
+                  
+                  
+                </div>
+        
+                <div class="child_per">
+                <div class="row"  *ngIf="LeaveMastersvalue" >
+                
+                  
+                  <div class="col-md-3">
+                      <span class="">
+                          <mat-checkbox [(ngModel)]="LeaveaprvChecked" 
+                          [indeterminate]="isLeaveaprvIndeterminate()" 
+                          (change)="onLeaveaprvChange()" 
+                          [ngModelOptions]="{standalone: true}">
+                          Leave Aprrovals
+                          </mat-checkbox>
+                      </span><br>
+                  </div>
+                  
+                  <div class="col-md-9">
+                      <div class="selection_checkmark_sec">
+                          <div class="all_selection_Sec">
+                              <div class="row">
+                            
+                                  <div class="col-md-2" *ngFor="let permission of GrouppermissionsLeaveaprv">
+                                      <h2> 
+                                          <span> 
+                                              <mat-checkbox [value]="permission.id" 
+                                              (change)="onCheckboxChangesLeaveaprv(permission.id)"
+                                               [checked]="selectedPermissions.includes(permission.id)">
+                                                  {{ getDisplayNameLeaveaprv(permission.codename) }}
+                                              </mat-checkbox> 
+                                          </span> 
+                                      </h2>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+        
+                   
+        
+        
+        
+                  
+        
+                
+               
+             
+                
+       
+          
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                 
+        
+                </div>
+                
+        
+        
+                </div>
+
+
+
+
+
                 <div class="row mt-4">
                   <div class="col-md-8">
         

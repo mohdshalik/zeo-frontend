@@ -155,7 +155,7 @@
 } */
 
 .mat-drawer.mat-drawer-side{
-    margin-left: 4%;
+    margin-left: 3%;
    margin-top: 60px;
    border-left: solid 1px white;
 }
@@ -191,4 +191,9 @@
 .mat-expansion-panel::after{
     margin-right: 10px;
     color: white !important;
+}
+
+
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled="true"]):hover{
+    background: transparent !important;
 }
