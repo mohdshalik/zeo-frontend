@@ -3,6 +3,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { EmployeeService } from '../employee-master/employee.service';
 import { SessionService } from '../login/session.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-approvals',
@@ -11,6 +12,9 @@ import { SessionService } from '../login/session.service';
 })
 export class ApprovalsComponent {
 
+
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
   schemas: string[] = []; // Array to store schema names
 
@@ -134,7 +138,7 @@ note: string = '';  // To hold the note entered by the user
   const selectedSchema = this.authService.getSelectedSchema();
 
   if (selectedSchema) {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/request-approvals/${approvalId}/`;
+    const apiUrl = `${this.apiUrl}/employee/api/request-approvals/${approvalId}/?schema=${selectedSchema}`;
 
     this.EmployeeService.getApprovalDetails(apiUrl).subscribe(
       (response: any) => {
@@ -163,7 +167,7 @@ note: string = '';  // To hold the note entered by the user
         status: 'Rejected',       // Setting status to "Approved"
       };
     if (selectedSchema) {
-      const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/request-approvals/${approvalId}/reject/`;
+      const apiUrl = `${this.apiUrl}/employee/api/request-approvals/${approvalId}/reject/?schema=${selectedSchema}`;
   
       this.EmployeeService.rejectApprovalRequest(apiUrl, approvalData).subscribe(
         (response: any) => {
@@ -198,7 +202,7 @@ note: string = '';  // To hold the note entered by the user
   const selectedSchema = this.authService.getSelectedSchema();
 
   if (selectedSchema) {
-    const apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/request-approvals/${approvalId}/approve/`;
+    const apiUrl = `${this.apiUrl}/employee/api/request-approvals/${approvalId}/approve/?schema=${selectedSchema}`;
 
 
        // Data to be sent in the request body (including the note)

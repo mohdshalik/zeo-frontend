@@ -67,9 +67,14 @@ export class UserRoleGroupingCreateComponent implements OnInit {
 
   //permission stored arrays for leaves
   GrouppermissionsLeaveaprv:any[] =[];
+  GrouppermissionsLeavetype:any[] =[];
+  GrouppermissionsLeavemaster:any[] =[];
+  GrouppermissionsLeavereq:any[] =[];
+  GrouppermissionsLeavecom:any[] =[];
 
+  GrouppermissionsLeaveaprvlvl:any[] =[];
 
-
+  GrouppermissionsLeaveaprvlvltemp:any[] =[];
 
 
   //creating group name declared variables.
@@ -139,6 +144,14 @@ export class UserRoleGroupingCreateComponent implements OnInit {
 
 
   LeaveaprvInderminate=false;
+  LeavetypeInderminate=false;
+  LeavemasterInderminate=false;
+  LeavereqInderminate=false;
+  LeavecomInderminate=false;
+  LeaveaprvlvlInderminate=false;
+  LeaveaprvlvltempInderminate=false;
+
+
 
 
 
@@ -200,6 +213,12 @@ export class UserRoleGroupingCreateComponent implements OnInit {
 
     //Calendars checkbox checked values
     LeaveaprvChecked:boolean= false;
+    LeavetypeChecked:boolean= false;
+    LeavemasterChecked:boolean= false;
+    LeavereqChecked:boolean= false;
+    LeavecomChecked:boolean= false;
+    LeaveaprvlvlChecked:boolean= false;
+    LeaveaprvlvltempChecked:boolean= false;
 
   
 
@@ -487,7 +506,13 @@ export class UserRoleGroupingCreateComponent implements OnInit {
 
 
   isLeaveMangementMasterChecked():boolean{
-    return this.LeaveaprvChecked ;
+    return this.LeaveaprvChecked &&
+    this.LeavetypeChecked &&
+    this.LeavemasterChecked &&
+    this.LeavereqChecked &&
+    this.LeavecomChecked &&
+    this.LeaveaprvlvlChecked &&
+    this.LeaveaprvlvltempChecked
        
   }
 
@@ -498,6 +523,47 @@ export class UserRoleGroupingCreateComponent implements OnInit {
     return selectedLeaveaprvPermissions.length > 0 && selectedLeaveaprvPermissions.length < this.GrouppermissionsLeaveaprv.length;
   }
 
+  isLeavetypeIndeterminate(): boolean {
+    const selectedLeavetypePermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsLeavetype.map(p => p.id).includes(permission)
+    );
+    return selectedLeavetypePermissions.length > 0 && selectedLeavetypePermissions.length < this.GrouppermissionsLeavetype.length;
+  }
+
+  isLeavemasterIndeterminate(): boolean {
+    const selectedLeavemasterPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsLeavemaster.map(p => p.id).includes(permission)
+    );
+    return selectedLeavemasterPermissions.length > 0 && selectedLeavemasterPermissions.length < this.GrouppermissionsLeavemaster.length;
+  }
+
+  isLeavereqIndeterminate(): boolean {
+    const selectedLeavereqPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsLeavereq.map(p => p.id).includes(permission)
+    );
+    return selectedLeavereqPermissions.length > 0 && selectedLeavereqPermissions.length < this.GrouppermissionsLeavereq.length;
+  }
+
+  isLeavecomIndeterminate(): boolean {
+    const selectedLeavecomPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsLeavecom.map(p => p.id).includes(permission)
+    );
+    return selectedLeavecomPermissions.length > 0 && selectedLeavecomPermissions.length < this.GrouppermissionsLeavecom.length;
+  }
+
+  isLeaveaprvlvlIndeterminate(): boolean {
+    const selectedLeaveaprvlvlPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsLeaveaprvlvl.map(p => p.id).includes(permission)
+    );
+    return selectedLeaveaprvlvlPermissions.length > 0 && selectedLeaveaprvlvlPermissions.length < this.GrouppermissionsLeaveaprvlvl.length;
+  }
+
+  isLeaveaprvlvltempIndeterminate(): boolean {
+    const selectedLeaveaprvlvltempPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsLeaveaprvlvltemp.map(p => p.id).includes(permission)
+    );
+    return selectedLeaveaprvlvltempPermissions.length > 0 && selectedLeaveaprvlvltempPermissions.length < this.GrouppermissionsLeaveaprvlvltemp.length;
+  }
   constructor(
     private UserMasterService: UserMasterService,
     private authService: AuthenticationService,
@@ -572,6 +638,13 @@ updateInderminateCalenders():void{
 
 updateInderminateLeave():void{
   this.isLeaveaprvIndeterminate();
+  this.isLeavetypeIndeterminate();
+  this.isLeavemasterIndeterminate();
+  this.isLeavereqIndeterminate();
+  this.isLeavecomIndeterminate();
+  this.isLeaveaprvlvlIndeterminate();
+  this.isLeaveaprvlvltempIndeterminate();
+
 
 }
 
@@ -631,6 +704,13 @@ updateInderminateLeave():void{
 
   loadLeavePermissions():void{
     this.loadpermissionsLeaveaprv();
+    this.loadpermissionsLeavetype();
+    this.loadpermissionsLeavemaster();
+    this.loadpermissionsLeavereq();
+    this.loadpermissionsLeavecom();
+    this.loadpermissionsLeaveaprvlvl();
+    this.loadpermissionsLeaveaprvlvltemp();
+
 
   }
 
@@ -1731,6 +1811,231 @@ if (selectedSchema) {
                       }
 
 
+                      
+                    loadpermissionsLeavetype(): void {
+                      const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+                  
+                      console.log('schemastore',selectedSchema )
+                  
+                  if (selectedSchema) {
+                         
+                    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                      (result: any) => {
+                          this.GrouppermissionsLeavetype = result.slice(304, 308);
+                          
+                        },
+                        (error: any) => {
+                          console.error('Error fetching permissions:', error);
+                        }
+                      );
+                  }
+                    }
+                  
+                  
+                      //Display Name add view delte code for emplotee master-------
+                  
+                      getDisplayNameLeavetype(permissionCodename: string): string {
+                        switch (permissionCodename.trim().toLowerCase()) {
+                          case 'add_leave_type':
+                            return 'Add';
+                          case 'change_leave_type':
+                            return 'Edit';
+                          case 'delete_leave_type':
+                            return 'Delete';
+                          case 'view_leave_type':
+                            return 'View';
+                          default:
+                            return permissionCodename;
+                        }
+                      }
+
+                      loadpermissionsLeavemaster(): void {
+                        const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+                    
+                        console.log('schemastore',selectedSchema )
+                    
+                    if (selectedSchema) {
+                           
+                      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                        (result: any) => {
+                            this.GrouppermissionsLeavemaster = result.slice(363, 367);
+                            
+                          },
+                          (error: any) => {
+                            console.error('Error fetching permissions:', error);
+                          }
+                        );
+                    }
+                      }
+                    
+                    
+                        //Display Name add view delte code for emplotee master-------
+                    
+                        getDisplayNameLeavemaster(permissionCodename: string): string {
+                          switch (permissionCodename.trim().toLowerCase()) {
+                            case 'add_leave_entitlement':
+                              return 'Add';
+                            case 'change_leave_entitlement':
+                              return 'Edit';
+                            case 'delete_leave_entitlement':
+                              return 'Delete';
+                            case 'view_leave_entitlement':
+                              return 'View';
+                            default:
+                              return permissionCodename;
+                          }
+                        }
+
+                        loadpermissionsLeavereq(): void {
+                          const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+                      
+                          console.log('schemastore',selectedSchema )
+                      
+                      if (selectedSchema) {
+                             
+                        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                          (result: any) => {
+                              this.GrouppermissionsLeavereq = result.slice(371, 375);
+                              
+                            },
+                            (error: any) => {
+                              console.error('Error fetching permissions:', error);
+                            }
+                          );
+                      }
+                        }
+                      
+                          //Display Name add view delte code for emplotee master-------
+                      
+                          getDisplayNameLeavereq(permissionCodename: string): string {
+                            switch (permissionCodename.trim().toLowerCase()) {
+                              case 'add_employee_leave_request':
+                                return 'Add';
+                              case 'change_employee_leave_request':
+                                return 'Edit';
+                              case 'delete_employee_leave_request':
+                                return 'Delete';
+                              case 'view_employee_leave_request':
+                                return 'View';
+                              default:
+                                return permissionCodename;
+                            }
+                          }
+
+                          
+                        loadpermissionsLeavecom(): void {
+                          const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+                      
+                          console.log('schemastore',selectedSchema )
+                      
+                      if (selectedSchema) {
+                             
+                        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                          (result: any) => {
+                              this.GrouppermissionsLeavecom = result.slice(343, 347);
+                              
+                            },
+                            (error: any) => {
+                              console.error('Error fetching permissions:', error);
+                            }
+                          );
+                      }
+                        }
+                      
+                          //Display Name add view delte code for emplotee master-------
+                      
+                          getDisplayNameLeavecom(permissionCodename: string): string {
+                            switch (permissionCodename.trim().toLowerCase()) {
+                              case 'add_compensatoryleavetransaction':
+                                return 'Add';
+                              case 'change_compensatoryleavetransaction':
+                                return 'Edit';
+                              case 'delete_compensatoryleavetransaction':
+                                return 'Delete';
+                              case 'view_compensatoryleavetransaction':
+                                return 'View';
+                              default:
+                                return permissionCodename;
+                            }
+                          }
+
+
+
+                          loadpermissionsLeaveaprvlvl(): void {
+                            const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+                        
+                            console.log('schemastore',selectedSchema )
+                        
+                        if (selectedSchema) {
+                               
+                          this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                            (result: any) => {
+                                this.GrouppermissionsLeaveaprvlvl = result.slice(419, 423);
+                                
+                              },
+                              (error: any) => {
+                                console.error('Error fetching permissions:', error);
+                              }
+                            );
+                        }
+                          }
+                        
+                        
+                            //Display Name add view delte code for emplotee master-------
+                        
+                            getDisplayNameLeaveaprvlvl(permissionCodename: string): string {
+                              switch (permissionCodename.trim().toLowerCase()) {
+                                case 'add_leaveapprovallevels':
+                                  return 'Add';
+                                case 'change_leaveapprovallevels':
+                                  return 'Edit';
+                                case 'delete_leaveapprovallevels':
+                                  return 'Delete';
+                                case 'view_leaveapprovallevels':
+                                  return 'View';
+                                default:
+                                  return permissionCodename;
+                              }
+                            }
+      
+
+                            loadpermissionsLeaveaprvlvltemp(): void {
+                              const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+                          
+                              console.log('schemastore',selectedSchema )
+                          
+                          if (selectedSchema) {
+                                 
+                            this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                              (result: any) => {
+                                  this.GrouppermissionsLeaveaprvlvltemp = result.slice(387, 391);
+                                  
+                                },
+                                (error: any) => {
+                                  console.error('Error fetching permissions:', error);
+                                }
+                              );
+                          }
+                            }
+                          
+                          
+                              //Display Name add view delte code for emplotee master-------
+                          
+                              getDisplayNameLeaveaprvlvltemp(permissionCodename: string): string {
+                                switch (permissionCodename.trim().toLowerCase()) {
+                                  case 'add_lvemailtemplate':
+                                    return 'Add';
+                                  case 'change_lvemailtemplate':
+                                    return 'Edit';
+                                  case 'delete_lvemailtemplate':
+                                    return 'Delete';
+                                  case 'view_lvemailtemplate':
+                                    return 'View';
+                                  default:
+                                    return permissionCodename;
+                                }
+                              }
+        
 
 
 
@@ -2417,6 +2722,145 @@ if (selectedSchema) {
   }
 
 
+  onCheckboxChangesLeavetype(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateLeavetypeCheckbox();
+    this.updateLeave();
+
+  }
+
+  updateLeavetypeCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsLeavetype.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.LeavetypeChecked = allPermissionsSelected;
+    this.LeavetypeInderminate = this.isLeavetypeIndeterminate();
+  }
+
+  onCheckboxChangesLeavemaster(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateLeavemasterCheckbox();
+    this.updateLeave();
+
+  }
+
+  updateLeavemasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsLeavemaster.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.LeavemasterChecked = allPermissionsSelected;
+    this.LeavemasterInderminate = this.isLeavemasterIndeterminate();
+  }
+
+
+
+  onCheckboxChangesLeavereq(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateLeavereqCheckbox();
+    this.updateLeave();
+
+  }
+
+  updateLeavereqCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsLeavereq.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.LeavereqChecked = allPermissionsSelected;
+    this.LeavereqInderminate = this.isLeavereqIndeterminate();
+  }
+
+
+  onCheckboxChangesLeavecom(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateLeavecomCheckbox();
+    this.updateLeave();
+
+  }
+
+  updateLeavecomCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsLeavecom.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.LeavecomChecked = allPermissionsSelected;
+    this.LeavecomInderminate = this.isLeavecomIndeterminate();
+  }
+
+
+
+  onCheckboxChangesLeaveaprvlvl(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateLeaveaprvlvlCheckbox();
+    this.updateLeave();
+
+  }
+
+  updateLeaveaprvlvlCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsLeaveaprvlvl.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.LeaveaprvlvlChecked = allPermissionsSelected;
+    this.LeaveaprvlvlInderminate = this.isLeaveaprvlvlIndeterminate();
+  }
+
+  onCheckboxChangesLeaveaprvlvltemp(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateLeaveaprvlvltempCheckbox();
+    this.updateLeave();
+
+  }
+
+  updateLeaveaprvlvltempCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsLeaveaprvlvltemp.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.LeaveaprvlvltempChecked = allPermissionsSelected;
+    this.LeaveaprvlvltempInderminate = this.isLeaveaprvlvltempIndeterminate();
+  }
+
+
+
 
 
 
@@ -2758,12 +3202,19 @@ iscalenders(): boolean {
 
 isLeaves(): boolean {
   const LeaveaprvInderminate = this.isLeaveaprvIndeterminate();
-  // const assignweekInderminate = this.isAssignWeekIndeterminate();
+  const LeavetypeInderminate = this.isLeavetypeIndeterminate();
+  const LeavemasterInderminate = this.isLeavemasterIndeterminate();
+  const LeavereqInderminate = this.isLeavereqIndeterminate();
+  const LeavecomInderminate = this.isLeavecomIndeterminate();
+  const LeaveaprvlvlInderminate = this.isLeaveaprvlvlIndeterminate();
+  const LeaveaprvlvltempInderminate = this.isLeaveaprvlvltempIndeterminate();
+
   // const addholidayInderminate = this.isAddHolidayIndeterminate();
   // const assignholidayInderminate = this.isAssignHolidayIndeterminate();
 
   const otherGroupIndeterminate = false;
-  return LeaveaprvInderminate || otherGroupIndeterminate;
+  return LeaveaprvInderminate || LeavetypeInderminate ||LeavemasterInderminate ||
+  LeavereqInderminate ||  LeavecomInderminate || LeaveaprvlvlInderminate ||  LeaveaprvlvltempInderminate || otherGroupIndeterminate;
 } 
 // emportReportInderminate= false;
 // documentReportInderminate = false;
@@ -3101,6 +3552,89 @@ showexpandable(): void {
 
   }
 
+  
+  onLeavetypeChange(): void {
+    if (this.LeavetypeChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsLeavetype.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsLeavetype.map(p => p.id).includes(permission));
+    }
+    this.updateLeaveCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+  onLeavemasterChange(): void {
+    if (this.LeavemasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsLeavemaster.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsLeavemaster.map(p => p.id).includes(permission));
+    }
+    this.updateLeaveCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+
+  onLeavereqChange(): void {
+    if (this.LeavereqChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsLeavereq.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsLeavereq.map(p => p.id).includes(permission));
+    }
+    this.updateLeaveCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+
+  onLeavecomChange(): void {
+    if (this.LeavecomChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsLeavecom.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsLeavecom.map(p => p.id).includes(permission));
+    }
+    this.updateLeaveCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+
+  onLeaveaprvlvlChange(): void {
+    if (this.LeaveaprvlvlChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsLeaveaprvlvl.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsLeaveaprvlvl.map(p => p.id).includes(permission));
+    }
+    this.updateLeaveCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+  onLeaveaprvlvltempChange(): void {
+    if (this.LeaveaprvlvltempChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsLeaveaprvlvltemp.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsLeaveaprvlvltemp.map(p => p.id).includes(permission));
+    }
+    this.updateLeaveCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+
 
 
   updateCalenderCheckbox(): void {
@@ -3111,6 +3645,8 @@ showexpandable(): void {
   updateLeaveCheckbox(): void {
     this.Leavechecked = this.isLeaveMangementMasterChecked();
   }
+
+  
   // selectAlls(): void {
   //   const isSelected = this.settingsChecked;
   
@@ -3324,6 +3860,13 @@ selectCalender(): void {
 selectLeave(): void {
   const allPermissions = [
     ...this.GrouppermissionsLeaveaprv,
+    ...this.GrouppermissionsLeavetype,
+    ...this.GrouppermissionsLeavemaster,
+    ...this.GrouppermissionsLeavereq,
+    ...this.GrouppermissionsLeavecom,
+    ...this.GrouppermissionsLeaveaprvlvl,
+    ...this.GrouppermissionsLeaveaprvlvltemp,
+
     // ...this.Grouppermisionsassignweek,
     // ...this.Grouppermissionsaddholiday,
     // ...this.Grouppermissionsassisgnholiday
@@ -3336,6 +3879,14 @@ selectLeave(): void {
   }
 
   this.updateLeaveaprvCheckbox();
+
+  this.updateLeavetypeCheckbox();
+  this.updateLeavemasterCheckbox();
+  this.updateLeavereqCheckbox();
+  this.updateLeavecomCheckbox();
+  this.updateLeaveaprvlvlCheckbox();
+  this.updateLeaveaprvlvltempCheckbox();
+
   // this.updateAddHolidayCheckbox();
   // this.updateAssignHolidayCheckbox();
   // this.updateAssignweekCheckbox();
@@ -3355,6 +3906,15 @@ updateCalender():void{
 
 updateLeave():void{
   this.updateLeaveaprvCheckbox();
+  this.updateLeavetypeCheckbox();
+  this.updateLeavemasterCheckbox();
+  this.updateLeavereqCheckbox();
+  this.updateLeavecomCheckbox();
+  this.updateLeaveaprvlvlCheckbox();
+  this.updateLeaveaprvlvltempCheckbox();
+
+
+  
   // this.updateAssignHolidayCheckbox();
   // this.updateAddWeekCheckbox();
   // this.updateAssignweekCheckbox();
@@ -3383,6 +3943,13 @@ isCalenderInderminate(): boolean {
 isLeaveInderminate(): boolean {
   const hasSelectedPermissions = [
     ...this.GrouppermissionsLeaveaprv,
+    ...this.GrouppermissionsLeavetype,
+    ...this.GrouppermissionsLeavemaster,
+    ...this.GrouppermissionsLeavereq,
+    ...this.GrouppermissionsLeavecom,
+    ...this.GrouppermissionsLeaveaprvlvl,
+    ...this.GrouppermissionsLeaveaprvlvltemp,
+
     // ...this.Grouppermisionsassignweek,
     // ...this.Grouppermissionsaddholiday,
     // ...this.Grouppermissionsassisgnholiday

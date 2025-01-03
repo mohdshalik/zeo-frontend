@@ -1285,12 +1285,19 @@ export class EmployeeService {
         }
 
 
-    getApprovalslist(selectedSchema: string, userId: number): Observable<any> {
-      const apiUrl = `${this.apiUrl}/users/api/user/${userId}/approvals/?schema=${selectedSchema}`;
+  //   getApprovalslist(selectedSchema: string, userId: number): Observable<any> {
+  //     const apiUrl = `${this.apiUrl}/users/api/user/${userId}/approvals/?schema=${selectedSchema}`;
   
-      // Fetch approvals for the user from the API
-      return this.http.get(apiUrl);
-  }
+  //     // Fetch approvals for the user from the API
+  //     return this.http.get(apiUrl);
+  // }
+
+  getApprovalslist(selectedSchema: string, userId: number): Observable<any> {
+    const apiUrl = `${this.apiUrl}/employee/api/request-approvals/?schema=${selectedSchema}`;
+
+    // Fetch approvals for the user from the API
+    return this.http.get(apiUrl);
+}
 
   getSChemadatas(selectedSchema: string): Observable<any> {
     const url = `${this.apiUrl}/organisation/api/schema-data/?schema=${selectedSchema}`;

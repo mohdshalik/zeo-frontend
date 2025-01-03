@@ -9,6 +9,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DepartmentServiceService } from '../department-master/department-service.service';
 import { environment } from '../../environments/environment';
+import { SuccesModalComponent } from '../succes-modal/succes-modal.component';
 
 
 @Component({
@@ -157,15 +158,15 @@ export class DepartmentCreationComponent {
         // Handle successful upload
         console.log('bulkupload upload successful', response);
   
-         const dialogRef = this.dialog.open(DepartmentCreationComponent, {
-              width: '300px', // Adjust width as needed
-              data: { message: 'bulkupload employee successfully!' } // Pass any data you want to display in the modal
-            });
-        
-            dialogRef.afterClosed().subscribe(() => {
-              console.log('The success modal was closed');
-              // Handle any actions after the modal is closed, if needed
-            });
+        const dialogRef = this.dialog.open(SuccesModalComponent, {
+          width: '300px', // Adjust width as needed
+          data: { message: 'bulkupload Department successfully!' } // Pass any data you want to display in the modal
+        });
+    
+        dialogRef.afterClosed().subscribe(() => {
+          console.log('The success modal was closed');
+          // Handle any actions after the modal is closed, if needed
+        });
       }, (error) => {
         // Handle upload error
         console.error('Document upload failed', error);

@@ -237,6 +237,15 @@ export class CreateEmployeeComponent implements OnInit {
 
 
 
+  ReadMore: boolean = true;
+
+
+    //hiding info box
+    visible: boolean = true;
+    visibility: boolean = false;
+    show: boolean = false;
+    createem :boolean = true;
+
 
   constructor(private EmployeeService: EmployeeService ,
     private CountryService: CountryService ,
@@ -770,6 +779,9 @@ if (this.isHiringMandatory && !this.emp_joined_date) {
 );
       
   }
+
+
+
 
   postCustomFieldValues(empMasterId: number): void {
     const customFieldValues = this.custom_fields.map(field => ({
@@ -1432,6 +1444,174 @@ loadFormFields(): void {
     
   }
 
+
+
+  
+  bulkOn() {
+    this.ReadMore = !this.ReadMore; //not equal to condition
+    this.visible = !this.visible;
+    this.visibility = !this.visibility;
+  }
+
+  openbulkupload() {
+    this.show = !this.show;
+   
+  }
+
+
+ bulkuploaddocument(): void {
+    this.registerButtonClicked = true;
+    // const companyData = {
+    //   emp_languages:this.emp_languages,
+
+    // }
+
+    const formData = new FormData();
+    // formData.append('')
+  // Append the profile picture only if it's selected
+  if (this.file) {
+    formData.append('file', this.file);
+  } else {
+    // Append a null or empty value to indicate no file was selected
+    formData.append('file', '');
+  }
+  
+
+ 
+    
+    formData.append('emp_code', this.emp_code);
+
+    formData.append('emp_first_name', this.emp_first_name);
+    formData.append('emp_last_name', this.emp_last_name);
+    
+  
+    formData.append('emp_gender', this.emp_gender);
+    formData.append('emp_date_of_birth', this.emp_date_of_birth);
+    formData.append('emp_personal_email', this.emp_personal_email);
+    formData.append('emp_mobile_number_1', this.emp_mobile_number_1);
+    formData.append('emp_mobile_number_2', this.emp_mobile_number_2);
+  
+    formData.append('emp_city', this.emp_city);
+    formData.append('emp_permenent_address', this.emp_permenent_address);
+    formData.append('emp_present_address', this.emp_present_address);
+    formData.append('emp_relegion', this.emp_relegion);
+    formData.append('emp_blood_group', this.emp_blood_group);
+  
+    formData.append('emp_nationality', this.emp_nationality);
+    formData.append('emp_marital_status', this.emp_marital_status);
+    formData.append('emp_father_name', this.emp_father_name);
+    formData.append('emp_mother_name', this.emp_mother_name);
+    formData.append('emp_posting_location', this.emp_posting_location);
+  
+    formData.append('emp_country_id', this.emp_country_id);
+    formData.append('emp_state_id', this.emp_state_id);
+
+
+    formData.append('emp_company_id', this.emp_company_id);
+    formData.append('emp_branch_id', this.emp_branch_id);
+    formData.append('emp_dept_id', this.emp_dept_id);
+
+    formData.append('emp_desgntn_id', this.emp_desgntn_id);
+    formData.append('emp_ctgry_id', this.emp_ctgry_id);
+    formData.append('emp_languages', this.emp_languages);
+
+    // formData.append('emp_languages', JSON.stringify(this.emp_languages));
+    formData.append('emp_active_date', this.emp_date_of_confirmation);
+    formData.append('emp_hired_date', this.emp_joined_date);
+    formData.append('is_ess', this.is_ess ? '1' : '0');
+    formData.append('emp_status', this.emp_status ? '1' : '0');
+    
+    
+  
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      // return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+   
+
+    this.http.post(`${this.apiUrl}/employee/api/emp-bulkupload/bulk_upload/?schema=${selectedSchema}`, formData)
+      .subscribe((response) => {
+        // Handle successful upload
+        console.log('bulkupload upload successful', response);
+
+         const dialogRef = this.dialog.open(SuccesModalComponent, {
+              width: '300px', // Adjust width as needed
+              data: { message: 'bulkupload employee successfully!' } // Pass any data you want to display in the modal
+            });
+        
+            dialogRef.afterClosed().subscribe(() => {
+              console.log('The success modal was closed');
+              // Handle any actions after the modal is closed, if needed
+            });
+      }, (error) => {
+        // Handle upload error
+        console.error('Document upload failed', error);
+        alert('enter all fields correctly');
+      });
+
+  }
+
+
+  onChangeFile(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      
+      if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+        const formData = new FormData();
+        formData.append('file', file);
+  
+        const selectedSchema = localStorage.getItem('selectedSchema');
+        if (!selectedSchema) {
+          console.error('No schema selected.');
+          alert('No schema selected. Please select a schema.');
+          return;
+        }
+  
+        const url = `${this.apiUrl}/employee/api/emp-bulkupload/bulk_upload/?schema=${selectedSchema}`;
+        console.log('Uploading to URL:', url);
+        
+        this.http.post(url, formData).subscribe(
+          (res: any) => {
+            console.log('Upload successful:', res);
+          },
+          (error: any) => {
+            console.error('Upload error:', error);
+            alert('Upload failed. Please check the console for details.');
+          }
+        );
+      } else {
+        alert("Please select a valid Excel file");
+      }
+    }
+  }
+  
+
+Delete: boolean = false;
+
+   Deletes: boolean = false;
+   selectedFiles!: File;
+   file: any='';
+
+selectFile(event: any){
+  console.log(event)
+}
+
+uploadFile(){
+  let formData = new FormData();
+  formData.append('file',this.file)
+}
+
+onFileSelect(event: any) {
+  if (event.target.files.length > 0) {
+    this.file = event.target.files[0];
+  }
+}
+
+togglebulkupload() {
+  this.Delete = !this.Delete;
+  
+}
 
 
 
