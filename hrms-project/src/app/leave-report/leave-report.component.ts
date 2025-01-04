@@ -302,20 +302,20 @@ export class LeaveReportComponent {
                     const groupPermissions = firstItem.groups.flatMap((group: any) => group.permissions);
                     console.log('Group Permissions:', groupPermissions);
     
-                      this.hasViewPermission = this.checkGroupPermission('view_report', groupPermissions);
+                      this.hasViewPermission = this.checkGroupPermission('view_leavereport', groupPermissions);
                  console.log('Has view permission:', this.hasViewPermission);
             
-                   this.hasAddPermission = this.checkGroupPermission('add_report', groupPermissions);
+                   this.hasAddPermission = this.checkGroupPermission('add_leavereport', groupPermissions);
                   console.log('Has add permission:', this.hasAddPermission);
             
-                 this.hasDeletePermission = this.checkGroupPermission('delete_report', groupPermissions);
+                 this.hasDeletePermission = this.checkGroupPermission('delete_leavereport', groupPermissions);
               console.log('Has delete permission:', this.hasDeletePermission);
             
-                  this.hasEditPermission = this.checkGroupPermission('change_report', groupPermissions);
+                  this.hasEditPermission = this.checkGroupPermission('change_leavereport', groupPermissions);
                  console.log('Has edit permission:', this.hasEditPermission);
 
                  
-                 this.hasExportPermission = this.checkGroupPermission('export_report', groupPermissions);
+                 this.hasExportPermission = this.checkGroupPermission('export_leavereport', groupPermissions);
                  console.log('Has export permission:', this.hasExportPermission);
                   } else {
                     console.error('No groups found in data or groups array is empty.', firstItem);

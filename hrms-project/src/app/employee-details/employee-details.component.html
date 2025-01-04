@@ -217,6 +217,13 @@
 
                               
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-3" *ngFor="let cus of employee.custom_field_values">
+                                   <h2> {{cus.emp_custom_field}}</h2>
+                                   <h3>{{cus.field_value}}</h3>
+                                </div>
+                            </div>
                         </div>
 
                     

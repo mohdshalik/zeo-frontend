@@ -7,6 +7,7 @@ import { EmployeeService } from '../employee-master/employee.service';
 import { UserMasterService } from '../user-master/user-master.service';
 import { environment } from '../../environments/environment';
 import { SessionService } from '../login/session.service';
+import { DesignationService } from '../designation-master/designation.service';
 
 @Component({
   selector: 'app-general-request',
@@ -49,6 +50,11 @@ export class GeneralRequestComponent {
 
 
 
+  hasAddPermission: boolean = false;
+  hasDeletePermission: boolean = false;
+  hasViewPermission: boolean =false;
+  hasEditPermission: boolean = false;
+
 
   registerButtonClicked = false;
 
@@ -63,6 +69,8 @@ export class GeneralRequestComponent {
     private employeeService: EmployeeService,
     private userService: UserMasterService,
     private sessionService: SessionService,
+    private DesignationService: DesignationService,
+
 
     
 
@@ -81,10 +89,89 @@ ngOnInit(): void {
   
   if (this.userId !== null) {
     this.authService.getUserData(this.userId).subscribe(
-      (userData: any) => {
-        this.userDetails = userData;
-        this.created_by = this.userId; // Automatically set the owner to logged-in user ID
+      async (userData: any) => {
+        this.userDetails = userData; // Store user details in userDetails property
+        console.log('User ID:', this.userId); // Log user ID
+        console.log('User Details:', this.userDetails); // Log user details
+  
+        // Check if user is_superuser is true or false
+        let isSuperuser = this.userDetails.is_superuser || false; // Default to false if is_superuser is undefined
+        const selectedSchema = this.authService.getSelectedSchema();
+        if (!selectedSchema) {
+          console.error('No schema selected.');
+          return;
+        }
+      
+      
+        if (isSuperuser) {
+          console.log('User is superuser or ESS user');
+          
+          // Grant all permissions
+          this.hasViewPermission = true;
+          this.hasAddPermission = true;
+          this.hasDeletePermission = true;
+          this.hasEditPermission = true;
+      
+          // Fetch designations without checking permissions
+          // this.fetchDesignations(selectedSchema);
+        } else {
+          console.log('User is not superuser');
+  
+          const selectedSchema = this.authService.getSelectedSchema();
+          if (selectedSchema) {
+           
+            
+            
+            try {
+              const permissionsData: any = await this.DesignationService.getDesignationsPermission(selectedSchema).toPromise();
+              console.log('Permissions data:', permissionsData);
+  
+              if (Array.isArray(permissionsData) && permissionsData.length > 0) {
+                const firstItem = permissionsData[0];
+  
+                if (firstItem.is_superuser) {
+                  console.log('User is superuser according to permissions API');
+                  // Grant all permissions
+                  this.hasViewPermission = true;
+                  this.hasAddPermission = true;
+                  this.hasDeletePermission = true;
+                  this.hasEditPermission = true;
+                } else if (firstItem.groups && Array.isArray(firstItem.groups) && firstItem.groups.length > 0) {
+                  const groupPermissions = firstItem.groups.flatMap((group: any) => group.permissions);
+                  console.log('Group Permissions:', groupPermissions);
+  
+                  this.hasAddPermission = this.checkGroupPermission('add_generalrequest', groupPermissions);
+                  console.log('Has add permission:', this.hasAddPermission);
+    
+                 this.hasDeletePermission = this.checkGroupPermission('delete_generalrequest', groupPermissions);
+                 console.log('Has delete permission:', this.hasDeletePermission);
+    
+                  this.hasEditPermission = this.checkGroupPermission('change_generalrequest', groupPermissions);
+                  console.log('Has edit permission:', this.hasEditPermission);
+  
+                  this.hasViewPermission = this.checkGroupPermission('view_generalrequest', groupPermissions);
+                  console.log('Has view permission:', this.hasViewPermission);
 
+
+                } else {
+                  console.error('No groups found in data or groups array is empty.', firstItem);
+                }
+              } else {
+                console.error('Permissions data is not an array or is empty.', permissionsData);
+              }
+  
+              // Fetching designations after checking permissions
+              // this.fetchDesignations(selectedSchema);
+            }
+            
+            catch (error) {
+              console.error('Error fetching permissions:', error);
+            }
+          } else {
+            console.error('No schema selected.');
+          }
+            
+        }
       },
       (error) => {
         console.error('Failed to fetch user details:', error);
@@ -110,6 +197,33 @@ ngOnInit(): void {
 
  
 }
+
+
+
+// checkViewPermission(permissions: any[]): boolean {
+//   const requiredPermission = 'add_generalrequest' ||'change_generalrequest' ||'delete_generalrequest' ||'view_generalrequest';
+  
+
+//   // Check user permissions
+//   if (permissions.some(permission => permission.codename === requiredPermission)) {
+//     return true;
+//   }
+
+//   // Check group permissions (if applicable)
+//   // Replace `// TODO: Implement group permission check`
+//   // with your logic to retrieve and check group permissions
+//   // (consider using a separate service or approach)
+//   return false; // Replace with actual group permission check
+// }
+
+
+
+
+checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
+  return groupPermissions.some(permission => permission.codename === codeName);
+}
+
+
 
   loadDeparmentBranch(): void {
     

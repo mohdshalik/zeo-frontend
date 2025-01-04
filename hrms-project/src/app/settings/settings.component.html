@@ -97,7 +97,7 @@
                           </div>
 
 
-                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/document-numbering" *ngIf="hasAddCompanyMaster">
+                          <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/document-numbering" *ngIf="hasViewDN">
                             <a class="set_siding" mat-list-item  ><span class="side_option">Document Numbering</span> </a>
                             <!-- <p class="side_option">I'm visible because I am open</p> -->
                           </div>
@@ -116,12 +116,12 @@
                           
                           </mat-expansion-panel-header>
                      
-                          <div class="mat-expansion-panel-body " >
+                          <div class="mat-expansion-panel-body " *ngIf="hasViewWeek">
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/weelcalendar"><span class="side_option" > Week Calendar</span> </a>
                           <!-- <p class="side_option">I'm visible because I am open</p> -->
                         </div>
 
-                        <div class="mat-expansion-panel-body " >
+                        <div class="mat-expansion-panel-body " *ngIf="hasViewWeekAssgn">
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/assign-weekcalendar"><span class="side_option" > Assign calendar</span> </a>
                           <!-- <p class="side_option">I'm visible because I am open</p> -->
                         </div>
@@ -129,12 +129,12 @@
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/assignweek-calendar-days"><span class="side_option" > Assign Week calendar Days</span> </a>
                         </div> -->
 
-                        <div class="mat-expansion-panel-body " >
+                        <div class="mat-expansion-panel-body " *ngIf="hasViewHoly">
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/holiday-calendar"><span class="side_option" > Holiday Calendar</span> </a>
                           <!-- <p class="side_option">I'm visible because I am open</p> -->
                         </div>
 
-                        <div class="mat-expansion-panel-body " >
+                        <div class="mat-expansion-panel-body " *ngIf="hasViewHolyAssgn">
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/assign-holiday-calendar"><span class="side_option" >Assign Holiday Calendar</span> </a>
                           <!-- <p class="side_option">I'm visible because I am open</p> -->
                         </div>
@@ -186,13 +186,13 @@
                         </div>
                       
                       
-                        <div class="mat-expansion-panel-body " >
+                        <div class="mat-expansion-panel-body ">
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/designation-report"><span class="side_option" >Designation Report</span> </a>
                           <!-- <p class="side_option">I'm visible because I am open</p> -->
                         </div>
 
                            
-                        <div class="mat-expansion-panel-body " >
+                        <div class="mat-expansion-panel-body " *ngIf="hasViewPermissionLeavereport" >
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/leave-report"><span class="side_option" >Leave Report</span> </a>
                           <!-- <p class="side_option">I'm visible because I am open</p> -->
                         </div>
@@ -212,7 +212,7 @@
                           
                           </mat-expansion-panel-header>
                      
-                          <div class="mat-expansion-panel-body " >
+                          <div class="mat-expansion-panel-body "  *ngIf="hasViewPermissionFormdes">
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/from-designer"><span class="side_option" >Employee-form</span> </a>
                         </div>
 
@@ -223,7 +223,7 @@
                          
                         </mat-expansion-panel>
                         <mat-expansion-panel >
-                          <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/email-template">
+                          <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/email-template" *ngIf="hasViewPermissionEmtemp">
                           
                                 <a mat-list-item> <mat-icon>dashboard_customize
 
@@ -245,7 +245,7 @@
                          
                         </mat-expansion-panel>
                         <mat-expansion-panel >
-                          <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/company-policy">
+                          <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/company-policy"  *ngIf="hasViewPermissionCmp">
                           
                                 <a mat-list-item> <mat-icon>dashboard_customize
 

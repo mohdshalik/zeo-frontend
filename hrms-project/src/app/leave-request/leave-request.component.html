@@ -1,6 +1,6 @@
 <div class="container">
     <div class="comapny_section">
-        <div class="com_list ">
+        <div class="com_list " *ngIf="hasViewPermission">
             <div class="cpm-sec">
 
                 <h2>Leave Request</h2>
@@ -94,7 +94,8 @@
                  
                     </div>
                   
-                    <div class="row">
+                    <div class="row" *ngIf="hasAddPermission"
+                    >
                       <div class="col-md-9"></div>
                       <div class="col-md-3">
                         <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Type</button>

@@ -1,11 +1,11 @@
 <div class="container">
-    <div class="comapny_section">
+    <div class="comapny_section" *ngIf="hasViewPermission">
 
         <div class="header_section">
 
             <div class="row">
                 <div class="col-md-3">
-                    <h1> Leave </h1>
+                    <h1> Leave Master</h1>
                 </div>
 
                 <div class="col-md-4">
@@ -15,8 +15,8 @@
                 </div>
                 <div class="col-md-5">
                     <div class="button-group pull-right">
-                        <button type="button"  class="btn-Create btn btn-success " > <span class="header-btn-icon"><mat-icon>add_circle
-                        </mat-icon></span> Create</button>
+                        <!-- <button type="button"  class="btn-Create btn btn-success " > <span class="header-btn-icon"><mat-icon>add_circle
+                        </mat-icon></span> Create</button> -->
                         <!-- <span *ngIf="!hasAddPermission"></span>
 
                         <button type="button" class="btn-Edit btn-info btn"  (click)="EditShowButtons()" *ngIf="hasEditPermission">
@@ -309,7 +309,7 @@
                           
                         </div>
 
-                        <div class="row">
+                        <div class="row" *ngIf="hasAddPermission">
                             <div class="col-md-9"></div>
                             <div class="col-md-3">
                                 <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Entitlement</button>
@@ -458,7 +458,7 @@
                                   </div>
                             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="hasAddPermission">
             <div class="col-md-9"></div>
             <div class="col-md-3">
                 <button type="submit" class="btn btn-success btn-full mt-4">Save</button>

@@ -92,32 +92,7 @@ if (this.userId !== null) {
 
         const selectedSchema = this.authService.getSelectedSchema();
         if (selectedSchema) {
-          // try {
-          //   const userData: any = await this.DesignationService.getDesignationsPermission(selectedSchema).toPromise();
-          //   console.log('permissions:', userData);
         
-          //   if (userData && userData.length > 0 && userData[0].groups) {
-          //     const groupPermissions = userData[0].groups.flatMap((group: any) => group.permissions);
-          //     console.log('Group Permissions:', groupPermissions);
-        
-          //     this.hasViewPermission = this.checkGroupPermission('view_desgntn_master', groupPermissions);
-          //     console.log('Has view permission:', this.hasViewPermission);
-        
-          //     this.hasAddPermission = this.checkGroupPermission('add_desgntn_master', groupPermissions);
-          //     console.log('Has add permission:', this.hasAddPermission);
-        
-          //     this.hasDeletePermission = this.checkGroupPermission('delete_desgntn_master', groupPermissions);
-          //     console.log('Has delete permission:', this.hasDeletePermission);
-        
-          //     this.hasEditPermission = this.checkGroupPermission('change_desgntn_master', groupPermissions);
-          //     console.log('Has edit permission:', this.hasEditPermission);
-          //   } else {
-          //     console.error('No groups found in data or data format is incorrect.', userData);
-          //   }
-        
-          //   // Fetching designations after checking permissions
-          //   this.fetchDesignations(selectedSchema);
-          // }
 
 
           try {

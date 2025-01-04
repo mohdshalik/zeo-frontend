@@ -614,6 +614,62 @@
               </div>
       
           </div>
+
+          <div class="col-md-3">
+            <span class=""><mat-checkbox [(ngModel)]="CpMasterChecked" 
+              [indeterminate]="isCpmasterIndeterminate()" 
+              (change)="onUserCpChange()" 
+              [ngModelOptions]="{standalone: true}" >
+             Company Policy
+            </mat-checkbox> </span><br>
+    
+        </div>
+     
+        <div class="col-md-9">
+            <div class="selection_checkmark_sec">
+                <div class="all_selection_Sec">
+                    <div class="row">
+                        <div class="col-md-3" *ngFor="let permission of  GrouppermissionsCpMaster">
+                            <h2> <span> <mat-checkbox [value]="permission.id" 
+                              (change)="onCheckboxChangesCp(permission.id)" 
+                              [checked]="selectedPermissions.includes(permission.id)" > 
+                              {{ getDisplayNameCp(permission.codename) }} 
+                            </mat-checkbox> </span> </h2>
+                          </div>
+                        
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+
+        <div class="col-md-3">
+          <span class=""><mat-checkbox [(ngModel)]="EmtMasterChecked" 
+            [indeterminate]="isEmtmasterIndeterminate()" 
+            (change)="onUserEmtChange()" 
+            [ngModelOptions]="{standalone: true}" >
+           Email Template
+          </mat-checkbox> </span><br>
+  
+      </div>
+   
+      <div class="col-md-9">
+          <div class="selection_checkmark_sec">
+              <div class="all_selection_Sec">
+                  <div class="row">
+                      <div class="col-md-3" *ngFor="let permission of  GrouppermissionsEmtMaster">
+                          <h2> <span> <mat-checkbox [value]="permission.id" 
+                            (change)="onCheckboxChangesEmt(permission.id)" 
+                            [checked]="selectedPermissions.includes(permission.id)" > 
+                            {{ getDisplayNameEmt(permission.codename) }} 
+                          </mat-checkbox> </span> </h2>
+                        </div>
+                      
+                  </div>
+              </div>
+          </div>
+  
+      </div>
         
           <div class="col-md-3">
             <span class=""><mat-checkbox [(ngModel)]="FormdesMasterChecked" 
@@ -773,6 +829,32 @@
                       </div>
                     
         
+                      <div class="col-md-3">
+                        <span class=""><mat-checkbox [(ngModel)]="LeaveReportChecked"
+                          [indeterminate]="isLeaveReportIndeterminate()" 
+                           (change)="onLeaveReportChange()"
+                            [ngModelOptions]="{standalone: true}" >
+                            Leave Report
+                        </mat-checkbox> </span><br>
+      
+                    </div>
+      
+                    <div class="col-md-9">
+                        <div class="selection_checkmark_sec">
+                            <div class="all_selection_Sec">
+                                <div class="row">
+                                    <div class="col-md-2" *ngFor="let permission of GrouppermissiionsLeaveReport">
+                                        <h2> <span> <mat-checkbox [value]="permission.id" 
+                                          (change)="onCheckboxChangesLeaveReport(permission.id)" 
+                                          [checked]="selectedPermissions.includes(permission.id)" > {{ getDisplayNameLeaveReport(permission.codename) }} </mat-checkbox> </span> </h2>
+                                      </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+        
+                    </div>
+                  
                   
                 
                

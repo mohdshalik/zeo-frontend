@@ -1,7 +1,7 @@
 <div class="container" >
     <div class="comapny_section">
         <div class="com_list ">
-    <div class="cpm-sec">
+    <div class="cpm-sec" *ngIf="hasAddPermission">
 
         <h2>Create Weekend Calendar</h2><hr>
 
@@ -238,7 +238,7 @@
 
     <div>
         <!-- Calendar Dropdown List -->
-        <div class="row mt-4">
+        <div class="row mt-4" *ngIf="hasViewPermission">
           <div class="col-md-6">
             <label>Weekend Calendar</label>
             <div class="custom-sel">

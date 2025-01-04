@@ -2,7 +2,7 @@
 
     
     <div class="comapny_section">
-        <div class="com_list ">
+        <div class="com_list " *ngIf="hasViewPermission">
     <div class="cpm-sec">
 
         <h2>Company Policy</h2><hr>
@@ -69,7 +69,7 @@
                 </div>
     
                 <div class="col-md-2">
-                    <button type="submit" class="btn-Create btn-full mt-5 btn-success btn" >Save</button>  
+                    <button type="submit" class="btn-Create btn-full mt-5 btn-success btn" *ngIf="hasAddPermission">Save</button>  
                  </div>
     
                  

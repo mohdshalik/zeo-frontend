@@ -32,9 +32,24 @@ export class SettingsComponent {
   hasViewStateMaster: boolean = false;
   hasAddCompanyMaster: boolean = false;
   hasViewNotification: boolean = false;
+  hasViewDN : boolean = false;
+  hasViewPermissionFormdes : boolean = false;
+  hasViewPermissionEmtemp : boolean = false;
+  hasViewPermissionCmp : boolean = false;
+
+
+
+
+
+  hasViewWeek: boolean = false;
+  hasViewWeekAssgn: boolean = false;
+  hasViewHoly: boolean = false;
+  hasViewHolyAssgn : boolean = false;
+
   hasViewPermissionempreport:boolean = false;
   hasViewPermissiondocreport:boolean = false;
   hasViewPermissiongenreport:boolean = false;
+  hasViewPermissionLeavereport:boolean = false;
 
 
 
@@ -87,10 +102,25 @@ if (this.userId !== null) {
         this.hasViewStateMaster = true;
         this.hasAddCompanyMaster = true;
         this.hasViewNotification = true;
+        this.hasViewDN = true;
+        this.hasViewPermissionFormdes = true;
+        this.hasViewPermissionEmtemp = true;
+        this.hasViewPermissionCmp = true;
+
+
+
+
+        this.hasViewWeek = true;
+        this.hasViewWeekAssgn = true;
+        this.hasViewHoly = true;
+        this.hasViewHolyAssgn = true;
+
+
         this.hasViewPermissionempreport = true;
         this.hasViewPermissiondocreport = true;
         this.hasViewPermissiongenreport = true;
-     
+        this.hasViewPermissionLeavereport = true;
+
 
 
 
@@ -124,10 +154,25 @@ if (this.userId !== null) {
                 this.hasViewStateMaster = true;
                 this.hasAddCompanyMaster = true;
                 this.hasViewNotification = true;
+                this.hasViewDN = true;
+                this.hasViewPermissionFormdes = true;
+                this.hasViewPermissionEmtemp = true;
+                this.hasViewPermissionCmp = true;
+
+
+
+
+                this.hasViewWeek = true;
+                this.hasViewWeekAssgn = true;
+                this.hasViewHoly = true;
+                this.hasViewHolyAssgn = true;
+
+
                 this.hasViewPermissionempreport = true;
                 this.hasViewPermissiondocreport = true;
                 this.hasViewPermissiongenreport = true;
-       
+                this.hasViewPermissionLeavereport = true;
+
 
         
               } else if (firstItem.groups && Array.isArray(firstItem.groups) && firstItem.groups.length > 0) {
@@ -158,6 +203,36 @@ if (this.userId !== null) {
                     this.hasViewNotification = this.checkGroupPermission('view_notification', groupPermissions);
                     console.log('Has view permission:', this.hasViewNotification);
 
+                    this.hasViewDN = this.checkGroupPermission('view_document_numbering', groupPermissions);
+                    console.log('Has view permission:', this.hasViewDN);
+
+                    this.hasViewPermissionFormdes = this.checkGroupPermission('view_emp_customfield', groupPermissions);
+                    console.log('Has view permission:', this.hasViewPermissionFormdes);
+                   
+                    this.hasViewPermissionEmtemp = this.checkGroupPermission('view_emailtemplate', groupPermissions);
+                    console.log('Has view permission:', this.hasViewPermissionEmtemp);
+
+                    this.hasViewPermissionCmp = this.checkGroupPermission('view_companypolicy', groupPermissions);
+                    console.log('Has view permission:', this.hasViewPermissionCmp);
+                  
+                  
+                   
+                   
+                   
+                    this.hasViewWeek = this.checkGroupPermission('view_weekend_calendar', groupPermissions);
+                    console.log('Has view permission:', this.hasViewWeek);
+                    
+                    this.hasViewWeekAssgn = this.checkGroupPermission('view_assign_weekend', groupPermissions);
+                    console.log('Has view permission:', this.hasViewWeekAssgn);
+
+                    this.hasViewHoly = this.checkGroupPermission('view_holiday', groupPermissions);
+                    console.log('Has view permission:', this.hasViewHoly);
+                   
+                    this.hasViewHolyAssgn = this.checkGroupPermission('view_assign_holiday', groupPermissions);
+                    console.log('Has view permission:', this.hasViewHolyAssgn);
+                  
+                  
+                  
                     this.hasViewPermissionempreport = this.checkGroupPermission('view_report', groupPermissions);
                    console.log('Has view permission:', this.hasViewPermissionempreport);
       
@@ -166,6 +241,10 @@ if (this.userId !== null) {
               
                     this.hasViewPermissiongenreport = this.checkGroupPermission('view_generalrequestreport', groupPermissions);
                   console.log('Has view permission:', this.hasViewPermissiongenreport);
+
+                  
+                  this.hasViewPermissionLeavereport = this.checkGroupPermission('view_leavereport', groupPermissions);
+                  console.log('Has view permission:', this.hasViewPermissionLeavereport);
       
                  
               } else {
@@ -204,21 +283,21 @@ if (this.userId !== null) {
   }
 
   
-  checkViewPermission(permissions: any[]): boolean {
-    const requiredPermission = 'view_ctgry_master' ||'add_ctgry_master' ||'delete_ctgry_master' ||'change_ctgry_master';
+  // checkViewPermission(permissions: any[]): boolean {
+  //   const requiredPermission = 'view_ctgry_master' ||'add_ctgry_master' ||'delete_ctgry_master' ||'change_ctgry_master';
     
   
-    // Check user permissions
-    if (permissions.some(permission => permission.codename === requiredPermission)) {
-      return true;
-    }
+  //   // Check user permissions
+  //   if (permissions.some(permission => permission.codename === requiredPermission)) {
+  //     return true;
+  //   }
   
-    // Check group permissions (if applicable)
-    // Replace `// TODO: Implement group permission check`
-    // with your logic to retrieve and check group permissions
-    // (consider using a separate service or approach)
-    return false; // Replace with actual group permission check
-  }
+  //   // Check group permissions (if applicable)
+  //   // Replace `// TODO: Implement group permission check`
+  //   // with your logic to retrieve and check group permissions
+  //   // (consider using a separate service or approach)
+  //   return false; // Replace with actual group permission check
+  // }
 
   
 

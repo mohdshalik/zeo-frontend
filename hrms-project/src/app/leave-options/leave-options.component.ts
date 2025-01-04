@@ -32,10 +32,18 @@ export class LeaveOptionsComponent {
   
   userPermissions: string[] = [];
   user_permissions: string[] = [];
+
+  
   hasViewPermissionEmp: boolean = false;
   hasViewPermissiondesg: boolean = false;
   hasViewPermission: boolean =false;
   hasViewPermissiondept: boolean = false;
+  hasViewPermissioncmpL: boolean = false;
+  hasViewPermissionLeaveAprvlvl: boolean = false;
+  hasViewPermissionLeavetemp: boolean = false;
+
+
+
 
   constructor(private EmployeeService:EmployeeService,
     private sessionService: SessionService,
@@ -80,6 +88,12 @@ if (this.userId !== null) {
         this.hasViewPermissionEmp = true;
         this.hasViewPermissiondesg = true;
         this.hasViewPermissiondept = true;
+        this.hasViewPermissioncmpL = true;
+        this.hasViewPermissionLeaveAprvlvl = true;
+        this.hasViewPermissionLeavetemp = true;
+
+
+
     
         // Fetch designations without checking permissions
         this.fetchDesignations(selectedSchema);
@@ -142,22 +156,37 @@ if (this.userId !== null) {
                 this.hasViewPermissionEmp = true;
                 this.hasViewPermissiondesg = true;
                 this.hasViewPermissiondept = true;
+                this.hasViewPermissioncmpL = true;
+                this.hasViewPermissionLeaveAprvlvl = true;
+                this.hasViewPermissionLeavetemp = true;
+
+
         
               } else if (firstItem.groups && Array.isArray(firstItem.groups) && firstItem.groups.length > 0) {
                 const groupPermissions = firstItem.groups.flatMap((group: any) => group.permissions);
                 console.log('Group Permissions:', groupPermissions);
 
-                this.hasViewPermission = this.checkGroupPermission('view_ctgry_master', groupPermissions);
+                this.hasViewPermission = this.checkGroupPermission('view_leaveapproval', groupPermissions);
                      console.log('Has view permission:', this.hasViewPermission);
     
-                     this.hasViewPermissiondesg = this.checkGroupPermission('view_desgntn_master', groupPermissions);
+                     this.hasViewPermissiondesg = this.checkGroupPermission('view_leave_type', groupPermissions);
                      console.log('Has view permission:', this.hasViewPermissiondesg);
                         
-                     this.hasViewPermissiondept = this.checkGroupPermission('view_dept_master', groupPermissions);
+                     this.hasViewPermissiondept = this.checkGroupPermission('view_leave_entitlement', groupPermissions);
                      console.log('Has view permission:', this.hasViewPermissiondept);
       
-                     this.hasViewPermissionEmp = this.checkGroupPermission('view_emp_master', groupPermissions);
+                     this.hasViewPermissionEmp = this.checkGroupPermission('view_employee_leave_request', groupPermissions);
                      console.log('Has view permission:', this.hasViewPermissionEmp);
+                    
+                     this.hasViewPermissioncmpL = this.checkGroupPermission('view_compensatoryleavetransaction', groupPermissions);
+                     console.log('Has view permission:', this.hasViewPermissioncmpL);
+                     
+                     this.hasViewPermissionLeaveAprvlvl = this.checkGroupPermission('view_leaveapprovallevels', groupPermissions);
+                     console.log('Has view permission:', this.hasViewPermissionLeaveAprvlvl);
+                    
+                     this.hasViewPermissionLeavetemp = this.checkGroupPermission('view_lvemailtemplate', groupPermissions);
+                     console.log('Has view permission:', this.hasViewPermissionLeavetemp);
+                     
               } else {
                 console.error('No groups found in data or groups array is empty.', firstItem);
               }
@@ -195,21 +224,21 @@ if (this.userId !== null) {
   }
 
 
-  checkViewPermission(permissions: any[]): boolean {
-    const requiredPermission = 'view_ctgry_master' ||'add_ctgry_master' ||'delete_ctgry_master' ||'change_ctgry_master';
+  // checkViewPermission(permissions: any[]): boolean {
+  //   const requiredPermission = 'view_ctgry_master' ||'add_ctgry_master' ||'delete_ctgry_master' ||'change_ctgry_master';
     
   
-    // Check user permissions
-    if (permissions.some(permission => permission.codename === requiredPermission)) {
-      return true;
-    }
+  //   // Check user permissions
+  //   if (permissions.some(permission => permission.codename === requiredPermission)) {
+  //     return true;
+  //   }
   
-    // Check group permissions (if applicable)
-    // Replace `// TODO: Implement group permission check`
-    // with your logic to retrieve and check group permissions
-    // (consider using a separate service or approach)
-    return false; // Replace with actual group permission check
-  }
+  //   // Check group permissions (if applicable)
+  //   // Replace `// TODO: Implement group permission check`
+  //   // with your logic to retrieve and check group permissions
+  //   // (consider using a separate service or approach)
+  //   return false; // Replace with actual group permission check
+  // }
 
   
 

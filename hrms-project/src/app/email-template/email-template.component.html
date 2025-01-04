@@ -1,10 +1,10 @@
 <div class="container" >
 
-    <div class="email_div"  >
+    <!-- <div class="email_div"  >
         <mat-icon>chevron_left</mat-icon>
-    </div>
+    </div> -->
     <div class="comapny_section">
-        <div class="com_list ">
+        <div class="com_list " *ngIf="hasAddPermission">
     <div class="cpm-sec">
 
         <h2>Email Template</h2><hr>
@@ -91,7 +91,7 @@
         </div>
 
         
-        <div class="com_list ">
+        <div class="com_list " *ngIf="hasViewPermission">
             <div class="cpm-sec">
         
                 <h2>Email Templates</h2><hr>
@@ -105,7 +105,7 @@
 
                             </div>
                             <div class="col-md-2 col-4">
-                                <button type="button" class="btn" (click)="openEditPopuss(deparmentsec)">View</button>
+                                <button type="button" class="btn" (click)="openEditPopuss(deparmentsec)" *ngIf="hasEditPermission">View</button>
 
                             </div> 
                         </div>

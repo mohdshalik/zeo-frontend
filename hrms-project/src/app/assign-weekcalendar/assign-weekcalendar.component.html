@@ -1,6 +1,6 @@
 <div class="container" >
     <div class="comapny_section">
-        <div class="com_list ">
+        <div class="com_list " *ngIf="hasViewPermission">
     <div class="cpm-sec">
 
         <h2>Assign Week Calendar</h2><hr>
@@ -171,7 +171,7 @@
     </div>
 
     <div class="col-md-2">
-        <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerAssignCalendar()">Save</button>  
+        <button type="button" class="btn-Create btn-full mt-5 btn-success btn" *ngIf="hasAddPermission" (click)="registerAssignCalendar()">Save</button>  
      </div>
 </div>
      

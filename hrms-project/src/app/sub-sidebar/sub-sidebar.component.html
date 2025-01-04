@@ -10,11 +10,15 @@
                   <li routerLink="/main-sidebar/sub-sidebar/department-master" *ngIf="hasViewPermissiondept"><a ><mat-icon>peoples</mat-icon> Department Master </a></li>
                   <li routerLink="/main-sidebar/sub-sidebar/designation-master" *ngIf="hasViewPermissiondesg"><a ><mat-icon>peoples</mat-icon> Designation Master</a></li>
                   <li routerLink="/main-sidebar/sub-sidebar/catogary-master" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Category Master</a></li>
-                  <li routerLink="/main-sidebar/sub-sidebar/general-request" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> General Request</a></li>
-                  <li routerLink="/main-sidebar/sub-sidebar/request-type" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Request Type</a></li>
-                  <li routerLink="/main-sidebar/sub-sidebar/approvals" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Approvals</a></li>
-                  <li routerLink="/main-sidebar/sub-sidebar/approval-level" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Approval Level</a></li>
-                  <li routerLink="/main-sidebar/sub-sidebar/attendace-marking" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Attendance Marking</a></li>
+                  <li routerLink="/main-sidebar/sub-sidebar/general-request" *ngIf="hasViewPermissionGenreq"><a ><mat-icon>peoples</mat-icon> General Request</a></li>
+                 
+                  <li routerLink="/main-sidebar/sub-sidebar/request-type" *ngIf="hasViewPermissionReqType"><a ><mat-icon>peoples</mat-icon> Request Type</a></li>
+                  
+                  <li routerLink="/main-sidebar/sub-sidebar/approvals" *ngIf="hasViewPermissionAprv"><a ><mat-icon>peoples</mat-icon> Approvals</a></li>
+                  
+                  <li routerLink="/main-sidebar/sub-sidebar/approval-level" *ngIf="hasViewPermissionAprvlvl"><a ><mat-icon>peoples</mat-icon> Approval Level</a></li>
+                 
+                  <li routerLink="/main-sidebar/sub-sidebar/attendace-marking" *ngIf="hasViewPermissionAttd"><a ><mat-icon>peoples</mat-icon> Attendance Marking</a></li>
   
   
               </ul> 

@@ -1,7 +1,7 @@
 <div class="container" >
     <div class="comapny_section">
         <div class="com_list ">
-    <div class="cpm-sec">
+    <div class="cpm-sec" *ngIf="hasViewPermission"    >
 
         <h2>Attendance Marking</h2><hr>
 
@@ -62,7 +62,8 @@
 
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-2" *ngIf="hasAddPermission"
+            >
                 <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerApproveLevel()">Save</button>  
              </div>
 

@@ -1,6 +1,6 @@
 <div class="container" >
     <div class="comapny_section">
-        <div class="com_list ">
+        <div class="com_list " *ngIf="hasViewPermission">
     <div class="cpm-sec">
 
         <h2>Create Location</h2><hr>
@@ -90,7 +90,7 @@
         </form>
 
         
-    <div class="row">
+    <div class="row" *ngIf="hasAddPermission">
         <div class="col-md-10"></div>
         <!-- <div class="col-md-2">
             <button   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>

@@ -43,6 +43,9 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   Grouppermissionsexpirydocuments: any[] = [];
   GrouppermissionslocationMaster: any[] = [];
   GrouppermissionsDnMaster: any[] = [];
+  GrouppermissionsCpMaster: any[] = [];
+  GrouppermissionsEmtMaster: any[] = [];
+
   GrouppermissionsFormdesMaster: any[] = [];
 
 
@@ -52,6 +55,7 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   GrouppermissionsemployeeReport: any[] = [];
   GrouppermissionsdocumnetReport: any[] =[];
   GrouppermissiionsgeneralReport: any[]=[];
+  GrouppermissiionsLeaveReport: any[]=[];
 
 
 
@@ -114,6 +118,9 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   expiredMasterInderminate= false;
   locationMasterInderminate= false;
   DnMasterInderminate= false;
+  CpMasterInderminate= false;
+  EmtMasterInderminate= false;
+
   FormdesMasterInderminate= false;
 
 
@@ -123,6 +130,7 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   emportReportInderminate= false;
   documentReportInderminate = false;
   generalReportInderminate= false;
+  LeaveReportInderminate= false;
 
 
   //selected calendars checkboxes.
@@ -189,6 +197,9 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   expireddocumnetsMasterChecked:boolean = false;
   locationMasterChecked:boolean = false;
   DnMasterChecked:boolean = false;
+  CpMasterChecked:boolean = false;
+  EmtMasterChecked:boolean = false;
+
   FormdesMasterChecked:boolean = false;
 
 
@@ -199,6 +210,7 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   emportReportChecked:boolean = false;
   documentReportChecked:boolean = false;
   generelReportChecked:boolean = false;
+  LeaveReportChecked:boolean = false;
 
   
   
@@ -363,6 +375,8 @@ export class UserRoleGroupingCreateComponent implements OnInit {
       this.expireddocumnetsMasterChecked &&
       this.locationMasterChecked &&
       this.DnMasterChecked &&
+      this.CpMasterChecked &&
+      this.EmtMasterChecked &&
       this.FormdesMasterChecked;
   }
   
@@ -424,6 +438,18 @@ export class UserRoleGroupingCreateComponent implements OnInit {
     return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsDnMaster.length;
   }
 
+  isCpmasterIndeterminate(): boolean {
+    const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsCpMaster.map(p => p.id).includes(permission)
+    );
+    return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsCpMaster.length;
+  }
+  isEmtmasterIndeterminate(): boolean {
+    const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissionsEmtMaster.map(p => p.id).includes(permission)
+    );
+    return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsEmtMaster.length;
+  }
   isFormdesmasterIndeterminate(): boolean {
     const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
       this.GrouppermissionsFormdesMaster.map(p => p.id).includes(permission)
@@ -437,7 +463,8 @@ export class UserRoleGroupingCreateComponent implements OnInit {
   isReportManagementMasterChecked(): boolean {
     return this.emportReportChecked &&
       this.documentReportChecked &&
-      this.generelReportChecked ;
+      this.generelReportChecked  &&
+      this.LeaveReportChecked;
       
   }
   
@@ -462,6 +489,13 @@ export class UserRoleGroupingCreateComponent implements OnInit {
     return selectedGenReportPermissions.length > 0 && selectedGenReportPermissions.length < this.GrouppermissiionsgeneralReport.length;
   }
   
+
+  isLeaveReportIndeterminate(): boolean {
+    const selectedLeaveReportPermissions = this.selectedPermissions.filter(permission =>
+      this.GrouppermissiionsLeaveReport.map(p => p.id).includes(permission)
+    );
+    return selectedLeaveReportPermissions.length > 0 && selectedLeaveReportPermissions.length < this.GrouppermissiionsLeaveReport.length;
+  }
 
 
 
@@ -616,6 +650,9 @@ export class UserRoleGroupingCreateComponent implements OnInit {
     this.isExpireddocumentsIndeterminate();
     this.isloactionmasterIndeterminate();
     this.isDnmasterIndeterminate();
+    this.isCpmasterIndeterminate();
+    this.isEmtmasterIndeterminate();
+
     this.isFormdesmasterIndeterminate();
 
 
@@ -626,6 +663,8 @@ updateIndeterminateReports(): void{
   this.isEmployeeReportIndeterminate();
   this.isDocumentReportIndeterminate();
   this.isGeneralReportIndeterminate();
+  this.isLeaveReportIndeterminate();
+
 }
 
 updateInderminateCalenders():void{
@@ -681,6 +720,9 @@ updateInderminateLeave():void{
     this.loadpermissionexpirydocuments();
     this.loadpermissionlocationmaster();
     this.loadpermissionDnmaster();
+    this.loadpermissionCpmaster();
+    this.loadpermissionEmtmaster();
+
     this.loadpermissionFormdesmaster();
 
 
@@ -690,7 +732,8 @@ updateInderminateLeave():void{
     this.loadpermissionsEmpReport();
     this.loadpermissionsDocReport();
     this.loadpermissionsGenReport();
-   
+    this.loadpermissionsLeaveReport();
+
   }
 
 
@@ -724,20 +767,33 @@ updateInderminateLeave():void{
   loadpermissionsEmpMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsEmp = result.slice(291, 295);
-        
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_emp_master', 'change_emp_master', 'delete_emp_master', 'view_emp_master'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsEmp = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsEmp);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -764,19 +820,33 @@ if (selectedSchema) {
   loadpermissionsDepartMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsDept = result.slice(148, 152);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_dept_master', 'change_dept_master', 'delete_dept_master', 'view_dept_master'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsDept = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsDept);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -803,19 +873,33 @@ if (selectedSchema) {
   loadpermissionsDisgMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsDis = result.slice(156, 160);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_desgntn_master', 'change_desgntn_master', 'delete_desgntn_master', 'view_desgntn_master'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsDis = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsDis);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -840,19 +924,33 @@ if (selectedSchema) {
   loadpermissionsCatgMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsCat = result.slice(144, 148);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_ctgry_master', 'change_ctgry_master', 'delete_ctgry_master', 'view_ctgry_master'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsCat = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsCat);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -879,19 +977,33 @@ if (selectedSchema) {
    loadpermissionsGenMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsGen = result.slice(237, 241);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_generalrequest', 'change_generalrequest', 'delete_generalrequest', 'view_generalrequest'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsGen = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsGen);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -916,20 +1028,34 @@ if (selectedSchema) {
 
     loadpermissionsReqtypeMaster(): void {
       const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-  
-      console.log('schemastore',selectedSchema )
-  
-  if (selectedSchema) {
-         
-    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-      (result: any) => {
-          this.GrouppermissionsReqtype = result.slice(263, 267);
-        },
-        (error: any) => {
-          console.error('Error fetching permissions:', error);
-        }
-      );
-  }
+
+      console.log('schemastore', selectedSchema);
+    
+      if (selectedSchema) {
+        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+          (result: any[]) => {
+            // Specify the codenames you want to filter
+            const requiredCodenames = ['add_requesttype', 'change_requesttype', 'delete_requesttype', 'view_requesttype'];
+    
+            // Filter and remove duplicates based on codename
+            const uniquePermissionsMap = new Map();
+            result.forEach(permission => {
+              const codename = permission.codename.trim().toLowerCase();
+              if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                uniquePermissionsMap.set(codename, permission);
+              }
+            });
+    
+            // Convert map values to an array
+            this.GrouppermissionsReqtype = Array.from(uniquePermissionsMap.values());
+    
+            console.log('Filtered Unique Permissions:', this.GrouppermissionsReqtype);
+          },
+          (error: any) => {
+            console.error('Error fetching permissions:', error);
+          }
+        );
+      }
     }
   
   
@@ -957,19 +1083,33 @@ if (selectedSchema) {
    loadpermissionsAprMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsApr = result.slice(271, 275);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_approval', 'change_approval', 'delete_approval', 'view_approval'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsApr = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsApr);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -995,20 +1135,34 @@ if (selectedSchema) {
 
       loadpermissionsAprlvlMaster(): void {
         const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-    
-        console.log('schemastore',selectedSchema )
-    
-    if (selectedSchema) {
-           
-      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-        (result: any) => {
-            this.GrouppermissionsAprlvl = result.slice(275, 279);
-          },
-          (error: any) => {
-            console.error('Error fetching permissions:', error);
-          }
-        );
-    }
+
+        console.log('schemastore', selectedSchema);
+      
+        if (selectedSchema) {
+          this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+            (result: any[]) => {
+              // Specify the codenames you want to filter
+              const requiredCodenames = ['add_approvallevel', 'change_approvallevel', 'delete_approvallevel', 'view_approvallevel'];
+      
+              // Filter and remove duplicates based on codename
+              const uniquePermissionsMap = new Map();
+              result.forEach(permission => {
+                const codename = permission.codename.trim().toLowerCase();
+                if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                  uniquePermissionsMap.set(codename, permission);
+                }
+              });
+      
+              // Convert map values to an array
+              this.GrouppermissionsAprlvl = Array.from(uniquePermissionsMap.values());
+      
+              console.log('Filtered Unique Permissions:', this.GrouppermissionsAprlvl);
+            },
+            (error: any) => {
+              console.error('Error fetching permissions:', error);
+            }
+          );
+        }
       }
     
     
@@ -1035,19 +1189,33 @@ if (selectedSchema) {
    loadpermissionsAtdMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsAtd = result.slice(427, 431);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_attendance', 'change_attendance', 'delete_attendance', 'view_attendance'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsAtd = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsAtd);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -1082,19 +1250,33 @@ if (selectedSchema) {
   loadpermissionsCmpMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsCmp = result.slice(4, 8);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_company', 'change_company', 'delete_company', 'view_company'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsCmp = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsCmp);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
   
 
@@ -1122,19 +1304,33 @@ if (selectedSchema) {
   loadpermissionsBranchMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsBrch = result.slice(140, 144);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_brnch_mstr', 'change_brnch_mstr', 'delete_brnch_mstr', 'view_brnch_mstr'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsBrch = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsBrch);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -1158,21 +1354,35 @@ if (selectedSchema) {
  
  //load permission for user master----------
     loadpermissionsUserMaster(): void {
-    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+      const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsUser = result.slice(12, 16);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
+      console.log('schemastore', selectedSchema);
+    
+      if (selectedSchema) {
+        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+          (result: any[]) => {
+            // Specify the codenames you want to filter
+            const requiredCodenames = ['add_customuser', 'change_customuser', 'delete_customuser', 'view_customuser'];
+    
+            // Filter and remove duplicates based on codename
+            const uniquePermissionsMap = new Map();
+            result.forEach(permission => {
+              const codename = permission.codename.trim().toLowerCase();
+              if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                uniquePermissionsMap.set(codename, permission);
+              }
+            });
+    
+            // Convert map values to an array
+            this.GrouppermissionsUser = Array.from(uniquePermissionsMap.values());
+    
+            console.log('Filtered Unique Permissions:', this.GrouppermissionsUser);
+          },
+          (error: any) => {
+            console.error('Error fetching permissions:', error);
+          }
+        );
       }
-    );
-}
   }
 
 
@@ -1198,19 +1408,33 @@ if (selectedSchema) {
   loadpermissionsUserGroupMaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsUsergroup = result.slice(60,64);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_group', 'change_group', 'delete_group', 'view_group'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsUsergroup = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsUsergroup);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -1236,19 +1460,33 @@ if (selectedSchema) {
   loadpermissionsassigneduser(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsassigneddUser = result.slice(56, 60);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_permission', 'change_permission', 'delete_permission', 'view_permission'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsassigneddUser = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsassigneddUser);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -1274,19 +1512,33 @@ if (selectedSchema) {
   loadpermissionsstatemaster(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.GrouppermissionsstateMaster = result.slice(48, 52);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_state_mstr', 'change_state_mstr', 'delete_state_mstr', 'view_state_mstr'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissionsstateMaster = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissionsstateMaster);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
 
@@ -1313,19 +1565,33 @@ if (selectedSchema) {
   loadpermissionsdocumnettype(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
+  console.log('schemastore', selectedSchema);
 
-if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.Grouppermissionsdocumentype= result.slice(24, 28);
+  if (selectedSchema) {
+    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+      (result: any[]) => {
+        // Specify the codenames you want to filter
+        const requiredCodenames = ['add_document_type', 'change_document_type', 'delete_document_type', 'view_document_type'];
+
+        // Filter and remove duplicates based on codename
+        const uniquePermissionsMap = new Map();
+        result.forEach(permission => {
+          const codename = permission.codename.trim().toLowerCase();
+          if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+            uniquePermissionsMap.set(codename, permission);
+          }
+        });
+
+        // Convert map values to an array
+        this.Grouppermissionsdocumentype = Array.from(uniquePermissionsMap.values());
+
+        console.log('Filtered Unique Permissions:', this.Grouppermissionsdocumentype);
       },
       (error: any) => {
         console.error('Error fetching permissions:', error);
       }
     );
-}
+  }
   }
 
    //Display Name  add view delte code for Document type master-------
@@ -1351,19 +1617,33 @@ if (selectedSchema) {
 
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-    console.log('schemastore',selectedSchema )
-
+    console.log('schemastore', selectedSchema);
+  
     if (selectedSchema) {
-     	
-  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-    (result: any) => {
-        this.Grouppermissionsexpirydocuments = result.slice(283, 287);
-      },
-      (error: any) => {
-        console.error('Error fetching permissions:', error);
-      }
-    );
-}
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_emp_documents', 'change_emp_documents', 'delete_emp_documents', 'view_emp_documents'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.Grouppermissionsexpirydocuments = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.Grouppermissionsexpirydocuments);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
   }
 
     //Display Name  add view delte code for Document type master-------
@@ -1390,20 +1670,34 @@ if (selectedSchema) {
   
     loadpermissionlocationmaster(): void {
       const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-  
-      console.log('schemastore',selectedSchema )
-  
-  if (selectedSchema) {
-         
-    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-      (result: any) => {
-          this.GrouppermissionslocationMaster = result.slice(4, 8);
-        },
-        (error: any) => {
-          console.error('Error fetching permissions:', error);
-        }
-      );
-  }
+
+      console.log('schemastore', selectedSchema);
+    
+      if (selectedSchema) {
+        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+          (result: any[]) => {
+            // Specify the codenames you want to filter
+            const requiredCodenames = ['add_company', 'change_company', 'delete_company', 'view_company'];
+    
+            // Filter and remove duplicates based on codename
+            const uniquePermissionsMap = new Map();
+            result.forEach(permission => {
+              const codename = permission.codename.trim().toLowerCase();
+              if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                uniquePermissionsMap.set(codename, permission);
+              }
+            });
+    
+            // Convert map values to an array
+            this.GrouppermissionslocationMaster = Array.from(uniquePermissionsMap.values());
+    
+            console.log('Filtered Unique Permissions:', this.GrouppermissionslocationMaster);
+          },
+          (error: any) => {
+            console.error('Error fetching permissions:', error);
+          }
+        );
+      }
     }
   
       //Display Name  add view delte code for Company master-------
@@ -1425,22 +1719,34 @@ if (selectedSchema) {
 
       loadpermissionDnmaster(): void {
         const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-    
-        console.log('schemastore',selectedSchema )
-    
-    if (selectedSchema) {
-           
-      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-        (result: any) => {
-            this.GrouppermissionsDnMaster = result.slice(160, 164);
-            // console.log('GrouppermissionsDnMaster',result )
 
-          },
-          (error: any) => {
-            console.error('Error fetching permissions:', error);
-          }
-        );
-    }
+        console.log('schemastore', selectedSchema);
+      
+        if (selectedSchema) {
+          this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+            (result: any[]) => {
+              // Specify the codenames you want to filter
+              const requiredCodenames = ['add_document_numbering', 'change_document_numbering', 'delete_document_numbering', 'view_document_numbering'];
+      
+              // Filter and remove duplicates based on codename
+              const uniquePermissionsMap = new Map();
+              result.forEach(permission => {
+                const codename = permission.codename.trim().toLowerCase();
+                if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                  uniquePermissionsMap.set(codename, permission);
+                }
+              });
+      
+              // Convert map values to an array
+              this.GrouppermissionsDnMaster = Array.from(uniquePermissionsMap.values());
+      
+              console.log('Filtered Unique Permissions:', this.GrouppermissionsDnMaster);
+            },
+            (error: any) => {
+              console.error('Error fetching permissions:', error);
+            }
+          );
+        }
       }
     
         //Display Name  add view delte code for Company master-------
@@ -1460,25 +1766,134 @@ if (selectedSchema) {
           }
         }
 
+        loadpermissionCpmaster(): void {
+          const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+          console.log('schemastore', selectedSchema);
+        
+          if (selectedSchema) {
+            this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+              (result: any[]) => {
+                // Specify the codenames you want to filter
+                const requiredCodenames = ['add_companypolicy', 'change_companypolicy', 'delete_companypolicy', 'view_companypolicy'];
+        
+                // Filter and remove duplicates based on codename
+                const uniquePermissionsMap = new Map();
+                result.forEach(permission => {
+                  const codename = permission.codename.trim().toLowerCase();
+                  if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                    uniquePermissionsMap.set(codename, permission);
+                  }
+                });
+        
+                // Convert map values to an array
+                this.GrouppermissionsCpMaster = Array.from(uniquePermissionsMap.values());
+        
+                console.log('Filtered Unique Permissions:', this.GrouppermissionsCpMaster);
+              },
+              (error: any) => {
+                console.error('Error fetching permissions:', error);
+              }
+            );
+          }
+        }
+      
+          //Display Name  add view delte code for Company master-------
+      
+          getDisplayNameCp(permissionCodename: string): string {
+            switch (permissionCodename.trim().toLowerCase()) {
+              case 'add_companypolicy':
+                return 'Add';
+              case 'change_companypolicy':
+                return 'Edit';
+              case 'delete_companypolicy':
+                return 'Delete';
+              case 'view_companypolicy':
+                return 'View';
+              default:
+                return permissionCodename;
+            }
+          }
+
+          loadpermissionEmtmaster(): void {
+            const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+    
+            console.log('schemastore', selectedSchema);
+          
+            if (selectedSchema) {
+              this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                (result: any[]) => {
+                  // Specify the codenames you want to filter
+                  const requiredCodenames = ['add_emailtemplate', 'change_emailtemplate', 'delete_emailtemplate', 'view_emailtemplate'];
+          
+                  // Filter and remove duplicates based on codename
+                  const uniquePermissionsMap = new Map();
+                  result.forEach(permission => {
+                    const codename = permission.codename.trim().toLowerCase();
+                    if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                      uniquePermissionsMap.set(codename, permission);
+                    }
+                  });
+          
+                  // Convert map values to an array
+                  this.GrouppermissionsEmtMaster = Array.from(uniquePermissionsMap.values());
+          
+                  console.log('Filtered Unique Permissions:', this.GrouppermissionsEmtMaster);
+                },
+                (error: any) => {
+                  console.error('Error fetching permissions:', error);
+                }
+              );
+            }
+          }
+        
+            //Display Name  add view delte code for Company master-------
+        
+            getDisplayNameEmt(permissionCodename: string): string {
+              switch (permissionCodename.trim().toLowerCase()) {
+                case 'add_emailtemplate':
+                  return 'Add';
+                case 'change_emailtemplate':
+                  return 'Edit';
+                case 'delete_emailtemplate':
+                  return 'Delete';
+                case 'view_emailtemplate':
+                  return 'View';
+                default:
+                  return permissionCodename;
+              }
+            }
 
         loadpermissionFormdesmaster(): void {
           const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-      
-          console.log('schemastore',selectedSchema )
-      
-      if (selectedSchema) {
-             
-        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-          (result: any) => {
-              this.GrouppermissionsFormdesMaster = result.slice(189, 193);
-              // console.log('GrouppermissionsDnMaster',result )
-  
-            },
-            (error: any) => {
-              console.error('Error fetching permissions:', error);
-            }
-          );
-      }
+
+          console.log('schemastore', selectedSchema);
+        
+          if (selectedSchema) {
+            this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+              (result: any[]) => {
+                // Specify the codenames you want to filter
+                const requiredCodenames = ['add_emp_customfield', 'change_emp_customfield', 'delete_emp_customfield', 'view_emp_customfield'];
+        
+                // Filter and remove duplicates based on codename
+                const uniquePermissionsMap = new Map();
+                result.forEach(permission => {
+                  const codename = permission.codename.trim().toLowerCase();
+                  if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                    uniquePermissionsMap.set(codename, permission);
+                  }
+                });
+        
+                // Convert map values to an array
+                this.GrouppermissionsFormdesMaster = Array.from(uniquePermissionsMap.values());
+        
+                console.log('Filtered Unique Permissions:', this.GrouppermissionsFormdesMaster);
+              },
+              (error: any) => {
+                console.error('Error fetching permissions:', error);
+              }
+            );
+          }
         }
       
           //Display Name  add view delte code for Company master-------
@@ -1506,20 +1921,34 @@ if (selectedSchema) {
 
       loadpermissionsEmpReport(): void {
         const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-    
-        console.log('schemastore',selectedSchema )
-    
-    if (selectedSchema) {
-           
-      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-        (result: any) => {
-            this.GrouppermissionsemployeeReport = result.slice(254, 259);
-          },
-          (error: any) => {
-            console.error('Error fetching permissions:', error);
-          }
-        );
-    }
+
+        console.log('schemastore', selectedSchema);
+      
+        if (selectedSchema) {
+          this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+            (result: any[]) => {
+              // Specify the codenames you want to filter
+              const requiredCodenames = ['add_report', 'change_report', 'delete_report', 'export_report','view_report'];
+      
+              // Filter and remove duplicates based on codename
+              const uniquePermissionsMap = new Map();
+              result.forEach(permission => {
+                const codename = permission.codename.trim().toLowerCase();
+                if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                  uniquePermissionsMap.set(codename, permission);
+                }
+              });
+      
+              // Convert map values to an array
+              this.GrouppermissionsemployeeReport = Array.from(uniquePermissionsMap.values());
+      
+              console.log('Filtered Unique Permissions:', this.GrouppermissionsemployeeReport);
+            },
+            (error: any) => {
+              console.error('Error fetching permissions:', error);
+            }
+          );
+        }
       }
     
         //Display Name  add view delte code for Company master-------
@@ -1542,21 +1971,35 @@ if (selectedSchema) {
         }
       
         loadpermissionsDocReport(): void {
-        const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-    
-        console.log('schemastore',selectedSchema )
-    
-    if (selectedSchema) {
-           
-      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-        (result: any) => {
-            this.GrouppermissionsdocumnetReport = result.slice(172, 177);
-          },
-          (error: any) => {
-            console.error('Error fetching permissions:', error);
+          const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+          console.log('schemastore', selectedSchema);
+        
+          if (selectedSchema) {
+            this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+              (result: any[]) => {
+                // Specify the codenames you want to filter
+                const requiredCodenames = ['add_doc_report', 'change_doc_report', 'delete_doc_report', 'export_document_report','view_doc_report'];
+        
+                // Filter and remove duplicates based on codename
+                const uniquePermissionsMap = new Map();
+                result.forEach(permission => {
+                  const codename = permission.codename.trim().toLowerCase();
+                  if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                    uniquePermissionsMap.set(codename, permission);
+                  }
+                });
+        
+                // Convert map values to an array
+                this.GrouppermissionsdocumnetReport = Array.from(uniquePermissionsMap.values());
+        
+                console.log('Filtered Unique Permissions:', this.GrouppermissionsdocumnetReport);
+              },
+              (error: any) => {
+                console.error('Error fetching permissions:', error);
+              }
+            );
           }
-        );
-    }
       }
     
         //Display Name  add view delte code for Company master-------
@@ -1577,22 +2020,39 @@ if (selectedSchema) {
               return permissionCodename;
           }
         }
+
+
+
         loadpermissionsGenReport(): void {
           const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-      
-          console.log('schemastore',selectedSchema )
-      
-      if (selectedSchema) {
-             
-        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-          (result: any) => {
-              this.GrouppermissiionsgeneralReport = result.slice(241, 246);
-            },
-            (error: any) => {
-              console.error('Error fetching permissions:', error);
-            }
-          );
+
+  console.log('schemastore', selectedSchema);
+
+  if (selectedSchema) {
+    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+      (result: any[]) => {
+        // Specify the codenames you want to filter
+        const requiredCodenames = ['add_generalrequestreport', 'change_generalrequestreport', 'delete_generalrequestreport', 'export_general_request_report','view_generalrequestreport'];
+
+        // Filter and remove duplicates based on codename
+        const uniquePermissionsMap = new Map();
+        result.forEach(permission => {
+          const codename = permission.codename.trim().toLowerCase();
+          if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+            uniquePermissionsMap.set(codename, permission);
+          }
+        });
+
+        // Convert map values to an array
+        this.GrouppermissiionsgeneralReport = Array.from(uniquePermissionsMap.values());
+
+        console.log('Filtered Unique Permissions:', this.GrouppermissiionsgeneralReport);
+      },
+      (error: any) => {
+        console.error('Error fetching permissions:', error);
       }
+    );
+  }
         }
 
 
@@ -1617,6 +2077,65 @@ if (selectedSchema) {
           }
 
 
+          loadpermissionsLeaveReport(): void {
+            const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+    console.log('schemastore', selectedSchema);
+  
+    if (selectedSchema) {
+      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+        (result: any[]) => {
+          // Specify the codenames you want to filter
+          const requiredCodenames = ['add_leavereport', 'change_leavereport', 'delete_leavereport', 'export_report','view_leavereport'];
+  
+          // Filter and remove duplicates based on codename
+          const uniquePermissionsMap = new Map();
+          result.forEach(permission => {
+            const codename = permission.codename.trim().toLowerCase();
+            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+              uniquePermissionsMap.set(codename, permission);
+            }
+          });
+  
+          // Convert map values to an array
+          this.GrouppermissiionsLeaveReport = Array.from(uniquePermissionsMap.values());
+  
+          console.log('Filtered Unique Permissions:', this.GrouppermissiionsLeaveReport);
+        },
+        (error: any) => {
+          console.error('Error fetching permissions:', error);
+        }
+      );
+    }
+          }
+
+
+
+
+
+  
+  
+        
+            //Display Name  add view delte code for Company master-------
+        
+            getDisplayNameLeaveReport(permissionCodename: string): string {
+              switch (permissionCodename.trim().toLowerCase()) {
+                case 'add_leavereport':
+                  return 'Add';
+                case 'change_leavereport':
+                  return 'Edit';
+                case 'delete_leavereport':
+                  return 'Delete';
+                case 'export_report':
+                  return 'Export';
+                  case 'view_leavereport':
+                    return 'View';
+                default:
+                  return permissionCodename;
+              }
+            }
+  
+
 
           
         
@@ -1625,20 +2144,34 @@ if (selectedSchema) {
           // loadpermissionsAddweekDetail
             loadpermissionsAddweekDetail(): void {
               const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-          
-              console.log('schemastore',selectedSchema )
-          
-          if (selectedSchema) {
-                 
-            this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-              (result: any) => {
-                  this.Grouppermissionsaddweek = result.slice(331, 335);
-                },
-                (error: any) => {
-                  console.error('Error fetching permissions:', error);
-                }
-              );
-          }
+
+              console.log('schemastore', selectedSchema);
+            
+              if (selectedSchema) {
+                this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                  (result: any[]) => {
+                    // Specify the codenames you want to filter
+                    const requiredCodenames = ['add_weekend_calendar', 'change_weekend_calendar', 'delete_weekend_calendar', 'view_weekend_calendar'];
+            
+                    // Filter and remove duplicates based on codename
+                    const uniquePermissionsMap = new Map();
+                    result.forEach(permission => {
+                      const codename = permission.codename.trim().toLowerCase();
+                      if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                        uniquePermissionsMap.set(codename, permission);
+                      }
+                    });
+            
+                    // Convert map values to an array
+                    this.Grouppermissionsaddweek = Array.from(uniquePermissionsMap.values());
+            
+                    console.log('Filtered Unique Permissions:', this.Grouppermissionsaddweek);
+                  },
+                  (error: any) => {
+                    console.error('Error fetching permissions:', error);
+                  }
+                );
+              }
             }
           
               //Display Name  add view delte code for Company master-------
@@ -1661,20 +2194,34 @@ if (selectedSchema) {
               // loadpermissionsAssignweekDetail
               loadpermissionsAssignweekDetail(): void {
                 const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-            
-                console.log('schemastore',selectedSchema )
-            
-            if (selectedSchema) {
-                   
-              this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                (result: any) => {
-                    this.Grouppermisionsassignweek = result.slice(403,407);
-                  },
-                  (error: any) => {
-                    console.error('Error fetching permissions:', error);
-                  }
-                );
-            }
+
+  console.log('schemastore', selectedSchema);
+
+  if (selectedSchema) {
+    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+      (result: any[]) => {
+        // Specify the codenames you want to filter
+        const requiredCodenames = ['add_assign_weekend', 'change_assign_weekend', 'delete_assign_weekend', 'view_assign_weekend'];
+
+        // Filter and remove duplicates based on codename
+        const uniquePermissionsMap = new Map();
+        result.forEach(permission => {
+          const codename = permission.codename.trim().toLowerCase();
+          if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+            uniquePermissionsMap.set(codename, permission);
+          }
+        });
+
+        // Convert map values to an array
+        this.Grouppermisionsassignweek = Array.from(uniquePermissionsMap.values());
+
+        console.log('Filtered Unique Permissions:', this.Grouppermisionsassignweek);
+      },
+      (error: any) => {
+        console.error('Error fetching permissions:', error);
+      }
+    );
+  }
               }
             
                 //Display Name  add view delte code for Company master-------
@@ -1698,20 +2245,34 @@ if (selectedSchema) {
 
                 loadpermissionsAddholidayDetail(): void {
                   const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-              
-                  console.log('schemastore',selectedSchema )
-              
-              if (selectedSchema) {
-                     
-                this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                  (result: any) => {
-                      this.Grouppermissionsaddholiday = result.slice(351,355);
-                    },
-                    (error: any) => {
-                      console.error('Error fetching permissions:', error);
-                    }
-                  );
-              }
+
+                  console.log('schemastore', selectedSchema);
+                
+                  if (selectedSchema) {
+                    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                      (result: any[]) => {
+                        // Specify the codenames you want to filter
+                        const requiredCodenames = ['add_holiday', 'change_holiday', 'delete_holiday', 'view_holiday'];
+                
+                        // Filter and remove duplicates based on codename
+                        const uniquePermissionsMap = new Map();
+                        result.forEach(permission => {
+                          const codename = permission.codename.trim().toLowerCase();
+                          if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                            uniquePermissionsMap.set(codename, permission);
+                          }
+                        });
+                
+                        // Convert map values to an array
+                        this.Grouppermissionsaddholiday = Array.from(uniquePermissionsMap.values());
+                
+                        console.log('Filtered Unique Permissions:', this.Grouppermissionsaddholiday);
+                      },
+                      (error: any) => {
+                        console.error('Error fetching permissions:', error);
+                      }
+                    );
+                  }
                 }
               
                   //Display Name  add view delte code for Company master-------
@@ -1734,20 +2295,34 @@ if (selectedSchema) {
 
                   loadpermissionsAssignholidayDetail(): void {
                     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-                
-                    console.log('schemastore',selectedSchema )
-                
-                if (selectedSchema) {
-                       
-                  this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                    (result: any) => {
-                        this.Grouppermissionsassisgnholiday = result.slice(355, 359);
-                      },
-                      (error: any) => {
-                        console.error('Error fetching permissions:', error);
-                      }
-                    );
-                }
+
+                    console.log('schemastore', selectedSchema);
+                  
+                    if (selectedSchema) {
+                      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                        (result: any[]) => {
+                          // Specify the codenames you want to filter
+                          const requiredCodenames = ['add_assign_holiday', 'change_assign_holiday', 'delete_assign_holiday', 'view_assign_holiday'];
+                  
+                          // Filter and remove duplicates based on codename
+                          const uniquePermissionsMap = new Map();
+                          result.forEach(permission => {
+                            const codename = permission.codename.trim().toLowerCase();
+                            if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                              uniquePermissionsMap.set(codename, permission);
+                            }
+                          });
+                  
+                          // Convert map values to an array
+                          this.Grouppermissionsassisgnholiday = Array.from(uniquePermissionsMap.values());
+                  
+                          console.log('Filtered Unique Permissions:', this.Grouppermissionsassisgnholiday);
+                        },
+                        (error: any) => {
+                          console.error('Error fetching permissions:', error);
+                        }
+                      );
+                    }
                   }
                 
                     //Display Name  add view delte code for Company master-------
@@ -1775,21 +2350,34 @@ if (selectedSchema) {
 
                     loadpermissionsLeaveaprv(): void {
                       const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-                  
-                      console.log('schemastore',selectedSchema )
-                  
-                  if (selectedSchema) {
-                         
-                    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                      (result: any) => {
-                          this.GrouppermissionsLeaveaprv = result.slice(391, 395);
-                          
-                        },
-                        (error: any) => {
-                          console.error('Error fetching permissions:', error);
-                        }
-                      );
-                  }
+
+                      console.log('schemastore', selectedSchema);
+                    
+                      if (selectedSchema) {
+                        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                          (result: any[]) => {
+                            // Specify the codenames you want to filter
+                            const requiredCodenames = ['add_leaveapproval', 'change_leaveapproval', 'delete_leaveapproval', 'view_leaveapproval'];
+                    
+                            // Filter and remove duplicates based on codename
+                            const uniquePermissionsMap = new Map();
+                            result.forEach(permission => {
+                              const codename = permission.codename.trim().toLowerCase();
+                              if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                                uniquePermissionsMap.set(codename, permission);
+                              }
+                            });
+                    
+                            // Convert map values to an array
+                            this.GrouppermissionsLeaveaprv = Array.from(uniquePermissionsMap.values());
+                    
+                            console.log('Filtered Unique Permissions:', this.GrouppermissionsLeaveaprv);
+                          },
+                          (error: any) => {
+                            console.error('Error fetching permissions:', error);
+                          }
+                        );
+                      }
                     }
                   
                   
@@ -1814,21 +2402,34 @@ if (selectedSchema) {
                       
                     loadpermissionsLeavetype(): void {
                       const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-                  
-                      console.log('schemastore',selectedSchema )
-                  
-                  if (selectedSchema) {
-                         
-                    this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                      (result: any) => {
-                          this.GrouppermissionsLeavetype = result.slice(304, 308);
-                          
-                        },
-                        (error: any) => {
-                          console.error('Error fetching permissions:', error);
-                        }
-                      );
-                  }
+
+                      console.log('schemastore', selectedSchema);
+                    
+                      if (selectedSchema) {
+                        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                          (result: any[]) => {
+                            // Specify the codenames you want to filter
+                            const requiredCodenames = ['add_leave_type', 'change_leave_type', 'delete_leave_type', 'view_leave_type'];
+                    
+                            // Filter and remove duplicates based on codename
+                            const uniquePermissionsMap = new Map();
+                            result.forEach(permission => {
+                              const codename = permission.codename.trim().toLowerCase();
+                              if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                                uniquePermissionsMap.set(codename, permission);
+                              }
+                            });
+                    
+                            // Convert map values to an array
+                            this.GrouppermissionsLeavetype = Array.from(uniquePermissionsMap.values());
+                    
+                            console.log('Filtered Unique Permissions:', this.GrouppermissionsLeavetype);
+                          },
+                          (error: any) => {
+                            console.error('Error fetching permissions:', error);
+                          }
+                        );
+                      }
                     }
                   
                   
@@ -1851,21 +2452,34 @@ if (selectedSchema) {
 
                       loadpermissionsLeavemaster(): void {
                         const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-                    
-                        console.log('schemastore',selectedSchema )
-                    
-                    if (selectedSchema) {
-                           
-                      this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                        (result: any) => {
-                            this.GrouppermissionsLeavemaster = result.slice(363, 367);
-                            
-                          },
-                          (error: any) => {
-                            console.error('Error fetching permissions:', error);
-                          }
-                        );
-                    }
+
+                        console.log('schemastore', selectedSchema);
+                      
+                        if (selectedSchema) {
+                          this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                            (result: any[]) => {
+                              // Specify the codenames you want to filter
+                              const requiredCodenames = ['add_leave_entitlement', 'change_leave_entitlement', 'delete_leave_entitlement', 'view_leave_entitlement'];
+                      
+                              // Filter and remove duplicates based on codename
+                              const uniquePermissionsMap = new Map();
+                              result.forEach(permission => {
+                                const codename = permission.codename.trim().toLowerCase();
+                                if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                                  uniquePermissionsMap.set(codename, permission);
+                                }
+                              });
+                      
+                              // Convert map values to an array
+                              this.GrouppermissionsLeavemaster = Array.from(uniquePermissionsMap.values());
+                      
+                              console.log('Filtered Unique Permissions:', this.GrouppermissionsLeavemaster);
+                            },
+                            (error: any) => {
+                              console.error('Error fetching permissions:', error);
+                            }
+                          );
+                        }
                       }
                     
                     
@@ -1888,21 +2502,34 @@ if (selectedSchema) {
 
                         loadpermissionsLeavereq(): void {
                           const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-                      
-                          console.log('schemastore',selectedSchema )
-                      
-                      if (selectedSchema) {
-                             
-                        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                          (result: any) => {
-                              this.GrouppermissionsLeavereq = result.slice(371, 375);
-                              
-                            },
-                            (error: any) => {
-                              console.error('Error fetching permissions:', error);
-                            }
-                          );
-                      }
+
+                          console.log('schemastore', selectedSchema);
+                        
+                          if (selectedSchema) {
+                            this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                              (result: any[]) => {
+                                // Specify the codenames you want to filter
+                                const requiredCodenames = ['add_employee_leave_request', 'change_employee_leave_request', 'delete_employee_leave_request', 'view_employee_leave_request'];
+                        
+                                // Filter and remove duplicates based on codename
+                                const uniquePermissionsMap = new Map();
+                                result.forEach(permission => {
+                                  const codename = permission.codename.trim().toLowerCase();
+                                  if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                                    uniquePermissionsMap.set(codename, permission);
+                                  }
+                                });
+                        
+                                // Convert map values to an array
+                                this.GrouppermissionsLeavereq = Array.from(uniquePermissionsMap.values());
+                        
+                                console.log('Filtered Unique Permissions:', this.GrouppermissionsLeavereq);
+                              },
+                              (error: any) => {
+                                console.error('Error fetching permissions:', error);
+                              }
+                            );
+                          }
                         }
                       
                           //Display Name add view delte code for emplotee master-------
@@ -1925,21 +2552,34 @@ if (selectedSchema) {
                           
                         loadpermissionsLeavecom(): void {
                           const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-                      
-                          console.log('schemastore',selectedSchema )
-                      
-                      if (selectedSchema) {
-                             
-                        this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                          (result: any) => {
-                              this.GrouppermissionsLeavecom = result.slice(343, 347);
-                              
-                            },
-                            (error: any) => {
-                              console.error('Error fetching permissions:', error);
-                            }
-                          );
-                      }
+
+                          console.log('schemastore', selectedSchema);
+                        
+                          if (selectedSchema) {
+                            this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                              (result: any[]) => {
+                                // Specify the codenames you want to filter
+                                const requiredCodenames = ['add_compensatoryleavetransaction', 'change_compensatoryleavetransaction', 'delete_compensatoryleavetransaction', 'view_compensatoryleavetransaction'];
+                        
+                                // Filter and remove duplicates based on codename
+                                const uniquePermissionsMap = new Map();
+                                result.forEach(permission => {
+                                  const codename = permission.codename.trim().toLowerCase();
+                                  if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                                    uniquePermissionsMap.set(codename, permission);
+                                  }
+                                });
+                        
+                                // Convert map values to an array
+                                this.GrouppermissionsLeavecom = Array.from(uniquePermissionsMap.values());
+                        
+                                console.log('Filtered Unique Permissions:', this.GrouppermissionsLeavecom);
+                              },
+                              (error: any) => {
+                                console.error('Error fetching permissions:', error);
+                              }
+                            );
+                          }
                         }
                       
                           //Display Name add view delte code for emplotee master-------
@@ -1963,21 +2603,34 @@ if (selectedSchema) {
 
                           loadpermissionsLeaveaprvlvl(): void {
                             const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-                        
-                            console.log('schemastore',selectedSchema )
-                        
-                        if (selectedSchema) {
-                               
-                          this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                            (result: any) => {
-                                this.GrouppermissionsLeaveaprvlvl = result.slice(419, 423);
-                                
-                              },
-                              (error: any) => {
-                                console.error('Error fetching permissions:', error);
-                              }
-                            );
-                        }
+
+                            console.log('schemastore', selectedSchema);
+                          
+                            if (selectedSchema) {
+                              this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                                (result: any[]) => {
+                                  // Specify the codenames you want to filter
+                                  const requiredCodenames = ['add_leaveapprovallevels', 'change_leaveapprovallevels', 'delete_leaveapprovallevels', 'view_leaveapprovallevels'];
+                          
+                                  // Filter and remove duplicates based on codename
+                                  const uniquePermissionsMap = new Map();
+                                  result.forEach(permission => {
+                                    const codename = permission.codename.trim().toLowerCase();
+                                    if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                                      uniquePermissionsMap.set(codename, permission);
+                                    }
+                                  });
+                          
+                                  // Convert map values to an array
+                                  this.GrouppermissionsLeaveaprvlvl = Array.from(uniquePermissionsMap.values());
+                          
+                                  console.log('Filtered Unique Permissions:', this.GrouppermissionsLeaveaprvlvl);
+                                },
+                                (error: any) => {
+                                  console.error('Error fetching permissions:', error);
+                                }
+                              );
+                            }
                           }
                         
                         
@@ -2001,21 +2654,34 @@ if (selectedSchema) {
 
                             loadpermissionsLeaveaprvlvltemp(): void {
                               const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-                          
-                              console.log('schemastore',selectedSchema )
-                          
-                          if (selectedSchema) {
-                                 
-                            this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
-                              (result: any) => {
-                                  this.GrouppermissionsLeaveaprvlvltemp = result.slice(387, 391);
-                                  
-                                },
-                                (error: any) => {
-                                  console.error('Error fetching permissions:', error);
-                                }
-                              );
-                          }
+
+                              console.log('schemastore', selectedSchema);
+                            
+                              if (selectedSchema) {
+                                this.UserMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                                  (result: any[]) => {
+                                    // Specify the codenames you want to filter
+                                    const requiredCodenames = ['add_lvemailtemplate', 'change_lvemailtemplate', 'delete_lvemailtemplate', 'view_lvemailtemplate'];
+                            
+                                    // Filter and remove duplicates based on codename
+                                    const uniquePermissionsMap = new Map();
+                                    result.forEach(permission => {
+                                      const codename = permission.codename.trim().toLowerCase();
+                                      if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                                        uniquePermissionsMap.set(codename, permission);
+                                      }
+                                    });
+                            
+                                    // Convert map values to an array
+                                    this.GrouppermissionsLeaveaprvlvltemp = Array.from(uniquePermissionsMap.values());
+                            
+                                    console.log('Filtered Unique Permissions:', this.GrouppermissionsLeaveaprvlvltemp);
+                                  },
+                                  (error: any) => {
+                                    console.error('Error fetching permissions:', error);
+                                  }
+                                );
+                              }
                             }
                           
                           
@@ -2506,6 +3172,50 @@ if (selectedSchema) {
     this.DnMasterInderminate = this.isDnmasterIndeterminate();
   }
 
+  onCheckboxChangesCp(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateCpMasterCheckbox();
+    this.updateSelectAlls();
+
+  }
+
+  updateCpMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsCpMaster.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.CpMasterChecked = allPermissionsSelected;
+    this.CpMasterInderminate = this.isCpmasterIndeterminate();
+  }
+
+  onCheckboxChangesEmt(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateEmtMasterCheckbox();
+    this.updateSelectAlls();
+
+  }
+
+  updateEmtMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsEmtMaster.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.EmtMasterChecked = allPermissionsSelected;
+    this.EmtMasterInderminate = this.isEmtmasterIndeterminate();
+  }
+
 
   onCheckboxChangesFormdes(permission: string): void {
     if (this.selectedPermissions.includes(permission)) {
@@ -2597,6 +3307,29 @@ if (selectedSchema) {
     );
     this.generelReportChecked= allPermissionsSelected;
     this.generalReportInderminate = this.isGeneralReportIndeterminate();
+  }
+
+
+  onCheckboxChangesLeaveReport(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateLeaveReportCheckbox();
+    this.updateReport();
+
+  }
+
+  updateLeaveReportCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissiionsLeaveReport.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.LeaveReportChecked= allPermissionsSelected;
+    this.LeaveReportInderminate = this.isLeaveReportIndeterminate();
   }
 
 
@@ -3170,6 +3903,9 @@ issettings(): boolean {
   const expiredMasterInderminate = this.isExpireddocumentsIndeterminate();
   const locationMasterInderminate = this.isloactionmasterIndeterminate();
   const DnMasterInderminate = this.isDnmasterIndeterminate();
+  const CpMasterInderminate = this.isCpmasterIndeterminate();
+  const EmtMasterInderminate = this.isEmtmasterIndeterminate();
+
   const FormdesMasterInderminate = this.isFormdesmasterIndeterminate();
 
 
@@ -3177,17 +3913,19 @@ issettings(): boolean {
 
     // Return true only if some but not all checkboxes are selected
     return branchMasterInderminate || userMasterInderminate || userGroupMasterInderminate || assignMasterInderminate||stateMasterInderminate || documentMasterInderminate || userGroupMasterInderminate || expiredMasterInderminate||locationMasterInderminate||
-    DnMasterInderminate || FormdesMasterInderminate || otherGroupIndeterminate;
+    DnMasterInderminate || CpMasterInderminate || EmtMasterInderminate || FormdesMasterInderminate || otherGroupIndeterminate;
 }
 isreports(): boolean {
   const emportReportInderminate = this.isEmployeeReportIndeterminate();
   const documentReportInderminate = this.isDocumentReportIndeterminate();
   const generalReportInderminate = this.isGeneralReportIndeterminate();
-  
+  const LeaveReportInderminate = this.isLeaveReportIndeterminate();
+
     const otherGroupIndeterminate = false; // Add indeterminate checks for other groups like Dept, Dis, Cat
 
     // Return true only if some but not all checkboxes are selected
-    return emportReportInderminate || documentReportInderminate || generalReportInderminate || otherGroupIndeterminate;
+    return emportReportInderminate || documentReportInderminate || 
+    generalReportInderminate ||  LeaveReportInderminate || otherGroupIndeterminate;
 }
 
 iscalenders(): boolean {
@@ -3421,6 +4159,31 @@ showexpandable(): void {
 
   }
 
+  onUserCpChange(): void {
+    if (this.CpMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsCpMaster.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsCpMaster.map(p => p.id).includes(permission));
+    }
+    this.updateSettingsCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+  onUserEmtChange(): void {
+    if (this.EmtMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsEmtMaster.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsEmtMaster.map(p => p.id).includes(permission));
+    }
+    this.updateSettingsCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
 
   onUserFormdesChange(): void {
     if (this.FormdesMasterChecked) {
@@ -3479,6 +4242,21 @@ showexpandable(): void {
 
 
   }
+
+  onLeaveReportChange(): void {
+    if (this.LeaveReportChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissiionsLeaveReport.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissiionsLeaveReport.map(p => p.id).includes(permission));
+    }
+    this.updateReportCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
+
+
   updateReportCheckbox(): void {
     this.reportchecked = this.isReportManagementMasterChecked();
   }
@@ -3692,6 +4470,9 @@ showexpandable(): void {
       ...this.Grouppermissionsexpirydocuments,
       ...this.GrouppermissionslocationMaster,
       ...this.GrouppermissionsDnMaster,
+      ...this.GrouppermissionsCpMaster,
+      ...this.GrouppermissionsEmtMaster,
+
       ...this.GrouppermissionsFormdesMaster
 
 
@@ -3712,6 +4493,9 @@ showexpandable(): void {
     this.updateexpiryMasterCheckbox();
     this.updatelocMasterCheckbox();
     this.updateDnMasterCheckbox();
+    this.updateCpMasterCheckbox();
+    this.updateEmtMasterCheckbox();
+
     this.updateFormdesMasterCheckbox();
 
     this.updateSettingsCheckbox();
@@ -3727,6 +4511,9 @@ showexpandable(): void {
     this.updateexpiryMasterCheckbox();
     this.updatelocMasterCheckbox();
     this.updateDnMasterCheckbox();
+    this.updateCpMasterCheckbox();
+    this.updateEmtMasterCheckbox();
+
     this.updateFormdesMasterCheckbox();
 
 
@@ -3745,6 +4532,9 @@ showexpandable(): void {
       ...this.Grouppermissionsexpirydocuments,
       ...this.GrouppermissionslocationMaster,
       ...this.GrouppermissionsDnMaster,
+      ...this.GrouppermissionsCpMaster,
+      ...this.GrouppermissionsEmtMaster,
+
       ...this.GrouppermissionsFormdesMaster
 
 
@@ -3792,7 +4582,9 @@ showexpandable(): void {
     const allPermissions = [
       ...this.GrouppermissionsemployeeReport,
       ...this.GrouppermissionsdocumnetReport,
-      ...this.GrouppermissiionsgeneralReport
+      ...this.GrouppermissiionsgeneralReport,
+      ...this.GrouppermissiionsLeaveReport
+
     ].map(permission => permission.id);
   
     if (this.reportchecked) {
@@ -3804,6 +4596,10 @@ showexpandable(): void {
     this.updateEmpReportCheckbox();
     this.updatedocReportCheckbox();
     this.updateGenReportCheckbox();
+    this.updateLeaveReportCheckbox();
+
+
+
     this.updateReportCheckbox();
   }
 // updateReport():void{
@@ -3819,6 +4615,9 @@ updateReport(): void {
   this.updateEmpReportCheckbox();
   this.updatedocReportCheckbox();
   this.updateGenReportCheckbox();
+  this.updateLeaveReportCheckbox();
+
+
   this.updateIndeterminateReports();
 }
 
@@ -3828,7 +4627,9 @@ isReportInderminate(): boolean {
   const hasSelectedPermissions = [
     ...this.GrouppermissionsemployeeReport,
     ...this.GrouppermissionsdocumnetReport,
-    ...this.GrouppermissiionsgeneralReport
+    ...this.GrouppermissiionsgeneralReport,
+    ...this.GrouppermissiionsLeaveReport
+
   ].some(permission => this.selectedPermissions.includes(permission.id));
 
   return hasSelectedPermissions && !this.isReportManagementMasterChecked();

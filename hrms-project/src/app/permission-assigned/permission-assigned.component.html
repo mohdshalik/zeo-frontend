@@ -1,7 +1,7 @@
 <div class="container">
     <div class="comapny_section">
         <div class="com_list ">
-            <div class="cpm-sec">
+            <div class="cpm-sec" *ngIf="hasViewPermission">
 
                 <h2>Assigned Permission For User</h2>
                 <hr>
@@ -39,7 +39,7 @@
 
                     </div>
 
-                    <div class="row">
+                    <div class="row" *ngIf="hasAddPermission">
                         <div class="col-md-10">
             
                         </div>

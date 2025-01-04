@@ -1,5 +1,5 @@
 <div class="container" >
-    <div class="comapny_section">
+    <div class="comapny_section" *ngIf="hasViewPermission">
         <div class="header_section">
 
             <div class="row">
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-full btn-info pull-right" (click)="openEditPopuss(employeesec.document_id)">Update</button> 
+                        <button type="button" class="btn btn-full btn-info pull-right" (click)="openEditPopuss(employeesec.document_id)" *ngIf="hasEditPermission">Update</button> 
 
                     </div>
                 </div>

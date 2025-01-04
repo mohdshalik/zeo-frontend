@@ -119,44 +119,7 @@ if (this.userId !== null) {
 
         const selectedSchema = this.authService.getSelectedSchema();
         if (selectedSchema) {
-          // try {
-          //   const permissionsData: any = await this.DesignationService.getDesignationsPermission(selectedSchema).toPromise();
-          //   console.log('Permissions data:', permissionsData);
-  
-          //   if (permissionsData && permissionsData.length > 0 && permissionsData[0].groups) {
-          //     // Check if user is superuser according to the permissions API
-          //     isSuperuser = permissionsData[0].is_superuser || false;
-              
-          //     if (isSuperuser) {
-          //       console.log('User is superuser according to permissions API');
-          //       // Grant all permissions
-          //       this.hasViewPermission = true;
-          //       this.hasAddPermission = true;
-          //       this.hasDeletePermission = true;
-          //       this.hasEditPermission = true;
-          //     } else {
-          //       const groupPermissions = permissionsData[0].groups.flatMap((group: any) => group.permissions);
-          //       console.log('Group Permissions:', groupPermissions);
-  
-          //       this.hasViewPermission = this.checkGroupPermission('view_ctgry_master', groupPermissions);
-          //       console.log('Has view permission:', this.hasViewPermission);
-  
-          //       this.hasAddPermission = this.checkGroupPermission('add_ctgry_master', groupPermissions);
-          //       console.log('Has add permission:', this.hasAddPermission);
-  
-          //       this.hasDeletePermission = this.checkGroupPermission('delete_ctgry_master', groupPermissions);
-          //       console.log('Has delete permission:', this.hasDeletePermission);
-  
-          //       this.hasEditPermission = this.checkGroupPermission('change_ctgry_master', groupPermissions);
-          //       console.log('Has edit permission:', this.hasEditPermission);
-          //     }
-          //   } else {
-          //     console.error('No groups found in data or data format is incorrect.', permissionsData);
-          //   }
-  
-          //   // Fetching designations after checking permissions
-          //   this.fetchDesignations(selectedSchema);
-          // } 
+         
           
           
           try {
@@ -230,21 +193,21 @@ if (this.userId !== null) {
     }
 
    
-    checkViewPermission(permissions: any[]): boolean {
-      const requiredPermission = 'view_ctgry_master' ||'add_ctgry_master' ||'delete_ctgry_master' ||'change_ctgry_master';
+    // checkViewPermission(permissions: any[]): boolean {
+    //   const requiredPermission = 'view_ctgry_master' ||'add_ctgry_master' ||'delete_ctgry_master' ||'change_ctgry_master';
       
     
-      // Check user permissions
-      if (permissions.some(permission => permission.codename === requiredPermission)) {
-        return true;
-      }
+    //   // Check user permissions
+    //   if (permissions.some(permission => permission.codename === requiredPermission)) {
+    //     return true;
+    //   }
     
-      // Check group permissions (if applicable)
-      // Replace `// TODO: Implement group permission check`
-      // with your logic to retrieve and check group permissions
-      // (consider using a separate service or approach)
-      return false; // Replace with actual group permission check
-    }
+    //   // Check group permissions (if applicable)
+    //   // Replace `// TODO: Implement group permission check`
+    //   // with your logic to retrieve and check group permissions
+    //   // (consider using a separate service or approach)
+    //   return false; // Replace with actual group permission check
+    // }
 
     
 

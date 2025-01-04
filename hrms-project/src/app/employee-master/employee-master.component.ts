@@ -193,76 +193,7 @@ if (this.userId !== null) {
 
         const selectedSchema = this.authService.getSelectedSchema();
         if (selectedSchema) {
-          // try {
-          //   const userData: any = await this.EmployeeService.getDesignationsPermission(selectedSchema).toPromise();
-          //   console.log('permissions:', userData);
         
-          //   if (userData && userData.length > 0 && userData[0].groups) {
-          //     const groupPermissions = userData[0].groups.flatMap((group: any) => group.permissions);
-          //     console.log('Group Permissions:', groupPermissions);
-        
-          //     this.hasViewPermission = this.checkGroupPermission('view_emp_master', groupPermissions);
-          //     console.log('Has view permission:', this.hasViewPermission);
-        
-          //     this.hasAddPermission = this.checkGroupPermission('add_emp_master', groupPermissions);
-          //     console.log('Has add permission:', this.hasAddPermission);
-        
-          //     this.hasDeletePermission = this.checkGroupPermission('delete_emp_master', groupPermissions);
-          //     console.log('Has delete permission:', this.hasDeletePermission);
-        
-          //     this.hasEditPermission = this.checkGroupPermission('change_emp_master', groupPermissions);
-          //     console.log('Has edit permission:', this.hasEditPermission);
-          //   } else {
-          //     console.error('No groups found in data or data format is incorrect.', userData);
-          //   }
-        
-          //   // Fetching designations after checking permissions
-          //   this.fetchDesignations(selectedSchema);
-          // } 
-          
-          
-
-          
-          // try {
-          //   const permissionsData: any = await this.EmployeeService.getDesignationsPermission(selectedSchema).toPromise();
-          //   console.log('Permissions data:', permissionsData);
-  
-          //   if (permissionsData && permissionsData.length > 0 && permissionsData[0].groups) {
-          //     // Check if user is superuser according to the permissions API
-          //     isSuperuser = permissionsData[0].is_superuser || false;
-              
-          //     if (isSuperuser) {
-          //       console.log('User is superuser according to permissions API');
-          //       // Grant all permissions
-          //       this.hasViewPermission = true;
-          //       this.hasAddPermission = true;
-          //       this.hasDeletePermission = true;
-          //       this.hasEditPermission = true;
-            
-          //     } else {
-          //       const groupPermissions = userData[0].groups.flatMap((group: any) => group.permissions);
-          //     console.log('Group Permissions:', groupPermissions);
-        
-          //      this.hasViewPermission = this.checkGroupPermission('view_emp_master', groupPermissions);
-          //      console.log('Has view permission:', this.hasViewPermission);
-        
-          //     this.hasAddPermission = this.checkGroupPermission('add_emp_master', groupPermissions);
-          //     console.log('Has add permission:', this.hasAddPermission);
-        
-          //    this.hasDeletePermission = this.checkGroupPermission('delete_emp_master', groupPermissions);
-          //     console.log('Has delete permission:', this.hasDeletePermission);
-        
-          //    this.hasEditPermission = this.checkGroupPermission('change_emp_master', groupPermissions);
-          //     console.log('Has edit permission:', this.hasEditPermission);
-          //     }
-          //   } else {
-          //     console.error('No groups found in data or data format is incorrect.', permissionsData);
-          //   }
-  
-          //   // Fetching designations after checking permissions
-          //   this.fetchDesignations(selectedSchema);
-          // }
-          
 
           try {
             const permissionsData: any = await this.EmployeeService.getDesignationsPermission(selectedSchema).toPromise();

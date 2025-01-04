@@ -7,11 +7,11 @@
       <div class="wrapper">
         <div class="sidebar">
             <ul>
-                <li routerLink="/main-sidebar/leave-options/leave-approvals"><a ><mat-icon>peoples</mat-icon> Leave Approvals</a></li>
-                <li routerLink="/main-sidebar/leave-options/leave-type"><a><mat-icon>peoples</mat-icon> Leave Type</a></li>
-                <li  routerLink="/main-sidebar/leave-options/leave-master" *ngIf="hasViewPermissionEmp"><a ><mat-icon>peoples</mat-icon> Leave Master</a></li>
+                <li routerLink="/main-sidebar/leave-options/leave-approvals" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Leave Approvals</a></li>
+                <li routerLink="/main-sidebar/leave-options/leave-type" *ngIf="hasViewPermissiondesg"><a><mat-icon>peoples</mat-icon> Leave Type</a></li>
+                <li  routerLink="/main-sidebar/leave-options/leave-master" *ngIf="hasViewPermissiondept"><a ><mat-icon>peoples</mat-icon> Leave Master</a></li>
                 <li  routerLink="/main-sidebar/leave-options/leave-request" *ngIf="hasViewPermissionEmp"><a ><mat-icon>peoples</mat-icon> Leave Request</a></li>
-                <li  routerLink="/main-sidebar/leave-options/compensatory-leave" *ngIf="hasViewPermissionEmp"><a ><mat-icon>peoples</mat-icon> Compensatory Leave</a></li>
+                <li  routerLink="/main-sidebar/leave-options/compensatory-leave" *ngIf="hasViewPermissioncmpL"><a ><mat-icon>peoples</mat-icon> Compensatory Leave</a></li>
           
 
                 <mat-nav-list>
@@ -33,11 +33,11 @@
                             <span class="con_clr"> Leave Arrangement</span></a>
                         </mat-expansion-panel-header>
           
-                        <div class="mat-expansion-panel-body "  routerLink="/main-sidebar/leave-options/leave-approval-level">
+                        <div class="mat-expansion-panel-body " *ngIf="hasViewPermissionLeaveAprvlvl"  routerLink="/main-sidebar/leave-options/leave-approval-level">
                           <a class="set_siding" mat-list-item><span class="side_option">Leave Approval Level</span> </a>
                         </div>
           
-                        <div class="mat-expansion-panel-body "  routerLink="/main-sidebar/leave-options/leave-template">
+                        <div class="mat-expansion-panel-body "  *ngIf="hasViewPermissionLeavetemp" routerLink="/main-sidebar/leave-options/leave-template">
                           <a class="set_siding" mat-list-item><span class="side_option">Leave Template</span> </a>
                         </div>
                       </mat-expansion-panel>

@@ -1,7 +1,6 @@
 <div class="container">
-    <div class="comapny_section">
-        <div class="com_list ">
-            <div class="cpm-sec">
+    <div class="comapny_section" *ngIf="hasViewPermission">
+        <div class="com_list " >
 
                 <h2>Create Leave Type</h2>
                 <hr>
@@ -84,7 +83,7 @@
                       </div>
                     </div>
                   
-                    <div class="row">
+                    <div class="row" *ngIf="hasAddPermission">
                       <div class="col-md-9"></div>
                       <div class="col-md-3">
                         <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Type</button>
@@ -104,5 +103,5 @@
 
 
 
-    </div>
+
 </div>

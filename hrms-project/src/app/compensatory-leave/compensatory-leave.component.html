@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="comapny_section">
+    <div class="comapny_section" *ngIf="hasViewPermission">
 
         <div class="header_section">
 
@@ -85,6 +85,13 @@
                       </div>
 
                             </div>
+                            <div class="row" *ngIf="hasAddPermission">
+                              <div class="col-md-9"></div>
+                              <div class="col-md-3">
+                                  <button type="submit" class="btn btn-success btn-full mt-4">Save</button>
+                  
+                              </div>
+                          </div>
                       
                     </form>
             </div>
@@ -129,6 +136,14 @@
                       </div>
 
                             </div>
+                            
+                            <div class="row" *ngIf="hasAddPermission">
+                              <div class="col-md-9"></div>
+                              <div class="col-md-3">
+                                  <button type="submit" class="btn btn-success btn-full mt-4">Save</button>
+                  
+                              </div>
+                          </div>
                       
                     </form>
                 </div>

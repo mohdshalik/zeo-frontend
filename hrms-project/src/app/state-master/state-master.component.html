@@ -1,6 +1,6 @@
 <div class="container" >
     <div class="comapny_section">
-        <div class="com_list ">
+        <div class="com_list " *ngIf="hasAddPermission">
     <div class="cpm-sec">
 
         <h2>Create State</h2><hr>
@@ -65,7 +65,7 @@
         </div>
 
 
-        <table width="100%">     
+        <table width="100%" *ngIf="hasViewPermission">     
       
           <thead>
               <tr>
