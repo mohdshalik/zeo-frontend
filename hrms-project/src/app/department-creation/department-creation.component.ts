@@ -157,19 +157,22 @@ export class DepartmentCreationComponent {
       .subscribe((response) => {
         // Handle successful upload
         console.log('bulkupload upload successful', response);
+        alert('bulkupload upload successful');
+        window.location.reload();
+
   
-        const dialogRef = this.dialog.open(SuccesModalComponent, {
-          width: '300px', // Adjust width as needed
-          data: { message: 'bulkupload Department successfully!' } // Pass any data you want to display in the modal
-        });
+        // const dialogRef = this.dialog.open(SuccesModalComponent, {
+        //   width: '300px', // Adjust width as needed
+        //   data: { message: 'bulkupload Department successfully!' } // Pass any data you want to display in the modal
+        // });
     
-        dialogRef.afterClosed().subscribe(() => {
-          console.log('The success modal was closed');
-          // Handle any actions after the modal is closed, if needed
-        });
+        // dialogRef.afterClosed().subscribe(() => {
+        //   console.log('The success modal was closed');
+        //   // Handle any actions after the modal is closed, if needed
+        // });
       }, (error) => {
         // Handle upload error
-        console.error('Document upload failed', error);
+        console.error('Departments upload failed', error);
         alert('enter all fields correctly');
       });
   

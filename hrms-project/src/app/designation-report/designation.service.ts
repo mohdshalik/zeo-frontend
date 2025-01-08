@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DesignationService {
-    private apiUrl: string = '';
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
   constructor(private http: HttpClient) {
     this.initializeApiUrl();
    }
@@ -21,7 +22,7 @@ export class DesignationService {
       console.error('No schema selected.');
       throw new Error('No schema selected.');
     }
-    this.apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Designation/designation_report`;
+    this.apiUrl = `${this.apiUrl}/organisation/api/Designation/designation_report/?schema=${selectedSchema}`;
   }
 
   getStandardReport(): Observable<any> {

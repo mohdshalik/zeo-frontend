@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentService {
-  private baseUrl = 'http://127.0.0.1:8000/employee/api/doc-report/';
-  private apiUrl: string = '';
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+  private baseUrl = `${this.apiUrl}/employee/api/doc-report/`;
 
   constructor(private http: HttpClient) { 
     this.initializeApiUrl();
@@ -17,13 +18,13 @@ export class DocumentService {
   }
   // Fetch available fields and selected fields
   fetchAvailableAndSelectedFields(reportId: number): Observable<any> {
-    const url = `${this.baseUrl}select_filter_fields/?report_id=${reportId}`;
+    const url = `${this.apiUrl}/employee/api/doc-report/select_filter_fields/?report_id=${reportId}`;
     return this.http.get<any>(url);
   }
 
   // Generate employee filter table based on selected fields and report ID
   generateEmployeeFilterTable(reportId: number, selectedFields: string[]): Observable<any> {
-    const url = `${this.baseUrl}generate_doc_filter_table/`;
+    const url = `${this.apiUrl}/employee/api/doc-report/generate_doc_filter_table/`;
     const body = {
       report_id: reportId,
       selected_fields: selectedFields
@@ -33,7 +34,7 @@ export class DocumentService {
 
   // Filter existing report based on selected fields and report ID
   filterExistingReport(reportId: number, filterCriteria: any): Observable<any> {
-    const url = `${this.baseUrl}filter_existing_report/`;
+    const url = `${this.apiUrl}/employee/api/doc-report/filter_existing_report/`;
     const formData = new FormData();
     formData.append('report_id', reportId.toString());
     for (const key in filterCriteria) {
@@ -46,7 +47,7 @@ export class DocumentService {
 
   // Generate Excel view for filtered report
   generateExcelView(reportId: number): Observable<Blob> {
-    const url = `${this.baseUrl}generate_excel_view/?report_id=${reportId}`;
+    const url = `${this.apiUrl}/employee/api/doc-report/generate_excel_view/?report_id=${reportId}`;
     return this.http.get(url, { responseType: 'blob' });
   }
   // getStandardReport(): Observable<any> {
@@ -65,7 +66,7 @@ export class DocumentService {
       console.error('No schema selected.');
       throw new Error('No schema selected.');
     }
-    this.apiUrl = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/std_report/`;
+    this.apiUrl = `${this.apiUrl}/employee/api/doc-report/std_report/?schema=${selectedSchema}`;
   }
 
   getStandardReport(): Observable<any> {

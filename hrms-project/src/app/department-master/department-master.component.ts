@@ -10,6 +10,7 @@ import { DepartmentServiceService } from './department-service.service';
 import { DepartmentCreationComponent } from '../department-creation/department-creation.component';
 import { DepartmentEditComponent } from '../department-edit/department-edit.component';
 import { SessionService } from '../login/session.service';
+import { withModule } from '@angular/core/testing';
 
 @Component({
   selector: 'app-department-master',
@@ -290,7 +291,8 @@ if (this.userId !== null) {
             console.log('Department deleted successfully:', DeptId);
             // Remove the deleted employee from the local list
             this.Departments = this.Departments.filter(employee => employee.id !== DeptId);
-          },
+            window.location.reload();      
+              },
           (error) => {
             console.error('Error deleting Department:', error);
           }

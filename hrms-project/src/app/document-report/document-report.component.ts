@@ -32,6 +32,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReportGenerateService } from '../report-generate/report-generate.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { SessionService } from '../login/session.service';
+import { environment } from '../../environments/environment';
 
 
 
@@ -98,6 +99,9 @@ public datePipe: DatePipe;
   @ViewChild('filteredReportModal') filteredReportModal!: ElementRef;
 
   public baseUrls = 'http://127.0.0.1:8000/employee/api/doc-report'; // Define the base URL property
+  
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
 
   readonly panelOpenState = signal(false);
   selectedReportId: number | null = null; // Track selected report ID
@@ -635,7 +639,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
     }
   
     // Replace with your actual API to fetch saved reports
-    this.http.get<any[]>(`http://${selectedSchema}.localhost:8000/employee/api/doc-report/`).subscribe(
+    this.http.get<any[]>(`${this.apiUrl}/employee/api/doc-report/?schema=${selectedSchema}`).subscribe(
       reports => {
         this.savedReports = reports;
       },
@@ -821,7 +825,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       console.error('No schema selected.');
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/`;
+    const url = `${this.apiUrl}/employee/api/doc-report/?schema=${selectedSchema}`;
     this.http.get<any[]>(url).subscribe(
       (reports: any[]) => {
         this.savedReports = reports;
@@ -849,7 +853,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       console.error('No schema selected.');
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/select_document_fields/?report_id=${reportId}`;
+    const url = `${this.apiUrl}/employee/api/doc-report/select_document_fields/?report_id=${reportId}&?schema=${selectedSchema}`;
     this.http.get<any>(url).subscribe(
       response => {
         // Assuming response.available_fields is an object and we want to convert it to an array
@@ -1017,7 +1021,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       console.error('No schema selected.');
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/generate_doc_filter_table/`;
+    const url = `${this.apiUrl}/employee/api/doc-report/generate_doc_filter_table/?schema=${selectedSchema}`;
     const formData = new FormData();
     formData.append('report_id', this.selectedReportId.toString());
   
@@ -1645,7 +1649,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
     const startDateFormatted = this.datePipe.transform(this.dateRange.start, 'yyyy/MM/dd');
     const endDateFormatted = this.datePipe.transform(this.dateRange.end, 'yyyy/MM/dd');
   
-    const filterByDateUrl = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/filter_by_date/`;   
+    const filterByDateUrl = `${this.apiUrl}/employee/api/doc-report/filter_by_date/?schema=${selectedSchema}`;   
      const filterByDateFormData = new FormData();
     filterByDateFormData.append('report_id', selectedReportId.toString());
     filterByDateFormData.append('start_date', startDateFormatted!);
@@ -1676,7 +1680,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
           console.log('Unique Values:', uniqueValues);
   
           // Prepare FormData for backend request
-   const generateReportUrl = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/generate_doc_filter_table/`;          
+   const generateReportUrl = `${this.apiUrl}/employee/api/doc-report/generate_doc_filter_table/?schema=${selectedSchema}`;          
    const generateReportFormData = new FormData();
           generateReportFormData.append('report_id', selectedReportId.toString());
           selectedFieldKeys.forEach(key => generateReportFormData.append('selected_fields', key));
@@ -1925,7 +1929,7 @@ openReportDialog(reportId: number | null, uniqueValues: any): void {
       return;
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/generate_document_report/`;
+    const url = `${this.apiUrl}/employee/api/doc-report/generate_document_report/?schema=${selectedSchema}`;
     const formData = new FormData();
     formData.append('file_name', this.fileName);
   
@@ -2044,7 +2048,7 @@ openReportDialog(reportId: number | null, uniqueValues: any): void {
       return;
     }
 
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/doc-report`;
+    const url = `${this.apiUrl}/employee/api/doc-report/?schema=${selectedSchema}`;
     this.http.get<Report[]>(url).subscribe(
       (reports: Report[]) => {
         this.savedReports = reports;

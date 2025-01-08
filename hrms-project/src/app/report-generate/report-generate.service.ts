@@ -53,7 +53,7 @@ export class ReportGenerateService {
     );
   }
     getReportDetails(ReportId:number): Observable<any> {
-      const url = `${this.baseUrl}/emp-report/${ReportId}/`;
+      const url = `${this.apiUrl}/employee/api/emp-report/${ReportId}/`;
       return this.http.get(url);
    
   }
@@ -65,7 +65,7 @@ export class ReportGenerateService {
       console.error('No schema selected.');
       return throwError('No schema selected.');
     }
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/select_document_fields/`;
+    const url = `${this.apiUrl}/employee/api/doc-report/select_document_fields/?schema=${selectedSchema}`;
 
     const token = localStorage.getItem('authToken'); // Use appropriate token logic
     const headers = new HttpHeaders({
@@ -90,7 +90,7 @@ export class ReportGenerateService {
       console.error('No schema selected.');
       return throwError('No schema selected.');
     }
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/report-general-request/select_generalreport_fields/`;
+    const url = `${this.apiUrl}/employee/api/report-general-request/select_generalreport_fields/?schema=${selectedSchema}`;
 
     const token = localStorage.getItem('authToken'); // Use appropriate token logic
     const headers = new HttpHeaders({
@@ -114,7 +114,7 @@ export class ReportGenerateService {
       console.error('No schema selected.');
       return throwError('No schema selected.');
     }
-    const url = `http://${selectedSchema}.localhost:8000/calendars/api/leave-report/select_leavereport_fields/`;
+    const url = `${this.apiUrl}/calendars/api/leave-report/select_leavereport_fields/?schema=${selectedSchema}`;
 
     const token = localStorage.getItem('authToken'); // Use appropriate token logic
     const headers = new HttpHeaders({
@@ -152,7 +152,7 @@ export class ReportGenerateService {
       console.error('No schema selected.');
       return throwError('No schema selected.');
     }
-    const url = `http://${selectedSchema}.localhost:8000/calendars/api/leave-report/select_leavereport_fields/`;
+    const url = `${this.apiUrl}/calendars/api/leave-report/select_leavereport_fields/?schema=${selectedSchema}`;
 
     const token = localStorage.getItem('authToken'); // Use appropriate token logic
     const headers = new HttpHeaders({

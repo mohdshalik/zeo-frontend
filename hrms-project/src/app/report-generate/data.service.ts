@@ -3,6 +3,7 @@ import { Configuration } from './configuration.interface';
 import { Observable, catchError, map, pipe, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { environment } from '../../environments/environment';
 
 
 export interface Field {
@@ -18,8 +19,10 @@ interface FieldResponse {
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'http://127.0.0.1:8000/employee/api/emp-report/select_filter_fields/'; 
+  // private apiUrl = 'http://127.0.0.1:8000/employee/api/emp-report/select_filter_fields/'; 
   baseUrl = 'http://127.0.0.1:8000/employee/api/emp-report/';
+    private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+  
 
   private savedConfigurations: Configuration[] = [
     { id: 1, name: 'Configuration 1', filters: ['filter1'], columns: ['column1', 'column2'] },
@@ -135,7 +138,7 @@ export class DataService {
       console.error('No schema selected.');
       throw new Error('No schema selected.');
     }
-    this.apiUrl = `http://${selectedSchema}.localhost:8000/calendars/api/leave-report/std_report/`;
+    this.apiUrl = `${this.apiUrl}/calendars/api/leave-report/std_report/?schema=${selectedSchema}`;
   }
 
   getStandardReportLeave(): Observable<any> {

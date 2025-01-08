@@ -14,6 +14,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
 import { SessionService } from '../login/session.service';
 import { SchemaCreationComponent } from '../schema-creation/schema-creation.component';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-schema-selection',
@@ -150,7 +151,7 @@ export class SchemaSelectionComponent {
          // Remove schema-related subdomain
     const currentUrl = window.location.href;
     const baseUrl = new URL(currentUrl);
-    baseUrl.hostname = 'localhost';
+    baseUrl.hostname = environment.apiBaseUrl
 
        // Redirect to the login page
        this.router.navigate(['/login']).then(() => {

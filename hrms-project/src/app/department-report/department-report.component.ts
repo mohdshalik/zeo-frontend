@@ -7,12 +7,16 @@ import { DesignationService } from '../designation-master/designation.service';
 import { SessionService } from '../login/session.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { EmployeeService } from '../employee-master/employee.service';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-department-report',
   templateUrl: './department-report.component.html',
   styleUrl: './department-report.component.css'
 })
 export class DepartmentReportComponent  implements OnInit  {
+
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
   departmentData: any[] = []; // Initialize as an empty array
   displayedColumns: string[] = ['Department Name', 'Department Code', 'Description', 'Active'];

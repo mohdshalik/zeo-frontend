@@ -91,6 +91,7 @@ export class EmployeeFamilyComponent {
       (response) => {
         console.log('Registration successful', response);
         alert('Employee Family added!');
+        window.location.reload();
         // Optionally close the dialog or reset the form
       },
       (error) => {

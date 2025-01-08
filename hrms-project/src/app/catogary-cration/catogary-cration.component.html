@@ -7,18 +7,18 @@
         <div class="row">
             <div class="col-md-6" >
                
-      <label>Catogary Tittle</label>
-     <input type="text"  class="form-control" required  [(ngModel)]="ctgry_title"  placeholder="Enter Catogary Name"
+      <label>Category Tittle</label>
+     <input type="text"  class="form-control" required  [(ngModel)]="ctgry_title"  placeholder="Enter Category Name"
       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !ctgry_title}">
      
-     <div *ngIf="registerButtonClicked && !ctgry_title" class="error-message">Department Name is required.</div>
+     <div *ngIf="registerButtonClicked && !ctgry_title" class="error-message">Category Name is required.</div>
 </div>
 
 
 <div class="col-md-6" >
                
-    <label>Catogary code</label>
-   <input type="text"  class="form-control" required  [(ngModel)]="ctgry_code"  placeholder="Enter Catogary code"
+    <label>Category code</label>
+   <input type="text"  class="form-control" required  [(ngModel)]="ctgry_code"  placeholder="Enter Category code"
     [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !ctgry_code}">
    
    <div *ngIf="registerButtonClicked && !ctgry_code" class="error-message">category code is required.</div>

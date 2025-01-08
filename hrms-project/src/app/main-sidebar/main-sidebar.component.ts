@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, NavigationEnd  } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http'; // Import HttpErrorResponse
 import { EmployeeService } from '../employee-master/employee.service';
 import { SessionService } from '../login/session.service';
+import { environment } from '../../environments/environment';
 
 // import { DivControlService } from '../div-control.service';
 // import { AuthService } from '../auth/auth.service';
@@ -177,7 +178,7 @@ export class MainSidebarComponent {
        // Remove schema-related subdomain
     const currentUrl = window.location.href;
     const baseUrl = new URL(currentUrl);
-    baseUrl.hostname = 'localhost';
+    baseUrl.hostname = environment.apiBaseUrl
 
        // Redirect to the login page
        this.router.navigate(['/login']).then(() => {

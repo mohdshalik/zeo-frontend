@@ -201,10 +201,12 @@ export class UserMasterService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
    
-    const apiUrl = `http://${selectedSchema}.localhost:8000/organisation/api/Group/${departmentId}/`;
+    const apiUrl = `${this.apiUrl}/organisation/api/Group/${departmentId}/?schema=${selectedSchema}`;
    
     return this.http.get(apiUrl);
   }
+
+  // const apiUrl = `${this.apiUrl}/organisation/api/perm/?schema=${selectedSchema}`;
 
 
   openEditPopuss(departmentId: number): Observable<any> {

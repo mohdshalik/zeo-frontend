@@ -25,6 +25,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { SessionService } from '../login/session.service';
 import { LeaveDialogComponent } from './leave-dialog/leave-dialog.component';
 import { DataService } from '../report-generate/data.service';
+import { environment } from '../../environments/environment';
 
 
 interface ColumnDefinition {
@@ -108,8 +109,10 @@ export class LeaveReportComponent {
 
   @ViewChild('filteredReportModal') filteredReportModal!: ElementRef;
 
-  public baseUrls = 'http://127.0.0.1:8000/leave-report'; // Define the base URL property
 
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
+  public baseUrls = `${this.apiUrl}/leave-report`; // Define the base URL property
 
   readonly panelOpenState = signal(false);
   selectedReportId: number | null = null; // Track selected report ID
@@ -680,7 +683,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
   
     // const url = `http://${selectedSchema}.localhost:8000/employe
     // Replace with your actual API to fetch saved reports
-    this.http.get<any[]>(`http://${selectedSchema}.localhost:8000/calendars/api/leave-report/`).subscribe(
+    this.http.get<any[]>(`${this.apiUrl}/calendars/api/leave-report/?schema=${selectedSchema}`).subscribe(
       reports => {
         this.savedReports = reports;
       },
@@ -866,7 +869,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       console.error('No schema selected.');
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/`;
+    const url = `${this.apiUrl}/employee/api/emp-report/?schema=${selectedSchema}`;
     this.http.get<any[]>(url).subscribe(
       (reports: any[]) => {
         this.savedReports = reports;
@@ -903,7 +906,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       return;
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/select_filter_fields/?report_id=${reportId}`;
+    const url = `${this.apiUrl}/employee/api/emp-report/select_filter_fields/?report_id=${reportId}&?schema=${selectedSchema}`;
   
     this.http.get<any>(url).subscribe(
       (response: { available_fields: { [key: string]: { value: string, name: string } }, selected_fields: string[] }) => {
@@ -1071,7 +1074,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       console.error('No schema selected.');
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/generate_employee_filter_table/`;
+    const url = `${this.apiUrl}/employee/api/emp-report/generate_employee_filter_table/?schema=${selectedSchema}`;
     const formData = new FormData();
     formData.append('report_id', this.selectedReportId.toString());
   
@@ -1148,7 +1151,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
     }
   
     // const url = `http://${selectedSchema}.localhost:8000/employee/api/emp-report/`;
-    const url = `http://${selectedSchema}.localhost:8000/calendars/api/leave-report/generate_filter_table/`;
+    const url = `${this.apiUrl}/calendars/api/leave-report/generate_filter_table/?schema=${selectedSchema}`;
     const formData = new FormData();
     formData.append('report_id', this.selectedReportId.toString());
   
@@ -1298,7 +1301,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       return;
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/calendars/api/leave-report/generate_leave_report/`;
+    const url = `${this.apiUrl}/calendars/api/leave-report/generate_leave_report/?schema=${selectedSchema}`;
     const formData = new FormData();
     formData.append('file_name', this.fileName);
   
@@ -1410,7 +1413,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       return;
     }
 
-    const url = `http://${selectedSchema}.localhost:8000/calendars/api/leave-report/`;
+    const url = `${this.apiUrl}/calendars/api/leave-report/?schema=${selectedSchema}`;
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${authToken}`

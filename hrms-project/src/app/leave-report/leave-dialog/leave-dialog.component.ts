@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { ApiService } from '../../report-generate/api.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { environment } from '../../../environments/environment';
 
 interface DocumentItem {
   created_at_date: string; // Adjust the type if it's not a string
@@ -21,6 +22,9 @@ interface DocumentItem {
   styleUrl: './leave-dialog.component.css'
 })
 export class LeaveDialogComponent implements OnInit, AfterViewInit  {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
   
 // export class ReportDialogComponent implements AfterViewInit {
  
@@ -345,7 +349,7 @@ display_names: { [key: string]: string } = {
        console.error('No schema selected.');
      }
    
-     const url = `http://${selectedSchema}.localhost:8000/calendars/api/leave-report/general_filter_report/`;
+     const url = `${this.apiUrl}/calendars/api/leave-report/general_filter_report/?schema=${selectedSchema}`;
      const formData = new FormData();
      formData.append('report_id', reportId.toString());
  

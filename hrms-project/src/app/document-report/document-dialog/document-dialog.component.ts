@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { ApiService } from '../../report-generate/api.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { environment } from '../../../environments/environment';
 
 interface DocumentItem {
   emp_doc_expiry_date: string; // Adjust the type if it's not a string
@@ -23,6 +24,9 @@ interface DocumentItem {
 
 
 export class DocumentDialogComponent implements OnInit, AfterViewInit  {
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
   // export class ReportDialogComponent implements AfterViewInit {
 
   // dataSource = new MatTableDataSource<any>(); // Initialize data source for table
@@ -453,7 +457,7 @@ groupData(): void {
       return;
     }
   
-    const url = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/filter_document_report/`;
+    const url = `${this.apiUrl}/employee/api/doc-report/filter_document_report/?schema=${selectedSchema}`;
     const formData = new FormData();
     formData.append('report_id', reportId.toString());
   
@@ -490,7 +494,7 @@ groupData(): void {
               commonDataPayload.append('report_id', reportId.toString());
               commonDates.forEach(date => commonDataPayload.append('emp_doc_expiry_date', date));
   
-              const commonDataUrl = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/filter_document_report/`;
+              const commonDataUrl = `${this.apiUrl}/employee/api/doc-report/filter_document_report/?schema=${selectedSchema}`;
   
               // this.http.post<any>(commonDataUrl, commonDataPayload).subscribe(
               //   commonResponse => {
@@ -648,7 +652,7 @@ groupData(): void {
     const selectedSchema = 'yourSchema'; // Replace with actual value or logic to get schema
   
     // Construct the URL
-    const commonDataUrl = `http://${selectedSchema}.localhost:8000/employee/api/doc-report/filter_document_report/`;
+    const commonDataUrl = `${this.apiUrl}/employee/api/doc-report/filter_document_report/?schema=${selectedSchema}`;
   
     // Create FormData object and append necessary fields
     const commonDataPayload = new FormData();

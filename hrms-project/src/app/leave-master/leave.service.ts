@@ -189,11 +189,19 @@ export class LeaveService {
   }
   
 
-  getApprovalslistLeave(selectedSchema: string, userId: number): Observable<any> {
-    const apiUrl = `${this.apiUrl}/users/api/user/${userId}/lvapprovals/?schema=${selectedSchema}`;
+//   getApprovalslistLeave(selectedSchema: string, userId: number): Observable<any> {
+//     const apiUrl = `${this.apiUrl}/users/api/user/${userId}/lvapprovals/?schema=${selectedSchema}`;
 
-    // Fetch approvals for the user from the API
-    return this.http.get(apiUrl);
+//     // Fetch approvals for the user from the API
+//     return this.http.get(apiUrl);
+// }
+
+getApprovalslistLeave(selectedSchema: string, userId: number): Observable<any> {
+  const apiUrl = `${this.apiUrl}/calendars/api/leave-approvals/?schema=${selectedSchema}`;
+
+  // Fetch approvals for the user from the API
+  
+  return this.http.get(apiUrl);
 }
 
 

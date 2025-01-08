@@ -509,276 +509,367 @@ synccat(selectedValue: string): void {
 }
 
 
+uploadEmployeeDocument(): void {
+  this.registerButtonClicked = true;
 
+  // List of required fields for validation
+  const requiredFields = [
+      { field: this.emp_code, fieldName: 'Employee Code' },
+      { field: this.emp_date_of_birth, fieldName: 'Date of Birth' },
+      { field: this.emp_branch_id, fieldName: 'Branch' },
+      { field: this.emp_first_name, fieldName: this.firstNameFieldName, condition: this.isFirstNameMandatory },
+      { field: this.emp_last_name, fieldName: this.lastNameFieldName, condition: this.isLastNameMandatory },
+      { field: this.emp_gender, fieldName: this.genderFieldName, condition: this.isGenderMandatory },
+      { field: this.emp_personal_email, fieldName: this.emailFieldName, condition: this.isEmailMandatory },
+      { field: this.emp_mobile_number_1, fieldName: this.cmpnoFieldName, condition: this.isCmpnoMandatory },
+      { field: this.emp_mobile_number_2, fieldName: this.pernoFieldName, condition: this.isPernoMandatory },
+      { field: this.emp_present_address, fieldName: this.preaddressFieldName, condition: this.isPresaddMandatory },
+      { field: this.emp_city, fieldName: this.cityFieldName, condition: this.isCityMandatory },
+      { field: this.emp_country_id, fieldName: this.cntryFieldName, condition: this.isLCountryMandatory },
+      { field: this.emp_dept_id, fieldName: this.deptFieldName, condition: this.isLDepartmentMandatory },
+      { field: this.emp_joined_date, fieldName: this.hiredFieldName, condition: this.isHiringMandatory },
+  ];
 
-  uploadEmployeeDocument(): void {
-    this.registerButtonClicked = true;
-    // const companyData = {
-    //   emp_languages:this.emp_languages,
-
-    // }
-
-        // Basic validation for username and password fields
-  if (!this.emp_code || !this.emp_date_of_birth ||!this.emp_branch_id ) {
-    if (!this.emp_code) {
-      alert('Employee code field is blank.');
-    }
-    if (!this.emp_date_of_birth) {
-      alert('Date Of birth field is blank.');
-    }
-   
-   
-    if (!this.emp_branch_id) {
-      alert('Branch field is blank.');
-    }
-
-
-    if (this.isFirstNameMandatory && !this.emp_first_name) {
-      alert(`${this.firstNameFieldName} is required.`);
-      return; // Stop form submission if the field is mandatory and empty
+  // Validate required fields
+  for (const field of requiredFields) {
+      if (field.condition !== false && !field.field) {
+          alert(`${field.fieldName} is required.`);
+          return; // Stop execution if validation fails
+      }
   }
 
-  if (this.isLastNameMandatory && !this.emp_last_name) {
-    alert(`${this.lastNameFieldName} is required.`);
-    return; // Stop form submission if the field is mandatory and empty
-}
-
-
-
-
-if (this.isGenderMandatory && !this.emp_gender) {
-  alert(`${this.genderFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isEmailMandatory && !this.emp_personal_email) {
-  alert(`${this.emailFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-if (this.isCmpnoMandatory && !this.emp_mobile_number_1) {
-  alert(`${this.cmpnoFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-if (this.isPernoMandatory && !this.emp_mobile_number_2) {
-  alert(`${this.pernoFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isPeraddMandatory && !this.emp_permenent_address) {
-  alert(`${this.peraddressFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isPresaddMandatory && !this.emp_present_address) {
-  alert(`${this.preaddressFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isCityMandatory && !this.emp_city) {
-  alert(`${this.cityFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-if (this.isRelMandatory && !this.emp_relegion) {
-  alert(`${this.religionFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isBloodMandatory && !this.emp_blood_group) {
-  alert(`${this.bloodFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-
-if (this.isNatMandatory && !this.emp_nationality) {
-  alert(`${this.nationFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isMariMandatory && !this.emp_marital_status) {
-  alert(`${this.maritalFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isFatherMandatory && !this.emp_father_name) {
-  alert(`${this.fatherFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-if (this.isMotherMandatory && !this.emp_mother_name) {
-  alert(`${this.motherFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-
-if (this.isLocationMandatory && !this.emp_posting_location) {
-  alert(`${this.locationFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isLCountryMandatory && !this.emp_country_id) {
-  alert(`${this.cntryFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isLBranchMandatory && !this.emp_branch_id) {
-  alert(`${this.brchFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-
-if (this.isLDepartmentMandatory && !this.emp_dept_id) {
-  alert(`${this.deptFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-if (this.isLDesignationMandatory && !this.emp_desgntn_id) {
-  alert(`${this.desFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-
-if (this.isLCatogoryMandatory && !this.emp_ctgry_id) {
-  alert(`${this.catFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-if (this.isHiringMandatory && !this.emp_joined_date) {
-  alert(`${this.hiredFieldName} is required.`);
-  return; // Stop form submission if the field is mandatory and empty
-}
-
-
-
-
-    // if (!this.emp_dept_id) {
-    //   alert('Department field is blank.');
-    // }
-
-    // if (!this.emp_desgntn_id) {
-    //   alert('Designation field is blank.');
-    // }
-
-    // if (!this.emp_ctgry_id) {
-    //   alert('Category field is blank.');
-    // }
-    // return; // Exit the function if validation fails
-  }
-    
-    const formData = new FormData();
-    
-  // Append the profile picture only if it's selected
+  // Proceed to create FormData if all validations pass
+  const formData = new FormData();
   if (this.selectedFile) {
-    formData.append('emp_profile_pic', this.selectedFile);
+      formData.append('emp_profile_pic', this.selectedFile);
   } else {
-    // Append a null or empty value to indicate no file was selected
-    formData.append('emp_profile_pic', '');
+      formData.append('emp_profile_pic', '');
   }
-  
-    
-    formData.append('emp_code', this.emp_code);
 
-    formData.append('emp_first_name', this.emp_first_name);
-    formData.append('emp_last_name', this.emp_last_name);
-    
-  
-    formData.append('emp_gender', this.emp_gender);
-    formData.append('emp_date_of_birth', this.emp_date_of_birth);
-    formData.append('emp_personal_email', this.emp_personal_email);
-    formData.append('emp_mobile_number_1', this.emp_mobile_number_1);
-    formData.append('emp_mobile_number_2', this.emp_mobile_number_2);
-  
-    formData.append('emp_city', this.emp_city);
-    formData.append('emp_permenent_address', this.emp_permenent_address);
-    formData.append('emp_present_address', this.emp_present_address);
-    formData.append('emp_relegion', this.emp_relegion);
-    formData.append('emp_blood_group', this.emp_blood_group);
-  
-    formData.append('emp_nationality', this.emp_nationality);
-    formData.append('emp_marital_status', this.emp_marital_status);
-    formData.append('emp_father_name', this.emp_father_name);
-    formData.append('emp_mother_name', this.emp_mother_name);
-    formData.append('emp_posting_location', this.emp_posting_location);
-  
+  // Add fields to FormData
+  formData.append('emp_code', this.emp_code);
+  formData.append('emp_first_name', this.emp_first_name);
+  formData.append('emp_last_name', this.emp_last_name);
+  formData.append('emp_gender', this.emp_gender);
+  formData.append('emp_date_of_birth', this.emp_date_of_birth);
+  formData.append('emp_personal_email', this.emp_personal_email);
+  formData.append('emp_mobile_number_1', this.emp_mobile_number_1);
+  formData.append('emp_mobile_number_2', this.emp_mobile_number_2);
+  formData.append('emp_city', this.emp_city);
+  formData.append('emp_present_address', this.emp_present_address);
+  formData.append('emp_country_id', this.emp_country_id);
+  formData.append('emp_dept_id', this.emp_dept_id);
+  formData.append('emp_joined_date', this.emp_joined_date);
 
-    formData.append('emp_country_id', this.emp_country_id);
-    formData.append('emp_state_id', this.emp_state_id);
-
-
-    formData.append('emp_branch_id', this.emp_branch_id);
-    formData.append('emp_dept_id', this.emp_dept_id);
-
-    formData.append('emp_desgntn_id', this.emp_desgntn_id);
-    formData.append('emp_ctgry_id', this.emp_ctgry_id);
-    // formData.append('emp_languages', this.emp_languages);
-
-    // formData.append('emp_languages', JSON.stringify(this.emp_languages));
-    formData.append('emp_date_of_confirmation', this.emp_date_of_confirmation);
-    formData.append('emp_joined_date', this.emp_joined_date);
-    formData.append('is_ess', this.is_ess ? '1' : '0');
-    formData.append('emp_status', this.emp_status ? '1' : '0');
-
-    const selectedSchema = localStorage.getItem('selectedSchema');
-    if (!selectedSchema) {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
       console.error('No schema selected.');
-      // return throwError('No schema selected.'); // Return an error observable if no schema is selected
-    }
+      alert('Please select a schema before proceeding.');
+      return;
+  }
+
+  // Make the API call
+  this.http.post(`${this.apiUrl}/employee/api/Employee/?schema=${selectedSchema}`, formData)
+      .subscribe(
+          (response: any) => {
+              const createdEmployeeId = response.id; // Adjust based on your API response
+              this.EmployeeService.setEmployeeId(createdEmployeeId);
+
+              // Post custom field values
+              this.postCustomFieldValues(createdEmployeeId);
+
+              // Success modal
+              const dialogRef = this.dialog.open(SuccesModalComponent, {
+                  width: '300px',
+                  data: { message: 'Employee created successfully!', emp_id: createdEmployeeId },
+              });
+
+              dialogRef.afterClosed().subscribe(() => {
+                  console.log('The success modal was closed');
+              });
+          },
+          (error: HttpErrorResponse) => {
+              const errorMessage = error.error?.detail || 'Something went wrong.';
+              console.error('Document upload failed', error);
+              alert(`Registration failed! ${errorMessage}`);
+          }
+      );
+}
+
+
+
+
+//   uploadEmployeeDocument(): void {
+//     this.registerButtonClicked = true;
+//     // const companyData = {
+//     //   emp_languages:this.emp_languages,
+
+//     // }
+
+//         // Basic validation for username and password fields
+
+//   if (!this.emp_code || !this.emp_date_of_birth ||!this.emp_branch_id ) {
+//     if (!this.emp_code) {
+//       alert('Employee code field is blank.');
+//     }
+//     if (!this.emp_date_of_birth) {
+//       alert('Date Of birth field is blank.');
+//     }
    
    
-    // return this.http.put(apiUrl, formData);
+//     if (!this.emp_branch_id) {
+//       alert('Branch field is blank.');
+//     }
+
+
+//     if (this.isFirstNameMandatory && !this.emp_first_name) {
+//       alert(`${this.firstNameFieldName} is required.`);
+//       return; // Stop form submission if the field is mandatory and empty
+//   }
+
+//   if (this.isLastNameMandatory && !this.emp_last_name) {
+//     alert(`${this.lastNameFieldName} is required.`);
+//     return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+
+
+// if (this.isGenderMandatory && !this.emp_gender) {
+//   alert(`${this.genderFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isEmailMandatory && !this.emp_personal_email) {
+//   alert(`${this.emailFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+// if (this.isCmpnoMandatory && !this.emp_mobile_number_1) {
+//   alert(`${this.cmpnoFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+// if (this.isPernoMandatory && !this.emp_mobile_number_2) {
+//   alert(`${this.pernoFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isPeraddMandatory && !this.emp_permenent_address) {
+//   alert(`${this.peraddressFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isPresaddMandatory && !this.emp_present_address) {
+//   alert(`${this.preaddressFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isCityMandatory && !this.emp_city) {
+//   alert(`${this.cityFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+// if (this.isRelMandatory && !this.emp_relegion) {
+//   alert(`${this.religionFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isBloodMandatory && !this.emp_blood_group) {
+//   alert(`${this.bloodFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+
+// if (this.isNatMandatory && !this.emp_nationality) {
+//   alert(`${this.nationFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isMariMandatory && !this.emp_marital_status) {
+//   alert(`${this.maritalFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isFatherMandatory && !this.emp_father_name) {
+//   alert(`${this.fatherFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+// if (this.isMotherMandatory && !this.emp_mother_name) {
+//   alert(`${this.motherFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+
+// if (this.isLocationMandatory && !this.emp_posting_location) {
+//   alert(`${this.locationFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isLCountryMandatory && !this.emp_country_id) {
+//   alert(`${this.cntryFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isLBranchMandatory && !this.emp_branch_id) {
+//   alert(`${this.brchFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+
+// if (this.isLDepartmentMandatory && !this.emp_dept_id) {
+//   alert(`${this.deptFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+// if (this.isLDesignationMandatory && !this.emp_desgntn_id) {
+//   alert(`${this.desFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+
+// if (this.isLCatogoryMandatory && !this.emp_ctgry_id) {
+//   alert(`${this.catFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+// if (this.isHiringMandatory && !this.emp_joined_date) {
+//   alert(`${this.hiredFieldName} is required.`);
+//   return; // Stop form submission if the field is mandatory and empty
+// }
+
+
+
+
+//     // if (!this.emp_dept_id) {
+//     //   alert('Department field is blank.');
+//     // }
+
+//     // if (!this.emp_desgntn_id) {
+//     //   alert('Designation field is blank.');
+//     // }
+
+//     // if (!this.emp_ctgry_id) {
+//     //   alert('Category field is blank.');
+//     // }
+//     // return; // Exit the function if validation fails
+//   }
+    
+//     const formData = new FormData();
+    
+//   // Append the profile picture only if it's selected
+//   if(this.selectedFile) {
+//     formData.append('emp_profile_pic', this.selectedFile);
+//   } else {
+//     // Append a null or empty value to indicate no file was selected
+//     formData.append('emp_profile_pic', '');
+//   }
+  
+    
+//     formData.append('emp_code', this.emp_code);
+
+//     formData.append('emp_first_name', this.emp_first_name);
+//     formData.append('emp_last_name', this.emp_last_name);
+    
+  
+//     formData.append('emp_gender', this.emp_gender);
+//     formData.append('emp_date_of_birth', this.emp_date_of_birth);
+//     formData.append('emp_personal_email', this.emp_personal_email);
+//     formData.append('emp_mobile_number_1', this.emp_mobile_number_1);
+//     formData.append('emp_mobile_number_2', this.emp_mobile_number_2);
+  
+//     formData.append('emp_city', this.emp_city);
+//     formData.append('emp_permenent_address', this.emp_permenent_address);
+//     formData.append('emp_present_address', this.emp_present_address);
+//     formData.append('emp_relegion', this.emp_relegion);
+//     formData.append('emp_blood_group', this.emp_blood_group);
+  
+//     formData.append('emp_nationality', this.emp_nationality);
+//     formData.append('emp_marital_status', this.emp_marital_status);
+//     formData.append('emp_father_name', this.emp_father_name);
+//     formData.append('emp_mother_name', this.emp_mother_name);
+//     formData.append('emp_posting_location', this.emp_posting_location);
+  
+
+//     formData.append('emp_country_id', this.emp_country_id);
+//     formData.append('emp_state_id', this.emp_state_id);
+
+
+//     formData.append('emp_branch_id', this.emp_branch_id);
+//     formData.append('emp_dept_id', this.emp_dept_id);
+
+//     formData.append('emp_desgntn_id', this.emp_desgntn_id);
+//     formData.append('emp_ctgry_id', this.emp_ctgry_id);
+//     // formData.append('emp_languages', this.emp_languages);
+
+//     // formData.append('emp_languages', JSON.stringify(this.emp_languages));
+//     formData.append('emp_date_of_confirmation', this.emp_date_of_confirmation);
+//     formData.append('emp_joined_date', this.emp_joined_date);
+//     formData.append('is_ess', this.is_ess ? '1' : '0');
+//     formData.append('emp_status', this.emp_status ? '1' : '0');
+
+//     const selectedSchema = localStorage.getItem('selectedSchema');
+//     if (!selectedSchema) {
+//       console.error('No schema selected.');
+//       // return throwError('No schema selected.'); // Return an error observable if no schema is selected
+//     }
+   
+   
+//     // return this.http.put(apiUrl, formData);
 
   
-    this.http.post(`${this.apiUrl}/employee/api/Employee/?schema=${selectedSchema}`, formData)
-    .subscribe(
-      (response: any) => {
-        // Handle successful upload
-        console.log('Document upload successful', response);
+//     this.http.post(`${this.apiUrl}/employee/api/Employee/?schema=${selectedSchema}`, formData)
+//     .subscribe(
+//       (response: any) => {
+//         // Handle successful upload
+//         console.log('Document upload successful', response);
 
-        // Extract employee ID from the response
-        // const createdEmployeeId = response.id; // Adjust this based on the actual response structure
+          
+
+//         // Extract employee ID from the response
+//         // const createdEmployeeId = response.id; // Adjust this based on the actual response structure
 
         
-   // Extract employee ID from the response
-   const createdEmployeeId = response.id; // Adjust this based on the actual response structure
+//    // Extract employee ID from the response
+//    const createdEmployeeId = response.id; // Adjust this based on the actual response structure
 
-   this.EmployeeService.setEmployeeId(createdEmployeeId);
-   // Now post the custom field values
-   this.postCustomFieldValues(createdEmployeeId);
-   const dialogRef = this.dialog.open(SuccesModalComponent, {
-    width: '300px',
-    data: { message: 'Employee created successfully!', emp_id: createdEmployeeId }
-});
-        dialogRef.afterClosed().subscribe(() => {
-            console.log('The success modal was closed');
+//    this.EmployeeService.setEmployeeId(createdEmployeeId);
+//    // Now post the custom field values
+//    this.postCustomFieldValues(createdEmployeeId);
+//    const dialogRef = this.dialog.open(SuccesModalComponent, {
+//     width: '300px',
+//     data: { message: 'Employee created successfully!', emp_id: createdEmployeeId }
+// });
+//         dialogRef.afterClosed().subscribe(() => {
+//             console.log('The success modal was closed');
 
-            // Open the add more fields modal with the created employee ID
-            // this.addMoreFields(createdEmployeeId);
-        });
-    },
-    (error: HttpErrorResponse) => {
-        const errorMessage = error.error?.detail || 'Something went wrong.';
-        console.error('Document upload failed', error);
-        alert(`Registration failed! ${errorMessage}`);
-    }
-);
+//             // Open the add more fields modal with the created employee ID
+//             // this.addMoreFields(createdEmployeeId);
+//         });
+//     },
+//     (error: HttpErrorResponse) => {
+//         const errorMessage = error.error?.detail || 'Something went wrong.';
+//         console.error('Document upload failed', error);
+//         alert(`Registration failed! ${errorMessage}`);
+//     }
+// );
       
-  }
+//   }
 
 
 
