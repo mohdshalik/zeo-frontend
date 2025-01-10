@@ -27,6 +27,10 @@ export class RequestTypeComponent    {
   description: any = '';
   created_by: any = '';
  
+  
+  level: any = '';
+  role: any = '';
+  approver: any = '';
 
 
 
@@ -41,6 +45,7 @@ export class RequestTypeComponent    {
 
   schemas: string[] = []; // Array to store schema names
 
+  use_common_workflow:  boolean = false;
 
 
 
@@ -235,6 +240,41 @@ ngOnInit(): void {
               description:this.description,
             
               created_by:this.created_by,
+              use_common_workflow:this.use_common_workflow,
+
+           
+        
+              // Add other form field values to the companyData object
+            };
+          
+        
+            this.employeeService.registerReqType(companyData).subscribe(
+              (response) => {
+                console.log('Registration successful', response);
+              
+                    alert('Request Type has been Added ');
+                    window.location.reload();
+                    // window.location.reload();
+               
+        
+              },
+              (error) => {
+                console.error('Added failed', error);
+                alert('enter all field!')
+                // Handle the error appropriately, e.g., show a user-friendly error message.
+              }
+            );
+          }
+
+
+          registerRequestTyopecmnwrkflow(): void {
+            this.registerButtonClicked = true;
+            const companyData = {
+              level: this.level,
+            
+              role:this.role,
+            
+              approver:this.approver,
 
            
         
