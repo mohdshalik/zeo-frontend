@@ -173,11 +173,11 @@ export class LoginComponent implements OnInit {
     this.authService.getEmployee().subscribe(
       (result: any) => {
         this.users = result;
-        console.log(' fetching employees:');
+        console.log(' fetching Users:');
 
       },
       (error) => {
-        console.error('Error fetching employees:', error);
+        console.error('Error fetching USERS:', error);
       }
     );
   }
