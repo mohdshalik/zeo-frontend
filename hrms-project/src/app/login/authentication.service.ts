@@ -34,10 +34,19 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private EmployeeService: EmployeeService) {}
 
-
+  // login(username: string, password: string): Observable<any> {
+  //   const url = `${this.apiUrl}/token/`;
+  //   const body = { username, password };
+  //   return this.http.post(url, body).pipe(
+  //     tap((response: any) => {
+  //       const token = response.access;
+  //       this.setAuthToken(token);
+  //     })
+  //   );
+  // }
 
   login( password: string,username: string,): Observable<any> {
-    const url = `http://80.65.208.178/users/token`;
+    const url = `${this.apiUrl}/token/`;
     const body = {  password,username, };
     return this.http.post(url, body).pipe(
       tap((response: any) => {
