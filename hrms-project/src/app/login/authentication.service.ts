@@ -45,10 +45,28 @@ export class AuthenticationService {
   //   );
   // }
 
-  login( password: string,username: string,): Observable<any> {
+  // login( password: string,username: string,): Observable<any> {
+  //   const url = `${this.apiUrl}/token/`;
+  //   const body = {  password,username, };
+  //   return this.http.post(url, body).pipe(
+  //     tap((response: any) => {
+  //       const token = response.access;
+  //       this.setAuthToken(token);
+  //     })
+  //   );
+  // }
+
+  login(password: string, username: string): Observable<any> {
     const url = `${this.apiUrl}/token/`;
-    const body = {  password,username, };
-    return this.http.post(url, body).pipe(
+    const body = { password, username };
+
+    // Set custom headers
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', // Specify the content type
+      'Accept': 'application/json',      // Specify accepted response type
+    });
+
+    return this.http.post(url, body, { headers }).pipe(
       tap((response: any) => {
         const token = response.access;
         this.setAuthToken(token);
@@ -56,6 +74,7 @@ export class AuthenticationService {
     );
   }
 
+  
   private fetchUserPermissions() {
     this.http.get<string[]>(`${this.apiUrl}/api/user/7/role_grouping/`).pipe(
       map((permissions: string[]) => permissions.map(permission => ({ codename: permission } as Permission)))
