@@ -47,7 +47,7 @@ export class AuthenticationService {
   // }
 
   login( password: string,username: string,): Observable<any> {
-    const url = `${this.apiUrl}/token/`;
+    const url = `${this.apiUrl}/`;
     const body = {  password,username, };
     return this.http.post(url, body).pipe(
       tap((response: any) => {
