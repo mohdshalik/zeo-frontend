@@ -24,7 +24,6 @@ interface Permission {
 })
 export class AuthenticationService {
 
-  // private apiUrl = 'http://80.65.208.178:8000/users';  // Update with your Django backend URL
   private apiUrl = `${environment.apiBaseUrl}/users`; // Use the correct `apiBaseUrl` for live and local
 
   //testing
@@ -35,16 +34,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private EmployeeService: EmployeeService) {}
 
-  // login(username: string, password: string): Observable<any> {
-  //   const url = `${this.apiUrl}/token/`;
-  //   const body = { username, password };
-  //   return this.http.post(url, body).pipe(
-  //     tap((response: any) => {
-  //       const token = response.access;
-  //       this.setAuthToken(token);
-  //     })
-  //   );
-  // }
+
 
   login( password: string,username: string,): Observable<any> {
     const url = `http://80.65.208.178/users/token`;
