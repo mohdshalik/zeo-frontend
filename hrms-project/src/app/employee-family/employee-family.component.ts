@@ -127,7 +127,8 @@ createEmployeeQual():void{
         //     console.log('Login successful after registration', loginResponse);
         //     // Optionally, you can navigate to another page or perform other actions upon successful login.
             alert('Employee Qualification uploaded!');
-           
+            window.location.reload();
+
        
 
       },
@@ -172,7 +173,8 @@ createEmployeeJonHistory():void{
         //     console.log('Login successful after registration', loginResponse);
         //     // Optionally, you can navigate to another page or perform other actions upon successful login.
             alert('Employee Job History uploaded');
-           
+            window.location.reload();
+
             // window.location.reload();
         //   },
         //   (loginError) => {
@@ -220,7 +222,8 @@ createEmployeeLeaveReq():void{
         //     console.log('Login successful after registration', loginResponse);
         //     // Optionally, you can navigate to another page or perform other actions upon successful login.
             alert('Company has been Registered and logged in!');
-           
+            window.location.reload();
+
             // window.location.reload();
         //   },
         //   (loginError) => {

@@ -90,7 +90,9 @@ ngOnInit(): void {
   if (this.userId !== null) {
     this.authService.getUserData(this.userId).subscribe(
       async (userData: any) => {
+       
         this.userDetails = userData; // Store user details in userDetails property
+        this.created_by = this.userId
         console.log('User ID:', this.userId); // Log user ID
         console.log('User Details:', this.userDetails); // Log user details
   
