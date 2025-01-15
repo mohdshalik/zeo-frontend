@@ -34,6 +34,43 @@ export class CatogaryCrationComponent {
    private ref:MatDialogRef<CatogaryCrationComponent>) {}
 
 
+
+   copiedCategoryData: { title: string; code: string; description: string } | null = null;
+
+
+
+   ngOnInit() {
+  // Retrieve the copied data from the service
+  this.copiedCategoryData = this.CatogaryService.getCopiedCategoryData();
+
+  }
+   // Method to copy the current field values
+   copyFields() {
+    this.copiedCategoryData = {
+      title: this.ctgry_title,
+      code: this.ctgry_code,
+      description: this.ctgry_description
+    };
+  
+    // Use the service to store the copied data
+    this.CatogaryService.setCopiedCategoryData(this.copiedCategoryData);
+    console.log('Copied Values:', this.copiedCategoryData);
+  }
+  // Method to paste the copied field values
+  pasteFields() {
+    alert('Paste button clicked!');
+    if (this.copiedCategoryData) {
+      this.ctgry_title = this.copiedCategoryData.title;
+      this.ctgry_code = this.copiedCategoryData.code;
+      this.ctgry_description = this.copiedCategoryData.description;
+  
+      console.log('Pasted Values:', this.copiedCategoryData);
+    } else {
+      console.warn('No data available to paste. Please copy fields first.');
+      alert('No data to paste. Please copy fields first.');
+    }
+  }
+
    registerCatogary(): void {
     this.registerButtonClicked = true;
 

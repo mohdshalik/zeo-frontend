@@ -304,6 +304,11 @@ table tr td {
     padding: 15px;
     margin-inline-end: 10px;
   }
+
+  .comapny_section{
+    margin-left: 0px !important;
+    margin-top: 190px !important;
+  }
 }
 
 

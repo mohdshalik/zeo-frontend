@@ -1,5 +1,9 @@
-<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" [class.menu-open]="isMenuOpen"
-  [class.menu-close]="!isMenuOpen" >
+<nav id="sidebarMenu" class=" d-lg-block sidebar   bg-white" [class.menu-open]="isMenuOpen"
+  [class.menu-close]="!isMenuOpen" *ngIf="showsidebar" >
+  <!-- <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" [class.menu-open]="isMenuOpen"
+  [class.menu-close]="!isMenuOpen" > -->
+
+
   <div class="position-sticky">
     <div class="list-group list-group-flush  mt-5">
 
@@ -46,35 +50,19 @@
     </button> -->
 
     <!-- Brand -->
+
+
+    <div class="nav_mov">
      <a class="navbar-brand">
       <img src="assets/zeo_logo_new.png" height="70" width="100%" alt="MDB Logo" 
         loading="lazy" />
+
      </a>
+     <h1 class="pull-right menu_mob" (click)="showsidebarclick()" >menubar</h1>
+
+     </div>
  
-    <!-- <a class="navbar-brand">
-      <div *ngIf="selectedCompany">
-        <img *ngIf="selectedCompany.logo; else defaultLogo"
-             [src]="selectedCompany.logo" 
-             alt="Company Logo" 
-             height="70" 
-             width="100%" 
-             loading="lazy">
-      
-        <ng-template #defaultLogo>
-          <img src="assets/zeo_logo_new.png" 
-               height="70" 
-               width="100%" 
-               alt="Default Company Logo" 
-               loading="lazy">
-        </ng-template>
-      </div>
-      
-      
-    
-    </a> -->
-
-
-    <!-- Right links -->
+   
     <ul class="navbar-nav ms-auto d-flex flex-row">
       <!-- Notification dropdown -->
       <li class="nav-item dropdown">
@@ -84,7 +72,7 @@
          <span class="badge rounded-pill badge-notification bg-danger" *ngIf="expiredDocumentsCount > 0"
                style="position: absolute; margin-left: -10px; color: white;">{{ expiredDocumentsCount }}</span>
      </a>
-       
+       </li>
    
       <li class="nav-item dropdown" *ngIf="schemas.length > 0">
         <div class="Company_pro" >
@@ -108,14 +96,7 @@
     
 
      
-      
-<!-- 
-      <div class="board_user" *ngIf="showboard">
 
-      
-
-      
-    </div> -->
 
     <li>
       <div class="user_logged_outer" *ngIf="userDetails">
@@ -130,17 +111,7 @@
     </li>
       
      
-      <!-- <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon style="margin-bottom: 3px;">apartment</mat-icon>
-          <span class="cmp_list">Company 1
-            
-          </span>
-        </button>
-     
-     
-      </mat-menu> -->
-  
+    
     
 
       <!-- Avatar -->
@@ -162,66 +133,7 @@
   </div>
   <!-- Container wrapper -->
 </nav>
-<!-- <div class="row">
-  <div class="col-md-8"></div>
-  <div class="col-md-4">
-    <div class="company_change">
-      
-    </div>
-  </div>
-</div> -->
-<!-- <div class="" style="overflow-x: hidden;padding: 20px; background: whitesmoke;">
-  <div class="content-dash ">
- 
 
-    <div class="row">
-      <div class="col-md-4 col-12">
-        <div class="admin-det" routerLink="/branch-creation">
-          <div class="detail_ico">
-            <mat-icon class="icon-det" >apartment</mat-icon>
-          </div>
-          <div class="details_con">
-            <h2>Branches</h2>
-            <h2>02</h2>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-12">
-        <div class="admin-det admin-emp-clr">
-          <div class="detail_ico ">
-            <mat-icon class="icon-det">diversity_2
-
-            </mat-icon>
-          </div>
-          <div class="details_con">
-            <h2>Employees</h2>
-            <h2>100</h2>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-12">
-        <div class="admin-det admin-lev-clr">
-          <div class="detail_ico ">
-            <mat-icon class="icon-det"> reduce_capacity
-
-            </mat-icon>
-
-          </div>
-
-          <div class="details_con">
-            <h2>Leaves</h2>
-            <h2>12</h2>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</div> -->
 <router-outlet></router-outlet>
 
 

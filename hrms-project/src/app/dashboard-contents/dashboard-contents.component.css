@@ -104,6 +104,13 @@ table thead th {
       padding: 15px;
       margin-inline-end: 10px;
     }
+
+    .card{
+      width: 100% !important;
+      margin-top: 10px !important;
+      position: relative !important;
+    }
+    
   }
   
 

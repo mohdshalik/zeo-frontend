@@ -431,6 +431,10 @@ table thead th {
     border: 1px solid #e6edf1;
     padding: 15px;
   }
+
+  .menu_mob{
+    display: none;
+  }
   
   @media only screen and (max-width: 640px) {
     table thead {
@@ -464,6 +468,24 @@ table thead th {
       color: #fff;
       padding: 15px;
       margin-inline-end: 10px;
+    }
+
+
+    .comapny_section{
+      margin-left: 0px !important;
+    }
+
+    .menu_mob{
+      display: block;
+      color: white;
+    }
+
+    .nav_mov{
+      width: 95%;
+    }
+
+    .menu-open{
+      width: 70% !important;
     }
   }
   

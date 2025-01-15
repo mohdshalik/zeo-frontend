@@ -16,7 +16,23 @@ export class CatogaryService {
 
   private baseUrl = 'http://80.65.208.178:8000/organisation/api';
 
+
+  private copiedCategoryData: { title: string; code: string; description: string } | null = null;
+
   constructor(private http: HttpClient) {}
+
+
+  setCopiedCategoryData(data: { title: string; code: string; description: string }) {
+    this.copiedCategoryData = data;
+  }
+
+  getCopiedCategoryData() {
+    return this.copiedCategoryData;
+  }
+
+  clearCopiedCategoryData() {
+    this.copiedCategoryData = null;
+  }
 
   getcatogary(): Observable<any> {
     const selectedSchema = localStorage.getItem('selectedSchema');

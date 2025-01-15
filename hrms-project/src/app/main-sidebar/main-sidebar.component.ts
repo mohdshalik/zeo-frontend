@@ -143,11 +143,19 @@ export class MainSidebarComponent {
     setTimeout(() => {
       this.isLoading = false; // Hide the loader
 
-      const url = `/main-sidebar`;
+      const url = `/main-sidebar/dashboard-contents`;
         window.location.href = url;
     }, 3000); // Delay of 100ms to ensure localStorage is updated
 }
 
+
+
+showsidebar: boolean = true;
+
+showsidebarclick() {
+  this.showsidebar = !this.showsidebar;
+  
+}
 
 
 

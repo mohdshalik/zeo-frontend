@@ -220,3 +220,15 @@ button:focus{
 .input-group>.form-control:focus {
     z-index: 0;
 }
+
+
+@media only screen and (max-width: 600px) {
+
+    .toggle-container{
+        display: none;
+    }
+    .sign-in{
+        width: 100%;
+    }
+ 
+  }
