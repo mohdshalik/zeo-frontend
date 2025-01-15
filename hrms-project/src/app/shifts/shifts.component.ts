@@ -291,6 +291,8 @@ this.loadShiftsPattern();
 
 
   
+
+  
   loadShifts(): void {
     
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
