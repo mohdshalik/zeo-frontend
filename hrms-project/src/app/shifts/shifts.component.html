@@ -1,0 +1,677 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec">
+
+        <!-- <h2>Shifts</h2><hr> -->
+
+        <mat-tab-group>
+          <mat-tab label="Shifts">
+
+            <form >
+
+                <div class="row">
+                    <div class="col-md-6" >
+                   
+                        <label>Shift Name</label>
+                       <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter name "
+                        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
+                       
+                       <div *ngIf="registerButtonClicked && !name" class="error-message">name is required.</div>
+                  </div>
+    
+    
+                  <div class="col-md-6" >
+                   
+                    <label>Start TIme</label>
+                   <input type="time"  class="form-control" required  [(ngModel)]="start_time"  placeholder="Enter start time "
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !start_time}">
+                   
+                   <div *ngIf="registerButtonClicked && !start_time" class="error-message">start time is required.</div>
+              </div>
+    
+              <div class="col-md-6" >
+                   
+                <label>End TIme</label>
+               <input type="time"  class="form-control" required  [(ngModel)]="end_time"  placeholder="Enter time date "
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !end_time}">
+               
+               <div *ngIf="registerButtonClicked && !end_time" class="error-message">end time is required.</div>
+          </div>
+    
+     
+          <div class="col-md-6" >
+                   
+            <label>Break duration</label>
+           <input type="text"   class="form-control" required  [(ngModel)]="break_duration"  placeholder="00:00:00 "
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !break_duration}">
+           
+           <div *ngIf="registerButtonClicked && !break_duration" class="error-message">break duration is required.</div>
+      </div>
+
+     
+                </div>
+    
+            
+    
+    <div class="row">
+        <div class="col-md-10">
+    
+        </div>
+    
+        <div class="col-md-2">
+            <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerEmployeeShifts()">Create</button>  
+         </div>
+    </div>
+         
+        </form>
+
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <!-- <h4>Shifts</h4> -->
+                <table class="table"  >
+                    <thead>
+                        <tr>
+                            <th>Shift Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Break Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let deparmentsec of Shifts">
+                            <td>{{ deparmentsec.name }}</td>
+                            <td>{{ deparmentsec.start_time }}</td>
+                            <td>{{ deparmentsec.end_time }}</td>
+                            <td>{{ deparmentsec.break_duration }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        </mat-tab>
+            <mat-tab label="Shift Pattern">
+
+
+
+                
+                <form>
+                    <div class="row">
+
+                        <div class="col-md-6" >
+                   
+                            <label> Name</label>
+                           <input type="text"  class="form-control" required  [(ngModel)]="Patern_name"  placeholder="Enter name "
+                            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
+                           
+                           <div *ngIf="registerButtonClicked && !name" class="error-message">name is required.</div>
+                      </div>
+        
+                        
+                        <div class="col-md-6" >
+                            <label>Monday Shift</label>
+                            <div class="custom-sel">
+            
+                                <select class="form-control" id="monday_shift" required [(ngModel)]="monday_shift"   [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !monday_shift}" >
+                                    <option value="" >Select</option>
+                                    <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !monday_shift" class="error-message">Please Select  </div>
+                                
+                                
+                               
+            
+                              
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" >
+                            <label>Tuesday Shift</label>
+                            <div class="custom-sel">
+            
+                                <select class="form-control" id="tuesday_shift" required [(ngModel)]="tuesday_shift"   [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !tuesday_shift}" >
+                                    <option value="" >Select</option>
+                                    <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !tuesday_shift" class="error-message">Please Select  </div>
+                                
+                                
+                               
+            
+                              
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6" >
+                            <label>Wednesday Shift</label>
+                            <div class="custom-sel">
+            
+                                <select class="form-control" id="wednesday_shift" required [(ngModel)]="wednesday_shift"   [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !wednesday_shift}" >
+                                    <option value="" >Select</option>
+                                    <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !wednesday_shift" class="error-message">Please Select  </div>
+                                
+                                
+                               
+            
+                              
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6" >
+                            <label>Thursday Shift</label>
+                            <div class="custom-sel">
+            
+                                <select class="form-control" id="thursday_shift" required [(ngModel)]="thursday_shift"   [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !thursday_shift}" >
+                                    <option value="" >Select</option>
+                                    <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !thursday_shift" class="error-message">Please Select  </div>
+                                
+                                
+                               
+            
+                              
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6" >
+                            <label>Friday Shift</label>
+                            <div class="custom-sel">
+            
+                                <select class="form-control" id="friday_shift" required [(ngModel)]="friday_shift"   [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !friday_shift}" >
+                                    <option value="" >Select</option>
+                                    <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !friday_shift" class="error-message">Please Select  </div>
+                                
+                                
+                               
+            
+                              
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6" >
+                            <label>Saturday Shift</label>
+                            <div class="custom-sel">
+            
+                                <select class="form-control" id="saturday_shift" required [(ngModel)]="saturday_shift"   [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !saturday_shift}" >
+                                    <option value="" >Select</option>
+                                    <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !saturday_shift" class="error-message">Please Select  </div>
+                                
+                                
+                               
+            
+                              
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6" >
+                            <label>Sunday Shift</label>
+                            <div class="custom-sel">
+            
+                                <select class="form-control" id="sunday_shift" required [(ngModel)]="sunday_shift"   [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !sunday_shift}" >
+                                    <option value="" >Select</option>
+                                    <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !sunday_shift" class="error-message">Please Select  </div>
+                                
+                                
+                               
+            
+                              
+                            </div>
+                        </div>
+
+
+                       
+                        <!-- <div class="col-md-6" >
+                            <label>Employee</label>
+                            <div class="custom-sel">
+                                <div class="form-control-wrapper">
+                                  <mat-form-field>
+                                    <mat-select  placeholder="Select" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}" #selectEmp multiple>
+                                      <div class="select-all">
+                                        <mat-checkbox [(ngModel)]="allSelectedEmp" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectionEmp()">
+                                          Select All
+                                        </mat-checkbox>
+                                      </div>
+                                     
+                                      <mat-option *ngFor="let emp of Employee" [value]="emp.id">
+                                        {{ emp.emp_first_name }}   {{ emp.emp_last_name }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div *ngIf="registerButtonClicked && (!employee || employee.length === 0)" class="error-message">
+                                  Please Select Your employee
+                                </div>
+                              </div>
+                        </div>
+
+                        <div class="col-md-6" >
+                            <label>Select Branches</label>
+                            <div class="custom-sel">
+                              <div class="form-control-wrapper">
+                             
+        
+                                <mat-form-field>
+                                  <mat-select placeholder="Select" [(ngModel)]="branch" [ngModelOptions]="{standalone: true}" #select multiple>
+                                    <div class="select-all">
+                                      <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelection()">
+                                        Select All
+                                      </mat-checkbox>
+                                    </div>
+                                    <input type="text" placeholder="serach" class="form-control">
+        
+                                    <mat-option *ngFor="let food of branches" [value]="food.id">
+                                      {{ food.branch_name }}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                                
+                              </div>
+                              <div *ngIf="registerButtonClicked && (!branch || branch.length === 0)" class="error-message">
+                                Please Select Your Branch
+                              </div>
+                            </div>
+                          </div>
+                          
+                            
+                         
+                          <div class="col-md-6" >
+                            <label>Department</label>
+                            <div class="custom-sel">
+                                <div class="form-control-wrapper">
+                                  <mat-form-field>
+                                    <mat-select  placeholder="Select" [(ngModel)]="department" [ngModelOptions]="{standalone: true}" #selectDept  multiple>
+                                      <div class="select-all">
+                                        <mat-checkbox [(ngModel)]="allSelecteddept" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectiondept()">
+                                          Select All
+                                        </mat-checkbox>
+                                      </div>
+                                      <mat-option *ngFor="let deparmentsec of Departments" [value]="deparmentsec.id">
+                                        {{ deparmentsec.dept_name }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div *ngIf="registerButtonClicked && (!department || department.length === 0)" class="error-message">
+                                  Please Select Your department
+                                </div>
+                              </div>
+                        </div>
+
+                        <div class="col-md-6" >
+                            <label>Designation</label>
+                            <div class="custom-sel">
+                                <div class="form-control-wrapper">
+                                  <mat-form-field>
+                                    <mat-select  placeholder="Select" [(ngModel)]="designation" [ngModelOptions]="{standalone: true}" #selectDes  multiple>
+                                      <div class="select-all">
+                                        <mat-checkbox [(ngModel)]="allSelecteddes" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectiondes()">
+                                          Select All
+                                        </mat-checkbox>
+                                      </div>
+                                      <mat-option *ngFor="let deparmentsec of Designations" [value]="deparmentsec.id">
+                                        {{ deparmentsec.desgntn_job_title }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div *ngIf="registerButtonClicked && (!designation || designation.length === 0)" class="error-message">
+                                  Please Select Your designation
+                                </div>
+                              </div>
+                        </div>
+        
+                        <div class="col-md-6" >
+                            <label>Category</label>
+                            <div class="custom-sel">
+                                <div class="form-control-wrapper">
+                                  <mat-form-field>
+                                    <mat-select  placeholder="Select" [(ngModel)]="role" [ngModelOptions]="{standalone: true}" #selectCat multiple>
+                                      <div class="select-all">
+                                        <mat-checkbox [(ngModel)]="allSelectedcat" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectioncat()">
+                                          Select All
+                                        </mat-checkbox>
+                                      </div>
+                                     
+                                      <mat-option *ngFor="let deparmentsec of Categories" [value]="deparmentsec.id">
+                                        {{ deparmentsec.ctgry_title }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div *ngIf="registerButtonClicked && (!role || role.length === 0)" class="error-message">
+                                  Please Select Your category
+                                </div>
+                              </div>
+                        </div> -->
+        
+                   
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                    
+                        </div>
+                    
+                        <div class="col-md-2">
+                            <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerWeeklyEmployeeShifts()">Create</button>  
+                         </div>
+                    </div>
+                </form>
+           
+                </mat-tab>
+
+                <mat-tab label="Employee Shift">
+
+
+
+                <form>
+                  <div class="row">
+                    
+                  <div class="col-md-6" >
+                   
+                    <label>Start Date</label>
+                   <input type="date"  class="form-control" required  [(ngModel)]="start_date"  placeholder="Enter start date "
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !start_date}">
+                   
+                   <div *ngIf="registerButtonClicked && !start_date" class="error-message">start date is required.</div>
+              </div>
+
+        
+
+
+          <div class="col-md-6" >
+                   
+            <label>Rotation cycle weeks</label>
+           <input type="number"  class="form-control" required  [(ngModel)]="rotation_cycle_weeks"  placeholder="Enter Rotation cycle weeks "
+            [ngModelOptions]="{standalone: true}" >
+           
+      </div>
+
+      <div class="col-md-6 mt-3">
+        <label></label>
+        <!-- <div class="check-box-selection-sec form-control mt-4"> -->
+            <div class="mat-set">
+                <mat-checkbox [(ngModel)]="is_rotating" [ngModelOptions]="{standalone: true}">is rotating</mat-checkbox>
+            </div>
+           
+        <!-- </div> -->
+    </div>
+
+    <div class="col-md-6" *ngIf="!is_rotating">
+      <label>Single Shift Pattern</label>
+      <div class="custom-sel">
+
+          <select class="form-control" id="single_shift_pattern" required [(ngModel)]="single_shift_pattern"   [ngModelOptions]="{standalone: true}" >
+              <option value="" >Select</option>
+              <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+          </select>
+          
+          
+         
+
+        
+      </div>
+  </div>
+
+     <div class="col-md-6" >
+                            <label>Employee</label>
+                            <div class="custom-sel">
+                                <div class="form-control-wrapper">
+                                  <mat-form-field>
+                                    <mat-select  placeholder="Select" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}" #selectEmp multiple>
+                                      <div class="select-all">
+                                        <mat-checkbox [(ngModel)]="allSelectedEmp" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectionEmp()">
+                                          Select All
+                                        </mat-checkbox>
+                                      </div>
+                                     
+                                      <mat-option *ngFor="let emp of Employee" [value]="emp.id">
+                                        {{ emp.emp_first_name }}   {{ emp.emp_last_name }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div *ngIf="registerButtonClicked && (!employee || employee.length === 0)" class="error-message">
+                                  Please Select Your employee
+                                </div>
+                              </div>
+                        </div>
+
+                     
+                            
+                         
+                          <div class="col-md-6" >
+                            <label>Department</label>
+                            <div class="custom-sel">
+                                <div class="form-control-wrapper">
+                                  <mat-form-field>
+                                    <mat-select  placeholder="Select" [(ngModel)]="departments" [ngModelOptions]="{standalone: true}" #selectDept  multiple>
+                                      <div class="select-all">
+                                        <mat-checkbox [(ngModel)]="allSelecteddept" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectiondept()">
+                                          Select All
+                                        </mat-checkbox>
+                                      </div>
+                                      <mat-option *ngFor="let deparmentsec of Departments" [value]="deparmentsec.id">
+                                        {{ deparmentsec.dept_name }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <!-- <div *ngIf="registerButtonClicked && (!departments || departments.length === 0)" class="error-message">
+                                  Please Select Your department
+                                </div> -->
+                              </div>
+                        </div>
+
+                     
+        
+        
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-10">
+                
+                    </div>
+                
+                    <div class="col-md-2">
+                        <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerEmployeeallocateshifts()">Create</button>  
+                     </div>
+                </div>
+                </form>
+            
+             
+                  </mat-tab>
+
+
+                  <mat-tab label="Week Pattern Assigning">
+                    <form>
+<div class="row">
+  <div class="col-md-6" >
+                   
+    <label>Week number</label>
+   <input type="number"  class="form-control" required  [(ngModel)]="week_number"  placeholder="Enter Week number "
+    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !week_number}">
+   
+   <div *ngIf="registerButtonClicked && !week_number" class="error-message">Week numberis required.</div>
+</div>
+
+<div class="col-md-6" >
+  <label>Schedule</label>
+  <div class="custom-sel">
+
+      <select class="form-control" id="schedule" required [(ngModel)]="schedule"   [ngModelOptions]="{standalone: true}" >
+          <option value="" >Select</option>
+          <option *ngFor="let deparmentsec of EmployeeShifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+      </select>
+      
+      
+     
+
+    
+  </div>
+</div>
+
+
+<div class="col-md-6" >
+  <label>Template</label>
+  <div class="custom-sel">
+
+      <select class="form-control" id="template" required [(ngModel)]="template"   [ngModelOptions]="{standalone: true}" >
+          <option value="" >Select</option>
+          <option *ngFor="let deparmentsec of ShiftsPattern" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+      </select>
+      
+      
+     
+
+    
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-10">
+
+  </div>
+
+  <div class="col-md-2">
+      <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerweekassign()">Create</button>  
+   </div>
+</div>
+
+</div>
+
+                    </form>
+                    </mat-tab>
+  
+
+                    <mat-tab label="Shift Override">
+                      <form>
+  <div class="row">
+    <div class="col-md-6" >
+                     
+      <label>Date</label>
+     <input type="date"  class="form-control" required  [(ngModel)]="date"  placeholder="Enter Date "
+      [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !date}">
+     
+     <div *ngIf="registerButtonClicked && !date" class="error-message">Date required.</div>
+  </div>
+  
+  <!-- <div class="col-md-6" >
+    <label>Employee</label>
+    <div class="custom-sel">
+        <div class="form-control-wrapper">
+          <mat-form-field>
+            <mat-select  placeholder="Select" [(ngModel)]="employee_override" [ngModelOptions]="{standalone: true}" #selectEmp multiple>
+              <div class="select-all">
+                <mat-checkbox [(ngModel)]="allSelectedEmp" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectionEmp()">
+                  Select All
+                </mat-checkbox>
+              </div>
+             
+              <mat-option *ngFor="let emp of Employee" [value]="emp.id">
+                {{ emp.emp_first_name }}   {{ emp.emp_last_name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div *ngIf="registerButtonClicked && (!employee_override || employee_override.length === 0)" class="error-message">
+          Please Select Your employee
+        </div>
+      </div>
+</div> -->
+  
+
+<div class="col-md-6" >
+  <label>Employee</label>
+  <div class="custom-sel">
+
+      <select class="form-control" id="employee_override" required [(ngModel)]="employee_override"   [ngModelOptions]="{standalone: true}" >
+          <option value="" >Select</option>
+          <option *ngFor="let emp of Employee" [value]="emp.id">
+            {{ emp.emp_first_name }}   {{ emp.emp_last_name }}  </option>
+      </select>
+      
+      
+     
+
+    
+  </div>
+</div>
+  
+<div class="col-md-6" >
+  <label>Shift Override</label>
+  <div class="custom-sel">
+
+      <select class="form-control" id="override_shift" required [(ngModel)]="override_shift"   [ngModelOptions]="{standalone: true}" >
+          <option value="" >Select</option>
+          <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+      </select>
+      
+      
+     
+
+    
+  </div>
+</div>
+  
+  
+  <div class="row">
+    <div class="col-md-10">
+  
+    </div>
+  
+    <div class="col-md-2">
+        <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerShiftOverride()">Create</button>  
+     </div>
+  </div>
+  
+  </div>
+  
+                      </form>
+                      </mat-tab>
+           
+                </mat-tab-group> 
+
+      
+
+
+
+
+        </div>
+
+
+     
+
+       
+
+        </div>
+
+   
+
+  
+
+</div>
+
+
+</div>
+
+
+

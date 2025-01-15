@@ -1355,4 +1355,115 @@ getLoggedInEmployee() {
   return this.http.get<{ employee_id: number; emp_code: string }>('/api/employee/by_user');
 }
 
+
+
+
+registerShifts(payload: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.'); // Return an error observable if no schema is selected
+  }
+
+  const apiUrl = `${this.apiUrl}/calendars/api/shifts/?schema=${selectedSchema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(apiUrl, JSON.stringify(payload), { headers }).pipe(
+    catchError((error) => {
+      // Handle errors here
+      console.error('Error during email configuration registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+registerEmployeeShifts(payload: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.'); // Return an error observable if no schema is selected
+  }
+
+  const apiUrl = `${this.apiUrl}/calendars/api/employee-shift/?schema=${selectedSchema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(apiUrl, JSON.stringify(payload), { headers }).pipe(
+    catchError((error) => {
+      // Handle errors here
+      console.error('Error during email configuration registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+registerWeeklyShifts(payload: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.'); // Return an error observable if no schema is selected
+  }
+
+  const apiUrl = `${this.apiUrl}/calendars/api/shiftpattern/?schema=${selectedSchema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(apiUrl, JSON.stringify(payload), { headers }).pipe(
+    catchError((error) => {
+      // Handle errors here
+      console.error('Error during email configuration registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+registerweekpaternassign(payload: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.'); // Return an error observable if no schema is selected
+  }
+
+  const apiUrl = `${this.apiUrl}/calendars/api/weekpattern-assignment/?schema=${selectedSchema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(apiUrl, JSON.stringify(payload), { headers }).pipe(
+    catchError((error) => {
+      // Handle errors here
+      console.error('Error during email configuration registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+registerShiftOverride(payload: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.'); // Return an error observable if no schema is selected
+  }
+
+  const apiUrl = `${this.apiUrl}/calendars/api/shift-overrides/?schema=${selectedSchema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(apiUrl, JSON.stringify(payload), { headers }).pipe(
+    catchError((error) => {
+      // Handle errors here
+      console.error('Error during email configuration registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+getDesignations(selectedSchema: string): Observable<any> {
+  // const url = `${this.baseUrl}/Branch/`;
+  // return this.http.get(url);
+
+  const apiUrl = `${this.apiUrl}/organisation/api/Designation/?schema=${selectedSchema}`;
+
+  // Fetch employees from the API
+  return this.http.get(apiUrl);
+}
+
 }

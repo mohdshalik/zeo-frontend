@@ -138,6 +138,7 @@ import { LeaveDialogComponent } from './leave-report/leave-dialog/leave-dialog.c
 import { EmployeeApprovalsComponent } from './employee-approvals/employee-approvals.component';
 import { DashboardContentsComponent } from './dashboard-contents/dashboard-contents.component';
 import { MatStepperModule } from '@angular/material/stepper';  
+import { ShiftsComponent } from './shifts/shifts.component';
 
 @NgModule({
   declarations: [
@@ -234,6 +235,7 @@ import { MatStepperModule } from '@angular/material/stepper';
      EmployeeLeaveComponent,
      EmployeeApprovalsComponent,
      DashboardContentsComponent,
+     ShiftsComponent
      
      
 

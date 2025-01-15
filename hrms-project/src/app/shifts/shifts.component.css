@@ -1,0 +1,231 @@
+
+.comapny_section{
+
+    margin-top: 100px;
+    margin-left: 50px;
+    
+}
+
+
+.header_section{
+    background: white;
+    padding: 24px 20px 15px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    width: 100%;
+    border-bottom: solid 3px navy;
+}
+
+.header_section h1{
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+
+}
+
+
+.com_list{
+    padding: 20px;
+    width: 100%;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-top: solid 3px navy;
+    margin-bottom: 20px;
+
+
+}
+
+.com_list h2{
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+}
+
+
+
+  
+table thead th {
+    color: #ffffff;
+    background: #004976;
+    padding: 10px;
+    border:1px solid #ffefef;
+    font-weight: 500;
+  }
+  
+  table tr {
+    background: #ffffff;
+  }
+  
+  table tr td {
+    border: 1px solid  black;
+    padding: 10px;
+  }
+  
+  @media only screen and (max-width: 640px) {
+    table thead {
+      display: none;
+    }
+  
+    table tbody {
+      display: block;
+    }
+  
+    table tbody tr td {
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+  
+    table tbody tr {
+      margin-bottom: 20px;
+      display: block;
+      border: 1px solid #004976;
+      background: #f9f9f9;
+      overflow: hidden;
+    }
+  
+    table tbody td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      width: 30%;
+      display: flex;
+      background: #004976;
+      color: #fff;
+      padding: 15px;
+      margin-inline-end: 10px;
+    }
+  }
+  
+
+
+
+  p{
+    margin-bottom: 0px;
+  }
+  
+tr:nth-child(even) {
+    background-color: #ffdddd4f  !important;
+  }
+
+
+  .cpm-sec label{
+    font-size: 15px;
+  
+  }
+  
+  .cpm-sec .form-control{
+    font-size: 15px !important;
+  }
+  
+
+  /* assign-holiday-calendar.component.css */
+::ng-deep .mat-tab-group {
+  overflow-x: hidden;
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  overflow-x: hidden;
+}
+
+::ng-deep .mat-mdc-tab-body-content {
+  overflow-x: hidden  !important;
+}
+
+
+::ng-deep .mdc-text-field--no-label{
+  border:1px solid #ced4da;
+}
+
+::ng-deep .mat-mdc-form-field-flex {
+  padding: 4px 7px;
+  height: 35px;
+}
+
+
+.form-control-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+::ng-deep .form-control-wrapper mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .form-control-wrapper .mat-form-field-wrapper {
+  padding: 0;
+  margin: 0;
+}
+
+::ng-deep .form-control-wrapper .mat-form-field-flex {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+::ng-deep .form-control-wrapper .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .form-control-wrapper .mat-select {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  height: auto;
+  line-height: 1.5;
+}
+
+::ng-deep .form-control-wrapper .mat-select-trigger {
+  height: auto;
+  padding: 0;
+}
+
+::ng-deep .form-control-wrapper .mat-select-value-text {
+  padding: 0;
+  margin: 0;
+}
+
+::ng-deep .form-control-wrapper .mat-form-field-infix {
+  padding: 0;
+  border: none;
+}
+
+::ng-deep .form-control-wrapper .mat-select-placeholder {
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+
+::ng-deep .form-control-wrapper  .mat-mdc-form-field-infix{
+  margin-top: -14px;
+}
+
+::ng-deep .form-control-wrapper .mdc-text-field--filled:not(.mdc-text-field--disabled){
+
+background-color: white;
+}
+
+::ng-deep .form-control-wrapper .mdc-text-field{
+padding: 0px;
+}
+
+::ng-deep .form-control-wrapper .mat-mdc-form-field-infix:focus-visible{
+outline: none-webkit-focus-ring-color auto 0px;
+
+
+}
+
+
+.calendar_view_sec h4{
+  font-size: 14px;
+  font-weight: 400;
+
+}
+
+.calendar_view_sec h5{
+  font-size: 16px;
+  font-weight: 500;
+ color: #5c1e7f;
+}

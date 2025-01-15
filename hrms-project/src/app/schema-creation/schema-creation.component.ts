@@ -35,7 +35,8 @@ export class SchemaCreationComponent {
   userDetailss: any[] = [];
   username: any;
 
-  
+  isLoading: boolean = false;
+
   constructor(
    
     private http: HttpClient,
@@ -91,8 +92,8 @@ export class SchemaCreationComponent {
   }
   registerCatogary(): void {
     this.registerButtonClicked = true;
+
   
-    alert(123)
     if (!this.schema_name || !this.name || !this.country) {
       let errorMessage = '';
       if (!this.schema_name) errorMessage += 'Location Name field is blank. ';
@@ -117,15 +118,22 @@ export class SchemaCreationComponent {
     companyData.append('country', this.country);
 
    
-  
+    this.isLoading = true;
+
     // Make API call
     this.userService.getSchema(companyData).subscribe(
       (response) => {
         console.log('Registration successful', response);
+        this.isLoading = false;
+
         alert('Location has been Registered!');
         this.ref.close('Closed using function');
+
+        window.location.reload();
       },
       (error) => {
+        this.isLoading = false;
+
         console.error('Registration failed', error);
         alert('Registration failed! Please ensure all fields are filled out correctly.');
       }

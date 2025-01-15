@@ -41,9 +41,9 @@
             <label>{{genderFieldName}}</label>
             <select class="form-control" id="emp_gender" name="emp_gender"  [(ngModel)]="Emp.emp_gender"  [ngModelOptions]="{standalone: true}" >
               
-                <option >Male</option>
-                <option>Female</option>
-                <option>Other</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
             </select>
         </div>
         <!-- <label>Last Name</label>
@@ -172,10 +172,10 @@
             <label>{{maritalFieldName}}</label>
             <select class="form-control" id="emp_marital_status" name="emp_marital_status"  [(ngModel)]="Emp.emp_marital_status"  [ngModelOptions]="{standalone: true}" >
               
-                <option >Mingle</option>
-                <option>Single</option>
-                <option>Divorce</option>
-                <option>Widow</option>
+                <option value="M" >Married</option>
+                <option value="S">Single</option>
+                <option value="divorced">Divorced</option>
+                <option value="widow">Widow</option>
 
                 
             </select>

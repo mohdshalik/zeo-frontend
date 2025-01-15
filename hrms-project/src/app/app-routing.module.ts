@@ -63,6 +63,7 @@ import { LeaveReportComponent } from './leave-report/leave-report.component';
 import { EmployeeApprovalsComponent } from './employee-approvals/employee-approvals.component';
 import { EmployeeLeaveComponent } from './employee-leave/employee-leave.component';
 import { DashboardContentsComponent } from './dashboard-contents/dashboard-contents.component';
+import { ShiftsComponent } from './shifts/shifts.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -209,6 +210,12 @@ const routes: Routes = [
             path:'assign-holiday-calendar',
             component:AssignHolidayCalendarComponent
           },
+
+          {
+            path:'shifts',
+            component:ShiftsComponent
+          },
+
           {
             path:'report-generate',
             component:ReportGenerateComponent,
