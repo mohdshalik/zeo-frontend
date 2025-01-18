@@ -50,6 +50,8 @@ export class CreateEmployeeComponent implements OnInit {
 
   emp_date_of_birth:any ='';
   emp_personal_email:any ='';
+  emp_company_email:any ='';
+
   emp_mobile_number_1:any ='';
   emp_mobile_number_2:any ='';
   emp_city:any ='';
@@ -1579,6 +1581,8 @@ loadFormFields(): void {
     formData.append('emp_gender', this.emp_gender);
     formData.append('emp_date_of_birth', this.emp_date_of_birth);
     formData.append('emp_personal_email', this.emp_personal_email);
+    formData.append('emp_company_email', this.emp_company_email);
+
     formData.append('emp_mobile_number_1', this.emp_mobile_number_1);
     formData.append('emp_mobile_number_2', this.emp_mobile_number_2);
   

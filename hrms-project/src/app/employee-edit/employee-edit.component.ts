@@ -78,6 +78,8 @@ export class EmployeeEditComponent {
 
   emp_date_of_birth:any ='';
   emp_personal_email:any ='';
+  emp_company_email:any ='';
+
   emp_mobile_number_1:any ='';
   emp_mobile_number_2:any ='';
   emp_city:any ='';
@@ -253,6 +255,8 @@ export class EmployeeEditComponent {
     formData.append('emp_gender', this.Emp.emp_gender);
     formData.append('emp_date_of_birth', this.Emp.emp_date_of_birth);
     formData.append('emp_personal_email', this.Emp.emp_personal_email);
+    formData.append('emp_company_email', this.emp_company_email);
+
     formData.append('emp_mobile_number_1', this.Emp.emp_mobile_number_1);
     formData.append('emp_mobile_number_2', this.Emp.emp_mobile_number_2);
     formData.append('emp_city', this.Emp.emp_city);

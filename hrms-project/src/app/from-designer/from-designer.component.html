@@ -1242,7 +1242,7 @@
                   <div class="row">
                       <div class="col-md-6">
       
-                          <label> Feild Name</label>
+                          <label> Field Name</label>
                           <input type="text" class="form-control" required [(ngModel)]="field_name"
                               placeholder="Enter Feild Name" [ngModelOptions]="{standalone: true}"
                               [ngClass]="{'error-field': registerButtonClicked && !field_name}">
@@ -1268,6 +1268,7 @@
                               <option value="dropdown">Dropdown</option>
                               <option value="radio">Radio</option>
                               <option value="date">Date</option>
+                              <option value="text">Text Box</option>
                             </select>
                             <div *ngIf="registerButtonClicked1 && !data_type" class="error-message">
                               Please select a type

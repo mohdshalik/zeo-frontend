@@ -6,6 +6,7 @@ import { LeaveService } from './leave.service';
 import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/core';
 import { DesignationService } from '../designation-master/designation.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-leave-master',
@@ -31,7 +32,11 @@ months: { short: string, full: string }[] = [
 ];
 
 
+firstFormGroup!: FormGroup;
+secondFormGroup!: FormGroup;
+ThridFormGroup!: FormGroup
 
+isLinear = true;
 
   LeaveTypes: any[] = [];
   Branches: any[] = [];

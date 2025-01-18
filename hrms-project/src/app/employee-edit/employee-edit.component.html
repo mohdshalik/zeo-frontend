@@ -74,7 +74,10 @@
     <div class="col-md-6" >
                    
         <label>Personal Email ID</label>
-       <input type="text"  class="form-control" required placeholder="Enter Personal Email ID">
+       <input type="text"  class="form-control"   [(ngModel)]="emp_company_email"  placeholder="Enter Company email"
+       [ngModelOptions]="{standalone: true}" 
+   >
+   >
        
        <!-- <div *ngIf="registerButtonClicked && !emp_personal_email" class="error-message">Description is required.</div> -->
     </div>
