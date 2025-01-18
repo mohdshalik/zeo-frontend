@@ -19,15 +19,6 @@
         <div class="row">
 
             <div class="col-md-6">
-                <label>shalik Developer</label>
-                <input type="text">
-            </div>
-            <div class="col-md-6">
-                <label>subina</label>
-                <input type="text" placeholder="text">
-            </div>
-
-            <div class="col-md-6">
                 <label>{{empCodeFieldName}}</label>
             
                 <!-- Hidden input to store the final value to be posted -->
@@ -139,17 +130,6 @@
    <!-- <div *ngIf="registerButtonClicked && !emp_personal_email" class="error-message">Description is required.</div> -->
 </div>
 
-<div class="col-md-6"  >
-               
-    <label>Company Email</label>
-    <input type="text"  class="form-control" required  [(ngModel)]="emp_company_email"  placeholder="Enter Company email"
-    [ngModelOptions]="{standalone: true}" 
->
-
-               
-                </div>
-   
-   <!-- <div *ngIf="registerButtonClicked && !emp_personal_email" class="error-message">Description is required.</div> -->
 
 
 
@@ -797,6 +777,13 @@
 
     </div> -->
 
+    <!-- <div class="col-md-6">
+               
+        <label>Hired date</label>
+       <input type="date"  class="form-control" required id="emp_hired_date" name="emp_hired_date"  [(ngModel)]="emp_hired_date"  placeholder="Enter hired Date "
+        [ngModelOptions]="{standalone: true}" >
+       
+    </div> -->
 
     <div class="col-md-6"  *ngIf="!isHireFieldHidden">
                
@@ -809,6 +796,7 @@
 <div *ngIf="registerButtonClicked && isHiringMandatory && !emp_joined_date" class="error-message">
             {{hiredFieldName}} is required.
         </div>
+       <!-- <div *ngIf="registerButtonClicked && !emp_mother_name" class="error-message">Description is required.</div> -->
     </div>
 
     <div class="col-md-6">
