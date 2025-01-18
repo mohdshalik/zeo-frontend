@@ -74,7 +74,6 @@ export class CreateEmployeeComponent implements OnInit {
   emp_dept_id:any='';
   emp_desgntn_id:any='';
   emp_ctgry_id:any='';
-  // emp_languages: string[] = [];
   emp_languages: any='';
   emp_date_of_confirmation:any='';
   emp_joined_date:any=''; 
