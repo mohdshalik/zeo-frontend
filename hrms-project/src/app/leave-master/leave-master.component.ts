@@ -92,7 +92,28 @@ userDetails: any;
 userDetailss: any;
 schemas: string[] = []; // Array to store schema names
 
+name:any='';
+code:any='';
+type:any='';
+unit:any='';
+valid_to:any='';
+valid_from:any='';
+
+description:any='';
+
+image: string | undefined;
+
+negative: boolean = false;
+
+allow_opening_balance: boolean = false;
+
+
+selectedFile!: File | null;
+
   @ViewChild('select') select: MatSelect | undefined;
+  @ViewChild('selectDept') selectDept: MatSelect | undefined;
+  @ViewChild('selectDes') selectDes: MatSelect | undefined;
+  @ViewChild('selectCat') selectCat: MatSelect | undefined;
 
 
   constructor(
@@ -238,7 +259,49 @@ if (this.userId !== null) {
    
     }
 
+    onFileSelected(event: any): void {
+      this.selectedFile = event.target.files.length > 0 ? event.target.files[0] : null;
+    }
+    
 
+
+    registerleaveType(): void {
+      this.registerButtonClicked = true;
+      if (!this.name || !this.code || !this.valid_to) {
+        return;
+      }
+    
+      const formData = new FormData();
+      formData.append('name', this.name);
+      formData.append('code', this.code);
+      formData.append('type', this.type);
+      formData.append('unit', this.unit);
+      formData.append('valid_to', this.valid_to);
+      formData.append('valid_from', this.valid_from);
+      formData.append('description', this.description);
+      formData.append('negative', this.negative.toString());
+      formData.append('allow_opening_balance', this.allow_opening_balance.toString());
+      // formData.append('image', this.selectedFile);
+        // Append the profile picture only if it's selected
+   // Append the image only if it's selected
+   if (this.selectedFile) {
+    formData.append('image', this.selectedFile);
+  }
+  
+    
+      this.leaveService.registerLeaveType(formData).subscribe(
+        (response) => {
+          console.log('Registration successful', response);
+          alert('Leave type has been added');
+          window.location.reload();
+        },
+        (error) => {
+          console.error('Added failed', error);
+          alert('Enter all required fields!');
+        }
+      );
+    }
+  
     // checkViewPermission(permissions: any[]): boolean {
     //   const requiredPermission = ' add_leave_entitlement' ||'change_leave_entitlement' ||'delete_leave_entitlement' ||'view_leave_entitlement';
       
@@ -306,7 +369,8 @@ if (this.userId !== null) {
         (response) => {
           console.log('Registration successful', response);
           alert('Leave Entitlement has been added');
-          window.location.reload();
+          // window.location.reload();
+          
         },  
         (error) => {
           console.error('Added failed', error);
@@ -417,6 +481,7 @@ if (this.userId !== null) {
   allSelecteddept=false;
   allSelectedcat=false;
   allSelectedEmp=false;
+  allSelectedDes=false;
 
 
   toggleAllSelection(): void {
@@ -431,21 +496,31 @@ if (this.userId !== null) {
   }
 
   toggleAllSelectiondept(): void {
-    if (this.select) {
+    if (this.selectDept) {
       if (this.allSelecteddept) {
-        this.select.options.forEach((item: MatOption) => item.select());
+        this.selectDept.options.forEach((item: MatOption) => item.select());
       } else {
-        this.select.options.forEach((item: MatOption) => item.deselect());
+        this.selectDept.options.forEach((item: MatOption) => item.deselect());
       }
     }
   }
 
   toggleAllSelectioncat(): void {
-    if (this.select) {
+    if (this.selectCat) {
       if (this.allSelectedcat) {
-        this.select.options.forEach((item: MatOption) => item.select());
+        this.selectCat.options.forEach((item: MatOption) => item.select());
       } else {
-        this.select.options.forEach((item: MatOption) => item.deselect());
+        this.selectCat.options.forEach((item: MatOption) => item.deselect());
+      }
+    }
+  }
+
+  toggleAllSelectionDes(): void {
+    if (this.selectDes) {
+      if (this.allSelectedDes) {
+        this.selectDes.options.forEach((item: MatOption) => item.select());
+      } else {
+        this.selectDes.options.forEach((item: MatOption) => item.deselect());
       }
     }
   }

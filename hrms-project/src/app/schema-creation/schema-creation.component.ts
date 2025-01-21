@@ -94,24 +94,26 @@ export class SchemaCreationComponent {
     this.registerButtonClicked = true;
 
   
-    if (!this.schema_name || !this.name || !this.country) {
+    if ( !this.name || !this.country) {
       let errorMessage = '';
-      if (!this.schema_name) errorMessage += 'Location Name field is blank. ';
+      // if (!this.schema_name) errorMessage += 'Location Name field is blank. ';
       if (!this.name) errorMessage += 'Name field is blank. ';
       alert(errorMessage.trim());
       return; // Exit the function if validation fails
     }
   
     // Validation for spaces in the schema_name field
-    const schemaNameHasSpaces = /\s/.test(this.schema_name);
-    if (schemaNameHasSpaces) {
-      alert('Schema name should not contain spaces.');
-      return; // Exit the function if validation fails
-    }
+
+
+    // const schemaNameHasSpaces = /\s/.test(this.schema_name);
+    // if (schemaNameHasSpaces) {
+    //   alert('Schema name should not contain spaces.');
+    //   return; // Exit the function if validation fails
+    // }
   
     // Prepare FormData
     const companyData = new FormData();
-    companyData.append('schema_name', this.schema_name);
+    // companyData.append('schema_name', this.schema_name);
     companyData.append('name', this.name);
     companyData.append('owner', this.owner);
     

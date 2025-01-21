@@ -5,20 +5,20 @@
 
         <form >
         <div class="row">
-            <div class="col-md-6" >
+            <!-- <div class="col-md-6" >
                
-      <label>Company Name</label>
-     <input type="text"  class="form-control" required  [(ngModel)]="schema_name"  placeholder="Enter Company Name"
+      <label>Schema Name</label>
+     <input type="text"  class="form-control" required  [(ngModel)]="schema_name"  placeholder="Enter schema name"
       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !schema_name}">
      
-     <div *ngIf="registerButtonClicked && !schema_name" class="error-message">Company Name is required.</div>
-</div>
+     <div *ngIf="registerButtonClicked && !schema_name" class="error-message">schema_name  is required.</div>
+</div> -->
 
 
 <div class="col-md-6" >
                
-    <label>Name </label>
-   <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter Name "
+    <label>Company Name </label>
+   <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter Company  Name "
     [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
    
    <div *ngIf="registerButtonClicked && !name" class="error-message">Name is required.</div>
