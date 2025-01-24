@@ -26,12 +26,20 @@ export class FromDesignerComponent {
   field_name: any
   field_value: any;
 
+
+
   // emp_id: string = '';
   data_type:any='';
   dropdown_values:any='';
   radio_values:any="";
   emp_id: number | undefined;
   emp_master:any='';
+
+  field_name_doc: any
+  field_value_doc: any;
+  data_type_doc:any='';
+  dropdown_values_doc:any='';
+  radio_values_doc:any="";
 
   registerButtonClicked = false;
   registerButtonClicked1 = false;
@@ -43,7 +51,8 @@ export class FromDesignerComponent {
 
   isMArketingModalOpen:boolean=false;
 
-  
+  isDocumentfieldModalOpen:boolean=false;
+
    // Initial field names
    empCodeFieldName: string = 'Employee Code';
    firstNameFieldName: string = 'First Name';
@@ -174,6 +183,8 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
 
 
   custom_fields :any[] = [];
+  custom_fields_doc :any[] = [];
+
 
   constructor(private EmployeeService: EmployeeService ,
     private http: HttpClient,
@@ -190,6 +201,8 @@ private sessionService: SessionService,
 
    ngOnInit(): void {
     this.loadFormFields();
+    this.loadFormFieldsDoc();
+
     this.loadFieldNames();
     this.loadFieldDisplay();
     this.loadFamilyFieldNames();
@@ -1248,6 +1261,14 @@ if (this.userId !== null) {
     this.isMArketingModalOpen=false;
   }
 
+  openDocFieldModal(): void {
+    this.isDocumentfieldModalOpen = true;
+  }
+  ClosePopupDoc(){
+    this.isDocumentfieldModalOpen=false;
+  }
+
+
 //   CreateEmployeeFeild(): void {
 //     this.registerButtonClicked = true;
 
@@ -1319,6 +1340,41 @@ CreateEmployeeFeild(): void {
   );
 }
 
+
+CreateEmployeeFeildDoc(): void {
+  this.registerButtonClicked = true;
+
+  // Convert the dropdown_values string into an array
+  const dropdownValuesArray = this.dropdown_values_doc
+      ? this.dropdown_values_doc.split(',').map((value: any) => value.trim())
+      : [];
+      
+ // Convert the radio_values string into an array
+ const radio_valuesArray = this.radio_values_doc
+ ? this.radio_values_doc.split(',').map((value: any) => value.trim())
+ : [];
+
+  const fieldData = {
+    emp_custom_field: this.field_name_doc,
+      field_value: this.field_value_doc,
+      data_type: this.data_type_doc,
+      dropdown_values: dropdownValuesArray,
+      radio_values: radio_valuesArray,
+      // mandatory: this.mandatory  // Capture the mandatory field status
+  };
+
+  this.EmployeeService.registerEmpAddMoreFeildDoc(fieldData).subscribe(
+      (response) => {
+          console.log('Field added successfully', response);
+          alert('Field added successfully');
+      },
+      (error) => {
+          console.error('Field addition failed', error);
+          alert('Enter all fields!');
+      }
+  );
+}
+
 updateCustomField(field: any): void {
   // Convert the dropdown_values and radio_values only if they are strings
   const updatedField = {
@@ -1365,6 +1421,23 @@ loadFormFields(): void {
   }
 }
 
+loadFormFieldsDoc(): void {
+  const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+  console.log('schemastore',selectedSchema )
+  // Check if selectedSchema is available
+  if (selectedSchema) {
+  this.EmployeeService.getFormFieldDoc(selectedSchema).subscribe(
+    (result: any) => {
+      this.custom_fields_doc = result;
+    },
+    (error: any) => {
+      console.error('Error fetching countries:', error);
+    }
+  );
+  }
+}
+
 
 deleteCustomField(fieldId: number): void {
   if (confirm('Are you sure you want to delete this custom field?')) {
@@ -1382,6 +1455,24 @@ deleteCustomField(fieldId: number): void {
     );
   }
 }
+
+deleteCustomFieldDoc(fieldId: number): void {
+  if (confirm('Are you sure you want to delete this custom field?')) {
+    this.EmployeeService.deleteEmpCustomFieldDoc(fieldId).subscribe(
+      (response) => {
+        console.log('Field deleted successfully', response);
+        // Remove the deleted field from the custom_fields array
+        this.custom_fields_doc = this.custom_fields_doc.filter(field => field.id !== fieldId);
+        alert('Field deleted successfully');
+      },
+      (error) => {
+        console.error('Field delete failed', error);
+        alert('Error deleting field!');
+      }
+    );
+  }
+}
+
 
 
 

@@ -63,8 +63,8 @@
                             </div>
 
                             <div class="col-md-4">
-                                <h2>Employee Status</h2>
-                                <h3>{{employee.emp_status}}</h3>
+                                <h2>Is Ess</h2>
+                                <h3>{{employee.is_ess}}</h3>
                                 <!-- <h2>Employee Ess User</h2>
                                 <h3>{{employee.is_ess}}</h3> -->
                             </div>
@@ -107,6 +107,11 @@
                                 <h3>{{employee.emp_posting_location}}</h3>
                             </div>
                           
+                            
+                            <!-- <div class="col-md-5">
+                                <h2>Is Ess </h2>
+                                <h3>{{employee.is_ess}}</h3>
+                            </div> -->
                         </div>
 
                         <!-- <div *ngFor="let doc of expiredDocuments">
@@ -219,12 +224,14 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3" *ngFor="let cus of employee.custom_field_values">
+                                <div class="col-md-3" *ngFor="let cus of employee.custom_fields">
                                    <h2> {{cus.emp_custom_field}}</h2>
                                    <h3>{{cus.field_value}}</h3>
                                 </div>
                             </div>
                         </div>
+
+                        
 
                     
                     </mat-tab>
@@ -370,62 +377,49 @@
                   
 
                      <mat-tab label="Emp Documents">
-                        <div class="tab_content  mt-3" *ngIf="employeeDocuments.length"  >
+                        <div class="tab_content mt-3" *ngIf="employeeDocuments.length">
                             <div class="row mt-3" *ngFor="let document of employeeDocuments">
-                                <div class="col-md-2">
-                                    <h2>Document number</h2>
-                                    <h3>{{ document.emp_doc_number }}</h3>
+                              <div class="col-md-2">
+                                <h2>Document Number</h2>
+                                <h3>{{ document.emp_doc_number }}</h3>
+                              </div>
+                              <div class="col-md-2">
+                                <h2>Issue Date</h2>
+                                <h3>{{ document.emp_doc_issued_date }}</h3>
+                              </div>
+                              <div class="col-md-2">
+                                <h2>Expiry Date</h2>
+                                <h3>{{ document.emp_doc_expiry_date }}</h3>
+                              </div>
+                              <div class="col-md-2">
+                                <h2>Type</h2>
+                                <h3>{{ document.document_type }}</h3>
+                              </div>
+                              <div class="col-md-1">
+                                <h2>Status</h2>
+                                <h3>{{ document.is_active }}</h3>
+                              </div>
+                              <div class="col-md-3">
+                                <h2>Employee Document</h2>
+                                <div class="dec_sec" style="width: 100%;">
+                                  <!-- Display the document if it's an image -->
+                                  <img *ngIf="isImage(document.emp_doc_document)" [src]="document.emp_doc_document" alt="Employee Document" style="width: 150px; height:150px;">
+                                  <!-- Display a link to download the document if it's not an image -->
+                                  <a *ngIf="!isImage(document.emp_doc_document)" [href]="document.emp_doc_document" target="_blank">View Document</a>
                                 </div>
-                                <div class="col-md-2" >
-                                    <h2>issue Date</h2>
-                                    <h3> {{ document.emp_doc_issued_date }}</h3>
-                                </div>
-                             
-                             
-                                <div class="col-md-2" >
-                                    <h2>expired date</h2>
-                                    <h3>{{ document.emp_doc_expiry_date }} </h3>
-                                </div>
+                              </div>
+                          
+    <!-- Display each custom field in a separate column -->
+    <ng-container *ngFor="let field of document.doc_custom_fields">
+        <div class="col-md-3">
+          <h2>{{ field.emp_custom_field }}</h2>
+          <h3>Custom Field Value</h3>
 
-                                <div class="col-md-2">
-                                    <h2>Type</h2>
-                                    <h3>{{ document.document_type }}</h3>
-                                </div>
-
-                                <div class="col-md-1" >
-                                    <h2> Status</h2>
-                                    <h3> {{ document.is_active }}</h3>
-                                </div>
-
-                                
-
-                                <div class="col-md-3">
-                                    <h2>Employee Document</h2>
-
-                                    <div class="dec_sec" style="width: 100%;">
-                                    <!-- Display the document if it's an image -->
-                                    <img *ngIf="isImage(document.emp_doc_document)" [src]="document.emp_doc_document" alt="Employee Document" style="width: 150px; height:150px;">
-                                    <!-- Display a link to download the document if it's not an image -->
-                                    <a *ngIf="!isImage(document.emp_doc_document)" [href]="document.emp_doc_document" target="_blank">View Document</a>
-                                </div>
-                                </div>
-
-
-                                <!-- <div class="col-md-3" >
-                                    <h2>employee document</h2>
-                                    <img src="{{ document.emp_doc_document }}"  alt="Employee Document">
-                                </div> -->
-
-                                
-
-                               
-                             
-
-                         
+        </div>
+      </ng-container>
+                          
                             </div>
-
-                         
-                        </div>
+                          </div>
                         <div class=" mt-5" >
                             <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeefamAdd()">Add Document</button>
                         </div>

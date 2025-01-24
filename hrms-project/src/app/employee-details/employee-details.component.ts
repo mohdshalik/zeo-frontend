@@ -163,17 +163,16 @@ export class EmployeeDetailsComponent implements OnInit {
 
 
     fetchEmployeeDocuments(): void {
-      // this.http.get<any[]>('http://127.0.0.1:8000/employee/api/Employee/${employeeId}/emp-Documents/')
-      //   .subscribe((data: any[]) => {
-      //     this.employeeDocuments = data;
-      //   });
-
       this.EmployeeService.getDocument(this.employee).subscribe(
         data => {
-          this.employeeDocuments = data;
+          // Assuming the API response includes doc_custom_fields as part of each document object
+          this.employeeDocuments = data.map((document: { doc_custom_fields: any; }) => ({
+            ...document,
+            doc_custom_fields: document.doc_custom_fields || [] // Ensure this key is present
+          }));
         },
         error => {
-          console.error('Error fetching family details:', error);
+          console.error('Error fetching employee documents:', error);
         }
       );
     }

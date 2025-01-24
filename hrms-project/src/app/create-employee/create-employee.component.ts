@@ -919,8 +919,10 @@ uploadEmployeeDocument(): void {
         console.error('No schema selected.');
         // return throwError('No schema selected.'); // Return an error observable if no schema is selected
       }
-        this.http.post(`${this.apiUrl}/employee/api/emp-custom-field-value/?schema=${selectedSchema}`, fieldValue)
-            .subscribe(
+
+        // this.http.post(`${this.apiUrl}/employee/api/emp-custom-field-value/?schema=${selectedSchema}`, fieldValue)
+        this.http.post(`${this.apiUrl}/employee/api/custom-field-value/?schema=${selectedSchema}`, fieldValue)
+         .subscribe(
                 (response: any) => {
                     console.log('Custom field value posted successfully', response);
                 },

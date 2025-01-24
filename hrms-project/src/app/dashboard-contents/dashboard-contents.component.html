@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-7">
                   <div class="custom-sel pull-right">
-                    <select class="drop_list" [(ngModel)]="selectedBranchIdhol" (change)="onBranchChange($event)">
+                    <select class="drop_list form-control" [(ngModel)]="selectedBranchIdhol" (change)="onBranchChange($event)">
                       <option value="" disabled selected>Select Branch</option>
                       <option *ngFor="let branch of branches" [value]="branch.id">
                         {{ branch.branch_name }}

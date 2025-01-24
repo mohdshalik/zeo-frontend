@@ -1,10 +1,12 @@
 import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CompanyRegistrationService } from '../company-registration.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EmployeeService } from '../employee-master/employee.service';
 import { CountryService } from '../country.service';
+import { environment } from '../../environments/environment';
+import { SessionService } from '../login/session.service';
 
 @Component({
   selector: 'app-employee-family',
@@ -13,7 +15,8 @@ import { CountryService } from '../country.service';
 })
 export class EmployeeFamilyComponent {
 
-  
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
   selectedDeparmentsecId:any | undefined;
 
   registerButtonClicked = false;
@@ -64,6 +67,7 @@ export class EmployeeFamilyComponent {
   document_type:any='';
   selectedFile!: File;
   emp_id: number;
+  created_by:any='';
 
 
   constructor(private EmployeeService: EmployeeService ,
@@ -71,6 +75,8 @@ export class EmployeeFamilyComponent {
     private http: HttpClient,
     private authService: AuthenticationService,
     private countryService: CountryService,
+    private sessionService: SessionService,
+
    private ref:MatDialogRef<EmployeeFamilyComponent>,
    @Inject(MAT_DIALOG_DATA) public data: any,
    ) {
@@ -261,9 +267,13 @@ uploadEmployeeDocument(): void {
   this.EmployeeService.uploadEmployeeDocument(this.emp_id, formData)
     .subscribe(
       (response) => {
+        const createdEmployeeId = response.id; // Adjust based on your API response
+        this.EmployeeService.setEmployeeId(createdEmployeeId);
+        this.postCustomFieldValues(createdEmployeeId);
+
         console.log('Document upload successful', response);
         alert('Document upload successful');
-        window.location.reload();
+        // window.location.reload();
       },
       (error) => {
         console.error('Document upload failed', error);
@@ -271,14 +281,115 @@ uploadEmployeeDocument(): void {
       }
     );
 }
+
+file:any ='';
+visibilitys:boolean=false;
+visibles:boolean=true;
+ReadMore:boolean=false;
+selectedFiles: File | null = null;
+
+onFileChange(event: any){
+  // this.file = event.target.files[0];
+  // console.log(this.file);
+
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const file = input.files[0];
+    const validExtensions = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel', 'text/csv'];
+
+    if (!validExtensions.includes(file.type)) {
+      alert('Please upload a valid Excel file (e.g., .xls, .xlsx, or .csv)');
+      this.selectedFiles = null;
+      return;
+    }
+
+    this.selectedFiles = file;
+  }
+  
+}
+
+bulkUploadDoc() {
+  this.ReadMore = !this.ReadMore; //not equal to condition
+  this.visibles = !this.visibles;
+  this.visibilitys = !this.visibilitys;
+}
+
+bulkuploaddocument(): void {
+  if (!this.selectedFiles) {
+    alert('Please select a valid Excel file before uploading.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', this.selectedFiles); // Ensure this matches the backend field name
+  formData.append('emp_doc_number', this.emp_doc_number || '');
+  formData.append('emp_doc_issued_date', this.emp_doc_issued_date || '');
+  formData.append('emp_doc_expiry_date', this.emp_doc_expiry_date || '');
+  formData.append('document_type', this.document_type || '');
+
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    alert('No schema selected.');
+    return;
+  }
+
+  this.http.post(`${this.apiUrl}/employee/api/Bulkupload-Documents/bulk_upload/?schema=${selectedSchema}`, formData)
+    .subscribe(
+      (response) => {
+        console.log('Bulk upload successful', response);
+        alert('Bulk upload successful');
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Bulk upload failed', error);
+        alert(error.error || 'Error during bulk upload.');
+      }
+    );
+}
+
+  
  
+schemas: string[] = []; // Array to store schema names
+
+  
+userId: number | null | undefined;
+userDetails: any;
+userDetailss: any[] = [];
+username: any;
 
   ngOnInit(): void {
     this.loadDeparmentBranch();
     // this.loadStates();
     
     this.loadDocumentType();
+    this.loadFormFields();
+    this.userId = this.sessionService.getUserId();
+  
+    if (this.userId !== null) {
+      this.authService.getUserData(this.userId).subscribe(
+        (userData: any) => {
+          this.userDetails = userData;
+          this.created_by = this.userId; // Automatically set the owner to logged-in user ID
 
+        },
+        (error) => {
+          console.error('Failed to fetch user details:', error);
+        }
+      );
+
+      this.authService.getUserSchema(this.userId).subscribe(
+        (userData: any) => {
+          this.userDetailss = userData; // Store user schemas in userDetailss
+
+          this.schemas = userData.map((schema: any) => schema.schema_name);
+        },
+        (error) => {
+          console.error('Failed to fetch user schemas:', error);
+        }
+      );
+    } else {
+      console.error('User ID is null.');
+    }
    
   }
  
@@ -301,6 +412,24 @@ uploadEmployeeDocument(): void {
     }
   }
 
+  custom_fields :any[] = [];
+
+  loadFormFields(): void {
+    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+    console.log('schemastore',selectedSchema )
+    // Check if selectedSchema is available
+    if (selectedSchema) {
+    this.EmployeeService.getFormFieldDoc(selectedSchema).subscribe(
+      (result: any) => {
+        this.custom_fields = result;
+      },
+      (error: any) => {
+        console.error('Error fetching countries:', error);
+      }
+    );
+    }
+  }
   ClosePopup(){
     this.ref.close('Closed using function');
     window.location.reload();
@@ -345,6 +474,32 @@ uploadEmployeeDocument(): void {
   }
 
 
+  postCustomFieldValues(empMasterId: number): void {
+    const customFieldValues = this.custom_fields.map(field => ({
+        emp_custom_field: field.emp_custom_field, // Assuming the field has an 'id' property
+        field_value: field.field_value, // The value entered by the user
+        emp_documents: empMasterId ,// The employee ID from the response
+        created_by:this.created_by
+    }));
+
+    // Make API calls to post each custom field value
+    customFieldValues.forEach(fieldValue => {
+      const selectedSchema = localStorage.getItem('selectedSchema');
+      if (!selectedSchema) {
+        console.error('No schema selected.');
+        // return throwError('No schema selected.'); // Return an error observable if no schema is selected
+      }
+        this.http.post(`${this.apiUrl}/employee/api/Documents-customfieldvalue/?schema=${selectedSchema}`, fieldValue)
+            .subscribe(
+                (response: any) => {
+                    console.log('Custom field value posted successfully', response);
+                },
+                (error: HttpErrorResponse) => {
+                    console.error('Failed to post custom field value', error);
+                }
+            );
+    });
+}
 
 
 

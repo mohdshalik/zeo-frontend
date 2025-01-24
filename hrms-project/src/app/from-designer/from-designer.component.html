@@ -1802,7 +1802,7 @@
 <mat-step>
   <ng-template matStepLabel>Documents</ng-template>
   
-
+<div>
   
   <div class="mt-3">
       <mat-accordion class="mt-3">
@@ -1948,6 +1948,195 @@
                   </mat-expansion-panel>
                 </mat-accordion>
               </div>
+
+              <div class="calendar_view_sec mt-3" *ngFor="let field of custom_fields_doc">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <div class="col-md-6">
+                                Field Name - {{field.emp_custom_field}}
+                            </div>
+                            <div class="col-md-5">
+                                Data Type - {{field.data_type}}
+                            </div>
+                            <div class="col-md-1">
+                                <mat-icon class="trash" (click)="deleteCustomFieldDoc(field.id)">delete</mat-icon>
+                            </div>
+                            <mat-panel-title></mat-panel-title>
+                        </mat-expansion-panel-header>
+            
+                        <div class="inside_udf">
+                            <!-- Collapsible panel content for editing the field -->
+                            <div class="row">
+                                <!-- Field Name -->
+                                <div class="col-md-6">
+                                    <label>Field Name</label>
+                                    <input type="text" class="form-control" [(ngModel)]="field.emp_custom_field" placeholder="Enter Field Name" [ngModelOptions]="{standalone: true}" />
+                                </div>
+            
+                                <!-- Data Type -->
+                                <div class="col-md-6">
+                                    <label>Data Type</label>
+                                    <div class="custom-sel">
+                                        <select class="form-control" [(ngModel)]="field.data_type" [ngModelOptions]="{standalone: true}">
+                                            <option value="dropdown">Dropdown</option>
+                                            <option value="radio">Radio</option>
+                                            <option value="date">Date</option>
+                                        </select>
+                                    </div>
+                                </div>
+            
+                                <!-- Dropdown Values -->
+                                <div class="col-md-6" *ngIf="field.data_type === 'dropdown'">
+                                    <label>Dropdown Values</label>
+                                    <input type="text" class="form-control" [(ngModel)]="field.dropdown_values" placeholder="Enter Dropdown Values (comma separated)" [ngModelOptions]="{standalone: true}" />
+                                </div>
+            
+                                <!-- Radio Values -->
+                                <div class="col-md-6" *ngIf="field.data_type === 'radio'">
+                                    <label>Radio Values</label>
+                                    <input type="text" class="form-control" [(ngModel)]="field.radio_values" placeholder="Enter Radio Values (comma separated)" [ngModelOptions]="{standalone: true}" />
+                                </div>
+            
+                                <!-- Mandatory Field Checkbox -->
+                                <div class="col-md-6">
+                                    <label></label>
+                                    <div class="check-box-selection-sec mt-2">
+                                        <div class="mat-set">
+                                            <mat-checkbox [(ngModel)]="field.mandatory" [ngModelOptions]="{standalone: true}">Mandatory Field</mat-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Update Button -->
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <button type="button" mat-raised-button color="primary" (click)="updateCustomField(field)">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            
+              </div>
+
+<button class="d-block mx-auto btn " (click)="openDocFieldModal()">Add More Field</button>
+
+  <!-- Modal Popup for add marketing language skill -->
+  <div *ngIf="isDocumentfieldModalOpen" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-10">
+          <h2>Add New Fields For Employee Document</h2>
+          <hr>
+        </div>
+        <div class="col-md-2">
+          <span class="close pull-right" (click)="ClosePopupDoc()">&times;</span>
+        </div>
+      </div>
+
+
+
+      <form>
+        <div class="row">
+            <div class="col-md-6">
+
+                <label> Field Name</label>
+                <input type="text" class="form-control" required [(ngModel)]="field_name_doc"
+                    placeholder="Enter Feild Name" [ngModelOptions]="{standalone: true}"
+                    [ngClass]="{'error-field': registerButtonClicked && !field_name_doc}">
+
+                <div *ngIf="registerButtonClicked && !field_name_doc" class="error-message">Feild
+                    Name is required.</div>
+            </div>
+
+       
+
+            <div class="col-md-6">
+                <label>Data Type</label>
+                <div class="custom-sel">
+                  <select
+                    class="form-control"
+                    id="data_type"
+                    required
+                    [(ngModel)]="data_type_doc"
+                    [ngModelOptions]="{ standalone: true }"
+                    [ngClass]="{ 'error-field': registerButtonClicked1 && !data_type }"
+                  >
+                    <option value="" disabled>Select Data Type</option>
+                    <option value="dropdown">Dropdown</option>
+                    <option value="radio">Radio</option>
+                    <option value="date">Date</option>
+                    <option value="text">Text Box</option>
+                  </select>
+                  <div *ngIf="registerButtonClicked1 && !data_type_doc" class="error-message">
+                    Please select a type
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Dropdown values input field, displayed only if "dropdown" is selected -->
+              <div class="col-md-6" *ngIf="data_type_doc === 'dropdown'">
+                <label>Dropdown Values</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  [(ngModel)]="dropdown_values_doc"
+                  placeholder="Enter Dropdown Values (comma separated)"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+              
+              <!-- Radio values input field, displayed only if "radio" is selected -->
+              <div class="col-md-6" *ngIf="data_type_doc === 'radio'">
+                <label>Radio Values</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  [(ngModel)]="radio_values_doc"
+                  placeholder="Enter Radio Values (comma separated)"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+              
+
+
+              <!-- <div class="col-md-6">
+                <label></label>
+                <div class="check-box-selection-sec mt-2">
+                    <div class="mat-set">
+                        <mat-checkbox [(ngModel)]="mandatory">Mandatory Field</mat-checkbox>
+                    </div>
+                   
+                </div>
+              </div>
+             -->
+
+        
+        </div>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <button (click)="ClosePopupDoc()" class="pull-right btn btn-danger btn-full mt-4">Close</button>
+
+            </div>
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" (click)="CreateEmployeeFeildDoc()" class="pull-right btn-full mt-4">Done</button>
+
+            </div>
+        </div>
+    </form>
+
+   
+
+     
+    </div>
+  </div>
+              
   <div>
     <button class="pull-right" mat-button matStepperPrevious>Back</button>
   </div>
