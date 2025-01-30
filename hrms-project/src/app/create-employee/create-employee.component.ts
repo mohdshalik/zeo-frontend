@@ -552,6 +552,8 @@ uploadEmployeeDocument(): void {
   const selectedDate = new Date(this.emp_date_of_confirmation);
   const formattedDate = selectedDate.toISOString().split('T')[0]; // Converts to "YYYY-MM-DD"
   
+  const joinedDate = new Date(this.emp_joined_date);
+  const formattedJoinedDate = joinedDate.toISOString().split('T')[0];
 
   
   // Add fields to FormData
@@ -595,7 +597,9 @@ uploadEmployeeDocument(): void {
     // formData.append('emp_date_of_confirmation', this.emp_date_of_confirmation);
     formData.append('emp_date_of_confirmation', formattedDate);
 
-    formData.append('emp_joined_date', this.emp_joined_date);
+    // formData.append('emp_joined_date', this.emp_joined_date);
+    formData.append('emp_joined_date', formattedJoinedDate);
+
     formData.append('is_ess', this.is_ess ? '1' : '0');
     formData.append('emp_status', this.emp_status ? '1' : '0');
 
