@@ -57,7 +57,7 @@ export class UserMasterComponent {
 
     ngOnInit(): void {
     
-      this.loadUsers();
+      // this.loadUsers();
 
       
 // Retrieve user ID
@@ -185,24 +185,24 @@ if (this.userId !== null) {
 }
 
 
-      this.UserMasterService.getUsername().subscribe(username => {
-        this.username = username;
-      });
+      // this.UserMasterService.getUsername().subscribe(username => {
+      //   this.username = username;
+      // });
       
-      this.UserMasterService.getEmail().subscribe(email => {
-        this.email = email;
+      // this.UserMasterService.getEmail().subscribe(email => {
+      //   this.email = email;
         
-      });
+      // });
            
-      this.UserMasterService.getCompanyroll().subscribe(CompanyRole => {
-        this.CompanyRole = CompanyRole;
+      // this.UserMasterService.getCompanyroll().subscribe(CompanyRole => {
+      //   this.CompanyRole = CompanyRole;
         
-      });
+      // });
            
-      this.UserMasterService.getContact().subscribe(contact_number => {
-        this.contact_number = contact_number;
+      // this.UserMasterService.getContact().subscribe(contact_number => {
+      //   this.contact_number = contact_number;
         
-      });
+      // });
   
    
 
@@ -245,26 +245,28 @@ if (this.userId !== null) {
     //   return groupPermissions.some(permission => permission.codename === codeName);
     // }
      
-    loadUsers(): void {
-      this.UserMasterService.getUsers().subscribe(
-        (result: any) => {
-          this.Users = result;
-          console.log(' fetching Users:');
+    // loadUsers(): void {
+    //   this.UserMasterService.getUsers().subscribe(
+    //     (result: any) => {
+    //       this.Users = result;
+    //       console.log(' fetching Users:');
   
-        },
-        (error) => {
-          console.error('Error fetching Users:', error);
-        }
-      );
-    }
+    //     },
+    //     (error) => {
+    //       console.error('Error fetching Users:', error);
+    //     }
+    //   );
+    // }
   
 
     filterEmployees(): void {
       const query = this.searchQuery.toLowerCase();
       this.filteredEmployees = this.Users.filter(Users =>
         Users.username.toLowerCase().includes(query) ||
-        Users.email.toLowerCase().includes(query)
+        Users.email.toLowerCase().includes(query) ||
+        Users.filter((employee: { is_deleted: any; }) => !employee.is_deleted)
       );
+      
     }
   
 
@@ -294,26 +296,55 @@ if (this.userId !== null) {
     // You can add any additional logic if needed.
   }
 
-  deleteSelectedEmployees() { 
-    const selectedEmployeeIds = this.Users
-      .filter(employee => employee.selected)
-      .map(employee => employee.id);
+  // deleteSelectedEmployees() { 
+  //   const selectedEmployeeIds = this.Users
+  //     .filter(employee => employee.selected)
+  //     .map(employee => employee.id);
 
+  //   if (selectedEmployeeIds.length === 0) {
+  //     alert('No employees selected for deletion.');
+  //     return;
+  //   }
+
+  //   if (confirm('Are you sure you want to delete the selected employees?')) {
+  //     selectedEmployeeIds.forEach(DeptId => {
+  //       this.UserMasterService.deleteUser(DeptId).subscribe(
+  //         () => {
+  //           console.log('User deleted successfully:', DeptId);
+  //           // Remove the deleted employee from the local list
+  //           this.Users = this.Users.filter(employee => employee.id !== DeptId);
+  //         },
+  //         (error) => {
+  //           console.error('Error deleting employee:', error);
+  //         }
+  //       );
+  //     });
+  //   }
+  // }
+
+  deleteSelectedEmployees() {
+    const selectedEmployeeIds = this.Users.filter(employee => employee.selected).map(employee => employee.id);
+  
     if (selectedEmployeeIds.length === 0) {
       alert('No employees selected for deletion.');
       return;
     }
-
-    if (confirm('Are you sure you want to delete the selected employees?')) {
-      selectedEmployeeIds.forEach(DeptId => {
-        this.UserMasterService.deleteUser(DeptId).subscribe(
+  
+    if (confirm('Are you sure you want to hide the selected employees?')) {
+      selectedEmployeeIds.forEach(userId => {
+        this.UserMasterService.markUserAsDeleted(userId).subscribe(
           () => {
-            console.log('User deleted successfully:', DeptId);
-            // Remove the deleted employee from the local list
-            this.Users = this.Users.filter(employee => employee.id !== DeptId);
+            console.log('User marked as deleted:', userId);
+            // Update the local list to hide the user
+            this.Users = this.Users.map(employee => {
+              if (employee.id === userId) {
+                return { ...employee, is_deleted: true }; // Mark as deleted locally
+              }
+              return employee;
+            });
           },
           (error) => {
-            console.error('Error deleting employee:', error);
+            console.error('Error marking user as deleted:', error);
           }
         );
       });

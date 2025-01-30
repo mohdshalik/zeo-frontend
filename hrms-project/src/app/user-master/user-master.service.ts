@@ -42,6 +42,8 @@ export class UserMasterService {
  
   }
 
+  
+
   getSChemaUsers(selectedSchema: string): Observable<any> {
     // Construct the API URL with the selected schema
     const Url = `${this.apiUrl}/users/tenant-users/?schema=${selectedSchema}`;
@@ -320,6 +322,17 @@ return this.http.delete(apiUrl);
 
   }
 
+  markUserAsDeleted(userId: number): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+   
+   
+    const url = `${this.apiUrl}/users/api/user/${userId}/deactivate_user/`; // Update the endpoint accordingly
+    return this.http.post(url, {});
+  }
 
  
 

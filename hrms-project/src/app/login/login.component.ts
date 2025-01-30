@@ -148,18 +148,18 @@ export class LoginComponent implements OnInit {
       (error:HttpErrorResponse) => {
 
         if (error.status === 401) {
-          // Unauthorized error, typically used for wrong credentials
+          // Unauthorized error (wrong credentials)
           alert('Incorrect username or password.');
+        } else if (error.error?.non_field_errors) {
+          // Handle deactivated account error
+          alert(error.error.non_field_errors[0]); // "Your account is deactivated. Please contact support."
         } else {
           // General error message
           const errorMessage = error.error?.detail || 'Enter correct user ID and Password';
           alert(`Login error: ${errorMessage}`);
         }
-           
-
-        // console.error('Login error', error);
-        // // alert('Enter correct user ID and Password');
-        //       alert(`Login error: ${error.statusText}`);
+      
+        console.error('Login error', error);
       }
     );
   }

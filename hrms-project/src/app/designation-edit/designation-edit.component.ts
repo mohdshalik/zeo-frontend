@@ -22,7 +22,7 @@ export class DesignationEditComponent {
   registerButtonClicked = false;
   Catogaries: any[] = [];
 
-  job_title: string = '';
+  desgntn_job_title: string = '';
   desgntn_description:string ='';
   desgntn_code:string ='';
 

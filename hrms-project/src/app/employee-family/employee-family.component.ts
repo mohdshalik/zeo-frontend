@@ -255,6 +255,7 @@ createEmployeeLeaveReq():void{
 onFileSelected(event: any): void {
   this.selectedFile = event.target.files[0];
 }
+
 uploadEmployeeDocument(): void {
   this.registerButtonClicked3 = true;
   const formData = new FormData();

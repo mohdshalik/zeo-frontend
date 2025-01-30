@@ -10,10 +10,10 @@
             <div class="col-md-6" >
                
                 <label>Job Title</label>
-               <input type="text"  class="form-control" required id="job_title" name="job_title"  [(ngModel)]="designation.job_title"  placeholder="Enter Description "
-                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !job_title}">
+               <input type="text"  class="form-control" required id="desgntn_job_title" name="job_title"  [(ngModel)]="designation.desgntn_job_title"  placeholder="Enter Description "
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !desgntn_job_title}">
                
-               <div *ngIf="registerButtonClicked && !job_title" class="error-message">Description is required.</div>
+               <div *ngIf="registerButtonClicked && !desgntn_job_title" class="error-message">Designation name is required.</div>
             </div>
 
             <div class="col-md-6" >
