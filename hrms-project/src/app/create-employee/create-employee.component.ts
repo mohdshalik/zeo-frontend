@@ -531,6 +531,8 @@ uploadEmployeeDocument(): void {
       { field: this.emp_date_of_confirmation, fieldName: this.hiredFieldName, condition: this.isHiringMandatory },
   ];
 
+
+
   // Validate required fields
   for (const field of requiredFields) {
       if (field.condition !== false && !field.field) {
@@ -547,6 +549,11 @@ uploadEmployeeDocument(): void {
       formData.append('emp_profile_pic', '');
   }
 
+  const selectedDate = new Date(this.emp_date_of_confirmation);
+  const formattedDate = selectedDate.toISOString().split('T')[0]; // Converts to "YYYY-MM-DD"
+  
+
+  
   // Add fields to FormData
   formData.append('emp_code', this.emp_code);
 
@@ -585,7 +592,9 @@ uploadEmployeeDocument(): void {
     formData.append('emp_languages', this.emp_languages);
 
     // formData.append('emp_languages', JSON.stringify(this.emp_languages));
-    formData.append('emp_date_of_confirmation', this.emp_date_of_confirmation);
+    // formData.append('emp_date_of_confirmation', this.emp_date_of_confirmation);
+    formData.append('emp_date_of_confirmation', formattedDate);
+
     formData.append('emp_joined_date', this.emp_joined_date);
     formData.append('is_ess', this.is_ess ? '1' : '0');
     formData.append('emp_status', this.emp_status ? '1' : '0');
