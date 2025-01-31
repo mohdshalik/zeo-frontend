@@ -304,18 +304,33 @@ if (this.userId !== null) {
     return groupPermissions.some(permission => permission.codename === codeName);
   }
 
+  // fetchDesignations(selectedSchema: string) {
+  //   this.EmployeeService.getemployees(selectedSchema).subscribe(
+  //     (data: any) => {
+  //       this.employees = data;
+  //       this.filteredEmployees = this.employees;
+  //       console.log('employee:', this.employees);
+  //     },
+  //     (error: any) => {
+  //       console.error('Error fetching categories:', error);
+  //     }
+  //   );
+  // }
+
   fetchDesignations(selectedSchema: string) {
-    this.EmployeeService.getemployees(selectedSchema).subscribe(
-      (data: any) => {
-        this.employees = data;
-        this.filteredEmployees = this.employees;
-        console.log('employee:', this.employees);
-      },
-      (error: any) => {
-        console.error('Error fetching categories:', error);
-      }
-    );
-  }
+  this.EmployeeService.getemployees(selectedSchema).subscribe(
+    (data: any) => {
+      // Filtering employees where is_active is null or true
+      this.employees = data.filter((employee: any) => employee.is_active === null || employee.is_active === true);
+      this.filteredEmployees = this.employees;
+      console.log('Filtered Employees:', this.filteredEmployees);
+    },
+    (error: any) => {
+      console.error('Error fetching employees:', error);
+    }
+  );
+}
+
 
 
   toggleSearchOptions(): void {
