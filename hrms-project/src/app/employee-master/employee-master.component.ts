@@ -130,7 +130,7 @@ export class EmployeeMasterComponent {
    this.EmployeeService.getEmployees(selectedSchema).subscribe(
      (data: any) => {
        this.employees = data;
-       console.log('employee:' ,this.employees)
+       console.log('All Employees:' ,this.employees)
      },
      (error: any) => {
        console.error('Error fetching employees:', error);
@@ -142,13 +142,13 @@ export class EmployeeMasterComponent {
       
       
    // Extract schema name from the URL
-   const urlParts = window.location.href.split('.');
-   if (urlParts.length >= 2) {
-     this.selectedSchema = urlParts[0].replace('http://', '');
-     console.log(urlParts)
-   } else {
-     console.error("No schema selected.");
-   }
+  //  const urlParts = window.location.href.split('.');
+  //  if (urlParts.length >= 2) {
+  //    this.selectedSchema = urlParts[0].replace('http://', '');
+  //    console.log(urlParts)
+  //  } else {
+  //    console.error("No schema selected.");
+  //  }
 
       
       this.hideButton = this.EmployeeService.getHideButton();
