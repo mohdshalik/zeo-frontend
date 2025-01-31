@@ -47,6 +47,7 @@ export class DepartmentEditComponent {
   ) {
     this.DepartmentServiceService.getCategoryById(data.departmentId).subscribe(department => {
       this.department = department;
+      this.department.branch_id = department.branch_id;  // Ensure branch_id is assigned
     });
   }
 
@@ -57,6 +58,9 @@ export class DepartmentEditComponent {
     this.DepartmentServiceService.getCategoryById(this.data.departmentId).subscribe(
       (department) => {
         this.department = department;
+        this.department.branch_id = department.branch_id;  // Ensure branch_id is assigned
+        console.log('branch',this.department.branch_id)
+
       },
       (error) => {
         console.error('Error fetching department:', error);

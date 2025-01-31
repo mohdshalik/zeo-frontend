@@ -105,7 +105,8 @@ export class EmployeeEditComponent {
   // emp_languages: string[] = [];
   emp_active_date:any='';
   emp_hired_date:any=''; 
-  
+  emp_date_of_confirmation:any='';
+  emp_joined_date:any=''; 
 
 
   is_ess: boolean = false;
@@ -246,12 +247,17 @@ export class EmployeeEditComponent {
 //    // return; // Exit the function if validation fails
 //  }
    
+const selectedDate = new Date(this.emp_date_of_confirmation);
+const formattedDate = selectedDate.toISOString().split('T')[0]; // Converts to "YYYY-MM-DD"
+
+const joinedDate = new Date(this.emp_joined_date);
+const formattedJoinedDate = joinedDate.toISOString().split('T')[0];
     
     // Append other employee details
     formData.append('emp_code', this.Emp.emp_code);
 
     formData.append('emp_first_name', this.Emp.emp_first_name);
-    formData.append('emp_last_name', this.Emp.emp_last_name);
+    formData.append('emp_last_name', this.Emp.emp_last_name); 
     formData.append('emp_gender', this.Emp.emp_gender);
     formData.append('emp_date_of_birth', this.Emp.emp_date_of_birth);
     formData.append('emp_personal_email', this.Emp.emp_personal_email);
@@ -277,8 +283,11 @@ export class EmployeeEditComponent {
     formData.append('emp_desgntn_id', this.Emp.emp_desgntn_id);
     formData.append('emp_ctgry_id', this.Emp.emp_ctgry_id);
     // formData.append('emp_languages', JSON.stringify(this.Emp.emp_languages)); // Assuming emp_languages is an array of strings
-    formData.append('emp_active_date', this.Emp.emp_active_date);
-    formData.append('emp_hired_date', this.Emp.emp_hired_date);
+       // formData.append('emp_date_of_confirmation', this.emp_date_of_confirmation);
+       formData.append('emp_date_of_confirmation', formattedDate);
+
+       // formData.append('emp_joined_date', this.emp_joined_date);
+       formData.append('emp_joined_date', formattedJoinedDate);
     formData.append('is_ess', this.Emp.is_ess ? '1' : '0');
     formData.append('emp_status', this.Emp.emp_status ? '1' : '0');
 

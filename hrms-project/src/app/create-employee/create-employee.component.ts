@@ -1739,7 +1739,7 @@ loadFormFields(): void {
   }
   
 
-Delete: boolean = false;
+  Delete: boolean = false;
 
    Deletes: boolean = false;
    selectedFiles!: File;
