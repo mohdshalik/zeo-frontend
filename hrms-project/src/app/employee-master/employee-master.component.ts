@@ -317,15 +317,24 @@ if (this.userId !== null) {
   //   );
   // }
 
+  isLoading: boolean = false;
+
   fetchDesignations(selectedSchema: string) {
+    this.isLoading = true;
+
   this.EmployeeService.getemployees(selectedSchema).subscribe(
     (data: any) => {
       // Filtering employees where is_active is null or true
       this.employees = data.filter((employee: any) => employee.is_active === null || employee.is_active === true);
       this.filteredEmployees = this.employees;
+      this.isLoading = false;
+
+
       console.log('Filtered Employees:', this.filteredEmployees);
     },
     (error: any) => {
+      this.isLoading = false;
+
       console.error('Error fetching employees:', error);
     }
   );
@@ -424,7 +433,13 @@ if (this.userId !== null) {
               () => {
                   console.log('Employee deleted successfully');
                   // Refresh the employee list after deletion
-                  this.loadEmployee();
+                  const selectedSchema = this.authService.getSelectedSchema();
+                  if (!selectedSchema) {
+                    console.error('No schema selected.');
+                    return;
+                  }
+                  this.fetchDesignations(selectedSchema);
+                  window.location.reload();
               },
               (error) => {
                   console.error('Error deleting employee:', error);

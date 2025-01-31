@@ -342,6 +342,8 @@ if (this.userId !== null) {
               }
               return employee;
             });
+            window.location.reload();
+
           },
           (error) => {
             console.error('Error marking user as deleted:', error);
@@ -394,6 +396,7 @@ onDeleteEmployee(employeeId: number): void {
       this.UserMasterService.deleteUser(employeeId).subscribe(
           () => {
               console.log('User deleted successfully');
+              window.location.reload();
 
               // this.router.navigate(['/main-sidebar/sub-sidebar/employee-master']);
               // Refresh the employee list after deletion
