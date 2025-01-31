@@ -1681,11 +1681,26 @@ loadFormFields(): void {
               console.log('The success modal was closed');
               // Handle any actions after the modal is closed, if needed
             });
-      }, (error) => {
-        // Handle upload error
-        console.error('Document upload failed', error);
-        alert('enter all fields correctly');
-      });
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          // Check if the backend responds with missing fields error
+          if (error.error?.non_field_errors) {
+            alert(error.error.non_field_errors[0]); // Show specific error message from backend
+          } else {
+            alert('Enter all fields.');
+          }
+        } else if (error.status === 401) {
+          alert('Incorrect username or password.');
+        } else {
+          // General backend or network error
+          const errorMessage = error.error?.detail || 'Something went wrong. Please try again.';
+          alert(`Error: ${errorMessage}`);
+        }
+      
+        console.error('Upload error:', error);
+      }
+    );
 
   }
 
