@@ -553,7 +553,7 @@ uploadEmployeeDocument(): void {
   const formattedDate = selectedDate.toISOString().split('T')[0]; // Converts to "YYYY-MM-DD"
   
   const joinedDate = new Date(this.emp_joined_date);
-  const formattedJoinedDate = joinedDate.toISOString().split('T')[0];
+  const formattedJoinedDate = joinedDate.toISOString().split('T')[0]; 
 
   
   // Add fields to FormData

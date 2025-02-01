@@ -113,41 +113,42 @@ export class MainSidebarComponent {
 
 
 
-  selectSchema(event: any) {
-    const selectedSchemaName = event.target.value;
-    console.log("Selected schema name:", selectedSchemaName);
 
-    if (!selectedSchemaName) {
-        console.error("No schema selected.");
-        return;
-    }
+selectSchema(event: any) {
+  const selectedSchemaName = event.target.value;
+  console.log("Selected schema name:", selectedSchemaName);
 
-    const selectedSchema = this.userDetailss.find((schema: any) => schema.schema_name === selectedSchemaName);
-    if (!selectedSchema) {
-        console.error("Schema not found.");
-        return;
-    }
+  if (!selectedSchemaName) {
+      console.error("No schema selected.");
+      return;
+  }
 
-    const selectedSchemaId = selectedSchema.id;
-    console.log("Selected schema ID:", selectedSchemaId);
-    this.isLoading = true;
+  const selectedSchema = this.userDetailss.find((schema: any) => schema.schema_name === selectedSchemaName);
+  if (!selectedSchema) {
+      console.error("Schema not found.");
+      return;
+  }
 
-    // Store the selected schema name and ID in localStorage
-    localStorage.setItem('selectedSchema', selectedSchemaName);
-    localStorage.setItem('selectedSchemaId', selectedSchemaId.toString());
+  const selectedSchemaId = selectedSchema.id;
+  console.log("Selected schema ID:", selectedSchemaId);
+  this.isLoading = true;
 
-    // Update the component state
-    this.selectedSchema = selectedSchemaName;
+  // Store the selected schema name and ID in localStorage
+  localStorage.setItem('selectedSchema', selectedSchemaName);
+  localStorage.setItem('selectedSchemaId', selectedSchemaId.toString());
 
-    // Delay the URL redirection to ensure state is updated
-    setTimeout(() => {
-      this.isLoading = false; // Hide the loader
+  // Update the component state
+  this.selectedSchema = selectedSchemaName;
 
-      const url = `/main-sidebar/dashboard-contents`;
-        window.location.href = url;
-    }, 3000); // Delay of 100ms to ensure localStorage is updated
+  // Delay the URL redirection to ensure state is updated
+  setTimeout(() => {
+    this.isLoading = false; // Hide the loader
+
+    this.router.navigate(['/main-sidebar/dashboard-contents']);
+    // const url =` /main-sidebar/dashboard-contents`;
+    //   window.location.href = url;
+  }, 3000); // Delay of 100ms to ensure localStorage is updated
 }
-
 
 
 showsidebar: boolean = true;
@@ -177,27 +178,44 @@ showsidebarclick() {
   }
 
 
+  // logout(): void {
+  //   this.authService.logout().subscribe(() => {
+  //     // Clear any user-related data
+  //     localStorage.removeItem('token'); // Example: Remove authentication token
+  //     localStorage.removeItem('selectedSchema'); // Remove selected schema
+
+  //      // Remove schema-related subdomain
+  //   const currentUrl = window.location.href;
+  //   const baseUrl = new URL(currentUrl);
+  //   baseUrl.hostname = environment.apiBaseUrl
+
+  //      // Redirect to the login page
+  //      this.router.navigate(['/login']).then(() => {
+  //       window.location.href = baseUrl.origin + '/login';
+  //     });
+  //   }, (error: HttpErrorResponse) => { // Specify the type of error as HttpErrorResponse
+  //     console.error('Logout failed:', error);
+  //   });
+
+    
+  // }
+
   logout(): void {
     this.authService.logout().subscribe(() => {
       // Clear any user-related data
-      localStorage.removeItem('token'); // Example: Remove authentication token
-      localStorage.removeItem('selectedSchema'); // Remove selected schema
-
-       // Remove schema-related subdomain
-    const currentUrl = window.location.href;
-    const baseUrl = new URL(currentUrl);
-    baseUrl.hostname = environment.apiBaseUrl
-
-       // Redirect to the login page
-       this.router.navigate(['/login']).then(() => {
-        window.location.href = baseUrl.origin + '/login';
-      });
-    }, (error: HttpErrorResponse) => { // Specify the type of error as HttpErrorResponse
+      localStorage.removeItem('token'); // Remove authentication token
+  
+      // If you need to reset the hostname (for subdomain logout scenarios)
+      const currentUrl = window.location.href;
+      const baseUrl = new URL(currentUrl);
+      baseUrl.hostname = environment.apiBaseUrl; 
+  
+      // Redirect to login after logout and ensure a full reload
+      window.location.href = baseUrl.origin + '/login';
+      
+    }, (error: HttpErrorResponse) => { 
       console.error('Logout failed:', error);
     });
-
-    
   }
-
   
 }

@@ -134,35 +134,55 @@ export class SchemaSelectionComponent {
       setTimeout(() => {
         this.isLoading = false; // Hide the loader
   
-        const url =` /main-sidebar/dashboard-contents`;
-          window.location.href = url;
+        this.router.navigate(['/main-sidebar/dashboard-contents']);
+        // const url =` /main-sidebar/dashboard-contents`;
+        //   window.location.href = url;
       }, 3000); // Delay of 100ms to ensure localStorage is updated
   }
   
 
 
+    // logout(): void {
+    //   this.authService.logout().subscribe(() => {
+    //     // Clear any user-related data
+    //     localStorage.removeItem('token'); // Example: Remove authentication token
+    //     // Redirect to the login page
+    //     this.router.navigate(['/login']);
+
+    //      // Remove schema-related subdomain
+    // const currentUrl = window.location.href;
+    // const baseUrl = new URL(currentUrl);
+    // baseUrl.hostname = environment.apiBaseUrl
+
+    //    // Redirect to the login page
+    //    this.router.navigate(['/login']).then(() => {
+    //     window.location.href = baseUrl.origin + '/login';
+    //   });
+
+    //     // location.reload();
+    //   }, (error: HttpErrorResponse) => { // Specify the type of error as HttpErrorResponse
+    //     console.error('Logout failed:', error);
+    //   });
+    // }
+
     logout(): void {
       this.authService.logout().subscribe(() => {
         // Clear any user-related data
-        localStorage.removeItem('token'); // Example: Remove authentication token
-        // Redirect to the login page
-        this.router.navigate(['/login']);
-
-         // Remove schema-related subdomain
-    const currentUrl = window.location.href;
-    const baseUrl = new URL(currentUrl);
-    baseUrl.hostname = environment.apiBaseUrl
-
-       // Redirect to the login page
-       this.router.navigate(['/login']).then(() => {
+        localStorage.removeItem('token'); // Remove authentication token
+    
+        // If you need to reset the hostname (for subdomain logout scenarios)
+        const currentUrl = window.location.href;
+        const baseUrl = new URL(currentUrl);
+        baseUrl.hostname = environment.apiBaseUrl; 
+    
+        // Redirect to login after logout and ensure a full reload
         window.location.href = baseUrl.origin + '/login';
-      });
-
-        // location.reload();
-      }, (error: HttpErrorResponse) => { // Specify the type of error as HttpErrorResponse
+        
+      }, (error: HttpErrorResponse) => { 
         console.error('Logout failed:', error);
       });
     }
+    
  
     showboard :boolean=false;
 
