@@ -164,10 +164,10 @@ export class EmployeeDetailsComponent implements OnInit {
       return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
     }
 
-    // isImages(src: string): boolean {
-    //   const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
-    //   return extensions.some((ext) => src.toLowerCase().endsWith(ext));
-    // }
+    isImages(src: string): boolean {
+      const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
+      return extensions.some((ext) => src.toLowerCase().endsWith(ext));
+    }
     // fetchEmployeeDocuments(): void {
     //   this.EmployeeService.getDocument(this.employee).subscribe(
     //     data => {
@@ -187,11 +187,13 @@ export class EmployeeDetailsComponent implements OnInit {
 
     fetchEmployeeDocuments(): void {
       this.EmployeeService.getDocument(this.employee).subscribe(
-        data => {
-          console.log('Fetched employee documents:', data);
-          this.employeeDocuments = data.map((document: { emp_doc_document: any; }) => ({
+        (data: any[]) => {  // Allow any structure
+          this.employeeDocuments = data.map(document => ({
             ...document,
-            emp_doc_document: document.emp_doc_document ? document.emp_doc_document : null
+            emp_doc_document: document.emp_doc_document
+              ? `${environment.apiBaseUrl}${document.emp_doc_document}`
+              : null,
+            doc_custom_fields: document.doc_custom_fields || []
           }));
         },
         error => {
@@ -199,17 +201,7 @@ export class EmployeeDetailsComponent implements OnInit {
         }
       );
     }
-    
 
-    isImages(filePath: string | null | undefined): boolean {
-      if (!filePath) {
-        return false; // If null or undefined, return false instead of calling toLowerCase()
-      }
-    
-      const lowerCasePath = filePath.toLowerCase();
-      return lowerCasePath.endsWith('.jpg') || lowerCasePath.endsWith('.jpeg') || 
-             lowerCasePath.endsWith('.png') || lowerCasePath.endsWith('.gif');
-    }
     loadFamilyDetails(): void {
       this.EmployeeService.getFamilyDetails(this.employee).subscribe(
         family => {
