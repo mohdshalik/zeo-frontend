@@ -298,13 +298,7 @@ onFileChange(event: any){
     const file = input.files[0];
     const validExtensions = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel', 'text/csv'];
 
-    if (!validExtensions.includes(file.type)) {
-      alert('Please upload a valid Excel file (e.g., .xls, .xlsx, or .csv)');
-      this.selectedFiles = null;
-      return;
-    }
-
-    this.selectedFiles = file;
+   
   }
   
 }
@@ -382,6 +376,11 @@ username: any;
         (userData: any) => {
           this.userDetailss = userData; // Store user schemas in userDetailss
 
+
+
+
+
+          
           this.schemas = userData.map((schema: any) => schema.schema_name);
         },
         (error) => {
