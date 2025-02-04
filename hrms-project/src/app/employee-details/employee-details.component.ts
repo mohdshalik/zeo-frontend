@@ -163,26 +163,59 @@ export class EmployeeDetailsComponent implements OnInit {
       return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
     }
 
-    isImages(src: string): boolean {
-      const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
-      return extensions.some((ext) => src.toLowerCase().endsWith(ext));
-    }
+    isPDF(url: string): boolean {
+  return url.toLowerCase().endsWith('.pdf');
+}
+
+  
+    // fetchEmployeeDocuments(): void {
+    //   this.EmployeeService.getDocument(this.employee).subscribe(
+
+    //     family => {
+    //       this.employeeDocuments = family.map((document: { doc_custom_fields: any; }) => ({
+    //         ...document,
+            
+    //         doc_custom_fields: document.doc_custom_fields || [] // Ensure this key is present
+    //       }));
+    //     },
+      
+    //     // data => {
+          
+    //     //   // Assuming the API response includes doc_custom_fields as part of each document object
+    //     //   this.employeeDocuments = data.map((document: { doc_custom_fields: any; }) => ({
+    //     //     ...document,
+            
+    //     //     doc_custom_fields: document.doc_custom_fields || [] // Ensure this key is present
+    //     //   }));
+    //     // },
+    //     error => {
+    //       console.error('Error fetching employee documents:', error);
+    //     }
+    //   );
+    // }
+
     fetchEmployeeDocuments(): void {
       this.EmployeeService.getDocument(this.employee).subscribe(
-        data => {
-          
-          // Assuming the API response includes doc_custom_fields as part of each document object
-          this.employeeDocuments = data.map((document: { doc_custom_fields: any; }) => ({
+        (data: any) => {
+          const baseUrl = this.EmployeeService.getApiUrl(); // Get API URL safely
+    
+          // Filtering only active documents (is_active === true)
+          this.employeeDocuments = data.filter((document: any) => document.is_active === true).map((document: any) => ({
             ...document,
-            
-            doc_custom_fields: document.doc_custom_fields || [] // Ensure this key is present
+            doc_custom_fields: document.doc_custom_fields || [], // Ensure custom fields are present
+            emp_doc_document: document.emp_doc_document 
+              ? `${baseUrl}${document.emp_doc_document}` // Full URL for document
+              : null
           }));
+          
+          console.log('Filtered Employee Documents:', this.employeeDocuments);
         },
         error => {
           console.error('Error fetching employee documents:', error);
         }
       );
     }
+  
 
     loadFamilyDetails(): void {
       this.EmployeeService.getFamilyDetails(this.employee).subscribe(
