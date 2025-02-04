@@ -403,9 +403,9 @@
                                 <h2>Employee Document</h2>
                                 <div class="dec_sec" style="width: 100%;">
                                   <!-- Display the document if it's an image -->
-                                  <!-- <img [src]="document.emp_doc_document"  (error)="handleImageErrors($event)" style="width: 150px; height:150px;"> -->
+                                  <img [src]="document.emp_doc_document"  (error)="handleImageErrors($event)" style="width: 150px; height:150px;">
 
-                                  <img *ngIf="isImage(document.emp_doc_document)" [src]="document.emp_doc_document" alt="Employee Document" style="width: 150px; height:150px;">
+                                  <!-- <img *ngIf="isImage(document.emp_doc_document)" [src]="document.emp_doc_document" alt="Employee Document" style="width: 150px; height:150px;"> -->
                                   <!-- Display a link to download the document if it's not an image -->
                                   <a *ngIf="!isImage(document.emp_doc_document)" [href]="document.emp_doc_document" target="_blank">View Document</a>
                                 </div>
