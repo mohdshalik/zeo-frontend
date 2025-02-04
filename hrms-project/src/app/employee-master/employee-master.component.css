@@ -100,7 +100,8 @@ margin-right: 10px;
     background: white;
     padding: 25px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    border-left: solid 3px navy
+    border-left: solid 3px navy;
+    height: 170px;
 }
 
 .emp_pic{
