@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http'; // Import HttpErrorResponse
 import { EmployeeService } from '../employee-master/employee.service';
 import { SessionService } from '../login/session.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -112,22 +113,19 @@ export class EmployeeDashboardComponent {
   logout(): void {
     this.authService.logout().subscribe(() => {
       // Clear any user-related data
-      localStorage.removeItem('token'); // Example: Remove authentication token
-      localStorage.removeItem('selectedSchema'); // Remove selected schema
-
-       // Remove schema-related subdomain
-    const currentUrl = window.location.href;
-    const baseUrl = new URL(currentUrl);
-    baseUrl.hostname = 'localhost';
-
-       // Redirect to the login page
-       this.router.navigate(['/login']).then(() => {
-        window.location.href = baseUrl.origin + '/login';
-      });
-    }, (error: HttpErrorResponse) => { // Specify the type of error as HttpErrorResponse
+      localStorage.removeItem('token'); // Remove authentication token
+  
+      // If you need to reset the hostname (for subdomain logout scenarios)
+      const currentUrl = window.location.href;
+      const baseUrl = new URL(currentUrl);
+      baseUrl.hostname = environment.apiBaseUrl; 
+  
+      // Redirect to login after logout and ensure a full reload
+      window.location.href = baseUrl.origin + '/login';
+      
+    }, (error: HttpErrorResponse) => { 
       console.error('Logout failed:', error);
     });
-
     
   }
 
