@@ -16,7 +16,6 @@ import { SuccesModalComponent } from '../succes-modal/succes-modal.component';
 import { EmployeeFamilyComponent } from '../employee-family/employee-family.component';
 import { NotificationServiceService } from '../notification-service.service';
 import { EmployeeCreateLanguageComponent } from '../employee-create-language/employee-create-language.component';
-import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -160,49 +159,23 @@ export class EmployeeDetailsComponent implements OnInit {
       // console.error('Error loading image:', event);
     }
 
-    isImage(src: string | null | undefined): boolean {
-      console.log("Checking image:", src); // Debugging log
-      if (!src) {
-        return false;
-      }
-      return src.toLowerCase().endsWith('.jpg') || 
-             src.toLowerCase().endsWith('.jpeg') || 
-             src.toLowerCase().endsWith('.png') || 
-             src.toLowerCase().endsWith('.gif');
+    isImage(src: string): boolean {
+      return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
     }
 
-    
-
-    // isImages(src: string): boolean {
-    //   const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
-    //   return extensions.some((ext) => src.toLowerCase().endsWith(ext));
-    // }
-    // fetchEmployeeDocuments(): void {
-    //   this.EmployeeService.getDocument(this.employee).subscribe(
-    //     data => {
-          
-    //       // Assuming the API response includes doc_custom_fields as part of each document object
-    //       this.employeeDocuments = data.map((document: { doc_custom_fields: any; }) => ({
-    //         ...document,
-            
-    //         doc_custom_fields: document.doc_custom_fields || [] // Ensure this key is present
-    //       }));
-    //     },
-    //     error => {
-    //       console.error('Error fetching employee documents:', error);
-    //     }
-    //   );
-    // }
-
+    isImages(src: string): boolean {
+      const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
+      return extensions.some((ext) => src.toLowerCase().endsWith(ext));
+    }
     fetchEmployeeDocuments(): void {
       this.EmployeeService.getDocument(this.employee).subscribe(
-        (data: any[]) => {  // Allow any structure
-          this.employeeDocuments = data.map(document => ({
+        data => {
+          
+          // Assuming the API response includes doc_custom_fields as part of each document object
+          this.employeeDocuments = data.map((document: { doc_custom_fields: any; }) => ({
             ...document,
-            emp_doc_document: document.emp_doc_document
-              ? `${environment.apiBaseUrl}${document.emp_doc_document}`
-              : null,
-            doc_custom_fields: document.doc_custom_fields || []
+            
+            doc_custom_fields: document.doc_custom_fields || [] // Ensure this key is present
           }));
         },
         error => {
