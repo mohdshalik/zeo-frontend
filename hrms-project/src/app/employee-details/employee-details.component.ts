@@ -159,29 +159,29 @@ export class EmployeeDetailsComponent implements OnInit {
       // console.error('Error loading image:', event);
     }
 
-    isImage(src: string): boolean {
-      return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
-    }
+    // isImage(src: string): boolean {
+    //   return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
+    // }
 
     // isImages(src: string): boolean {
     //   const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
     //   return extensions.some((ext) => src.toLowerCase().endsWith(ext));
     // }
     fetchEmployeeDocuments(): void {
-      this.EmployeeService.getDocument(this.employee).subscribe(
-        data => {
+      // this.EmployeeService.getDocument(this.employee).subscribe(
+      //   data => {
           
-          // Assuming the API response includes doc_custom_fields as part of each document object
-          this.employeeDocuments = data.map((document: { doc_custom_fields: any; }) => ({
-            ...document,
+      //     // Assuming the API response includes doc_custom_fields as part of each document object
+      //     this.employeeDocuments = data.map((document: { doc_custom_fields: any; }) => ({
+      //       ...document,
             
-            doc_custom_fields: document.doc_custom_fields || [] // Ensure this key is present
-          }));
-        },
-        error => {
-          console.error('Error fetching employee documents:', error);
-        }
-      );
+      //       doc_custom_fields: document.doc_custom_fields || [] // Ensure this key is present
+      //     }));
+      //   },
+      //   error => {
+      //     console.error('Error fetching employee documents:', error);
+      //   }
+      // );
     }
 
     loadFamilyDetails(): void {
