@@ -160,9 +160,18 @@ export class EmployeeDetailsComponent implements OnInit {
       // console.error('Error loading image:', event);
     }
 
-    isImage(src: string): boolean {
-      return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
+    isImage(src: string | null | undefined): boolean {
+      console.log("Checking image:", src); // Debugging log
+      if (!src) {
+        return false;
+      }
+      return src.toLowerCase().endsWith('.jpg') || 
+             src.toLowerCase().endsWith('.jpeg') || 
+             src.toLowerCase().endsWith('.png') || 
+             src.toLowerCase().endsWith('.gif');
     }
+
+    
 
     // isImages(src: string): boolean {
     //   const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
