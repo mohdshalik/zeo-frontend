@@ -163,10 +163,10 @@ export class EmployeeDetailsComponent implements OnInit {
       return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
     }
 
-    isImages(src: string): boolean {
-      const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
-      return extensions.some((ext) => src.toLowerCase().endsWith(ext));
-    }
+    // isImages(src: string): boolean {
+    //   const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
+    //   return extensions.some((ext) => src.toLowerCase().endsWith(ext));
+    // }
     fetchEmployeeDocuments(): void {
       this.EmployeeService.getDocument(this.employee).subscribe(
         data => {
