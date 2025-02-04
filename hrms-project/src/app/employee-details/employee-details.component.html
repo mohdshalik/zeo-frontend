@@ -376,47 +376,7 @@
                     </mat-tab> -->
                   
 
-                     <mat-tab label="Emp Documents">
-                        <div class="tab_content mt-3" *ngIf="employeeDocuments.length">
-                            <div class="row mt-3" *ngFor="let document of employeeDocuments">
-                              <div class="col-md-2">
-                                <h2>Document Number</h2>
-                                <h3>{{ document.emp_doc_number }}</h3>
-                              </div>
-                              <div class="col-md-2">
-                                <h2>Issue Date</h2>
-                                <h3>{{ document.emp_doc_issued_date }}</h3>
-                              </div>
-                              <div class="col-md-2">
-                                <h2>Expiry Date</h2>
-                                <h3>{{ document.emp_doc_expiry_date }}</h3>
-                              </div>
-                              <div class="col-md-2">
-                                <h2>Type</h2>
-                                <h3>{{ document.document_type }}</h3>
-                              </div>
-                              <div class="col-md-1">
-                                <h2>Status</h2>
-                                <h3>{{ document.is_active }}</h3>
-                              </div>
-                           
-                          
-    <!-- Display each custom field in a separate column -->
-    <ng-container *ngFor="let field of document.doc_custom_fields">
-        <div class="col-md-3">
-          <h2>{{ field.emp_custom_field }}</h2>
-          <h3>{{ field.field_value }}</h3>
-
-        </div>
-      </ng-container>
-                          
-                            </div>
-                          </div>
-                        <div class=" mt-5" >
-                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeefamAdd()">Add Document</button>
-                        </div>
-                        <div *ngIf="!employeeDocuments.length">No employee documents available.</div>
-                    </mat-tab>
+                    
                   
                     <mat-tab label="Emp Language">
                         <div class="tab_content  mt-3"   >
