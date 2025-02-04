@@ -139,6 +139,7 @@ import { EmployeeApprovalsComponent } from './employee-approvals/employee-approv
 import { DashboardContentsComponent } from './dashboard-contents/dashboard-contents.component';
 import { MatStepperModule } from '@angular/material/stepper';  
 import { ShiftsComponent } from './shifts/shifts.component';
+import { PayRollComponent } from './pay-roll/pay-roll.component';
 
 @NgModule({
   declarations: [
@@ -235,7 +236,8 @@ import { ShiftsComponent } from './shifts/shifts.component';
      EmployeeLeaveComponent,
      EmployeeApprovalsComponent,
      DashboardContentsComponent,
-     ShiftsComponent
+     ShiftsComponent,
+     PayRollComponent
      
      
 

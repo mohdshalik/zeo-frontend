@@ -64,6 +64,7 @@ import { EmployeeApprovalsComponent } from './employee-approvals/employee-approv
 import { EmployeeLeaveComponent } from './employee-leave/employee-leave.component';
 import { DashboardContentsComponent } from './dashboard-contents/dashboard-contents.component';
 import { ShiftsComponent } from './shifts/shifts.component';
+import { PayRollComponent } from './pay-roll/pay-roll.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -129,6 +130,11 @@ const routes: Routes = [
             path:'attendace-marking',
             component:AttendaceMarkingComponent,
           },
+          {
+            path:'pay-roll',
+            component:PayRollComponent,
+          },
+
 
           
           { path: 'report-generate',
