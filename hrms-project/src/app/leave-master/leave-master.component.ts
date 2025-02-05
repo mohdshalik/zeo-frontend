@@ -76,6 +76,15 @@ isLinear = true;
 
 
 
+
+  showMonth: boolean = false; // Controls the visibility of the "Month" dropdown
+  showDay: boolean = false;   // Controls the visibility of the "Day" dropdown
+
+  showResetMonth: boolean = false; // Controls the visibility of the reset "Month" dropdown
+  showResetDay: boolean = false;   // Controls the visibility of the reset "Day" dropdown
+
+
+
   gender:any='';
   branch:any='';
   designation:any='';
@@ -525,4 +534,32 @@ if (this.userId !== null) {
     }
   }
   
+
+
+  onAccrualFrequencyChange(): void {
+    if (this.accrual_frequency === 'years') {
+      this.showMonth = true;  // Show month dropdown
+      this.showDay = true;    // Show day dropdown
+    } else if (this.accrual_frequency === 'months') {
+      this.showMonth = false; // Hide month dropdown
+      this.showDay = true;    // Show day dropdown
+    } else {
+      this.showMonth = false; // Hide both dropdowns
+      this.showDay = false;
+    }
+  }
+
+
+  onResetFrequencyChange(): void {
+    if (this.frequency === 'years') {
+      this.showResetMonth = true;  // Show month dropdown
+      this.showResetDay = true;    // Show day dropdown
+    } else if (this.frequency === 'months') {
+      this.showResetMonth = false; // Hide month dropdown
+      this.showResetDay = true;    // Show day dropdown
+    } else {
+      this.showResetMonth = false; // Hide both dropdowns
+      this.showResetDay = false;
+    }
+  }
 }

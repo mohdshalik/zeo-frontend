@@ -198,15 +198,16 @@
             <div class="col-md-4">
               <label>Accrual frequency</label>
               <div class="custom-sel">
-                <select class="form-control" id="accrual_frequency" name="accrual_frequency" [(ngModel)]="accrual_frequency" [ngModelOptions]="{standalone: true}">
+                <select class="form-control" id="accrual_frequency" name="accrual_frequency" [(ngModel)]="accrual_frequency" (change)="onAccrualFrequencyChange()" [ngModelOptions]="{standalone: true}">
                   <option value="years">Years</option>
                   <option value="months">Months</option>
                   <option value="days">Days</option>
                 </select>
               </div>
             </div>
-
-            <div class="col-md-4">
+            
+            <!-- Accrual Month: Visible only when "Years" is selected -->
+            <div class="col-md-4" *ngIf="showMonth">
               <label>Accrual month</label>
               <div class="custom-sel">
                 <select class="form-control" id="accrual_month" name="accrual_month" [(ngModel)]="accrual_month" [ngModelOptions]="{standalone: true}">
@@ -223,11 +224,11 @@
                   <option value="Nov">November</option>
                   <option value="Dec">December</option>
                 </select>
-                
               </div>
             </div>
-
-            <div class="col-md-4">
+            
+            <!-- Accrual Day: Visible when "Years" or "Months" is selected -->
+            <div class="col-md-4" *ngIf="showDay">
               <label>Accrual day</label>
               <div class="custom-sel">
                 <select class="form-control" id="accrual_day" name="accrual_day" [(ngModel)]="accrual_day" [ngModelOptions]="{standalone: true}">
@@ -236,6 +237,7 @@
                 </select>
               </div>
             </div>
+            
 
 
             <div class="col-md-4">
@@ -270,10 +272,11 @@
        
 
                          
-          <div class="col-md-4">
+          <div class="col-md-4" >
               <label>Frequency</label>
               <div class="custom-sel">
-                <select class="form-control" id="frequency" name="frequency" [(ngModel)]="frequency" [ngModelOptions]="{standalone: true}">
+                <select class="form-control" id="frequency" name="frequency" [(ngModel)]="frequency"
+                (change)="onResetFrequencyChange()" [ngModelOptions]="{standalone: true}">
                   <option value="years">Years</option>
                   <option value="months">Months</option>
                   <option value="days">Days</option>
@@ -281,7 +284,7 @@
               </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="showResetMonth">
               <label> Month</label>
               <div class="custom-sel">
                 <select class="form-control" id="month" name="month" [(ngModel)]="month" [ngModelOptions]="{standalone: true}">
@@ -302,7 +305,7 @@
               </div>
             </div>
           
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="showResetDay">
               <label>Day</label>
               <div class="custom-sel">
                 <select class="form-control" id="day" name="day" [(ngModel)]="day" [ngModelOptions]="{standalone: true}">

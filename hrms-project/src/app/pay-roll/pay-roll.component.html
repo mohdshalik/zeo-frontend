@@ -49,40 +49,93 @@
             <mat-tab label="Salary Component">
                 
                 <div class="tab_boddy">
-                    <!-- <form (ngSubmit)="requestCompansatoryLeave()" enctype="multipart/form-data">
+                    <form (ngSubmit)="RegisterSalaryComponent()" enctype="multipart/form-data">
 
                         <div class="row">
+                            <div class="col-md-6">
+                                <label> Component Name</label>
+                                <input type="text" class="form-control" required [(ngModel)]="name" placeholder="Enter  name"
+                                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
+                         <div *ngIf="registerButtonClicked && !name" class="error-message"> name is required.</div>
+                            </div>
                             <div class="col-md-6" >
-                                <label>Request type</label>
+                                <label>Component Type</label>
                                 <div class="custom-sel">
-                                  <select class="form-control" id="request_type" name="request_type" [(ngModel)]="request_type" [ngModelOptions]="{standalone: true}">
-                                    <option value="work_request">work Request</option>
-                                    <option value="leave_request">Compansatory Leave Request</option>
+                                  <select class="form-control" id="component_type" name="component_type" [(ngModel)]="component_type" [ngModelOptions]="{standalone: true}">
+                                    <option value="deduction">Deduction</option>
+                                    <option value="addition">Addition</option>
+                                    <option value="others">Others</option>
                                   </select>
                                 </div>
                               </div>
 
                                   
                       <div class="col-md-6">
-                        <label>Work Date</label>
-                        <input type="date" class="form-control" required [(ngModel)]="work_date" placeholder="Enter work Date"
-                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !work_date}">
-                        <div *ngIf="registerButtonClicked && !work_date" class="error-message">work Date is required.</div>
+                        <label>Gl Code</label>
+                        <input type="text" class="form-control" required [(ngModel)]="glcode" placeholder="Enter glcode "
+                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !glcode}">
+                        <div *ngIf="registerButtonClicked && !glcode" class="error-message">glcode  is required.</div>
                       </div>
                   
                       <div class="col-md-12">
-                        <label>Reason</label>
-                        <textarea class="form-control" [(ngModel)]="reason" [ngModelOptions]="{standalone: true}"></textarea>
+                        <label>Description</label>
+                        <textarea class="form-control" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
                       </div>
+                      
+            <div class="col-md-4">
+                <label></label>
+                <div class="check-box-selection-sec mt-2">
+                    <div class="mat-set">
+                        <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
+                        <mat-checkbox [(ngModel)]="is_fixed" [ngModelOptions]="{standalone: true}">Is Fixed</mat-checkbox>
+                        <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
+                    </div>
+                   
+                </div>
+            </div>
 
-                      <div class="col-md-6">
-                        <label>Employee</label>
-                        <div class="custom-sel">
-                          <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let employee of Employees" [value]="employee.id">{{ employee.emp_code }}</option>
-                          </select>
-                        </div>
-                      </div>
+            <div class="col-md-4">
+                <label></label>
+                <div class="check-box-selection-sec mt-2">
+                    <div class="mat-set">
+                       <mat-checkbox [(ngModel)]="affected_by_unpaid_leave" [ngModelOptions]="{standalone: true}">
+                        Affected by unpaid leave</mat-checkbox>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label></label>
+                <div class="check-box-selection-sec mt-2">
+                    <div class="mat-set">
+                       <mat-checkbox [(ngModel)]="affected_by_halfpaid_leave" [ngModelOptions]="{standalone: true}">
+                        Affected by halfpaid leave</mat-checkbox>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label></label>
+                <div class="check-box-selection-sec mt-2">
+                    <div class="mat-set">
+                       <mat-checkbox [(ngModel)]="prorata_calculation" [ngModelOptions]="{standalone: true}">
+                        Prorata calculation</mat-checkbox>
+                    </div>
+                   
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label></label>
+                <div class="check-box-selection-sec mt-2">
+                    <div class="mat-set">
+                       <mat-checkbox [(ngModel)]="is_emi_deduction" [ngModelOptions]="{standalone: true}">
+                        Is emi deduction</mat-checkbox>
+                    </div>
+                   
+                </div>
+            </div>
+
 
                             </div>
                             <div class="row" *ngIf="hasAddPermission">
@@ -93,59 +146,67 @@
                               </div>
                           </div>
                       
-                    </form> -->
+                    </form>
             </div>
           </mat-tab>
+           
               <mat-tab label="Employee Salary ">
   
                 <div class="tab_boddy">
-                    <!-- <form (ngSubmit)="requestCompansatoryTransLeave()" enctype="multipart/form-data">
+                    <form (ngSubmit)="requestEmployeeSalary()" enctype="multipart/form-data">
 
                         <div class="row">
-                            <div class="col-md-6" >
-                                <label>Transaction type</label>
-                                <div class="custom-sel">
-                                  <select class="form-control" id="transaction_type" name="transaction_type" [(ngModel)]="transaction_type" [ngModelOptions]="{standalone: true}">
-                                    <option value="addition">Addition</option>
-                                    <option value="deduction">Deduction</option>
-                                  </select>
-                                </div>
-                              </div>
-
+                         
 
                                   
                       <div class="col-md-6">
-                        <label>Days</label>
-                        <input type="date" class="form-control" required [(ngModel)]="days" placeholder="Enter  Days"
-                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !days}">
-                        <div *ngIf="registerButtonClicked && !days" class="error-message"> Days is required.</div>
+                        <label>Amount</label>
+                        <input type="text" class="form-control" required [(ngModel)]="amount" placeholder="Enter  amount"
+                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !amount}">
+                        <div *ngIf="registerButtonClicked && !amount" class="error-message"> amount is required.</div>
                       </div>
                   
-                      <div class="col-md-12">
-                        <label>Reason</label>
-                        <textarea class="form-control" [(ngModel)]="reason" [ngModelOptions]="{standalone: true}"></textarea>
-                      </div>
-
+                 
                       <div class="col-md-6">
                         <label>Employee</label>
                         <div class="custom-sel">
                           <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let employee of Employees" [value]="employee.id">{{ employee.emp_code }}</option>
+                            <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.emp_code }}</option>
                           </select>
                         </div>
                       </div>
 
+                      <div class="col-md-6">
+                        <label>Salary Component</label>
+                        <div class="custom-sel">
+                          <select class="form-control" id="component" name="component" [(ngModel)]="component" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let component of Salarycomponent" [value]="component.id">{{ component.name }}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label></label>
+                        <div class="check-box-selection-sec mt-2">
+                            <div class="mat-set">
+                               <mat-checkbox [(ngModel)]="is_active" [ngModelOptions]="{standalone: true}">
+                                Is Active</mat-checkbox>
+                            </div>
+                           
+                        </div>
+                    </div>
+
                             </div>
                             
-                            <div class="row" *ngIf="hasAddPermission">
+                            <div class="row" >
                               <div class="col-md-9"></div>
                               <div class="col-md-3">
-                                  <button type="submit" class="btn btn-success btn-full mt-4">Save</button>
+                                  <button type="submit"  class="btn btn-success btn-full mt-4">Save</button>
                   
                               </div>
                           </div>
                       
-                    </form> -->
+                    </form>
                 </div>
                   </mat-tab>
   

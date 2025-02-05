@@ -7,9 +7,15 @@
           <div class="sidebar">
               <ul>
                   <li routerLink="/main-sidebar/sub-sidebar/employee-master" *ngIf="hasViewPermissionEmp"><a><mat-icon>peoples</mat-icon> Employee Master </a></li>
+                 
+                  <li routerLink="/main-sidebar/sub-sidebar/pay-roll" *ngIf="hasViewPermissionAttd"><a ><mat-icon>peoples</mat-icon> Pay Roll</a></li>
+
                   <li routerLink="/main-sidebar/sub-sidebar/department-master" *ngIf="hasViewPermissiondept"><a ><mat-icon>peoples</mat-icon> Department Master </a></li>
+                 
                   <li routerLink="/main-sidebar/sub-sidebar/designation-master" *ngIf="hasViewPermissiondesg"><a ><mat-icon>peoples</mat-icon> Designation Master</a></li>
+                  
                   <li routerLink="/main-sidebar/sub-sidebar/catogary-master" *ngIf="hasViewPermission"><a ><mat-icon>peoples</mat-icon> Category Master</a></li>
+                 
                   <li routerLink="/main-sidebar/sub-sidebar/general-request" *ngIf="hasViewPermissionGenreq"><a ><mat-icon>peoples</mat-icon> General Request</a></li>
                  
                   <li routerLink="/main-sidebar/sub-sidebar/request-type" *ngIf="hasViewPermissionReqType"><a ><mat-icon>peoples</mat-icon> Request Type</a></li>
@@ -20,7 +26,6 @@
                  
                   <li routerLink="/main-sidebar/sub-sidebar/attendace-marking" *ngIf="hasViewPermissionAttd"><a ><mat-icon>peoples</mat-icon> Attendance Marking</a></li>
                  
-                  <li routerLink="/main-sidebar/sub-sidebar/pay-roll" *ngIf="hasViewPermissionAttd"><a ><mat-icon>peoples</mat-icon> Pay Roll</a></li>
 
   
               </ul> 
