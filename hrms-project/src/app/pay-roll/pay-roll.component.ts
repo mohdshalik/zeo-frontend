@@ -5,6 +5,7 @@ import { SessionService } from '../login/session.service';
 import { LeaveService } from '../leave-master/leave.service';
 import { DesignationService } from '../designation-master/designation.service';
 import { EmployeeService } from '../employee-master/employee.service';
+import { CatogaryService } from '../catogary-master/catogary.service';
 
 @Component({
   selector: 'app-pay-roll',
@@ -14,22 +15,27 @@ import { EmployeeService } from '../employee-master/employee.service';
 export class PayRollComponent {
 
 
-  name:any='';
-  component_type:any='';
-  glcode:any='';
-  description:any='';
-  reason:any='';
-  is_fixed: boolean = false;
-  affected_by_unpaid_leave: boolean = false;
-  affected_by_halfpaid_leave: boolean = false;
-  prorata_calculation: boolean = false;
-  is_emi_deduction: boolean = false;
+  payroll_frequency:any='';
+  next_run_date:any='';
+  pay_period_start_date:any='';
+  pay_period_end_date:any='';
+  created_by:any='';
+  category:any='';
 
 
-  amount:any='';
+
+
+  pay_period_start:any='';
+  pay_period_end:any='';
+  total_earnings:any='';
+  total_deductions:any='';
+  net_salary:any='';
   employee:any='';
-  component:any='';
-  is_active: boolean = false;
+  is_paid: boolean = false;
+
+
+  payslip_pdf: File | null = null;
+  payroll:any='';
 
   registerButtonClicked: boolean = false;
 
@@ -50,6 +56,13 @@ Salarycomponent: any[] = [];
 
 filteredEmployees: any[] = [];
 
+Categories: any[] = [];
+Payrolls: any[] = [];
+PayrollSettings: any[] = [];
+PaySlips: any[] = [];
+
+
+
 
   constructor(
     private http: HttpClient,
@@ -58,6 +71,7 @@ filteredEmployees: any[] = [];
     private leaveService:LeaveService,
     private DesignationService: DesignationService,
     private EmployeeService:EmployeeService,
+    private categoryService:CatogaryService,
 
     
     ) {}
@@ -68,7 +82,11 @@ filteredEmployees: any[] = [];
 
 
       this.LoadEmployee(selectedSchema);
-      this.LoadSalaryCom(selectedSchema);
+      // this.LoadSalaryCom(selectedSchema);
+this.LoadCategory();
+this.LoadPayroll(selectedSchema);
+this.LoadPayrollSettings(selectedSchema);
+this.LoadPaySlip(selectedSchema)
 
       
       }
@@ -80,7 +98,7 @@ if (this.userId !== null) {
     async (userData: any) => {
       this.userDetails = userData; // Store user details in userDetails property
 
-
+      this.created_by = this.userId;
       console.log('User ID:', this.userId); // Log user ID
       console.log('User Details:', this.userDetails); // Log user details
 
@@ -194,74 +212,165 @@ if (this.userId !== null) {
       return groupPermissions.some(permission => permission.codename === codeName);
       }
 
-    RegisterSalaryComponent(): void {
-      this.registerButtonClicked = true;
 
 
-      if (!this.name || !this.component_type || !this.glcode) {
-        return;
-      }
-    
-      const formData = new FormData();
-      formData.append('name', this.name);
-      formData.append('component_type', this.component_type);
-      formData.append('glcode', this.glcode);
-      formData.append('description', this.description);
+      RegisterPayrollSettings(): void {
+        this.registerButtonClicked = true;
       
-      formData.append('is_fixed', this.is_fixed.toString());
-      formData.append('affected_by_unpaid_leave', this.affected_by_unpaid_leave.toString());
-
-      formData.append('affected_by_halfpaid_leave', this.affected_by_halfpaid_leave.toString());
-
-      formData.append('prorata_calculation', this.prorata_calculation.toString());
-
-      formData.append('is_emi_deduction', this.is_emi_deduction.toString());
-
-      this.leaveService.registerSalaryComponent(formData).subscribe(
-        (response) => {
-          console.log('Registration successful', response);
-          alert('Salary Component has been added');
-          window.location.reload();
-        },
-        (error) => {
-          console.error('Added failed', error);
-          alert('Enter all required fields!');
+        // Frontend validation
+        if (!this.payroll_frequency || !this.next_run_date || !this.pay_period_start_date || !this.pay_period_end_date) {
+          alert('Please fill in all required fields.');
+          return;
         }
-      );
-    }
-
-    
-    requestEmployeeSalary(): void {
       
-    
-      this.registerButtonClicked = true;
+        const formData = new FormData();
+        formData.append('payroll_frequency', this.payroll_frequency);
+        formData.append('next_run_date', this.next_run_date);
+        formData.append('pay_period_start_date', this.pay_period_start_date);
+        formData.append('pay_period_end_date', this.pay_period_end_date);
 
+        formData.append('category', this.category);
+        formData.append('created_by', this.created_by);
 
-      if (!this.amount || !this.employee || !this.component) {
-        return;
+        this.leaveService.requestPayrollSettings(formData).subscribe(
+          (response) => {
+            console.log('Registration successful', response);
+            alert('Payroll Settings has been added');
+            window.location.reload();
+          },
+          (error) => {
+            console.error('Added failed', error);
+      
+            // Extract backend error message
+            let errorMessage = 'An unexpected error occurred. Please try again.';
+      
+            if (error.error) {
+              if (typeof error.error === 'string') {
+                errorMessage = error.error; // If backend returns a string message
+              } else if (error.error.detail) {
+                errorMessage = error.error.detail; // If backend returns { detail: "message" }
+              } else if (error.error.non_field_errors) {
+                errorMessage = error.error.non_field_errors.join(', '); // Handle non-field errors array
+              } else {
+                // Handle field-specific errors
+                const fieldErrors = Object.keys(error.error).map(field => `${field}: ${error.error[field]}`).join('\n');
+                errorMessage = fieldErrors || errorMessage;
+              }
+            }
+      
+            alert(errorMessage); // Show extracted error
+          }
+        );
       }
-    
-      const formData = new FormData();
-      formData.append('amount', this.amount);
-      formData.append('employee', this.employee);
-      formData.append('component', this.component);
       
-      formData.append('is_active', this.is_active.toString());
-   
-
-      this.leaveService.registerEmpSalary(formData).subscribe(
-        (response) => {
-          console.log('Registration successful', response);
-          alert('Employee Salary  has been added');
-          window.location.reload();
-        },
-        (error) => {
-          console.error('Added failed', error);
-          alert('Enter all required fields!');
+    
+      requestPayRoll(): void {
+        this.registerButtonClicked = true;
+      
+        // Frontend validation
+        if (!this.pay_period_start || !this.pay_period_end || !this.employee) {
+          alert('Please fill in all required fields.');
+          return;
         }
-      );
-    }
+      
+        const formData = new FormData();
+        formData.append('pay_period_start', this.pay_period_start);
+        formData.append('pay_period_end', this.pay_period_end);
+        formData.append('total_earnings', this.total_earnings);
+        formData.append('total_deductions', this.total_deductions);
+        formData.append('net_salary', this.net_salary);
+        formData.append('employee', this.employee);
+        formData.append('created_by', this.created_by);
+        formData.append('is_paid', this.is_paid.toString());
+      
+        this.leaveService.requestPayroll(formData).subscribe(
+          (response) => {
+            console.log('Registration successful', response);
+            alert('Payroll has been added');
+            window.location.reload();
+          },
+          (error) => {
+            console.error('Added failed', error);
+      
+            // Extract backend error message
+            let errorMessage = 'An unexpected error occurred. Please try again.';
+      
+            if (error.error) {
+              if (typeof error.error === 'string') {
+                errorMessage = error.error; // If backend returns a plain string message
+              } else if (error.error.detail) {
+                errorMessage = error.error.detail; // If backend returns { detail: "message" }
+              } else if (error.error.non_field_errors) {
+                errorMessage = error.error.non_field_errors.join(', '); // Handle non-field errors array
+              } else {
+                // Handle field-specific errors
+                const fieldErrors = Object.keys(error.error).map(field => `${field}: ${error.error[field]}`).join('\n');
+                errorMessage = fieldErrors || errorMessage;
+              }
+            }
+      
+            alert(errorMessage); // Show extracted error
+          }
+        );
+      }
 
+     
+      
+      registerPaySlip(): void {
+        this.registerButtonClicked = true;
+      
+        // Frontend validation
+        if (!this.payslip_pdf || !this.payroll) {
+          alert('Please select a Payslip PDF and Payroll.');
+          return;
+        }
+      
+        const formData = new FormData();
+        formData.append('payroll', this.payroll);
+        formData.append('payslip_pdf', this.payslip_pdf); // Append file to FormData
+      
+        this.leaveService.requestPaySlip(formData).subscribe(
+          (response) => {
+            console.log('Registration successful', response);
+            alert('Payslip has been added successfully.');
+            window.location.reload();
+          },
+          (error) => {
+            console.error('Upload failed', error);
+      
+            // Extract backend error message
+            let errorMessage = 'An unexpected error occurred. Please try again.';
+      
+            if (error.error) {
+              if (typeof error.error === 'string') {
+                errorMessage = error.error;
+              } else if (error.error.detail) {
+                errorMessage = error.error.detail;
+              } else if (error.error.non_field_errors) {
+                errorMessage = error.error.non_field_errors.join(', ');
+              } else {
+                const fieldErrors = Object.keys(error.error)
+                  .map((field) => `${field}: ${error.error[field]}`)
+                  .join('\n');
+                errorMessage = fieldErrors || errorMessage;
+              }
+            }
+      
+            alert(errorMessage); // Show extracted error
+          }
+        );
+      }
+      
+      
+
+onFileSelected(event:any){
+  const file = event.target.files[0];
+  if  (file){
+    this.payslip_pdf =file;
+
+
+  }
+}
 
 
     LoadEmployee(selectedSchema: string) {
@@ -294,4 +403,67 @@ if (this.userId !== null) {
         }
       );
     }
+
+
+    LoadCategory() {
+      this.categoryService.getcatogary().subscribe(
+        (data: any) => {
+          this.Categories = data;
+        
+          console.log('Categories:', this.Categories);
+        },
+        (error: any) => {
+          console.error('Error fetching categories:', error);
+        }
+      );
+    }
+
+
+    LoadPayroll(selectedSchema: string) {
+      this.leaveService.getPayroll(selectedSchema).subscribe(
+        (data: any) => {
+          this.Payrolls = data;
+        
+          console.log('Payrolls:', this.Payrolls);
+        },
+        (error: any) => {
+          console.error('Error fetching Payrolls:', error);
+        }
+      );
+    }
+
+    LoadPayrollSettings(selectedSchema: string) {
+      this.leaveService.getPayrollSettings(selectedSchema).subscribe(
+        (data: any) => {
+          this.PayrollSettings = data;
+        
+          console.log('payrollsettings:', this.PayrollSettings);
+        },
+        (error: any) => {
+          console.error('Error fetching PayrollSettings:', error);
+        }
+      );
+    }
+
+
+    LoadPaySlip(selectedSchema: string) {
+      this.leaveService.getPaySlip(selectedSchema).subscribe(
+        (data: any) => {
+          // Ensure each payslip has a valid URL
+          this.PaySlips = data.map((payslip: any) => ({
+            ...payslip,
+            payslip_pdf: payslip.payslip_pdf ? payslip.payslip_pdf : null
+          }));
+    
+          console.log('Fetched Payslips:', this.PaySlips);
+        },
+        (error: any) => {
+          console.error('Error fetching Payslips:', error);
+        }
+      );
+    }
+    
+
+ 
+
 }

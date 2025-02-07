@@ -65,6 +65,7 @@ import { EmployeeLeaveComponent } from './employee-leave/employee-leave.componen
 import { DashboardContentsComponent } from './dashboard-contents/dashboard-contents.component';
 import { ShiftsComponent } from './shifts/shifts.component';
 import { PayRollComponent } from './pay-roll/pay-roll.component';
+import { SalaryComponent } from './salary/salary.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -134,6 +135,11 @@ const routes: Routes = [
             path:'pay-roll',
             component:PayRollComponent,
           },
+          {
+            path:'salary',
+            component:SalaryComponent,
+          },
+
 
 
           

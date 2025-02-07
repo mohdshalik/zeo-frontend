@@ -352,6 +352,65 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   }
 
 
+
+  requestPayrollSettings(formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/PayrollSettings/?schema=${selectedSchema}`;
+  
+    return this.http.post(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during leave type registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+  requestPayroll(formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/payroll/?schema=${selectedSchema}`;
+  
+    return this.http.post(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during leave type registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+
+  requestPaySlip(formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/payslip/?schema=${selectedSchema}`;
+  
+    return this.http.post(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during leave type registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+
+
+
   getSalaryCom(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/payroll/api/salarycomponent/?schema=${selectedSchema}`;
   
@@ -359,6 +418,34 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
     return this.http.get(apiUrl);
   
   }
+
+
+  getPayroll(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/payroll/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+  }
+
+
+  
+  getPayrollSettings(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/PayrollSettings/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+  }
+
+  getPaySlip(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/payslip/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+  }
+
 
 
 

@@ -46,99 +46,72 @@
 
         <div class="tab_back mt-5">
         <mat-tab-group> 
-            <mat-tab label="Salary Component">
+            <mat-tab label="Payroll Settings">
                 
                 <div class="tab_boddy">
-                    <form (ngSubmit)="RegisterSalaryComponent()" enctype="multipart/form-data">
+                    <form (ngSubmit)="RegisterPayrollSettings()" enctype="multipart/form-data">
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <label> Component Name</label>
-                                <input type="text" class="form-control" required [(ngModel)]="name" placeholder="Enter  name"
-                                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
-                         <div *ngIf="registerButtonClicked && !name" class="error-message"> name is required.</div>
-                            </div>
+
                             <div class="col-md-6" >
-                                <label>Component Type</label>
+                                <label>Payroll Frequency</label>
                                 <div class="custom-sel">
-                                  <select class="form-control" id="component_type" name="component_type" [(ngModel)]="component_type" [ngModelOptions]="{standalone: true}">
-                                    <option value="deduction">Deduction</option>
-                                    <option value="addition">Addition</option>
-                                    <option value="others">Others</option>
+                                  <select class="form-control" id="payroll_frequency" name="payroll_frequency" [(ngModel)]="payroll_frequency" [ngModelOptions]="{standalone: true}"
+                                  [ngClass]="{'error-field': registerButtonClicked && !payroll_frequency}">
+                                    <option value="monthly">Monthly</option>
+                                    <option value="bi-weekly">Bi-Weekly</option>
+                                    <option value="weekly">Weekly</option>
+                                  </select>
+                                </div>
+                                <div *ngIf="registerButtonClicked && !next_run_date" class="error-message"> next run date is required.</div>
+
+                              </div>
+
+                            <div class="col-md-6">
+                                <label> Next Run Date</label>
+                                <input type="date" class="form-control" required [(ngModel)]="next_run_date" placeholder="Enter  next run date"
+                                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !next_run_date}">
+                         <div *ngIf="registerButtonClicked && !next_run_date" class="error-message"> next run date is required.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label> Pay period start date</label>
+                                <input type="date" class="form-control" required [(ngModel)]="pay_period_start_date" placeholder="Enter  pay period start date date"
+                                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !pay_period_start_date}">
+                         <div *ngIf="registerButtonClicked && !pay_period_start_date" class="error-message"> pay period start date is required.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label> Pay period end date</label>
+                                <input type="date" class="form-control" required [(ngModel)]="pay_period_end_date" placeholder="Enter  Pay period end date date"
+                                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !pay_period_end_date}">
+                         <div *ngIf="registerButtonClicked && !pay_period_end_date" class="error-message"> pay Pay period end date is required.</div>
+                            </div>
+
+                        
+                            <div class="col-md-6">
+                                <label>Category</label>
+                                <div class="custom-sel">
+                                  <select class="form-control" id="category" name="category" [(ngModel)]="category" [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let cat of Categories" [value]="cat.id">{{ cat.ctgry_title }}</option>
                                   </select>
                                 </div>
                               </div>
-
                                   
-                      <div class="col-md-6">
-                        <label>Gl Code</label>
-                        <input type="text" class="form-control" required [(ngModel)]="glcode" placeholder="Enter glcode "
-                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !glcode}">
-                        <div *ngIf="registerButtonClicked && !glcode" class="error-message">glcode  is required.</div>
-                      </div>
+                    
                   
-                      <div class="col-md-12">
-                        <label>Description</label>
-                        <textarea class="form-control" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
-                      </div>
+                   
                       
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                        <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
-                        <mat-checkbox [(ngModel)]="is_fixed" [ngModelOptions]="{standalone: true}">Is Fixed</mat-checkbox>
-                        <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
-                    </div>
-                   
-                </div>
-            </div>
+         
 
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                       <mat-checkbox [(ngModel)]="affected_by_unpaid_leave" [ngModelOptions]="{standalone: true}">
-                        Affected by unpaid leave</mat-checkbox>
-                    </div>
-                   
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                       <mat-checkbox [(ngModel)]="affected_by_halfpaid_leave" [ngModelOptions]="{standalone: true}">
-                        Affected by halfpaid leave</mat-checkbox>
-                    </div>
-                   
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                       <mat-checkbox [(ngModel)]="prorata_calculation" [ngModelOptions]="{standalone: true}">
-                        Prorata calculation</mat-checkbox>
-                    </div>
-                   
-                </div>
-            </div>
+           
+          
 
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                       <mat-checkbox [(ngModel)]="is_emi_deduction" [ngModelOptions]="{standalone: true}">
-                        Is emi deduction</mat-checkbox>
-                    </div>
-                   
-                </div>
-            </div>
+         
 
 
                             </div>
-                            <div class="row" *ngIf="hasAddPermission">
+                            <div class="row" >
                               <div class="col-md-9"></div>
                               <div class="col-md-3">
                                   <button type="submit" class="btn btn-success btn-full mt-4">Save</button>
@@ -148,23 +121,93 @@
                       
                     </form>
             </div>
+
+            <div class="whitesmokediv" style="background: whitesmoke; height: 30px;"></div>
+            <div class="tab_boddy mt-4">
+
+                <h2>Payrolls Settings</h2> <hr>
+
+                <table width="100%">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Payroll frequency</th>
+                        <th>Next run date</th>
+                        <th>Pay period start date</th>
+                        <th>Pay period end date</th>
+                        <th>Category</th>
+                       
+
+
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr *ngFor="let payroll of PayrollSettings;let i = index">
+                            <td>{{ i + 1 }}</td> 
+                            <td>{{payroll.payroll_frequency}}</td>
+                            <td>{{payroll.next_run_date}}</td>
+
+                            <td>{{payroll.pay_period_start_date}}</td>
+                            <td>{{payroll.pay_period_end_date}}</td>
+
+                            <td>{{payroll.category}}</td>
+
+                    
+                           
+
+
+                      </tr>
+                  
+                    </tbody>
+                  </table>
+        
+            </div>
           </mat-tab>
            
-              <mat-tab label="Employee Salary ">
+              <mat-tab label="Payroll">
   
                 <div class="tab_boddy">
-                    <form (ngSubmit)="requestEmployeeSalary()" enctype="multipart/form-data">
+                    <form (ngSubmit)="requestPayRoll()" enctype="multipart/form-data">
 
                         <div class="row">
                          
 
+                            <div class="col-md-6">
+                                <label>Pay period start</label>
+                                <input type="date" class="form-control" required [(ngModel)]="pay_period_start" placeholder="Enter  Pay period start"
+                                       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !pay_period_start}">
+                                <div *ngIf="registerButtonClicked && !pay_period_start" class="error-message"> Pay period start is required.</div>
+                              </div>
+                              <div class="col-md-6">
+                                <label>Pay period end</label>
+                                <input type="date" class="form-control" required [(ngModel)]="pay_period_end" placeholder="Enter  Pay period end"
+                                       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !pay_period_end}">
+                                <div *ngIf="registerButtonClicked && !pay_period_end" class="error-message"> Pay period end is required.</div>
+                              </div>
                                   
                       <div class="col-md-6">
-                        <label>Amount</label>
-                        <input type="text" class="form-control" required [(ngModel)]="amount" placeholder="Enter  amount"
-                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !amount}">
-                        <div *ngIf="registerButtonClicked && !amount" class="error-message"> amount is required.</div>
+                        <label>Total earnings</label>
+                        <input type="number" class="form-control" required [(ngModel)]="total_earnings" placeholder="Enter  Total earnings"
+                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !total_earnings}">
+                        <div *ngIf="registerButtonClicked && !total_earnings" class="error-message"> Total earnings is required.</div>
                       </div>
+
+                                      
+                      <div class="col-md-6">
+                        <label>Total deductions</label>
+                        <input type="number" class="form-control" required [(ngModel)]="total_deductions" placeholder="Enter  Total deductions"
+                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !total_deductions}">
+                        <div *ngIf="registerButtonClicked && !total_deductions" class="error-message"> Total deductions is required.</div>
+                      </div>
+                      <div class="col-md-6">
+                        <label>Net salary</label>
+                        <input type="number" class="form-control" required [(ngModel)]="net_salary" placeholder="Enter  Net salary"
+                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !net_salary}">
+                        <div *ngIf="registerButtonClicked && !net_salary" class="error-message">Net salary is required.</div>
+                      </div>
+                  
                   
                  
                       <div class="col-md-6">
@@ -176,21 +219,14 @@
                         </div>
                       </div>
 
-                      <div class="col-md-6">
-                        <label>Salary Component</label>
-                        <div class="custom-sel">
-                          <select class="form-control" id="component" name="component" [(ngModel)]="component" [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let component of Salarycomponent" [value]="component.id">{{ component.name }}</option>
-                          </select>
-                        </div>
-                      </div>
+                    
 
                       <div class="col-md-4">
                         <label></label>
                         <div class="check-box-selection-sec mt-2">
                             <div class="mat-set">
-                               <mat-checkbox [(ngModel)]="is_active" [ngModelOptions]="{standalone: true}">
-                                Is Active</mat-checkbox>
+                               <mat-checkbox [(ngModel)]="is_paid" [ngModelOptions]="{standalone: true}">
+                                Is paid</mat-checkbox>
                             </div>
                            
                         </div>
@@ -208,13 +244,135 @@
                       
                     </form>
                 </div>
+
+                <div class="whitesmokediv" style="background: whitesmoke; height: 30px;"></div>
+                <div class="tab_boddy mt-4">
+
+                    <h2>Payrolls</h2> <hr>
+
+                    <table width="100%">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Period star date</th>
+                            <th>Period end date</th>
+                            <th>Total earnings</th>
+                            <th>Total deductions</th>
+                            <th>Net salary</th>
+                            <th>Is paid</th>
+                            <th>Employee</th>
+
+
+
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr *ngFor="let payroll of Payrolls;let i = index">
+                                <td>{{ i + 1 }}</td> 
+                                <td>{{payroll.pay_period_start}}</td>
+                                <td>{{payroll.pay_period_end}}</td>
+
+                                <td>{{payroll.total_earnings}}</td>
+                                <td>{{payroll.total_deductions}}</td>
+
+                                <td>{{payroll.net_salary}}</td>
+
+                                <td>{{payroll.is_paid}}</td>
+
+                                <td>{{payroll.employee}}</td>
+
+                               
+
+
+                          </tr>
+                      
+                        </tbody>
+                      </table>
+            
+                </div>
                   </mat-tab>
   
+
+                  <mat-tab label="Payslip">
+  
+                    <div class="tab_boddy">
+                        <form (ngSubmit)="registerPaySlip()" enctype="multipart/form-data">
+                            <div class="row">
+                              <!-- File Upload Input -->
+                              <div class="col-md-6">
+                                <label>Payslip PDF</label>
+                                <input type="file" class="form-control" (change)="onFileSelected($event)" accept="application/pdf">
+                              </div>
+                          
+                              <!-- Payroll Dropdown -->
+                              <div class="col-md-6">
+                                <label>Payroll</label>
+                                <div class="custom-sel">
+                                  <select class="form-control" id="payroll" name="payroll" [(ngModel)]="payroll" [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let pay of Payrolls" [value]="pay.id">{{ pay.id }}</option>
+                                  </select>
+                                </div>
+                              </div>
+                          
+                       
+                            </div>
+                          
+                            <!-- Submit Button -->
+                            <div class="row">
+                              <div class="col-md-9"></div>
+                              <div class="col-md-3">
+                                <button type="submit" class="btn btn-success btn-full mt-4">Save</button>
+                              </div>
+                            </div>
+                          </form>
+                          <hr>
+
+                          <!-- Payslip List -->
+                           
+            
+                          </div>
+
+                          <div class="whitesmokediv" style="background: whitesmoke; height: 30px;"></div>
+                          <div class="tab_boddy mt-4">
+          
+                              <h2>Payslip Records</h2> <hr>
+                                    <div *ngIf="PaySlips.length > 0">
+                                      <div class="row" >
+                                          <div class="col-md-2" *ngFor="let payslip of PaySlips">
+                                              <div class="pdf-top">
+                                                  <h4><i class="fa-solid fa-cloud-arrow-down"></i></h4>
+                                              </div>
+                                              <div class="pdf-bottom">
+                                                  <a *ngIf="payslip.payslip_pdf" [href]="payslip.payslip_pdf" target="_blank" >
+                                                      <i class="fa-solid fa-file-pdf"></i> View PDF
+                  
+                                                    </a>
+                                                </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                             
+                                    <div *ngIf="PaySlips.length === 0">
+                                      <p>No Payslips Found.</p>
+                                    </div>
+                                    </div>
+                
+                          
+                  
+    
+                 
+                      </mat-tab>
+
+
+                  
              
                   </mat-tab-group> 
   
                   </div>
-   
+
+                
 
 
 

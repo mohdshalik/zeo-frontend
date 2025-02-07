@@ -300,6 +300,7 @@ width: 35px;
 
 .drop_chosse{
     opacity: -1;
+    margin-left: 45px;
 }
 .company_bor{
     border: none !important;

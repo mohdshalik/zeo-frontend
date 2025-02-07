@@ -140,6 +140,7 @@ import { DashboardContentsComponent } from './dashboard-contents/dashboard-conte
 import { MatStepperModule } from '@angular/material/stepper';  
 import { ShiftsComponent } from './shifts/shifts.component';
 import { PayRollComponent } from './pay-roll/pay-roll.component';
+import { SalaryComponent } from './salary/salary.component';
 
 @NgModule({
   declarations: [
@@ -237,7 +238,8 @@ import { PayRollComponent } from './pay-roll/pay-roll.component';
      EmployeeApprovalsComponent,
      DashboardContentsComponent,
      ShiftsComponent,
-     PayRollComponent
+     PayRollComponent,
+     SalaryComponent
      
      
 
@@ -278,7 +280,8 @@ import { PayRollComponent } from './pay-roll/pay-roll.component';
     MatMenuModule,
     MatTabsModule,
     MatSortModule,
-    MatStepperModule
+    MatStepperModule,
+    
     
     
     
