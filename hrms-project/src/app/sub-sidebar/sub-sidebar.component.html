@@ -7,10 +7,10 @@
           <div class="sidebar">
               <ul>
                   <li routerLink="/main-sidebar/sub-sidebar/employee-master" *ngIf="hasViewPermissionEmp"><a><mat-icon>peoples</mat-icon> Employee Master </a></li>
-                 
-                  <li routerLink="/main-sidebar/sub-sidebar/pay-roll" *ngIf="hasViewPermissionAttd"><a ><mat-icon>peoples</mat-icon> Pay Roll</a></li>
+                
+                                    
                   
-                  <li routerLink="/main-sidebar/sub-sidebar/salary" *ngIf="hasViewPermissionAttd"><a ><mat-icon>peoples</mat-icon> Saraly MAster</a></li>
+
 
                   <li routerLink="/main-sidebar/sub-sidebar/department-master" *ngIf="hasViewPermissiondept"><a ><mat-icon>peoples</mat-icon> Department Master </a></li>
                  
@@ -28,6 +28,9 @@
                  
                   <li routerLink="/main-sidebar/sub-sidebar/attendace-marking" *ngIf="hasViewPermissionAttd"><a ><mat-icon>peoples</mat-icon> Attendance Marking</a></li>
                  
+                  <li routerLink="/main-sidebar/sub-sidebar/salary" *ngIf="hasViewPermissionAttd"><a ><mat-icon>peoples</mat-icon> Saraly MAster</a></li>
+                  
+                  <li routerLink="/main-sidebar/sub-sidebar/pay-roll" *ngIf="hasViewPermissionAttd"><a ><mat-icon>peoples</mat-icon> Pay Roll</a></li>
 
   
               </ul> 
