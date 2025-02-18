@@ -331,11 +331,16 @@ export class EmployeeSctionComponent {
     
     
     
-        isImage(src: string): boolean {
-          return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
-        }
+        // isImage(src: string): boolean {
+        //   return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
+        // }
          
      
+        isPDF(url: string): boolean {
+          return url.toLowerCase().endsWith('.pdf');
+        }
+
+        
         checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
          return groupPermissions.some(permission => permission.codename === codeName);
        }

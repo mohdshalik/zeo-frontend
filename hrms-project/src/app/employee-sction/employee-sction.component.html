@@ -382,13 +382,13 @@
                                 <div class="col-md-3">
                                     <h2>Employee Document</h2>
 
-                                    <div class="dec_sec" style="width: 100%;">
-                                    <!-- Display the document if it's an image -->
-                                    <img *ngIf="isImage(document.emp_doc_document)" [src]="document.emp_doc_document" alt="Employee Document" style="width: 150px; height:150px;">
-                                    <!-- Display a link to download the document if it's not an image -->
-                                    <a *ngIf="!isImage(document.emp_doc_document)" [href]="document.emp_doc_document" target="_blank">View Document</a>
-                                </div>
-                                </div>
+                                    <div *ngIf="document.emp_doc_document">
+                                        <a [href]="document.emp_doc_document" target="_blank" *ngIf="isPDF(document.emp_doc_document)">View Document</a>
+                                        <img [src]="document.emp_doc_document" alt="Employee Document" *ngIf="!isPDF(document.emp_doc_document)" style="width: 100px; height: auto;">
+                                      </div>
+                                      <div *ngIf="!document.emp_doc_document">No Document Available</div>
+                                    </div>
+                              
 
 
                                 <!-- <div class="col-md-3" >
