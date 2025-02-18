@@ -147,9 +147,7 @@ export class EmployeeDetailsComponent implements OnInit {
 
     }
 
-    // ngOnDestroy() {
-    //   this.notificationServiceService.disconnect();
-    // }
+   
 
     handleImageError(event: any): void {
       // console.error('Error loading image:', event);
