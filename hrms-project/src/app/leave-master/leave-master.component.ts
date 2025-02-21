@@ -318,7 +318,7 @@ export class LeaveMasterComponent {
   registerleaveType(): void {
     this.registerButtonClicked = true;
   
-    if (!this.name || !this.code || !this.valid_to) {
+    if (!this.name || !this.code) {
       alert('Please fill in all required fields.');
       return;
     }

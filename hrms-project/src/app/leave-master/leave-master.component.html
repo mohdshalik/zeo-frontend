@@ -83,15 +83,13 @@
                 <div class="col-md-4">
                   <label>Valid From</label>
                   <input type="date" class="form-control" required [(ngModel)]="valid_from" placeholder="Enter valid from"
-                         [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !valid_from}">
-                  <div *ngIf="registerButtonClicked && !valid_from" class="error-message">valid from is required.</div>
+                         [ngModelOptions]="{standalone: true}" >
                 </div>
              
                 <div class="col-md-4">
                   <label>Valid To</label>
                   <input type="date" class="form-control" required [(ngModel)]="valid_to" placeholder="Enter valid to"
-                         [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !valid_to}">
-                  <div *ngIf="registerButtonClicked && !valid_to" class="error-message">valid to is required.</div>
+                         [ngModelOptions]="{standalone: true}" >
                 </div>
                 <div class="col-md-4">
                   <label for="image">Leave Type Image</label>

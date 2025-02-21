@@ -89,7 +89,7 @@ export class EmployeeLeaveComponent {
     formData.append('reason', this.reason);
     formData.append('status', this.status);
     formData.append('approved_by', this.approved_by);
-    formData.append('approved_on', this.approved_on);
+    // formData.append('approved_on', this.approved_on);
 
     formData.append('dis_half_day', this.dis_half_day.toString());
 
