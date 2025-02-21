@@ -147,7 +147,9 @@ export class EmployeeDetailsComponent implements OnInit {
 
     }
 
-   
+    // ngOnDestroy() {
+    //   this.notificationServiceService.disconnect();
+    // }
 
     handleImageError(event: any): void {
       // console.error('Error loading image:', event);
@@ -157,9 +159,10 @@ export class EmployeeDetailsComponent implements OnInit {
       // console.error('Error loading image:', event);
     }
 
-    // isImage(src: string): boolean {
-    //   return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
-    // }
+
+    isImage(src: string): boolean {
+      return src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg') || src.toLowerCase().endsWith('.png') || src.toLowerCase().endsWith('.gif');
+    }
 
     isPDF(url: string): boolean {
   return url.toLowerCase().endsWith('.pdf');
@@ -215,6 +218,7 @@ export class EmployeeDetailsComponent implements OnInit {
     }
   
 
+
     loadFamilyDetails(): void {
       this.EmployeeService.getFamilyDetails(this.employee).subscribe(
         family => {
@@ -226,6 +230,7 @@ export class EmployeeDetailsComponent implements OnInit {
       );
     }
 
+  
 
     loadFieldNames(): void {
       // Load field names from localStorage

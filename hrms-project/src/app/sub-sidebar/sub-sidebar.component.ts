@@ -229,7 +229,8 @@ if (this.userId !== null) {
   clickedOutside(): void {
     this.isMenuOpened = false;
   }
-  
+   
   
 
 }
+

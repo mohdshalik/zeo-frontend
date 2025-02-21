@@ -38,7 +38,8 @@ export class BranchEditComponent {
   br_state_id:any ='';
   br_country:any ='';
   branch_code:any='';
-  notification_period_days:any='';
+  probation_period_days:any='';
+
   branch_users:any='';
   // branch_logo: File | null = null;
   branch_logo: string | undefined;

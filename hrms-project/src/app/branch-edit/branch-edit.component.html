@@ -24,6 +24,15 @@
              
              <div *ngIf="registerButtonClicked && !branch_name" class="error-message">Branch Name is required.</div>
         </div>
+
+        <div class="col-md-6" >
+               
+            <label>Probation period days</label>
+           <input type="number"  class="form-control" required  [(ngModel)]="Emp.probation_period_days"  placeholder="Enter Branch Name" [ngModelOptions]="{standalone: true}" >
+           
+           <!-- <div *ngIf="registerButtonClicked && !probation_period_days" class="error-message">notification period days is required.</div> -->
+        </div>
+            
         
         <div class="col-md-6" >
                        

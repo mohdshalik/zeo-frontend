@@ -27,10 +27,10 @@
     
     <div class="col-md-6" >
                
-        <label>Notification Periods Days</label>
-       <input type="number"  class="form-control" required  [(ngModel)]="notification_period_days"  placeholder="Enter Branch Name" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !notification_period_days}">
+        <label>Probation period days</label>
+       <input type="number"  class="form-control" required  [(ngModel)]="probation_period_days"  placeholder="Enter Branch Name" [ngModelOptions]="{standalone: true}" >
        
-       <div *ngIf="registerButtonClicked && !notification_period_days" class="error-message">notification period days is required.</div>
+       <!-- <div *ngIf="registerButtonClicked && !probation_period_days" class="error-message">notification period days is required.</div> -->
     </div>
         
                    
