@@ -247,22 +247,18 @@ export class EmployeeService {
 
 
 
-  updateCategory(departmentId: number, categoryData: any): Observable<any> {
-
-    // const url = `${this.baseUrl}/emp-Documents/${departmentId}/`;
-    // return this.http.put(url, categoryData);
-
-
+  updateCategory(departmentId: number, updateData: any): Observable<any> {
     const selectedSchema = localStorage.getItem('selectedSchema');
     if (!selectedSchema) {
       console.error('No schema selected.');
-      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+      return throwError('No schema selected.');
     }
 
     const apiUrl = `${this.apiUrl}/employee/api/emp-Documents/${departmentId}/?schema=${selectedSchema}`;
 
-    return this.http.delete(apiUrl);
-  }
+    // Send only the required fields
+    return this.http.patch(apiUrl, updateData);
+}
 
   getExpiredDocuments(selectedSchema: string): Observable<any> {
 

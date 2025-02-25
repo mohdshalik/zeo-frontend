@@ -303,6 +303,8 @@ onFileChange(event: any){
   
 }
 
+ 
+
 bulkUploadDoc() {
   this.ReadMore = !this.ReadMore; //not equal to condition
   this.visibles = !this.visibles;

@@ -1596,113 +1596,105 @@ loadFormFields(): void {
   }
 
 
- bulkuploaddocument(): void {
+  bulkuploaddocument(): void {
     this.registerButtonClicked = true;
-    // const companyData = {
-    //   emp_languages:this.emp_languages,
-
-    // }
-
-    const formData = new FormData();
-    // formData.append('')
-  // Append the profile picture only if it's selected
-  if (this.file) {
-    formData.append('file', this.file);
-  } else {
-    // Append a null or empty value to indicate no file was selected
-    formData.append('file', '');
-  }
   
-
- 
-    
+    const formData = new FormData();
+  
+    if (this.file) {
+      formData.append('file', this.file);
+    } else {
+      formData.append('file', '');
+    }
+  
     formData.append('emp_code', this.emp_code);
-
     formData.append('emp_first_name', this.emp_first_name);
     formData.append('emp_last_name', this.emp_last_name);
-    
-  
     formData.append('emp_gender', this.emp_gender);
     formData.append('emp_date_of_birth', this.emp_date_of_birth);
     formData.append('emp_personal_email', this.emp_personal_email);
     formData.append('emp_mobile_number_1', this.emp_mobile_number_1);
     formData.append('emp_mobile_number_2', this.emp_mobile_number_2);
-  
     formData.append('emp_city', this.emp_city);
     formData.append('emp_permenent_address', this.emp_permenent_address);
     formData.append('emp_present_address', this.emp_present_address);
     formData.append('emp_relegion', this.emp_relegion);
     formData.append('emp_blood_group', this.emp_blood_group);
-  
     formData.append('emp_nationality', this.emp_nationality);
     formData.append('emp_marital_status', this.emp_marital_status);
     formData.append('emp_father_name', this.emp_father_name);
     formData.append('emp_mother_name', this.emp_mother_name);
     formData.append('emp_posting_location', this.emp_posting_location);
-  
     formData.append('emp_country_id', this.emp_country_id);
     formData.append('emp_state_id', this.emp_state_id);
-
-
     formData.append('emp_company_id', this.emp_company_id);
     formData.append('emp_branch_id', this.emp_branch_id);
     formData.append('emp_dept_id', this.emp_dept_id);
-
     formData.append('emp_desgntn_id', this.emp_desgntn_id);
     formData.append('emp_ctgry_id', this.emp_ctgry_id);
     formData.append('emp_languages', this.emp_languages);
-
-    // formData.append('emp_languages', JSON.stringify(this.emp_languages));
     formData.append('emp_date_of_confirmation', this.emp_date_of_confirmation);
     formData.append('emp_joined_date', this.emp_joined_date);
     formData.append('is_ess', this.is_ess ? '1' : '0');
     formData.append('emp_status', this.emp_status ? '1' : '0');
-    
-    
   
     const selectedSchema = localStorage.getItem('selectedSchema');
     if (!selectedSchema) {
       console.error('No schema selected.');
-      // return throwError('No schema selected.'); // Return an error observable if no schema is selected
+      return;
     }
-   
-
+  
     this.http.post(`${this.apiUrl}/employee/api/emp-bulkupload/bulk_upload/?schema=${selectedSchema}`, formData)
-      .subscribe((response) => {
-        // Handle successful upload
-        console.log('bulkupload upload successful', response);
-
-         const dialogRef = this.dialog.open(SuccesModalComponent, {
-              width: '300px', // Adjust width as needed
-              data: { message: 'bulkupload employee successfully!' } // Pass any data you want to display in the modal
-            });
-        
-            dialogRef.afterClosed().subscribe(() => {
-              console.log('The success modal was closed');
-              // Handle any actions after the modal is closed, if needed
-            });
+    .subscribe(
+      (response) => {
+        console.log('Bulk upload successful', response);
+  
+        const dialogRef = this.dialog.open(SuccesModalComponent, {
+          width: '300px',
+          data: { message: 'Bulk upload employee successfully!' }
+        });
+  
+        dialogRef.afterClosed().subscribe(() => {
+          console.log('The success modal was closed');
+        });
       },
       (error: HttpErrorResponse) => {
-        if (error.status === 400) {
-          // Check if the backend responds with missing fields error
-          if (error.error?.non_field_errors) {
-            alert(error.error.non_field_errors[0]); // Show specific error message from backend
-          } else {
-            alert('Enter all fields.');
-          }
-        } else if (error.status === 401) {
-          alert('Incorrect username or password.');
-        } else {
-          // General backend or network error
-          const errorMessage = error.error?.detail || 'Something went wrong. Please try again.';
-          alert(`Error: ${errorMessage}`);
-        }
-      
         console.error('Upload error:', error);
+  
+        // If the backend provides an error message, display it in an alert
+        if (error.error) {
+          if (typeof error.error === 'string') {
+            alert(error.error); // If the error is a simple string
+          } else if (typeof error.error === 'object') {
+            const errorMessages: string[] = [];
+  
+            // Extract error messages from objects like sheet1_errors, sheet2_errors, etc.
+            Object.keys(error.error).forEach((key) => {
+              if (Array.isArray(error.error[key])) {
+                error.error[key].forEach((errObj: any) => {
+                  if (errObj.error) {
+                    errorMessages.push(`Row ${errObj.row}: ${errObj.error}`);
+                  }
+                });
+              }
+            });
+  
+            if (errorMessages.length > 0) {
+              alert(errorMessages.join('\n')); // Show all errors in an alert
+            } else {
+              alert('An unexpected error occurred.');
+            }
+          } else {
+            alert('Something went wrong.');
+          }
+        } else {
+          alert('Something went wrong.');
+        }
       }
     );
-
+  
   }
+  
 
 
   onChangeFile(event: any) {

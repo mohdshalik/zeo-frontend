@@ -143,13 +143,14 @@ selectSchema(event: any) {
   // Delay the URL redirection to ensure state is updated
   setTimeout(() => {
     this.isLoading = false; // Hide the loader
+    this.isMenuOpen = true;
 
      this.router.navigate(['/main-sidebar/dashboard-contents']);
 
     // this.router.navigate(['/main-sidebar/sub-sidebar/dashboard-contents']);
     // const url =` /main-sidebar/dashboard-contents`;
     //   window.location.href = url;
-  }, 3000); // Delay of 100ms to ensure localStorage is updated
+  }, 500); // Delay of 100ms to ensure localStorage is updated
 }
 
 

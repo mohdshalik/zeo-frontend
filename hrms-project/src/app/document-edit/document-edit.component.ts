@@ -90,30 +90,33 @@ this.route.params.subscribe(params => {
 
   retrieveDocumentData(): void {
     const selectedSchema = localStorage.getItem('selectedSchema');
-    if (!selectedSchema) {
-      console.error('No schema selected.');
-      return;
-    }
-    if (!this.departmentId) {
-      console.error('No department ID provided.');
-      return;
-    }
+    if (!selectedSchema || !this.departmentId) return;
 
     const apiUrl = `${this.apiUrl}/employee/api/emp-Documents/${this.departmentId}/?schema=${selectedSchema}`;
+    
     this.http.get(apiUrl).subscribe(
-      (data: any) => {
-        this.documentData = data;
-        if (this.documentData) {
-          console.log('show',this.documentData.emp_doc_document);
-        } else {
-          console.error('documentData is undefined or null');
-        }
-      },
-      (error) => {
-        console.error('Error fetching document data:', error);
-      }
+        (data: any) => {
+            this.documentData = data;
+            console.log('Fetched Document Data:', this.documentData);
+
+            // Ensure Employees and DocsTypes are loaded before setting values
+            this.setDropdownValues();
+        },
+        (error) => console.error('Error fetching document data:', error)
     );
-  }
+}
+
+setDropdownValues(): void {
+    if (!this.Employees || !this.DocsTypes) return;
+
+    const empExists = this.Employees.some(emp => emp.id === this.documentData.emp_id);
+    if (!empExists) console.warn('Employee ID not found in dropdown list.');
+
+    const docTypeExists = this.DocsTypes.some(doc => doc.id === this.documentData.document_type);
+    if (!docTypeExists) console.warn('Document Type ID not found in dropdown list.');
+}
+
+
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -134,7 +137,7 @@ this.route.params.subscribe(params => {
       .subscribe((response) => {
         console.log('Document updated successfully', response);
         alert('Document updated successfully ');
-        window.location.reload();
+        // window.location.reload();
         // Redirect or perform other actions as needed
       }, (error) => {
         console.error('Failed to update document', error);
@@ -143,6 +146,8 @@ this.route.params.subscribe(params => {
       });
   }
   
+
+
 
 
   loadDeparmentBranch(): void {

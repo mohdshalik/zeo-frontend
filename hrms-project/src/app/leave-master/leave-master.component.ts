@@ -8,6 +8,8 @@ import { MatOption } from '@angular/material/core';
 import { DesignationService } from '../designation-master/designation.service';
 import { FormGroup } from '@angular/forms';
 import { EmployeeService } from '../employee-master/employee.service';
+import { formatDate } from '@angular/common';
+
 
 @Component({
   selector: 'app-leave-master',
@@ -315,6 +317,7 @@ export class LeaveMasterComponent {
   }
 
 
+
   registerleaveType(): void {
     this.registerButtonClicked = true;
   
@@ -323,13 +326,20 @@ export class LeaveMasterComponent {
       return;
     }
   
+    // Convert valid_from and valid_to to 'YYYY-MM-DD'
+    const formattedValidFrom = this.valid_from ? formatDate(this.valid_from, 'yyyy-MM-dd', 'en-US') : '';
+    const formattedValidTo = this.valid_to ? formatDate(this.valid_to, 'yyyy-MM-dd', 'en-US') : '';
+  
+    console.log("Formatted valid_from:", formattedValidFrom);  // Debugging
+    console.log("Formatted valid_to:", formattedValidTo);  // Debugging
+  
     const formData = new FormData();
     formData.append('name', this.name);
     formData.append('code', this.code);
     formData.append('type', this.type);
     formData.append('unit', this.unit);
-    formData.append('valid_to', this.valid_to);
-    formData.append('valid_from', this.valid_from);
+    formData.append('valid_from', formattedValidFrom);  // ✅ Fixing Date Format
+    formData.append('valid_to', formattedValidTo);      // ✅ Fixing Date Format
     formData.append('description', this.description);
     formData.append('created_by', this.created_by);
     formData.append('negative', this.negative.toString());
@@ -337,7 +347,6 @@ export class LeaveMasterComponent {
     formData.append('include_weekend_and_holiday', this.include_weekend_and_holiday.toString());
     formData.append('use_common_workflow', this.use_common_workflow.toString());
   
-    // Append the image only if it's selected
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
     }
@@ -351,26 +360,23 @@ export class LeaveMasterComponent {
       (error) => {
         console.error('Added failed', error);
   
-        // Extract backend error message
         let errorMessage = 'An unexpected error occurred. Please try again.';
   
         if (error.error) {
           if (typeof error.error === 'string') {
-            errorMessage = error.error; // If backend returns a plain string message
+            errorMessage = error.error;
           } else if (error.error.detail) {
-            errorMessage = error.error.detail; // If backend returns { detail: "message" }
+            errorMessage = error.error.detail;
           } else if (error.error.non_field_errors) {
-            errorMessage = error.error.non_field_errors.join(', '); // Handle non-field errors array
+            errorMessage = error.error.non_field_errors.join(', ');
           } else {
-            // Handle field-specific errors
-            const fieldErrors = Object.keys(error.error)
-              .map((field) => `${field}: ${error.error[field]}`)
+            errorMessage = Object.keys(error.error)
+              .map((field) => `${field}: ${error.error[field].join(', ')}`)
               .join('\n');
-            errorMessage = fieldErrors || errorMessage;
           }
         }
   
-        alert(errorMessage); // Show extracted error
+        alert(errorMessage);
       }
     );
   }
@@ -590,33 +596,43 @@ export class LeaveMasterComponent {
 
   registerleaveApplicable(): void {
     this.registerButtonClicked = true;
-    // if (!this.name || !this.code || !this.valid_to) {
-    //   return;
-    // }
-
-    const formData = new FormData();
-    formData.append('gender', this.gender);
-    formData.append('leave_type', this.leave_type);
-    formData.append('branch', this.branch);
-    formData.append('department', this.department);
-    formData.append('designation', this.designation);
-    formData.append('role', this.role);
-
-
-
-
+  
+    const formData: any = {
+      gender: this.gender,
+      leave_type: this.leave_type,
+      branch: this.branch && this.branch.length > 0 ? this.branch.map((b: any) => Number(b)) : [], // Send [] if empty
+      department: this.department && this.department.length > 0 ? this.department.map((d: any) => Number(d)) : [],
+      designation: this.designation && this.designation.length > 0 ? this.designation.map((des: any) => Number(des)) : [],
+      role: this.role && this.role.length > 0 ? this.role.map((r: any) => Number(r)) : [],
+    };
+  
     this.leaveService.registerLeaveapplicable(formData).subscribe(
       (response) => {
         console.log('Registration successful', response);
-        alert('Leave Applicable to  has been added');
+        alert('Leave Applicable has been added');
         window.location.reload();
       },
       (error) => {
         console.error('Added failed', error);
-        alert('Enter all required fields!');
+  
+        // Extract backend validation error messages
+        if (error.error) {
+          let errorMessage = '';
+          for (const key in error.error) {
+            if (error.error.hasOwnProperty(key)) {
+              errorMessage += `${key}: ${error.error[key].join(', ')}\n`;
+            }
+          }
+          alert(errorMessage);
+        } else {
+          alert('An error occurred. Please try again.');
+        }
       }
     );
   }
+  
+  
+  
 
   allSelected = false;
   allSelecteddept = false;

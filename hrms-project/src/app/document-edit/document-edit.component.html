@@ -53,7 +53,7 @@
             <div class="col-md-6" >
                
                 <label>Document Number</label>
-               <input type="number"  class="form-control" required id="emp_doc_number" name="emp_doc_number"  [(ngModel)]="documentData.emp_doc_number"  
+               <input type="number"  class="form-control" required id="documentData.emp_doc_number" name="documentData.emp_doc_number"  [(ngModel)]="documentData.emp_doc_number"  
                 [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_doc_number}">
                
                <div *ngIf="registerButtonClicked && !emp_doc_number" class="error-message">Description is required.</div>
@@ -88,11 +88,17 @@
 
     <div class="custom-sel">
         <label>Select Employee</label>
-        <select class="form-control" id="emp_id" required [(ngModel)]="documentData.emp_id"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_id}" >
-            <option value="" >Select</option>
-            <option *ngFor="let deparmentsec of Employees" [value]="deparmentsec.id">{{ deparmentsec.emp_first_name     }} </option>
-        </select>
-        <div *ngIf="registerButtonClicked && !emp_id" class="error-message">Please Select Your Company</div>
+        <select class="form-control" id="emp_id" required [(ngModel)]="documentData.emp_id"  
+        [ngModelOptions]="{standalone: true}" 
+        [ngClass]="{'error-field': registerButtonClicked && !documentData.emp_id}" >
+        
+        <option *ngFor="let employee of Employees" [value]="employee.id">
+            {{ employee.emp_first_name }}
+        </option>
+    </select>
+    <p>Selected Employee ID: {{ documentData.emp_id }}</p>
+    
+    
     </div>
                 
 
@@ -104,11 +110,18 @@
 
     <div class="custom-sel">
         <label>Select Document Type</label>
-        <select class="form-control" id="document_type" required [(ngModel)]="documentData.document_type"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !document_type}" >
-            <option value="" >Select</option>
-            <option *ngFor="let deparmentsec of DocsTypes" [value]="deparmentsec.id">{{ deparmentsec.type_name     }} </option>
-        </select>
-        <div *ngIf="registerButtonClicked && !document_type" class="error-message">Please Select Document Type</div>
+        <select class="form-control" id="document_type" required [(ngModel)]="documentData.document_type"  
+        [ngModelOptions]="{standalone: true}" 
+        [ngClass]="{'error-field': registerButtonClicked && !documentData.document_type}" >
+        
+        <option value="">Select Document Type</option>
+        <option *ngFor="let doc of DocsTypes" [value]="doc.id">
+            {{ doc.type_name }}
+        </option>
+    </select>
+    <p>Selected Document Type ID: {{ documentData.document_type }}</p>
+    
+    
     </div>
                 
 
