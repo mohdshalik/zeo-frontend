@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { DesignationService } from '../designation-master/designation.service';
 import { SessionService } from '../login/session.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-weelcalendar',

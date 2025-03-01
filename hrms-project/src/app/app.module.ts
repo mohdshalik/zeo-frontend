@@ -141,7 +141,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { ShiftsComponent } from './shifts/shifts.component';
 import { PayRollComponent } from './pay-roll/pay-roll.component';
 import { SalaryComponent } from './salary/salary.component';
-import { FullCalendarModule } from '@fullcalendar/angular';
+// import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -282,8 +282,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     MatTabsModule,
     MatSortModule,
     MatStepperModule,
-    FullCalendarModule // Add FullCalendar module
-    
     
     
     
