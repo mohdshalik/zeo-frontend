@@ -8,7 +8,6 @@ import { UserMasterService } from '../user-master/user-master.service';
 import { CatogaryService } from '../catogary-master/catogary.service';
 import { SessionService } from '../login/session.service';
 import { DesignationService } from '../designation-master/designation.service';
-import { an } from '@fullcalendar/core/internal-common';
 import { LeaveService } from '../leave-master/leave.service';
 
 @Component({
