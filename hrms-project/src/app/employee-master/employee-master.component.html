@@ -66,7 +66,7 @@
 
                            <span *ngIf="!hasDeletePermission"></span>
 
-                           <button type="button" class="btn-Edit btn-secondary  btn"  (click)="EditShowButtons()" *ngIf="hasEditPermission">
+                           <button type="button" class="btn-Edit btn-secondary  btn"  (click)="OpenBulkuploadModal()" *ngIf="hasEditPermission">
                             <span class="header-btn-icon">
                              <mat-icon>system_update_alt
                         </mat-icon></span> Import</button>
@@ -147,6 +147,68 @@
 </div>
 
 
+  <!-- Modal Popup for selected approval details -->
+  <div *ngIf="isBulkuploadEmployeeModalOpen" class="modal">
+
+    <div class="modal-content">
+
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Employee Bulk Upload</h2> 
+            </div>
+            <div class="col-md-4">
+                <span class="close pull-right" (click)="closeBulkuploadModal()">&times;</span>
+
+            </div>
+        </div><hr>
+
+    
+                <form (ngSubmit)="bulkuploaddocument()"  #documentForm="ngForm" >
+                   
+        
+                <div class="row">
+                    '    <div class="col-md-12">
+                        <label for="emp_profile_pic">Upload Employee Details:</label>
+            
+                        <input
+                        type="file"
+                        accept=".xlsx"
+                        class="form-control"
+                        id="file"
+                        name="myfile"
+                        (change)="onFileSelect($event)"
+                        #UploadFileInput
+                      />
+                <!-- <input type="file"                accept=".xlsx"
+                (change) ="onChangeFile($event)" > -->
+                
+            </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10"></div>
+                
+                    <div class="col-md-2">
+                        <button  type="submit" 
+                           mat-raised-button color="primary"   class="pull-right btn-full mt-4" >Save</button>
+                           
+            
+                    </div>
+                </div>
+            
+                   
+                </form>
+        
+       
+
+            
+   
+    
+    
+
+    </div>
+  </div>
+
 
 <div *ngIf="!hasViewPermission">
     <!-- Message for users without permission -->
@@ -159,3 +221,5 @@
       </div>
 
 
+
+      

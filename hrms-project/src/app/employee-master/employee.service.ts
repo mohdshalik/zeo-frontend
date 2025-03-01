@@ -541,7 +541,7 @@ export class EmployeeService {
 
 
   getLangaugeSkill(selectedSchema: string): Observable<any> {
-    const apiUrl = `${this.apiUrl}/employee/api/language_skill/?schema=${selectedSchema}`;
+    const apiUrl = `${this.apiUrl}/core/api/language_skill/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -550,7 +550,7 @@ export class EmployeeService {
   }
 
   getPrgmLangaugeSkill(selectedSchema: string): Observable<any> {
-    const apiUrl = `${this.apiUrl}/employee/api/programming-skill/?schema=${selectedSchema}`;
+    const apiUrl = `${this.apiUrl}/core/api/programming-skill/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -560,7 +560,7 @@ export class EmployeeService {
 
 
   getMarLangaugeSkill(selectedSchema: string): Observable<any> {
-    const apiUrl = `${this.apiUrl}/employee/api/marketing-skill/?schema=${selectedSchema}`;
+    const apiUrl = `${this.apiUrl}/core/api/marketing-skill/?schema=${selectedSchema}`;
 
     // Fetch employees from the API
     return this.http.get(apiUrl);

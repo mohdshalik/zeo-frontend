@@ -398,37 +398,43 @@
 
           <div class="col-md-6" >
                    
-            <label>Rotation cycle weeks</label>
-           <input type="number"  class="form-control" required  [(ngModel)]="rotation_cycle_weeks"  placeholder="Enter Rotation cycle weeks "
+            <label>Schedule name</label>
+           <input type="text"  class="form-control" required  [(ngModel)]="schedule_name"  placeholder="Enter schedule name  "
             [ngModelOptions]="{standalone: true}" >
            
       </div>
 
-      <div class="col-md-6 mt-3">
-        <label></label>
-        <!-- <div class="check-box-selection-sec form-control mt-4"> -->
-            <div class="mat-set">
-                <mat-checkbox [(ngModel)]="is_rotating" [ngModelOptions]="{standalone: true}">is rotating</mat-checkbox>
-            </div>
-           
-        <!-- </div> -->
-    </div>
+      
 
-    <div class="col-md-6" *ngIf="!is_rotating">
-      <label>Single Shift Pattern</label>
-      <div class="custom-sel">
-
-          <select class="form-control" id="single_shift_pattern" required [(ngModel)]="single_shift_pattern"   [ngModelOptions]="{standalone: true}" >
-              <option value="" >Select</option>
-              <option *ngFor="let deparmentsec of Shifts" [value]="deparmentsec.id">{{ deparmentsec.name     }}  </option>
+      <div class="col-md-6">
+        <label>Shift type</label>
+        <div class="custom-sel">
+          <select class="form-control" [(ngModel)]="shift_type" [ngModelOptions]="{standalone: true}">
+            <option value="rotating">Rotating Shift</option>
+            <option value="fixed">Fixed Shift</option>
           </select>
-          
-          
-         
-
-        
+        </div>
       </div>
-  </div>
+      
+      <!-- Only display Rotation Cycle Weeks when shift_type is "rotating" -->
+      <div class="col-md-6" *ngIf="shift_type === 'rotating'">
+        <label>Rotation Cycle Weeks</label>
+        <input type="number" class="form-control" required [(ngModel)]="rotation_cycle_weeks" placeholder="Enter Rotation Cycle Weeks" [ngModelOptions]="{standalone: true}">
+      </div>
+      
+      <!-- Only display Single Shift Pattern when shift_type is "fixed" -->
+      <div class="col-md-6" *ngIf="shift_type === 'fixed'">
+        <label>Single Shift Pattern</label>
+        <div class="custom-sel">
+          <select class="form-control" id="single_shift_pattern" required [(ngModel)]="single_shift_pattern" [ngModelOptions]="{standalone: true}">
+            <option value="">Select</option>
+            <option *ngFor="let pattern of ShiftsPattern" [value]="pattern.id">
+              {{ pattern.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      
 
      <div class="col-md-6" >
                             <label>Employee</label>
@@ -496,6 +502,89 @@
                 </div>
                 </form>
             
+
+                <div class="shift-allocation-container">
+                  <h2>Employee Shift Allocation</h2>
+                  
+                  <!-- Selection Form (same as before) -->
+                  <form (ngSubmit)="fetchShifts()">
+                    <div class="row">
+                      <!-- Schedule Dropdown -->
+                      <div class="col-md-4">
+                        <label>Schedule</label>
+                        <select class="form-control" [(ngModel)]="selectedSchedule" name="schedule" required>
+                          <option value="" disabled>Select Schedule</option>
+                          <option *ngFor="let s of EmployeeShifts" [value]="s.id">
+                            {{ s.schedule_name }}
+                          </option>
+                        </select>
+                      </div>
+                  
+                      <!-- Employee Dropdown -->
+                      <!-- <div class="col-md-4">
+                        <label>Employee</label>
+                        <select class="form-control" [(ngModel)]="selectedEmployee" name="employee" required>
+                          <option value="" disabled>Select Employee</option>
+                          <option *ngFor="let e of Employee" [value]="e.id">
+                            {{ e.emp_code }}
+                          </option>
+                        </select>
+                      </div> -->
+                  
+                      <!-- Year Dropdown -->
+                      <div class="col-md-4">
+                        <label>Year</label>
+                        <select class="form-control" [(ngModel)]="selectedYear" name="year" required>
+                          <option value="" disabled>Select Year</option>
+                          <option *ngFor="let y of availableYears" [value]="y">
+                            {{ y }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-10"></div>
+                      <div class="col-md-2">
+                        <button type="submit" class="btn btn-full btn-zeo mt-3">Fetch Shifts</button>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="shift-allocation-container" *ngIf="employeeCodes.length > 0 && allDates.length > 0">
+                    <h2>SHIFT ALLOCATION FOR YEAR {{ shiftData.year }} - {{ shiftData.month }}</h2>
+                    
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <!-- First column header for "Employee" -->
+                          <th>Employee</th>
+                          <!-- Each date becomes a column -->
+                          <th *ngFor="let date of allDates">
+                            {{ date }}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- Each row represents one employee -->
+                        <tr *ngFor="let empCode of employeeCodes">
+                          <!-- First cell is the employee code -->
+                          <td>{{ empCode }}</td>
+                          <!-- Each subsequent cell is the shift for that employee on that date -->
+                          <td *ngFor="let date of allDates">
+                            {{ getShift(empCode, date) }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  
+                  
+                </div>
+                
+                
+                  
+
+              
              
                   </mat-tab>
 

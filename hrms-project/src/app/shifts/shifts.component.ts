@@ -8,6 +8,7 @@ import { MatSelect } from '@angular/material/select';
 import { DepartmentServiceService } from '../department-master/department-service.service';
 import { CompanyRegistrationService } from '../company-registration.service';
 import { MatOption } from '@angular/material/core';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-shifts',
@@ -16,6 +17,7 @@ import { MatOption } from '@angular/material/core';
 })
 export class ShiftsComponent {
 
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
   name:any='';
   start_time:any='';
@@ -66,8 +68,9 @@ export class ShiftsComponent {
 
 
   start_date:any='';
-  rotation_cycle_weeks:any='';
-  is_rotating:any='';
+  schedule_name:any='';
+  shift_type:any='';
+  rotation_cycle_weeks :any='';
   departments:any='';
   single_shift_pattern:any='';
 
@@ -82,6 +85,15 @@ export class ShiftsComponent {
   date:any='';
   override_shift:any='';
   employee_override:any=''
+
+
+  shiftData: any = {};
+
+  selectedYear: number | '' = '';
+  selectedSchedule: string = '';
+  selectedEmployee: string = '';
+  availableYears: number[] = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
+  employeeShifts: any[] = [];
 
   
   @ViewChild('select') select: MatSelect | undefined;
@@ -118,6 +130,8 @@ export class ShiftsComponent {
     this.loadDesignations();
 this.loadEmployeeshift();
 this.loadShiftsPattern();
+
+
   }
   
   registerEmployeeShifts(): void {
@@ -197,39 +211,49 @@ this.loadShiftsPattern();
 
   registerEmployeeallocateshifts(): void {
     this.registerButtonClicked = true;
-
- 
-
-    const companyData = {
-      start_date: this.start_date,
-      rotation_cycle_weeks: this.rotation_cycle_weeks ,
-      is_rotating: this.is_rotating,
-      // single_shift_pattern: this.single_shift_pattern,
-      employee: this.employee,
-      departments: this.departments,
-      single_shift_pattern:this.single_shift_pattern,
-
-
-      // employee: this.employee,
-      // branch: this.branch,
-      // department: this.department,
-      // designation: this.designation,
-      // role: this.role,
-
+  
+    // Build the payload, converting values as necessary:
+    const payload = {
+      start_date: this.start_date || null,
+      schedule_name: this.schedule_name || null,
+      shift_type: this.shift_type || null,
+      // Convert to number if provided; otherwise, send null.
+      rotation_cycle_weeks: this.rotation_cycle_weeks ? Number(this.rotation_cycle_weeks) : null,
+      employee: this.employee || null,
+      // For a multi-select field, ensure we send an array.
+      departments: (this.departments && Array.isArray(this.departments)) ? this.departments : [],
+      // If nothing is selected for single shift pattern, send null.
+      single_shift_pattern: this.single_shift_pattern || null,
     };
-
-    this.employeeService.registerEmployeeShifts(companyData).subscribe(
-      (response) => { 
+  
+    console.log('Payload:', payload);
+  
+    this.employeeService.registerEmployeeShifts(payload).subscribe(
+      (response) => {
         console.log('Registration successful', response);
         alert('Shift has been added.');
         window.location.reload();
       },
       (error) => {
         console.error('Registration failed', error);
-        alert('Registration failed. Please try again.');
+  
+        // Extract backend error messages.
+        let errorMsg = 'Registration failed. Please try again.';
+        if (error.error) {
+          if (typeof error.error === 'string') {
+            errorMsg = error.error;
+          } else if (typeof error.error === 'object') {
+            // Example: { rotation_cycle_weeks: ["A valid integer is required."], departments: ["Expected a list of items but got type \"str\"."] }
+            errorMsg = Object.keys(error.error)
+              .map(field => `${field}: ${error.error[field].join(', ')}`)
+              .join('\n');
+          }
+        }
+        alert(errorMsg);
       }
     );
   }
+  
 
 
   registerweekassign(): void {
@@ -516,5 +540,87 @@ this.loadShiftsPattern();
                   );
                 }
                 }
+
+
+
+        
+// The raw response from the backend:
+
+// For table display:
+//  - employeeCodes: array of strings (["EMP001", "EMP2", ...])
+//  - allDates: array of sorted date strings (["01-01-2025", "02-01-2025", ...])
+employeeCodes: string[] = [];
+allDates: string[] = [];
+
+// After fetching shiftData, transform for table display
+transformShiftDataForTable(): void {
+  if (!this.shiftData || !this.shiftData.shifts) {
+    this.employeeCodes = [];
+    this.allDates = [];
+    return;
+  }
+
+  // 1) Get all employee codes
+  this.employeeCodes = Object.keys(this.shiftData.shifts); // e.g. ["EMP001", "EMP2"]
+
+  // 2) Gather all dates from each employee's shift object
+  const dateSet = new Set<string>(); 
+  for (const empCode of this.employeeCodes) {
+    const schedule = this.shiftData.shifts[empCode];
+    if (schedule) {
+      Object.keys(schedule).forEach(date => dateSet.add(date));
+    }
+  }
+
+  // 3) Sort the dates
+  this.allDates = Array.from(dateSet).sort((a, b) => {
+    // Example date format: "DD-MM-YYYY"
+    const [dayA, monthA, yearA] = a.split('-').map(Number);
+    const [dayB, monthB, yearB] = b.split('-').map(Number);
+    const dateA = new Date(yearA, monthA - 1, dayA).getTime();
+    const dateB = new Date(yearB, monthB - 1, dayB).getTime();
+    return dateA - dateB;
+  });
+}
+
+// Helper to fetch a shift from shiftData for a given employee and date
+getShift(empCode: string, date: string): string {
+  if (!this.shiftData.shifts || !this.shiftData.shifts[empCode]) return '';
+  return this.shiftData.shifts[empCode][date] || '';
+}
+
+// Example: fetching the shifts
+fetchShifts(): void {
+  if (!this.selectedSchedule ||  !this.selectedYear) {
+    alert('Please select schedule, employee, and year.');
+    return;
+  }
+
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  const url = `${this.apiUrl}/calendars/api/employee-shift/get_shifts_for_year/?schedule_id=${this.selectedSchedule}&employee=${this.selectedEmployee}&year=${this.selectedYear}&schema=${selectedSchema}`;
+
+  this.http.get(url).subscribe(
+    (response: any) => {
+      console.log('Fetched shift data:', response);
+      this.shiftData = response;
+
+      // Transform for table
+      this.transformShiftDataForTable();
+    },
+    (error) => {
+      console.error('Error fetching shift data:', error);
+      let errorMessage = 'Error fetching shift data.';
+      if (error.error) {
+        if (typeof error.error === 'string') {
+          errorMessage = error.error;
+        } else if (error.error.error) {
+          errorMessage = error.error.error;
+        }
+      }
+      alert(errorMessage);
+    }
+  );
+}
+
   
 }

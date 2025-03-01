@@ -289,18 +289,40 @@ visibles:boolean=true;
 ReadMore:boolean=false;
 selectedFiles: File | null = null;
 
-onFileChange(event: any){
-  // this.file = event.target.files[0];
-  // console.log(this.file);
+// onFileChange(event: any){
+//   // this.file = event.target.files[0];
+//   // console.log(this.file);
 
+//   const input = event.target as HTMLInputElement;
+//   if (input.files && input.files.length > 0) {
+//     const file = input.files[0];
+//     const validExtensions = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel', 'text/csv'];
+
+   
+//   }
+  
+// }
+
+
+onFileChange(event: any) {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files.length > 0) {
     const file = input.files[0];
-    const validExtensions = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel', 'text/csv'];
+    // Allowed MIME types for Excel and CSV files.
+    const validExtensions = [
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'application/vnd.ms-excel',
+      'text/csv'
+    ];
 
-   
+    if (validExtensions.includes(file.type)) {
+      this.selectedFiles = file; // Set the file to your variable.
+      console.log("Selected file:", file);
+    } else {
+      alert('Please select a valid Excel file.');
+      this.selectedFiles = null;
+    }
   }
-  
 }
 
  

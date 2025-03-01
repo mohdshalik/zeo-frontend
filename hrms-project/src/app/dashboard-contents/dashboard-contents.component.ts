@@ -165,7 +165,7 @@ loadBranch(): void {
           this.selectedBranchId = this.branches[0].id;
           this.selectedBranchIdhol = this.branches[0].id; // Default branch for holidays
 
-          this.fetchBranchPolicies(this.selectedBranchId, selectedSchema);
+          // this.fetchBranchPolicies(this.selectedBranchId, selectedSchema);
           this.fetchBranchHolidays(this.selectedBranchIdhol);
 
         }
@@ -186,8 +186,13 @@ loadBranch(): void {
       const selectedBranch = this.branches.find(branch => branch.id == branchId);
       if (selectedBranch) {
         this.selectedBranchHolidays = selectedBranch.holidays || [];
+        this.selectedBranchPolicies = selectedBranch.policies || [];
+
+        this.isAddFieldsModalOpen=false;
       } else {
         this.selectedBranchHolidays = [];
+        this.selectedBranchPolicies = [];
+
       }
     }
   }
@@ -196,6 +201,8 @@ loadBranch(): void {
   fetchBranchHolidays(branchId: string): void {
     const selectedBranch = this.branches.find(branch => branch.id === branchId);
     this.selectedBranchHolidays = selectedBranch ? selectedBranch.holidays || [] : [];
+    this.selectedBranchPolicies = selectedBranch ? selectedBranch.policies || [] : [];
+
   }
   // Utility methods to format date
   getDate(dateStr: string): string {
@@ -214,39 +221,48 @@ loadBranch(): void {
   }
 
 
-  onBranchChangeCmpPolicy(event: Event): void {
-    const branchId = (event.target as HTMLSelectElement).value;
+  // onBranchChangeCmpPolicy(event: Event): void {
+  //   const branchId = (event.target as HTMLSelectElement).value;
 
-    const selectedSchema = this.authService.getSelectedSchema();
+  //   const selectedSchema = this.authService.getSelectedSchema();
   
-    if (branchId && selectedSchema ) {
-      this.DepartmentServiceService.getBranchPolicies(branchId,selectedSchema).subscribe(
-        (result: any) => {
-          this.selectedBranchPolicies = result;
-          console.log('Policies fetched for branch:', branchId, this.selectedBranchPolicies);
-        },
-        (error) => {
-          console.error('Error fetching policies for branch:', branchId, error);
-          this.selectedBranchPolicies = [];
-        }
-      );
-    } else {
-      this.selectedBranchPolicies = [];
-    }
-  }
+  //   if (branchId && selectedSchema ) {
+  //     this.DepartmentServiceService.getBranchPolicies(branchId,selectedSchema).subscribe(
+  //       (result: any) => {
+  //         this.selectedBranchPolicies = result;
+  //         console.log('Policies fetched for branch:', branchId, this.selectedBranchPolicies);
+  //       },
+  //       (error) => {
+  //         console.error('Error fetching policies for branch:', branchId, error);
+  //         this.selectedBranchPolicies = [];
+  //       }
+  //     );
+  //   } else {
+  //     this.selectedBranchPolicies = [];
+  //   }
+  // }
 
-  fetchBranchPolicies(branchId: string, selectedSchema: string): void {
-    this.DepartmentServiceService.getBranchPolicies(branchId, selectedSchema).subscribe(
-      (result: any) => {
-        this.selectedBranchPolicies = result; // Store policies for the selected branch
-        console.log('Policies fetched for branch:', branchId, this.selectedBranchPolicies);
-      },
-      (error) => {
-        console.error('Error fetching policies for branch:', branchId, error);
-        this.selectedBranchPolicies = []; // Clear policies on error
-      }
-    );
-  }
+  // fetchBranchPolicies(branchId: string, selectedSchema: string): void {
+  //   this.DepartmentServiceService.getBranchPolicies(branchId, selectedSchema).subscribe(
+  //     (result: any) => {
+  //       this.selectedBranchPolicies = result; // Store policies for the selected branch
+  //       console.log('Policies fetched for branch:', branchId, this.selectedBranchPolicies);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching policies for branch:', branchId, error);
+  //       this.selectedBranchPolicies = []; // Clear policies on error
+  //     }
+  //   );
+  // }
 
+
+  isAddFieldsModalOpen: boolean = false;
+
+  openAddFieldsModal():void{
+    this.isAddFieldsModalOpen=true;
+  }
+  closemarketModal(){
+    this.isAddFieldsModalOpen=false;
+  }
 
 }

@@ -232,6 +232,10 @@ private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` fo
   hideButton = false;
 
 
+
+  
+
+  
   ngOnInit(): void {
     // Load available fields when the component initializes
 

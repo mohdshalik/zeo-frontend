@@ -146,7 +146,7 @@ selectSchema(event: any) {
     this.isMenuOpen = true;
 
      this.router.navigate(['/main-sidebar/dashboard-contents']);
-
+      window.location.reload();
     // this.router.navigate(['/main-sidebar/sub-sidebar/dashboard-contents']);
     // const url =` /main-sidebar/dashboard-contents`;
     //   window.location.href = url;

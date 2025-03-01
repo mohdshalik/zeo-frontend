@@ -8,6 +8,8 @@ import { UserMasterService } from '../user-master/user-master.service';
 import { CatogaryService } from '../catogary-master/catogary.service';
 import { SessionService } from '../login/session.service';
 import { DesignationService } from '../designation-master/designation.service';
+import { an } from '@fullcalendar/core/internal-common';
+import { LeaveService } from '../leave-master/leave.service';
 
 @Component({
   selector: 'app-document-numbering',
@@ -25,6 +27,8 @@ export class DocumentNumberingComponent {
   branch_id: any = '';
   category: any = '';
   user: any = '';
+  type:any = '';
+  leave_type:any = '';
 
 
   automatic_numbering:  boolean = false;
@@ -34,6 +38,8 @@ export class DocumentNumberingComponent {
   Categories:any []=[];
 
   docsNumbers:any []=[];
+
+  LeaveTypes:any []=[];
 
 
   registerButtonClicked = false;
@@ -60,6 +66,7 @@ export class DocumentNumberingComponent {
     private employeeService: EmployeeService,
     private sessionService: SessionService,
     private DesignationService: DesignationService,
+    private leaveService: LeaveService,
 
 
 
@@ -73,6 +80,7 @@ ngOnInit(): void {
   this.loadCAtegory();
   this.loadUsers();
   this.loaddocNumers();
+  this.loadLeaveTypes();
 
 
   this.userId = this.sessionService.getUserId();
@@ -285,51 +293,40 @@ ngOnInit(): void {
 
 
 
-          registerGeneralreq(): void {
-            this.registerButtonClicked = true;
-            const companyData = {
-              preffix: this.preffix,
-            
-              suffix:this.suffix,
-              year: this.year,
-            
-              start_number:this.start_number,
-              current_number: this.current_number,
-            
-              end_number:this.end_number,
-              branch_id:this.branch_id,
-              category:this.category,
-              user:this.user,
-
-              automatic_numbering:this.automatic_numbering,
-
-
-
-           
-        
-              // Add other form field values to the companyData object
-            };
-        
-            this.employeeService.registerDocNum(companyData).subscribe(
-              (response) => {
-                console.log('Registration successful', response);
+            registerGeneralreq(): void {
+              this.registerButtonClicked = true;
               
-                    alert('Document number has been Added ');
-                    window.location.reload();
-                    // window.location.reload();
-               
-        
-              },
-              (error) => {
-                console.error('Add failed', error);
-                console.log('Full error response:', error);
-    
-                // Check if the error message matches the specific error
-                const errorMessage = error.error?.error || 'An error occurred while adding the document number. Please try again.';
-                alert(errorMessage);
+              // Convert the date string to an integer year.
+              const yearInt = this.year ? new Date(this.year).getFullYear() : null;
+              
+              const companyData = {
+                prefix: this.preffix,
+                suffix: this.suffix,
+                year: yearInt, // now a number, e.g. 2025
+                current_number: this.current_number,
+                branch_id: this.branch_id,
+                category: this.category,
+                user: this.user,
+                automatic_numbering: this.automatic_numbering,
+                type: this.type,
+                leave_type: this.leave_type,
+              };
+            
+              this.employeeService.registerDocNum(companyData).subscribe(
+                (response) => {
+                  console.log('Registration successful', response);
+                  alert('Document number has been Added');
+                  window.location.reload();
+                },
+                (error) => {
+                  console.error('Add failed', error);
+                  console.log('Full error response:', error);
+                  const errorMessage = error.error?.error || 'An error occurred while adding the document number. Please try again.';
+                  alert(errorMessage);
+                }
+              );
             }
-            );
-          }
+            
 
 
 
@@ -352,6 +349,27 @@ ngOnInit(): void {
             );
             }
           }
+        
+
+          loadLeaveTypes(): void {
+    
+            const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+          
+            console.log('schemastore',selectedSchema )
+            // Check if selectedSchema is available
+            if (selectedSchema) {
+              this.leaveService.getLeaveType(selectedSchema).subscribe(
+                (result: any) => {
+                  this.LeaveTypes = result;
+                  console.log(' fetching LeaveTypes:');
+          
+                },
+                (error) => {
+                  console.error('Error fetching LeaveTypes:', error);
+                }
+              );
+            }
+            }
         
         
 

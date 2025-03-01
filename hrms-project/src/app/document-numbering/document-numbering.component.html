@@ -41,14 +41,7 @@
            <div *ngIf="registerButtonClicked && !year" class="error-message">year is required.</div>
       </div>
 
-      <div class="col-md-3" >
-               
-        <label>Start Number</label>
-       <input type="number"  class="form-control" required  [(ngModel)]="start_number"  placeholder="Enter Start number"
-        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !start_number}">
-       
-       <div *ngIf="registerButtonClicked && !start_number" class="error-message">start number is required.</div>
-  </div>
+   
 
   <div class="col-md-3" >
                
@@ -60,14 +53,33 @@
 </div>
 
 
-<div class="col-md-3" >
-               
-    <label>End Number</label>
-   <input type="number"  class="form-control" required  [(ngModel)]="end_number"  placeholder="Enter end number"
-    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !end_number}">
-   
-   <div *ngIf="registerButtonClicked && !end_number" class="error-message">End number is required.</div>
+
+
+<div class="col-md-3">
+    <label>Type</label>
+    <div class="custom-sel">
+        <select class="form-control" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+            <option value="general_request">General Request</option>
+            <option value="leave_request">Leave Request</option>
+        </select>
+    </div>
 </div>
+
+
+<div class="col-md-3" *ngIf="type === 'leave_request'">
+
+
+    <div class="custom-sel">
+        <label>Select Leave Type</label>
+        <select class="form-control" id="leave_type" required [(ngModel)]="leave_type"  [ngModelOptions]="{standalone: true}" >
+            <option value="" >Select</option>
+            <option *ngFor="let deparmentsec of LeaveTypes" [value]="deparmentsec.id">{{ deparmentsec.name }} </option>
+        </select>
+    </div>
+                
+
+</div>
+
 
       <div class="col-md-3">
 

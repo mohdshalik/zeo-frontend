@@ -1,6 +1,6 @@
 import { Component,OnInit, ElementRef, Renderer2, ViewChild,  EventEmitter, Output } from '@angular/core';
 import { CountryService } from '../country.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CompanyRegistrationService } from '../company-registration.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -14,6 +14,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
 import { SessionService } from '../login/session.service';
 import { IdleService } from '../idle.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-employee-master',
@@ -21,6 +22,12 @@ import { IdleService } from '../idle.service';
   styleUrl: './employee-master.component.css'
 })
 export class EmployeeMasterComponent {
+
+
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
+
+
   // employeesec: any[] = [];
   Employees: any[] = [];
   // selectedDepartment: any;
@@ -51,6 +58,7 @@ export class EmployeeMasterComponent {
   serSubSec: boolean = true;  // Flag to toggle search options visibility
 
   searchPlaceholder: string = 'Search Employees'; // Default placeholder
+  file: any;
 
 
   constructor(private EmployeeService:EmployeeService,
@@ -304,6 +312,7 @@ if (this.userId !== null) {
     return groupPermissions.some(permission => permission.codename === codeName);
   }
 
+   
   // fetchDesignations(selectedSchema: string) {
   //   this.EmployeeService.getemployees(selectedSchema).subscribe(
   //     (data: any) => {
@@ -495,10 +504,199 @@ if (this.userId !== null) {
       
     }
 
+    isBulkuploadEmployeeModalOpen :boolean=false;
 
+
+OpenBulkuploadModal():void{
+  this.isBulkuploadEmployeeModalOpen = true;
+}
+
+
+closeBulkuploadModal():void{
+  this.isBulkuploadEmployeeModalOpen = false;
+
+}
     // handleImageError(event: any): void {
     //   console.error('Error loading image:', event);
     // }
 
+
+    emp_code:any='';
+    temp_emp_code: string | null = null;
+  
+  
+    emp_gender:any ='';
+  
+    emp_date_of_birth:any ='';
+    emp_personal_email:any ='';
+    emp_company_email:any ='';
+  
+    emp_mobile_number_1:any ='';
+    emp_mobile_number_2:any ='';
+    emp_city:any ='';
+  
+    emp_permenent_address:any ='';
+    emp_present_address:any ='';
+    emp_relegion:any ='';
+    emp_blood_group:any ='';
+    emp_nationality:any ='';
+    emp_marital_status:any ='';
+    emp_father_name:any ='';
+    emp_mother_name:any ='';
+    emp_posting_location:any ='';
+  
+    emp_country_id:any='';
+    countryService: any='';
+    emp_state_id:any='';
+    emp_company_id:any='';
+    emp_branch_id:any='';
+    emp_dept_id:any='';
+    emp_ctgry_id:any='';
+    emp_languages: any='';
+    emp_date_of_confirmation:any='';
+    emp_joined_date:any=''; 
+    emp_profile_pic: string | undefined;
+  
+    is_ess: boolean = false;
+  
+    emp_status: boolean = false;
+
+    selectedFile!: File | null;
+
+    bulkuploaddocument(): void {
+    
+      const formData = new FormData();
+    
+      if (this.file) {
+        formData.append('file', this.file);
+      } else {
+        formData.append('file', '');
+      }
+    
+      formData.append('emp_code', this.emp_code);
+      formData.append('emp_first_name', this.emp_first_name);
+      formData.append('emp_last_name', this.emp_last_name);
+      formData.append('emp_gender', this.emp_gender);
+      formData.append('emp_date_of_birth', this.emp_date_of_birth);
+      formData.append('emp_personal_email', this.emp_personal_email);
+      formData.append('emp_mobile_number_1', this.emp_mobile_number_1);
+      formData.append('emp_mobile_number_2', this.emp_mobile_number_2);
+      formData.append('emp_city', this.emp_city);
+      formData.append('emp_permenent_address', this.emp_permenent_address);
+      formData.append('emp_present_address', this.emp_present_address);
+      formData.append('emp_relegion', this.emp_relegion);
+      formData.append('emp_blood_group', this.emp_blood_group);
+      formData.append('emp_nationality', this.emp_nationality);
+      formData.append('emp_marital_status', this.emp_marital_status);
+      formData.append('emp_father_name', this.emp_father_name);
+      formData.append('emp_mother_name', this.emp_mother_name);
+      formData.append('emp_posting_location', this.emp_posting_location);
+      formData.append('emp_country_id', this.emp_country_id);
+      formData.append('emp_state_id', this.emp_state_id);
+      formData.append('emp_company_id', this.emp_company_id);
+      formData.append('emp_branch_id', this.emp_branch_id);
+      formData.append('emp_dept_id', this.emp_dept_id);
+      formData.append('emp_desgntn_id', this.emp_desgntn_id);
+      formData.append('emp_ctgry_id', this.emp_ctgry_id);
+      formData.append('emp_languages', this.emp_languages);
+      formData.append('emp_date_of_confirmation', this.emp_date_of_confirmation);
+      formData.append('emp_joined_date', this.emp_joined_date);
+      formData.append('is_ess', this.is_ess ? '1' : '0');
+      formData.append('emp_status', this.emp_status ? '1' : '0');
+    
+      const selectedSchema = localStorage.getItem('selectedSchema');
+      if (!selectedSchema) {
+        console.error('No schema selected.');
+        return;
+      }
+    
+      this.http.post(`${this.apiUrl}/employee/api/emp-bulkupload/bulk_upload/?schema=${selectedSchema}`, formData)
+      .subscribe(
+        (response) => {
+          console.log('Bulk upload successful', response);
+    
+       
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Upload error:', error);
+    
+          // If the backend provides an error message, display it in an alert
+          if (error.error) {
+            if (typeof error.error === 'string') {
+              alert(error.error); // If the error is a simple string
+            } else if (typeof error.error === 'object') {
+              const errorMessages: string[] = [];
+    
+              // Extract error messages from objects like sheet1_errors, sheet2_errors, etc.
+              Object.keys(error.error).forEach((key) => {
+                if (Array.isArray(error.error[key])) {
+                  error.error[key].forEach((errObj: any) => {
+                    if (errObj.error) {
+                      errorMessages.push(`Row ${errObj.row}: ${errObj.error}`);
+                    }
+                  });
+                }
+              });
+    
+              if (errorMessages.length > 0) {
+                alert(errorMessages.join('\n')); // Show all errors in an alert
+              } else {
+                alert('An unexpected error occurred.');
+              }
+            } else {
+              alert('Something went wrong.');
+            }
+          } else {
+            alert('Something went wrong.');
+          }
+        }
+      );
+    
+    }
+    
+  
+  
+    onChangeFile(event: any) {
+      if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        
+        if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+          const formData = new FormData();
+          formData.append('file', file);
+    
+          const selectedSchema = localStorage.getItem('selectedSchema');
+          if (!selectedSchema) {
+            console.error('No schema selected.');
+            alert('No schema selected. Please select a schema.');
+            return;
+          }
+    
+          const url = `${this.apiUrl}/employee/api/emp-bulkupload/bulk_upload/?schema=${selectedSchema}`;
+          console.log('Uploading to URL:', url);
+          
+          this.http.post(url, formData).subscribe(
+            (res: any) => {
+              console.log('Upload successful:', res);
+            },
+            (error: any) => {
+              console.error('Upload error:', error);
+              alert('Upload failed. Please check the console for details.');
+            }
+          );
+        } else {
+          alert("Please select a valid Excel file");
+        }
+      }
+    }
+    
+    onFileSelected(event: any): void {
+      this.selectedFile = event.target.files.length > 0 ? event.target.files[0] : null;
+    }
+    onFileSelect(event: any) {
+      if (event.target.files.length > 0) {
+        this.file = event.target.files[0];
+      }
+    }
+    
 
 }
