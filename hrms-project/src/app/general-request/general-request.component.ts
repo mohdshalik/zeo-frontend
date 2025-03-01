@@ -17,7 +17,7 @@ import { DesignationService } from '../designation-master/designation.service';
 export class GeneralRequestComponent {
 
   // doc_number: any = '';
-  doc_number: number | null = null;
+  document_number: number | null = null;
   reason: any = '';
   total: any = '';
   branch: any = '';
@@ -255,7 +255,7 @@ checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
           (response: any) => {
             this.automaticNumbering = response.automatic_numbering;
             if (this.automaticNumbering) {
-              this.doc_number = null; // Clear the document number field if automatic numbering is enabled
+              this.document_number = null; // Clear the document number field if automatic numbering is enabled
             }
           },
           (error) => {
@@ -363,12 +363,12 @@ checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
             this.registerButtonClicked = true;
             
             const companyData = {
-              doc_number: this.doc_number,
+              document_number: this.document_number,
             
               reason:this.reason,
-              total: this.total,
+              // total: this.total,
             
-              branch:this.branch,
+              // branch:this.branch,
               request_type: this.request_type,
             
               employee:this.employee,

@@ -52,6 +52,14 @@ export class UserMasterService {
     return this.http.get(Url);
   }
 
+  getApprover(selectedSchema: string): Observable<any> {
+    // Construct the API URL with the selected schema
+    const Url = `${this.apiUrl}/users/tenant-non-ess-users/?schema=${selectedSchema}`;
+
+    // Fetch employees from the API
+    return this.http.get(Url);
+  }
+
   getUsername(): Observable<any> {
     const url = `${this.baseUrl}/user/`;
     return this.http.get(url);

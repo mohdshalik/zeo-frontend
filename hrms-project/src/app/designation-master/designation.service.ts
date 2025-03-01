@@ -46,7 +46,7 @@ export class DesignationService {
     const apiUrl = `${this.apiUrl}/organisation/api/permissions/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
-    return this.http.get(apiUrl);
+    return this.http.get(apiUrl) ;
   
   }
 

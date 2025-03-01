@@ -25,7 +25,7 @@
             
                 </div>
 
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <div class="custom-sel">
                         <label>Select Branches</label>
                         <select class="form-control" id="branch" required [(ngModel)]="branch" (change)="onBranchChange($event)" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch}">
@@ -34,12 +34,12 @@
                         </select>
                         <div *ngIf="registerButtonClicked && !branch" class="error-message">Please Select Your Branch</div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-3">
                     <label>Document Number</label>
-                    <input type="number" class="form-control" required [(ngModel)]="doc_number" placeholder="Enter document number"
-                        [disabled]="automaticNumbering" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !doc_number && !automaticNumbering}">
-                    <div *ngIf="registerButtonClicked && !doc_number && !automaticNumbering" class="error-message">Document number is required.</div>
+                    <input type="number" class="form-control" required [(ngModel)]="document_number" placeholder="Enter document number"
+                        [disabled]="automaticNumbering" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !document_number && !automaticNumbering}">
+                    <div *ngIf="registerButtonClicked && !document_number && !automaticNumbering" class="error-message">Document number is required.</div>
                 </div>
                 
 
@@ -53,7 +53,7 @@
           </div>
 
 
-          
+<!--           
           <div class="col-md-3" >
                
             <label>Total</label>
@@ -61,7 +61,7 @@
             [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !total}">
            
            <div *ngIf="registerButtonClicked && !total" class="error-message">total is required.</div>
-      </div>
+      </div> -->
 
     
 
@@ -147,11 +147,11 @@
               <tr>
                 <th>No</th>
                 <th> Employee</th>
-                <th>Branch</th>
+                <!-- <th>Branch</th> -->
                 <th>Document Number</th>
                 <th>Request type</th>
                 <th>Reason</th>
-                <th>Total</th>
+                <!-- <th>Total</th> -->
                 <th>Approval Status</th>
 
                
@@ -162,12 +162,12 @@
               <tr *ngFor="let docs of GeneralReq;let i = index">
                 <td>{{ i + 1 }}</td> 
                 <td>{{ docs.employee }}</td>
-                <td>{{ docs.branch }}</td>
-                <td>{{ docs.doc_number }}</td>
+                <!-- <td>{{ docs.branch }}</td> -->
+                <td>{{ docs.document_number }}</td>
                 <td>{{ docs.request_type }}</td>
                 <td>{{ docs.reason }}</td>
-                <td>{{ docs.total }}</td>
-                <td>{{ docs.approved }}</td>
+                <!-- <td>{{ docs.total }}</td> -->
+                <td>{{ docs.status }}</td>
            
               </tr>
           
