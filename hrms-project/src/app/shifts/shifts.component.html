@@ -503,82 +503,89 @@
                 </form>
             
 
-                <div class="shift-allocation-container">
-                  <h2>Employee Shift Allocation</h2>
-                  
-                  <!-- Selection Form (same as before) -->
-                  <form (ngSubmit)="fetchShifts()">
+                <div class="shift-board-container">
+
+                   <!-- Selection Form -->
+                   <form (ngSubmit)="fetchShifts()">
                     <div class="row">
-                      <!-- Schedule Dropdown -->
-                      <div class="col-md-4">
-                        <label>Schedule</label>
-                        <select class="form-control" [(ngModel)]="selectedSchedule" name="schedule" required>
-                          <option value="" disabled>Select Schedule</option>
-                          <option *ngFor="let s of EmployeeShifts" [value]="s.id">
-                            {{ s.schedule_name }}
-                          </option>
-                        </select>
-                      </div>
-                  
-                      <!-- Employee Dropdown -->
-                      <!-- <div class="col-md-4">
-                        <label>Employee</label>
-                        <select class="form-control" [(ngModel)]="selectedEmployee" name="employee" required>
-                          <option value="" disabled>Select Employee</option>
-                          <option *ngFor="let e of Employee" [value]="e.id">
-                            {{ e.emp_code }}
-                          </option>
-                        </select>
-                      </div> -->
-                  
-                      <!-- Year Dropdown -->
-                      <div class="col-md-4">
-                        <label>Year</label>
-                        <select class="form-control" [(ngModel)]="selectedYear" name="year" required>
-                          <option value="" disabled>Select Year</option>
-                          <option *ngFor="let y of availableYears" [value]="y">
-                            {{ y }}
-                          </option>
-                        </select>
-                      </div>
+                        <!-- Schedule Dropdown -->
+                        <div class="col-md-4">
+                            <label>Schedule</label>
+                            <select class="form-control" [(ngModel)]="selectedSchedule" name="schedule" required>
+                                <option value="" disabled>Select Schedule</option>
+                                <option *ngFor="let s of EmployeeShifts" [value]="s.id">
+                                    {{ s.schedule_name }}
+                                </option>
+                            </select>
+                        </div>
+            
+                        <!-- Year Dropdown -->
+                        <div class="col-md-4">
+                            <label>Year</label>
+                            <select class="form-control" [(ngModel)]="selectedYear" name="year" required>
+                                <option value="" disabled>Select Year</option>
+                                <option *ngFor="let y of availableYears" [value]="y">
+                                    {{ y }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-10"></div>
+                        <div class="col-md-10"></div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-full btn-zeo mt-3">Fetch Shifts</button>
+                        </div>
+                    </div>
+                </form>
+              
+                
+                  <!-- Board Body -->
+                  <div class="shift-board-body" *ngIf="employeeCodes.length > 0 && allDates.length > 0">
+                    <!-- Top row: Date Headers -->
+                         <!-- Header with navigation (similar to your next/previous month) -->
+             
+                  <div class="month_view mt-4">
+                    <div class="row">
+                      <div class="col-md-10">
+                        <p>{{ selectedYear }}  </p>
+                      </div>
                       <div class="col-md-2">
-                        <button type="submit" class="btn btn-full btn-zeo mt-3">Fetch Shifts</button>
+                        <p >   <span><span class="arrow_outer"> <i class="fa fa-chevron-left" (click)="previousMonth()" [disabled]="currentMonthIndex === 0"></i> </span> {{ getMonthName(currentMonth) }}  <span class="arrow_outer">  <i class="fa fa-chevron-right"  (click)="nextMonth()" [disabled]="currentMonthIndex === 11"></i> </span> </span></p>
+
                       </div>
                     </div>
-                  </form>
-                  <div class="shift-allocation-container" *ngIf="employeeCodes.length > 0 && allDates.length > 0">
-                    <h2>SHIFT ALLOCATION FOR YEAR {{ shiftData.year }} - {{ shiftData.month }}</h2>
-                    
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <!-- First column header for "Employee" -->
-                          <th>Employee</th>
-                          <!-- Each date becomes a column -->
-                          <th *ngFor="let date of allDates">
-                            {{ date }}
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <!-- Each row represents one employee -->
-                        <tr *ngFor="let empCode of employeeCodes">
-                          <!-- First cell is the employee code -->
-                          <td>{{ empCode }}</td>
-                          <!-- Each subsequent cell is the shift for that employee on that date -->
-                          <td *ngFor="let date of allDates">
-                            {{ getShift(empCode, date) }}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
                   </div>
                   
-                  
-                  
+                    <div class="shift-board-row shift-board-row-head">
+                      <!-- First cell: "Employee Name" label -->
+                      <div class="shift-board-col-employee">
+                        <p class="mt-3">Employee Name</p>
+                      </div>
+                      <!-- Date columns -->
+                      <div class="shift-board-col-day" *ngFor="let date of allDates">
+                        <div class="shift-board-day-header">
+                          <div class="shift-board-day-number">{{ getDayNumber(date) }}</div>
+                          <div class="shift-board-day-name">{{ getDayName(date) }}</div>
+                        </div>
+                        <div class="shift-board-day-month">{{ getMonthNameFromDate(date) }}</div>
+                      </div>
+                    </div>
+                
+                    <!-- Rows for each employee -->
+                    <div class="shift-board-row" *ngFor="let empCode of employeeCodes">
+                      <!-- Employee Name Column -->
+                      <div class="shift-board-col-employee">
+                       <h1 class="mt-3"> {{ empCode }} </h1>
+                      </div>
+                
+                      <!-- Shift cells for each date -->
+                      <div class="shift-board-col-day" *ngFor="let date of allDates">
+                        <div class="shift-board-shift">
+                          <h2> {{ getShift(empCode, date) }} </h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
                 

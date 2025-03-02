@@ -95,7 +95,7 @@ export class LeaveService {
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `${this.apiUrl}/calendars/api/leave-request/?schema=${selectedSchema}`;
+    const apiUrl = `${this.apiUrl}/calendars/api/emp-leave-request/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {

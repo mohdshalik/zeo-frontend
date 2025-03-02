@@ -89,7 +89,7 @@ export class ShiftsComponent {
 
   shiftData: any = {};
 
-  selectedYear: number | '' = '';
+  // selectedYear: number | '' = '';
   selectedSchedule: string = '';
   selectedEmployee: string = '';
   availableYears: number[] = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
@@ -550,77 +550,125 @@ this.loadShiftsPattern();
 //  - employeeCodes: array of strings (["EMP001", "EMP2", ...])
 //  - allDates: array of sorted date strings (["01-01-2025", "02-01-2025", ...])
 employeeCodes: string[] = [];
-allDates: string[] = [];
-
-// After fetching shiftData, transform for table display
+    allDates: string[] = [];
+    selectedYear: string = '2025'; // Default to 2025
+    currentMonthIndex: number = 0; // Start with January (0 = Jan, 11 = Dec)
+    currentMonth: string = '01';   // Current month in "MM" format
+// Transform shift data for table display based on current month
 transformShiftDataForTable(): void {
   if (!this.shiftData || !this.shiftData.shifts) {
-    this.employeeCodes = [];
-    this.allDates = [];
-    return;
+      this.employeeCodes = [];
+      this.allDates = [];
+      return;
   }
 
   // 1) Get all employee codes
-  this.employeeCodes = Object.keys(this.shiftData.shifts); // e.g. ["EMP001", "EMP2"]
+  this.employeeCodes = Object.keys(this.shiftData.shifts);
 
-  // 2) Gather all dates from each employee's shift object
-  const dateSet = new Set<string>(); 
+  // 2) Gather dates for the current month
+  const dateSet = new Set<string>();
   for (const empCode of this.employeeCodes) {
-    const schedule = this.shiftData.shifts[empCode];
-    if (schedule) {
-      Object.keys(schedule).forEach(date => dateSet.add(date));
-    }
+      const schedule = this.shiftData.shifts[empCode];
+      if (schedule) {
+          Object.keys(schedule).forEach(date => {
+              if (date.split('-')[1] === this.currentMonth) {
+                  dateSet.add(date);
+              }
+          });
+      }
   }
 
   // 3) Sort the dates
   this.allDates = Array.from(dateSet).sort((a, b) => {
-    // Example date format: "DD-MM-YYYY"
-    const [dayA, monthA, yearA] = a.split('-').map(Number);
-    const [dayB, monthB, yearB] = b.split('-').map(Number);
-    const dateA = new Date(yearA, monthA - 1, dayA).getTime();
-    const dateB = new Date(yearB, monthB - 1, dayB).getTime();
-    return dateA - dateB;
+      const [dayA, monthA, yearA] = a.split('-').map(Number);
+      const [dayB, monthB, yearB] = b.split('-').map(Number);
+      const dateA = new Date(yearA, monthA - 1, dayA).getTime();
+      const dateB = new Date(yearB, monthB - 1, dayB).getTime();
+      return dateA - dateB;
   });
 }
 
-// Helper to fetch a shift from shiftData for a given employee and date
+// Get shift for employee and date
 getShift(empCode: string, date: string): string {
   if (!this.shiftData.shifts || !this.shiftData.shifts[empCode]) return '';
   return this.shiftData.shifts[empCode][date] || '';
 }
 
-// Example: fetching the shifts
+// Fetch shifts for the selected year
 fetchShifts(): void {
-  if (!this.selectedSchedule ||  !this.selectedYear) {
-    alert('Please select schedule, employee, and year.');
-    return;
+  if (!this.selectedSchedule || !this.selectedYear) {
+      alert('Please select schedule and year.');
+      return;
   }
 
   const selectedSchema = localStorage.getItem('selectedSchema');
-  const url = `${this.apiUrl}/calendars/api/employee-shift/get_shifts_for_year/?schedule_id=${this.selectedSchedule}&employee=${this.selectedEmployee}&year=${this.selectedYear}&schema=${selectedSchema}`;
+  const url = `${this.apiUrl}/calendars/api/employee-shift/get_shifts_for_year/?schedule_id=${this.selectedSchedule}&year=${this.selectedYear}&schema=${selectedSchema}`;
 
   this.http.get(url).subscribe(
-    (response: any) => {
-      console.log('Fetched shift data:', response);
-      this.shiftData = response;
-
-      // Transform for table
-      this.transformShiftDataForTable();
-    },
-    (error) => {
-      console.error('Error fetching shift data:', error);
-      let errorMessage = 'Error fetching shift data.';
-      if (error.error) {
-        if (typeof error.error === 'string') {
-          errorMessage = error.error;
-        } else if (error.error.error) {
-          errorMessage = error.error.error;
-        }
+      (response: any) => {
+          console.log('Fetched shift data:', response);
+          this.shiftData = response;
+          this.currentMonthIndex = 0; // Reset to January
+          this.currentMonth = '01';   // January
+          this.transformShiftDataForTable();
+      },
+      (error) => {
+          console.error('Error fetching shift data:', error);
+          let errorMessage = 'Error fetching shift data.';
+          if (error.error) {
+              errorMessage = typeof error.error === 'string' ? error.error : error.error.error || errorMessage;
+          }
+          alert(errorMessage);
       }
-      alert(errorMessage);
-    }
   );
 }
 
+// Navigate to next month
+nextMonth(): void {
+  if (this.currentMonthIndex < 11) {
+      this.currentMonthIndex++;
+      this.currentMonth = String(this.currentMonthIndex + 1).padStart(2, '0');
+      this.transformShiftDataForTable();
+  }
+}
+
+// Navigate to previous month
+previousMonth(): void {
+  if (this.currentMonthIndex > 0) {
+      this.currentMonthIndex--;
+      this.currentMonth = String(this.currentMonthIndex + 1).padStart(2, '0');
+      this.transformShiftDataForTable();
+  }
+}
+
+// Helper to get month name for display
+getMonthName(month: string): string {
+  const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  return monthNames[parseInt(month) - 1];
+}
+
+// Extract the day number (e.g. "25") from "DD-MM-YYYY"
+getDayNumber(dateStr: string): string {
+  return dateStr.split('-')[0]; // "25"
+}
+
+// Convert "DD-MM-YYYY" to a JS date, then get weekday name (e.g. "Mon", "Tuesday", etc.)
+getDayName(dateStr: string): string {
+  const [day, month, year] = dateStr.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
+  // 'short' -> "Mon", 'long' -> "Monday"
+  return date.toLocaleString('en-US', { weekday: 'short' });
+}
+
+// Extract the month name from "DD-MM-YYYY"
+getMonthNameFromDate(dateStr: string): string {
+  const [day, month, year] = dateStr.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
+  // 'short' -> "Jan", 'long' -> "January"
+  return date.toLocaleString('en-US', { month: 'short' });
+}
   
 }
