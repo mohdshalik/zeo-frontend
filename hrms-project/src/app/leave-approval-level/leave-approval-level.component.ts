@@ -222,7 +222,7 @@ if (this.userId !== null) {
  
   
     LoadUsers(selectedSchema: string) {
-      this.leaveService.getUsers(selectedSchema).subscribe(
+      this.leaveService.getApproverUsers(selectedSchema).subscribe(
         (data: any) => {
           this.Users = data;
         

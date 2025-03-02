@@ -276,6 +276,14 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
     return this.http.get(apiUrl);
   
   }
+  getApproverUsers(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/users/tenant-non-ess-users/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+  }
+
 
   getLeaverejectionReasons(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/calendars/api/leave-rejection-reason/?schema=${selectedSchema}`;
