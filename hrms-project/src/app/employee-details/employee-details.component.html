@@ -258,6 +258,13 @@
                                     <h3>{{ member.ef_company_expence }} </h3>
                                 </div>
 
+                                    <!-- Display each custom field -->
+                            <ng-container *ngFor="let field of member.fam_custom_fields">
+                                <div class="col-md-3">
+                                  <h2>{{ field.emp_custom_field }}</h2>
+                                  <h3>{{ field.field_value }}</h3>
+                                </div>
+                              </ng-container>
                          
                             </div>
 
@@ -286,8 +293,19 @@
                                     <h3>{{ Qualification.emp_qf_subject }} </h3>
                                 </div>
                              
+      
+                                <div class="col-md-3" >
+                                    <h2>Institution</h2>
+                                    <h3>{{ Qualification.emp_qf_instituition }} </h3>
+                                </div>
 
-                         
+                                               <!-- Display each custom field -->
+         <ng-container *ngFor="let field of Qualification.qualification_fields">
+            <div class="col-md-3">
+              <h2>{{ field.emp_custom_field }}</h2>
+              <h3>{{ field.field_value }}</h3>
+            </div>
+          </ng-container>
                             </div>
 
                          
@@ -331,6 +349,15 @@
                                     <h3>{{ Jobhistory.emp_jh_years_experiance }} </h3>
                                 </div>
                              
+
+                                  <!-- Display each custom field -->
+         <ng-container *ngFor="let field of Jobhistory.job_history_custom_fields">
+            <div class="col-md-3">
+              <h2>{{ field.emp_custom_field }}</h2>
+              <h3>{{ field.field_value }}</h3>
+            </div>
+          </ng-container>
+                         
                              
 
                          

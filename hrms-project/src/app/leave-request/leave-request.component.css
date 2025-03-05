@@ -226,3 +226,13 @@ input:focus-visible {
 /* label{
     font-size: 14px;
 } */
+
+
+.cpm-sec label{
+  font-size: 15px;
+
+}
+
+.cpm-sec .form-control{
+  font-size: 13px !important;
+}

@@ -85,6 +85,15 @@ export class DepartmentServiceService {
   }
 
 
+  getApprover(selectedSchema: string): Observable<any> {
+    // Construct the API URL with the selected schema
+    const Url = `${this.apiUrl}/users/tenant-non-ess-users/?schema=${selectedSchema}`;
+
+    // Fetch employees from the API
+    return this.http.get(Url);
+  }
+
+
   getUserforPermissionGroupSelection(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/organisation/api/Group/?schema=${selectedSchema}`;
   

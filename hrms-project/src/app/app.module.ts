@@ -141,6 +141,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { ShiftsComponent } from './shifts/shifts.component';
 import { PayRollComponent } from './pay-roll/pay-roll.component';
 import { SalaryComponent } from './salary/salary.component';
+import { CreateLeavetypeComponent } from './create-leavetype/create-leavetype.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -240,7 +241,8 @@ import { SalaryComponent } from './salary/salary.component';
      DashboardContentsComponent,
      ShiftsComponent,
      PayRollComponent,
-     SalaryComponent
+     SalaryComponent,
+     CreateLeavetypeComponent
      
      
 

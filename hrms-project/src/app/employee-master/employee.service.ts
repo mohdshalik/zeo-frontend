@@ -1185,6 +1185,64 @@ export class EmployeeService {
   }
 
 
+  
+  registerEmpAddMoreFeildFam(familyData: any): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+
+    const apiUrl = `${this.apiUrl}/employee/api/empfamily-UDF/?schema=${selectedSchema}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post(apiUrl, familyData, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error during family registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+  
+
+
+  registerEmpAddMoreFeildQual(familyData: any): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+
+    const apiUrl = `${this.apiUrl}/employee/api/empQualification-UDF/?schema=${selectedSchema}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post(apiUrl, familyData, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error during family registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+  registerEmpAddMoreFeildJob(familyData: any): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+
+    const apiUrl = `${this.apiUrl}/employee/api/empjob-history-UDF/?schema=${selectedSchema}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post(apiUrl, familyData, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error during family registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+
   updateEmpCustomField(field: any): Observable<any> {
 
     const selectedSchema = localStorage.getItem('selectedSchema');
@@ -1241,6 +1299,39 @@ export class EmployeeService {
     return this.http.get(apiUrl);
   }
 
+  getFormFieldFam(selectedSchema: string): Observable<any> {
+    // const url = `${this.baseUrl}/Branch/`;
+    // return this.http.get(url);
+
+    const apiUrl = `${this.apiUrl}/employee/api/empfamily-UDF/?schema=${selectedSchema}`;
+
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  }
+
+
+   getFormFieldQual(selectedSchema: string): Observable<any> {
+    // const url = `${this.baseUrl}/Branch/`;
+    // return this.http.get(url);
+
+    const apiUrl = `${this.apiUrl}/employee/api/empQualification-UDF/?schema=${selectedSchema}`;
+
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  }
+
+
+  getFormFieldJob(selectedSchema: string): Observable<any> {
+    // const url = `${this.baseUrl}/Branch/`;
+    // return this.http.get(url);
+
+    const apiUrl = `${this.apiUrl}/employee/api/empjob-history-UDF/?schema=${selectedSchema}`;
+
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  }
+
+
   deleteEmpCustomField(fieldId: number): Observable<any> {
     const selectedSchema = localStorage.getItem('selectedSchema');
     if (!selectedSchema) {
@@ -1262,6 +1353,38 @@ export class EmployeeService {
     return this.http.delete(url);
   }
 
+
+  deleteEmpCustomFieldFam(fieldId: number): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+    const url = `${this.apiUrl}/employee/api/empfamily-UDF/${fieldId}/?schema=${selectedSchema}`;
+    return this.http.delete(url);
+  }
+
+
+  deleteEmpCustomFieldQual(fieldId: number): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+    const url = `${this.apiUrl}/employee/api/empQualification-UDF/${fieldId}/?schema=${selectedSchema}`;
+    return this.http.delete(url);
+  }
+
+
+  deleteEmpCustomFieldJob(fieldId: number): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+    const url = `${this.apiUrl}/employee/api/empjob-history-UDF/${fieldId}/?schema=${selectedSchema}`;
+    return this.http.delete(url);
+  }
 
 
   registerApproveLevel(companyData: any): Observable<any> {

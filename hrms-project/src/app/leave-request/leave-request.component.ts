@@ -23,6 +23,8 @@ export class LeaveRequestComponent {
   approved_on:any='';
   half_day_period:any='' ;
   leave_type:any='' ;
+  document_number:any='' ;
+
 
   employee:any='' ;
 
@@ -37,6 +39,9 @@ export class LeaveRequestComponent {
   Employees: any[] = [];
 
   Users: any[] = [];
+
+  LeaveRequests: any[] = [];
+
 
 
   hasAddPermission: boolean = false;
@@ -68,6 +73,8 @@ schemas: string[] = []; // Array to store schema names
         this.LoadLeavetype(selectedSchema);
       this.LoadEmployee(selectedSchema);
       this.LoadUsers(selectedSchema);
+      this.LoadLeaveRequest(selectedSchema);
+
 
       
       }
@@ -215,47 +222,54 @@ if (this.userId !== null) {
       }
  
 
-  requestLeave(): void {
-    this.registerButtonClicked = true;
-    // if (!this.name || !this.code || !this.valid_to) {
-    //   return;
-    // }
-  
-    const formData = new FormData();
-    formData.append('start_date', this.start_date);
-    formData.append('end_date', this.end_date);
-    formData.append('reason', this.reason);
-    formData.append('status', this.status);
-    // formData.append('approved_by', this.approved_by);
-    // formData.append('approved_on', this.approved_on);
+      requestLeave(): void {
+        this.registerButtonClicked = true;
+        
+        const formData = new FormData();
+        formData.append('start_date', this.start_date);
+        formData.append('end_date', this.end_date);
+        formData.append('reason', this.reason);
+        formData.append('status', this.status);
+        formData.append('dis_half_day', this.dis_half_day.toString());
+        formData.append('half_day_period', this.half_day_period);
+        formData.append('document_number', this.document_number);
 
-    formData.append('dis_half_day', this.dis_half_day.toString());
-
-    formData.append('half_day_period', this.half_day_period);
-    formData.append('leave_type', this.leave_type);
-    formData.append('employee', this.employee);
-
-   
-
-    
-  
-  
-    this.leaveService.requestLeaveAdmin(formData).subscribe(
-      (response) => {
-        console.log('Registration successful', response);
-
-
-        alert('Leave Request   has been Sent');
-
-        window.location.reload();
-      },  
-      (error) => {
-        console.error('Added failed', error);
-        alert('Enter all required fields!');
+        
+        formData.append('leave_type', this.leave_type);
+        formData.append('employee', this.employee);
+      
+        this.leaveService.requestLeaveAdmin(formData).subscribe(
+          (response) => {
+            console.log('Registration successful', response);
+            alert('Leave Request has been Sent');
+            window.location.reload();
+          },
+          (error) => {
+            console.error('Request failed', error);
+            
+            let errorMessage = 'Enter all required fields!';
+            
+            if (error.error) {
+              if (typeof error.error === 'string') {
+                errorMessage = error.error;
+              } else if (error.error.detail) {
+                errorMessage = error.error.detail;
+              } else if (error.error.non_field_errors) {
+                errorMessage = error.error.non_field_errors.join(', ');
+              } else {
+                // Collect field-specific error messages
+                const fieldErrors = Object.keys(error.error)
+                  .map(field => `${field}: ${error.error[field].join(', ')}`)
+                  .join('\n');
+                errorMessage = fieldErrors || errorMessage;
+              }
+            }
+            
+            alert(errorMessage);
+          }
+        );
       }
-    );
-  }
-
+      
 
 
   LoadLeavetype(selectedSchema: string) {
@@ -300,5 +314,20 @@ if (this.userId !== null) {
     );
   }
 
+
+  LoadLeaveRequest(selectedSchema: string) {
+    this.leaveService.getLeaveRequest(selectedSchema).subscribe(
+      (data: any) => {
+        this.LeaveRequests = data;
+      
+        console.log('employee:', this.LeaveTypes);
+      },
+      (error: any) => {
+        console.error('Error fetching categories:', error);
+      }
+    );
+  }
+
+  
 
 }

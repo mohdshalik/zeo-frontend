@@ -84,6 +84,41 @@
 
 
                         </div>
+
+
+                        <div class="row" >
+                            <div class="col-md-6" *ngFor="let field of custom_fieldsFam">
+                                <label>{{ field.emp_custom_field }}</label>
+                                <ng-container [ngSwitch]="field.data_type">
+                                    <!-- Dropdown -->
+                                    <select *ngSwitchCase="'dropdown'" class="form-control" 
+                                            [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}"
+                                            [required]="field.mandatory">
+                                        <option *ngFor="let value of field.dropdown_values" [value]="value">{{ value }}</option>
+                                    </select>
+                                    <!-- Radio -->
+                                    <div class="radio-sec form-control" *ngSwitchCase="'radio'">
+                                        <div *ngFor="let value of field.radio_values" class="form-check">
+                                            <input type="radio" class="form-check-input" [id]="value + field.id" 
+                                                   [(ngModel)]="field.field_value" [value]="value" 
+                                                   [ngModelOptions]="{standalone: true}" [required]="field.mandatory">
+                                            <label class="form-check-label" [for]="value + field.id">{{ value }}</label>
+                                        </div>
+                                    </div>
+                                    <!-- Date -->
+                                    <input *ngSwitchCase="'date'" type="date" class="form-control" 
+                                           [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}" 
+                                           [required]="field.mandatory" />
+                                    <!-- Default for other or empty data_type -->
+                                    <input *ngSwitchDefault type="text" class="form-control" 
+                                           [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}" 
+                                           [required]="field.mandatory" />
+                                </ng-container>
+                            </div>
+                            
+                        </div>
+
+
                     </form>
                 </div>
 
@@ -177,6 +212,38 @@
 
 
 
+                        </div>
+
+                        <div class="row" >
+                            <div class="col-md-6" *ngFor="let field of custom_fieldsQual">
+                                <label>{{ field.emp_custom_field }}</label>
+                                <ng-container [ngSwitch]="field.data_type">
+                                    <!-- Dropdown -->
+                                    <select *ngSwitchCase="'dropdown'" class="form-control" 
+                                            [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}"
+                                            [required]="field.mandatory">
+                                        <option *ngFor="let value of field.dropdown_values" [value]="value">{{ value }}</option>
+                                    </select>
+                                    <!-- Radio -->
+                                    <div class="radio-sec form-control" *ngSwitchCase="'radio'">
+                                        <div *ngFor="let value of field.radio_values" class="form-check">
+                                            <input type="radio" class="form-check-input" [id]="value + field.id" 
+                                                   [(ngModel)]="field.field_value" [value]="value" 
+                                                   [ngModelOptions]="{standalone: true}" [required]="field.mandatory">
+                                            <label class="form-check-label" [for]="value + field.id">{{ value }}</label>
+                                        </div>
+                                    </div>
+                                    <!-- Date -->
+                                    <input *ngSwitchCase="'date'" type="date" class="form-control" 
+                                           [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}" 
+                                           [required]="field.mandatory" />
+                                    <!-- Default for other or empty data_type -->
+                                    <input *ngSwitchDefault type="text" class="form-control" 
+                                           [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}" 
+                                           [required]="field.mandatory" />
+                                </ng-container>
+                            </div>
+                            
                         </div>
                     </div>
                 </form>
@@ -308,6 +375,38 @@
 
 
 
+                        </div>
+
+                        <div class="row" >
+                            <div class="col-md-6" *ngFor="let field of custom_fieldsJob">
+                                <label>{{ field.emp_custom_field }}</label>
+                                <ng-container [ngSwitch]="field.data_type">
+                                    <!-- Dropdown -->
+                                    <select *ngSwitchCase="'dropdown'" class="form-control" 
+                                            [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}"
+                                            [required]="field.mandatory">
+                                        <option *ngFor="let value of field.dropdown_values" [value]="value">{{ value }}</option>
+                                    </select>
+                                    <!-- Radio -->
+                                    <div class="radio-sec form-control" *ngSwitchCase="'radio'">
+                                        <div *ngFor="let value of field.radio_values" class="form-check">
+                                            <input type="radio" class="form-check-input" [id]="value + field.id" 
+                                                   [(ngModel)]="field.field_value" [value]="value" 
+                                                   [ngModelOptions]="{standalone: true}" [required]="field.mandatory">
+                                            <label class="form-check-label" [for]="value + field.id">{{ value }}</label>
+                                        </div>
+                                    </div>
+                                    <!-- Date -->
+                                    <input *ngSwitchCase="'date'" type="date" class="form-control" 
+                                           [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}" 
+                                           [required]="field.mandatory" />
+                                    <!-- Default for other or empty data_type -->
+                                    <input *ngSwitchDefault type="text" class="form-control" 
+                                           [(ngModel)]="field.field_value" [ngModelOptions]="{standalone: true}" 
+                                           [required]="field.mandatory" />
+                                </ng-container>
+                            </div>
+                            
                         </div>
                     </div>
                 </form>

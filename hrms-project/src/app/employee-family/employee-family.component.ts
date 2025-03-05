@@ -95,9 +95,12 @@ export class EmployeeFamilyComponent {
 
     this.EmployeeService.registerEmpFamilyz(this.emp_id, familyData).subscribe(
       (response) => {
+        const createdEmployeeId = response.id; // Adjust based on your API response
+        this.EmployeeService.setEmployeeId(createdEmployeeId);
+        this.postCustomFieldValuesFam(createdEmployeeId);
         console.log('Registration successful', response);
         alert('Employee Family added!');
-        window.location.reload();
+        // window.location.reload();
         // Optionally close the dialog or reset the form
       },
       (error) => {
@@ -126,14 +129,18 @@ createEmployeeQual():void{
 
     this.EmployeeService.registerEmpQualificationz(this.emp_id, familyData).subscribe(
       (response) => {
+        const createdEmployeeId = response.id; // Adjust based on your API response
+        this.EmployeeService.setEmployeeId(createdEmployeeId);
+        this.postCustomFieldValuesQual(createdEmployeeId);
         this.step++;
+        
         console.log('Registration successful', response);
         // this.authService.login(this.cmpny_mail, this.cmpny_pincode).subscribe(
         //   (loginResponse) => {
         //     console.log('Login successful after registration', loginResponse);
         //     // Optionally, you can navigate to another page or perform other actions upon successful login.
             alert('Employee Qualification uploaded!');
-            window.location.reload();
+            // window.location.reload();
 
        
 
@@ -172,6 +179,9 @@ createEmployeeJonHistory():void{
 
     this.EmployeeService.registerEmpJobHisz(this.emp_id,familyData).subscribe(
       (response) => {
+         const createdEmployeeId = response.id; // Adjust based on your API response
+        this.EmployeeService.setEmployeeId(createdEmployeeId);
+        this.postCustomFieldValuesJob(createdEmployeeId);
         this.step++;
         console.log('Registration successful', response);
         // this.authService.login(this.cmpny_mail, this.cmpny_pincode).subscribe(
@@ -179,7 +189,7 @@ createEmployeeJonHistory():void{
         //     console.log('Login successful after registration', loginResponse);
         //     // Optionally, you can navigate to another page or perform other actions upon successful login.
             alert('Employee Job History uploaded');
-            window.location.reload();
+            // window.location.reload();
 
             // window.location.reload();
         //   },
@@ -382,6 +392,12 @@ username: any;
     
     this.loadDocumentType();
     this.loadFormFields();
+    this.loadFormFieldsFam();
+    this.loadFormFieldsQual();
+
+    this.loadFormFieldsJob();
+
+
     this.userId = this.sessionService.getUserId();
   
     if (this.userId !== null) {
@@ -437,6 +453,10 @@ username: any;
   }
 
   custom_fields :any[] = [];
+  custom_fieldsFam :any[] = [];
+  custom_fieldsQual :any[] = [];
+  custom_fieldsJob :any[] = [];
+
 
   loadFormFields(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
@@ -454,6 +474,63 @@ username: any;
     );
     }
   }
+
+
+
+  loadFormFieldsFam(): void {
+    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+    console.log('schemastore',selectedSchema )
+    // Check if selectedSchema is available
+    if (selectedSchema) {
+    this.EmployeeService.getFormFieldFam(selectedSchema).subscribe(
+      (result: any) => {
+        this.custom_fieldsFam = result;
+      },
+      (error: any) => {
+        console.error('Error fetching countries:', error);
+      }
+    );
+    }
+  }
+
+
+  loadFormFieldsQual(): void {
+    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+    console.log('schemastore',selectedSchema )
+    // Check if selectedSchema is available
+    if (selectedSchema) {
+    this.EmployeeService.getFormFieldQual(selectedSchema).subscribe(
+      (result: any) => {
+        this.custom_fieldsQual = result;
+      },
+      (error: any) => {
+        console.error('Error fetching countries:', error);
+      }
+    );
+    }
+  }
+
+
+  loadFormFieldsJob(): void {
+    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+    console.log('schemastore',selectedSchema )
+    // Check if selectedSchema is available
+    if (selectedSchema) {
+    this.EmployeeService.getFormFieldJob(selectedSchema).subscribe(
+      (result: any) => {
+        this.custom_fieldsJob = result;
+      },
+      (error: any) => {
+        console.error('Error fetching countries:', error);
+      }
+    );
+    }
+  }
+
+
   ClosePopup(){
     this.ref.close('Closed using function');
     window.location.reload();
@@ -526,6 +603,91 @@ username: any;
 }
 
 
+
+postCustomFieldValuesFam(empMasterId: number): void {
+  const customFieldValues = this.custom_fieldsFam.map(field => ({
+      emp_custom_field: field.emp_custom_field, // Assuming the field has an 'id' property
+      field_value: field.field_value, // The value entered by the user
+      emp_family: empMasterId ,// The employee ID from the response
+      created_by:this.created_by
+  }));
+
+  // Make API calls to post each custom field value
+  customFieldValues.forEach(fieldValue => {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      // return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+      this.http.post(`${this.apiUrl}/employee/api/empfamily-customfieldvalue/?schema=${selectedSchema}`, fieldValue)
+          .subscribe(
+              (response: any) => {
+                  console.log('Custom field value posted successfully', response);
+              },
+              (error: HttpErrorResponse) => {
+                  console.error('Failed to post custom field value', error);
+              }
+          );
+  });
+}
+
+
+
+
+postCustomFieldValuesQual(empMasterId: number): void {
+  const customFieldValues = this.custom_fieldsQual.map(field => ({
+      emp_custom_field: field.emp_custom_field, // Assuming the field has an 'id' property
+      field_value: field.field_value, // The value entered by the user
+      emp_qualification: empMasterId ,// The employee ID from the response
+      created_by:this.created_by
+  }));
+
+  // Make API calls to post each custom field value
+  customFieldValues.forEach(fieldValue => {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      // return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+      this.http.post(`${this.apiUrl}/employee/api/empQualification-customfieldvalue/?schema=${selectedSchema}`, fieldValue)
+          .subscribe(
+              (response: any) => {
+                  console.log('Custom field value posted successfully', response);
+              },
+              (error: HttpErrorResponse) => {
+                  console.error('Failed to post custom field value', error);
+              }
+          );
+  });
+}
+
+
+postCustomFieldValuesJob(empMasterId: number): void {
+  const customFieldValues = this.custom_fieldsJob.map(field => ({
+      emp_custom_field: field.emp_custom_field, // Assuming the field has an 'id' property
+      field_value: field.field_value, // The value entered by the user
+      emp_job_history: empMasterId ,// The employee ID from the response
+      created_by:this.created_by
+  }));
+
+  // Make API calls to post each custom field value
+  customFieldValues.forEach(fieldValue => {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      // return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+      this.http.post(`${this.apiUrl}/employee/api/empjob-history-customfieldvalue/?schema=${selectedSchema}`, fieldValue)
+          .subscribe(
+              (response: any) => {
+                  console.log('Custom field value posted successfully', response);
+              },
+              (error: HttpErrorResponse) => {
+                  console.error('Failed to post custom field value', error);
+              }
+          );
+  });
+}
 
 
 }

@@ -188,7 +188,7 @@ if (this.userId !== null) {
   loadDeparmentBranch(): void {
     const selectedSchema = this.authService.getSelectedSchema();
         if (selectedSchema) {
-          this.DepartmentServiceService.getUserforPermission(selectedSchema).subscribe(
+          this.DepartmentServiceService.getApprover(selectedSchema).subscribe(
             (result: any) => {
               this.users = result;
               console.log(' fetching Companies:');

@@ -1,0 +1,114 @@
+<div mat-dialog-content class="">
+    <div class="cpm-sec">
+
+        <h1>Create Leave Type</h1><hr>
+
+    
+        <form (ngSubmit)="registerleaveType()" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-md-4">
+                <label>Name</label>
+                <input type="text" class="form-control" required [(ngModel)]="name" placeholder="Enter name"
+                       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
+                <div *ngIf="registerButtonClicked && !name" class="error-message">name is required.</div>
+              </div>
+          
+              <div class="col-md-4">
+                <label>Code</label>
+                <input type="text" class="form-control" required [(ngModel)]="code" placeholder="Enter code"
+                       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !code}">
+                <div *ngIf="registerButtonClicked && !code" class="error-message">code is required.</div>
+              </div>
+          
+              <div class="col-md-4">
+                <label>Leave Type</label>
+                <div class="custom-sel">
+                  <select class="form-control" id="type" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+                    <option>paid</option>
+                    <option>unpaid</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="col-md-4">
+                <label>Leave Unit</label>
+                <div class="custom-sel">
+                  <select class="form-control" id="unit" name="unit" [(ngModel)]="unit" [ngModelOptions]="{standalone: true}">
+                    <option>days</option>
+                    <option>hours</option>
+                  </select>
+                </div>
+              </div>
+          
+              <div class="col-md-4">
+                <label>Valid From</label>
+                <input type="date" class="form-control" required [(ngModel)]="valid_from" placeholder="Enter valid from"
+                       [ngModelOptions]="{standalone: true}" >
+              </div>
+           
+              <div class="col-md-4">
+                <label>Valid To</label>
+                <input type="date" class="form-control" required [(ngModel)]="valid_to" placeholder="Enter valid to"
+                       [ngModelOptions]="{standalone: true}" >
+              </div>
+              <div class="col-md-4">
+                <label for="image">Leave Type Image</label>
+                <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)">
+              </div>
+          
+              <div class="col-md-4">
+                <label></label>
+                <div class="check-box-selection-sec form-control mt-3">
+                  <div class="mat-set">
+                    <mat-checkbox [(ngModel)]="negative" [ngModelOptions]="{standalone: true}">Negative</mat-checkbox>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="col-md-4">
+                <label></label>
+                <div class="check-box-selection-sec form-control mt-3">
+                  <div class="mat-set">
+                    <mat-checkbox [(ngModel)]="allow_half_day" [ngModelOptions]="{standalone: true}">Allow Half Day</mat-checkbox>
+                  </div>
+                </div>
+              </div>
+                <div class="col-md-4">
+                <label></label>
+                <div class="check-box-selection-sec form-control mt-3">
+                  <div class="mat-set">
+                    <mat-checkbox [(ngModel)]="include_weekend_and_holiday" [ngModelOptions]="{standalone: true}">Include Weekend & Holiday</mat-checkbox>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="col-md-4">
+                <label></label>
+                <div class="check-box-selection-sec form-control mt-3">
+                  <div class="mat-set">
+                    <mat-checkbox [(ngModel)]="use_common_workflow" [ngModelOptions]="{standalone: true}">Use Common Workflow</mat-checkbox>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label>Description</label>
+                <textarea class="form-control" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
+              </div>
+              
+            </div>
+
+          
+            <div class="row">
+              <div class="col-md-9"></div>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Type</button>
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+</div>
+<div mat-dialog-action>
+    
+</div>

@@ -9,6 +9,9 @@ import { DesignationService } from '../designation-master/designation.service';
 import { FormGroup } from '@angular/forms';
 import { EmployeeService } from '../employee-master/employee.service';
 import { formatDate } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateLeavetypeComponent } from '../create-leavetype/create-leavetype.component';
+
 
 
 @Component({
@@ -172,6 +175,8 @@ export class LeaveMasterComponent {
     private leaveService: LeaveService,
     private DesignationService: DesignationService,
     private employeeService: EmployeeService,
+    private dialog:MatDialog,
+
 
 
 
@@ -422,7 +427,7 @@ export class LeaveMasterComponent {
     formData.append('round_of', this.round_of);
     formData.append('prorate_type', this.prorate_type);
 
-    formData.append('leave_type', this.leave_type);
+    formData.append('leave_type', this.selectedLeaveTypeForModal.id);
     formData.append('created_by', this.created_by);
 
 
@@ -469,7 +474,7 @@ export class LeaveMasterComponent {
       formData.append('encashment_value', this.encashment_value);
       formData.append('encashment_unit_or_percentage', this.encashment_unit_or_percentage);
       formData.append('encashment_max_limit', this.encashment_max_limit);
-      formData.append('leave_type', this.leave_type);
+      formData.append('leave_type', this.selectedLeaveTypeForModal.id);
 
       formData.append('reset', this.reset.toString());
       formData.append('allow_cf', this.allow_cf.toString());
@@ -508,6 +513,12 @@ export class LeaveMasterComponent {
       }
     );
   }
+
+  toggleFlip(leavetype: any): void {
+    // Toggle the 'flipped' property on the current card
+    leavetype.flipped = !leavetype.flipped;
+  }
+  
   
 
 
@@ -599,7 +610,7 @@ export class LeaveMasterComponent {
   
     const formData: any = {
       gender: this.gender,
-      leave_type: this.leave_type,
+      leave_type: this.selectedLeaveTypeForModal.id,
       branch: this.branch && this.branch.length > 0 ? this.branch.map((b: any) => Number(b)) : [], // Send [] if empty
       department: this.department && this.department.length > 0 ? this.department.map((d: any) => Number(d)) : [],
       designation: this.designation && this.designation.length > 0 ? this.designation.map((des: any) => Number(des)) : [],
@@ -713,6 +724,29 @@ export class LeaveMasterComponent {
       this.showResetDay = false;
     }
   }
+
+
+
+  selectedLeaveTypeForModal: any = null;
+
+  isLeavetypeCreationModalOpen:boolean=false;
+
+// This method is called when the "Configure leave type" button is clicked
+openLeaveConfigurationModal(leavetype: any): void {
+  this.selectedLeaveTypeForModal = { ...leavetype }; // copy the leave type data
+  this.isLeavetypeCreationModalOpen = true;
+}
+  ClosePopup(){
+    this.isLeavetypeCreationModalOpen=false;
+  }
+
+  CreateLeaveModal(){
+    this.dialog.open(CreateLeavetypeComponent,{
+      width:'80%',
+      height:'700px',
+    })
+  }
+
 
 
 }

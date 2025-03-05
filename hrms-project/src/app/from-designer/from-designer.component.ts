@@ -41,6 +41,30 @@ export class FromDesignerComponent {
   dropdown_values_doc:any='';
   radio_values_doc:any="";
 
+
+    field_name_fam: any
+  field_value_fam: any;
+  data_type_fam:any='';
+  dropdown_values_fam:any='';
+  radio_values_fam:any="";
+
+
+
+  field_name_qual: any
+  field_value_qual: any;
+  data_type_qual:any='';
+  dropdown_values_qual:any='';
+  radio_values_qual:any="";
+
+
+
+  field_name_job: any
+  field_value_job: any;
+  data_type_job:any='';
+  dropdown_values_job:any='';
+  radio_values_job:any="";
+
+
   registerButtonClicked = false;
   registerButtonClicked1 = false;
 
@@ -52,6 +76,13 @@ export class FromDesignerComponent {
   isMArketingModalOpen:boolean=false;
 
   isDocumentfieldModalOpen:boolean=false;
+
+  isFamfieldModalOpen:boolean=false;
+
+  isQualfieldModalOpen:boolean=false;
+
+  isJobfieldModalOpen:boolean=false;
+
 
    // Initial field names
    empCodeFieldName: string = 'Employee Code';
@@ -184,6 +215,12 @@ bloodDropdownOptions: string[] = [];  // Property to store the dropdown options
 
   custom_fields :any[] = [];
   custom_fields_doc :any[] = [];
+  custom_fields_fam :any[] = [];
+  custom_fields_qual :any[] = [];
+  custom_fields_job :any[] = [];
+
+
+
 
 
   constructor(private EmployeeService: EmployeeService ,
@@ -202,6 +239,12 @@ private sessionService: SessionService,
    ngOnInit(): void {
     this.loadFormFields();
     this.loadFormFieldsDoc();
+    this.loadFormFieldsFam();
+    this.loadFormFieldsQual();
+    this.loadFormFieldsJob();
+
+
+
 
     this.loadFieldNames();
     this.loadFieldDisplay();
@@ -1269,6 +1312,32 @@ if (this.userId !== null) {
   }
 
 
+
+  openFamFieldModal(): void {
+    this.isFamfieldModalOpen = true;
+  }
+  ClosePopupFam(){
+    this.isFamfieldModalOpen=false;
+  }
+
+
+  openQualFieldModal(): void {
+    this.isQualfieldModalOpen = true;
+  }
+  ClosePopupQual(){
+    this.isQualfieldModalOpen=false;
+  }
+
+
+  openJobFieldModal(): void {
+    this.isJobfieldModalOpen = true;
+  }
+  ClosePopupJob(){
+    this.isJobfieldModalOpen=false;
+  }
+
+
+
 //   CreateEmployeeFeild(): void {
 //     this.registerButtonClicked = true;
 
@@ -1375,6 +1444,115 @@ CreateEmployeeFeildDoc(): void {
   );
 }
 
+
+
+CreateEmployeeFeildFam(): void {
+  this.registerButtonClicked = true;
+
+  // Convert the dropdown_values string into an array
+  const dropdownValuesArray = this.dropdown_values_fam
+      ? this.dropdown_values_fam.split(',').map((value: any) => value.trim())
+      : [];
+      
+ // Convert the radio_values string into an array
+ const radio_valuesArray = this.radio_values_fam
+ ? this.radio_values_fam.split(',').map((value: any) => value.trim())
+ : [];
+
+  const fieldData = {
+    emp_custom_field: this.field_name_fam,
+      field_value: this.field_value_fam,
+      data_type: this.data_type_fam,
+      dropdown_values: dropdownValuesArray,
+      radio_values: radio_valuesArray,
+      // mandatory: this.mandatory  // Capture the mandatory field status
+  };
+
+  this.EmployeeService.registerEmpAddMoreFeildFam(fieldData).subscribe(
+      (response) => {
+          console.log('Field added successfully', response);
+          alert('Field added successfully');
+      },
+      (error) => {
+          console.error('Field addition failed', error);
+          alert('Enter all fields!');
+      }
+  );
+}
+
+
+CreateEmployeeFeildQual(): void {
+  this.registerButtonClicked = true;
+
+  // Convert the dropdown_values string into an array
+  const dropdownValuesArray = this.dropdown_values_qual
+      ? this.dropdown_values_qual.split(',').map((value: any) => value.trim())
+      : [];
+      
+ // Convert the radio_values string into an array
+ const radio_valuesArray = this.radio_values_qual
+ ? this.radio_values_qual.split(',').map((value: any) => value.trim())
+ : [];
+
+  const fieldData = {
+    emp_custom_field: this.field_name_qual,
+      field_value: this.field_value_qual,
+      data_type: this.data_type_qual,
+      dropdown_values: dropdownValuesArray,
+      radio_values: radio_valuesArray,
+      // mandatory: this.mandatory  // Capture the mandatory field status
+  };
+
+  this.EmployeeService.registerEmpAddMoreFeildQual(fieldData).subscribe(
+      (response) => {
+          console.log('Field added successfully', response);
+          alert('Field added successfully');
+      },
+      (error) => {
+          console.error('Field addition failed', error);
+          alert('Enter all fields!');
+      }
+  );
+}
+
+
+
+CreateEmployeeFeildJob(): void {
+  this.registerButtonClicked = true;
+
+  // Convert the dropdown_values string into an array
+  const dropdownValuesArray = this.dropdown_values_job
+      ? this.dropdown_values_job.split(',').map((value: any) => value.trim())
+      : [];
+      
+ // Convert the radio_values string into an array
+ const radio_valuesArray = this.radio_values_job
+ ? this.radio_values_job.split(',').map((value: any) => value.trim())
+ : [];
+
+  const fieldData = {
+    emp_custom_field: this.field_name_job,
+      field_value: this.field_value_job,
+      data_type: this.data_type_job,
+      dropdown_values: dropdownValuesArray,
+      radio_values: radio_valuesArray,
+      // mandatory: this.mandatory  // Capture the mandatory field status
+  };
+
+  this.EmployeeService.registerEmpAddMoreFeildJob(fieldData).subscribe(
+      (response) => {
+          console.log('Field added successfully', response);
+          alert('Field added successfully');
+      },
+      (error) => {
+          console.error('Field addition failed', error);
+          alert('Enter all fields!');
+      }
+  );
+}
+
+
+
 updateCustomField(field: any): void {
   // Convert the dropdown_values and radio_values only if they are strings
   const updatedField = {
@@ -1439,6 +1617,62 @@ loadFormFieldsDoc(): void {
 }
 
 
+loadFormFieldsFam(): void {
+  const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+  console.log('schemastore',selectedSchema )
+  // Check if selectedSchema is available
+  if (selectedSchema) {
+  this.EmployeeService.getFormFieldFam(selectedSchema).subscribe(
+    (result: any) => {
+      this.custom_fields_fam = result;
+    },
+    (error: any) => {
+      console.error('Error fetching EMployee Family Fields:', error);
+    }
+  );
+  }
+}
+
+loadFormFieldsQual(): void {
+  const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+  console.log('schemastore',selectedSchema )
+  // Check if selectedSchema is available
+  if (selectedSchema) {
+  this.EmployeeService.getFormFieldQual(selectedSchema).subscribe(
+    (result: any) => {
+      this.custom_fields_qual = result;
+    },
+    (error: any) => {
+      console.error('Error fetching EMployee Family Fields:', error);
+    }
+  );
+  }
+}
+
+
+loadFormFieldsJob(): void {
+  const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+  console.log('schemastore',selectedSchema )
+  // Check if selectedSchema is available
+  if (selectedSchema) {
+  this.EmployeeService.getFormFieldJob(selectedSchema).subscribe(
+    (result: any) => {
+      this.custom_fields_job = result;
+    },
+    (error: any) => {
+      console.error('Error fetching EMployee Family Fields:', error);
+    }
+  );
+  }
+}
+
+
+
+
+
 deleteCustomField(fieldId: number): void {
   if (confirm('Are you sure you want to delete this custom field?')) {
     this.EmployeeService.deleteEmpCustomField(fieldId).subscribe(
@@ -1473,6 +1707,61 @@ deleteCustomFieldDoc(fieldId: number): void {
   }
 }
 
+
+deleteCustomFieldFam(fieldId: number): void {
+  if (confirm('Are you sure you want to delete this custom field?')) {
+    this.EmployeeService.deleteEmpCustomFieldFam(fieldId).subscribe(
+      (response) => {
+        console.log('Field deleted successfully', response);
+        // Remove the deleted field from the custom_fields array
+        this.custom_fields_fam = this.custom_fields_fam.filter(field => field.id !== fieldId);
+        alert('Field deleted successfully');
+      },
+      (error) => {
+        console.error('Field delete failed', error);
+        alert('Error deleting field!');
+      }
+    );
+  }
+}
+
+
+
+deleteCustomFieldQual(fieldId: number): void {
+  if (confirm('Are you sure you want to delete this custom field?')) {
+    this.EmployeeService.deleteEmpCustomFieldQual(fieldId).subscribe(
+      (response) => {
+        console.log('Field deleted successfully', response);
+        // Remove the deleted field from the custom_fields array
+        this.custom_fields_qual = this.custom_fields_qual.filter(field => field.id !== fieldId);
+        alert('Field deleted successfully');
+      },
+      (error) => {
+        console.error('Field delete failed', error);
+        alert('Error deleting field!');
+      }
+    );
+  }
+}
+
+
+
+deleteCustomFieldJob(fieldId: number): void {
+  if (confirm('Are you sure you want to delete this custom field?')) {
+    this.EmployeeService.deleteEmpCustomFieldJob(fieldId).subscribe(
+      (response) => {
+        console.log('Field deleted successfully', response);
+        // Remove the deleted field from the custom_fields array
+        this.custom_fields_job = this.custom_fields_job.filter(field => field.id !== fieldId);
+        alert('Field deleted successfully');
+      },
+      (error) => {
+        console.error('Field delete failed', error);
+        alert('Error deleting field!');
+      }
+    );
+  }
+}
 
 
 
