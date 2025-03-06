@@ -147,6 +147,16 @@ export class EmployeeService {
   }
 
 
+  updateDocNum(docId: number, payload: any): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+    const url = `${this.apiUrl}/organisation/api/document-numbering/${docId}/?schema=${selectedSchema}`;
+    return this.http.put(url, payload);
+  }
+
 
 
   registerReqType(companyData: any): Observable<any> {

@@ -69,6 +69,11 @@ export class LeaveService {
     );
   }
 
+  getAllLeaveEntitlements(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-entitlement/?schema=${selectedSchema}`;
+    return this.http.get(apiUrl);
+  }
+  
 
   registerLeaveapplicable(formData: FormData): Observable<any> {
     const selectedSchema = localStorage.getItem('selectedSchema');

@@ -51,6 +51,10 @@ export class LeaveMasterComponent {
   Category: any[] = [];
 
 
+  leaveEntitlements: any[] = [];
+
+
+
 
   // entitlement field variables declaration
 
@@ -186,6 +190,7 @@ export class LeaveMasterComponent {
     const selectedSchema = this.authService.getSelectedSchema();
     if (selectedSchema) {
 
+      this.loadLeaveEntitlements();
 
       this.LoadLeavetype(selectedSchema);
       this.LoadEmployee(selectedSchema);
@@ -521,6 +526,25 @@ export class LeaveMasterComponent {
   
   
 
+
+  // Call this method to load all leave entitlement records (e.g., after registration or on init)
+loadLeaveEntitlements(): void {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return;
+  }
+  
+  this.leaveService.getAllLeaveEntitlements(selectedSchema).subscribe(
+    (result: any) => {
+      console.log('Fetched leave entitlements:', result);
+      this.leaveEntitlements = result; // Assuming your API returns an array of records
+    },
+    (error) => {
+      console.error('Error fetching leave entitlements:', error);
+    }
+  );
+}
 
 
   LoadLeavetype(selectedSchema: string) {

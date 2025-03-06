@@ -17,7 +17,7 @@ import { LeaveService } from '../leave-master/leave.service';
 })
 export class DocumentNumberingComponent {
 
-  preffix: any = '';
+  prefix: any = '';
   suffix: any = '';
   year: any = '';
   start_number: any = '';
@@ -55,6 +55,11 @@ export class DocumentNumberingComponent {
   hasDeletePermission: boolean = false;
   hasViewPermission: boolean =false;
   hasEditPermission: boolean = false;
+
+
+  // Variable to hold the selected document for editing
+selectedDoc: any = {};
+isDocumentnumbereditModalOpen: boolean = false;
   
   constructor(private DepartmentServiceService: DepartmentServiceService ,
     private companyRegistrationService: CompanyRegistrationService, 
@@ -299,7 +304,7 @@ ngOnInit(): void {
               const yearInt = this.year ? new Date(this.year).getFullYear() : null;
               
               const companyData = {
-                prefix: this.preffix,
+                prefix: this.prefix,
                 suffix: this.suffix,
                 year: yearInt, // now a number, e.g. 2025
                 current_number: this.current_number,
@@ -370,6 +375,38 @@ ngOnInit(): void {
             }
             }
         
+
+
+            openEditDocModal(doc: any): void {
+              // Clone the document (to avoid modifying the original before saving)
+              this.selectedDoc = { ...doc };
+              this.isDocumentnumbereditModalOpen = true;
+            }
+            
+            closeEditDocModal(): void {
+              this.isDocumentnumbereditModalOpen = false;
+            }
+            
+            // Method to update the document number via API
+            updateDocumentNumber(): void {
+              // Optionally convert the date input to a year integer if needed:
+              // Example: this.selectedDoc.year = new Date(this.selectedDoc.year).getFullYear();
+              
+              this.employeeService.updateDocNum(this.selectedDoc.id, this.selectedDoc).subscribe(
+                (response) => {
+                  console.log('Document updated successfully', response);
+                  alert('Document number updated successfully.');
+                  // Optionally, refresh your list or reload the page
+                  this.closeEditDocModal();
+                  this.loaddocNumers(); // re-fetch the list if needed
+                },
+                (error) => {
+                  console.error('Error updating document number', error);
+                  const errorMessage = error.error?.error || 'Error updating document number.';
+                  alert(errorMessage);
+                }
+              );
+            }
         
 
 

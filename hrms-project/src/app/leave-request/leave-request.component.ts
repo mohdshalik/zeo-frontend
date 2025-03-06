@@ -18,6 +18,7 @@ export class LeaveRequestComponent {
   reason:any='';
 
   status:any='';
+  
   applied_on:any='';
   approved_by:any='';
   approved_on:any='';

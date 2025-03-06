@@ -12,12 +12,12 @@
                 <div class="col-md-3" >
                
                     <label>Preffix</label>
-                   <input type="text"  class="form-control" required  [(ngModel)]="preffix"  placeholder="Enter Preffix
+                   <input type="text"  class="form-control" required  [(ngModel)]="prefix"  placeholder="Enter prefix
                    
                    "
-                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !preffix}">
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !prefix}">
                    
-                   <div *ngIf="registerButtonClicked && !preffix" class="error-message">Preffix is required.</div>
+                   <div *ngIf="registerButtonClicked && !prefix" class="error-message">Preffix is required.</div>
               </div>
               
 
@@ -161,45 +161,110 @@
 
         </div>
 
-
         <table width="100%" *ngIf="hasViewPermission">
             <thead>
               <tr>
                 <th>No</th>
-                <th> Preffix</th>
+                <th>Preffix</th>
                 <th>Suffix</th>
                 <th>Year</th>
-                <th>start No</th>
-                <th>current No</th>
-                <th>End No</th>
+                <th>Current No</th>
                 <th>Branch</th>
                 <th>Category</th>
-                <th>Authomatic numbering</th>
-
-
-               
+                <th>Automatic numbering</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-                
-              <tr *ngFor="let docs of docsNumbers;let i = index">
-                <td>{{ i + 1 }}</td> 
-                <td>{{ docs.preffix }}</td>
+              <tr *ngFor="let docs of docsNumbers; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ docs.prefix }}</td>
                 <td>{{ docs.suffix }}</td>
                 <td>{{ docs.year }}</td>
-                <td>{{ docs.start_number }}</td>
                 <td>{{ docs.current_number }}</td>
-                <td>{{ docs.end_number }}</td>
                 <td>{{ docs.branch_id }}</td>
                 <td>{{ docs.category }}</td>
                 <td>{{ docs.automatic_numbering }}</td>
-
-           
+                <td>
+                  <i class="fa-solid fa-edit" (click)="openEditDocModal(docs)"></i>
+                </td>
               </tr>
-          
             </tbody>
           </table>
 
+
+          <!-- Edit Modal Popup -->
+<div *ngIf="isDocumentnumbereditModalOpen" class="modal">
+    <div class="modal-content">
+      <span class="close pull-right" (click)="closeEditDocModal()">&times;</span>
+      <h2>Edit Document Number</h2>
+      <form (ngSubmit)="updateDocumentNumber()">
+
+        <div class="row">
+
+
+        <div class="col-md-4">
+          <label>Preffix</label>
+          <input type="text" class="form-control" [(ngModel)]="selectedDoc.prefix" name="prefix" required>
+        </div>
+        <div class="col-md-4">
+          <label>Suffix</label>
+          <input type="text" class="form-control" [(ngModel)]="selectedDoc.suffix" name="suffix" required>
+        </div>
+        <div class="col-md-4">
+          <label>Year</label>
+          <!-- Use type="date" for picking a date then convert to year in TS if needed -->
+          <input type="date" class="form-control" [(ngModel)]="selectedDoc.year" name="year" required>
+        </div>
+      
+        <div class="col-md-4">
+          <label>Current Number</label>
+          <input type="number" class="form-control" [(ngModel)]="selectedDoc.current_number" name="current_number" required>
+        </div>
+       
+        <div class="col-md-4">
+          <label>Branch</label>
+          <select class="form-control" [(ngModel)]="selectedDoc.branch_id" name="branch_id" required>
+            <option value="">Select</option>
+            <option *ngFor="let branch of branches" [value]="branch.id">{{ branch.branch_name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label>Category</label>
+          <select class="form-control" [(ngModel)]="selectedDoc.category" name="category" required>
+            <option value="">Select</option>
+            <option *ngFor="let cat of Categories" [value]="cat.id">{{ cat.ctgry_title }}</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="mt-4">Automatic Numbering</label>
+          <mat-checkbox [(ngModel)]="selectedDoc.automatic_numbering" name="automatic_numbering"></mat-checkbox>
+        </div>
+
+
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-8">
+
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-secondary  btn-full" (click)="closeEditDocModal()">Cancel</button>
+
+            </div>
+
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary btn btn-full">Save </button>
+
+            </div>
+
+
+
+
+        </div>
+      </form>
+    </div>
+  </div>
         </div>
         </div>
         
+ 

@@ -31,12 +31,12 @@
                         </div>
                       </div>
 
-                      <div class="col-md-3">
+                      <!-- <div class="col-md-3">
                         <label>Document Number</label>
                         <input type="text" class="form-control" required [(ngModel)]="document_number" placeholder="Enter Document number"
                                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !document_number}">
                         <div *ngIf="registerButtonClicked && !document_number" class="error-message">Document number is required.</div>
-                      </div>
+                      </div> -->
                   
 
 
@@ -128,10 +128,12 @@
             <tr>
               <th>No</th>
               <th> Employee</th>
-              <!-- <th>Branch</th> -->
-              <th>Document Number</th>
+              <th>Start date</th>
+              <th>End date</th>
               <th>Leave Type</th>
               <th>Reason</th>
+
+              <th>Document Number</th>
               <!-- <th>Total</th> -->
               <th>Approval Status</th>
 
@@ -143,11 +145,12 @@
             <tr *ngFor="let docs of LeaveRequests;let i = index">
               <td>{{ i + 1 }}</td> 
               <td>{{ docs.employee }}</td>
-              <!-- <td>{{ docs.branch }}</td> -->
-              <td>{{ docs.document_number }}</td>
+              <td>{{ docs.start_date }}</td>
+              <td>{{ docs.start_date }}</td> 
               <td>{{ docs.leave_type }}</td>
               <td>{{ docs.reason }}</td>
-              <!-- <td>{{ docs.total }}</td> -->
+              <td>{{ docs.document_number }}</td>
+       
               <td>{{ docs.status }}</td>
          
             </tr>

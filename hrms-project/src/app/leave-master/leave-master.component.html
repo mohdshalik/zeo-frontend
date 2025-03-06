@@ -747,7 +747,66 @@
         
                           </div>
                       </div>
-                  </form>         
+                  </form>      
+                  
+                  
+
+<!-- Table View for Leave Entitlements -->
+
+<div class="table-container mt-5">
+<table class="table table-bordered table-hover preview-table" width="100%" *ngIf="leaveEntitlements && leaveEntitlements.length > 0">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Leave Type</th>
+      <th>Effective after</th>
+      <th>Effective after Unit</th>
+      <th>Accrual Rate</th>
+      <th>Accrual Frequency</th>
+      <th>Accrual Month</th>
+      <th>Accrual Day</th>
+      <th>Round Of</th>
+      <th>Prorate Type</th>
+      <th>Prorate Accrual</th>
+      <th>CF Value</th>
+      <th>CF Unit/Percentage</th>
+      <th>CF Max Limit</th>
+      <th>CF Expires in Value</th>
+      <th>CF Time Choice</th>
+      <th>Encashment Value</th>
+      <th>Encashment Unit/Percentage</th>
+      <th>Encashment Max Limit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ent of leaveEntitlements; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ ent.leave_type }}</td>
+      <td>{{ ent.min_experience }}</td>
+      <td>{{ ent.effective_after_unit }}</td>
+      <td>{{ ent.accrual_rate }}</td>
+      <td>{{ ent.accrual_frequency }}</td>
+      <td>{{ ent.accrual_month }}</td>
+      <td>{{ ent.accrual_day }}</td>
+      <td>{{ ent.round_of }}</td>
+      <td>{{ ent.prorate_type }}</td>
+      <td>{{ ent.prorate_accrual }}</td>
+      <td>{{ ent.cf_value }}</td>
+      <td>{{ ent.cf_unit_or_percentage }}</td>
+      <td>{{ ent.cf_max_limit }}</td>
+      <td>{{ ent.cf_expires_in_value }}</td>
+      <td>{{ ent.cf_time_choice }}</td>
+      <td>{{ ent.encashment_value }}</td>
+      <td>{{ ent.encashment_unit_or_percentage }}</td>
+      <td>{{ ent.encashment_max_limit }}</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
                          </div>
                 </mat-tab>
                 <mat-tab label="Reset">

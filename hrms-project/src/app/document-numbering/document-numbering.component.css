@@ -275,3 +275,56 @@ table thead th {
   font-size: 12px !important;
   margin-bottom: 12px;
 }
+
+
+
+
+/* Add your CSS styles here */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%; /* Could be more or less, depending on screen size */
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 100px;
+  height: auto;
+
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal h2{
+
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-family: math;
+}
