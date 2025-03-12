@@ -16,8 +16,13 @@ export class PermissionAssignedComponent {
   users :any[]=[];
   registerButtonClicked = false;
 
+  registerButtonClickededit = false;
+
+
   groups:any='';
   Groups :any[]=[];
+  UserPermissions :any[]=[];
+
 
 
   hasAddPermission: boolean = false;
@@ -29,6 +34,10 @@ userId: number | null | undefined;
 userDetails: any;
 userDetailss: any;
 schemas: string[] = []; // Array to store schema names
+
+
+isUserPereditModalOpen = false;
+selectedUserPermission: any = { profile: '', groups: [] };
 
   constructor(private DepartmentServiceService: DepartmentServiceService ,
     private http: HttpClient,
@@ -42,6 +51,8 @@ private sessionService: SessionService,
     
   this.loadDeparmentBranch();
   this.loadUserPermissions();
+  this.loadAssignedPermissionsForUser();
+
 
   this.userId = this.sessionService.getUserId();
 if (this.userId !== null) {
@@ -225,31 +236,113 @@ if (this.userId !== null) {
  
   registerUserAssignedPermission(): void {
     this.registerButtonClicked = true;
+  
     const companyData = {
       profile: this.profile,
-      groups:this.groups,
-    
-   
-
-      // Add other form field values to the companyData object
+      groups: this.groups,
     };
   
-
     this.DepartmentServiceService.registerUserAssgnedPer(companyData).subscribe(
       (response) => {
         console.log('Registration successful', response);
-       
-            alert('Group Permission has been Assigned ');
-            window.location.reload();
-          
-
+        alert('Group Permission has been Assigned');
+        window.location.reload();
       },
       (error) => {
         console.error('Registration failed', error);
-        alert('enter all field!')
-        // Handle the error appropriately, e.g., show a user-friendly error message.
+  
+        // Check if the error response contains a profile message
+        if (error.error && error.error.profile) {
+          alert(error.error.profile[0]); // Show the backend error message
+        } else {
+          alert('Something went wrong. Please try again!');
+        }
       }
     );
   }
+  
+
+
+  loadAssignedPermissionsForUser(): void {
+    const selectedSchema = this.authService.getSelectedSchema();
+        if (selectedSchema) {
+          this.DepartmentServiceService.getassignedPermissionsForUser(selectedSchema).subscribe(
+            (result: any) => {
+              this.UserPermissions = result;
+              console.log(' fetching User Permissions:');
+      
+            },
+            (error) => {
+              console.error('Error User Permissions:', error);
+            }
+          );
+        }
+   
+  }
+
+  
+  deleteAssignedPermission(permissionId: number): void {
+    if (confirm('Are you sure you want to delete this permission?')) {
+      const selectedSchema = this.authService.getSelectedSchema();
+      if (selectedSchema) {
+      this.DepartmentServiceService.deleteAssignedPermission(permissionId,selectedSchema).subscribe(
+        (response) => {
+          console.log('Permission deleted successfully', response);
+          alert('Permission deleted successfully');
+          this.loadAssignedPermissionsForUser(); // Refresh the list after deletion
+        },
+        (error) => {
+          console.error('Error deleting permission:', error);
+          alert('Failed to delete permission');
+        }
+      );
+    }
+    }
+  }
+
+
+
+
+
+  // Open modal and set selected permission details
+openEditPerModal(permission: any): void {
+  this.selectedUserPermission = { ...permission }; // Copy the object to avoid binding issues
+  this.isUserPereditModalOpen = true;
+}
+
+// Close modal
+closeEditPerModal(): void {
+  this.isUserPereditModalOpen = false;
+  this.selectedUserPermission = { profile: '', groups: [] };
+}
+
+updateUserPermission(): void {
+  this.registerButtonClickededit = true;
+
+  if (!this.selectedUserPermission.profile || this.selectedUserPermission.groups.length === 0) {
+    return; // Stop if form validation fails
+  }
+
+  const selectedSchema = this.authService.getSelectedSchema(); // Get schema name
+  if (!selectedSchema) {
+    console.error('No schema selected');
+    return;
+  }
+
+  this.DepartmentServiceService.updateUserPermission(selectedSchema, this.selectedUserPermission.id, this.selectedUserPermission)
+    .subscribe(
+      (response) => {
+        console.log('Permission updated successfully', response);
+        alert('Permission updated successfully');
+        this.loadAssignedPermissionsForUser(); // Refresh the table
+        this.closeEditPerModal();
+      },
+      (error) => {
+        console.error('Error updating permission:', error);
+        alert('Failed to update permission');
+      }
+    );
+}
+
 
 }

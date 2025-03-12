@@ -105,6 +105,8 @@ export class EmployeeEditComponent {
   // emp_languages: string[] = [];
   emp_active_date:any='';
   emp_hired_date:any=''; 
+  // emp_hired_date:any=''; 
+  
   emp_date_of_confirmation:any='';
   emp_joined_date:any=''; 
 
@@ -199,53 +201,7 @@ export class EmployeeEditComponent {
     if (this.selectedFile) {
         formData.append('emp_profile_pic', this.selectedFile, this.selectedFile.name);
     }
-            // Basic validation for username and password fields
-//   if (!this.emp_code || !this.emp_date_of_birth || this.emp_gender ||this.emp_personal_email||this.emp_mobile_number_1 ||this.emp_country_id || this.emp_state_id|| this.emp_company_id||
-//     this.emp_branch_id||this.emp_dept_id ||this.emp_desgntn_id||this.emp_ctgry_id) {
-//    if (!this.emp_code) {
-//      alert('Employee code field is blank.');
-//    }
-//    if (!this.emp_date_of_birth) {
-//      alert('Date Of birth field is blank.');
-//    }
-//    if (!this.emp_gender) {
-//      alert('Gender field is blank.');
-//    }
-//    if (!this.emp_personal_email) {
-//      alert('Email id field is blank.');
-//    }
-//    if (!this.emp_mobile_number_1) {
-//      alert('Contact field is blank.');
-//    }
-
-//    if (!this.emp_country_id) {
-//      alert('Country field is blank.');
-//    }
-
-//    if (!this.emp_state_id) {
-//      alert('State field is blank.');
-//    }
-
-//    if (!this.emp_company_id) {
-//      alert('Company field is blank.');
-//    }
-//    if (!this.emp_branch_id) {
-//      alert('Branch field is blank.');
-//    }
-
-//    if (!this.emp_dept_id) {
-//      alert('Department field is blank.');
-//    }
-
-//    if (!this.emp_desgntn_id) {
-//      alert('Designation field is blank.');
-//    }
-
-//    if (!this.emp_ctgry_id) {
-//      alert('Category field is blank.');
-//    }
-//    // return; // Exit the function if validation fails
-//  }
+      
    
 const selectedDate = new Date(this.emp_date_of_confirmation);
 const formattedDate = selectedDate.toISOString().split('T')[0]; // Converts to "YYYY-MM-DD"

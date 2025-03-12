@@ -178,7 +178,7 @@ showsidebarclick() {
 
   
   redirectToExpiredDocuments(): void {
-    this.router.navigate(['/main-sidebar/settings/document-expired']);
+    this.router.navigate(['/main-sidebar/sub-sidebar/document-expired']);
     this.expiredDocumentsCount = 0;
   }
 

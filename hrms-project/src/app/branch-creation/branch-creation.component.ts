@@ -240,7 +240,7 @@ registerBranch(): void {
   const formData = new FormData();
   // br_pincode
   formData.append('branch_users', this.branch_users);
-  formData.append('probation_period_days',this.probation_period_days);
+  // formData.append('probation_period_days',this.probation_period_days);
   formData.append('br_city',this.br_city);
   formData.append('br_country',this.br_country);
   formData.append('br_company_id',this.br_company_id);

@@ -121,7 +121,6 @@ export class UserCreationComponent {
         console.log('Registration successful', response);
        
             alert('User has been Registered and logged in!');
-            // window.location.reload();
             const createdUserId = response.id; // Assume `response` contains the new user ID
 
             
@@ -182,6 +181,7 @@ export class UserCreationComponent {
   
   closeAddFieldsModal(){
     this.isAddFieldsModalOpen=false;
+    window.location.reload();
   }
 
   openPopus(userId: string): void {

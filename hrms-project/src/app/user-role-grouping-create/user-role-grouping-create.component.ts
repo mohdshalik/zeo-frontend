@@ -4,6 +4,7 @@ import { UserMasterService } from '../user-master/user-master.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from '../login/authentication.service';
 import { environment } from '../../environments/environment';
+import { window } from 'rxjs';
 
 @Component({
   selector: 'app-user-role-grouping-create',
@@ -4807,7 +4808,10 @@ onSubmit(): void {
   // Send POST request to the dynamically constructed URL
   this.http.post(url, formData).subscribe(response => {
     console.log('Data saved successfully:', response); 
-    alert('permission Gropu Added')
+  
+    
+    alert('permission Gropu Added');
+
     // Optionally reset the form or handle the response
   }, error => {
     console.error('Failed to save data:', error);
@@ -4824,5 +4828,6 @@ onSubmit(): void {
 
   ClosePopup() {
     this.ref.close('Closed using function');
+    
   }
 }

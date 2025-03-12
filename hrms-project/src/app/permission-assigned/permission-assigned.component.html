@@ -52,5 +52,74 @@
                 </form>
             </div>
         </div>
+
+        <table width="100%" *ngIf="hasViewPermission">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>User</th>
+                <th>Group Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let per of UserPermissions; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ per.profile }}</td> <!-- Display User Name -->
+                <td>
+                  <span *ngFor="let group of per.groups; let last = last">
+                    {{ group.name }}{{ last ? '' : ', ' }}
+                  </span> 
+                </td> <!-- Display Group Name(s) -->
+                <td>
+                    <span class="table-btns">
+                        <button type="button" class="btn-zeo btn" (click)="openEditPerModal(per)">
+                            <i class="fa-solid fa-edit"></i>
+                          </button>
+                        <button type="button" class="btn-zeo btn " (click)="deleteAssignedPermission(per.id)"><i class="fa-solid fa-trash"></i></button>
+                    </span>
+                </td>
+              
+              </tr>
+            </tbody>
+          </table>
+          
+
+ <!-- Edit Modal Popup -->
+<div *ngIf="isUserPereditModalOpen" class="modal">
+    <div class="modal-content">
+      <span class="close pull-right" (click)="closeEditPerModal()">&times;</span>
+      <h2>Edit User Permission</h2>
+      <form (ngSubmit)="updateUserPermission()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="custom-sel">
+                    <label>Select User</label>
+                    <select class="form-control" id="profile" required [(ngModel)]="selectedUserPermission.profile"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClickededit && !selectedUserPermission.profile}">
+                        <option value="">Select</option>
+                        <option *ngFor="let user of users" [value]="user.id">{{ user.username }}</option>
+                    </select>
+                    <div *ngIf="registerButtonClickededit && !selectedUserPermission.profile" class="error-message">Please Select a User</div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="custom-sel">
+                    <label>Select Group</label>
+                    <select class="form-control" id="groups" multiple required [(ngModel)]="selectedUserPermission.groups"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClickededit && !selectedUserPermission.groups}">
+                        <option value="">Select</option>
+                        <option *ngFor="let group of Groups" [value]="group.id">{{ group.name }}</option>
+                    </select>
+                    <div *ngIf="registerButtonClickededit && !selectedUserPermission.groups" class="error-message">Please Select a Group</div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+</div>
+
+
+        
     </div>
 </div>

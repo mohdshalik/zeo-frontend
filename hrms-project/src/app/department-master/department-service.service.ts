@@ -101,7 +101,24 @@ export class DepartmentServiceService {
     return this.http.get(apiUrl);
   }
 
+  getassignedPermissionsForUser(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/organisation/api/permissions/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  }
 
+
+  deleteAssignedPermission(permissionId: number,selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/organisation/api/permissions/${permissionId}/?schema=${selectedSchema}`;
+    return this.http.delete(apiUrl);
+  }
+
+  updateUserPermission(selectedSchema: string, permissionId: number, updatedData: any): Observable<any> {
+    const apiUrl = `${this.apiUrl}/organisation/api/permissions/${permissionId}/?schema=${selectedSchema}`;
+    return this.http.put(apiUrl, updatedData);
+  }
+  
 
   getCategoryById(departmentId: number): Observable<any> {
     // const url = `${this.baseUrl}/Department/${departmentId}/`;

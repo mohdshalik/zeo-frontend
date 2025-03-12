@@ -224,7 +224,7 @@
        
         <div class="col-md-4">
           <label>Branch</label>
-          <select class="form-control" [(ngModel)]="selectedDoc.branch_id" name="branch_id" required>
+          <select class="form-control" [(ngModel)]="selectedDoc.branch_id"  name="branch_id" required>
             <option value="">Select</option>
             <option *ngFor="let branch of branches" [value]="branch.id">{{ branch.branch_name }}</option>
           </select>
@@ -237,7 +237,7 @@
           </select>
         </div>
         <div class="col-md-4">
-          <label class="mt-4">Automatic Numbering</label>
+          <label class="mt-4">proper-Autonumbering</label>
           <mat-checkbox [(ngModel)]="selectedDoc.automatic_numbering" name="automatic_numbering"></mat-checkbox>
         </div>
 

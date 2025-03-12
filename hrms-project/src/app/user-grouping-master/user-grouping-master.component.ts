@@ -382,6 +382,7 @@ deleteSelectedEmployees() {
           console.log('Group deleted successfully:', DeptId);
           // Remove the deleted employee from the local list
           this.Groups = this.Groups.filter(employee => employee.id !== DeptId);
+          window.location.reload();
         },
         (error) => {
           console.error('Error deleting Group:', error);

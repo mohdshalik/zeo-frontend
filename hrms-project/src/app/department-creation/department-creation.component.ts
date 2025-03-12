@@ -173,7 +173,7 @@ export class DepartmentCreationComponent {
       }, (error) => {
         // Handle upload error
         console.error('Departments upload failed', error);
-        alert('enter all fields correctly');
+        alert('Departments upload failed! enter all fields correctly');
       });
   
   }

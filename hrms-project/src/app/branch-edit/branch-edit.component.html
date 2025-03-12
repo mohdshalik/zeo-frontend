@@ -9,7 +9,7 @@
 
             <div class="col-md-6" >
                      
-                <label>Branch Name</label>
+                <label>Branch Code</label>
                <input type="text"  class="form-control" required id="branch_code" name="branch_code"  [(ngModel)]="Emp.branch_code"  placeholder="Enter Branch Code"
                 [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch_code}">
                
@@ -25,14 +25,7 @@
              <div *ngIf="registerButtonClicked && !branch_name" class="error-message">Branch Name is required.</div>
         </div>
 
-        <div class="col-md-6" >
-               
-            <label>Probation period days</label>
-           <input type="number"  class="form-control" required  [(ngModel)]="Emp.probation_period_days"  placeholder="Enter Branch Name" [ngModelOptions]="{standalone: true}" >
-           
-           <!-- <div *ngIf="registerButtonClicked && !probation_period_days" class="error-message">notification period days is required.</div> -->
-        </div>
-            
+      
         
         <div class="col-md-6" >
                        
@@ -82,7 +75,7 @@
         </div>
         
 
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
     
     
             <div class="custom-sel">
@@ -96,7 +89,7 @@
                         
     
         </div>
-        
+         -->
         
         
   
@@ -134,7 +127,7 @@
             
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="!branch_users">
 
 
             <div class="custom-sel">

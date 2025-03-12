@@ -106,9 +106,16 @@ import { SessionService } from '../login/session.service';
                       <h2 class="text-center">{{ branchsec.br_branch_nmbr_1 }} </h2>
                   </div>
                 
-                  <button type="button" class="btn btn-Edit btn-info d-block mx-auto mt-2" (click)="openEditPopuss(branchsec.id)" *ngIf="showEditBtn">Edit</button>
                   
-          
+
+                </div>
+                <div class="row mt-2">
+                <div class="col-md-10">
+                </div>
+                <div class="col-md-2">
+                 <button mat-fab class="btn_ed pull-right" style="color:white" color="primary" aria-label="Example icon button with a delete icon" (click)="openEditPopuss(branchsec.id)" *ngIf="showEditBtn"><mat-icon>draw</mat-icon></button>
+
+                </div>
                 </div>
               </div>
 
@@ -354,6 +361,7 @@ deleteSelectedEmployees() {
           // Remove the deleted employee from the local list
           this.branches = this.branches.filter(employee => employee.id !== categoryId);
           alert(' Branch deleted successfully')
+          window.location.reload();
 
         },
         (error) => {

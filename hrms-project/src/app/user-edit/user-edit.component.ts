@@ -95,16 +95,16 @@ export class UserEditComponent {
     // Update category
 
      // Basic validation
-     if (!this.Emp.username || !this.Emp.email || !this.Emp.password || !this.Emp.tenants) {
+     if (!this.Emp.username || !this.Emp.email  || !this.Emp.tenants) {
       if (!this.Emp.username) {
         alert('User field is blank.');
       }
       if (!this.Emp.email) {
         alert('Email field is blank.');
       }
-      if (!this.Emp.password) {
-        alert('Password field is blank.');
-      }
+      // if (!this.Emp.password) {
+      //   alert('Password field is blank.');
+      // }
     }
     
     this.UserMasterService.updateEmp(this.data.employeeId, this.Emp).subscribe(

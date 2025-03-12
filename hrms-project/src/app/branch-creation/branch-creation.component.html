@@ -24,14 +24,13 @@
        
        <div *ngIf="registerButtonClicked && !branch_code" class="error-message">Branch Code is required.</div>
     </div>
-    
+<!--     
     <div class="col-md-6" >
                
         <label>Probation period days</label>
        <input type="number"  class="form-control" required  [(ngModel)]="probation_period_days"  placeholder="Enter Branch Name" [ngModelOptions]="{standalone: true}" >
        
-       <!-- <div *ngIf="registerButtonClicked && !probation_period_days" class="error-message">notification period days is required.</div> -->
-    </div>
+    </div> -->
         
                    
                      
@@ -95,7 +94,7 @@
                          
                   
               <label>Email</label>
-              <input type="text" [(ngModel)]="br_branch_mail" required [ngModelOptions]="{standalone: true}" class="form-control" placeholder="example@gmail.com"
+              <input type="text" [(ngModel)]="br_branch_mail" required [ngModelOptions]="{standalone: true}" class="form-control" placeholder="enter email id"
               [ngClass]="{'error-field': registerButtonClicked && !br_branch_mail}" >
               <div *ngIf="registerButtonClicked && !br_branch_mail" class="error-message">Please enter your email.</div>
     

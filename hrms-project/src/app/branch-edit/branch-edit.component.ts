@@ -9,6 +9,7 @@ import { Route,ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../employee-master/employee.service';
 import { BranchServiceService } from '../branch-master/branch-service.service';
 import { DepartmentServiceService } from '../department-master/department-service.service';
+import { SessionService } from '../login/session.service';
 
 @Component({
   selector: 'app-branch-edit',
@@ -48,6 +49,13 @@ export class BranchEditComponent {
   selectedFile!: File | null;
 
 
+  schemas: string[] = []; // Array to store schema names
+
+  
+  userId: number | null | undefined;
+  userDetails: any;
+  userDetailss: any[] = [];
+  username: any;
 
   constructor(
     private ref:MatDialogRef<BranchEditComponent>,
@@ -58,6 +66,7 @@ export class BranchEditComponent {
 
 
     private EmployeeService : EmployeeService,
+  private sessionService: SessionService,
 
     private renderer: Renderer2,
     private http: HttpClient,
@@ -88,6 +97,39 @@ export class BranchEditComponent {
 
     this.loadCountries();
 this. loadBranchUser();
+
+
+
+this.userId = this.sessionService.getUserId();
+
+  
+if (this.userId !== null) {
+  this.authService.getUserData(this.userId).subscribe(
+    (userData: any) => {
+      this.userDetails = userData;
+      this.branch_users = this.userId; // Automatically set the owner to logged-in user ID
+
+    },
+    (error) => {
+      console.error('Failed to fetch user details:', error);
+    }
+  );
+
+  this.authService.getUserSchema(this.userId).subscribe(
+    (userData: any) => {
+      this.userDetailss = userData; // Store user schemas in userDetailss
+
+      this.schemas = userData.map((schema: any) => schema.schema_name);
+    },
+    (error) => {
+      console.error('Failed to fetch user schemas:', error);
+    }
+  );
+} else {
+  console.error('User ID is null.');
+}
+
+
  
 
   }
@@ -116,6 +158,7 @@ this. loadBranchUser();
         console.log('Branches updated successfully:', response);
         // Close the dialog when category is updated
         this.dialogRef.close();
+        window.location.reload();
  
       },
       (error) => {

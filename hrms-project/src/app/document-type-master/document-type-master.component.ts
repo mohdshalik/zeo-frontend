@@ -220,33 +220,42 @@ if (this.userId !== null) {
   
   registerDocumentType(): void {
     this.registerButtonClicked = true;
+
     const companyData = {
       type_name: this.type_name,
-    
-      description:this.description,
-   
-
-      // Add other form field values to the companyData object
+      description: this.description,
     };
-  
 
     this.countryService.registerDocumentType(companyData).subscribe(
       (response) => {
         console.log('Registration successful', response);
-      
-            alert('Document Type has been Added ');
-            window.location.reload();
-            // window.location.reload();
-       
-
+        alert('Document Type has been Added');
+        window.location.reload();
       },
       (error) => {
-        console.error('Added failed', error);
-        alert('enter all field!');
-        // Handle the error appropriately, e.g., show a user-friendly error message.
+        console.error('Addition failed', error);
+
+        // Check if the error response contains validation messages from the backend
+        if (error.error) {
+          let errorMessage = 'Error: ';
+          if (typeof error.error === 'string') {
+            // If backend returns a simple error message
+            errorMessage += error.error;
+          } else if (typeof error.error === 'object') {
+            // If backend returns an object with multiple field errors
+            for (const key in error.error) {
+              if (error.error.hasOwnProperty(key)) {
+                errorMessage += `\n${key}: ${error.error[key]}`;
+              }
+            }
+          }
+          alert(errorMessage);
+        } else {
+          alert('An unknown error occurred. Please try again.');
+        }
       }
     );
-  }
+}
 
 
   // loadCompanies(): void { 

@@ -139,6 +139,10 @@ const routes: Routes = [
             path:'salary',
             component:SalaryComponent,
           },
+          {
+            path:'document-expired',
+            component:DocumentExpiredComponent
+          },
 
 
 
@@ -181,10 +185,7 @@ const routes: Routes = [
             component:DocumentTypeMasterComponent
           },
 
-          {
-            path:'document-expired',
-            component:DocumentExpiredComponent
-          },
+        
           {
             path:'user-details/:id/details',
             component:UserDetailsComponent
