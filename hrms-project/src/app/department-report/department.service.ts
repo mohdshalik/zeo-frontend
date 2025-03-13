@@ -43,4 +43,13 @@ export class DepartmentService {
     return throwError('Something went wrong; please try again later.');
   }
  
+
+
+    // Service method to create a new permission group
+    createPermissionGroup(selectedSchema: string, groupData: any): Observable<any> {
+      const url = `${this.apiUrl}/organisation/api/Group/?schema=${selectedSchema}`;
+      return this.http.post(url, groupData);
+    }
+
+
 }

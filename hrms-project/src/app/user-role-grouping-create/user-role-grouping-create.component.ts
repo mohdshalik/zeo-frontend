@@ -4783,6 +4783,8 @@ showcalenders(): void{
 showLeaves(): void{
   this.LeaveMastersvalue =!this.LeaveMastersvalue;
 }
+
+
 onSubmit(): void {
   const selectedSchema = localStorage.getItem('selectedSchema');
   
@@ -4791,43 +4793,37 @@ onSubmit(): void {
     return;
   }
 
-  // Validate the form data
-  // if (!this.profile || !this.selectedPermissions || this.selectedPermissions.length === 0) {
-  //   console.error('Codename and permissions are required.');
-  //   return;
-  // }
-
-  // Construct the URL with the selected schema
-  const url = `${this.apiUrl}/organisation/api/Group/?schema=${selectedSchema}`;
-  
   const formData = {
     name: this.groupName,
     permissions: this.selectedPermissions
   };
 
-  // Send POST request to the dynamically constructed URL
-  this.http.post(url, formData).subscribe(response => {
-    console.log('Data saved successfully:', response); 
-  
-    
-    alert('permission Gropu Added');
+  this.http.post(`${this.apiUrl}/organisation/api/Group/?schema=${selectedSchema}`, formData)
+    .subscribe(
+      (response) => {
+        console.log('Data saved successfully:', response);
+        alert('Permission Group Added');
 
-    // Optionally reset the form or handle the response
-  }, error => {
-    console.error('Failed to save data:', error);
-    alert(`fail to save data ! ${error}`)
-    if (error.error.profile) {
-      // Display the error message to the user, e.g., by setting a form error
-      console.error('Codename error:', error.error.profile);
+        // ✅ Force reload the page
+        (window as any).location.reload();
 
-    }
-  });
+      },
+      (error) => {
+        console.error('Failed to save data:', error);
+        alert(`Fail to save data! ${error}`);
+      }
+    );
 }
+
+ 
+
 
 
 
   ClosePopup() {
     this.ref.close('Closed using function');
+    (window as any).location.reload();
+
     
   }
 }

@@ -286,22 +286,34 @@ if (this.userId !== null) {
       }
     }
   
-    // Method to handle placeholder selection
-    selectPlaceholder(placeholder: string): void {
-      const currentContent = $(this.el.nativeElement).find('#summernote').summernote('code');
+    selectedPlaceholders: string[] = []; // Store multiple placeholders
+
+  // // Method to handle placeholder selection
+  // selectPlaceholder(placeholder: string): void {
+  //   const currentContent = $(this.el.nativeElement).find('#summernote').summernote('code');
+    
+  //   // If the placeholder is already inserted, prevent adding it again
+  //   if (!this.selectedPlaceholders.includes(placeholder)) {
+  //     // Append the new placeholder
+  //     const updatedContent = currentContent + ' ' + placeholder;
+  //     $(this.el.nativeElement).find('#summernote').summernote('code', updatedContent);
+
+  //     // Add the placeholder to the selectedPlaceholders array
+  //     this.selectedPlaceholders.push(placeholder);
+  //   }
+  // }
+
+
+  selectPlaceholder(placeholder: string): void {
+    const currentContent = $(this.el.nativeElement).find('#summernote').summernote('code');
+    
+    const updatedContent = currentContent + ' ' + placeholder;
+    $(this.el.nativeElement).find('#summernote').summernote('code', updatedContent);
   
-      // If a placeholder is already selected, replace it with the new one
-      if (this.selectedPlaceholder) {
-        const updatedContent = currentContent.replace(this.selectedPlaceholder, placeholder);
-        $(this.el.nativeElement).find('#summernote').summernote('code', updatedContent);
-      } else {
-        // If no placeholder is selected yet, just append the new placeholder
-        $(this.el.nativeElement).find('#summernote').summernote('code', currentContent + placeholder);
-      }
+    this.selectedPlaceholders.push(placeholder); // Allow duplicates
+  }
   
-      // Update the selected placeholder
-      this.selectedPlaceholder = placeholder; // Store the latest selected placeholder
-    }
+
   
     ngAfterViewInit(): void {
       // Initialize Summernote
