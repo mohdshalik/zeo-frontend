@@ -154,6 +154,8 @@ registerBranch(): void {
   formData.append('branch_name', this.branch_name);
   formData.append('branch_code', this.branch_code);
   formData.append('br_country', this.br_country);
+  formData.append('br_state_id', this.br_state_id);
+
   formData.append('br_branch_mail', this.br_branch_mail);
   formData.append('br_branch_nmbr_1', this.br_branch_nmbr_1);
   formData.append('branch_logo', this.branch_logo, this.branch_logo.name);

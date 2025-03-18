@@ -34,7 +34,7 @@ export class BranchEditComponent {
 
   br_branch_nmbr_1:any ='';
   br_branch_nmbr_2:any ='';
-  br_branch_mail:any ='+';
+  br_branch_mail:any ='';
   br_company_id:any ='';
   br_state_id:any ='';
   br_country:any ='';
@@ -44,6 +44,8 @@ export class BranchEditComponent {
   branch_users:any='';
   branch_logo: File | null = null;
   // branch_logo: string | undefined;
+
+  state_label: string = ''; // For dynamically storing state_label
 
 
   selectedFile!: File | null;
@@ -139,13 +141,33 @@ if (this.userId !== null) {
       this.branch_logo = file;
     }
   }
+
+  onStateChange(event: any): void {
+    this.br_state_id = Number(event);
+  }
+
+
   updateBranch(): void {
     const formData = new FormData();
   
-    // Append all form fields
+    // Convert date field to 'YYYY-MM-DD' format before appending
+    const formattedDate = this.formatDate(this.Emp.br_start_date);
+  
+    // Append all form fields, ensuring proper type conversion
     for (const key in this.Emp) {
       if (this.Emp.hasOwnProperty(key)) {
-        formData.append(key, this.Emp[key]);
+        let value = this.Emp[key];
+  
+        // Ensure primary key values are sent as numbers
+        if (key === 'br_state_id' || key === 'br_created_by' || key === 'br_updated_by') {
+          value = Number(value) || null;  // Convert to number or set to null if invalid
+        }
+  
+        if (key === 'br_start_date') {
+          formData.append(key, formattedDate); // Send the formatted date
+        } else {
+          formData.append(key, value);
+        }
       }
     }
   
@@ -153,9 +175,24 @@ if (this.userId !== null) {
     if (this.branch_logo) {
       formData.append('branch_logo', this.branch_logo);
     } else {
-      formData.append('branch_logo', ''); // Null value when no file is selected
+      formData.append('branch_logo', '');
     }
   
+    // Automatically set the created and updated user IDs
+    const loggedInUserId = this.authService.getLoggedInUserId(); // Replace with your actual method to get the user ID
+
+  
+
+    if (this.userId !== null && this.userId !== undefined) {
+      formData.append('br_created_by', this.userId.toString());
+      formData.append('br_updated_by', this.userId.toString());
+      formData.append('br_state_id', this.userId.toString());
+
+
+    } else {
+      console.error('Logged-in user ID is null or undefined.');
+    }
+    
     this.BranchServiceService.updateBranch(this.data.employeeId, formData).subscribe(
       (response) => {
         console.log('Branches updated successfully:', response);
@@ -166,6 +203,15 @@ if (this.userId !== null) {
         console.error('Error updating Branch:', error);
       }
     );
+  }
+  
+  // Date format function
+  formatDate(date: any): string {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
   
  
@@ -200,16 +246,17 @@ if (this.userId !== null) {
   }
 
   onCountryChange(): void {
-    if (this.Emp.br_country !== undefined) {
+    if (this.br_country !== undefined) {
       this.loadStatesByCountry();
     }
   }
-
+  
   loadStatesByCountry(): void {
-    this.CountryService.getStatesByCountryId(this.Emp.br_state_id!).subscribe(
+    this.CountryService.getStatesByCountryId(this.br_country!).subscribe(
       (result: any) => {
-        console.log(result);
-        this.states = result; // Assuming the data is directly in the result without a 'data' property
+        console.log('State Response:', result);
+        this.states = result.states; // Accessing the 'states' array
+        this.state_label = result.state_label; // Accessing the dynamic state label
       },
       (error) => {
         console.error('Error fetching states:', error);
@@ -217,7 +264,6 @@ if (this.userId !== null) {
     );
   }
   
-
   // loadCompanies(): void {
   //   this.BranchServiceService.getCompany().subscribe(
   //     (result: any) => {

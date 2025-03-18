@@ -75,58 +75,30 @@
         </div>
         
 
-        <!-- <div class="col-md-6">
-    
-    
+        
+  
+         <div class="col-md-6">
             <div class="custom-sel">
-                <label>Select Company</label>
-                <select class="form-control" id="country" required name="br_company_id" [(ngModel)]="Emp.br_company_id"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !br_company_id}" >
-                    <option value="" >Select</option>
-                    <option *ngFor="let country of companies" [value]="country.id">{{ country.cmpny_name }}</option>
-                </select>
-                <div *ngIf="registerButtonClicked && !br_company_id" class="error-message">Please Select Your Company</div>
+              <label>Country</label>
+              <select class="form-control" id="country" required [(ngModel)]="br_country" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}">
+                <option value="">Select</option>
+                <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+              </select>
             </div>
-                        
-    
-        </div>
-         -->
-        
-        
-  
-                <div class="col-md-6">
-  
-  
-                  <div class="custom-sel">
-                      <label>Country</label>
-                      <select class="form-control" id="country" required [(ngModel)]="Emp.br_country" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !br_country}" >
-                          <option value="" >Select</option>
-                          <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
-                      </select>
-                      <div *ngIf="registerButtonClicked && !br_country" class="error-message">Please Select Your Country</div>
-                  </div>
-                              
-      
-       
-                     
-                     
-                  
-              </div>
-              <div class="col-md-6" *ngIf="states && states.length > 0">
-                 
+          </div>
           
-                <div class="custom-sel" >
-                    <label>State</label>
-                    <select class="form-control" id="state" required [(ngModel)]="Emp.br_state_id"  [ngModelOptions]="{standalone:true}" [ngClass]="{'error-field': registerButtonClicked && !br_state_id}">
-                        <option value=""> select</option>
-                        <option  *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
-                    </select>
-                    <div *ngIf="registerButtonClicked && !br_state_id" class="error-message">Please Select your State.</div>
-                </div>
-                                 
-    
-            
-        </div>
-
+          <!-- Dynamic State Section -->
+          <div class="col-md-6" *ngIf="states && states.length > 0">
+            <div class="custom-sel">
+              <!-- Dynamically displaying the state_label from the API response -->
+              <label>{{ state_label }}</label>
+              <select class="form-control" id="state" required [(ngModel)]="br_state_id" (ngModelChange)="onStateChange($event)" [ngModelOptions]="{standalone:true}">
+                <option value="">Select</option>
+                <option *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
+              </select>
+            </div>
+          </div>
+          
         <div class="col-md-6"  style="display: none;">
 
 
@@ -150,20 +122,22 @@
         
               
            </div>
+
+           <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
+      
+            </div>
+            <div class="col-md-2">
+                <button   mat-raised-button color="primary" class="pull-right btn-full mt-4" type="submit" (click)="updateBranch()" >Save</button>
+      
+            </div>
+        </div>
         </form>
     
   
-    <div class="row">
-        <div class="col-md-8"></div>
-        <div class="col-md-2">
-            <button (click)="ClosePopup()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
-  
-        </div>
-        <div class="col-md-2">
-            <button   mat-raised-button color="primary" class="pull-right btn-full mt-4" type="submit" (click)="updateBranch()" >Save</button>
-  
-        </div>
-    </div>
+
   
   
         </div>
