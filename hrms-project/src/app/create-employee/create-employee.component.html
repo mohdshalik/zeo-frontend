@@ -521,23 +521,19 @@
             </ng-container>
         </div>
         
+        
 
+        <!-- Dynamic State Section -->
         <div class="col-md-6" *ngIf="states && states.length > 0">
-               
-        
-            <div class="custom-sel" >
-                <label>State</label>
-                <select class="form-control" id="emp_state_id" name="emp_state_id" required [(ngModel)]="emp_state_id"  [ngModelOptions]="{standalone:true}" >
-                    <option value=""> select</option>
-                    <option  *ngFor="let emp_state_id of states" [value]="emp_state_id.id">{{ emp_state_id.state_name }}</option>
-                </select>
-                <!-- <div *ngIf="registerButtonClicked && !emp_state_id" class="error-message">Please Select your State.</div> -->
+            <div class="custom-sel">
+              <!-- Dynamically displaying the state_label from the API response -->
+              <label>{{ state_label }}</label>
+              <select class="form-control" id="state" required [(ngModel)]="emp_state_id" [ngModelOptions]="{standalone:true}">
+                <option value="">Select</option>
+                <option *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
+              </select>
             </div>
-                             
-
-        
-    </div>
-
+          </div>
 
     
     <!-- <div class="col-md-6">

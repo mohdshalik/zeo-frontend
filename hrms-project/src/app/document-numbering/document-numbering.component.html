@@ -53,6 +53,34 @@
 </div>
 
 
+<div class="col-md-3" >
+               
+  <label>Total length</label>
+ <input type="number"  class="form-control" required  [(ngModel)]="total_length"  placeholder="Enter total length"
+  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !total_length}">
+ 
+ <div *ngIf="registerButtonClicked && !total_length" class="error-message">total length is required.</div>
+</div>
+
+
+<div class="col-md-3" >
+               
+  <label>Start Date</label>
+ <input type="date"  class="form-control" required  [(ngModel)]="start_date"  placeholder="Enter start date"
+  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !start_date}">
+ 
+ <div *ngIf="registerButtonClicked && !start_date" class="error-message">start date is required.</div>
+</div>
+
+<div class="col-md-3" >
+               
+  <label>End Date</label>
+ <input type="date"  class="form-control" required  [(ngModel)]="end_date"  placeholder="Enter end date"
+  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !end_date}">
+ 
+ <div *ngIf="registerButtonClicked && !end_date" class="error-message">end date is required.</div>
+</div>
+
 
 
 <div class="col-md-3">
@@ -96,20 +124,7 @@
 
     </div>
 
-    <div class="col-md-3">
-
-
-        <div class="custom-sel">
-            <label>Category</label>
-            <select class="form-control" id="category" required [(ngModel)]="category"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !category}" >
-                <option value="" >Select</option>
-                <option *ngFor="let deparmentsec of Categories" [value]="deparmentsec.id">{{ deparmentsec.ctgry_title     }} </option>
-            </select>
-            <div *ngIf="registerButtonClicked && !category" class="error-message">Please Select Category </div>
-        </div>
-                    
-
-    </div>
+    
 
 
     <div class="col-md-3" *ngIf="!user">
@@ -168,7 +183,10 @@
                 <th>Year</th>
                 <th>Current No</th>
                 <th>Branch</th>
-                <th>Category</th>
+                <th>Total Length</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+
                 <th>Automatic numbering</th>
                 <th>Action</th>
               </tr>
@@ -181,7 +199,12 @@
                 <td>{{ docs.year }}</td>
                 <td>{{ docs.current_number }}</td>
                 <td>{{ docs.branch_id }}</td>
-                <td>{{ docs.category }}</td>
+                <td>{{ docs.total_length }}</td>
+
+                <td>{{ docs.start_date }}</td>
+
+                <td>{{ docs.end_date }}</td>
+
                 <td>{{ docs.automatic_numbering }}</td>
                 <td>
                   <i class="fa-solid fa-edit" (click)="openEditDocModal(docs)"></i>

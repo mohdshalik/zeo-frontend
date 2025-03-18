@@ -65,6 +65,8 @@ export class EmployeeEditComponent {
   joinFieldName: string = 'Joining Date';
 
   registerButtonClicked = false;
+  state_label: string = ''; // For dynamically storing state_label
+
 
   Emp: any = {};
   EmpD: any = {};
@@ -551,12 +553,18 @@ onCountryChange(): void {
 }
 
 loadStatesByCountry(): void {
-  this.CountryService.getStatesByCountryId(this.emp_country_id!).subscribe(
+  if (!this.emp_country_id) {
+    console.error('Country ID is null or undefined.');
+    return;
+  }
+
+  this.CountryService.getStatesByCountryId(this.emp_country_id).subscribe(
     (result: any) => {
-      console.log(result);
-      this.states = result; // Assuming the data is directly in the result without a 'data' property
+      console.log('State Response:', result);
+      this.states = result.states;
+      this.state_label = result.state_label;
     },
-    (error) => {
+    (error: any) => {
       console.error('Error fetching states:', error);
     }
   );

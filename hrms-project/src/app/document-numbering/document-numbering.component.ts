@@ -29,6 +29,9 @@ export class DocumentNumberingComponent {
   type:any = '';
   leave_type:any = '';
 
+  total_length: any = '';
+  start_date:any = '';
+  end_date:any = '';
 
   automatic_numbering:  boolean = false;
 
@@ -309,8 +312,10 @@ ngOnInit(): void {
                 year: yearInt, // now a number, e.g. 2025
                 current_number: this.current_number,
                 branch_id: this.branch_id,
-                category: this.category,
                 user: this.user,
+                total_length: this.total_length,
+                start_date: this.start_date,
+                end_date: this.end_date,
                 // automatic_numbering: this.automatic_numbering,
                 type: this.type,
                 leave_type: this.leave_type,

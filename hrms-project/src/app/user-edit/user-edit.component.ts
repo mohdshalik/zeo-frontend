@@ -92,34 +92,61 @@ export class UserEditComponent {
   }
 
   updateEmp(): void {
-    // Update category
-
-     // Basic validation
-     if (!this.Emp.username || !this.Emp.email  || !this.Emp.tenants) {
+    // Basic validation before sending request
+    if (!this.Emp.username || !this.Emp.email || !this.Emp.tenants) {
       if (!this.Emp.username) {
-        alert('User field is blank.');
+        alert('Username: This field may not be blank.');
       }
       if (!this.Emp.email) {
-        alert('Email field is blank.');
+        alert('Email: This field may not be blank.');
       }
-      // if (!this.Emp.password) {
-      //   alert('Password field is blank.');
-      // }
+      if (!this.Emp.tenants) {
+        alert('Tenants: This field is required.');
+      }
+      return; // Stop execution if basic validation fails
     }
-    
-    this.UserMasterService.updateEmp(this.data.employeeId, this.Emp).subscribe(
+  
+    // Create a copy of Emp object to avoid modifying the original
+    let updateData = { ...this.Emp };
+  
+    // If password is empty, remove it from the update payload
+    if (!this.Emp.password || this.Emp.password.trim() === '') {
+      delete updateData.password;
+    }
+  
+    this.UserMasterService.updateEmp(this.data.employeeId, updateData).subscribe(
       (response) => {
         console.log('USER updated successfully:', response);
-        // Close the dialog when category is updated
-        alert('User has been Updated');
+        alert('User has been updated successfully!');
         window.location.reload();
       },
       (error) => {
         console.error('Error updating USER:', error);
+  
+        if (error.status === 400 && error.error) {
+          let errorMessages = [];
+  
+          // Extract field-specific validation messages
+          for (let field in error.error) {
+            if (error.error[field] && error.error[field].length > 0) {
+              errorMessages.push(`${field.charAt(0).toUpperCase() + field.slice(1)}: ${error.error[field][0]}`);
+            }
+          }
+  
+          // Display alert with field name and error message
+          if (errorMessages.length > 0) {
+            alert(errorMessages.join('\n'));
+          } else {
+            alert('An unknown error occurred. Please try again.');
+          }
+        } else {
+          alert('Failed to update user. Please check your input.');
+        }
       }
     );
   }
- 
+  
+  
 
 
   loadCompanies(): void { 

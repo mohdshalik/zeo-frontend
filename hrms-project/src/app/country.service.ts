@@ -379,6 +379,8 @@ export class CountryService {
     // Fetch employees from the API
     return this.http.get(Url);
   }
+
+
   getStatesByCountryId(countryId: number): Observable<any> {
  
 
@@ -394,6 +396,17 @@ export class CountryService {
   }
 
   
+
+  getStatesByCountryIds(countryId: number): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError(() => new Error('No schema selected.'));
+    }
+
+    const apiUrl = `${this.apiUrl}/core/api/Country/${countryId}/states/?schema=${selectedSchema}`;
+    return this.http.get(apiUrl);
+  }
 
 
   

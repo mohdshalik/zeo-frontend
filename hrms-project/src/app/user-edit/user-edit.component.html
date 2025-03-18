@@ -4,7 +4,7 @@
 
         <h1>User Details</h1><hr>
 
-        <form (submit)="updateEmp">
+        <form >
             <div class="row">
                 <div class="col-md-6" >
                    
@@ -91,9 +91,8 @@
      
     
             </div>
-        </form>
-    
 
+            
     <div class="row">
         <div class="col-md-8"></div>
         <div class="col-md-2">
@@ -101,10 +100,13 @@
 
         </div>
         <div class="col-md-2">
-            <button   mat-raised-button color="primary" class="pull-right btn-full mt-4" type="submit" (click)="updateEmp()" >Save</button>
+            <button   mat-raised-button color="primary" class="pull-right btn-full mt-4" type="button" (click)="updateEmp()" >Save</button>
 
         </div>
     </div>
+        </form>
+    
+
 
 
         </div>
