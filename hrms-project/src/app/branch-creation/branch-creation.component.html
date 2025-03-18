@@ -34,42 +34,28 @@
         
                    
                      
-                    <div class="col-md-6">
-    
-    
-                      <div class="custom-sel">
-                          <label>Country</label>
-                          <select class="form-control" id="country" required [(ngModel)]="br_country" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}"  >
-                              <option value="" >Select</option>
-                              <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
-                          </select>
-                         
-                      </div>
-                                  
-    
-           
-                         
-                         
-                      
-                  </div>
-    
-                  
-                  <div class="col-md-6" *ngIf="states && states.length > 0">
-                         
-                  
-                      <div class="custom-sel" >
-                          <label>State</label>
-                          <select class="form-control" id="state" required [(ngModel)]="br_state_id"  [ngModelOptions]="{standalone:true}" >
-                              <option value=""> select</option>
-                              <option  *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
-                          </select>
-                          <!-- <div *ngIf="registerButtonClicked && !cmpny_state_id" class="error-message">Please Select your State.</div> -->
-                      </div>
-                                       
-    
-                  
-              </div>
-    
+    <div class="col-md-6">
+        <div class="custom-sel">
+          <label>Country</label>
+          <select class="form-control" id="country" required [(ngModel)]="br_country" (change)="onCountryChange()" [ngModelOptions]="{standalone: true}">
+            <option value="">Select</option>
+            <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Dynamic State Section -->
+      <div class="col-md-6" *ngIf="states && states.length > 0">
+        <div class="custom-sel">
+          <!-- Dynamically displaying the state_label from the API response -->
+          <label>{{ state_label }}</label>
+          <select class="form-control" id="state" required [(ngModel)]="br_state_id" [ngModelOptions]="{standalone:true}">
+            <option value="">Select</option>
+            <option *ngFor="let state of states" [value]="state.id">{{ state.state_name }}</option>
+          </select>
+        </div>
+      </div>
+      
               <div class="col-md-6">
                          
                   

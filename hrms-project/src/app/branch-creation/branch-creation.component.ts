@@ -31,6 +31,8 @@ countries: any[] = [];
 states: any[] = [];
 br_country: any | undefined;
 br_state_id: any | undefined;
+state_label: string = ''; // For dynamically storing state_label
+
 
 selectedBranchsecId:any | undefined;
 
@@ -132,103 +134,6 @@ loadBranch(): void {
 
 
 
-// registerBranch(): void {
-//   this.registerButtonClicked = true;
-
-
-//         // Basic validation for username and password fields
-//         if (!this.branch_name || !this.branch_code || !this.br_country ||!this.br_branch_mail||!this.br_branch_nmbr_1  || !this.branch_logo) {
-//           if (!this.branch_name) {
-//             alert('Branch Name field is blank.');
-//           }
-//           if (!this.branch_code) {
-//             alert('Branch code field is blank.');
-//           }
-//           if (!this.br_branch_nmbr_1) {
-//             alert('Branch Phone Number field is blank.');
-//           }
-//           if (!this.br_country) {
-//             alert('Country field is blank.');
-//           }
-//           if (!this.br_branch_mail) {
-//             alert('Email id field is blank.');
-//           }
-//           if (!this.branch_logo) {
-//             alert('branch_logo field is blank.');
-//           }
-         
-//      // Exit the function if validation fails
-//         }
-
-//           // Validate email format
-//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   if (!emailRegex.test(this.br_branch_mail)) {
-//     alert('Enter a valid email address.');
-//     return; // Exit the function if validation fails
-//   }
-
-//   const companyData = {
-//     branch_name: this.branch_name,
-//     br_city:this.br_city,
-//     br_branch_mail:this.br_branch_mail,
-//     br_branch_nmbr_1:this.br_branch_nmbr_1,
-//     br_branch_nmbr_2:this.br_branch_nmbr_2,
-//     br_country:this.br_country,
-//     br_state_id:this.br_state_id,
-//     br_pincode:this.br_pincode,
-//     br_company_id:this.br_company_id,
-//     notification_period_days:this.notification_period_days,
-//     branch_code:this.branch_code,
-//     branch_users:this.branch_users,
-//     branch_logo:this.branch_logo
-//     // Add other form field values to the companyData object
-//   };
-//   // if (this.selectedFile) {
-//   //   const formData = new FormData();
-//   //   formData.append('logo', this.selectedFile, this.selectedFile.name);
-
-//   //   // Replace 'http://localhost:8000/upload-logo' with your backend API endpoint for handling logo uploads
-//   //   this.http.post<any>('http://localhost:8000/upload-logo', formData).subscribe(
-//   //     (response) => {
-//   //       console.log('Logo uploaded successfully', response);
-//   //       // Optionally, you can handle the response from the server (e.g., get the logo URL)
-//   //     },
-//   //     (error) => {
-//   //       console.error('Logo upload failed', error);
-//   //       // Handle the error appropriately, e.g., show a user-friendly error message
-//   //     }
-//   //   );
-//   // }
-
-//   this.BrachRegistrationService.registerBranch(companyData).subscribe(
-//     (response) => {
-//       console.log('Registration successful', response);
-//       // this.authService.login(this.cmpny_mail, this.cmpny_pincode).subscribe(
-//       //   (loginResponse) => {
-//       //     console.log('Login successful after registration', loginResponse);
-//       //     // Optionally, you can navigate to another page or perform other actions upon successful login.
-//           alert('Branch has been Registered successfully Completed');
-//           window.location.reload();
-//           // window.location.reload();
-//       //   },
-//       //   (loginError) => {
-//       //     console.error('Login failed after registration', loginError);
-//       //     // Handle login error after registration
-//       //   }
-//       // );
-//       // Optionally, you can navigate to another page or perform other actions upon successful registration.
-//       // alert('Company has been Register!')
-//       // window.location.reload();
-
-//     },
-//     (error) => {
-//       console.error('Registration failed', error);
-//       alert('enter all field!')
-//       // Handle the error appropriately, e.g., show a user-friendly error message.
-//     }
-//   );
-// }
-
 registerBranch(): void {
   this.registerButtonClicked = true;
 
@@ -303,17 +208,6 @@ loadCountries(): void {
 }
 
 
-loadStates(): void {
-  this.countryService.getAllStates().subscribe(
-    (result: any) => {
-      console.log(result); // Log the API response
-      this.states = result; // Assuming the data is directly in the result without a 'data' property
-    },
-    (error) => {
-      console.error('Error fetching states:', error);
-    }
-  );
-}
 
 onCountryChange(): void {
   if (this.br_country !== undefined) {
@@ -324,14 +218,16 @@ onCountryChange(): void {
 loadStatesByCountry(): void {
   this.countryService.getStatesByCountryId(this.br_country!).subscribe(
     (result: any) => {
-      console.log(result);
-      this.states = result; // Assuming the data is directly in the result without a 'data' property
+      console.log('State Response:', result);
+      this.states = result.states; // Accessing the 'states' array
+      this.state_label = result.state_label; // Accessing the dynamic state label
     },
     (error) => {
       console.error('Error fetching states:', error);
     }
   );
 }
+
 
 
 loadBranchUser(): void {

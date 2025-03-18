@@ -42,8 +42,8 @@ export class BranchEditComponent {
   probation_period_days:any='';
 
   branch_users:any='';
-  // branch_logo: File | null = null;
-  branch_logo: string | undefined;
+  branch_logo: File | null = null;
+  // branch_logo: string | undefined;
 
 
   selectedFile!: File | null;
@@ -133,39 +133,41 @@ if (this.userId !== null) {
  
 
   }
-
   onFileSelected(event: any): void {
-    this.selectedFile = event.target.files.length > 0 ? event.target.files[0] : null;
+    const file = event.target.files[0];
+    if (file) {
+      this.branch_logo = file;
+    }
   }
-  
   updateBranch(): void {
-    // Update category
-
-      // Create a FormData object to handle file uploads
-  const formData = new FormData();
-
-  // Append the profile picture only if it's selected
-  if (this.selectedFile) {
-    formData.append('branch_logo', this.selectedFile);
-  } else {
-    // Append a null or empty value to indicate no file was selected
-    formData.append('branch_logo', '');
-  }
+    const formData = new FormData();
   
-
-    this.BranchServiceService.updateBranch(this.data.employeeId, this.Emp,).subscribe(
+    // Append all form fields
+    for (const key in this.Emp) {
+      if (this.Emp.hasOwnProperty(key)) {
+        formData.append(key, this.Emp[key]);
+      }
+    }
+  
+    // Append the file only if it's selected
+    if (this.branch_logo) {
+      formData.append('branch_logo', this.branch_logo);
+    } else {
+      formData.append('branch_logo', ''); // Null value when no file is selected
+    }
+  
+    this.BranchServiceService.updateBranch(this.data.employeeId, formData).subscribe(
       (response) => {
         console.log('Branches updated successfully:', response);
-        // Close the dialog when category is updated
         this.dialogRef.close();
         window.location.reload();
- 
       },
       (error) => {
-        console.error('Error updating Branchesng:', error);
+        console.error('Error updating Branch:', error);
       }
     );
   }
+  
  
 
 

@@ -311,7 +311,7 @@ ngOnInit(): void {
                 branch_id: this.branch_id,
                 category: this.category,
                 user: this.user,
-                automatic_numbering: this.automatic_numbering,
+                // automatic_numbering: this.automatic_numbering,
                 type: this.type,
                 leave_type: this.leave_type,
               };

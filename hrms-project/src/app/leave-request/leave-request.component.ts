@@ -245,6 +245,7 @@ if (this.userId !== null) {
             alert('Leave Request has been Sent');
             window.location.reload();
           },
+
           (error) => {
             console.error('Request failed', error);
             
@@ -272,6 +273,10 @@ if (this.userId !== null) {
       }
       
 
+
+    
+
+      
 
   LoadLeavetype(selectedSchema: string) {
     this.leaveService.getLeaveType(selectedSchema).subscribe(
