@@ -404,6 +404,7 @@ ngOnInit(): void {
                   // Optionally, refresh your list or reload the page
                   this.closeEditDocModal();
                   this.loaddocNumers(); // re-fetch the list if needed
+                  
                 },
                 (error) => {
                   console.error('Error updating document number', error);

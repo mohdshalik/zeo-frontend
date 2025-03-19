@@ -361,6 +361,20 @@ export class EmployeeService {
 
 
 
+  getEmployeeLeavetypes(employeeId: number): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/leave_balance/?schema=${selectedSchema}
+`;
+
+    return this.http.get(apiUrl);
+  }
+
+
   getEmployeeData(): Observable<any> {
     return this.http.get(`${this.baseUrl}/Employee/`);
   }

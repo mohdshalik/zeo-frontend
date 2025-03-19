@@ -35,13 +35,17 @@
           <div class="col-md-3" >
                
             <label>Year</label>
-           <input type="date"  class="form-control" required  [(ngModel)]="year"  placeholder="Enter year"
+           <input type="number"  class="form-control" required  [(ngModel)]="year"  placeholder="Enter year"
             [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !year}">
            
            <div *ngIf="registerButtonClicked && !year" class="error-message">year is required.</div>
       </div>
 
-   
+       
+
+    
+
+
 
   <div class="col-md-3" >
                
@@ -187,7 +191,6 @@
                 <th>Start Date</th>
                 <th>End Date</th>
 
-                <th>Automatic numbering</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -205,7 +208,6 @@
 
                 <td>{{ docs.end_date }}</td>
 
-                <td>{{ docs.automatic_numbering }}</td>
                 <td>
                   <i class="fa-solid fa-edit" (click)="openEditDocModal(docs)"></i>
                 </td>
@@ -235,13 +237,43 @@
         <div class="col-md-4">
           <label>Year</label>
           <!-- Use type="date" for picking a date then convert to year in TS if needed -->
-          <input type="date" class="form-control" [(ngModel)]="selectedDoc.year" name="year" required>
+          <input type="number" class="form-control" [(ngModel)]="selectedDoc.year" name="year" required>
         </div>
       
         <div class="col-md-4">
           <label>Current Number</label>
           <input type="number" class="form-control" [(ngModel)]="selectedDoc.current_number" name="current_number" required>
         </div>
+
+        
+<div class="col-md-3" >
+               
+  <label>Total length</label>
+ <input type="number"  class="form-control" required  [(ngModel)]="selectedDoc.total_length"  placeholder="Enter total length"
+  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !total_length}">
+ 
+ <div *ngIf="registerButtonClicked && !total_length" class="error-message">total length is required.</div>
+</div>
+
+
+<div class="col-md-3" >
+               
+  <label>Start Date</label>
+ <input type="date"  class="form-control" required  [(ngModel)]="selectedDoc.start_date"  placeholder="Enter start date"
+  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !start_date}">
+ 
+ <div *ngIf="registerButtonClicked && !start_date" class="error-message">start date is required.</div>
+</div>
+
+<div class="col-md-3" >
+               
+  <label>End Date</label>
+ <input type="date"  class="form-control" required  [(ngModel)]="selectedDoc.end_date"  placeholder="Enter end date"
+  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !end_date}">
+ 
+ <div *ngIf="registerButtonClicked && !end_date" class="error-message">end date is required.</div>
+</div>
+
        
         <div class="col-md-4">
           <label>Branch</label>
@@ -250,13 +282,7 @@
             <option *ngFor="let branch of branches" [value]="branch.id">{{ branch.branch_name }}</option>
           </select>
         </div>
-        <div class="col-md-4">
-          <label>Category</label>
-          <select class="form-control" [(ngModel)]="selectedDoc.category" name="category" required>
-            <option value="">Select</option>
-            <option *ngFor="let cat of Categories" [value]="cat.id">{{ cat.ctgry_title }}</option>
-          </select>
-        </div>
+        
         <!-- <div class="col-md-4">
           <label class="mt-4">proper-Autonumbering</label>
           <mat-checkbox [(ngModel)]="selectedDoc.automatic_numbering" name="automatic_numbering"></mat-checkbox>
@@ -285,6 +311,7 @@
       </form>
     </div>
   </div>
+  
         </div>
         </div>
         

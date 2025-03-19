@@ -38,6 +38,8 @@ export class LeaveRequestComponent {
 
   LeaveTypes: any[] = [];
   Employees: any[] = [];
+  allLeaveTypes: any[] = [];
+leaveBalances: any[] = [];
 
   Users: any[] = [];
 
@@ -71,7 +73,7 @@ schemas: string[] = []; // Array to store schema names
       if (selectedSchema) {
 
 
-        this.LoadLeavetype(selectedSchema);
+        // this.LoadLeavetype(selectedSchema);
       this.LoadEmployee(selectedSchema);
       this.LoadUsers(selectedSchema);
       this.LoadLeaveRequest(selectedSchema);
@@ -278,19 +280,40 @@ if (this.userId !== null) {
 
       
 
-  LoadLeavetype(selectedSchema: string) {
-    this.leaveService.getLeaveType(selectedSchema).subscribe(
-      (data: any) => {
-        this.LeaveTypes = data;
+  // LoadLeavetype(selectedSchema: string) {
+  //   this.leaveService.getLeaveType(selectedSchema).subscribe(
+  //     (data: any) => {
+  //       this.LeaveTypes = data;
       
-        console.log('employee:', this.LeaveTypes);
+  //       console.log('employee:', this.LeaveTypes);
+  //     },
+  //     (error: any) => {
+  //       console.error('Error fetching categories:', error);
+  //     }
+  //   );
+  // }
+
+  selectedEmployee: number | null = null; 
+
+  onEmployeeChange() {
+    if (!this.selectedEmployee) return;
+  
+    this.leaveService.getLeaveBalance(this.selectedEmployee).subscribe(
+      (data: any) => {
+        this.leaveBalances = data.leave_balance;
+        this.allLeaveTypes = data.available_leave_types;
+  
+        // Filter available leave types based on the employee's leave balance
+        const leaveTypeNames = this.leaveBalances.map(lb => lb.leave_type);
+        this.LeaveTypes = this.allLeaveTypes.filter(lt => leaveTypeNames.includes(lt.name));
+  
+        console.log('Filtered Leave Types:', this.LeaveTypes);
       },
       (error: any) => {
-        console.error('Error fetching categories:', error);
+        console.error('Error fetching leave balance:', error);
       }
     );
   }
-
 
 
   LoadEmployee(selectedSchema: string) {

@@ -25,6 +25,8 @@ import { EmployeeCreateLanguageComponent } from '../employee-create-language/emp
 })
 export class EmployeeDetailsComponent implements OnInit {
   Employees: any[] = [];
+  employeeLeaves: any[] = [];
+
   emp_first_name: string = '';
   employee: any;
   profilePicture: any;
@@ -144,9 +146,35 @@ export class EmployeeDetailsComponent implements OnInit {
         console.error('Employee ID parameter is null.');
       }
 
+      if (employeeIdParam) {
+        const employeeId = +employeeIdParam;
+    
+        // Fetch employee leave details
+        this.EmployeeService.getEmployeeLeavetypes(employeeId).subscribe(
+          (response) => {
+            if (response && response.leave_balance) {
+              this.employeeLeaves = response.leave_balance;
+            }
+          },
+          (error) => {
+            console.error('Failed to fetch employee leave', error);
+          }
+        );
+      } else {
+        console.error('Employee ID parameter is null.');
+      }
+
 
     }
 
+
+
+    // Calculate progress animation based on leave balance
+getProgressOffset(balance: number): number {
+  const maxLeave = 10; // Assume max leave limit is 10 (Adjust as needed)
+  const fullCircle = 251; // Full circle stroke-dasharray value
+  return fullCircle - (balance / maxLeave) * fullCircle;
+}
     // ngOnDestroy() {
     //   this.notificationServiceService.disconnect();
     // }

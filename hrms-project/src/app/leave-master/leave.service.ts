@@ -265,6 +265,16 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   
   }
 
+  getLeaveBalance(employeeId: number) {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+  return this.http.get(`http://127.0.0.1:8000/employee/api/Employee/${employeeId}/leave_balance/?schema=${selectedSchema}`);
+}
+
 
   getLeaveRequest(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/calendars/api/emp-leave-request/?schema=${selectedSchema}`;

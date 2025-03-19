@@ -131,7 +131,7 @@ export class LeaveMasterComponent {
   // leave reset field variables declaration
 
 
-  reset: boolean = false;
+  reset: boolean = true;
 
   frequency: any = '';
   month: any = '';

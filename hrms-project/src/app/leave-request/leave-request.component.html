@@ -15,12 +15,12 @@
                       <div class="col-md-3">
                         <label>Employee</label>
                         <div class="custom-sel">
-                          <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}">
+                          <select class="form-control" id="employee" name="employee" [(ngModel)]="selectedEmployee"
+                                  (change)="onEmployeeChange()" [ngModelOptions]="{standalone: true}">
                             <option *ngFor="let employee of Employees" [value]="employee.id">{{ employee.emp_code }}</option>
                           </select>
                         </div>
                       </div>
-
                       
                       <div class="col-md-3">
                         <label>Leave Type</label>
@@ -30,6 +30,7 @@
                           </select>
                         </div>
                       </div>
+                      
 
                       <!-- <div class="col-md-3">
                         <label>Document Number</label>

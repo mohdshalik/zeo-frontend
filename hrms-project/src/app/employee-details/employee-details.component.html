@@ -667,6 +667,41 @@
             </div>
             </div>
           </div>
+
+
+
+          <div class="leave-balace-sec mt-4">
+            <div class="row">
+                <div class="col-md-3" *ngFor="let leave of employeeLeaves">
+                    <div class="leave-type-sec">
+                        <div class="row">
+                            <div class="col-md-5 mt-2">
+                                <h5>{{ leave.leave_type }}</h5>
+                                <h6>Leave</h6>
+                            </div>
+                    
+                            <div class="col-md-7 d-flex align-items-center justify-content-end">
+                                <div class="progress-circle">
+                                    <svg viewBox="0 0 100 100">
+                                        <circle class="bg" cx="50" cy="50" r="40"></circle>
+                                        <circle class="progress" cx="50" cy="50" r="40" 
+                                        [attr.stroke-dashoffset]="getProgressOffset(leave.balance)"></circle>
+                                    </svg>
+                                    <div class="count">{{ leave.balance }}</div> 
+                                    <!-- Dynamic Count Number -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+          </div>
+
+
+
+
+
         </div>
 
 
