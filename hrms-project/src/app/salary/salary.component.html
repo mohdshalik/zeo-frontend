@@ -147,7 +147,49 @@
                           </div>
                       
                     </form>
+
+
+
+                 
+            
+
+
+                    
             </div>
+
+
+            <div class="end_section"></div>
+            <table width="100%" *ngIf="hasViewPermission">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                   
+                    <th>Name</th>
+                    <th>Component Type</th>
+                    <th>Code</th>
+                    <th>Is Fixed</th>
+                    <th>Description</th>
+
+    
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let docs of Salarycomponent; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ docs.name }}</td>
+                    <td>{{ docs.component_type }}</td>
+                    <td>{{ docs.code }}</td>
+                    <td>{{ docs.is_fixed }}</td>
+                    <td>{{ docs.description }}</td>
+                  
+    
+                    <td>
+                      <i class="fa-solid fa-edit"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
           </mat-tab>
            
               <mat-tab label="Employee Salary ">
@@ -208,6 +250,37 @@
                       
                     </form>
                 </div>
+
+                <div class="end_section"></div>
+                <table width="100%" *ngIf="hasViewPermission">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                       
+                        <th>Amount</th>
+                        <th>Employee</th>
+                        <th>component</th>
+                     
+    
+        
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let docs of EmployeeSalarycomponent; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ docs.amount }}</td>
+                        <td>{{ docs.employee }}</td>
+                        <td>{{ docs.component }}</td>
+                       
+                      
+        
+                        <td>
+                          <i class="fa-solid fa-edit"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                   </mat-tab>
   
              

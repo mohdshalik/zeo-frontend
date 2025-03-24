@@ -4,6 +4,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { SessionService } from '../login/session.service';
 import { LeaveService } from '../leave-master/leave.service';
 import { EmployeeService } from '../employee-master/employee.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-leave',
@@ -48,6 +49,10 @@ export class EmployeeLeaveComponent {
     private sessionService: SessionService,
     private leaveService:LeaveService,
     private EmployeeService:EmployeeService,
+    private route: ActivatedRoute,
+    private router: Router,
+
+
 
 
   
@@ -70,7 +75,23 @@ export class EmployeeLeaveComponent {
       
       }
 
-      
+      this.route.params.subscribe(params => {
+        const employeeId = +params['id']; // Assuming the route has 'id' as a parameter
+  
+        if (employeeId) {
+          this.EmployeeService.getEmployeeDetails(employeeId).subscribe(
+            (details) => {
+              this.employee = details;
+              console.log('emp id ;',details)
+            },
+            (error) => {
+              console.error('Failed to fetch employee details', error);
+            }
+          );
+        } else {
+          console.error('Employee ID parameter is null.');
+        }
+      });
      
     }
 

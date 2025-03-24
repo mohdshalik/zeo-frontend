@@ -545,11 +545,14 @@ body {
   font-size: 16px;
   color: black;
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 
 .leave-type-sec h6{
   font-size: 14px;
+  text-transform: capitalize;
+  color: gray;
 
 }
 

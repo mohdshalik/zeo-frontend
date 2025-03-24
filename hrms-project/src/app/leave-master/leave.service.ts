@@ -409,11 +409,11 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `${this.apiUrl}/payroll/api/PayrollSettings/?schema=${selectedSchema}`;
+    const apiUrl = `${this.apiUrl}/payroll/api/PayrollFormula/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
-        console.error('Error during leave type registration:', error);
+        console.error('Error during Payroll Formula registration:', error);
         return throwError(error);
       })
     );
@@ -427,7 +427,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
       return throwError('No schema selected.');
     }
   
-    const apiUrl = `${this.apiUrl}/payroll/api/payroll/?schema=${selectedSchema}`;
+    const apiUrl = `${this.apiUrl}/payroll/api/PayrollRun/?schema=${selectedSchema}`;
   
     return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
@@ -457,6 +457,22 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   }
 
 
+  requestPayslipComponent(formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/PayslipComponent/?schema=${selectedSchema}`;
+  
+    return this.http.post(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during leave type registration:', error);
+        return throwError(error);
+      })
+    );
+  }
 
 
 
@@ -469,8 +485,16 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   }
 
 
+  getEmployeeSalaryCom(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/employeesalary/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+  }
+
   getPayroll(selectedSchema: string): Observable<any> {
-    const apiUrl = `${this.apiUrl}/payroll/api/payroll/?schema=${selectedSchema}`;
+    const apiUrl = `${this.apiUrl}/payroll/api/PayrollRun/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -480,7 +504,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
   
   getPayrollSettings(selectedSchema: string): Observable<any> {
-    const apiUrl = `${this.apiUrl}/payroll/api/PayrollSettings/?schema=${selectedSchema}`;
+    const apiUrl = `${this.apiUrl}/payroll/api/PayrollFormula/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -489,6 +513,16 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
   getPaySlip(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/payroll/api/payslip/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+    
+  }
+
+
+  getPayslipComponent(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/PayslipComponent/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);

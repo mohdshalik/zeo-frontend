@@ -231,3 +231,8 @@
   .header-btn-icon{
     vertical-align: middle;
   }
+
+  .end_section{
+    padding: 10px;
+    background: whitesmoke;
+  }

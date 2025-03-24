@@ -15,27 +15,40 @@ import { CatogaryService } from '../catogary-master/catogary.service';
 export class PayRollComponent {
 
 
-  payroll_frequency:any='';
-  next_run_date:any='';
-  pay_period_start_date:any='';
-  pay_period_end_date:any='';
+
   created_by:any='';
+
+
+  name:any='';
+  formula_text: string = ''; // Initialize empty
+  description:any='';
+
+
+
+
+  year:any='';
+  month:any='';
+  pay_formula:any='';
+  branch:any='';
+  department:any='';
   category:any='';
-
-
-
-
-  pay_period_start:any='';
-  pay_period_end:any='';
-  total_earnings:any='';
-  total_deductions:any='';
-  net_salary:any='';
-  employee:any='';
-  is_paid: boolean = false;
 
 
   payslip_pdf: File | null = null;
   payroll:any='';
+
+
+  basic_salary:any='';
+  gross_salary:any=''; 
+  net_salary:any=''; 
+  total_deductions:any=''; 
+  total_additions:any=''; 
+
+
+  amount:any=''; 
+  payslip:any=''; 
+  component:any=''; 
+
 
   registerButtonClicked: boolean = false;
 
@@ -60,6 +73,17 @@ Categories: any[] = [];
 Payrolls: any[] = [];
 PayrollSettings: any[] = [];
 PaySlips: any[] = [];
+PaySlipsComponent: any[] = [];
+
+
+
+Branches: any[] = [];
+Departments: any[] = [];
+
+
+
+
+
 
 
 
@@ -87,8 +111,14 @@ this.LoadCategory();
 this.LoadPayroll(selectedSchema);
 this.LoadPayrollSettings(selectedSchema);
 this.LoadPaySlip(selectedSchema)
+this.LoadSalaryCom(selectedSchema)
+this.LoadPaySlipComponent(selectedSchema);
 
-      
+this.LoadBranch(selectedSchema);
+this.LoadDepartment(selectedSchema);
+
+
+
       }
 
 
@@ -109,6 +139,9 @@ if (this.userId !== null) {
         console.error('No schema selected.');
         return;
       }
+
+
+
     
     
       if (isSuperuser) {
@@ -208,6 +241,8 @@ if (this.userId !== null) {
    
     }
 
+
+    
     checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
       return groupPermissions.some(permission => permission.codename === codeName);
       }
@@ -218,19 +253,16 @@ if (this.userId !== null) {
         this.registerButtonClicked = true;
       
         // Frontend validation
-        if (!this.payroll_frequency || !this.next_run_date || !this.pay_period_start_date || !this.pay_period_end_date) {
+        if (!this.name || !this.formula_text ) {
           alert('Please fill in all required fields.');
           return;
         }
       
         const formData = new FormData();
-        formData.append('payroll_frequency', this.payroll_frequency);
-        formData.append('next_run_date', this.next_run_date);
-        formData.append('pay_period_start_date', this.pay_period_start_date);
-        formData.append('pay_period_end_date', this.pay_period_end_date);
-
-        formData.append('category', this.category);
-        formData.append('created_by', this.created_by);
+        formData.append('name', this.name);
+        formData.append('formula_text', this.formula_text);
+        formData.append('description', this.description);
+   
 
         this.leaveService.requestPayrollSettings(formData).subscribe(
           (response) => {
@@ -263,26 +295,43 @@ if (this.userId !== null) {
         );
       }
       
+
+      insertIntoTextarea(componentName: string): void {
+        if (this.formula_text) {
+          this.formula_text += ' ' + componentName; // Append new name
+        } else {
+          this.formula_text = componentName; // First entry
+        }
+      }
+
+      clearTextarea(): void {
+        this.formula_text = ''; // Clear the textarea
+      }
+
+      deleteLastCharacter(): void {
+        this.formula_text = this.formula_text.trim().slice(0, -1); // Remove last character
+      }
+      
+      
+      
     
       requestPayRoll(): void {
         this.registerButtonClicked = true;
       
         // Frontend validation
-        if (!this.pay_period_start || !this.pay_period_end || !this.employee) {
+        if (!this.year || !this.pay_formula ) {
           alert('Please fill in all required fields.');
           return;
         }
       
         const formData = new FormData();
-        formData.append('pay_period_start', this.pay_period_start);
-        formData.append('pay_period_end', this.pay_period_end);
-        formData.append('total_earnings', this.total_earnings);
-        formData.append('total_deductions', this.total_deductions);
-        formData.append('net_salary', this.net_salary);
-        formData.append('employee', this.employee);
-        formData.append('created_by', this.created_by);
-        formData.append('is_paid', this.is_paid.toString());
-      
+        formData.append('year', this.year);
+        formData.append('month', this.month);
+        formData.append('pay_formula', this.pay_formula);
+        formData.append('branch', this.branch);
+        formData.append('department', this.department);
+        formData.append('category', this.category);
+     
         this.leaveService.requestPayroll(formData).subscribe(
           (response) => {
             console.log('Registration successful', response);
@@ -320,14 +369,22 @@ if (this.userId !== null) {
         this.registerButtonClicked = true;
       
         // Frontend validation
-        if (!this.payslip_pdf || !this.payroll) {
+        if (!this.basic_salary || !this.gross_salary) {
           alert('Please select a Payslip PDF and Payroll.');
           return;
         }
       
         const formData = new FormData();
-        formData.append('payroll', this.payroll);
-        formData.append('payslip_pdf', this.payslip_pdf); // Append file to FormData
+        formData.append('basic_salary', this.basic_salary);
+        formData.append('gross_salary', this.gross_salary); // Append file to FormData
+
+        formData.append('net_salary', this.net_salary);
+
+        formData.append('total_deductions', this.total_deductions);
+
+        formData.append('total_additions', this.total_additions);
+
+
       
         this.leaveService.requestPaySlip(formData).subscribe(
           (response) => {
@@ -362,6 +419,56 @@ if (this.userId !== null) {
       }
       
       
+      registerPaySlipComponent(): void {
+        this.registerButtonClicked = true;
+      
+        // Frontend validation
+        if (!this.amount || !this.payslip) {
+          alert('Please select a Payslip PDF and Payroll.');
+          return;
+        }
+      
+        const formData = new FormData();
+        formData.append('amount', this.amount);
+        formData.append('payslip', this.payslip); // Append file to FormData
+
+        formData.append('component', this.component);
+
+     
+
+
+      
+        this.leaveService.requestPayslipComponent(formData).subscribe(
+          (response) => {
+            console.log('Registration successful', response);
+            alert('Payslip has been added successfully.');
+            window.location.reload();
+          },
+          (error) => {
+            console.error('Upload failed', error);
+      
+            // Extract backend error message
+            let errorMessage = 'An unexpected error occurred. Please try again.';
+      
+            if (error.error) {
+              if (typeof error.error === 'string') {
+                errorMessage = error.error;
+              } else if (error.error.detail) {
+                errorMessage = error.error.detail;
+              } else if (error.error.non_field_errors) {
+                errorMessage = error.error.non_field_errors.join(', ');
+              } else {
+                const fieldErrors = Object.keys(error.error)
+                  .map((field) => `${field}: ${error.error[field]}`)
+                  .join('\n');
+                errorMessage = fieldErrors || errorMessage;
+              }
+            }
+      
+            alert(errorMessage); // Show extracted error
+          }
+        );
+      }
 
 onFileSelected(event:any){
   const file = event.target.files[0];
@@ -463,6 +570,51 @@ onFileSelected(event:any){
       );
     }
     
+
+    LoadPaySlipComponent(selectedSchema: string) {
+      this.leaveService.getPayslipComponent(selectedSchema).subscribe(
+        (data: any) => {
+          // Ensure each payslip has a valid URL
+          this.PaySlipsComponent = data;
+    
+          console.log('Fetched Payslips:', this.PaySlips);
+        },
+        (error: any) => {
+          console.error('Error fetching Payslips:', error);
+        }
+      );
+    }
+    
+
+    
+  LoadBranch(selectedSchema: string) {
+    this.leaveService.getBranches(selectedSchema).subscribe(
+      (data: any) => {
+        this.Branches = data;
+
+        console.log('employee:', this.Branches);
+      },
+      (error: any) => {
+        console.error('Error fetching categories:', error);
+      }
+    );
+  }
+
+  LoadDepartment(selectedSchema: string) {
+    this.leaveService.getDepartments(selectedSchema).subscribe(
+      (data: any) => {
+        this.Departments = data;
+
+        console.log('employee:', this.Departments);
+      },
+      (error: any) => {
+        console.error('Error fetching categories:', error);
+      }
+    );
+  }
+
+
+  
 
  
 

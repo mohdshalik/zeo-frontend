@@ -46,6 +46,8 @@ schemas: string[] = []; // Array to store schema names
 
 employees: any[] = [];
 Salarycomponent: any[] = [];
+EmployeeSalarycomponent: any[] = [];
+
 
 filteredEmployees: any[] = [];
 
@@ -68,6 +70,7 @@ filteredEmployees: any[] = [];
 
       this.LoadEmployee(selectedSchema);
       this.LoadSalaryCom(selectedSchema);
+      this.LoadEmployeeSalaryCom(selectedSchema);
 
       
       }
@@ -285,6 +288,20 @@ if (this.userId !== null) {
       this.leaveService.getSalaryCom(selectedSchema).subscribe(
         (data: any) => {
           this.Salarycomponent = data;
+        
+          console.log('employee:', this.Salarycomponent);
+        },
+        (error: any) => {
+          console.error('Error fetching categories:', error);
+        }
+      );
+    }
+
+
+    LoadEmployeeSalaryCom(selectedSchema: string) {
+      this.leaveService.getEmployeeSalaryCom(selectedSchema).subscribe(
+        (data: any) => {
+          this.EmployeeSalarycomponent = data;
         
           console.log('employee:', this.Salarycomponent);
         },
