@@ -148,9 +148,9 @@
     <label>Monday</label>
     <div class="custom-sel">
         <select class="form-control" id="monday" name="monday"  [(ngModel)]="monday"  [ngModelOptions]="{standalone: true}">
-            <option>fullday</option>
-            <option>halfday</option>
-            <option>leave</option>
+            <option value="fullday">Full Day</option>
+            <option value="halfday">Half Day</option>
+            <option value="leave">Leave</option>
         </select>
     </div>
 </div>
@@ -159,9 +159,9 @@
     <label>Tuesday</label>
     <div class="custom-sel">
         <select class="form-control" id="tuesday" name="tuesday"  [(ngModel)]="tuesday"  [ngModelOptions]="{standalone: true}">
-            <option>fullday</option>
-            <option>halfday</option>
-            <option>leave</option>
+          <option value="fullday">Full Day</option>
+          <option value="halfday">Half Day</option>
+          <option value="leave">Leave</option>
         </select>
     </div>
 </div>
@@ -170,9 +170,9 @@
     <label>wednesday</label>
     <div class="custom-sel">
         <select class="form-control" id="wednesday" name="wednesday"  [(ngModel)]="wednesday"  [ngModelOptions]="{standalone: true}">
-            <option>fullday</option>
-            <option>halfday</option>
-            <option>leave</option>
+          <option value="fullday">Full Day</option>
+          <option value="halfday">Half Day</option>
+          <option value="leave">Leave</option>
         </select>
     </div>
 </div>
@@ -181,9 +181,9 @@
     <label>thursday</label>
     <div class="custom-sel">
         <select class="form-control" id="thursday" name="thursday"  [(ngModel)]="thursday"  [ngModelOptions]="{standalone: true}">
-            <option>fullday</option>
-            <option>halfday</option>
-            <option>leave</option>
+          <option value="fullday">Full Day</option>
+          <option value="halfday">Half Day</option>
+          <option value="leave">Leave</option>
         </select>
     </div>
 </div>
@@ -192,9 +192,9 @@
     <label>friday</label>
     <div class="custom-sel">
         <select class="form-control" id="friday" name="friday"  [(ngModel)]="friday"  [ngModelOptions]="{standalone: true}">
-            <option>fullday</option>
-            <option>halfday</option>
-            <option>leave</option>
+          <option value="fullday">Full Day</option>
+          <option value="halfday">Half Day</option>
+          <option value="leave">Leave</option>
         </select>
     </div>
 </div>
@@ -203,9 +203,9 @@
     <label>saturday</label>
     <div class="custom-sel">
         <select class="form-control" id="saturday" name="saturday"  [(ngModel)]="saturday"  [ngModelOptions]="{standalone: true}">
-            <option>fullday</option>
-            <option>halfday</option>
-            <option>leave</option>
+          <option value="fullday">Full Day</option>
+          <option value="halfday">Half Day</option>
+          <option value="leave">Leave</option>
         </select>
     </div>
 </div>
@@ -214,9 +214,9 @@
     <label>sunday</label>
     <div class="custom-sel">
         <select class="form-control" id="sunday" name="sunday"  [(ngModel)]="sunday"  [ngModelOptions]="{standalone: true}">
-            <option>fullday</option>
-            <option>halfday</option>
-            <option>leave</option>
+          <option value="fullday">Full Day</option>
+          <option value="halfday">Half Day</option>
+          <option value="leave">Leave</option>
         </select>
     </div>
 </div>
@@ -288,7 +288,7 @@
                   <tr *ngFor="let detail of groupDetailsByMonth()[month]">
                     <td>{{ formatDate(detail.date) }}</td>
                     <td>{{ getDayName(detail.date) }}</td>
-                    <td class="leave_type_clm" (click)="openEditModal(detail)">{{ detail.day_type }}</td>
+                    <td class="leave_type_clm" >{{ getDayTypeDisplayName(detail.day_type) }}</td>
                     <td>
                       <button type="button" class="btn-Edit btn-info btn btn_tabl" (click)="openEditModal(detail)">
                         <span class="header-btn-icon">
@@ -320,9 +320,9 @@
               <label for="dayType">Day Type</label>
               <div class="custom-sel input-group">
                 <select class="form-control" id="dayType" [(ngModel)]="editDateDetails.day_type" name="dayType">
-                  <option value="leave">leave</option>
-                  <option value="work">work</option>
-                  <option value="halfday">halfday</option>
+                  <option value="leave">Leave</option>
+                  <option value="fullday">Full Day</option>
+                  <option value="halfday">Half Day</option>
                 </select>
                 <button type="submit" class="update-btn btn btn-info">Update</button>
               </div>

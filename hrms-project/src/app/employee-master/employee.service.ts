@@ -368,8 +368,7 @@ export class EmployeeService {
       return throwError('No schema selected.'); // Return an error observable if no schema is selected
     }
 
-    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/leave_balance/?schema=${selectedSchema}
-`;
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/leave_balance/?schema=${selectedSchema}`;
 
     return this.http.get(apiUrl);
   }
@@ -383,6 +382,10 @@ export class EmployeeService {
     const url = `${this.baseUrl}/Employee/${employeeId}/`;
     return this.http.get(url);
   }
+
+
+
+
 
 
   getDocById(departmentId: number): Observable<any> {
@@ -1664,5 +1667,28 @@ export class EmployeeService {
     // Fetch employees from the API
     return this.http.get(apiUrl);
   }
+
+
+
+
+
+
+
+  getAssignWeekendcalendar(selectedSchema: string): Observable<any> {
+    const Url = `${this.apiUrl}/calendars/api/assign-weekend/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(Url);
+  
+  }
+
+  getAssignHolcalendar(selectedSchema: string): Observable<any> {
+    const Url = `${this.apiUrl}/calendars/api/assign-holiday/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(Url);
+  
+  }
+
 
 }

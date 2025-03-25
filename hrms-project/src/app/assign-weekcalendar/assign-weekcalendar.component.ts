@@ -44,6 +44,7 @@ export class AssignWeekcalendarComponent {
   category: number[] = [];
   employee: number[] = [];
 
+  AssignWeekCalendar: any[] = [];
 
   
 
@@ -100,6 +101,7 @@ ngOnInit(): void {
   this.loadWeekendCalendar();
   this.loadEmployee();
 
+  this.loadAssignedWeekendCalendar();
 
   this.userId = this.sessionService.getUserId();
   if (this.userId !== null) {
@@ -394,7 +396,25 @@ ngOnInit(): void {
               }
 
   
-
+              loadAssignedWeekendCalendar(): void {
+    
+                const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+              
+                console.log('schemastore',selectedSchema )
+                // Check if selectedSchema is available
+                if (selectedSchema) {
+                  this.employeeService.getAssignWeekendcalendar(selectedSchema).subscribe(
+                    (result: any) => {
+                      this.AssignWeekCalendar = result;
+                      console.log(' fetching Companies:');
+              
+                    },
+                    (error) => {
+                      console.error('Error fetching Companies:', error);
+                    }
+                  );
+                }
+                }
 
 
 

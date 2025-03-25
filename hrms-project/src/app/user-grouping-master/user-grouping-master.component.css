@@ -340,7 +340,8 @@ margin-right: 10px;
 }
 .responsive-table__body .responsive-table__row:hover {
     color: #fff;
-    background-color: #fb4f83;
+    background-color:#d1a6a8;
+     /* #fb4f83; */
 }
 .responsive-table__body__text {
     display: flex;

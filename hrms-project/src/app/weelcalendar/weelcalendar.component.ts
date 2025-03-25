@@ -221,6 +221,18 @@ if (this.userId !== null) {
   //   }
   // }
 
+  dayTypeDisplayNames: { [key: string]: string } = {
+    'fullday': 'Full Day',
+    'halfday': 'Half Day',
+    'weekend': 'Weekend',
+    'holiday': 'Holiday',
+    'leave':'Leave'
+  };
+  
+  getDayTypeDisplayName(dayType: string): string {
+    return this.dayTypeDisplayNames[dayType] || dayType; // Fallback to the original value if not found
+  }
+
   selectCalendar(event: any): void {
     const selectedId = event.target.value;
     this.selectedCalendar = this.calendars.find(calendar => calendar.id == selectedId);
@@ -233,6 +245,7 @@ if (this.userId !== null) {
   
     const query = this.searchQuery.toLowerCase();
     return this.selectedCalendar.details.filter((detail: { date: string }) => {
+      
       const formattedDate = this.formatDate(detail.date).toLowerCase();
       return formattedDate.includes(query);
     });

@@ -77,7 +77,8 @@
                             </td>
                             <td class="responsive-table__body__text responsive-table__body__text--status">
                                
-                                <button type="button" class="btn btn-Edit btn-info btn-list-edit" (click)="openEditPopuss(Rolegroup.id)"  *ngIf="showEditBtn">Edit</button>
+                                <button type="button" class="btn btn-Edit btn-info btn-list-edit" (click)="openEditPopuss(Rolegroup.id)"  *ngIf="showEditBtn">                          <mat-icon>draw</mat-icon>
+                                </button>
                                 <mat-checkbox *ngIf="Delete" [(ngModel)]="Rolegroup.selected" (change)="onCheckboxChange(Rolegroup.id)"></mat-checkbox>
 
                             </td>

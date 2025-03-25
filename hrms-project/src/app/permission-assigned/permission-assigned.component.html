@@ -13,7 +13,6 @@
                             <div class="custom-sel">
                                 <label>Select User</label>
                                 <select class="form-control" id="profile" required [(ngModel)]="profile"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !profile}">
-                                    <option value="">Select</option>
                                     <option *ngFor="let deparmentsec of users" [value]="deparmentsec.id">{{ deparmentsec.username }}</option>
                                 </select>
                                 <div *ngIf="registerButtonClicked && !profile" class="error-message">Please Select Your Company</div>

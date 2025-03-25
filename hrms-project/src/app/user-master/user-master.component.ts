@@ -19,7 +19,7 @@ import { SessionService } from '../login/session.service';
   styleUrl: './user-master.component.css'
 })
 export class UserMasterComponent {
-  Users: any[] = [];
+  Users: any[] = []; // Ensure it's an array
   selectedDepartment: any;
 
   username: string = '';
@@ -219,56 +219,35 @@ if (this.userId !== null) {
     }
   
     fetchDesignations(selectedSchema: string) {
-
-      // Get the selected schema
- const selectedSchemas = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-
- console.log('schemastore',selectedSchemas )
- // Check if selectedSchema is available
- if (selectedSchemas) {
-      
-      this.UserMasterService.getSChemaUsers(selectedSchemas).subscribe(
-        (data: any) => {
-          this.Users = data;
-          this.filteredEmployees = this.Users;
-
-          console.log('users:', this.Users);
-        },
-        (error: any) => {
-          console.error('Error fetching categories:', error);
-        }
-      );
- }
+      const selectedSchemas = this.authService.getSelectedSchema();
+    
+      if (selectedSchemas) {
+        this.UserMasterService.getSChemaUsers(selectedSchemas).subscribe(
+          (data: any) => {
+            this.Users = Array.isArray(data) ? data : []; // Ensure it's an array
+            this.filteredEmployees = [...this.Users];
+            console.log('Users:', this.Users);
+          },
+          (error: any) => {
+            console.error('Error fetching categories:', error);
+          }
+        );
+      }
     }
    
-    // checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
-    //   return groupPermissions.some(permission => permission.codename === codeName);
-    // }
-     
-    // loadUsers(): void {
-    //   this.UserMasterService.getUsers().subscribe(
-    //     (result: any) => {
-    //       this.Users = result;
-    //       console.log(' fetching Users:');
   
-    //     },
-    //     (error) => {
-    //       console.error('Error fetching Users:', error);
-    //     }
-    //   );
-    // }
-  
-
     filterEmployees(): void {
+      if (!Array.isArray(this.Users)) {
+        console.error('Users is not an array:', this.Users);
+        return;
+      }
+    
       const query = this.searchQuery.toLowerCase();
-      this.filteredEmployees = this.Users.filter(Users =>
-        Users.username.toLowerCase().includes(query) ||
-        Users.email.toLowerCase().includes(query) ||
-        Users.filter((employee: { is_deleted: any; }) => !employee.is_deleted)
+      this.filteredEmployees = this.Users.filter(user =>
+        user.username.toLowerCase().includes(query) ||
+        user.email.toLowerCase().includes(query)
       );
-      
     }
-  
 
 
     openPopus(){
@@ -296,32 +275,7 @@ if (this.userId !== null) {
     // You can add any additional logic if needed.
   }
 
-  // deleteSelectedEmployees() { 
-  //   const selectedEmployeeIds = this.Users
-  //     .filter(employee => employee.selected)
-  //     .map(employee => employee.id);
-
-  //   if (selectedEmployeeIds.length === 0) {
-  //     alert('No employees selected for deletion.');
-  //     return;
-  //   }
-
-  //   if (confirm('Are you sure you want to delete the selected employees?')) {
-  //     selectedEmployeeIds.forEach(DeptId => {
-  //       this.UserMasterService.deleteUser(DeptId).subscribe(
-  //         () => {
-  //           console.log('User deleted successfully:', DeptId);
-  //           // Remove the deleted employee from the local list
-  //           this.Users = this.Users.filter(employee => employee.id !== DeptId);
-  //         },
-  //         (error) => {
-  //           console.error('Error deleting employee:', error);
-  //         }
-  //       );
-  //     });
-  //   }
-  // }
-
+  
   deleteSelectedEmployees() {
     const selectedEmployeeIds = this.Users.filter(employee => employee.selected).map(employee => employee.id);
   
