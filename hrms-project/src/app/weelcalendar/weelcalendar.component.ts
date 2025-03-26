@@ -226,7 +226,7 @@ if (this.userId !== null) {
     'halfday': 'Half Day',
     'weekend': 'Weekend',
     'holiday': 'Holiday',
-    'leave':'Leave'
+    'leave':'Off'
   };
   
   getDayTypeDisplayName(dayType: string): string {

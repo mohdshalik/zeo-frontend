@@ -280,11 +280,11 @@ if (this.userId !== null) {
     const selectedEmployeeIds = this.Users.filter(employee => employee.selected).map(employee => employee.id);
   
     if (selectedEmployeeIds.length === 0) {
-      alert('No employees selected for deletion.');
+      alert('No user selected for deletion.');
       return;
     }
   
-    if (confirm('Are you sure you want to hide the selected employees?')) {
+    if (confirm('Are you sure you want to delete the selected user?')) {
       selectedEmployeeIds.forEach(userId => {
         this.UserMasterService.markUserAsDeleted(userId).subscribe(
           () => {
@@ -296,7 +296,7 @@ if (this.userId !== null) {
               }
               return employee;
             });
-            window.location.reload();
+            // window.location.reload();
 
           },
           (error) => {

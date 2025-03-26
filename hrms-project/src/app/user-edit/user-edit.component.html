@@ -2,7 +2,16 @@
 
     <div class="cpm-sec" *ngIf="Emp" >
 
-        <h1>User Details</h1><hr>
+        <div class="row">
+            <div class="col-md-9">
+                <h1>User Details</h1><hr>
+
+            </div>
+            <div class="col-md-3">
+                <button class="btn-zeo btn btn-full" (click)="togglePasswordField()">  {{ showPasswordField ? 'Cancel' : 'Change Password' }}
+                </button>
+            </div>
+        </div>
 
         <form >
             <div class="row">
@@ -79,7 +88,7 @@
     
 
 
-        <div class="col-md-6" >
+        <div class="col-md-6"  *ngIf="showPasswordField">
                    
             <label>password</label>
            <input type="text"  class="form-control" required id="password" name="password"  [(ngModel)]="Emp.password"  placeholder="Enter password"

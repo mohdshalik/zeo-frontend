@@ -112,6 +112,7 @@ export class EmployeeMasterComponent {
             console.log('Employee deleted successfully:', employeeId);
             // Remove the deleted employee from the local list
             this.employees = this.employees.filter(employee => employee.id !== employeeId);
+            window.location.reload();
           },
           (error) => {
             console.error('Error deleting employee:', error);

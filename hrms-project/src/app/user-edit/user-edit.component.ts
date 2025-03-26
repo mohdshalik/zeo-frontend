@@ -34,6 +34,7 @@ export class UserEditComponent {
   Emp: any;
 
 
+  Changepwd:any ='';
 
   username:any ='';
 
@@ -147,7 +148,11 @@ export class UserEditComponent {
   }
   
   
+  showPasswordField: boolean = false;
 
+  togglePasswordField() {
+    this.showPasswordField = !this.showPasswordField;
+  }
 
   loadCompanies(): void { 
     this.CompanyRegistrationService.getCompany().subscribe(
