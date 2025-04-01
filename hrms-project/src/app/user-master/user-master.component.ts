@@ -331,6 +331,7 @@ if (this.userId !== null) {
   // show div with selected user details
 
 
+
   showEmployeeDetails(employeeId: number, companysec: any): void {
     this.UserMasterService.getEmployeeDetails(employeeId).subscribe(
         (details: any) => {
@@ -374,6 +375,8 @@ showUserDetails(employeeId: number): void {
       console.error('Failed to fetch employee details', error);
     }
   );
+
+
 }
 
 

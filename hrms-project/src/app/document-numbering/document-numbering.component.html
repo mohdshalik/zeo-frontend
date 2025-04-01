@@ -32,14 +32,14 @@
 
 
           
-          <div class="col-md-3" >
+          <!-- <div class="col-md-3" >
                
             <label>Year</label>
            <input type="number"  class="form-control" required  [(ngModel)]="year"  placeholder="Enter year"
             [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !year}">
            
            <div *ngIf="registerButtonClicked && !year" class="error-message">year is required.</div>
-      </div>
+      </div> -->
 
        
 
@@ -184,7 +184,6 @@
                 <th>No</th>
                 <th>Preffix</th>
                 <th>Suffix</th>
-                <th>Year</th>
                 <th>Current No</th>
                 <th>Branch</th>
                 <th>Total Length</th>
@@ -199,7 +198,6 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ docs.prefix }}</td>
                 <td>{{ docs.suffix }}</td>
-                <td>{{ docs.year }}</td>
                 <td>{{ docs.current_number }}</td>
                 <td>{{ docs.branch_id }}</td>
                 <td>{{ docs.total_length }}</td>
@@ -234,11 +232,10 @@
           <label>Suffix</label>
           <input type="text" class="form-control" [(ngModel)]="selectedDoc.suffix" name="suffix" required>
         </div>
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <label>Year</label>
-          <!-- Use type="date" for picking a date then convert to year in TS if needed -->
           <input type="number" class="form-control" [(ngModel)]="selectedDoc.year" name="year" required>
-        </div>
+        </div> -->
       
         <div class="col-md-4">
           <label>Current Number</label>

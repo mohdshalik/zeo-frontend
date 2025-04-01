@@ -36,6 +36,8 @@ export class CreateEmployeeComponent implements OnInit {
   designations:any[] = [];
   catogories:any[] =[];
   languages:any[] = [];
+  Religions: any[] = [];
+
 
   state_label: string = ''; // For dynamically storing state_label
 
@@ -391,6 +393,8 @@ export class CreateEmployeeComponent implements OnInit {
     }
     
     this.loadCountries();
+    this.loadReligoin();
+
 
     this.loadCompanies();
     this.loadbranches();
@@ -1453,6 +1457,26 @@ loadStatesByCountry(): void {
   );
 }
 
+
+
+loadReligoin(): void {
+
+  const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+  console.log('schemastore',selectedSchema )
+  // Check if selectedSchema is available
+  if (selectedSchema) {
+
+  this.CountryService.getReligionList(selectedSchema).subscribe(
+    (result: any) => {
+      this.Religions = result;
+    },
+    (error: any) => {
+      console.error('Error fetching countries:', error);
+    }
+  );
+  }
+}
 
 
 loadCompanies(): void {

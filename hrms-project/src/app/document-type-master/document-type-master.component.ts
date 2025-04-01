@@ -55,8 +55,6 @@ export class DocumentTypeMasterComponent {
 
   ngOnInit(): void {
   
-  
-
     
 // Retrieve user ID
 this.userId = this.sessionService.getUserId();
@@ -258,6 +256,45 @@ if (this.userId !== null) {
 }
 
 
+  // Variable to hold the selected document for editing
+  selectedDoc: any = {};
+  isDocumentnumbereditModalOpen: boolean = false;
+    
+openEditDocModal(state: any): void {
+  // Clone the document (to avoid modifying the original before saving)
+  this.selectedDoc = { ...state };
+  this.isDocumentnumbereditModalOpen = true;
+}
+
+
+
+closeEditDocModal(): void {
+  this.isDocumentnumbereditModalOpen = false;
+}
+
+// Method to update the document number via API
+updateDocumentNumber(): void {
+  // Optionally convert the date input to a year integer if needed:
+  // Example: this.selectedDoc.year = new Date(this.selectedDoc.year).getFullYear();
+  
+  this.countryService.updateDocNum(this.selectedDoc.id, this.selectedDoc).subscribe(
+    (response) => {
+      console.log('Document type updated successfully', response);
+      alert('Document type updated successfully.');
+      // Optionally, refresh your list or reload the page
+      this.closeEditDocModal();
+       // re-fetch the list if needed
+      window.location.reload();
+    },
+    (error) => {
+      console.error('Error updating document type', error);
+      const errorMessage = error.error?.error || 'Error updating document type.';
+      alert(errorMessage);
+    }
+  );
+}
+
+
   // loadCompanies(): void { 
   //   const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
@@ -289,4 +326,37 @@ if (this.userId !== null) {
       console.log('The dialog was closed');
     });
   }
+
+
+  deleteDoc(permissionId: number): void {
+    if (confirm('Are you sure you want to delete this permission?')) {
+      const selectedSchema = this.authService.getSelectedSchema();
+      if (selectedSchema) {
+      this.countryService.deleteAssignedPermission(permissionId,selectedSchema).subscribe(
+        (response) => {
+          console.log('Document type deleted successfully', response);
+          alert('Document type deleted successfully');
+            
+      const selectedSchema = this.authService.getSelectedSchema();
+      if (!selectedSchema) {
+        console.error('No schema selected.');
+        return;
+      }
+          this.fetchDesignations(selectedSchema); // Refresh the list after deletion
+        },
+        (error) => {
+          console.error('Error deleting Document type:', error);
+          alert('Failed to delete permission');
+        }
+      );
+    }
+    }
+  }
+
+
+
+
+
+
+
 }

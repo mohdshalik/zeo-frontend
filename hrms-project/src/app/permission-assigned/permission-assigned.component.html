@@ -21,16 +21,44 @@
                         
 
                         <div class="col-md-6">
+                            <label>Select Group</label>
 
 
-                            <div class="custom-sel">
+                            <!-- <div class="custom-sel">
                                 <label>Select Group</label>
                                 <select class="form-control" id="groups" multiple required [(ngModel)]="groups"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !groups}" >
                                     <option value="" >Select</option>
                                     <option *ngFor="let deparmentsec of   Groups" [value]="deparmentsec.id">{{ deparmentsec.name     }} </option>
                                 </select>
                                 <div *ngIf="registerButtonClicked && !groups" class="error-message">Please Select Your Company</div>
-                            </div>
+                            </div> -->
+
+
+                            <div class="custom-sel">
+                                <div class="form-control-wrapper">
+                              
+          
+                                  <mat-form-field>
+                                    <!-- <mat-label>Favorite food</mat-label> -->
+                                    <mat-select placeholder="Select" [(ngModel)]="groups" [ngModelOptions]="{standalone: true}" #select multiple>
+                                      <div class="select-all">
+                                        <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelection()">
+                                          Select All
+                                        </mat-checkbox>
+                                      </div>
+                                      <input type="text" placeholder="serach" class="form-control">
+          
+                                      <mat-option *ngFor="let deparmentsec of   Groups" [value]="deparmentsec.id">
+                                        {{ deparmentsec.name}} 
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                  
+                                </div>
+                                <div *ngIf="registerButtonClicked && (!groups || groups.length === 0)" class="error-message">
+                                  Please Select Your groups
+                                </div>
+                              </div>
                                         
                     
                         </div>
@@ -64,7 +92,7 @@
             <tbody>
               <tr *ngFor="let per of UserPermissions; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ per.profile }}</td> <!-- Display User Name -->
+                <td>{{ per.user }}</td> <!-- Display User Name -->
                 <td>
                   <span *ngFor="let group of per.groups; let last = last">
                     {{ group.name }}{{ last ? '' : ', ' }}
@@ -103,15 +131,43 @@
             </div>
             
             <div class="col-md-6">
-                <div class="custom-sel">
+                <!-- <div class="custom-sel">
                     <label>Select Group</label>
-                    <select class="form-control" id="groups" multiple required [(ngModel)]="selectedUserPermission.groups"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClickededit && !selectedUserPermission.groups}">
+                    <select class="form-control" id="groups" multiple required [(ngModel)]="selectedUserPermission.groups"
+                        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClickededit && !selectedUserPermission.groups}">
                         <option value="">Select</option>
                         <option *ngFor="let group of Groups" [value]="group.id">{{ group.name }}</option>
                     </select>
                     <div *ngIf="registerButtonClickededit && !selectedUserPermission.groups" class="error-message">Please Select a Group</div>
-                </div>
+                </div> -->
+
+                <label>Select Group</label>
+                <div class="custom-sel">
+                    <div class="form-control-wrapper">
+                  
+
+                      <mat-form-field>
+                        <mat-select placeholder="Select" [(ngModel)]="selectedUserPermission.groups" [ngModelOptions]="{standalone: true}" #selectEdit multiple>
+                          <div class="select-all">
+                            <mat-checkbox [(ngModel)]="allSelectedEdit" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectionEdit()">
+                              Select All
+                            </mat-checkbox>
+                          </div>
+                          <input type="text" placeholder="serach" class="form-control">
+
+                          <mat-option *ngFor="let deparmentsec of   Groups" [value]="deparmentsec.id">
+                            {{ deparmentsec.name}} 
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      
+                    </div>
+                    <div *ngIf="registerButtonClicked && (!groups || groups.length === 0)" class="error-message">
+                      Please Select Your groups
+                    </div>
+                  </div>
             </div>
+            
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
       </form>

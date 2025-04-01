@@ -19,7 +19,7 @@ export class DocumentNumberingComponent {
 
   prefix: any = '';
   suffix: any = '';
-  year: any = '';
+  // year: any = '';
   start_number: any = '';
   current_number: any = '';
   end_number: any = '';
@@ -304,12 +304,12 @@ ngOnInit(): void {
               this.registerButtonClicked = true;
               
               // Convert the date string to an integer year.
-              const yearInt = this.year ? new Date(this.year).getFullYear() : null;
+              // const yearInt = this.year ? new Date(this.year).getFullYear() : null;
               
               const companyData = {
                 prefix: this.prefix,
                 suffix: this.suffix,
-                year: yearInt, // now a number, e.g. 2025
+                // year: yearInt, // now a number, e.g. 2025
                 current_number: this.current_number,
                 branch_id: this.branch_id,
                 user: this.user,

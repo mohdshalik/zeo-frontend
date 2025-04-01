@@ -225,11 +225,10 @@
 </div> -->
    <!-- <div *ngIf="registerButtonClicked && !emp_relegion" class="error-message">Description is required.</div> -->
 
-<div class="col-md-6" *ngIf="!isReliFieldHidden">
+<!-- <div class="col-md-6" >
     <label>{{religionFieldName}}</label>
 
 
-    <!-- Hidden input to store the final value to be posted -->
 
     <input type="text"  class="form-control" required   [(ngModel)]="emp_relegion"  placeholder="Enter {{religionFieldName}}"
     [ngModelOptions]="{standalone: true}"  style="display: none;" [required]="isRelMandatory" 
@@ -240,7 +239,6 @@
                 </div>
 
     <ng-container [ngSwitch]="selectedDataTypereligion">
-        <!-- Text Box -->
         <input *ngSwitchCase="'Text Box'" type="text" class="form-control" 
                required placeholder="{{religionFieldName}}" 
                [(ngModel)]="temp_religion" 
@@ -248,7 +246,6 @@
                [ngClass]="{'error-field': registerButtonClicked && !temp_religion}">
         <div *ngIf="registerButtonClicked && !temp_religion" class="error-message">{{religionFieldName}} is required.</div>
 
-        <!-- Dropdown -->
         <div *ngSwitchCase="'Dropdown'" class="custom-sel">
             <select class="form-control" [(ngModel)]="temp_religion" (ngModelChange)="syncReligion($event)" [ngModelOptions]="{standalone: true}">
                 <option value="">Select an option</option>
@@ -257,7 +254,7 @@
             <div *ngIf="registerButtonClicked && !temp_religion" class="error-message">{{religionFieldName}} is required.</div>
         </div>
     </ng-container>
-</div>
+</div> -->
 
 
 <!-- <div class="col-md-6" >
@@ -302,7 +299,7 @@
 </div>
 
 
-<div class="col-md-6"   *ngIf="!isNationFieldHidden">
+<!-- <div class="col-md-6"   >
                
     <label>{{nationFieldName}}</label>
     <input type="text"  class="form-control" required   [(ngModel)]="emp_nationality"  placeholder="Enter {{nationFieldName}}"
@@ -310,11 +307,41 @@
  [ngClass]="{'error-field': registerButtonClicked && isNatMandatory && !emp_nationality}" >
  
  <div *ngIf="registerButtonClicked && isNatMandatory && !emp_nationality" class="error-message">
-                     {{nationFieldName}} is required.
+                  
                  </div>
    
-   <!-- <div *ngIf="registerButtonClicked && !emp_nationality" class="error-message">Description is required.</div> -->
+</div> -->
+
+
+<div class="col-md-6" *ngIf="!isNationFieldHidden">
+    
+    
+    <div class="custom-sel">
+        <label>{{nationFieldName}}</label>
+        <select class="form-control" id="emp_nationality" name="emp_nationality" required [(ngModel)]="emp_nationality"  [ngModelOptions]="{standalone: true}"  >
+            <option value="" >Select</option>
+            <option *ngFor="let emp_nationality of countries" [value]="emp_nationality.id">{{ emp_nationality.country_name }}</option>
+        </select>
+    </div>
+                
+
 </div>
+
+
+<div class="col-md-6" *ngIf="!isReliFieldHidden">
+    
+    
+    <div class="custom-sel">
+        <label>{{religionFieldName}}</label>
+        <select class="form-control" id="emp_relegion" name="emp_relegion" required [(ngModel)]="emp_relegion"  [ngModelOptions]="{standalone: true}"  >
+            <option value="" >Select</option>
+            <option *ngFor="let emp_relegion of Religions" [value]="emp_relegion.id">{{ emp_relegion.religion }}</option>
+        </select>
+    </div>
+                
+
+</div>
+
 
 
 
@@ -1071,15 +1098,7 @@
        <div *ngIf="registerButtonClicked && !emp_city" class="error-message">Description is required.</div>
     </div>
     
-    
-    <div class="col-md-6" >
-                   
-        <label>Religion</label>
-       <input type="text"  class="form-control" required id="emp_relegion" name="emp_relegion"  [(ngModel)]="emp_relegion"  placeholder="Enter Religion"
-        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_relegion}">
-       
-       <div *ngIf="registerButtonClicked && !emp_relegion" class="error-message">Description is required.</div>
-    </div>
+ 
     
     <div class="col-md-6" >
                    

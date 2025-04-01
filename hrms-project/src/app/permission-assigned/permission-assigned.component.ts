@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { DepartmentServiceService } from '../department-master/department-service.service';
 import { SessionService } from '../login/session.service';
 import { DesignationService } from '../designation-master/designation.service';
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-permission-assigned',
@@ -11,7 +13,11 @@ import { DesignationService } from '../designation-master/designation.service';
   styleUrl: './permission-assigned.component.css'
 })
 export class PermissionAssignedComponent {
- 
+
+  @ViewChild('select') select: MatSelect | undefined;
+
+  @ViewChild('selectEdit') selectEdit: MatSelect | undefined;
+
   profile: number | string | undefined;
   users :any[]=[];
   registerButtonClicked = false;
@@ -308,6 +314,9 @@ if (this.userId !== null) {
 openEditPerModal(permission: any): void {
   this.selectedUserPermission = { ...permission }; // Copy the object to avoid binding issues
   this.isUserPereditModalOpen = true;
+    // Ensure groups are stored as an array of group IDs
+    this.selectedUserPermission.groups = permission.groups.map((group: any) => group.id);
+
 }
 
 // Close modal
@@ -344,5 +353,31 @@ updateUserPermission(): void {
     );
 }
 
+allSelected=false;
+allSelectedEdit=false;
+
+
+toggleAllSelection(): void {
+  if (this.select) {
+    if (this.allSelected) {
+      
+      this.select.options.forEach((item: MatOption) => item.select());
+    } else {
+      this.select.options.forEach((item: MatOption) => item.deselect());
+    }
+  }
+}
+
+
+toggleAllSelectionEdit(): void {
+  if (this.selectEdit) {
+    if (this.allSelectedEdit) {
+      
+      this.selectEdit.options.forEach((item: MatOption) => item.select());
+    } else {
+      this.selectEdit.options.forEach((item: MatOption) => item.deselect());
+    }
+  }
+}
 
 }

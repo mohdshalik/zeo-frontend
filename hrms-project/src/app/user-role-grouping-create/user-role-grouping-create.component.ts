@@ -4803,6 +4803,7 @@ onSubmit(): void {
       (response) => {
         console.log('Data saved successfully:', response);
         alert('Permission Group Added');
+        
 
         // ✅ Force reload the page
         (window as any).location.reload();
@@ -4823,6 +4824,7 @@ onSubmit(): void {
   ClosePopup() {
     this.ref.close('Closed using function');
     (window as any).location.reload();
+  
 
     
   }

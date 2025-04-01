@@ -35,6 +35,8 @@ export class EmployeeEditComponent {
   catogories:any[] =[];
   languages:any[] = [];
   Fields:any[] = [];
+  Religions: any[] = [];
+
 
   empCodeFieldName: string = 'Employee Code';
   firstNameFieldName: string = 'First Name';
@@ -63,6 +65,9 @@ export class EmployeeEditComponent {
   hiredFieldName: string = 'Hired Date';
 
   joinFieldName: string = 'Joining Date';
+
+  // nationFieldName: string = 'Joining Date';
+
 
   registerButtonClicked = false;
   state_label: string = ''; // For dynamically storing state_label
@@ -186,6 +191,8 @@ export class EmployeeEditComponent {
     this.loadEmployee();
     this.loadEmployeecust_value();
     this.loadFieldNames();
+    this.loadReligoin();
+
   }
 
 
@@ -674,7 +681,7 @@ loadFieldNames(): void {
   const savedpreaddressFieldName = localStorage.getItem('preaddressFieldName');
   const savedcityFieldName = localStorage.getItem('cityFieldName');
 
-  const savednationFieldName = localStorage.getItem('nationFieldName');
+  // const savednationFieldName = localStorage.getItem('nationFieldName');
 
 
       // Load field names from localStorage
@@ -688,6 +695,13 @@ loadFieldNames(): void {
            if (savedMaritalFieldName) {
                this.maritalFieldName = savedMaritalFieldName;
            }
+
+              // Load field names from localStorage
+              const savednationFieldName = localStorage.getItem('nationFieldName');
+              if (savednationFieldName) {
+                  this.nationFieldName = savednationFieldName;
+              }
+      
    
 
   if (savedEmpCodeFieldName) {
@@ -797,6 +811,25 @@ loadFieldNames(): void {
          if (savedjoinFieldName) {
            this.joinFieldName = savedjoinFieldName;
          }
+}
+
+loadReligoin(): void {
+
+  const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+
+  console.log('schemastore',selectedSchema )
+  // Check if selectedSchema is available
+  if (selectedSchema) {
+
+  this.CountryService.getReligionList(selectedSchema).subscribe(
+    (result: any) => {
+      this.Religions = result;
+    },
+    (error: any) => {
+      console.error('Error fetching countries:', error);
+    }
+  );
+  }
 }
 
 loadLanguages(): void {

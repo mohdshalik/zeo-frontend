@@ -75,9 +75,8 @@
                    
         <label>Personal Email ID</label>
        <input type="text"  class="form-control"   [(ngModel)]="emp_company_email"  placeholder="Enter Company email"
-       [ngModelOptions]="{standalone: true}" 
-   >
-   >
+       [ngModelOptions]="{standalone: true}">
+   
        
        <!-- <div *ngIf="registerButtonClicked && !emp_personal_email" class="error-message">Description is required.</div> -->
     </div>
@@ -89,10 +88,9 @@
     <div class="col-md-6" >
                    
         <label>{{cmpnoFieldName}}</label>
-       <input type="text"  class="form-control" required id="emp_mobile_number_1" name="emp_mobile_number_1"  [(ngModel)]="Emp.emp_mobile_number_1"  placeholder="Enter Contact Number"
-        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_mobile_number_1}">
+       <input type="text"  class="form-control" required id="emp_mobile_number_1" name="emp_mobile_number_1"  [(ngModel)]="Emp.emp_mobile_number_1"  placeholder="Enter {{cmpnoFieldName}}"
+        [ngModelOptions]="{standalone: true}" >
        
-       <div *ngIf="registerButtonClicked && !emp_mobile_number_1" class="error-message">Description is required.</div>
     </div>
     
     
@@ -142,13 +140,18 @@
     
     <div class="col-md-6" >
                    
-        <label>{{religionFieldName}}</label>
-       <input type="text"  class="form-control" required id="emp_relegion" name="emp_relegion"  [(ngModel)]="Emp.emp_relegion"  placeholder="Enter Religion"
-        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !emp_relegion}">
-       
-       <div *ngIf="registerButtonClicked && !emp_relegion" class="error-message">Description is required.</div>
+        <div class="custom-sel">
+            <label>{{religionFieldName}}</label>
+            <select class="form-control" id="emp_relegion" name="emp_relegion" required [(ngModel)]="Emp.emp_relegion"  [ngModelOptions]="{standalone: true}"  >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_relegion of Religions" [value]="emp_relegion.id">{{ emp_relegion.religion }}</option>
+            </select>
+        </div>
     </div>
     
+
+
+
     <div class="col-md-6" >
                    
         <label>{{bloodFieldName}}</label>
@@ -224,7 +227,19 @@
     
     </div>
     
+    <div class="col-md-6" >
     
+    
+        <div class="custom-sel">
+            <label>{{nationFieldName}}</label>
+            <select class="form-control" id="emp_nationality" name="emp_nationality" required [(ngModel)]="emp_nationality"  [ngModelOptions]="{standalone: true}"  >
+                <option value="" >Select</option>
+                <option *ngFor="let emp_nationality of countries" [value]="emp_nationality.id">{{ emp_nationality.country_name }}</option>
+            </select>
+        </div>
+                    
+    
+    </div>
     
     
     

@@ -67,6 +67,7 @@
                 <th>No</th>
                 <th>Employee Document Type</th>
                 <th>Description</th>
+                <th>Action</th>
                
               </tr>
             </thead>
@@ -76,11 +77,73 @@
                 <td>{{ i + 1 }}</td> 
                 <td>{{ state.type_name }}</td>
                 <td>{{ state.description }}</td>
-           
+                <td> 
+                  <span class="table-btns">          
+                 <i class="fa-solid fa-edit" (click)="openEditDocModal(state)"></i>
+                 <i class="fa-solid fa-trash" (click)="deleteDoc(state.id)"></i>
+                 </span>
+
+                </td>
               </tr>
           
             </tbody>
           </table>
+
+
+             <!-- Edit Modal Popup -->
+<div *ngIf="isDocumentnumbereditModalOpen" class="modal">
+  <div class="modal-content">
+    <span class="close pull-right" (click)="closeEditDocModal()">&times;</span>
+    <h2>Edit Document Number</h2>
+    <form (ngSubmit)="updateDocumentNumber()">
+
+      <div class="row">
+
+
+        <div class="col-md-6" >
+               
+          <label>Type Name</label>
+         <input type="text"  class="form-control" required  [(ngModel)]="selectedDoc.type_name"  placeholder="Enter type Name"
+          [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !type_name}">
+         
+         <div *ngIf="registerButtonClicked && !type_name" class="error-message">Type Name is required.</div>
+    </div>
+    
+    
+    
+    <div class="col-md-6" >
+                   
+        <label>Description</label>
+       <input type="text"  class="form-control" required  [(ngModel)]="selectedDoc.description"  placeholder="Enter Description"
+        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !description}">
+       
+       <div *ngIf="registerButtonClicked && !description" class="error-message">Description is required.</div>
+    </div>
+    
+
+
+      </div>
+      <div class="row mt-4">
+          <div class="col-md-8">
+
+          </div>
+          <div class="col-md-2">
+              <button type="button" class="btn btn-secondary  btn-full" (click)="closeEditDocModal()">Cancel</button>
+
+          </div>
+
+          <div class="col-md-2">
+              <button type="submit" class="btn btn-primary btn btn-full">Save </button>
+
+          </div>
+
+
+
+
+      </div>
+    </form>
+  </div>
+</div>
 </div>
 </div>
 

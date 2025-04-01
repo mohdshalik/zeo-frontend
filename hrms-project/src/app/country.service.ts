@@ -147,6 +147,17 @@ export class CountryService {
     return this.http.get(Url);
   }
 
+  getReligionList(selectedSchema: string): Observable<any> {
+    // const url = `${this.baseUrl}/Branch/`;
+    // return this.http.get(url);
+
+    const Url = `${this.apiUrl}/core/api/religion/?schema=${selectedSchema}`;
+
+    // Fetch employees from the API
+    return this.http.get(Url);
+  }
+
+
   getstatescreated(selectedSchema: string): Observable<any> {
     // const url = `${this.baseUrl}/Branch/`;
     // return this.http.get(url);
@@ -333,6 +344,23 @@ export class CountryService {
         })
       );
       }
+
+      updateDocNum(docId: number, payload: any): Observable<any> {
+        const selectedSchema = localStorage.getItem('selectedSchema');
+        if (!selectedSchema) {
+          console.error('No schema selected.');
+          return throwError('No schema selected.');
+        }
+        const url = `${this.apiUrl}/core/api/Documents/${docId}/?schema=${selectedSchema}`;
+        return this.http.put(url, payload);
+      }
+
+      deleteAssignedPermission(permissionId: number,selectedSchema: string): Observable<any> {
+        const apiUrl = `${this.apiUrl}/core/api/Documents/${permissionId}/?schema=${selectedSchema}`;
+        return this.http.delete(apiUrl);
+      }
+    
+    
 
       getAllDocsList(selectedSchema: string): Observable<any> {
         // const url = `${this.baseUrl}/Branch/`;
