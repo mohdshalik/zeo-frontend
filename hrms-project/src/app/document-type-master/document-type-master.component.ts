@@ -39,6 +39,9 @@ export class DocumentTypeMasterComponent {
   userId: number | null | undefined;
   userDetails: any;
 
+  filteredDocuments: any[] = [];  // Filtered list
+
+
 
   constructor(
     private countryService: CountryService, 
@@ -207,6 +210,8 @@ if (this.userId !== null) {
     this.countryService.getDocument(selectedSchema).subscribe(
       (data: any) => {
         this.Documents = data;
+        this.filteredDocuments = data;  // Initialize filtered data
+        
         console.log('employee:', this.Documents);
       },
       (error: any) => {
@@ -215,6 +220,13 @@ if (this.userId !== null) {
     );
   }
 
+    // Filter documents based on searchQuery
+    filterDocuments() {
+      this.filteredDocuments = this.Documents.filter(doc =>
+        doc.type_name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        doc.description.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
   
   registerDocumentType(): void {
     this.registerButtonClicked = true;
@@ -259,6 +271,7 @@ if (this.userId !== null) {
   // Variable to hold the selected document for editing
   selectedDoc: any = {};
   isDocumentnumbereditModalOpen: boolean = false;
+  
     
 openEditDocModal(state: any): void {
   // Clone the document (to avoid modifying the original before saving)
@@ -354,7 +367,12 @@ updateDocumentNumber(): void {
   }
 
 
+  isExpanded = false;
+  searchQuery = '';
 
+  toggleSearch() {
+    this.isExpanded = !this.isExpanded;
+  }
 
 
 

@@ -40,16 +40,7 @@
                     <label>Select Branches</label>
                     <div class="custom-sel">
                       <div class="form-control-wrapper">
-                        <!-- <mat-form-field>
-                          <mat-select class="form-control" placeholder="Select" [(ngModel)]="branch" [ngModelOptions]="{standalone: true}" #select multiple>
-                            <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelection()">
-                              Select All
-                            </mat-checkbox>
-                            <mat-option *ngFor="let deparmentsec of branches" [value]="deparmentsec.id">
-                              {{ deparmentsec.branch_name }}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field> -->
+                    
 
                         <mat-form-field>
                           <!-- <mat-label>Favorite food</mat-label> -->
@@ -134,8 +125,10 @@
                                 Select All
                               </mat-checkbox>
                             </div>
-                           
-                            <mat-option *ngFor="let emp of Employee" [value]="emp.id">
+                            <input type="text" placeholder="serach" class="form-control"
+                            [(ngModel)]="SearchEmployee" (input)="FilterEmployee">
+
+                            <mat-option *ngFor="let emp of FilteredEmployees" [value]="emp.id">
                               {{ emp.emp_first_name }}   {{ emp.emp_last_name }}
                             </mat-option>
                           </mat-select>

@@ -69,7 +69,7 @@ userDetails: any;
 userDetailss: any;
 schemas: string[] = []; // Array to store schema names
 
-
+FilteredEmployees :any[]=[];
 
   @ViewChild('select') select: MatSelect | undefined;
 
@@ -365,6 +365,7 @@ ngOnInit(): void {
                 this.employeeService.getemployees(selectedSchema).subscribe(
                   (result: any) => {
                     this.Employee = result;
+                    this.FilteredEmployees = result;
                     console.log(' fetching Employees:');
             
                   },
@@ -373,6 +374,17 @@ ngOnInit(): void {
                   }
                 );
               }
+              }
+
+
+              SearchEmployee  = '';
+
+              FilterEmployee(){
+                this.FilteredEmployees = this.Employee.filter(emp =>
+                  emp.emp_first_name.toLowerCase().includes(this.SearchEmployee.toLowerCase())
+
+                );
+
               }
 
             loadWeekendCalendar(): void {

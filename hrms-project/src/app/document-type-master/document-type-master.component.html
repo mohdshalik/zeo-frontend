@@ -61,7 +61,25 @@
 
 
 
-        <table width="100%" *ngIf="hasViewPermission">
+        <div class="com_list  mt-4" style="border-top: white;">
+          <div  class="row">
+            <div class="col-md-4">
+              <h2 class="table-title">Employee Document Types</h2>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"
+                [class.expanded]="isExpanded" (input)="filterDocuments()">
+                <button class="search-btn" (click)="toggleSearch()">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+          <table class="mt-4" width="100%" *ngIf="hasViewPermission">
             <thead>
               <tr>
                 <th>No</th>
@@ -73,7 +91,7 @@
             </thead>
             <tbody>
                 
-              <tr *ngFor="let state of Documents;let i = index">
+              <tr *ngFor="let state of filteredDocuments; let i = index">
                 <td>{{ i + 1 }}</td> 
                 <td>{{ state.type_name }}</td>
                 <td>{{ state.description }}</td>
@@ -88,6 +106,8 @@
           
             </tbody>
           </table>
+        </div>
+    
 
 
              <!-- Edit Modal Popup -->
