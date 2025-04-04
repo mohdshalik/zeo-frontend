@@ -15,11 +15,11 @@ export class SalaryComponent {
 
   name:any='';
   component_type:any='';
-  glcode:any='';
+  code:any='';
   description:any='';
   reason:any='';
-  is_fixed: boolean = false;
-  affected_by_unpaid_leave: boolean = false;
+  is_fixed: boolean = true;
+  unpaid_leave: boolean = false;
   affected_by_halfpaid_leave: boolean = false;
   prorata_calculation: boolean = false;
   is_emi_deduction: boolean = false;
@@ -200,18 +200,20 @@ if (this.userId !== null) {
       this.registerButtonClicked = true;
 
 
-      if (!this.name || !this.component_type || !this.glcode) {
+      if (!this.name || !this.component_type || !this.code) {
         return;
       }
     
       const formData = new FormData();
       formData.append('name', this.name);
       formData.append('component_type', this.component_type);
-      formData.append('glcode', this.glcode);
+      formData.append('code', this.code);
       formData.append('description', this.description);
+      formData.append('formula', this.formula);
+
       
       formData.append('is_fixed', this.is_fixed.toString());
-      formData.append('affected_by_unpaid_leave', this.affected_by_unpaid_leave.toString());
+      formData.append('unpaid_leave', this.unpaid_leave.toString());
 
       formData.append('affected_by_halfpaid_leave', this.affected_by_halfpaid_leave.toString());
 
@@ -235,13 +237,11 @@ if (this.userId !== null) {
     
     requestEmployeeSalary(): void {
       
-    
+    alert(123)
       this.registerButtonClicked = true;
 
 
-      if (!this.amount || !this.employee || !this.component) {
-        return;
-      }
+  
     
       const formData = new FormData();
       formData.append('amount', this.amount);
@@ -311,4 +311,45 @@ if (this.userId !== null) {
       );
     }
 
+
+
+
+    formula: string = ''; // Initialize empty
+    
+    insertIntoTextarea(componentName: string): void {
+      if (this.formula) {
+        this.formula += ' ' + componentName; // Append new name
+      } else {
+        this.formula = componentName; // First entry
+      }
+    }
+
+    clearTextarea(): void {
+      this.formula = ''; // Clear the textarea
+    }
+
+    deleteLastCharacter(): void {
+      this.formula = this.formula.trim().slice(0, -1); // Remove last character
+    }
+
+
+
+
+    selectedComponent: any = null;
+
+    // selectedComponentId: number | null = null;
+
+
+    onComponentChange() {
+      // Find the selected component details from the Salarycomponent list
+      this.selectedComponent = this.Salarycomponent.find(
+        comp => comp.id === Number(this.component)
+      );
+    
+      // If is_fixed is false, clear the amount field
+      if (this.selectedComponent && !this.selectedComponent.is_fixed) {
+        this.amount = '';
+      }
+    }
+    
 }

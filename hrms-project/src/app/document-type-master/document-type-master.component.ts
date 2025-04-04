@@ -206,12 +206,14 @@ if (this.userId !== null) {
     return groupPermissions.some(permission => permission.codename === codeName);
   }
 
+
+  
   fetchDesignations(selectedSchema: string) {
     this.countryService.getDocument(selectedSchema).subscribe(
       (data: any) => {
         this.Documents = data;
         this.filteredDocuments = data;  // Initialize filtered data
-        
+
         console.log('employee:', this.Documents);
       },
       (error: any) => {

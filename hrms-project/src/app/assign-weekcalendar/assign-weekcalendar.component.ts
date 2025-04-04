@@ -71,6 +71,9 @@ schemas: string[] = []; // Array to store schema names
 
 FilteredEmployees :any[]=[];
 
+filteredDocuments: any[] = [];  // Filtered list
+
+
   @ViewChild('select') select: MatSelect | undefined;
 
 
@@ -418,6 +421,8 @@ ngOnInit(): void {
                   this.employeeService.getAssignWeekendcalendar(selectedSchema).subscribe(
                     (result: any) => {
                       this.AssignWeekCalendar = result;
+                      this.filteredDocuments = result;  // Initialize filtered data
+
                       console.log(' fetching Companies:');
               
                     },
@@ -475,7 +480,21 @@ ngOnInit(): void {
 
 
 
+            isExpanded = false;
+            searchQuery = '';
+          
+            toggleSearch() {
+              this.isExpanded = !this.isExpanded;
+            }
 
+
+                // Filter documents based on searchQuery
+    filterDocuments() {
+      this.filteredDocuments = this.AssignWeekCalendar.filter(doc =>
+        doc.weekend_model.toLowerCase().includes(this.searchQuery.toLowerCase()) 
+        // doc.employee.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
 
 
   

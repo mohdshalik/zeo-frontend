@@ -236,7 +236,30 @@
 
         </div>
 
-        <table class="table mt-4" >
+
+
+        <div class="com_list  mt-4" style="border-top: white;">
+          <div  class="row">
+            <div class="col-md-4">
+              <h2 class="table-title">Week Calendars</h2>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"
+                [class.expanded]="isExpanded" (input)="filterDocuments()">
+                <button class="search-btn" (click)="toggleSearch()">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+            <table class="table mt-4" >
           <thead>
             <tr>
               <th>No</th>
@@ -248,7 +271,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let detail of AssignWeekCalendar; let i = index">
+            <tr *ngFor="let detail of filteredDocuments; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ detail.weekend_model }}</td>
               <td>{{ (detail.branch && detail.branch.length > 0) ? detail.branch.join(', ') : 'Null' }}</td>
@@ -258,6 +281,10 @@
             </tr>
           </tbody>
         </table>
+
+          </div>
+
+      
         
       
         

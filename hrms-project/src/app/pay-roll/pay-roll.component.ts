@@ -19,16 +19,19 @@ export class PayRollComponent {
   created_by:any='';
 
 
+  // name:any='';
+  // formula_text: string = ''; // Initialize empty
+  // description:any='';
+
+
+
+
   name:any='';
-  formula_text: string = ''; // Initialize empty
-  description:any='';
+  start_date:any='';
+  end_date:any='';
+  payment_date:any='';
 
 
-
-
-  year:any='';
-  month:any='';
-  pay_formula:any='';
   branch:any='';
   department:any='';
   category:any='';
@@ -249,69 +252,54 @@ if (this.userId !== null) {
 
 
 
-      RegisterPayrollSettings(): void {
-        this.registerButtonClicked = true;
+      // RegisterPayrollSettings(): void {
+      //   this.registerButtonClicked = true;
       
-        // Frontend validation
-        if (!this.name || !this.formula_text ) {
-          alert('Please fill in all required fields.');
-          return;
-        }
+      //   // Frontend validation
+      //   if (!this.name || !this.formula_text ) {
+      //     alert('Please fill in all required fields.');
+      //     return;
+      //   }
       
-        const formData = new FormData();
-        formData.append('name', this.name);
-        formData.append('formula_text', this.formula_text);
-        formData.append('description', this.description);
+      //   const formData = new FormData();
+      //   formData.append('name', this.name);
+      //   formData.append('formula_text', this.formula_text);
+      //   formData.append('description', this.description);
    
 
-        this.leaveService.requestPayrollSettings(formData).subscribe(
-          (response) => {
-            console.log('Registration successful', response);
-            alert('Payroll Settings has been added');
-            window.location.reload();
-          },
-          (error) => {
-            console.error('Added failed', error);
+      //   this.leaveService.requestPayrollSettings(formData).subscribe(
+      //     (response) => {
+      //       console.log('Registration successful', response);
+      //       alert('Payroll Formula has been added');
+      //       window.location.reload();
+      //     },
+      //     (error) => {
+      //       console.error('Added failed', error);
       
-            // Extract backend error message
-            let errorMessage = 'An unexpected error occurred. Please try again.';
+      //       // Extract backend error message
+      //       let errorMessage = 'An unexpected error occurred. Please try again.';
       
-            if (error.error) {
-              if (typeof error.error === 'string') {
-                errorMessage = error.error; // If backend returns a string message
-              } else if (error.error.detail) {
-                errorMessage = error.error.detail; // If backend returns { detail: "message" }
-              } else if (error.error.non_field_errors) {
-                errorMessage = error.error.non_field_errors.join(', '); // Handle non-field errors array
-              } else {
-                // Handle field-specific errors
-                const fieldErrors = Object.keys(error.error).map(field => `${field}: ${error.error[field]}`).join('\n');
-                errorMessage = fieldErrors || errorMessage;
-              }
-            }
+      //       if (error.error) {
+      //         if (typeof error.error === 'string') {
+      //           errorMessage = error.error; // If backend returns a string message
+      //         } else if (error.error.detail) {
+      //           errorMessage = error.error.detail; // If backend returns { detail: "message" }
+      //         } else if (error.error.non_field_errors) {
+      //           errorMessage = error.error.non_field_errors.join(', '); // Handle non-field errors array
+      //         } else {
+      //           // Handle field-specific errors
+      //           const fieldErrors = Object.keys(error.error).map(field => `${field}: ${error.error[field]}`).join('\n');
+      //           errorMessage = fieldErrors || errorMessage;
+      //         }
+      //       }
       
-            alert(errorMessage); // Show extracted error
-          }
-        );
-      }
+      //       alert(errorMessage); // Show extracted error
+      //     }
+      //   );
+      // }
       
 
-      insertIntoTextarea(componentName: string): void {
-        if (this.formula_text) {
-          this.formula_text += ' ' + componentName; // Append new name
-        } else {
-          this.formula_text = componentName; // First entry
-        }
-      }
-
-      clearTextarea(): void {
-        this.formula_text = ''; // Clear the textarea
-      }
-
-      deleteLastCharacter(): void {
-        this.formula_text = this.formula_text.trim().slice(0, -1); // Remove last character
-      }
-      
+ 
       
       
     
@@ -319,16 +307,18 @@ if (this.userId !== null) {
         this.registerButtonClicked = true;
       
         // Frontend validation
-        if (!this.year || !this.pay_formula ) {
+        if (!this.name || !this.start_date ) {
           alert('Please fill in all required fields.');
           return;
         }
       
         const formData = new FormData();
-        formData.append('year', this.year);
-        formData.append('month', this.month);
-        formData.append('pay_formula', this.pay_formula);
+        formData.append('name', this.name);
+        formData.append('start_date', this.start_date);
+        formData.append('end_date', this.end_date);
+        formData.append('payment_date', this.payment_date);
         formData.append('branch', this.branch);
+
         formData.append('department', this.department);
         formData.append('category', this.category);
      
@@ -365,110 +355,110 @@ if (this.userId !== null) {
 
      
       
-      registerPaySlip(): void {
-        this.registerButtonClicked = true;
+      // registerPaySlip(): void {
+      //   this.registerButtonClicked = true;
       
-        // Frontend validation
-        if (!this.basic_salary || !this.gross_salary) {
-          alert('Please select a Payslip PDF and Payroll.');
-          return;
-        }
+      //   // Frontend validation
+      //   if (!this.basic_salary || !this.gross_salary) {
+      //     alert('Please select a Payslip PDF and Payroll.');
+      //     return;
+      //   }
       
-        const formData = new FormData();
-        formData.append('basic_salary', this.basic_salary);
-        formData.append('gross_salary', this.gross_salary); // Append file to FormData
+      //   const formData = new FormData();
+      //   formData.append('basic_salary', this.basic_salary);
+      //   formData.append('gross_salary', this.gross_salary); // Append file to FormData
 
-        formData.append('net_salary', this.net_salary);
+      //   formData.append('net_salary', this.net_salary);
 
-        formData.append('total_deductions', this.total_deductions);
+      //   formData.append('total_deductions', this.total_deductions);
 
-        formData.append('total_additions', this.total_additions);
+      //   formData.append('total_additions', this.total_additions);
 
 
       
-        this.leaveService.requestPaySlip(formData).subscribe(
-          (response) => {
-            console.log('Registration successful', response);
-            alert('Payslip has been added successfully.');
-            window.location.reload();
-          },
-          (error) => {
-            console.error('Upload failed', error);
+      //   this.leaveService.requestPaySlip(formData).subscribe(
+      //     (response) => {
+      //       console.log('Registration successful', response);
+      //       alert('Payslip has been added successfully.');
+      //       window.location.reload();
+      //     },
+      //     (error) => {
+      //       console.error('Upload failed', error);
       
-            // Extract backend error message
-            let errorMessage = 'An unexpected error occurred. Please try again.';
+      //       // Extract backend error message
+      //       let errorMessage = 'An unexpected error occurred. Please try again.';
       
-            if (error.error) {
-              if (typeof error.error === 'string') {
-                errorMessage = error.error;
-              } else if (error.error.detail) {
-                errorMessage = error.error.detail;
-              } else if (error.error.non_field_errors) {
-                errorMessage = error.error.non_field_errors.join(', ');
-              } else {
-                const fieldErrors = Object.keys(error.error)
-                  .map((field) => `${field}: ${error.error[field]}`)
-                  .join('\n');
-                errorMessage = fieldErrors || errorMessage;
-              }
-            }
+      //       if (error.error) {
+      //         if (typeof error.error === 'string') {
+      //           errorMessage = error.error;
+      //         } else if (error.error.detail) {
+      //           errorMessage = error.error.detail;
+      //         } else if (error.error.non_field_errors) {
+      //           errorMessage = error.error.non_field_errors.join(', ');
+      //         } else {
+      //           const fieldErrors = Object.keys(error.error)
+      //             .map((field) => `${field}: ${error.error[field]}`)
+      //             .join('\n');
+      //           errorMessage = fieldErrors || errorMessage;
+      //         }
+      //       }
       
-            alert(errorMessage); // Show extracted error
-          }
-        );
-      }
+      //       alert(errorMessage); // Show extracted error
+      //     }
+      //   );
+      // }
       
       
-      registerPaySlipComponent(): void {
-        this.registerButtonClicked = true;
+      // registerPaySlipComponent(): void {
+      //   this.registerButtonClicked = true;
       
-        // Frontend validation
-        if (!this.amount || !this.payslip) {
-          alert('Please select a Payslip PDF and Payroll.');
-          return;
-        }
+      //   // Frontend validation
+      //   if (!this.amount || !this.payslip) {
+      //     alert('Please select a Payslip PDF and Payroll.');
+      //     return;
+      //   }
       
-        const formData = new FormData();
-        formData.append('amount', this.amount);
-        formData.append('payslip', this.payslip); // Append file to FormData
+      //   const formData = new FormData();
+      //   formData.append('amount', this.amount);
+      //   formData.append('payslip', this.payslip); // Append file to FormData
 
-        formData.append('component', this.component);
+      //   formData.append('component', this.component);
 
      
 
 
       
-        this.leaveService.requestPayslipComponent(formData).subscribe(
-          (response) => {
-            console.log('Registration successful', response);
-            alert('Payslip has been added successfully.');
-            window.location.reload();
-          },
-          (error) => {
-            console.error('Upload failed', error);
+      //   this.leaveService.requestPayslipComponent(formData).subscribe(
+      //     (response) => {
+      //       console.log('Registration successful', response);
+      //       alert('Payslip has been added successfully.');
+      //       window.location.reload();
+      //     },
+      //     (error) => {
+      //       console.error('Upload failed', error);
       
-            // Extract backend error message
-            let errorMessage = 'An unexpected error occurred. Please try again.';
+      //       // Extract backend error message
+      //       let errorMessage = 'An unexpected error occurred. Please try again.';
       
-            if (error.error) {
-              if (typeof error.error === 'string') {
-                errorMessage = error.error;
-              } else if (error.error.detail) {
-                errorMessage = error.error.detail;
-              } else if (error.error.non_field_errors) {
-                errorMessage = error.error.non_field_errors.join(', ');
-              } else {
-                const fieldErrors = Object.keys(error.error)
-                  .map((field) => `${field}: ${error.error[field]}`)
-                  .join('\n');
-                errorMessage = fieldErrors || errorMessage;
-              }
-            }
+      //       if (error.error) {
+      //         if (typeof error.error === 'string') {
+      //           errorMessage = error.error;
+      //         } else if (error.error.detail) {
+      //           errorMessage = error.error.detail;
+      //         } else if (error.error.non_field_errors) {
+      //           errorMessage = error.error.non_field_errors.join(', ');
+      //         } else {
+      //           const fieldErrors = Object.keys(error.error)
+      //             .map((field) => `${field}: ${error.error[field]}`)
+      //             .join('\n');
+      //           errorMessage = fieldErrors || errorMessage;
+      //         }
+      //       }
       
-            alert(errorMessage); // Show extracted error
-          }
-        );
-      }
+      //       alert(errorMessage); // Show extracted error
+      //     }
+      //   );
+      // }
 
 onFileSelected(event:any){
   const file = event.target.files[0];
@@ -615,6 +605,10 @@ onFileSelected(event:any){
 
 
   
+
+
+
+
 
  
 

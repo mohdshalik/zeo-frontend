@@ -69,73 +69,88 @@
                                 </div>
                               </div>
 
-                                  
-                      <div class="col-md-6">
-                        <label>Gl Code</label>
-                        <input type="text" class="form-control" required [(ngModel)]="glcode" placeholder="Enter glcode "
-                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !glcode}">
-                        <div *ngIf="registerButtonClicked && !glcode" class="error-message">glcode  is required.</div>
-                      </div>
+                              <div class="col-md-6">
+                                <label>Code</label>
+                                <input type="text" class="form-control" required [(ngModel)]="code" placeholder="Enter code "
+                                       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !code}">
+                                <div *ngIf="registerButtonClicked && !code" class="error-message">code  is required.</div>
+                              </div>      
+              
                   
                       <div class="col-md-12">
                         <label>Description</label>
                         <textarea class="form-control" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
                       </div>
+
+                 
+
+                      <div class="col-md-4">
+                        <label></label>
+                        <div class="check-box-selection-sec form-control mt-2">
+                            <div class="mat-set">
+                               <mat-checkbox [(ngModel)]="unpaid_leave" [ngModelOptions]="{standalone: true}">
+                                Unpaid leave</mat-checkbox>
+                            </div>
+                           
+                        </div>
+
+
                       
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                        <!-- <mat-checkbox [(ngModel)]="is_ess">Is_Ess User</mat-checkbox> -->
-                        <mat-checkbox [(ngModel)]="is_fixed" [ngModelOptions]="{standalone: true}">Is Fixed</mat-checkbox>
-                        <!-- <mat-checkbox [(ngModel)]="is_staff">Is_Staff</mat-checkbox> -->
                     </div>
-                   
-                </div>
-            </div>
 
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                       <mat-checkbox [(ngModel)]="affected_by_unpaid_leave" [ngModelOptions]="{standalone: true}">
-                        Affected by unpaid leave</mat-checkbox>
+                    <div class="col-md-4">
+                      <label></label>
+                      <div class="check-box-selection-sec form-control  mt-2">
+                          <div class="mat-set">
+                              <mat-checkbox [(ngModel)]="is_fixed" [ngModelOptions]="{standalone: true}">Is Fixed</mat-checkbox>
+                          </div>
+                         
+                      </div>
                     </div>
-                   
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                       <mat-checkbox [(ngModel)]="affected_by_halfpaid_leave" [ngModelOptions]="{standalone: true}">
-                        Affected by halfpaid leave</mat-checkbox>
-                    </div>
-                   
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                       <mat-checkbox [(ngModel)]="prorata_calculation" [ngModelOptions]="{standalone: true}">
-                        Prorata calculation</mat-checkbox>
-                    </div>
-                   
-                </div>
-            </div>
+                      
+            
 
-            <div class="col-md-4">
-                <label></label>
-                <div class="check-box-selection-sec mt-2">
-                    <div class="mat-set">
-                       <mat-checkbox [(ngModel)]="is_emi_deduction" [ngModelOptions]="{standalone: true}">
-                        Is emi deduction</mat-checkbox>
-                    </div>
-                   
-                </div>
-            </div>
+            <div class="calculator-container mt-4"  *ngIf="!is_fixed">
 
+                      
+              <div class="calculator">
+
+            
+              
+              
+                <!-- Textarea for payroll formula -->
+                <label>Formula Text</label>
+
+                <textarea class="form-control display " [(ngModel)]="formula"
+                  [ngModelOptions]="{standalone: true}" readonly></textarea>
+            
+                <!-- Buttons Grid -->
+                <div class="buttons-grid">
+                  <!-- Salary Components List -->
+                  <button type="button" *ngFor="let component of Salarycomponent" 
+                    class="btn btn-primary component-btn" 
+                    (click)="insertIntoTextarea(component.code)">
+                    {{ component.code }}
+                  </button>
+            
+                  <!-- Operator Buttons -->
+                  <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('+')">+</button>
+                  <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('-')">-</button>
+                  <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('%')">%</button>
+                  <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('*')">x</button>
+
+                  <button type="button" class="btn btn-danger operator" (click)="clearTextarea()">C</button>
+                  <button type="button" class="btn btn-warning operator" (click)="deleteLastCharacter()">
+                    <i class="fa-solid fa-delete-left"></i>
+                  </button>
+                  <!-- <button class="btn btn-success operator" (click)="calculateResult()">=</button> -->
+                </div>
+              </div>
+            </div>
+            
+        
+
+        
 
                             </div>
                             <div class="row" *ngIf="hasAddPermission">
@@ -168,6 +183,7 @@
                     <th>Component Type</th>
                     <th>Code</th>
                     <th>Is Fixed</th>
+                    <th>Formula</th>
                     <th>Description</th>
 
     
@@ -181,6 +197,8 @@
                     <td>{{ docs.component_type }}</td>
                     <td>{{ docs.code }}</td>
                     <td>{{ docs.is_fixed }}</td>
+                    <td>{{ docs.formula }}</td>
+
                     <td>{{ docs.description }}</td>
                   
     
@@ -199,15 +217,32 @@
 
                         <div class="row">
                          
-
-                                  
-                      <div class="col-md-6">
-                        <label>Amount</label>
-                        <input type="text" class="form-control" required [(ngModel)]="amount" placeholder="Enter  amount"
-                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !amount}">
-                        <div *ngIf="registerButtonClicked && !amount" class="error-message"> amount is required.</div>
-                      </div>
-                  
+                          <div class="col-md-6">
+                            <label>Salary Component</label>
+                            <div class="custom-sel">
+                              <select class="form-control" id="component" name="component"
+                                      [(ngModel)]="component" 
+                                      [ngModelOptions]="{standalone: true}" 
+                                      (change)="onComponentChange()">
+                                <option *ngFor="let component of Salarycomponent" [value]="component.id">
+                                  {{ component.name }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          
+                          <!-- Amount Field (Only Visible if is_fixed === true) -->
+                          <div class="col-md-6" *ngIf="selectedComponent?.is_fixed">
+                            <label>Amount</label>
+                            <input type="text" class="form-control" required [(ngModel)]="amount"
+                                   placeholder="Enter amount"
+                                   [ngModelOptions]="{standalone: true}" 
+                                   [ngClass]="{'error-field': registerButtonClicked && !amount}">
+                            <div *ngIf="registerButtonClicked && !amount" class="error-message">
+                              Amount is required.
+                            </div>
+                          </div>
+                          
                  
                       <div class="col-md-6">
                         <label>Employee</label>
@@ -218,14 +253,7 @@
                         </div>
                       </div>
 
-                      <div class="col-md-6">
-                        <label>Salary Component</label>
-                        <div class="custom-sel">
-                          <select class="form-control" id="component" name="component" [(ngModel)]="component" [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let component of Salarycomponent" [value]="component.id">{{ component.name }}</option>
-                          </select>
-                        </div>
-                      </div>
+                    
 
                       <div class="col-md-4">
                         <label></label>

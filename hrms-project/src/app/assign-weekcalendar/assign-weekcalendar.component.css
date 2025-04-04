@@ -212,3 +212,45 @@ input:focus-visible {
   padding: 4px 7px;
   height: 35px;
 }
+
+
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-input {
+  width: 0;
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  transition: width 0.4s ease-in-out;
+  opacity: 0;
+  z-index: 0;
+}
+
+.search-input.expanded {
+  width: 300px; /* Adjust width as needed */
+  opacity: 1;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: -40px;
+  border-radius: 100%;
+  background: #5c1e81;
+  width: 35px;
+  height: 35px;
+  z-index: 10;
+}
+
+.search-btn i {
+  color: #ffffff;
+}
