@@ -51,6 +51,7 @@ export class SettingsComponent {
   hasViewPermissiongenreport:boolean = false;
   hasViewPermissionLeavereport:boolean = false;
 
+  stateLabel: string = ''; // Default value
 
 
 
@@ -85,6 +86,14 @@ if (this.userId !== null) {
       // Check if user is_superuser is true or false
       let isSuperuser = this.userDetails.is_superuser || false; // Default to false if is_superuser is undefined
       const selectedSchema = this.authService.getSelectedSchema();
+      console.log('schemaname',selectedSchema);
+
+      const selectedStateLabel = localStorage.getItem('selectedSchemaStateLabel');
+      console.log("Retrieved state label:", selectedStateLabel);
+
+      this.stateLabel = selectedStateLabel ? selectedStateLabel : '';
+
+
       if (!selectedSchema) {
         console.error('No schema selected.');
         return;

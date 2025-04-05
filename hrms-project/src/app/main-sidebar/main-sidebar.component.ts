@@ -69,7 +69,8 @@ export class MainSidebarComponent {
     const selectedSchema = this.authService.getSelectedSchema();
     const selectedSchemaId = this.authService.getSelectedSchemaId();
 
-
+    const selectedStateLabel = localStorage.getItem('selectedSchemaStateLabel');
+    console.log("Retrieved state label:", selectedStateLabel);
     
 
     if (selectedSchema && selectedSchemaId) {

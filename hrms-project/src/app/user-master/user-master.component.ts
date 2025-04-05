@@ -289,6 +289,8 @@ if (this.userId !== null) {
         this.UserMasterService.markUserAsDeleted(userId).subscribe(
           () => {
             console.log('User marked as deleted:', userId);
+            window.location.reload();
+
             // Update the local list to hide the user
             this.Users = this.Users.map(employee => {
               if (employee.id === userId) {
@@ -331,6 +333,8 @@ if (this.userId !== null) {
   // show div with selected user details
 
 
+
+  
 
   showEmployeeDetails(employeeId: number, companysec: any): void {
     this.UserMasterService.getEmployeeDetails(employeeId).subscribe(

@@ -120,13 +120,17 @@ export class SchemaSelectionComponent {
       }
   
       const selectedSchemaId = selectedSchema.id;
+      const selectedStateLabel = selectedSchema.state_label; // Get the state_label
       console.log("Selected schema ID:", selectedSchemaId);
+      console.log("Selected state label:", selectedStateLabel);
+     
       this.isLoading = true;
   
       // Store the selected schema name and ID in localStorage
       localStorage.setItem('selectedSchema', selectedSchemaName);
       localStorage.setItem('selectedSchemaId', selectedSchemaId.toString());
-  
+      localStorage.setItem('selectedSchemaStateLabel', selectedStateLabel); // Store state_label
+
       // Update the component state
       this.selectedSchema = selectedSchemaName;
   

@@ -3,17 +3,17 @@
         <div class="com_list " *ngIf="hasAddPermission">
     <div class="cpm-sec">
 
-        <h2>Create State</h2><hr>
+        <h2>Create {{ stateLabel }}</h2><hr>
 
         <form >
         <div class="row">
             <div class="col-md-6" >
                
-      <label>State Name</label>
-     <input type="text"  class="form-control" required  [(ngModel)]="state_name"  placeholder="Enter State Name"
+      <label>{{ stateLabel }} Name</label>
+     <input type="text"  class="form-control" required  [(ngModel)]="state_name"  placeholder="Enter {{ stateLabel }} Name"
       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !state_name}">
      
-     <div *ngIf="registerButtonClicked && !state_name" class="error-message">State Name is required.</div>
+     <div *ngIf="registerButtonClicked && !state_name" class="error-message">{{ stateLabel }} Name is required.</div>
 </div>
 
 

@@ -48,7 +48,7 @@
                         <!-- <h3 style="color: #714b67">Front End Developer</h3> -->
 
 
-                        <h2>User Name: {{Companies.username}}</h2><hr>
+                        <h2 >User Name: {{Companies.username}}</h2><hr>
                     </div>
                 </div>
 
@@ -84,10 +84,12 @@
                     <div class="col-md-4">
                         <h2 style="color: black;">User Details</h2><hr>
                         <h2>Company</h2>
-                        <h2 style="margin-top: 0px;color: black;"> {{Companies.tenants}}</h2>
+                        <h2 style="margin-top: 0px;color: black;"> {{ Companies.allocated_tenants?.[0]?.schema_name }}</h2>
 
                         <h2>Group Permissions</h2>
                         <!-- <h2 style="margin-top: 0px;color: black;">Manager </h2> -->
+                                                 <h2 style="margin-top: 0px;color: black;"> {{ Companies.user_groups }}</h2>
+
                     </div>
                 </div>
                 </div>

@@ -4785,7 +4785,7 @@ showLeaves(): void{
 }
 
 
-onSubmit(): void {
+createGroup(): void {
   const selectedSchema = localStorage.getItem('selectedSchema');
   
   if (!selectedSchema) {
@@ -4825,7 +4825,6 @@ onSubmit(): void {
     this.ref.close('Closed using function');
     (window as any).location.reload();
   
-
     
   }
 }

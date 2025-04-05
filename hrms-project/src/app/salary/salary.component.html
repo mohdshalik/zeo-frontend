@@ -52,13 +52,13 @@
                     <form (ngSubmit)="RegisterSalaryComponent()" enctype="multipart/form-data">
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label> Component Name</label>
                                 <input type="text" class="form-control" required [(ngModel)]="name" placeholder="Enter  name"
                                 [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
                          <div *ngIf="registerButtonClicked && !name" class="error-message"> name is required.</div>
                             </div>
-                            <div class="col-md-6" >
+                            <div class="col-md-4" >
                                 <label>Component Type</label>
                                 <div class="custom-sel">
                                   <select class="form-control" id="component_type" name="component_type" [(ngModel)]="component_type" [ngModelOptions]="{standalone: true}">
@@ -69,7 +69,7 @@
                                 </div>
                               </div>
 
-                              <div class="col-md-6">
+                              <div class="col-md-4">
                                 <label>Code</label>
                                 <input type="text" class="form-control" required [(ngModel)]="code" placeholder="Enter code "
                                        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !code}">
@@ -110,44 +110,40 @@
                       
             
 
-            <div class="calculator-container mt-4"  *ngIf="!is_fixed">
-
-                      
-              <div class="calculator">
-
-            
-              
-              
-                <!-- Textarea for payroll formula -->
-                <label>Formula Text</label>
-
-                <textarea class="form-control display " [(ngModel)]="formula"
-                  [ngModelOptions]="{standalone: true}" readonly></textarea>
-            
-                <!-- Buttons Grid -->
-                <div class="buttons-grid">
-                  <!-- Salary Components List -->
-                  <button type="button" *ngFor="let component of Salarycomponent" 
-                    class="btn btn-primary component-btn" 
-                    (click)="insertIntoTextarea(component.code)">
-                    {{ component.code }}
-                  </button>
-            
-                  <!-- Operator Buttons -->
-                  <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('+')">+</button>
-                  <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('-')">-</button>
-                  <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('%')">%</button>
-                  <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('*')">x</button>
-
-                  <button type="button" class="btn btn-danger operator" (click)="clearTextarea()">C</button>
-                  <button type="button" class="btn btn-warning operator" (click)="deleteLastCharacter()">
-                    <i class="fa-solid fa-delete-left"></i>
-                  </button>
-                  <!-- <button class="btn btn-success operator" (click)="calculateResult()">=</button> -->
-                </div>
-              </div>
-            </div>
-            
+                    <div class="calculator-container mt-4" *ngIf="!is_fixed">
+                      <div class="calculator">
+                        <!-- Textarea for payroll formula -->
+                        <label>Formula Text</label>
+                        <textarea class="form-control display" [(ngModel)]="formula" [ngModelOptions]="{standalone: true}" readonly></textarea>
+                    
+                        <!-- Buttons Grid -->
+                        <div class="buttons-grid">
+                          <!-- Salary Components List -->
+                          <button type="button" *ngFor="let component of Salarycomponent" 
+                            class="btn btn-primary component-btn" 
+                            (click)="insertIntoTextarea(component.code)">
+                            {{ component.code }}
+                          </button>
+                    
+                          <!-- Number Buttons (0-9) -->
+                          <button type="button" class="btn btn-dark number" *ngFor="let num of numbers" (click)="insertIntoTextarea(num)">
+                            {{ num }}
+                          </button>
+                    
+                          <!-- Operator Buttons -->
+                          <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('+')">+</button>
+                          <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('-')">-</button>
+                          <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('%')">%</button>
+                          <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('*')">x</button>
+                    
+                          <button type="button" class="btn btn-danger operator" (click)="clearTextarea()">C</button>
+                          <button type="button" class="btn btn-warning operator" (click)="deleteLastCharacter()">
+                            <i class="fa-solid fa-delete-left"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    
         
 
         

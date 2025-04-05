@@ -226,7 +226,14 @@ export class UserMasterService {
 
 
   updateCategory(departmentId: number, categoryData: any): Observable<any> {
-    const url = `${this.baseUrl}/Role-Grouping/${departmentId}/`;
+
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+
+    const url = `${this.apiUrl}/organisation/api/Group/${departmentId}/?schema=${selectedSchema}`;
     return this.http.put(url, categoryData);
   }
 
