@@ -56,6 +56,7 @@ export class UserDetailsComponent {
           (details) => {
             this.Companies = details;
             // this.cdr.detectChanges(); // Manually trigger change detection
+            
   
           },
           (error) => {
@@ -95,31 +96,31 @@ onCheckboxChange(employee:number) {
   // You can add any additional logic if needed.
 }
 
-deleteSelectedEmployees() { 
-  const selectedEmployeeIds = this.Users
-    .filter(employee => employee.selected)
-    .map(employee => employee.id);
+// deleteSelectedEmployees() { 
+//   const selectedEmployeeIds = this.Users
+//     .filter(employee => employee.selected)
+//     .map(employee => employee.id);
 
-  if (selectedEmployeeIds.length === 0) {
-    alert('No employees selected for deletion.');
-    return;
-  }
+//   if (selectedEmployeeIds.length === 0) {
+//     alert('No employees selected for deletion.');
+//     return;
+//   }
 
-  if (confirm('Are you sure you want to delete the selected employees?')) {
-    selectedEmployeeIds.forEach(DeptId => {
-      this.UserMasterService.deleteUser(DeptId).subscribe(
-        () => {
-          console.log('User deleted successfully:', DeptId);
-          // Remove the deleted employee from the local list
-          this.Users = this.Users.filter(employee => employee.id !== DeptId);
-        },
-        (error) => {
-          console.error('Error deleting employee:', error);
-        }
-      );
-    });
-  }
-}
+//   if (confirm('Are you sure you want to delete the selected employees?')) {
+//     selectedEmployeeIds.forEach(DeptId => {
+//       this.UserMasterService.deleteUser(DeptId).subscribe(
+//         () => {
+//           console.log('User deleted successfully:', DeptId);
+//           // Remove the deleted employee from the local list
+//           this.Users = this.Users.filter(employee => employee.id !== DeptId);
+//         },
+//         (error) => {
+//           console.error('Error deleting employee:', error);
+//         }
+//       );
+//     });
+//   }
+// }
 
 
 openEditEmpPopuss(employeeId: number, ):void{
@@ -134,6 +135,40 @@ openEditEmpPopuss(employeeId: number, ):void{
     console.log('The dialog was closed');
   });
 }
+
+
+ deleteSelectedEmployees() {
+    const selectedEmployeeIds = this.Users.filter(employee => employee.selected).map(employee => employee.id);
+  
+    if (selectedEmployeeIds.length === 0) {
+      alert('No user selected for deletion.');
+      return;
+    }
+  
+    if (confirm('Are you sure you want to delete the selected user?')) {
+      selectedEmployeeIds.forEach(userId => {
+        this.UserMasterService.markUserAsDeleted(userId).subscribe(
+          () => {
+            console.log('User marked as deleted:', userId);
+            window.location.reload();
+
+            // Update the local list to hide the user
+            this.Users = this.Users.map(employee => {
+              if (employee.id === userId) {
+                return { ...employee, is_deleted: true }; // Mark as deleted locally
+              }
+              return employee;
+            });
+            // window.location.reload();
+
+          },
+          (error) => {
+            console.error('Error marking user as deleted:', error);
+          }
+        );
+      });
+    }
+  }
 
 
 showEditBtn: boolean = false;
