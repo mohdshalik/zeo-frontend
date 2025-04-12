@@ -37,6 +37,7 @@ export class SettingsComponent {
   hasViewPermissionEmtemp : boolean = false;
   hasViewPermissionCmp : boolean = false;
 
+  hasViewPermissionLeaveEmtemp : boolean = false;
 
 
 
@@ -45,6 +46,8 @@ export class SettingsComponent {
   hasViewWeekAssgn: boolean = false;
   hasViewHoly: boolean = false;
   hasViewHolyAssgn : boolean = false;
+
+    hasViewShift : boolean = false;
 
   hasViewPermissionempreport:boolean = false;
   hasViewPermissiondocreport:boolean = false;
@@ -115,6 +118,7 @@ if (this.userId !== null) {
         this.hasViewPermissionFormdes = true;
         this.hasViewPermissionEmtemp = true;
         this.hasViewPermissionCmp = true;
+        this.hasViewPermissionLeaveEmtemp = true;
 
 
 
@@ -123,6 +127,7 @@ if (this.userId !== null) {
         this.hasViewWeekAssgn = true;
         this.hasViewHoly = true;
         this.hasViewHolyAssgn = true;
+        this.hasViewShift = true;
 
 
         this.hasViewPermissionempreport = true;
@@ -167,6 +172,7 @@ if (this.userId !== null) {
                 this.hasViewPermissionFormdes = true;
                 this.hasViewPermissionEmtemp = true;
                 this.hasViewPermissionCmp = true;
+                this.hasViewPermissionLeaveEmtemp = true;
 
 
 
@@ -175,6 +181,8 @@ if (this.userId !== null) {
                 this.hasViewWeekAssgn = true;
                 this.hasViewHoly = true;
                 this.hasViewHolyAssgn = true;
+                this.hasViewShift = true;
+
 
 
                 this.hasViewPermissionempreport = true;
@@ -224,7 +232,8 @@ if (this.userId !== null) {
                     this.hasViewPermissionCmp = this.checkGroupPermission('view_companypolicy', groupPermissions);
                     console.log('Has view permission:', this.hasViewPermissionCmp);
                   
-                  
+                    this.hasViewPermissionLeaveEmtemp = this.checkGroupPermission('view_lvemailtemplate', groupPermissions);
+                    console.log('Has view permission:', this.hasViewPermissionLeaveEmtemp);
                    
                    
                    
@@ -240,7 +249,8 @@ if (this.userId !== null) {
                     this.hasViewHolyAssgn = this.checkGroupPermission('view_assign_holiday', groupPermissions);
                     console.log('Has view permission:', this.hasViewHolyAssgn);
                   
-                  
+                    this.hasViewShift = this.checkGroupPermission('view_shift', groupPermissions);
+                    console.log('Has view permission:', this.hasViewShift);
                   
                     this.hasViewPermissionempreport = this.checkGroupPermission('view_report', groupPermissions);
                    console.log('Has view permission:', this.hasViewPermissionempreport);

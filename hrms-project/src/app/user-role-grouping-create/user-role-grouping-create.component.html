@@ -307,7 +307,78 @@
                   </div>
                 </div>
 
-            
+                <div class="row">
+                  <div class="col-md-3">
+                    <mat-checkbox [(ngModel)]="SalMasterChecked" 
+                              [indeterminate]="isSalMasterIndeterminate()" 
+
+                                  (change)="onSalMasterChange()" 
+                                  [ngModelOptions]="{standalone: true}">
+                    Salary Master
+                    </mat-checkbox>
+                  </div>
+                  <div class="col-md-9">
+
+
+                    
+                    <div class="selection_checkmark_sec">
+                      <div class="all_selection_Sec">
+                        <div class="row">
+                          <div class="col-md-3" *ngFor="let permission of GrouppermissionsSal">
+                            <mat-checkbox [value]="permission.id" 
+                                          (change)="onCheckboxChangeSal(permission.id)" 
+                                          [checked]="selectedPermissions.includes(permission.id)">
+                              {{ getDisplayNameSal(permission.codename) }}
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-3">
+                    <mat-checkbox [(ngModel)]="PayMasterChecked" 
+                              [indeterminate]="isPayMasterIndeterminate()" 
+
+                                  (change)="onPayMasterChange()" 
+                                  [ngModelOptions]="{standalone: true}">
+                    Payroll Master
+                    </mat-checkbox>
+                  </div>
+                  <div class="col-md-9">
+
+
+                    
+                    <div class="selection_checkmark_sec">
+                      <div class="all_selection_Sec">
+                        <div class="row">
+                          <div class="col-md-3" *ngFor="let permission of GrouppermissionsPay">
+                            <mat-checkbox [value]="permission.id" 
+                                          (change)="onCheckboxChangePay(permission.id)" 
+                                          [checked]="selectedPermissions.includes(permission.id)">
+                              {{ getDisplayNamePay(permission.codename) }}
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <!-- Setting Modules start here -->
+
              
                 <div class="row mt-3">
        
@@ -829,6 +900,61 @@
                           </div>
           
                       </div>
+
+
+                      <!-- <div class="col-md-3">
+                        <span class=""><mat-checkbox [(ngModel)]="DeptReportChecked"
+                          [indeterminate]="isDeptReportIndeterminate()" 
+                           (change)="onDeptReportChange()"
+                            [ngModelOptions]="{standalone: true}" >
+                            Department  Report
+                        </mat-checkbox> </span><br>
+      
+                    </div>
+      
+                    <div class="col-md-9">
+                        <div class="selection_checkmark_sec">
+                            <div class="all_selection_Sec">
+                                <div class="row">
+                                    <div class="col-md-2" *ngFor="let permission of GrouppermissiionsDeptReport">
+                                        <h2> <span> <mat-checkbox [value]="permission.id" 
+                                          (change)="onCheckboxChangesDeptReport(permission.id)" 
+                                          [checked]="selectedPermissions.includes(permission.id)" > {{ getDisplayNameDeptReport(permission.codename) }} </mat-checkbox> </span> </h2>
+                                      </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+        
+                    </div>
+
+                    <div class="col-md-3">
+                      <span class=""><mat-checkbox [(ngModel)]="DesReportChecked"
+                        [indeterminate]="isDesReportIndeterminate()" 
+                         (change)="onDesReportChange()"
+                          [ngModelOptions]="{standalone: true}" >
+                          Designation  Report
+                      </mat-checkbox> </span><br>
+    
+                  </div>
+    
+                  <div class="col-md-9">
+                      <div class="selection_checkmark_sec">
+                          <div class="all_selection_Sec">
+                              <div class="row">
+                                  <div class="col-md-2" *ngFor="let permission of GrouppermissiionsDesReport">
+                                      <h2> <span> <mat-checkbox [value]="permission.id" 
+                                        (change)="onCheckboxChangesDesReport(permission.id)" 
+                                        [checked]="selectedPermissions.includes(permission.id)" > {{ getDisplayNameDesReport(permission.codename) }} </mat-checkbox> </span> </h2>
+                                    </div>
+                                  
+                              </div>
+                          </div>
+                      </div>
+      
+                  </div>
+                 -->
+                  
                     
         
                       <div class="col-md-3">
@@ -1026,6 +1152,34 @@
                     </div>
                 
                
+
+                    <div class="col-md-3">
+                      <span class=""><mat-checkbox [(ngModel)]="ShiftChecked"
+                        [indeterminate]="isShiftIndeterminate()" 
+                         (change)="onShiftChange()"
+                          [ngModelOptions]="{standalone: true}" >
+                         Shift Allocation
+                      </mat-checkbox> </span><br>
+    
+                  </div>
+    
+                  <div class="col-md-9">
+                      <div class="selection_checkmark_sec">
+                          <div class="all_selection_Sec">
+                              <div class="row">
+                                  <div class="col-md-2" *ngFor="let permission of GrouppermissionsShift">
+                                      <h2> <span> <mat-checkbox [value]="permission.id" 
+                                        (change)="onCheckboxChangesShift(permission.id)" 
+                                        [checked]="selectedPermissions.includes(permission.id)" >
+                                         {{ getDisplayNameShiftDetail(permission.codename) }} </mat-checkbox> </span> </h2>
+                                    </div>
+                                  
+                              </div>
+                          </div>
+                      </div>
+      
+                  </div>
+              
              
                 
        

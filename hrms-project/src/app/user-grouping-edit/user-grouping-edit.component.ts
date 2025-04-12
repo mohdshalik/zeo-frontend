@@ -21,6 +21,14 @@ export class UserGroupingEditComponent {
 
   Departments: any[] = [];
 
+
+    //creating group name declared variables.
+ 
+   groupName: string = '';
+   codename:string ='';
+   profile:string ='';
+   selectedPermissions: any[] = [];
+
   registerButtonClicked :boolean = false;
 
   selectedDeparmentsecId:any | undefined;
@@ -28,590 +36,638 @@ export class UserGroupingEditComponent {
   selecteddepartmentId: number | undefined;
 
 
-   // permissions stored arrays for employeemaster
-  
-   GrouppermissionsEmp: any[] = [];
-   GrouppermissionsDept: any[] = [];
-   GrouppermissionsDis: any[] = [];
-   GrouppermissionsCat: any[] = [];
-   GrouppermissionsGen: any[] = [];
-   GrouppermissionsReqtype: any[] = [];
-   GrouppermissionsApr: any[] = [];
-   GrouppermissionsAprlvl: any[] = [];
-   GrouppermissionsAtd: any[] = [];
- 
- 
- 
- 
- 
- 
-   // permissions stored arrays for settings
- 
-   GrouppermissionsCmp: any[] = [];
-   GrouppermissionsBrch: any[] = [];
-   GrouppermissionsUser: any[] = [];
-   GrouppermissionsUsergroup: any[] = [];
-   GrouppermissionsassigneddUser: any[] = [];
-   GrouppermissionsstateMaster: any[] = [];
-   Grouppermissionsdocumentype: any[] = [];
-   Grouppermissionsexpirydocuments: any[] = [];
-   GrouppermissionslocationMaster: any[] = [];
-   GrouppermissionsDnMaster: any[] = [];
-   GrouppermissionsCpMaster: any[] = [];
-   GrouppermissionsEmtMaster: any[] = [];
- 
-   GrouppermissionsFormdesMaster: any[] = [];
- 
- 
- 
-     // permissions stored arrays for reports
- 
-   GrouppermissionsemployeeReport: any[] = [];
-   GrouppermissionsdocumnetReport: any[] =[];
-   GrouppermissiionsgeneralReport: any[]=[];
-   GrouppermissiionsLeaveReport: any[]=[];
- 
- 
- 
- 
-   // permissions stored arrays for calendar
- 
-   Grouppermissionsaddweek:any[] =[];
-   Grouppermisionsassignweek:any[]=[];
-   Grouppermissionsaddholiday: any[]=[];
-   Grouppermissionsassisgnholiday:any[]=[];
- 
- 
- 
-   //permission stored arrays for leaves
-   GrouppermissionsLeaveaprv:any[] =[];
-   GrouppermissionsLeavetype:any[] =[];
-   GrouppermissionsLeavemaster:any[] =[];
-   GrouppermissionsLeavereq:any[] =[];
-   GrouppermissionsLeavecom:any[] =[];
- 
-   GrouppermissionsLeaveaprvlvl:any[] =[];
- 
-   GrouppermissionsLeaveaprvlvltemp:any[] =[];
- 
- 
-   //creating group name declared variables.
- 
-   groupName: string = '';
-   codename:string ='';
-   profile:string ='';
-   selectedPermissions: any[] = [];
- 
- 
- 
- //selected employee master checkboxes.
-   employeeMasterIndeterminate = false;
-   departmentMasterInderminate= false;
-   designationMasterInderminate = false;
-   categoryMasterInderminate = false;
-   GenMasterInderminate = false;
-   ReqtypeMasterInderminate = false;
-   AprMasterInderminate = false;
-   AprlvlMasterInderminate = false;
-   AtdMasterInderminate = false;
- 
- 
- 
- 
- 
- 
- 
-   //selected settings checkboxes.
- 
-   branchMasterInderminate = false;
-   userMasterInderminate = false;
-   userGroupMasterInderminate= false;
-   assignMasterInderminate= false;
-   stateMasterInderminate= false;
-   documentMasterInderminate= false;
-   expiredMasterInderminate= false;
-   locationMasterInderminate= false;
-   DnMasterInderminate= false;
-   CpMasterInderminate= false;
-   EmtMasterInderminate= false;
- 
-   FormdesMasterInderminate= false;
- 
- 
- 
-   //selected reports checkboxes/
- 
-   emportReportInderminate= false;
-   documentReportInderminate = false;
-   generalReportInderminate= false;
-   LeaveReportInderminate= false;
- 
- 
-   //selected calendars checkboxes.
- 
-   calenderdetailInderminate= false;
- 
-   addweekInderminate=false;
-   assignweekInderminate= false;
-   addholidayInderminate= false;
-   assignholidayInderminate= false;
- 
- 
- 
- 
- 
-   //selected leave checkboxes.
- 
-   LeavedetailInderminate= false;
- 
- 
-   LeaveaprvInderminate=false;
-   LeavetypeInderminate=false;
-   LeavemasterInderminate=false;
-   LeavereqInderminate=false;
-   LeavecomInderminate=false;
-   LeaveaprvlvlInderminate=false;
-   LeaveaprvlvltempInderminate=false;
- 
- 
- 
- 
- 
- 
- 
-   // Add these lines
- 
- 
-   //employeemaster checkbox checked values
-   employeeMasterChecked: boolean = false;
-   departmentMasterChecked: boolean = false;
-   designationMasterChecked: boolean = false;
-   categoryMasterChecked: boolean = false;
-   GenMasterChecked: boolean = false;
-   ReqtypeMasterChecked: boolean = false;
-   AprMasterChecked: boolean = false;
-   AprlvlMasterChecked: boolean = false;
-   AtdMasterChecked: boolean = false;
- 
- 
- 
- 
- 
- 
- 
-   //settings checkbox checked values
- 
-   companyMasterChecked: boolean = false;
-   branchMasterChecked: boolean = false;
-   userMasterChecked: boolean = false;
-   usergroupingMasterChecked: boolean = false;
-   assignpermissionMasterChecked: boolean =false;
-   stationMasterChecked:boolean =false;
-   documenttypeMasterChecked:boolean = false;
-   expireddocumnetsMasterChecked:boolean = false;
-   locationMasterChecked:boolean = false;
-   DnMasterChecked:boolean = false;
-   CpMasterChecked:boolean = false;
-   EmtMasterChecked:boolean = false;
- 
-   FormdesMasterChecked:boolean = false;
- 
- 
- 
    
-   //Reports checkbox checked values
- 
-   emportReportChecked:boolean = false;
-   documentReportChecked:boolean = false;
-   generelReportChecked:boolean = false;
-   LeaveReportChecked:boolean = false;
- 
-   
-   
-   //Calendars checkbox checked values
- 
-   addweekChecked:boolean= false;
-   assignweekChecked:boolean = false;
-   addholidayChecked:boolean= false;
-   assignholidayChecked:boolean = false;
- 
- 
- 
-     //Calendars checkbox checked values
-     LeaveaprvChecked:boolean= false;
-     LeavetypeChecked:boolean= false;
-     LeavemasterChecked:boolean= false;
-     LeavereqChecked:boolean= false;
-     LeavecomChecked:boolean= false;
-     LeaveaprvlvlChecked:boolean= false;
-     LeaveaprvlvltempChecked:boolean= false;
- 
-   
- 
- 
- // main headings values
- 
-   selectAllChecked: boolean = false;
-   settingsChecked: boolean = false;
-   reportchecked:boolean = false;
-   calenderchecked:boolean = false;
-   Leavechecked:boolean = false;
- 
- 
- 
- 
-   expandedMasters: boolean = true;
-   expandedMastersvalue: boolean = true;
-   reportMastersvalue:boolean =true;
-   calenderMastersvalue:boolean =true;
-   LeaveMastersvalue:boolean =true;
- 
-   // Add this property
-  //  registerButtonClicked: boolean = false;
- 
-   childCheckboxes = [
-     'branchMasterChecked',
-     'userMasterChecked',
-     'userGroupingMasterChecked',
-     'assignPermissionMasterChecked',
-     'stateMasterChecked',
-     'documentTypeMasterChecked',
-     'expiredDocumentsMasterChecked',
-     'locationMasterChecked'
-   ];
-   checkboxes = [
-     { label: 'Branch Master', checked: false },
-     { label: 'User Master', checked: false },
-     { label: 'User Grouping', checked: false },
-     { label: 'Assign Permission For User', checked: false },
-     { label: 'State Master', checked: false },
-     { label: 'Document Type', checked: false },
-     { label: 'Expired Documents', checked: false },
-     { label: 'Location Master', checked: false },
-   ];
-   // permissionNameMap: { [key: string]: string } = {
-   //   "Add_emp_master": "Add ",
-   //   "Change_emp_master": "Edit",
-   //   "Delete_emp_master": "Delete",
-   //   "View_emp_master": "View"
-   // };
-   
- 
-  
- 
- 
-   isEmployeeManagementMasterChecked(): boolean {
-     return this.employeeMasterChecked &&
-       this.departmentMasterChecked &&
-       this.designationMasterChecked &&
-       this.categoryMasterChecked &&
-       this.GenMasterChecked &&
-       this.ReqtypeMasterChecked &&
-       this.AprMasterChecked &&
-       this.AprlvlMasterChecked &&
-       this.AtdMasterChecked;
-   }
-   
-   isEmployeeMasterIndeterminate(): boolean {
-     const selectedEmpPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsEmp.map(p => p.id).includes(permission)
-     );
-     return selectedEmpPermissions.length > 0 && selectedEmpPermissions.length < this.GrouppermissionsEmp.length;
-   }
- 
-   isDepartmentMasterIndeterminate(): boolean {
-     const selectedDeptPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsDept.map(p => p.id).includes(permission)
-     );
-     return selectedDeptPermissions.length > 0 && selectedDeptPermissions.length < this.GrouppermissionsDept.length;
-   }
- 
-   isDesignationMasterIndeterminate(): boolean {
-     const selectedDisPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsDis.map(p => p.id).includes(permission)
-     );
-     return selectedDisPermissions.length > 0 && selectedDisPermissions.length < this.GrouppermissionsDis.length;
-   }
- 
-   isCategoryMasterIndeterminate(): boolean {
-     const selectedCatPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsCat.map(p => p.id).includes(permission)
-     );
-     return selectedCatPermissions.length > 0 && selectedCatPermissions.length < this.GrouppermissionsCat.length;
-   }
- 
-   isGenMasterIndeterminate(): boolean {
-     const selectedGenPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsGen.map(p => p.id).includes(permission)
-     );
-     return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsGen.length;
-   }
- 
-   isReqtypeMasterIndeterminate(): boolean {
-     const selectedGenPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsReqtype.map(p => p.id).includes(permission)
-     );
-     return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsReqtype.length;
-   }
- 
-   isAprMasterIndeterminate(): boolean {
-     const selectedGenPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsApr.map(p => p.id).includes(permission)
-     );
-     return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsApr.length;
-   }
-   isAprlvlMasterIndeterminate(): boolean {
-     const selectedGenPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsAprlvl.map(p => p.id).includes(permission)
-     );
-     return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsAprlvl.length;
-   }
- 
-   isAtdMasterIndeterminate(): boolean {
-     const selectedGenPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsAtd.map(p => p.id).includes(permission)
-     );
-     return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsAtd.length;
-   }
+  GrouppermissionsEmp: any[] = [];
+  GrouppermissionsDept: any[] = [];
+  GrouppermissionsDis: any[] = [];
+  GrouppermissionsCat: any[] = [];
+  GrouppermissionsGen: any[] = [];
+  GrouppermissionsReqtype: any[] = [];
+  GrouppermissionsApr: any[] = [];
+  GrouppermissionsAprlvl: any[] = [];
+  GrouppermissionsAtd: any[] = [];
+  GrouppermissionsSal: any[] = [];
+  GrouppermissionsPay: any[] = [];
+
+
+
+
+
+  // permissions stored arrays for settings
+
+  GrouppermissionsCmp: any[] = [];
+  GrouppermissionsBrch: any[] = [];
+  GrouppermissionsUser: any[] = [];
+  GrouppermissionsUsergroup: any[] = [];
+  GrouppermissionsassigneddUser: any[] = [];
+  GrouppermissionsstateMaster: any[] = [];
+  Grouppermissionsdocumentype: any[] = [];
+  Grouppermissionsexpirydocuments: any[] = [];
+  GrouppermissionslocationMaster: any[] = [];
+  GrouppermissionsDnMaster: any[] = [];
+  GrouppermissionsCpMaster: any[] = [];
+  GrouppermissionsEmtMaster: any[] = [];
+
+  GrouppermissionsFormdesMaster: any[] = [];
+
+
+
+    // permissions stored arrays for reports
+
+  GrouppermissionsemployeeReport: any[] = [];
+  GrouppermissionsdocumnetReport: any[] =[];
+  GrouppermissiionsgeneralReport: any[]=[];
+  GrouppermissiionsLeaveReport: any[]=[];
+  GrouppermissiionsDeptReport: any[]=[];
+
+  GrouppermissiionsDesReport: any[]=[];
+
+
+
+
+
+  // permissions stored arrays for calendar
+
+  Grouppermissionsaddweek:any[] =[];
+  Grouppermisionsassignweek:any[]=[];
+  Grouppermissionsaddholiday: any[]=[];
+  Grouppermissionsassisgnholiday:any[]=[];
+  GrouppermissionsShift:any[]=[];
+
+
+
+
+  //permission stored arrays for leaves
+  GrouppermissionsLeaveaprv:any[] =[];
+  GrouppermissionsLeavetype:any[] =[];
+  GrouppermissionsLeavemaster:any[] =[];
+  GrouppermissionsLeavereq:any[] =[];
+  GrouppermissionsLeavecom:any[] =[];
+
+  GrouppermissionsLeaveaprvlvl:any[] =[];
+
+  GrouppermissionsLeaveaprvlvltemp:any[] =[];
+
  
  
  
  
- 
- 
-   isSettingsMasterChecked(): boolean {
-     return this.branchMasterChecked &&
-       this.userMasterChecked &&
-       this.usergroupingMasterChecked &&
-       this.assignpermissionMasterChecked &&
-       this.stationMasterChecked &&
-       this.documenttypeMasterChecked &&
-       this.expireddocumnetsMasterChecked &&
-       this.locationMasterChecked &&
-       this.DnMasterChecked &&
-       this.CpMasterChecked &&
-       this.EmtMasterChecked &&
-       this.FormdesMasterChecked;
-   }
-   
-   
-    isBranchMasterIndeterminate(): boolean {
-     const selectedBranchPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsBrch.map(p => p.id).includes(permission)
-     );
-     return selectedBranchPermissions.length > 0 && selectedBranchPermissions.length < this.GrouppermissionsBrch.length;
-   }
-  
-   isUserMasterIndeterminate(): boolean {
-     const selectedUserMasterPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsUser.map(p => p.id).includes(permission)
-     );
-     return selectedUserMasterPermissions.length > 0 && selectedUserMasterPermissions.length < this.GrouppermissionsUser.length;
-   }
-   isUserGroupingIndeterminate(): boolean {
-     const selectedUserGroupPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsUsergroup.map(p => p.id).includes(permission)
-     );
-     return selectedUserGroupPermissions.length > 0 && selectedUserGroupPermissions.length < this.GrouppermissionsUsergroup.length;
-   }
-     isAssignPermissionsIndeterminate(): boolean {
-     const selectedAssignPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsassigneddUser.map(p => p.id).includes(permission)
-     );
-     return selectedAssignPermissions.length > 0 && selectedAssignPermissions.length < this.GrouppermissionsassigneddUser.length;
-   }
-     isStateMasterIndeterminate(): boolean {
-     const selectedstatePermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsstateMaster.map(p => p.id).includes(permission)
-     );
-     return selectedstatePermissions.length > 0 && selectedstatePermissions.length < this.GrouppermissionsstateMaster.length;
-   }
-       isdocumenttypeIndeterminate(): boolean {
-     const selecteddocumentPermissions = this.selectedPermissions.filter(permission =>
-       this.Grouppermissionsdocumentype.map(p => p.id).includes(permission)
-     );
-     return selecteddocumentPermissions.length > 0 && selecteddocumentPermissions.length < this.Grouppermissionsdocumentype.length;
-   }
-         isExpireddocumentsIndeterminate(): boolean {
-     const selectedexpiredPermissions = this.selectedPermissions.filter(permission =>
-       this.Grouppermissionsexpirydocuments.map(p => p.id).includes(permission)
-     );
-     return selectedexpiredPermissions.length > 0 && selectedexpiredPermissions.length < this.Grouppermissionsexpirydocuments.length;
-   }
-           isloactionmasterIndeterminate(): boolean {
-     const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionslocationMaster.map(p => p.id).includes(permission)
-     );
-     return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionslocationMaster.length;
-   }
-   
-   isDnmasterIndeterminate(): boolean {
-     const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsDnMaster.map(p => p.id).includes(permission)
-     );
-     return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsDnMaster.length;
-   }
- 
-   isCpmasterIndeterminate(): boolean {
-     const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsCpMaster.map(p => p.id).includes(permission)
-     );
-     return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsCpMaster.length;
-   }
-   isEmtmasterIndeterminate(): boolean {
-     const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsEmtMaster.map(p => p.id).includes(permission)
-     );
-     return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsEmtMaster.length;
-   }
-   isFormdesmasterIndeterminate(): boolean {
-     const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsFormdesMaster.map(p => p.id).includes(permission)
-     );
-     return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsFormdesMaster.length;
-   }
- 
- 
- 
-   
-   isReportManagementMasterChecked(): boolean {
-     return this.emportReportChecked &&
-       this.documentReportChecked &&
-       this.generelReportChecked  &&
-       this.LeaveReportChecked;
-       
-   }
-   
-   isEmployeeReportIndeterminate(): boolean {
-     const selectedempreportPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsemployeeReport.map(p => p.id).includes(permission)
-     );
-     return selectedempreportPermissions.length > 0 && selectedempreportPermissions.length < this.GrouppermissionsemployeeReport.length;
-   }
- 
-   isDocumentReportIndeterminate(): boolean {
-     const selecteddocreportPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsdocumnetReport.map(p => p.id).includes(permission)
-     );
-     return selecteddocreportPermissions.length > 0 && selecteddocreportPermissions.length < this.GrouppermissionsdocumnetReport.length;
-   }
- 
-   isGeneralReportIndeterminate(): boolean {
-     const selectedGenReportPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissiionsgeneralReport.map(p => p.id).includes(permission)
-     );
-     return selectedGenReportPermissions.length > 0 && selectedGenReportPermissions.length < this.GrouppermissiionsgeneralReport.length;
-   }
-   
- 
-   isLeaveReportIndeterminate(): boolean {
-     const selectedLeaveReportPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissiionsLeaveReport.map(p => p.id).includes(permission)
-     );
-     return selectedLeaveReportPermissions.length > 0 && selectedLeaveReportPermissions.length < this.GrouppermissiionsLeaveReport.length;
-   }
- 
- 
- 
- 
- 
- 
- 
-   isCalenderMangementMasterChecked():boolean{
-     return this.addweekChecked &&
-           this.assignweekChecked &&
-           this.addholidayChecked &&
-           this.assignholidayChecked 
-   }
- 
-   isAddWeekIndeterminate(): boolean {
-     const selectedaddweekPermissions = this.selectedPermissions.filter(permission =>
-       this.Grouppermissionsaddweek.map(p => p.id).includes(permission)
-     );
-     return selectedaddweekPermissions.length > 0 && selectedaddweekPermissions.length < this.Grouppermissionsaddweek.length;
-   }
-   isAssignWeekIndeterminate(): boolean {
-     const selectedassignweekPermissions = this.selectedPermissions.filter(permission =>
-       this.Grouppermisionsassignweek.map(p => p.id).includes(permission)
-     );
-     return selectedassignweekPermissions.length > 0 && selectedassignweekPermissions.length < this.Grouppermisionsassignweek.length;
-   }
-   isAddHolidayIndeterminate(): boolean {
-     const selectedaddholidayPermissions = this.selectedPermissions.filter(permission =>
-       this.Grouppermissionsaddholiday.map(p => p.id).includes(permission)
-     );
-     return selectedaddholidayPermissions.length > 0 && selectedaddholidayPermissions.length < this.Grouppermissionsaddholiday.length;
-   }
-   isAssignHolidayIndeterminate(): boolean {
-     const selectedassignholidayPermissions = this.selectedPermissions.filter(permission =>
-       this.Grouppermissionsassisgnholiday.map(p => p.id).includes(permission)
-     );
-     return selectedassignholidayPermissions.length > 0 && selectedassignholidayPermissions.length < this.Grouppermissionsassisgnholiday.length;
-   }
-  
- 
- 
- 
- 
-   isLeaveMangementMasterChecked():boolean{
-     return this.LeaveaprvChecked &&
-     this.LeavetypeChecked &&
-     this.LeavemasterChecked &&
-     this.LeavereqChecked &&
-     this.LeavecomChecked &&
-     this.LeaveaprvlvlChecked &&
-     this.LeaveaprvlvltempChecked
-        
-   }
- 
-   isLeaveaprvIndeterminate(): boolean {
-     const selectedLeaveaprvPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsLeaveaprv.map(p => p.id).includes(permission)
-     );
-     return selectedLeaveaprvPermissions.length > 0 && selectedLeaveaprvPermissions.length < this.GrouppermissionsLeaveaprv.length;
-   }
- 
-   isLeavetypeIndeterminate(): boolean {
-     const selectedLeavetypePermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsLeavetype.map(p => p.id).includes(permission)
-     );
-     return selectedLeavetypePermissions.length > 0 && selectedLeavetypePermissions.length < this.GrouppermissionsLeavetype.length;
-   }
- 
-   isLeavemasterIndeterminate(): boolean {
-     const selectedLeavemasterPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsLeavemaster.map(p => p.id).includes(permission)
-     );
-     return selectedLeavemasterPermissions.length > 0 && selectedLeavemasterPermissions.length < this.GrouppermissionsLeavemaster.length;
-   }
- 
-   isLeavereqIndeterminate(): boolean {
-     const selectedLeavereqPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsLeavereq.map(p => p.id).includes(permission)
-     );
-     return selectedLeavereqPermissions.length > 0 && selectedLeavereqPermissions.length < this.GrouppermissionsLeavereq.length;
-   }
- 
-   isLeavecomIndeterminate(): boolean {
-     const selectedLeavecomPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsLeavecom.map(p => p.id).includes(permission)
-     );
-     return selectedLeavecomPermissions.length > 0 && selectedLeavecomPermissions.length < this.GrouppermissionsLeavecom.length;
-   }
- 
-   isLeaveaprvlvlIndeterminate(): boolean {
-     const selectedLeaveaprvlvlPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsLeaveaprvlvl.map(p => p.id).includes(permission)
-     );
-     return selectedLeaveaprvlvlPermissions.length > 0 && selectedLeaveaprvlvlPermissions.length < this.GrouppermissionsLeaveaprvlvl.length;
-   }
- 
-   isLeaveaprvlvltempIndeterminate(): boolean {
-     const selectedLeaveaprvlvltempPermissions = this.selectedPermissions.filter(permission =>
-       this.GrouppermissionsLeaveaprvlvltemp.map(p => p.id).includes(permission)
-     );
-     return selectedLeaveaprvlvltempPermissions.length > 0 && selectedLeaveaprvlvltempPermissions.length < this.GrouppermissionsLeaveaprvlvltemp.length;
-   }
+
+//selected employee master checkboxes.
+employeeMasterIndeterminate = false;
+departmentMasterInderminate= false;
+designationMasterInderminate = false;
+categoryMasterInderminate = false;
+GenMasterInderminate = false;
+ReqtypeMasterInderminate = false;
+AprMasterInderminate = false;
+AprlvlMasterInderminate = false;
+AtdMasterInderminate = false;
+SalMasterInderminate = false;
+PayMasterInderminate = false;
+
+
+
+
+
+
+
+//selected settings checkboxes.
+
+branchMasterInderminate = false;
+userMasterInderminate = false;
+userGroupMasterInderminate= false;
+assignMasterInderminate= false;
+stateMasterInderminate= false;
+documentMasterInderminate= false;
+expiredMasterInderminate= false;
+locationMasterInderminate= false;
+DnMasterInderminate= false;
+CpMasterInderminate= false;
+EmtMasterInderminate= false;
+
+FormdesMasterInderminate= false;
+
+
+
+//selected reports checkboxes/
+
+emportReportInderminate= false;
+documentReportInderminate = false;
+generalReportInderminate= false;
+LeaveReportInderminate= false;
+DeptReportInderminate= false;
+DesReportInderminate= false;
+
+
+//selected calendars checkboxes.
+
+calenderdetailInderminate= false;
+
+addweekInderminate=false;
+assignweekInderminate= false;
+addholidayInderminate= false;
+assignholidayInderminate= false;
+ShiftInderminate= false;
+
+
+
+
+
+//selected leave checkboxes.
+
+LeavedetailInderminate= false;
+
+
+LeaveaprvInderminate=false;
+LeavetypeInderminate=false;
+LeavemasterInderminate=false;
+LeavereqInderminate=false;
+LeavecomInderminate=false;
+LeaveaprvlvlInderminate=false;
+LeaveaprvlvltempInderminate=false;
+
+
+
+
+
+
+
+// Add these lines
+
+
+//employeemaster checkbox checked values
+employeeMasterChecked: boolean = false;
+departmentMasterChecked: boolean = false;
+designationMasterChecked: boolean = false;
+categoryMasterChecked: boolean = false;
+GenMasterChecked: boolean = false;
+ReqtypeMasterChecked: boolean = false;
+AprMasterChecked: boolean = false;
+AprlvlMasterChecked: boolean = false;
+AtdMasterChecked: boolean = false;
+SalMasterChecked: boolean = false;
+PayMasterChecked: boolean = false;
+
+
+
+
+
+
+
+//settings checkbox checked values
+
+companyMasterChecked: boolean = false;
+branchMasterChecked: boolean = false;
+userMasterChecked: boolean = false;
+usergroupingMasterChecked: boolean = false;
+assignpermissionMasterChecked: boolean =false;
+stationMasterChecked:boolean =false;
+documenttypeMasterChecked:boolean = false;
+expireddocumnetsMasterChecked:boolean = false;
+locationMasterChecked:boolean = false;
+DnMasterChecked:boolean = false;
+CpMasterChecked:boolean = false;
+EmtMasterChecked:boolean = false;
+
+FormdesMasterChecked:boolean = false;
+
+
+
+
+//Reports checkbox checked values
+
+emportReportChecked:boolean = false;
+documentReportChecked:boolean = false;
+generelReportChecked:boolean = false;
+LeaveReportChecked:boolean = false;
+DeptReportChecked:boolean = false;
+DesReportChecked:boolean = false;
+
+
+
+//Calendars checkbox checked values
+
+addweekChecked:boolean= false;
+assignweekChecked:boolean = false;
+addholidayChecked:boolean= false;
+assignholidayChecked:boolean = false;
+ShiftChecked:boolean = false;
+
+
+
+  //Calendars checkbox checked values
+  LeaveaprvChecked:boolean= false;
+  LeavetypeChecked:boolean= false;
+  LeavemasterChecked:boolean= false;
+  LeavereqChecked:boolean= false;
+  LeavecomChecked:boolean= false;
+  LeaveaprvlvlChecked:boolean= false;
+  LeaveaprvlvltempChecked:boolean= false;
+
+
+
+
+// main headings values
+
+selectAllChecked: boolean = false;
+settingsChecked: boolean = false;
+reportchecked:boolean = false;
+calenderchecked:boolean = false;
+Leavechecked:boolean = false;
+
+
+
+
+expandedMasters: boolean = true;
+expandedMastersvalue: boolean = true;
+reportMastersvalue:boolean =true;
+calenderMastersvalue:boolean =true;
+LeaveMastersvalue:boolean =true;
+
+// Add this property
+// registerButtonClicked: boolean = false;
+
+childCheckboxes = [
+  'branchMasterChecked',
+  'userMasterChecked',
+  'userGroupingMasterChecked',
+  'assignPermissionMasterChecked',
+  'stateMasterChecked',
+  'documentTypeMasterChecked',
+  'expiredDocumentsMasterChecked',
+  'locationMasterChecked'
+];
+checkboxes = [
+  { label: 'Branch Master', checked: false },
+  { label: 'User Master', checked: false },
+  { label: 'User Grouping', checked: false },
+  { label: 'Assign Permission For User', checked: false },
+  { label: 'State Master', checked: false },
+  { label: 'Document Type', checked: false },
+  { label: 'Expired Documents', checked: false },
+  { label: 'Location Master', checked: false },
+];
+// permissionNameMap: { [key: string]: string } = {
+//   "Add_emp_master": "Add ",
+//   "Change_emp_master": "Edit",
+//   "Delete_emp_master": "Delete",
+//   "View_emp_master": "View"
+// };
+
+
+
+
+
+isEmployeeManagementMasterChecked(): boolean {
+  return this.employeeMasterChecked &&
+    this.departmentMasterChecked &&
+    this.designationMasterChecked &&
+    this.categoryMasterChecked &&
+    this.GenMasterChecked &&
+    this.ReqtypeMasterChecked &&
+    this.AprMasterChecked &&
+    this.AprlvlMasterChecked &&
+    this.AtdMasterChecked &&
+    this.SalMasterChecked &&
+    this.PayMasterChecked;
+}
+
+isEmployeeMasterIndeterminate(): boolean {
+  const selectedEmpPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsEmp.map(p => p.id).includes(permission)
+  );
+  return selectedEmpPermissions.length > 0 && selectedEmpPermissions.length < this.GrouppermissionsEmp.length;
+}
+
+isDepartmentMasterIndeterminate(): boolean {
+  const selectedDeptPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsDept.map(p => p.id).includes(permission)
+  );
+  return selectedDeptPermissions.length > 0 && selectedDeptPermissions.length < this.GrouppermissionsDept.length;
+}
+
+isDesignationMasterIndeterminate(): boolean {
+  const selectedDisPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsDis.map(p => p.id).includes(permission)
+  );
+  return selectedDisPermissions.length > 0 && selectedDisPermissions.length < this.GrouppermissionsDis.length;
+}
+
+isCategoryMasterIndeterminate(): boolean {
+  const selectedCatPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsCat.map(p => p.id).includes(permission)
+  );
+  return selectedCatPermissions.length > 0 && selectedCatPermissions.length < this.GrouppermissionsCat.length;
+}
+
+isGenMasterIndeterminate(): boolean {
+  const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsGen.map(p => p.id).includes(permission)
+  );
+  return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsGen.length;
+}
+
+isReqtypeMasterIndeterminate(): boolean {
+  const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsReqtype.map(p => p.id).includes(permission)
+  );
+  return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsReqtype.length;
+}
+
+isAprMasterIndeterminate(): boolean {
+  const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsApr.map(p => p.id).includes(permission)
+  );
+  return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsApr.length;
+}
+isAprlvlMasterIndeterminate(): boolean {
+  const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsAprlvl.map(p => p.id).includes(permission)
+  );
+  return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsAprlvl.length;
+}
+
+isAtdMasterIndeterminate(): boolean {
+  const selectedGenPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsAtd.map(p => p.id).includes(permission)
+  );
+  return selectedGenPermissions.length > 0 && selectedGenPermissions.length < this.GrouppermissionsAtd.length;
+}
+
+isSalMasterIndeterminate(): boolean {
+  const selectedSalPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsSal.map(p => p.id).includes(permission)
+  );
+  return selectedSalPermissions.length > 0 && selectedSalPermissions.length < this.GrouppermissionsSal.length;
+}
+
+isPayMasterIndeterminate(): boolean {
+  const selectedPayPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsPay.map(p => p.id).includes(permission)
+  );
+  return selectedPayPermissions.length > 0 && selectedPayPermissions.length < this.GrouppermissionsPay.length;
+}
+
+
+
+
+isSettingsMasterChecked(): boolean {
+  return this.branchMasterChecked &&
+    this.userMasterChecked &&
+    this.usergroupingMasterChecked &&
+    this.assignpermissionMasterChecked &&
+    this.stationMasterChecked &&
+    this.documenttypeMasterChecked &&
+    this.expireddocumnetsMasterChecked &&
+    this.locationMasterChecked &&
+    this.DnMasterChecked &&
+    this.CpMasterChecked &&
+    this.EmtMasterChecked &&
+    this.FormdesMasterChecked;
+}
+
+
+ isBranchMasterIndeterminate(): boolean {
+  const selectedBranchPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsBrch.map(p => p.id).includes(permission)
+  );
+  return selectedBranchPermissions.length > 0 && selectedBranchPermissions.length < this.GrouppermissionsBrch.length;
+}
+
+isUserMasterIndeterminate(): boolean {
+  const selectedUserMasterPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsUser.map(p => p.id).includes(permission)
+  );
+  return selectedUserMasterPermissions.length > 0 && selectedUserMasterPermissions.length < this.GrouppermissionsUser.length;
+}
+isUserGroupingIndeterminate(): boolean {
+  const selectedUserGroupPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsUsergroup.map(p => p.id).includes(permission)
+  );
+  return selectedUserGroupPermissions.length > 0 && selectedUserGroupPermissions.length < this.GrouppermissionsUsergroup.length;
+}
+  isAssignPermissionsIndeterminate(): boolean {
+  const selectedAssignPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsassigneddUser.map(p => p.id).includes(permission)
+  );
+  return selectedAssignPermissions.length > 0 && selectedAssignPermissions.length < this.GrouppermissionsassigneddUser.length;
+}
+  isStateMasterIndeterminate(): boolean {
+  const selectedstatePermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsstateMaster.map(p => p.id).includes(permission)
+  );
+  return selectedstatePermissions.length > 0 && selectedstatePermissions.length < this.GrouppermissionsstateMaster.length;
+}
+    isdocumenttypeIndeterminate(): boolean {
+  const selecteddocumentPermissions = this.selectedPermissions.filter(permission =>
+    this.Grouppermissionsdocumentype.map(p => p.id).includes(permission)
+  );
+  return selecteddocumentPermissions.length > 0 && selecteddocumentPermissions.length < this.Grouppermissionsdocumentype.length;
+}
+      isExpireddocumentsIndeterminate(): boolean {
+  const selectedexpiredPermissions = this.selectedPermissions.filter(permission =>
+    this.Grouppermissionsexpirydocuments.map(p => p.id).includes(permission)
+  );
+  return selectedexpiredPermissions.length > 0 && selectedexpiredPermissions.length < this.Grouppermissionsexpirydocuments.length;
+}
+        isloactionmasterIndeterminate(): boolean {
+  const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionslocationMaster.map(p => p.id).includes(permission)
+  );
+  return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionslocationMaster.length;
+}
+
+isDnmasterIndeterminate(): boolean {
+  const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsDnMaster.map(p => p.id).includes(permission)
+  );
+  return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsDnMaster.length;
+}
+
+isCpmasterIndeterminate(): boolean {
+  const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsCpMaster.map(p => p.id).includes(permission)
+  );
+  return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsCpMaster.length;
+}
+isEmtmasterIndeterminate(): boolean {
+  const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsEmtMaster.map(p => p.id).includes(permission)
+  );
+  return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsEmtMaster.length;
+}
+isFormdesmasterIndeterminate(): boolean {
+  const selectedlocationPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsFormdesMaster.map(p => p.id).includes(permission)
+  );
+  return selectedlocationPermissions.length > 0 && selectedlocationPermissions.length < this.GrouppermissionsFormdesMaster.length;
+}
+
+
+
+
+isReportManagementMasterChecked(): boolean {
+  return this.emportReportChecked &&
+    this.documentReportChecked &&
+    this.generelReportChecked  &&
+    this.LeaveReportChecked &&
+    this.DeptReportChecked &&
+    this.DesReportChecked ;
+    
+}
+
+isEmployeeReportIndeterminate(): boolean {
+  const selectedempreportPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsemployeeReport.map(p => p.id).includes(permission)
+  );
+  return selectedempreportPermissions.length > 0 && selectedempreportPermissions.length < this.GrouppermissionsemployeeReport.length;
+}
+
+isDocumentReportIndeterminate(): boolean {
+  const selecteddocreportPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsdocumnetReport.map(p => p.id).includes(permission)
+  );
+  return selecteddocreportPermissions.length > 0 && selecteddocreportPermissions.length < this.GrouppermissionsdocumnetReport.length;
+}
+
+isGeneralReportIndeterminate(): boolean {
+  const selectedGenReportPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissiionsgeneralReport.map(p => p.id).includes(permission)
+  );
+  return selectedGenReportPermissions.length > 0 && selectedGenReportPermissions.length < this.GrouppermissiionsgeneralReport.length;
+}
+
+
+isLeaveReportIndeterminate(): boolean {
+  const selectedLeaveReportPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissiionsLeaveReport.map(p => p.id).includes(permission)
+  );
+  return selectedLeaveReportPermissions.length > 0 && selectedLeaveReportPermissions.length < this.GrouppermissiionsLeaveReport.length;
+}
+
+
+isDeptReportIndeterminate(): boolean {
+  const selectedDeptReportPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissiionsDeptReport.map(p => p.id).includes(permission)
+  );
+  return selectedDeptReportPermissions.length > 0 && selectedDeptReportPermissions.length < this.GrouppermissiionsDeptReport.length;
+}
+
+
+isDesReportIndeterminate(): boolean {
+  const selectedDesReportPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissiionsDesReport.map(p => p.id).includes(permission)
+  );
+  return selectedDesReportPermissions.length > 0 && selectedDesReportPermissions.length < this.GrouppermissiionsDesReport.length;
+}
+
+
+
+
+isCalenderMangementMasterChecked():boolean{
+  return this.addweekChecked &&
+        this.assignweekChecked &&
+        this.addholidayChecked &&
+        this.assignholidayChecked  &&
+        this.ShiftChecked 
+
+}
+
+isAddWeekIndeterminate(): boolean {
+  const selectedaddweekPermissions = this.selectedPermissions.filter(permission =>
+    this.Grouppermissionsaddweek.map(p => p.id).includes(permission)
+  );
+  return selectedaddweekPermissions.length > 0 && selectedaddweekPermissions.length < this.Grouppermissionsaddweek.length;
+}
+isAssignWeekIndeterminate(): boolean {
+  const selectedassignweekPermissions = this.selectedPermissions.filter(permission =>
+    this.Grouppermisionsassignweek.map(p => p.id).includes(permission)
+  );
+  return selectedassignweekPermissions.length > 0 && selectedassignweekPermissions.length < this.Grouppermisionsassignweek.length;
+}
+isAddHolidayIndeterminate(): boolean {
+  const selectedaddholidayPermissions = this.selectedPermissions.filter(permission =>
+    this.Grouppermissionsaddholiday.map(p => p.id).includes(permission)
+  );
+  return selectedaddholidayPermissions.length > 0 && selectedaddholidayPermissions.length < this.Grouppermissionsaddholiday.length;
+}
+isAssignHolidayIndeterminate(): boolean {
+  const selectedassignholidayPermissions = this.selectedPermissions.filter(permission =>
+    this.Grouppermissionsassisgnholiday.map(p => p.id).includes(permission)
+  );
+  return selectedassignholidayPermissions.length > 0 && selectedassignholidayPermissions.length < this.Grouppermissionsassisgnholiday.length;
+}
+
+
+isShiftIndeterminate(): boolean {
+  const selectedShiftPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsShift.map(p => p.id).includes(permission)
+  );
+  return selectedShiftPermissions.length > 0 && selectedShiftPermissions.length < this.GrouppermissionsShift.length;
+}
+
+
+
+isLeaveMangementMasterChecked():boolean{
+  return this.LeaveaprvChecked &&
+  this.LeavetypeChecked &&
+  this.LeavemasterChecked &&
+  this.LeavereqChecked &&
+  this.LeavecomChecked &&
+  this.LeaveaprvlvlChecked &&
+  this.LeaveaprvlvltempChecked
+     
+}
+
+isLeaveaprvIndeterminate(): boolean {
+  const selectedLeaveaprvPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsLeaveaprv.map(p => p.id).includes(permission)
+  );
+  return selectedLeaveaprvPermissions.length > 0 && selectedLeaveaprvPermissions.length < this.GrouppermissionsLeaveaprv.length;
+}
+
+isLeavetypeIndeterminate(): boolean {
+  const selectedLeavetypePermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsLeavetype.map(p => p.id).includes(permission)
+  );
+  return selectedLeavetypePermissions.length > 0 && selectedLeavetypePermissions.length < this.GrouppermissionsLeavetype.length;
+}
+
+isLeavemasterIndeterminate(): boolean {
+  const selectedLeavemasterPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsLeavemaster.map(p => p.id).includes(permission)
+  );
+  return selectedLeavemasterPermissions.length > 0 && selectedLeavemasterPermissions.length < this.GrouppermissionsLeavemaster.length;
+}
+
+isLeavereqIndeterminate(): boolean {
+  const selectedLeavereqPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsLeavereq.map(p => p.id).includes(permission)
+  );
+  return selectedLeavereqPermissions.length > 0 && selectedLeavereqPermissions.length < this.GrouppermissionsLeavereq.length;
+}
+
+isLeavecomIndeterminate(): boolean {
+  const selectedLeavecomPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsLeavecom.map(p => p.id).includes(permission)
+  );
+  return selectedLeavecomPermissions.length > 0 && selectedLeavecomPermissions.length < this.GrouppermissionsLeavecom.length;
+}
+
+isLeaveaprvlvlIndeterminate(): boolean {
+  const selectedLeaveaprvlvlPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsLeaveaprvlvl.map(p => p.id).includes(permission)
+  );
+  return selectedLeaveaprvlvlPermissions.length > 0 && selectedLeaveaprvlvlPermissions.length < this.GrouppermissionsLeaveaprvlvl.length;
+}
+
+isLeaveaprvlvltempIndeterminate(): boolean {
+  const selectedLeaveaprvlvltempPermissions = this.selectedPermissions.filter(permission =>
+    this.GrouppermissionsLeaveaprvlvltemp.map(p => p.id).includes(permission)
+  );
+  return selectedLeaveaprvlvltempPermissions.length > 0 && selectedLeaveaprvlvltempPermissions.length < this.GrouppermissionsLeaveaprvlvltemp.length;
+}
 
 
   constructor(
@@ -652,20 +708,9 @@ export class UserGroupingEditComponent {
     this.loadDeparmentBranch();
 
 
-    
+    this.loadPermissions();
     this.loadpermissionsEmpMaster();
     // this.loadpermissionsall();
-    this.loadpermissionsDepartMaster();
-    this.loadpermissionsDisgMaster();
-    this.loadpermissionsCatgMaster();
-
-    this.loadpermissionsCmpMaster();
-    this.loadpermissionsBranchMaster();
-    this.loadpermissionsUserMaster();
-    this.loadpermissionsUserGroupMaster();
-
-
-    this.loadPermissions();
     this.loadSettingPermissions();
     this.loadReportPermissions();
     this.loadCalenderPermissions();
@@ -723,7 +768,6 @@ export class UserGroupingEditComponent {
 
 
 
-
   updateIndeterminateStates(): void {
     this.isEmployeeMasterIndeterminate();
     this.isDepartmentMasterIndeterminate();
@@ -734,6 +778,8 @@ export class UserGroupingEditComponent {
     this.isAprMasterIndeterminate();
     this.isAprlvlMasterIndeterminate();
     this.isAtdMasterIndeterminate();
+    this.isSalMasterIndeterminate();
+    this.isPayMasterIndeterminate();
 
 
 
@@ -765,6 +811,9 @@ updateIndeterminateReports(): void{
   this.isDocumentReportIndeterminate();
   this.isGeneralReportIndeterminate();
   this.isLeaveReportIndeterminate();
+  this.isDeptReportIndeterminate();
+  this.isDesReportIndeterminate();
+
 
 }
 
@@ -773,6 +822,8 @@ updateInderminateCalenders():void{
   this.isAddWeekIndeterminate();
   this.isAssignWeekIndeterminate();
   this.isAssignHolidayIndeterminate();
+  this.isShiftIndeterminate();
+
 }
 
 
@@ -802,6 +853,8 @@ updateInderminateLeave():void{
     this.loadpermissionsAprMaster();
     this.loadpermissionsAprlvlMaster();
     this.loadpermissionsAtdMaster();
+    this.loadpermissionsSalMaster();
+    this.loadpermissionsPayMaster();
 
 
 
@@ -834,6 +887,10 @@ updateInderminateLeave():void{
     this.loadpermissionsDocReport();
     this.loadpermissionsGenReport();
     this.loadpermissionsLeaveReport();
+    this.loadpermissionsDeptReport();
+    this.loadpermissionsDesReport();
+
+
 
   }
 
@@ -843,6 +900,8 @@ updateInderminateLeave():void{
     this.loadpermissionsAssignweekDetail();
     this.loadpermissionsAddholidayDetail();
     this.loadpermissionsAssignholidayDetail();
+    this.loadpermissionsShiftDetail();
+
   }
 
 
@@ -1339,6 +1398,109 @@ updateInderminateLeave():void{
 
 
 
+           //load permission for Salary Master master
+
+           loadpermissionsSalMaster(): void {
+            const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+        
+            console.log('schemastore', selectedSchema);
+          
+            if (selectedSchema) {
+              this.userMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                (result: any[]) => {
+                  // Specify the codenames you want to filter
+                  const requiredCodenames = ['add_salarycomponent', 'change_salarycomponent', 'delete_salarycomponent', 'view_salarycomponent'];
+          
+                  // Filter and remove duplicates based on codename
+                  const uniquePermissionsMap = new Map();
+                  result.forEach(permission => {
+                    const codename = permission.codename.trim().toLowerCase();
+                    if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                      uniquePermissionsMap.set(codename, permission);
+                    }
+                  });
+          
+                  // Convert map values to an array
+                  this.GrouppermissionsSal = Array.from(uniquePermissionsMap.values());
+          
+                  console.log('Filtered Unique Permissions:', this.GrouppermissionsSal);
+                },
+                (error: any) => {
+                  console.error('Error fetching permissions:', error);
+                }
+              );
+            }
+          }
+        
+        
+           //Display Name  add view delte code for General request master-------
+        
+           getDisplayNameSal(permissionCodename: string): string {
+            switch (permissionCodename.trim().toLowerCase()) {
+              case 'add_salarycomponent':
+                return 'Add';
+              case 'change_salarycomponent':
+                return 'Edit';
+              case 'delete_salarycomponent':
+                return 'Delete';
+              case 'view_salarycomponent':
+                return 'View';
+              default:
+                return permissionCodename;
+            }
+          }
+        
+          
+          loadpermissionsPayMaster(): void {
+            const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+        
+            console.log('schemastore', selectedSchema);
+          
+            if (selectedSchema) {
+              this.userMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                (result: any[]) => {
+                  // Specify the codenames you want to filter
+                  const requiredCodenames = ['add_payrollrun', 'change_payrollrun', 'delete_payrollrun', 'view_payrollrun'];
+          
+                  // Filter and remove duplicates based on codename
+                  const uniquePermissionsMap = new Map();
+                  result.forEach(permission => {
+                    const codename = permission.codename.trim().toLowerCase();
+                    if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                      uniquePermissionsMap.set(codename, permission);
+                    }
+                  });
+          
+                  // Convert map values to an array
+                  this.GrouppermissionsPay = Array.from(uniquePermissionsMap.values());
+          
+                  console.log('Filtered Unique Permissions:', this.GrouppermissionsPay);
+                },
+                (error: any) => {
+                  console.error('Error fetching permissions:', error);
+                }
+              );
+            }
+          }
+        
+        
+           //Display Name  add view delte code for General request master-------
+        
+           getDisplayNamePay(permissionCodename: string): string {
+            switch (permissionCodename.trim().toLowerCase()) {
+              case 'add_payrollrun':
+                return 'Add';
+              case 'change_payrollrun':
+                return 'Edit';
+              case 'delete_payrollrun':
+                return 'Delete';
+              case 'view_payrollrun':
+                return 'View';
+              default:
+                return permissionCodename;
+            }
+          }
+        
 
 
 
@@ -1827,7 +1989,7 @@ updateInderminateLeave():void{
           this.userMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
             (result: any[]) => {
               // Specify the codenames you want to filter
-              const requiredCodenames = ['add_document_numbering', 'change_document_numbering', 'delete_document_numbering', 'view_document_numbering'];
+              const requiredCodenames = ['add_documentnumbering', 'change_documentnumbering', 'delete_documentnumbering', 'view_documentnumbering'];
       
               // Filter and remove duplicates based on codename
               const uniquePermissionsMap = new Map();
@@ -1854,13 +2016,13 @@ updateInderminateLeave():void{
     
         getDisplayNameDn(permissionCodename: string): string {
           switch (permissionCodename.trim().toLowerCase()) {
-            case 'add_document_numbering':
+            case 'add_documentnumbering':
               return 'Add';
-            case 'change_document_numbering':
+            case 'change_documentnumbering':
               return 'Edit';
-            case 'delete_document_numbering':
+            case 'delete_documentnumbering':
               return 'Delete';
-            case 'view_document_numbering':
+            case 'view_documentnumbering':
               return 'View';
             default:
               return permissionCodename;
@@ -2210,12 +2372,6 @@ updateInderminateLeave():void{
     }
           }
 
-
-
-
-
-  
-  
         
             //Display Name  add view delte code for Company master-------
         
@@ -2238,6 +2394,110 @@ updateInderminateLeave():void{
   
 
 
+            loadpermissionsDeptReport(): void {
+              const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+    
+      console.log('schemastore', selectedSchema);
+    
+      if (selectedSchema) {
+        this.userMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+          (result: any[]) => {
+            // Specify the codenames you want to filter
+            const requiredCodenames = ['add_leavereport', 'change_leavereport', 'delete_leavereport', 'export_report','view_leavereport'];
+    
+            // Filter and remove duplicates based on codename
+            const uniquePermissionsMap = new Map();
+            result.forEach(permission => {
+              const codename = permission.codename.trim().toLowerCase();
+              if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                uniquePermissionsMap.set(codename, permission);
+              }
+            });
+    
+            // Convert map values to an array
+            this.GrouppermissiionsDeptReport = Array.from(uniquePermissionsMap.values());
+    
+            console.log('Filtered Unique Permissions:', this.GrouppermissiionsDeptReport);
+          },
+          (error: any) => {
+            console.error('Error fetching permissions:', error);
+          }
+        );
+      }
+            }
+  
+          
+              //Display Name  add view delte code for Company master-------
+          
+              getDisplayNameDeptReport(permissionCodename: string): string {
+                switch (permissionCodename.trim().toLowerCase()) {
+                  case 'add_leavereport':
+                    return 'Add';
+                  case 'change_leavereport':
+                    return 'Edit';
+                  case 'delete_leavereport':
+                    return 'Delete';
+                  case 'export_report':
+                    return 'Export';
+                    case 'view_leavereport':
+                      return 'View';
+                  default:
+                    return permissionCodename;
+                }
+              }
+    
+              loadpermissionsDesReport(): void {
+                const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+      
+        console.log('schemastore', selectedSchema);
+      
+        if (selectedSchema) {
+          this.userMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+            (result: any[]) => {
+              // Specify the codenames you want to filter
+              const requiredCodenames = ['add_leavereport', 'change_leavereport', 'delete_leavereport', 'export_report','view_leavereport'];
+      
+              // Filter and remove duplicates based on codename
+              const uniquePermissionsMap = new Map();
+              result.forEach(permission => {
+                const codename = permission.codename.trim().toLowerCase();
+                if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                  uniquePermissionsMap.set(codename, permission);
+                }
+              });
+      
+              // Convert map values to an array
+              this.GrouppermissiionsDeptReport = Array.from(uniquePermissionsMap.values());
+      
+              console.log('Filtered Unique Permissions:', this.GrouppermissiionsDeptReport);
+            },
+            (error: any) => {
+              console.error('Error fetching permissions:', error);
+            }
+          );
+        }
+              }
+    
+            
+                //Display Name  add view delte code for Company master-------
+            
+                getDisplayNameDesReport(permissionCodename: string): string {
+                  switch (permissionCodename.trim().toLowerCase()) {
+                    case 'add_leavereport':
+                      return 'Add';
+                    case 'change_leavereport':
+                      return 'Edit';
+                    case 'delete_leavereport':
+                      return 'Delete';
+                    case 'export_report':
+                      return 'Export';
+                      case 'view_leavereport':
+                        return 'View';
+                    default:
+                      return permissionCodename;
+                  }
+                }
+      
           
         
         
@@ -2447,7 +2707,59 @@ updateInderminateLeave():void{
 
 
 
+                    loadpermissionsShiftDetail(): void {
+                      const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+                      console.log('schemastore', selectedSchema);
+                    
+                      if (selectedSchema) {
+                        this.userMasterService.getPermissionByRoleGrouping(selectedSchema).subscribe(
+                          (result: any[]) => {
+                            // Specify the codenames you want to filter
+                            const requiredCodenames = ['add_shift', 'change_shift', 'delete_shift', 'view_shift'];
+                    
+                            // Filter and remove duplicates based on codename
+                            const uniquePermissionsMap = new Map();
+                            result.forEach(permission => {
+                              const codename = permission.codename.trim().toLowerCase();
+                              if (requiredCodenames.includes(codename) && !uniquePermissionsMap.has(codename)) {
+                                uniquePermissionsMap.set(codename, permission);
+                              }
+                            });
+                    
+                            // Convert map values to an array
+                            this.GrouppermissionsShift = Array.from(uniquePermissionsMap.values());
+                    
+                            console.log('Filtered Unique Permissions:', this.GrouppermissionsShift);
+                          },
+                          (error: any) => {
+                            console.error('Error fetching permissions:', error);
+                          }
+                        );
+                      }
+                    }
+                  
+                      //Display Name  add view delte code for Company master-------
+                  
+                      getDisplayNameShiftDetail(permissionCodename: string): string {
+                        switch (permissionCodename.trim().toLowerCase()) {
+                          case 'add_shift':
+                            return 'Add';
+                          case 'change_shift':
+                            return 'Edit';
+                          case 'delete_shift':
+                            return 'Delete';
+                            case 'view_shift':
+                              return 'View';
+                          default:
+                            return permissionCodename;
+                        }
+                      }
 
+
+
+
+                      // Leave permisson fetching code here
 
                     loadpermissionsLeaveaprv(): void {
                       const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
@@ -2877,11 +3189,10 @@ updateInderminateLeave():void{
   //   );
   //   this.categoryMasterChecked = allPermissionsSelected;
   // }
-  onCheckboxChangeEmp(permission: number): void {
+  onCheckboxChangeEmp(permission: string): void {
     if (this.selectedPermissions.includes(permission)) {
       this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
     } else {
-
       this.selectedPermissions.push(permission);
     }
     this.updateEmployeeMasterCheckbox();
@@ -2889,10 +3200,6 @@ updateInderminateLeave():void{
   
 
   }
-  // Function to check if a permission is already assigned
-isPermissionChecked(permissionId: number): boolean {
-  return this.selectedPermissions.includes(permissionId);
-}
 
   updateEmployeeMasterCheckbox(): void {
     const allPermissionsSelected = this.GrouppermissionsEmp.every(permission => 
@@ -3071,6 +3378,44 @@ isPermissionChecked(permissionId: number): boolean {
   }
 
 
+  onCheckboxChangeSal(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+    this.updateSalMasterCheckbox();
+    this.updateSelectAll();
+  }
+
+  updateSalMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsSal.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.SalMasterChecked = allPermissionsSelected;
+    this.SalMasterInderminate = this.isSalMasterIndeterminate();
+
+  }
+
+
+  onCheckboxChangePay(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+    this.updatePayMasterCheckbox();
+    this.updateSelectAll();
+  }
+
+  updatePayMasterCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsPay.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.PayMasterChecked = allPermissionsSelected;
+    this.PayMasterInderminate = this.isPayMasterIndeterminate();
+
+  }
 
 
 
@@ -3535,6 +3880,27 @@ isPermissionChecked(permissionId: number): boolean {
 
 
 
+  onCheckboxChangesShift(permission: string): void {
+    if (this.selectedPermissions.includes(permission)) {
+      this.selectedPermissions = this.selectedPermissions.filter(p => p !== permission);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  
+   
+    // Update selectAll checkbox status
+    this.updateShiftCheckbox();
+    this.updateCalender();
+
+  }
+
+  updateShiftCheckbox(): void {
+    const allPermissionsSelected = this.GrouppermissionsShift.every(permission => 
+      this.selectedPermissions.includes(permission.id)
+    );
+    this.ShiftChecked= allPermissionsSelected;
+    this.ShiftInderminate= this.isShiftIndeterminate();
+  }
 
 
 
@@ -3723,6 +4089,8 @@ isPermissionChecked(permissionId: number): boolean {
     this.updateAprMasterCheckbox();
     this.updateAprlvlMasterCheckbox();
     this.updateAtdMasterCheckbox();
+    this.updateSalMasterCheckbox();
+    this.updatePayMasterCheckbox();
 
 
 
@@ -3750,6 +4118,7 @@ isPermissionChecked(permissionId: number): boolean {
     this.updateAddWeekCheckbox();
     this.updateAssignHolidayCheckbox();
     this.updateAssignweekCheckbox();
+    this.updateShiftCheckbox();
 
 
     this.updateLeaveaprvCheckbox();
@@ -3882,6 +4251,34 @@ isPermissionChecked(permissionId: number): boolean {
 
   }
 
+
+  onSalMasterChange(): void {
+    if (this.SalMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsSal.map(permission => permission.id));
+    } else {  
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsSal.map(p => p.id).includes(permission));
+    }
+  
+    // Update related checkboxes
+    this.updateEmployeeManagementCheckbox();
+    // this.selectAllChecked = this.categoryMasterChecked;
+
+  }
+
+
+  onPayMasterChange(): void {
+    if (this.PayMasterChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsPay.map(permission => permission.id));
+    } else {  
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsPay.map(p => p.id).includes(permission));
+    }
+  
+    // Update related checkboxes
+    this.updateEmployeeManagementCheckbox();
+    // this.selectAllChecked = this.categoryMasterChecked;
+
+  }
+
   updateEmployeeManagementCheckbox() {
     this.selectAllChecked = this.employeeMasterChecked && 
                             this.departmentMasterChecked && 
@@ -3890,8 +4287,11 @@ isPermissionChecked(permissionId: number): boolean {
                             this.GenMasterChecked &&
                             this.ReqtypeMasterChecked&&
                             this.AprMasterChecked &&
-                            this.AprlvlMasterChecked&&
-                            this.AtdMasterChecked;
+                            this.AprlvlMasterChecked &&
+                            this.AtdMasterChecked &&
+                            this.SalMasterChecked &&
+                            this.PayMasterChecked;
+
 }
 
 selectAll(): void {
@@ -3905,7 +4305,9 @@ selectAll(): void {
     ...this.GrouppermissionsApr,
     ...this.GrouppermissionsAprlvl,
     ...this.GrouppermissionsAtd,
+    ...this.GrouppermissionsSal,
 
+    ...this.GrouppermissionsPay,
 
 
 
@@ -3927,6 +4329,8 @@ selectAll(): void {
   this.updateAprMasterCheckbox();
   this.updateAprlvlMasterCheckbox();
   this.updateAtdMasterCheckbox();
+  this.updateSalMasterCheckbox();
+  this.updatePayMasterCheckbox();
 
 
 
@@ -3938,7 +4342,7 @@ selectAll(): void {
 isEmpDeptDisCatPermission(permission: string): boolean {
   return [...this.GrouppermissionsEmp, ...this.GrouppermissionsDept, ...this.GrouppermissionsDis, 
     ...this.GrouppermissionsCat, ...this.GrouppermissionsGen,...this.GrouppermissionsReqtype,
-    ...this.GrouppermissionsApr, ...this.GrouppermissionsAprlvl,...this.GrouppermissionsAtd,]
+    ...this.GrouppermissionsApr, ...this.GrouppermissionsAprlvl,...this.GrouppermissionsAtd,...this.GrouppermissionsSal,...this.GrouppermissionsPay,]
     .some(p => p.id === permission);
 }
 // this.updateBranchCheckbox();
@@ -3962,6 +4366,9 @@ updateSelectAll(): void {
   this.updateAprMasterCheckbox();
   this.updateAprlvlMasterCheckbox();
   this.updateAtdMasterCheckbox();
+  this.updateSalMasterCheckbox();
+
+  this.updatePayMasterCheckbox();
 
 
 
@@ -3979,7 +4386,9 @@ isemployee(): boolean {
   const AprMasterInderminate = this.isAprMasterIndeterminate();
   const AprlvlMasterInderminate = this.isAprlvlMasterIndeterminate();
   const AtdMasterInderminate = this.isAtdMasterIndeterminate();
+  const SalMasterInderminate = this.isSalMasterIndeterminate();
 
+  const PayMasterInderminate = this.isPayMasterIndeterminate();
 
 
 
@@ -3988,7 +4397,7 @@ isemployee(): boolean {
 
     // Return true only if some but not all checkboxes are selected
     return employeeMasterIndeterminate || departmentMasterInderminate || designationMasterInderminate || categoryMasterInderminate|| 
-    GenMasterInderminate|| ReqtypeMasterInderminate|| AprMasterInderminate|| AprlvlMasterInderminate|| AtdMasterInderminate||  otherGroupIndeterminate;
+    GenMasterInderminate|| ReqtypeMasterInderminate|| AprMasterInderminate|| AprlvlMasterInderminate|| AtdMasterInderminate|| SalMasterInderminate|| PayMasterInderminate||  otherGroupIndeterminate;
 }
 
 // branchMasterInderminate = false;
@@ -4039,9 +4448,11 @@ iscalenders(): boolean {
   const assignweekInderminate = this.isAssignWeekIndeterminate();
   const addholidayInderminate = this.isAddHolidayIndeterminate();
   const assignholidayInderminate = this.isAssignHolidayIndeterminate();
+  const ShiftInderminate = this.isShiftIndeterminate();
+
 
   const otherGroupIndeterminate = false;
-  return addweekInderminate || assignweekInderminate || addholidayInderminate || assignholidayInderminate || otherGroupIndeterminate;
+  return addweekInderminate || assignweekInderminate || addholidayInderminate || assignholidayInderminate || ShiftInderminate || otherGroupIndeterminate;
 }  
 
 isLeaves(): boolean {
@@ -4074,6 +4485,8 @@ isIndeterminate(): boolean {
     ...this.GrouppermissionsApr,
     ...this.GrouppermissionsAprlvl,
     ...this.GrouppermissionsAtd,
+    ...this.GrouppermissionsSal,
+    ...this.GrouppermissionsPay,
 
 
   ].some(permission => this.selectedPermissions.includes(permission.id));
@@ -4421,6 +4834,18 @@ showexpandable(): void {
 
   }
 
+  onShiftChange(): void {
+    if (this.ShiftChecked) {
+      this.selectedPermissions = this.selectedPermissions.concat(this.GrouppermissionsShift.map(permission => permission.id));
+    } else {
+      this.selectedPermissions = this.selectedPermissions.filter(permission => !this.GrouppermissionsShift.map(p => p.id).includes(permission));
+    }
+    this.updateCalenderCheckbox();
+    // this.updateSelectedPermissions(this.locationMasterChecked, this.GrouppermissionslocationMaster);
+    // this.settingsChecked = this.locationMasterChecked;
+
+
+  }
 
 
   onLeaveaprvChange(): void {
@@ -4747,7 +5172,9 @@ selectCalender(): void {
     ...this.Grouppermissionsaddweek,
     ...this.Grouppermisionsassignweek,
     ...this.Grouppermissionsaddholiday,
-    ...this.Grouppermissionsassisgnholiday
+    ...this.Grouppermissionsassisgnholiday,
+    ...this.GrouppermissionsShift
+
   ].map(permission => permission.id);
 
   if (this.calenderchecked) {
@@ -4761,6 +5188,8 @@ selectCalender(): void {
   this.updateAssignHolidayCheckbox();
   this.updateAssignweekCheckbox();
   this.updateCalenderCheckbox();
+  this.updateShiftCheckbox();
+
 }
 
 
@@ -4805,6 +5234,8 @@ updateCalender():void{
   this.updateAssignHolidayCheckbox();
   this.updateAddWeekCheckbox();
   this.updateAssignweekCheckbox();
+  this.updateShiftCheckbox();
+
 
   this.updateInderminateCalenders();
   this.updateCalenderCheckbox();
@@ -4839,7 +5270,9 @@ isCalenderInderminate(): boolean {
     ...this.Grouppermissionsaddweek,
     ...this.Grouppermisionsassignweek,
     ...this.Grouppermissionsaddholiday,
-    ...this.Grouppermissionsassisgnholiday
+    ...this.Grouppermissionsassisgnholiday,
+    ...this.GrouppermissionsShift
+
   ].some(permission => this.selectedPermissions.includes(permission.id));
 
   return hasSelectedPermissions && !this.isCalenderMangementMasterChecked();
@@ -4888,5 +5321,6 @@ showcalenders(): void{
 showLeaves(): void{
   this.LeaveMastersvalue =!this.LeaveMastersvalue;
 }
+
 
 }

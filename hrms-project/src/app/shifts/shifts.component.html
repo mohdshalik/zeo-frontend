@@ -1,5 +1,5 @@
 <div class="container" >
-    <div class="comapny_section">
+    <div class="comapny_section" *ngIf="hasViewPermission">
         <div class="com_list ">
     <div class="cpm-sec">
 
@@ -8,7 +8,7 @@
         <mat-tab-group>
           <mat-tab label="Shifts">
 
-            <form >
+            <form *ngIf="hasAddPermission">
 
                 <div class="row">
                     <div class="col-md-6" >
@@ -92,13 +92,13 @@
         </div>
 
 
-        </mat-tab>
+        </mat-tab >
             <mat-tab label="Shift Pattern">
 
 
 
                 
-                <form>
+                <form *ngIf="hasAddPermission">
                     <div class="row">
 
                         <div class="col-md-6" >
@@ -381,7 +381,7 @@
 
 
 
-                <form>
+                <form *ngIf="hasAddPermission">
                   <div class="row">
                     
                   <div class="col-md-6" >
@@ -506,7 +506,7 @@
                 <div class="shift-board-container">
 
                    <!-- Selection Form -->
-                   <form (ngSubmit)="fetchShifts()">
+                   <form (ngSubmit)="fetchShifts()" *ngIf="hasAddPermission">
                     <div class="row">
                         <!-- Schedule Dropdown -->
                         <div class="col-md-4">
@@ -597,7 +597,7 @@
 
 
                   <mat-tab label="Week Pattern Assigning">
-                    <form>
+                    <form *ngIf="hasAddPermission">
 <div class="row">
   <div class="col-md-6" >
                    
@@ -659,7 +659,7 @@
   
 
                     <mat-tab label="Shift Override">
-                      <form>
+                      <form *ngIf="hasAddPermission">
   <div class="row">
     <div class="col-md-6" >
                      

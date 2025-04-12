@@ -257,6 +257,10 @@ const routes: Routes = [
             path:'email-template',
             component:EmailTemplateComponent
           },
+            {
+      path:'leave-template',
+      component:LeaveTemplateComponent,
+    },
              {
             path:'company-policy',
             component:CompanyPolicyComponent
@@ -289,10 +293,7 @@ const routes: Routes = [
       path:'leave-approval-level',
       component:LeaveApprovalLevelComponent,
     },
-    {
-      path:'leave-template',
-      component:LeaveTemplateComponent,
-    },
+ 
 
     {
       path:'leave-approvals',

@@ -86,6 +86,9 @@
 
                           </div> -->
 
+
+
+
                           <div class="mat-expansion-panel-body" routerLink="/main-sidebar/settings/location-master" *ngIf="hasAddCompanyMaster">
                             <a class="set_siding" mat-list-item  ><span class="side_option">Location Master</span> </a>
                             <!-- <p class="side_option">I'm visible because I am open</p> -->
@@ -107,7 +110,7 @@
                         </mat-expansion-panel>
 
                         <mat-expansion-panel >
-                          <mat-expansion-panel-header class="mar-expantion-span">
+                          <mat-expansion-panel-header class="mar-expantion-span">     
                           
                                 <a mat-list-item> <mat-icon>calendar_month</mat-icon>
                                     <span class="con_clr"> Calendars</span></a>
@@ -139,7 +142,7 @@
                         </div>
                       
                       
-                        <div class="mat-expansion-panel-body " >
+                        <div class="mat-expansion-panel-body "   *ngIf="hasViewShift">
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/shifts"><span class="side_option" >Shift Allocations</span> </a>
                           <!-- <p class="side_option">I'm visible because I am open</p> -->
                         </div>
@@ -226,7 +229,7 @@
                          
                         </mat-expansion-panel>
                         <mat-expansion-panel >
-                          <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/email-template" *ngIf="hasViewPermissionEmtemp">
+                          <mat-expansion-panel-header class="mar-expantion-span"  >
                           
                                 <a mat-list-item> <mat-icon>dashboard_customize
 
@@ -236,7 +239,14 @@
                        
                           
                           </mat-expansion-panel-header>
-                     
+                      
+                          <div class="mat-expansion-panel-body "  routerLink="/main-sidebar/settings/email-template"  *ngIf="hasViewPermissionEmtemp">
+                          <a class="set_siding" mat-list-item  ><span class="side_option" >General Request </span> </a>
+                        </div>
+
+                        <div class="mat-expansion-panel-body "  routerLink="/main-sidebar/settings/leave-template"  *ngIf="hasViewPermissionLeaveEmtemp">
+                          <a class="set_siding" mat-list-item  ><span class="side_option" >Leave Request</span> </a>
+                        </div>
                           <!-- <div class="mat-expansion-panel-body " >
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/from-designer"><span class="side_option" >Employee-form</span> </a>
                         </div> -->
