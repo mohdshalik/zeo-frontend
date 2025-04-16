@@ -349,7 +349,9 @@ if (this.userId !== null) {
             }
       
             alert(errorMessage); // Show extracted error
-          }
+          } 
+
+        
         );
       }
 
@@ -520,6 +522,7 @@ onFileSelected(event:any){
       this.leaveService.getPayroll(selectedSchema).subscribe(
         (data: any) => {
           this.Payrolls = data;
+
         
           console.log('Payrolls:', this.Payrolls);
         },
@@ -604,12 +607,42 @@ onFileSelected(event:any){
   }
 
 
-  
-
-
-
-
 
  
+  LoadPayslip(selectedSchema: string) {
+    this.leaveService.getPaySlip(selectedSchema).subscribe(
+      (data: any) => {
+        this.PaySlips = data;
+        this.filteredDocuments = data;  // Initialize filtered data
+      
+        console.log('Payrolls:', this.Payrolls);
+      },
+      (error: any) => {
+        console.error('Error fetching Payrolls:', error);
+      }
+    );
+  }
+
+  searchQuery = '';
+
+
+  filteredDocuments: any[] = [];  // Filtered list
+// Filter documents based on searchQuery
+filterDocuments() {
+  this.filteredDocuments = this.PaySlips.filter(doc =>
+    doc.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+    doc.employee.toLowerCase().includes(this.searchQuery.toLowerCase())
+  );
+
+  
+}
+
+isExpanded = false;
+
+
+toggleSearch() {
+  this.isExpanded = !this.isExpanded;
+}
+
 
 }

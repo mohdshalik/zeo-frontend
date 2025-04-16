@@ -49,7 +49,7 @@
             <mat-tab label="Salary Component">
                 
                 <div class="tab_boddy">
-                    <form (ngSubmit)="RegisterSalaryComponent()" enctype="multipart/form-data">
+                    <form (ngSubmit)="saveOrUpdateSalaryComponent()" enctype="multipart/form-data">
 
                         <div class="row">
                             <div class="col-md-4">
@@ -150,10 +150,14 @@
 
                             </div>
                             <div class="row" *ngIf="hasAddPermission">
-                              <div class="col-md-9"></div>
+                              <div class="col-md-6"></div>
                               <div class="col-md-3">
-                                  <button type="submit" class="btn btn-success btn-full mt-4">Save</button>
-                  
+                                <button *ngIf="isEditMode" type="button" class="btn btn-danger btn-full mt-4" (click)="resetForm()">Cancel</button>
+                                </div>
+                              <div class="col-md-3">
+                                <button type="submit" class="btn btn-success btn-full mt-4">
+                                  {{ isEditMode ? 'Update' : 'Save' }}
+                                </button>                  
                               </div>
                           </div>
                       
@@ -199,7 +203,7 @@
                   
     
                     <td>
-                      <i class="fa-solid fa-edit"></i>
+                      <i class="fa-solid fa-edit" (click)="editSalaryComponent(docs)"></i>
                     </td>
                   </tr>
                 </tbody>
@@ -209,7 +213,7 @@
               <mat-tab label="Employee Salary ">
   
                 <div class="tab_boddy">
-                    <form (ngSubmit)="requestEmployeeSalary()" enctype="multipart/form-data">
+                    <form (ngSubmit)="saveOrUpdateSalaryComponentEmp()" enctype="multipart/form-data">
 
                         <div class="row">
                          
@@ -233,10 +237,8 @@
                             <input type="text" class="form-control" required [(ngModel)]="amount"
                                    placeholder="Enter amount"
                                    [ngModelOptions]="{standalone: true}" 
-                                   [ngClass]="{'error-field': registerButtonClicked && !amount}">
-                            <div *ngIf="registerButtonClicked && !amount" class="error-message">
-                              Amount is required.
-                            </div>
+                            >
+                          
                           </div>
                           
                  
@@ -265,10 +267,14 @@
                             </div>
                             
                             <div class="row" >
-                              <div class="col-md-9"></div>
+                              <div class="col-md-6"></div>
                               <div class="col-md-3">
-                                  <button type="submit"  class="btn btn-success btn-full mt-4">Save</button>
-                  
+                                <button *ngIf="isEditModeEmp" type="button" class="btn btn-danger btn-full mt-4" (click)="resetFormEmp()">Cancel</button>
+                                </div>
+                              <div class="col-md-3">
+                                <button type="submit" class="btn btn-success btn-full mt-4">
+                                  {{ isEditModeEmp ? 'Update' : 'Save' }}
+                                </button>                   
                               </div>
                           </div>
                       
@@ -300,7 +306,7 @@
                       
         
                         <td>
-                          <i class="fa-solid fa-edit"></i>
+                          <i class="fa-solid fa-edit" (click)="editSalaryComponentEmp(docs)"></i>
                         </td>
                       </tr>
                     </tbody>

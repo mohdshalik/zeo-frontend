@@ -475,6 +475,32 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   }
 
 
+  updateSalaryComponent(id: number, formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) return throwError('No schema selected.');
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/salarycomponent/${id}/?schema=${selectedSchema}`;
+    return this.http.put(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during update:', error);
+        return throwError(error);
+      })
+    );
+  }
+  
+
+  updateSalaryComponentEmp(id: number, formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) return throwError('No schema selected.');
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/employeesalary/${id}/?schema=${selectedSchema}`;
+    return this.http.put(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during update:', error);
+        return throwError(error);
+      })
+    );
+  }
 
   getSalaryCom(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/payroll/api/salarycomponent/?schema=${selectedSchema}`;
@@ -529,6 +555,8 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   
   }
 
+
+  
 
 
 

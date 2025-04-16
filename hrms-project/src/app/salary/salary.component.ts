@@ -51,6 +51,20 @@ EmployeeSalarycomponent: any[] = [];
 
 filteredEmployees: any[] = [];
 
+// edit salary component
+
+editingComponent: any = null;
+isEditMode: boolean = false;
+updateId: number | null = null;
+
+
+editingComponentEmp: any = null;
+isEditModeEmp: boolean = false;
+updateIdEmp: number | null = null;
+
+
+
+
 
   constructor(
     private http: HttpClient,
@@ -196,11 +210,49 @@ if (this.userId !== null) {
       return groupPermissions.some(permission => permission.codename === codeName);
       }
 
-    RegisterSalaryComponent(): void {
+    // RegisterSalaryComponent(): void {
+    //   this.registerButtonClicked = true;
+
+
+    //   if (!this.name || !this.component_type || !this.code) {
+    //     return;
+    //   }
+    
+    //   const formData = new FormData();
+    //   formData.append('name', this.name);
+    //   formData.append('component_type', this.component_type);
+    //   formData.append('code', this.code);
+    //   formData.append('description', this.description);
+    //   formData.append('formula', this.formula);
+
+      
+    //   formData.append('is_fixed', this.is_fixed.toString());
+    //   formData.append('unpaid_leave', this.unpaid_leave.toString());
+
+    //   formData.append('affected_by_halfpaid_leave', this.affected_by_halfpaid_leave.toString());
+
+    //   formData.append('prorata_calculation', this.prorata_calculation.toString());
+
+    //   formData.append('is_emi_deduction', this.is_emi_deduction.toString());
+
+    //   this.leaveService.registerSalaryComponent(formData).subscribe(
+    //     (response) => {
+    //       console.log('Registration successful', response);
+    //       alert('Salary Component has been added');
+    //       window.location.reload();
+    //     },
+    //     (error) => {
+    //       console.error('Added failed', error);
+    //       alert('Enter all required fields!');
+    //     }
+    //   );
+    // }
+
+    saveOrUpdateSalaryComponent(): void {
       this.registerButtonClicked = true;
-
-
+    
       if (!this.name || !this.component_type || !this.code) {
+        alert('Please fill in all required fields!');
         return;
       }
     
@@ -208,63 +260,207 @@ if (this.userId !== null) {
       formData.append('name', this.name);
       formData.append('component_type', this.component_type);
       formData.append('code', this.code);
-      formData.append('description', this.description);
-      formData.append('formula', this.formula);
-
-      
-      formData.append('is_fixed', this.is_fixed.toString());
-      formData.append('unpaid_leave', this.unpaid_leave.toString());
-
-      formData.append('affected_by_halfpaid_leave', this.affected_by_halfpaid_leave.toString());
-
-      formData.append('prorata_calculation', this.prorata_calculation.toString());
-
-      formData.append('is_emi_deduction', this.is_emi_deduction.toString());
-
-      this.leaveService.registerSalaryComponent(formData).subscribe(
-        (response) => {
-          console.log('Registration successful', response);
-          alert('Salary Component has been added');
-          window.location.reload();
-        },
-        (error) => {
-          console.error('Added failed', error);
-          alert('Enter all required fields!');
-        }
-      );
-    }
-
+      formData.append('description', this.description || '');
+      formData.append('formula', this.formula || '');
     
-    requestEmployeeSalary(): void {
+      formData.append('is_fixed', (this.is_fixed ?? false).toString());
+      formData.append('unpaid_leave', (this.unpaid_leave ?? false).toString());
+      formData.append('affected_by_halfpaid_leave', (this.affected_by_halfpaid_leave ?? false).toString());
+      formData.append('prorata_calculation', (this.prorata_calculation ?? false).toString());
+      formData.append('is_emi_deduction', (this.is_emi_deduction ?? false).toString());
+    
+      if (this.isEditMode && this.updateId !== null) {
+        this.leaveService.updateSalaryComponent(this.updateId, formData).subscribe(
+          (response) => {
+            alert('Salary Component updated successfully');
+            this.resetForm();
+            this.LoadSalaryCom(localStorage.getItem('selectedSchema') || '');
+          },
+          (error) => {
+            console.error('Update failed', error);
+            this.displayBackendErrors(error);
+          }
+        );
+      } else {
+        this.leaveService.registerSalaryComponent(formData).subscribe(
+          (response) => {
+            alert('Salary Component has been added');
+            this.resetForm();
+            this.LoadSalaryCom(localStorage.getItem('selectedSchema') || '');
+          },
+          (error) => {
+            console.error('Add failed', error);
+            this.displayBackendErrors(error);
+          }
+        );
+      }
+    }
+    
+    
+
+    resetForm(): void {
+      this.name = '';
+      this.component_type = '';
+      this.code = '';
+      this.description = '';
+      this.formula = '';
+      this.is_fixed = true;
+      this.unpaid_leave = false;
+      this.affected_by_halfpaid_leave = false;
+      this.prorata_calculation = false;
+      this.is_emi_deduction = false;
+      this.updateId = null;
+      this.isEditMode = false;
+      this.registerButtonClicked = false;
+    }
+    
+
+
+    editSalaryComponent(component: any): void {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+      this.name = component.name;
+      this.component_type = component.component_type;
+      this.code = component.code;
+      this.description = component.description;
+      this.formula = component.formula;
+    
+      this.is_fixed = component.is_fixed;
+      this.unpaid_leave = component.unpaid_leave;
+      this.affected_by_halfpaid_leave = component.affected_by_halfpaid_leave;
+      this.prorata_calculation = component.prorata_calculation;
+      this.is_emi_deduction = component.is_emi_deduction;
+    
+      this.updateId = component.id;
+      this.isEditMode = true;
+    }
+    
+    
+    // requestEmployeeSalary(): void {
       
-    alert(123)
-      this.registerButtonClicked = true;
+    //   this.registerButtonClicked = true;
 
 
   
+    
+    //   const formData = new FormData();
+    //   formData.append('amount', this.amount);
+    //   formData.append('employee', this.employee);
+    //   formData.append('component', this.component);
+      
+    //   formData.append('is_active', this.is_active.toString());
+   
+
+    //   this.leaveService.registerEmpSalary(formData).subscribe(
+    //     (response) => {
+    //       console.log('Registration successful', response);
+    //       alert('Employee Salary  has been added');
+    //       window.location.reload();
+    //     },
+    //     (error) => {
+    //       console.error('Added failed', error);
+    //       alert('Enter all required fields!');
+    //     }
+    //   );
+    // }
+    saveOrUpdateSalaryComponentEmp(): void {
+      this.registerButtonClicked = true;
+    
+      if ( !this.employee || !this.component) {
+        alert('Please fill in all required fields!');
+        return;
+      }
     
       const formData = new FormData();
       formData.append('amount', this.amount);
       formData.append('employee', this.employee);
       formData.append('component', this.component);
-      
-      formData.append('is_active', this.is_active.toString());
-   
+      formData.append('is_active', (this.is_active ?? false).toString());
+    
+      if (this.isEditModeEmp && this.updateIdEmp !== null) {
+        this.leaveService.updateSalaryComponentEmp(this.updateIdEmp, formData).subscribe(
+          (response) => {
+            alert('Employee Salary updated successfully');
+            this.resetFormEmp();
+            this.LoadEmployeeSalaryCom(localStorage.getItem('selectedSchema') || '');
+          },
+          (error) => {
+            console.error('Update failed', error);
+            this.displayBackendErrors(error);
+          }
+        );
+      } else {
+        this.leaveService.registerEmpSalary(formData).subscribe(
+          (response) => {
+            alert('Salary Component has been added');
+            this.resetFormEmp();
+            this.LoadEmployeeSalaryCom(localStorage.getItem('selectedSchema') || '');
+          },
+          (error) => {
+            console.error('Add failed', error);
+            this.displayBackendErrors(error);
+          }
+        );
+      }
+    }
+    
 
-      this.leaveService.registerEmpSalary(formData).subscribe(
-        (response) => {
-          console.log('Registration successful', response);
-          alert('Employee Salary  has been added');
-          window.location.reload();
-        },
-        (error) => {
-          console.error('Added failed', error);
-          alert('Enter all required fields!');
+    displayBackendErrors(error: any): void {
+      if (error.error) {
+        const backendErrors = error.error;
+        let errorMsg = '';
+    
+        // If the backend returns a dictionary of field-specific errors
+        if (typeof backendErrors === 'object') {
+          for (const key in backendErrors) {
+            if (backendErrors.hasOwnProperty(key)) {
+              const fieldErrors = backendErrors[key];
+              if (Array.isArray(fieldErrors)) {
+                fieldErrors.forEach((msg: string) => {
+                  errorMsg += `${key}: ${msg}\n`;
+                });
+              } else {
+                errorMsg += `${key}: ${fieldErrors}\n`;
+              }
+            }
+          }
+        } else {
+          // Fallback for generic error message
+          errorMsg = backendErrors;
         }
-      );
+    
+        alert(errorMsg || 'An unknown error occurred!');
+      } else {
+        alert('An error occurred while processing your request.');
+      }
     }
 
 
+
+    resetFormEmp(): void {
+      this.amount = '';
+      this.employee = '';
+      this.component = '';
+ 
+      this.is_active = true;
+
+    }
+    
+
+
+    editSalaryComponentEmp(component: any): void {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+      this.amount = component.amount;
+      this.employee = component.employee;
+      this.component = component.component;
+      this.is_active = component.is_active;
+     
+    
+      this.updateIdEmp = component.id;
+      this.isEditModeEmp = true;
+    }
+    
 
     LoadEmployee(selectedSchema: string) {
       this.EmployeeService.getemployees(selectedSchema).subscribe(
