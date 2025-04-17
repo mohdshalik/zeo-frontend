@@ -272,7 +272,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
       return throwError('No schema selected.');
     }
   
-  return this.http.get(`http://127.0.0.1:8000/employee/api/Employee/${employeeId}/leave_balance/?schema=${selectedSchema}`);
+  return this.http.get(`${this.apiUrl}/employee/api/Employee/${employeeId}/leave_balance/?schema=${selectedSchema}`);
 }
 
 

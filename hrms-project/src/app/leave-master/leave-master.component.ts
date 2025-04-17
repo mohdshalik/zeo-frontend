@@ -429,7 +429,7 @@ export class LeaveMasterComponent {
     formData.append('accrual_frequency', this.accrual_frequency);
     formData.append('accrual_month', this.accrual_month);
     formData.append('accrual_day', this.accrual_day);
-    formData.append('round_of', this.round_of);
+    // formData.append('round_of', this.round_of);
     formData.append('prorate_type', this.prorate_type);
 
     formData.append('leave_type', this.selectedLeaveTypeForModal.id);
