@@ -142,6 +142,7 @@ import { ShiftsComponent } from './shifts/shifts.component';
 import { PayRollComponent } from './pay-roll/pay-roll.component';
 import { SalaryComponent } from './salary/salary.component';
 import { CreateLeavetypeComponent } from './create-leavetype/create-leavetype.component';
+import { PayrollDetailsComponent } from './payroll-details/payroll-details.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -242,7 +243,8 @@ import { CreateLeavetypeComponent } from './create-leavetype/create-leavetype.co
      ShiftsComponent,
      PayRollComponent,
      SalaryComponent,
-     CreateLeavetypeComponent
+     CreateLeavetypeComponent,
+     PayrollDetailsComponent
      
      
 

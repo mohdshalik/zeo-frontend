@@ -547,6 +547,19 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   }
 
 
+  getSinglePayslip(id: string): Observable<any> {
+
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+
+    const apiUrl = `${this.apiUrl}/payroll/api/payslip/${id}/?schema=${selectedSchema}`;
+    return this.http.get(apiUrl);
+  }
+
   getPayslipComponent(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/payroll/api/PayslipComponent/?schema=${selectedSchema}`;
   
@@ -557,7 +570,9 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
 
   
-
+  downloadFile(url: string): Observable<Blob> {
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
 
 }

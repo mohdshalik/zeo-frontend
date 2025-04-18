@@ -6,6 +6,7 @@ import { LeaveService } from '../leave-master/leave.service';
 import { DesignationService } from '../designation-master/designation.service';
 import { EmployeeService } from '../employee-master/employee.service';
 import { CatogaryService } from '../catogary-master/catogary.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pay-roll',
@@ -99,6 +100,7 @@ Departments: any[] = [];
     private DesignationService: DesignationService,
     private EmployeeService:EmployeeService,
     private categoryService:CatogaryService,
+    private router: Router
 
     
     ) {}
@@ -644,5 +646,11 @@ toggleSearch() {
   this.isExpanded = !this.isExpanded;
 }
 
+
+
+viewPayrollDetails(payslip: any) {
+  // Navigate and pass the payslip ID as a route parameter (or use state)
+  this.router.navigate(['/main-sidebar/sub-sidebar/payroll-details', payslip.id]);
+}
 
 }

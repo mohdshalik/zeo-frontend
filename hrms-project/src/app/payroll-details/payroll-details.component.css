@@ -1,0 +1,673 @@
+
+.comapny_section{
+
+    margin-top: 100px;
+    margin-left: 50px;
+    
+  }
+  
+  .header_section{
+    background: white;
+    padding: 24px 20px 15px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    width: 100%;
+    border-bottom: solid 3px navy;
+  }
+  
+  .header_section h1{
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+  
+  }
+  
+  
+  .com_list{
+    padding: 20px;
+    width: 100%;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-top: solid 3px navy;
+    margin-bottom: 20px;
+  
+  
+  }
+  
+  .com_list h2{
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+  }
+  
+  
+  
+  
+  table thead th {
+    color: #ffffff;
+    background: #004976;
+    padding: 15px;
+    border: 1px solid #ebebec;
+    font-weight: 500;
+  }
+  
+  table tr {
+    background: #ffffff;
+  }
+  
+  table tr td {
+    border: 1px solid #e6edf1;
+    padding: 15px;
+  }
+  
+  @media only screen and (max-width: 640px) {
+    table thead {
+      display: none;
+    }
+  
+    table tbody {
+      display: block;
+    }
+  
+    table tbody tr td {
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+  
+    table tbody tr {
+      margin-bottom: 20px;
+      display: block;
+      border: 1px solid #004976;
+      background: #f9f9f9;
+      overflow: hidden;
+    }
+  
+    table tbody td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      width: 30%;
+      display: flex;
+      background: #004976;
+      color: #fff;
+      padding: 15px;
+      margin-inline-end: 10px;
+    }
+  }
+  
+  
+  
+  
+  p{
+    margin-bottom: 0px;
+  }
+  
+  
+  .form-control-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ::ng-deep .form-control-wrapper mat-form-field {
+    width: 100%;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-wrapper {
+    padding: 0;
+    margin: 0;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-flex {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-underline {
+    display: none;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    height: auto;
+    line-height: 1.5;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select-trigger {
+    height: auto;
+    padding: 0;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select-value-text {
+    padding: 0;
+    margin: 0;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-infix {
+    padding: 0;
+    border: none;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select-placeholder {
+    transform: translateY(-50%);
+    top: 50%;
+  }
+  
+  
+  ::ng-deep .form-control-wrapper  .mat-mdc-form-field-infix{
+    margin-top: -14px;
+  }
+  
+  ::ng-deep .form-control-wrapper .mdc-text-field--filled:not(.mdc-text-field--disabled){
+  
+  background-color: white;
+  }
+  
+  ::ng-deep .form-control-wrapper .mdc-text-field{
+  padding: 0px;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-mdc-form-field-infix:focus-visible{
+  outline: none-webkit-focus-ring-color auto 0px;
+  
+  
+  }
+  
+  
+  /* Remove :focus-visible style from all input elements */
+  input:focus-visible {
+  outline: none;
+  }
+  
+  /* Remove :focus-visible style from mat-select */
+  .mat-select:focus-visible {
+  outline: none;
+  }
+  
+  /* Use !important to ensure the outline is removed */
+  ::ng-deep .form-control-wrapper:focus-visible {
+  outline: none !important;
+  }
+  
+  
+  ::ng-deep .mat-select:focus-visible {
+  outline: none;
+  }
+  
+  /* Optionally, you can also override other styles */
+  ::ng-deep .mat-select:focus-visible .mat-select-value {
+  outline: none;
+  }
+  
+  ::ng-deep .mdc-text-field--no-label{
+  border:1px solid #ced4da;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-flex {
+  padding: 4px 7px;
+  height: 35px;
+  }
+  
+  .check-box-selection-sec{
+    padding: 0px !important;
+  }
+  
+ 
+  
+
+  .tab_boddy{
+    padding: 30px;
+  }
+  
+  .tab_back{
+    background: white;
+  }
+  
+  .header-btn-icon{
+    vertical-align: middle;
+  }
+
+
+  .tab_boddy h2{
+    font-size: 16px;
+    font-weight: 500;
+
+}
+
+.pdf-top{
+
+    border: solid 1px grey;
+    height: 70px;
+    width: 100%;
+}
+
+.pdf-bottom{
+    background: #8C0303;
+    color: white;
+    padding: 7px 10px;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+
+}
+
+
+.pdf-top h4{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 35px;
+}
+
+.pdf-bottom a{
+    color: white;
+    text-decoration: none;
+}
+
+
+
+
+
+.calculator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  padding: 15px;
+}
+
+.calculator {
+  width: 400px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.display {
+  width: 100%;
+  height: 50px;
+  text-align: right;
+  font-size: 20px;
+  border: none;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #e9ecef;
+  border-radius: 5px;
+}
+
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+button {
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.component-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.operator {
+  background-color: #6c757d;
+  color: white;
+}
+
+.operator:hover, .component-btn:hover {
+  opacity: 0.8;
+}
+
+.btn-danger {
+  background-color: red;
+  color: white;
+}
+
+.btn-success {
+  background-color: green;
+  color: white;
+}
+
+
+table th{
+  text-transform: capitalize;
+}
+
+
+.end_section{
+  padding: 10px;
+  background: whitesmoke;
+}
+
+.payslips-sec{
+  padding: 10px;
+  background: white;
+  margin-bottom: 15px;
+  padding: 20px;
+
+}
+
+.styled-table{
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    white-space: nowrap;
+    border-collapse: collapse  !important;
+}
+
+::ng-deep  .styled-table tr:nth-child(even){
+  background-color: whitesmoke;
+}
+
+
+.styled-table thead th {
+  border-spacing: 0 10px;
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: whitesmoke !important;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.text-table-header{
+
+      --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+        font-weight: 500;
+        font-size: 0.75rem;
+    line-height: 1rem;
+    border-collapse: collapse !important; 
+    border-width: 0 !important;
+
+}
+
+.text-table-body td{
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  white-space: nowrap;
+  border-collapse: collapse !important; 
+  border-width: 0 !important;
+}
+
+
+
+
+.table-body-text-spl{
+      color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+      font-weight: 500;
+  
+}
+
+
+
+
+.styled-table th {
+  text-align: left;
+  color: #555;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.styled-table td {
+  padding: 12px;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.pill {
+  display: inline-flex;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: capitalize;    
+  border-radius: 9999px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 0.75rem;
+
+}
+
+.green {
+  background-color: #e3f9e5;
+  color: #2e7d32;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 60px;
+  padding: 6px;
+
+}
+
+.yellow {
+  background-color: #fff8db;
+  color: #a47e1b;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 60px;
+  padding: 6px;
+
+
+}
+
+.red {
+  background-color: #fdecea;
+  color: #b00020;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 60px;
+  padding: 6px;
+
+}
+
+
+::ng-deep .styled-table tbody tr:hover td {
+  background-color: #f3f4f6 !important;
+  cursor: pointer;
+}
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-input {
+  width: 0;
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  transition: width 0.4s ease-in-out;
+  opacity: 0;
+  z-index: 0;
+}
+
+.search-input.expanded {
+  width: 300px; /* Adjust width as needed */
+  opacity: 1;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: -40px;
+  border-radius: 100%;
+  background: #5c1e81;
+  width: 35px;
+  height: 35px;
+  z-index: 10;
+}
+
+.search-btn i {
+  color: #ffffff;
+}
+
+
+
+
+
+
+.payslip-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .payslip-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .payslip-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  
+  .employee-details,
+  .work-summary {
+    margin-bottom: 20px;
+  }
+  
+  .salary-summary table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .salary-summary th,
+  .salary-summary td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    vertical-align: top;
+  }
+  
+  .salary-summary th {
+    background-color: #f0f0f0;
+    text-align: left;
+  }
+  
+  .net-salary {
+    background-color: #e8f5e9;
+    padding: 15px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .pill {
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    color: #fff;
+    text-transform: capitalize;
+  }
+  
+  .pill.green {
+    background-color: #4caf50;
+  }
+  .pill.yellow {
+    background-color: #ffc107;
+  }
+  .pill.red {
+    background-color: #f44336;
+  }
+  
+
+  .work-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+
+  .employee-details p{
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .employee-details h5{
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .employee-details h6{
+    font-size: 16px;
+    font-weight: 600;
+    color: #5c1e81;
+  }
+  
+
+  .salary-summary tr td p{
+    margin-bottom: 10px;
+
+  }
+
+  
+.vn-wisteria a{
+  background-color:#8e44ad;
+    display:inline-block;
+    position:relative;
+    margin:30px 5px;
+    padding:20px 20px 20px 80px;
+    color:#fff;
+    transition:all 0.4s ease;
+    border-radius:3px
+  }
+  .vn-wisteria a:before{
+    content:"\f019";
+    font-family:fontAwesome;
+    position:absolute;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    font-size:28px;
+    border-radius:0 20px 0 0;
+    color:#000;
+    background-color:#fff;
+    opacity:0.3;
+    padding:20px;
+    top:0;
+    left:0
+  }
+  .vn-wisteria a:hover{
+    background:#7f8c8d
+  }
+
+  .btn-download{
+    padding: 7px 15px;
+    background: #ddd;
+    font-size: 16px;
+    text-transform: capitalize;
+    /* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.05), 0 2px 2px rgba(0, 0, 0, 0.05); */
+    border-radius: 0px;
+    
+
+  }

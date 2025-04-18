@@ -443,6 +443,7 @@ if (this.userId !== null) {
       this.component = '';
  
       this.is_active = true;
+      this.isEditModeEmp = false;
 
     }
     

@@ -3,7 +3,7 @@
 
 
 
-      <div class="tab_back mt-5">
+      <div class="tab_back ">
         <mat-tab-group> 
             <mat-tab label="Payroll Run">
                 
@@ -175,7 +175,8 @@
                       </tr>
                     </thead>
                     <tbody class="text-table-body">
-                      <tr class="tbodytext" *ngFor="let payslip of PaySlips; let i = index">
+                      <tr class="tbodytext" *ngFor="let payslip of PaySlips; let i = index"
+                      (click)="viewPayrollDetails(payslip)" >
                         <td>{{ i + 1 }}</td>
                         <td class="table-body-text-spl">{{ payslip.employee }}</td>
                         <td>{{ payslip.payroll_run?.name }}</td>

@@ -263,7 +263,7 @@ loadUsers(): void {
         (response) => {
           console.log('Registration successful', response);
         
-              alert('General request has been Added ');
+              alert('Approvel Level Assigned ');
               window.location.reload();
               // window.location.reload();
          

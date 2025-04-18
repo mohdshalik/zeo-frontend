@@ -1,0 +1,76 @@
+
+<div class="container">
+    <div class="comapny_section" >
+      <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-full btn-download" (click)="downloadPayslip()"><i class="fa-solid fa-download"></i> Download</button>
+
+        </div>
+      </div>
+      
+
+
+        <div class="payslip-container" *ngIf="payslipDetails">
+          
+            <div class="payslip-header">
+              <h2>Payslip - {{ payslipDetails.payroll_run?.name }} {{ payslipDetails.payroll_run?.start_date | date:'yyyy' }}</h2>
+              <p class="mt-2">Status: 
+                <span [ngClass]="{
+                  'pill green': payslipDetails.status === 'approved',
+                  'pill yellow': payslipDetails.status === 'pending',
+                  'pill red': payslipDetails.status === 'rejected'    
+                }">{{ payslipDetails.status | titlecase }}</span>
+              </p>
+            </div>  
+          
+            <div class="employee-details mt-4">
+                
+              <p><span>Employee ID:</span> {{ payslipDetails.employee }}</p>
+              <p><span>Payroll Period:</span> {{ payslipDetails.payroll_run?.start_date }} to {{ payslipDetails.payroll_run?.end_date }}</p>
+              <p><span>Payment Date:</span> {{ payslipDetails.payroll_run?.payment_date }}</p>
+            </div>
+          
+            <!-- ⬇️ Working days moved here -->
+            <div class="work-summary work-top">
+              <p><strong>Total Working Days:</strong> {{ payslipDetails.total_working_days }}</p>
+              <p><strong>Days Worked:</strong> {{ payslipDetails.days_worked }}</p>
+            </div>
+          
+            <div class="salary-summary">
+              <table >
+                <thead>
+                  <tr>
+                    <th>Earnings</th>
+                    <th>Deductions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p>Gross Salary: ₹ {{ payslipDetails.gross_salary }}</p>
+                      <p>Pro-rata Adjustment: ₹ {{ payslipDetails.pro_rata_adjustment }}</p>
+                      <p>Arrears: ₹ {{ payslipDetails.arrears }}</p>
+                      <p><strong>Total Additions:</strong> ₹ {{ payslipDetails.total_additions }}</p>
+                    </td>
+                    <td>
+                      <p>Total Deductions: ₹ {{ payslipDetails.total_deductions }}</p>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2" class="net-salary">
+                      <strong>Net Salary Payable: ₹ {{ payslipDetails.net_salary }}</strong>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          
+          
+
+</div>
+
+

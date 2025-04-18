@@ -66,6 +66,7 @@ import { DashboardContentsComponent } from './dashboard-contents/dashboard-conte
 import { ShiftsComponent } from './shifts/shifts.component';
 import { PayRollComponent } from './pay-roll/pay-roll.component';
 import { SalaryComponent } from './salary/salary.component';
+import { PayrollDetailsComponent } from './payroll-details/payroll-details.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -134,6 +135,10 @@ const routes: Routes = [
           {
             path:'pay-roll',
             component:PayRollComponent,
+          },
+          {
+            path: 'payroll-details/:id',
+            component: PayrollDetailsComponent
           },
           {
             path:'salary',

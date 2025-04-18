@@ -60,6 +60,15 @@ export class UserMasterService {
     return this.http.get(Url);
   }
 
+  getUsersForAssigning(selectedSchema: string): Observable<any> {
+    // Construct the API URL with the selected schema
+    const Url = `${this.apiUrl}/users/group-perm-tenant-users/?schema=${selectedSchema}`;
+
+    // Fetch employees from the API
+    return this.http.get(Url);
+  }
+
+
   getUsername(): Observable<any> {
     const url = `${this.baseUrl}/user/`;
     return this.http.get(url);
