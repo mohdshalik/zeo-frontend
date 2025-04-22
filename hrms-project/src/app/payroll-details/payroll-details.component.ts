@@ -40,6 +40,8 @@ export class PayrollDetailsComponent {
   }
 
 
+  
+
   downloadPayslip(): void {
     if (!this.payslipDetails || !this.payslipDetails.employee || !this.payslipDetails.payroll_run?.start_date) {
       console.error('Missing payslip details');
