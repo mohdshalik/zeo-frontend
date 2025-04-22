@@ -18,7 +18,7 @@ import { SessionService } from '../login/session.service';
   templateUrl: './leave-template.component.html',
   styleUrl: './leave-template.component.css'
 })
-export class LeaveTemplateComponent {
+export class  LeaveTemplateComponent {
 
   
   template_type: any = '';
@@ -32,6 +32,7 @@ export class LeaveTemplateComponent {
   registerButtonClicked = false;
 
 
+   
 
   RequestType:any []=[];
   tempEmails:any []=[];
@@ -189,7 +190,7 @@ ngOnInit(): void {
  
 }
 
-
+ 
   
 checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
   return groupPermissions.some(permission => permission.codename === codeName);
@@ -206,7 +207,7 @@ checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
       this.leaveService.getLeaveType(selectedSchema).subscribe(
         (result: any) => {
           this.RequestType = result;
-          console.log(' fetching Companies:');
+          console.log(' fetching RequestType:');
   
         },
         (error) => {

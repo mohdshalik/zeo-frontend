@@ -143,6 +143,7 @@ import { PayRollComponent } from './pay-roll/pay-roll.component';
 import { SalaryComponent } from './salary/salary.component';
 import { CreateLeavetypeComponent } from './create-leavetype/create-leavetype.component';
 import { PayrollDetailsComponent } from './payroll-details/payroll-details.component';
+import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -244,7 +245,8 @@ import { PayrollDetailsComponent } from './payroll-details/payroll-details.compo
      PayRollComponent,
      SalaryComponent,
      CreateLeavetypeComponent,
-     PayrollDetailsComponent
+     PayrollDetailsComponent,
+     NotificationSettingsComponent
      
      
 

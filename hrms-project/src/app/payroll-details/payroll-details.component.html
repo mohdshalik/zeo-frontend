@@ -29,6 +29,7 @@
               <p><span>Employee ID:</span> {{ payslipDetails.employee }}</p>
               <p><span>Payroll Period:</span> {{ payslipDetails.payroll_run?.start_date }} to {{ payslipDetails.payroll_run?.end_date }}</p>
               <p><span>Payment Date:</span> {{ payslipDetails.payroll_run?.payment_date }}</p>
+              
             </div>
           
             <!-- ⬇️ Working days moved here -->
@@ -38,7 +39,27 @@
             </div>
           
             <div class="salary-summary">
+
               <table >
+                <thead>
+                  <tr>
+                    <th>components</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p> {{ payslipDetails.components?.component }}</p>
+              
+                    <td>
+                      <p> {{ payslipDetails.components?.amount }}</p>
+                    </td>
+                  </tr>
+                </tbody>
+            
+              </table>
+              <table class="mt-4" >
                 <thead>
                   <tr>
                     <th>Earnings</th>
@@ -66,6 +87,10 @@
                   </tr>
                 </tfoot>
               </table>
+
+
+
+             
             </div>
           </div>
           
