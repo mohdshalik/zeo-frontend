@@ -67,6 +67,7 @@ import { ShiftsComponent } from './shifts/shifts.component';
 import { PayRollComponent } from './pay-roll/pay-roll.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PayrollDetailsComponent } from './payroll-details/payroll-details.component';
+import { SalaryOptionsComponent } from './salary-options/salary-options.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -132,18 +133,8 @@ const routes: Routes = [
             path:'attendace-marking',
             component:AttendaceMarkingComponent,
           },
-          {
-            path:'pay-roll',
-            component:PayRollComponent,
-          },
-          {
-            path: 'payroll-details/:id',
-            component: PayrollDetailsComponent
-          },
-          {
-            path:'salary',
-            component:SalaryComponent,
-          },
+        
+        
           {
             path:'document-expired',
             component:DocumentExpiredComponent
@@ -312,6 +303,30 @@ const routes: Routes = [
   ]
 
 },
+
+{
+  path: 'salary-options',
+  component: SalaryOptionsComponent,
+  children:[
+    {
+      path:'salary',
+      component:SalaryComponent,
+    },
+
+    {
+      path:'pay-roll',
+      component:PayRollComponent,
+    },
+    {
+      path: 'payroll-details/:id',
+      component: PayrollDetailsComponent
+    },
+
+  ]
+
+},
+
+
 {
   path: 'dashboard-contents',
   component: DashboardContentsComponent,

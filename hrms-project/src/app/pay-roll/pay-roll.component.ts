@@ -304,7 +304,8 @@ if (this.userId !== null) {
  
       
       
-    
+      isLoading: boolean = false;
+
       requestPayRoll(): void {
         this.registerButtonClicked = true;
       
@@ -324,13 +325,19 @@ if (this.userId !== null) {
         formData.append('department', this.department);
         formData.append('category', this.category);
      
+        this.isLoading = true;
+
         this.leaveService.requestPayroll(formData).subscribe(
           (response) => {
+            this.isLoading = false;
+
             console.log('Registration successful', response);
             alert('Payroll has been added');
             window.location.reload();
           },
           (error) => {
+            this.isLoading = false;
+
             console.error('Added failed', error);
       
             // Extract backend error message
@@ -650,7 +657,7 @@ toggleSearch() {
 
 viewPayrollDetails(payslip: any) {
   // Navigate and pass the payslip ID as a route parameter (or use state)
-  this.router.navigate(['/main-sidebar/sub-sidebar/payroll-details', payslip.id]);
+  this.router.navigate(['/main-sidebar/salary-options/payroll-details', payslip.id]);
 }
 
 }
