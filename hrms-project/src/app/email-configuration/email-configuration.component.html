@@ -1,0 +1,148 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list ">
+    <div class="cpm-sec" *ngIf="hasViewPermission">
+
+        <h2>Email Configuration</h2><hr>
+
+    <form  (ngSubmit)="RequestEmailConfg()" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6" >
+           
+                <label>Email host</label>
+               <input type="text"  class="form-control" required  [(ngModel)]="email_host"  placeholder="Enter email host"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !email_host}">
+               
+               <div *ngIf="registerButtonClicked && !email_host" class="error-message">email_host is required.</div>
+          </div>
+          
+
+
+          <div class="col-md-6" >
+           
+            <label>Email port</label>
+           <input type="number"  class="form-control" required  [(ngModel)]="email_port"  placeholder="Enter email host"
+            [ngModelOptions]="{standalone: true}" >
+           
+      </div>
+      
+
+      <div class="col-md-6" >
+           
+        <label>Email host user</label>
+       <input type="text"  class="form-control" required  [(ngModel)]="email_host_user"  placeholder="Enter email host user"
+        [ngModelOptions]="{standalone: true}" >
+       
+  </div>
+
+  
+<div class="col-md-6" >
+           
+    <label>Email host Password</label>
+   <input type="password"  class="form-control" required  [(ngModel)]="email_host_password"  placeholder="Enter email host Password"
+    [ngModelOptions]="{standalone: true}" >
+   
+</div>
+
+
+<div class="col-md-6">
+    <label></label>
+    <div class="check-box-selection-sec mt-2">
+        <div class="mat-set">
+            <mat-checkbox [(ngModel)]="email_use_tls" [ngModelOptions]="{standalone: true}">Email use tls</mat-checkbox>
+        </div>
+       
+    </div>
+</div>
+
+<div class="col-md-6">
+    <label></label>
+    <div class="check-box-selection-sec mt-2">
+        <div class="mat-set">
+            <mat-checkbox [(ngModel)]="is_active" [ngModelOptions]="{standalone: true}">Is Active</mat-checkbox>
+        </div>
+       
+    </div>
+</div>
+      <!-- <div class="col-md-6">
+
+
+        <div class="custom-sel">
+            <label>Approver</label>
+            <select class="form-control" id="approver" required [(ngModel)]="approver"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !approver}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of Users" [value]="deparmentsec.id">{{ deparmentsec.username     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !approver" class="error-message">Please Select approver  </div>
+        </div>
+                    
+
+    </div> -->
+
+      
+
+   
+
+
+
+        </div>
+        <div class="row" *ngIf="hasAddPermission">
+            <div class="col-md-10">
+
+            </div>
+
+            <div class="col-md-2">
+                <button type="submit" class="btn-Create btn-full mt-5 btn-success btn" >Save</button>  
+             </div>
+
+             
+        </div>
+    </form>
+
+  
+  
+
+
+        </div>
+
+        </div>
+
+
+            
+        <table width="100%" *ngIf="hasViewPermission">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th> Email host  </th>
+                <th>Email Port</th>
+                <th>email use tls</th>
+                <th>email host user</th>
+                <th>email host password</th>
+                <th>is active</th>
+
+    
+               
+              </tr>
+            </thead>
+            <tbody>
+                
+              <tr *ngFor="let docs of EmailConfg;let i = index">
+                <td>{{ i + 1 }}</td> 
+                <td>{{ docs.email_host }}</td>
+                <td>{{ docs.email_port }}</td> 
+                <td>{{ docs.email_use_tls }}</td>
+                <td>{{ docs.email_host_user }}</td>
+                <td>{{ docs.email_host_password }}</td> 
+                <td>{{ docs.is_active }}</td>
+  
+              </tr>
+          
+            </tbody>
+          </table>
+  
+
+
+  
+
+</div>
+</div>

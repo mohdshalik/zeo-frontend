@@ -83,6 +83,34 @@
         </div>
 
 
+            
+        <table width="100%" *ngIf="hasViewPermission">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th> Level  </th>
+                <th>Request Type</th>
+                <th>Approver</th>
+  
+    
+               
+              </tr>
+            </thead>
+            <tbody>
+                
+              <tr *ngFor="let docs of ApprovalLEvel;let i = index">
+                <td>{{ i + 1 }}</td> 
+                <td>{{ docs.level }}</td>
+                <td>{{ docs.request_type }}</td> 
+                <td>{{ docs.approver }}</td>
+  
+              </tr>
+          
+            </tbody>
+          </table>
+  
+
+
   
 
 </div>

@@ -889,9 +889,10 @@
                            
                         </div>
                     </div>
+  </div>
+  <div class="row" *ngIf="allow_cf">
   
-  
-                      <div class="col-md-4">
+                      <div class="col-md-4" >
                         <label>Carry forward choice</label>
                         <div class="custom-sel">
                           <select class="form-control" id="carry_forward_choice" name="carry_forward_choice" [(ngModel)]="carry_forward_choice" [ngModelOptions]="{standalone: true}">
@@ -942,6 +943,12 @@
                       </div>
   
   
+
+
+                    </div>
+
+                    <div class="row">
+                      
                       <div class="col-md-4">
                         <label></label>
                         <div class="check-box-selection-sec form-control mt-3">
@@ -951,8 +958,6 @@
                            
                         </div>
                     </div>
-
-
                     </div>
                     <div class="row" *ngIf="allow_encashment">
                       <div class="col-md-4">
@@ -1215,4 +1220,5 @@
       </div>
 </div>
 
+</div>
 

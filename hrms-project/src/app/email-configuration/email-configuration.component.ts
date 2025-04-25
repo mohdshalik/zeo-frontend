@@ -8,20 +8,26 @@ import { DesignationService } from '../designation-master/designation.service';
 import { SessionService } from '../login/session.service';
 
 @Component({
-  selector: 'app-approval-level',
-  templateUrl: './approval-level.component.html',
-  styleUrl: './approval-level.component.css'
+  selector: 'app-email-configuration',
+  templateUrl: './email-configuration.component.html',
+  styleUrl: './email-configuration.component.css'
 })
-export class ApprovalLevelComponent {
+export class EmailConfigurationComponent {
 
-  level: any = '';
-  role: any = '';
-  approver: any = '';
-  request_type: any = '';
- 
+
+  email_host: any = '';
+  email_port: any = '';
+  email_host_password: any = '';
+  email_host_user: any = '';
+  created_by: any = '';
+
+  email_use_tls: boolean = false;
+  is_active: boolean = false;
+
+
   Users:any []=[];
-  RequestType:any []=[];
-  ApprovalLEvel:any []=[];
+  EmailConfg:any []=[];
+
 
 
   registerButtonClicked = false;
@@ -56,8 +62,7 @@ schemas: string[] = []; // Array to store schema names
 ngOnInit(): void {
  
   this.loadUsers();
-  this.loadRequestType();
-  this.loadApprovalLevelGen();
+  this.loadEmailConfg();
 
   this.userId = this.sessionService.getUserId();
   if (this.userId !== null) {
@@ -66,7 +71,7 @@ ngOnInit(): void {
         this.userDetails = userData; // Store user details in userDetails property
         // this.username = this.userDetails.username;
      
-  
+  this.created_by = this.userId;
         console.log('User ID:', this.userId); // Log user ID
         console.log('User Details:', this.userDetails); // Log user details
   
@@ -174,29 +179,13 @@ ngOnInit(): void {
   }
   
 
+
+
  
 }
 
 
-// checkViewPermission(permissions: any[]): boolean {
-//   const requiredPermission = 'add_approvallevel' ||'change_approvallevel' ||'delete_approvallevel' ||'view_approvallevel';
-  
-  
-//   // Check user permissions
-//   if (permissions.some(permission => permission.codename === requiredPermission)) {
-//     return true;
-//   }
-  
-//   // Check group permissions (if applicable)
-//   // Replace `// TODO: Implement group permission check`
-//   // with your logic to retrieve and check group permissions
-//   // (consider using a separate service or approach)
-//   return false; // Replace with actual group permission check
-//   }
-  
-
-  
-  checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
+checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
   return groupPermissions.some(permission => permission.codename === codeName);
   }
   
@@ -220,38 +209,16 @@ loadUsers(): void {
   }
   }
 
-  loadRequestType(): void {
+  loadEmailConfg(): void {
     
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
   
     console.log('schemastore',selectedSchema )
     // Check if selectedSchema is available
     if (selectedSchema) {
-      this.DepartmentServiceService.getReqType(selectedSchema).subscribe(
+      this.employeeService.getemailCong(selectedSchema).subscribe(
         (result: any) => {
-          this.RequestType = result;
-          console.log(' fetching Companies:');
-  
-        },
-        (error) => {
-          console.error('Error fetching Companies:', error);
-        }
-      );
-    }
-    }
-
-
-    
-  loadApprovalLevelGen(): void {
-    
-    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-  
-    console.log('schemastore',selectedSchema )
-    // Check if selectedSchema is available
-    if (selectedSchema) {
-      this.DepartmentServiceService.getApprovalLEvelGen(selectedSchema).subscribe(
-        (result: any) => {
-          this.ApprovalLEvel = result;
+          this.EmailConfg = result;
           console.log(' fetching Companies:');
   
         },
@@ -264,42 +231,49 @@ loadUsers(): void {
 
 
 
-    registerApproveLevel(): void {
+
+
+    RequestEmailConfg(): void {
       this.registerButtonClicked = true;
-      
-      const companyData = {
-        level: this.level,
-      
-        role:this.role,
-        approver: this.approver,
-  
-        request_type: this.request_type,
-      
+      // if (!this.name || !this.code || !this.valid_to) {
+      //   return;
+      // }
     
+      const formData = new FormData();
+      formData.append('email_host', this.email_host);
+      formData.append('email_port', this.email_port);
 
+      formData.append('email_host_user', this.email_host_user);
+      formData.append('email_host_password', this.email_host_password);
+      formData.append('created_by', this.created_by);
+
+      formData.append('email_use_tls', this.email_use_tls.toString());
+      formData.append('is_active', this.is_active.toString());
+
+
+    
+  
      
   
-        // Add other form field values to the companyData object
-      };
+      
     
-  
-      this.employeeService.registerApproveLevel(companyData).subscribe(
+    
+      this.employeeService.registerEmaiCong(formData).subscribe(
         (response) => {
           console.log('Registration successful', response);
-        
-              alert('Approvel Level Assigned ');
-              window.location.reload();
-              // window.location.reload();
-         
   
-        },
+  
+          alert('Leave Approval Level has been Created');
+  
+          window.location.reload();
+        },  
         (error) => {
           console.error('Added failed', error);
-          alert('enter all field!')
-          // Handle the error appropriately, e.g., show a user-friendly error message.
+          alert('Enter all required fields!');
         }
       );
     }
   
+
 
 }

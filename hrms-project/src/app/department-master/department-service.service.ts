@@ -77,6 +77,16 @@ export class DepartmentServiceService {
     
   }
 
+  getApprovalLEvelGen(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/employee/api/request-approvals-levels/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+
+    
+  }
+
+
   getUserforPermission(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/users/tenant-users/?schema=${selectedSchema}`;
   

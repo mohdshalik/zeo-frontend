@@ -25,7 +25,7 @@ import { EmployeeCreateLanguageComponent } from '../employee-create-language/emp
 })
 export class EmployeeDetailsComponent implements OnInit {
   Employees: any[] = [];
-  employeeLeaves: any[] = [];
+  employeeLeaves: any;
 
   emp_first_name: string = '';
   employee: any;
@@ -148,12 +148,10 @@ export class EmployeeDetailsComponent implements OnInit {
 
       if (employeeIdParam) {
         const employeeId = +employeeIdParam;
-    
-        // Fetch employee leave details
         this.EmployeeService.getEmployeeLeavetypes(employeeId).subscribe(
           (response) => {
-            if (response && response.leave_balance) {
-              this.employeeLeaves = response.leave_balance;
+            if (response) {
+              this.employeeLeaves = response;  // ✅ Store full response
             }
           },
           (error) => {
@@ -169,6 +167,12 @@ export class EmployeeDetailsComponent implements OnInit {
 
 
 
+    getLeaveBalance(typeId: number): number {
+      const balanceItem = this.employeeLeaves.leave_balance.find(
+        (item: any) => item.leave_type === typeId
+      );
+      return balanceItem ? balanceItem.balance : 0;  // Adjust field name if different
+    }
     // Calculate progress animation based on leave balance
 getProgressOffset(balance: number): number {
   const maxLeave = 10; // Assume max leave limit is 10 (Adjust as needed)

@@ -107,10 +107,10 @@ export class SalaryOptionsComponent {
   
               
                        
-                       this.hasViewPermissionSalary = this.checkGroupPermission('view_leaveapprovallevels', groupPermissions);
+                       this.hasViewPermissionSalary = this.checkGroupPermission('view_salarycomponent', groupPermissions);
                        console.log('Has view permission:', this.hasViewPermissionSalary);
                       
-                       this.hasViewPermissionPayroll = this.checkGroupPermission('view_lvemailtemplate', groupPermissions);
+                       this.hasViewPermissionPayroll = this.checkGroupPermission('view_payrollrun', groupPermissions);
                        console.log('Has view permission:', this.hasViewPermissionPayroll);
                        
                 } else {

@@ -7,10 +7,10 @@
         <div class="wrapper">
           <div class="sidebar">
               <ul>
-                  <li routerLink="/main-sidebar/salary-options/salary" ><a ><mat-icon>peoples</mat-icon> Salary Component</a></li>
+                  <li routerLink="/main-sidebar/salary-options/salary" *ngIf="hasViewPermissionSalary"><a ><mat-icon>peoples</mat-icon> Salary Component</a></li>
                   <!-- <li routerLink="/main-sidebar/leave-options/leave-type" *ngIf="hasViewPermissiondesg"><a><mat-icon>peoples</mat-icon> Leave Type</a></li> -->
                  
-                  <li routerLink="/main-sidebar/salary-options/pay-roll" ><a ><mat-icon>peoples</mat-icon> Payroll</a></li>
+                  <li routerLink="/main-sidebar/salary-options/pay-roll" *ngIf="hasViewPermissionPayroll"><a ><mat-icon>peoples</mat-icon> Payroll</a></li>
 
   
                   <mat-nav-list>

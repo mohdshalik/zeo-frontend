@@ -68,6 +68,8 @@ import { PayRollComponent } from './pay-roll/pay-roll.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PayrollDetailsComponent } from './payroll-details/payroll-details.component';
 import { SalaryOptionsComponent } from './salary-options/salary-options.component';
+import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
+import { EmailConfigurationComponent } from './email-configuration/email-configuration.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -253,6 +255,10 @@ const routes: Routes = [
             path:'email-template',
             component:EmailTemplateComponent
           },
+          {
+            path:'email-configuration',
+            component:EmailConfigurationComponent
+          },
             {
       path:'leave-template',
       component:LeaveTemplateComponent,
@@ -288,6 +294,10 @@ const routes: Routes = [
     {
       path:'leave-approval-level',
       component:LeaveApprovalLevelComponent,
+    },
+    {
+      path:'leave-balance',
+      component:LeaveBalanceComponent,
     },
  
 
