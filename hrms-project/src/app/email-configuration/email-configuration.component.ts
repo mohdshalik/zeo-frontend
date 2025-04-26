@@ -232,47 +232,33 @@ loadUsers(): void {
 
 
 
-
     RequestEmailConfg(): void {
       this.registerButtonClicked = true;
-      // if (!this.name || !this.code || !this.valid_to) {
-      //   return;
-      // }
     
-      const formData = new FormData();
-      formData.append('email_host', this.email_host);
-      formData.append('email_port', this.email_port);
-
-      formData.append('email_host_user', this.email_host_user);
-      formData.append('email_host_password', this.email_host_password);
-      formData.append('created_by', this.created_by);
-
-      formData.append('email_use_tls', this.email_use_tls.toString());
-      formData.append('is_active', this.is_active.toString());
-
-
+      // Prepare JSON payload instead of FormData
+      const payload = {
+        email_host: this.email_host,
+        email_port: this.email_port,
+        email_host_user: this.email_host_user,
+        email_host_password: this.email_host_password,
+        created_by: this.created_by,
+        email_use_tls: this.email_use_tls,
+        is_active: this.is_active
+      };
     
-  
-     
-  
-      
-    
-    
-      this.employeeService.registerEmaiCong(formData).subscribe(
+      this.employeeService.registerEmaiCong(payload).subscribe(
         (response) => {
           console.log('Registration successful', response);
-  
-  
-          alert('Leave Approval Level has been Created');
-  
+          alert('Email Configuration has been Created');
           window.location.reload();
-        },  
+        },
         (error) => {
           console.error('Added failed', error);
           alert('Enter all required fields!');
         }
       );
     }
+    
   
 
 
