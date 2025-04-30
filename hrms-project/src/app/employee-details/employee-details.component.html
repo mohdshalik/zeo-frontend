@@ -7,51 +7,52 @@
                     <h1> Employee Details </h1>
                 </div>
                 <div class="col-md-5">
-                    <div class="button-group pull-right" *ngIf="!hideButton" >
+                    <div class="button-group pull-right" *ngIf="!hideButton">
                         <!-- <button type="button"  class="btn-Create btn btn-success "><span class="header-btn-icon"><mat-icon>add_circle
                         </mat-icon></span> Create</button> -->
 
-                        <button type="button" class="btn-Edit btn-info btn"  (click)="openEditEmpPopuss(employee.id)">
+                        <button type="button" class="btn-Edit btn-info btn" (click)="openEditEmpPopuss(employee.id)">
                             <span class="header-btn-icon">
-                             <mat-icon>draw
-                        </mat-icon></span> Edit</button>
+                                <mat-icon>draw
+                                </mat-icon></span> Edit</button>
                         <button type="button" class="btn-Delete btn btn-danger" (click)="onDeleteEmployee(employee.id)">
                             <span class="header-btn-icon">
                                 <mat-icon> delete
-                           </mat-icon></span> Delete</button>
+                                </mat-icon></span> Delete</button>
                     </div>
                 </div>
 
             </div>
-           
-           
+
+
 
         </div>
         <!-- <div class="list_company_sec mt-4">
             
         </div> -->
-       
-        <div class="emp_details mt-5"  >
-           
+
+        <div class="emp_details mt-5">
+
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-card">
                         <div class="profile_img_emp d-block mx-auto">
                             <!-- <img [src]="employee.emp_profile_pic" alt="Employee Photo" style="width: 100%;"> -->
-                            <img [src]="employee.emp_profile_pic"  (error)="handleImageError($event)" style="width: 150px; height: 150px;">
+                            <img [src]="employee.emp_profile_pic" (error)="handleImageError($event)"
+                                style="width: 150px; height: 150px;">
                             <!-- <img *ngIf="employee.emp_profile_pic" [src]="employee.emp_profile_pic" alt="Profile Picture" class="img-fluid d-block mx-auto" style="width: 100%;"> -->
                         </div>
-                  
-                        <div class="text-data text-center" style="text-align: center;" >
-                          <span class="name">{{ employee.emp_first_name }} {{ employee.emp_last_name }} </span>
-                          <span class="job">{{employee.emp_desgntn_id}}
-                  </span>
+
+                        <div class="text-data text-center" style="text-align: center;">
+                            <span class="name">{{ employee.emp_first_name }} {{ employee.emp_last_name }} </span>
+                            <span class="job">{{employee.emp_desgntn_id}}
+                            </span>
                         </div>
-                  
-                     
-                  
-                      
-                      </div>    
+
+
+
+
+                    </div>
                 </div>
 
                 <div class="col-md-8">
@@ -106,8 +107,8 @@
                                 <h2>{{locationFieldName}}</h2>
                                 <h3>{{employee.emp_posting_location}}</h3>
                             </div>
-                          
-                            
+
+
                             <!-- <div class="col-md-5">
                                 <h2>Is Ess </h2>
                                 <h3>{{employee.is_ess}}</h3>
@@ -121,260 +122,263 @@
                     </div>
                 </div>
             </div>
-  <div class="row mt-4">
+            <div class="row mt-4">
 
-    <div class="col-md-12">
-        <div class="emp_tabs">
-                <mat-tab-group class="my-tabs" animationDuration="0ms">
-                    <mat-tab label="Personal Information">
-                        <div class="tab_content  mt-3">
-                            <div class="row">
-                                <div class="col-md-3" >
-                                    <h2>{{firstNameFieldName}}</h2>
-                                    <h3>{{ employee.emp_first_name }} </h3>
-                                </div>
+                <div class="col-md-12">
+                    <div class="emp_tabs">
+                        <mat-tab-group class="my-tabs" animationDuration="0ms">
+                            <mat-tab label="Personal Information">
+                                <div class="tab_content  mt-3">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2>{{firstNameFieldName}}</h2>
+                                            <h3>{{ employee.emp_first_name }} </h3>
+                                        </div>
 
-                                <div class="col-md-3">
-                                    <h2>{{lastNameFieldName}}</h2>
-                                    <h3>{{ employee.emp_last_name }} </h3>
-                                </div>
+                                        <div class="col-md-3">
+                                            <h2>{{lastNameFieldName}}</h2>
+                                            <h3>{{ employee.emp_last_name }} </h3>
+                                        </div>
 
-                                <div class="col-md-3">
-                                    <h2>{{genderFieldName}}</h2>
-                                    <h3>{{employee.emp_gender}} </h3>
-                                </div>
-                                <div class="col-md-3">
-                                    <h2>{{dobFieldName}}</h2>
-                                    <h3>{{employee.emp_date_of_birth}} </h3>
-                                </div>
-                            </div>
+                                        <div class="col-md-3">
+                                            <h2>{{genderFieldName}}</h2>
+                                            <h3>{{employee.emp_gender}} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>{{dobFieldName}}</h2>
+                                            <h3>{{employee.emp_date_of_birth}} </h3>
+                                        </div>
+                                    </div>
 
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h2>{{cmpnoFieldName}}</h2>
-                                    <h3>{{employee.emp_mobile_number_1}} </h3>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2>{{cmpnoFieldName}}</h2>
+                                            <h3>{{employee.emp_mobile_number_1}} </h3>
+                                        </div>
 
-                                <div class="col-md-3">
-                                    <h2>{{pernoFieldName}}</h2>
-                                    <h3>{{employee.emp_mobile_number_2}} </h3>
-                                </div>
+                                        <div class="col-md-3">
+                                            <h2>{{pernoFieldName}}</h2>
+                                            <h3>{{employee.emp_mobile_number_2}} </h3>
+                                        </div>
 
-                                <div class="col-md-3">
-                                    <h2>{{emailFieldName}}</h2>
-                                    <h3>{{employee.emp_personal_email}}</h3>
-                                </div>
-                                <div class="col-md-3">
-                                    <h2>{{cityFieldName}}</h2>
-                                    <h3>{{employee.emp_nationality}} </h3>
-                                </div>
-                            </div>
-
-                            
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h2>State</h2>
-                                    <h3>Kerala </h3>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <h2>{{cityFieldName}}</h2>
-                                    <h3>{{employee.emp_city}}</h3>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <h2>{{peraddressFieldName}}</h2>
-                                    <h3> {{employee.emp_permenent_address}}</h3>
-                                </div>
-                                <div class="col-md-3">
-                                    <h2>{{preaddressFieldName}}</h2>
-                                    <h3>{{employee.emp_present_address}}</h3>
-                                </div>
-                            </div>
+                                        <div class="col-md-3">
+                                            <h2>{{emailFieldName}}</h2>
+                                            <h3>{{employee.emp_personal_email}}</h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>{{cityFieldName}}</h2>
+                                            <h3>{{employee.emp_nationality}} </h3>
+                                        </div>
+                                    </div>
 
 
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h2>{{religionFieldName}}</h2>
-                                    <h3>{{employee.emp_relegion}} </h3>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2>State</h2>
+                                            <h3>Kerala </h3>
+                                        </div>
 
-                                <div class="col-md-3">
-                                    <h2>{{bloodFieldName}}</h2>
-                                    <h3>{{employee.emp_blood_group}}</h3>
-                                </div>
+                                        <div class="col-md-3">
+                                            <h2>{{cityFieldName}}</h2>
+                                            <h3>{{employee.emp_city}}</h3>
+                                        </div>
 
-                                <div class="col-md-3">
-                                    <h2>{{maritalFieldName}} </h2>
-                                    <h3>{{employee.emp_marital_status}}</h3>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <h2>Languages </h2>
-                                    <h3>{{employee.emp_languages}}</h3>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <h2>{{joinFieldName}} </h2>
-                                    <h3>{{employee.emp_active_date}}</h3>
-                                </div>
-                                <div class="col-md-3">
-                                    <h2>Nationality </h2>
-                                    <h3>{{employee.emp_nationality}}</h3>
-                                </div>
-                                
-                                
-
-                              
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-3" *ngFor="let cus of employee.custom_fields">
-                                   <h2> {{cus.emp_custom_field}}</h2>
-                                   <h3>{{cus.field_value}}</h3>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-
-                    
-                    </mat-tab>
+                                        <div class="col-md-3">
+                                            <h2>{{peraddressFieldName}}</h2>
+                                            <h3> {{employee.emp_permenent_address}}</h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>{{preaddressFieldName}}</h2>
+                                            <h3>{{employee.emp_present_address}}</h3>
+                                        </div>
+                                    </div>
 
 
-                    <mat-tab label="Employee Family">
-                        <div class="tab_content  mt-3" *ngFor="let member of emp_family_details">
-                            <div class="row">
-                                <div class="col-md-3" >
-                                    <h2>Employee Member Name</h2>
-                                    <h3>{{ member.ef_member_name }} </h3>
-                                </div>
-                                <div class="col-md-3" >
-                                    <h2>Date Of Birth</h2>
-                                    <h3>{{ member.ef_date_of_birth }} </h3>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2>{{religionFieldName}}</h2>
+                                            <h3>{{employee.emp_relegion}} </h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>{{bloodFieldName}}</h2>
+                                            <h3>{{employee.emp_blood_group}}</h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>{{maritalFieldName}} </h2>
+                                            <h3>{{employee.emp_marital_status}}</h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>Languages </h2>
+                                            <h3>{{employee.emp_languages}}</h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>{{joinFieldName}} </h2>
+                                            <h3>{{employee.emp_active_date}}</h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Nationality </h2>
+                                            <h3>{{employee.emp_nationality}}</h3>
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-3" *ngFor="let cus of employee.custom_fields">
+                                            <h2> {{cus.emp_custom_field}}</h2>
+                                            <h3>{{cus.field_value}}</h3>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="col-md-3" >
-                                    <h2>Employee Relation</h2>
-                                    <h3>{{ member.emp_relation }} </h3>
-                                </div>
-                                <div class="col-md-3" >
-                                    <h2>Employee Family Company Expense</h2>
-                                    <h3>{{ member.ef_company_expence }} </h3>
-                                </div>
 
-                                    <!-- Display each custom field -->
-                            <ng-container *ngFor="let field of member.fam_custom_fields">
-                                <div class="col-md-3">
-                                  <h2>{{ field.emp_custom_field }}</h2>
-                                  <h3>{{ field.field_value }}</h3>
-                                </div>
-                              </ng-container>
-                         
-                            </div>
 
-                           
 
-                         
-                        </div>
-                        <div class=" mt-5" >
-                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeefamAdd()">Add Family</button>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label="Qualification">
-                        <div class="tab_content  mt-3"  *ngFor="let Qualification of Qualifications">
-                            <div class="row">
-                                <div class="col-md-3" >
-                                    <h2>Employee Qualification</h2>
-                                    <h3>{{ Qualification.emp_qualification }} </h3>
-                                </div>
-                                <div class="col-md-3" >
-                                    <h2>Year</h2>
-                                    <h3>{{ Qualification.emp_qf_year }} </h3>
-                                </div>
+                            </mat-tab>
 
-                                <div class="col-md-3" >
-                                    <h2>Subject</h2>
-                                    <h3>{{ Qualification.emp_qf_subject }} </h3>
-                                </div>
-                             
-      
-                                <div class="col-md-3" >
-                                    <h2>Institution</h2>
-                                    <h3>{{ Qualification.emp_qf_instituition }} </h3>
-                                </div>
 
-                                               <!-- Display each custom field -->
-         <ng-container *ngFor="let field of Qualification.qualification_fields">
-            <div class="col-md-3">
-              <h2>{{ field.emp_custom_field }}</h2>
-              <h3>{{ field.field_value }}</h3>
-            </div>
-          </ng-container>
-                            </div>
+                            <mat-tab label="Employee Family">
+                                <div class="tab_content  mt-3" *ngFor="let member of emp_family_details">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2>Employee Member Name</h2>
+                                            <h3>{{ member.ef_member_name }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Date Of Birth</h2>
+                                            <h3>{{ member.ef_date_of_birth }} </h3>
+                                        </div>
 
-                         
-                        </div>
-                        <div class=" mt-5" >
-                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeefamAdd()">Add Qualification</button>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label="Job History">
-                        <div class="tab_content  mt-3"  *ngFor="let Jobhistory of Jobhistorys">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h2>Company Name</h2>
-                                    <h3>{{ Jobhistory.emp_jh_company_name }}</h3>
-                                </div>
-                                <div class="col-md-3" >
-                                    <h2>Designation</h2>
-                                    <h3>{{ Jobhistory.emp_jh_designation }} </h3>
-                                </div>
-                             
-                                <div class="col-md-3" >
-                                    <h2>From Date</h2>
-                                    <h3>{{ Jobhistory.emp_jh_from_date }} </h3>
-                                </div>
-                                <div class="col-md-3" >
-                                    <h2>End Date</h2>
-                                    <h3>{{ Jobhistory.emp_jh_end_date }} </h3>
-                                </div>
+                                        <div class="col-md-3">
+                                            <h2>Employee Relation</h2>
+                                            <h3>{{ member.emp_relation }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Employee Family Company Expense</h2>
+                                            <h3>{{ member.ef_company_expence }} </h3>
+                                        </div>
 
-                                <div class="col-md-3" >
-                                    <h2>Last Leaving Salary Per Month</h2>
-                                    <h3>{{ Jobhistory.emp_jh_leaving_salary_permonth }} </h3>
+                                        <!-- Display each custom field -->
+                                        <ng-container *ngFor="let field of member.fam_custom_fields">
+                                            <div class="col-md-3">
+                                                <h2>{{ field.emp_custom_field }}</h2>
+                                                <h3>{{ field.field_value }}</h3>
+                                            </div>
+                                        </ng-container>
+
+                                    </div>
+
+
+
+
                                 </div>
-                                <div class="col-md-3" >
-                                    <h2> Leaving Reason</h2>
-                                    <h3>{{ Jobhistory.emp_jh_reason }} </h3>
+                                <div class=" mt-5">
+                                    <button type="button" class="btn-Edit btn-info btn d-block mx-auto "
+                                        (click)="employeefamAdd()">Add Family</button>
                                 </div>
+                            </mat-tab>
+                            <mat-tab label="Qualification">
+                                <div class="tab_content  mt-3" *ngFor="let Qualification of Qualifications">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2>Employee Qualification</h2>
+                                            <h3>{{ Qualification.emp_qualification }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Year</h2>
+                                            <h3>{{ Qualification.emp_qf_year }} </h3>
+                                        </div>
 
-                                <div class="col-md-3" >
-                                    <h2> Total Experiance</h2>
-                                    <h3>{{ Jobhistory.emp_jh_years_experiance }} </h3>
+                                        <div class="col-md-3">
+                                            <h2>Subject</h2>
+                                            <h3>{{ Qualification.emp_qf_subject }} </h3>
+                                        </div>
+
+
+                                        <div class="col-md-3">
+                                            <h2>Institution</h2>
+                                            <h3>{{ Qualification.emp_qf_instituition }} </h3>
+                                        </div>
+
+                                        <!-- Display each custom field -->
+                                        <ng-container *ngFor="let field of Qualification.qualification_fields">
+                                            <div class="col-md-3">
+                                                <h2>{{ field.emp_custom_field }}</h2>
+                                                <h3>{{ field.field_value }}</h3>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+
                                 </div>
-                             
+                                <div class=" mt-5">
+                                    <button type="button" class="btn-Edit btn-info btn d-block mx-auto "
+                                        (click)="employeefamAdd()">Add Qualification</button>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Job History">
+                                <div class="tab_content  mt-3" *ngFor="let Jobhistory of Jobhistorys">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2>Company Name</h2>
+                                            <h3>{{ Jobhistory.emp_jh_company_name }}</h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Designation</h2>
+                                            <h3>{{ Jobhistory.emp_jh_designation }} </h3>
+                                        </div>
 
-                                  <!-- Display each custom field -->
-         <ng-container *ngFor="let field of Jobhistory.job_history_custom_fields">
-            <div class="col-md-3">
-              <h2>{{ field.emp_custom_field }}</h2>
-              <h3>{{ field.field_value }}</h3>
-            </div>
-          </ng-container>
-                         
-                             
+                                        <div class="col-md-3">
+                                            <h2>From Date</h2>
+                                            <h3>{{ Jobhistory.emp_jh_from_date }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>End Date</h2>
+                                            <h3>{{ Jobhistory.emp_jh_end_date }} </h3>
+                                        </div>
 
-                         
-                            </div>
+                                        <div class="col-md-3">
+                                            <h2>Last Leaving Salary Per Month</h2>
+                                            <h3>{{ Jobhistory.emp_jh_leaving_salary_permonth }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2> Leaving Reason</h2>
+                                            <h3>{{ Jobhistory.emp_jh_reason }} </h3>
+                                        </div>
 
-                         
-                        </div>
-                        <div class=" mt-5" >
-                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeefamAdd()">Add Job History</button>
-                        </div>
-                    </mat-tab>
-                    <!-- <mat-tab label="Leave Request">
+                                        <div class="col-md-3">
+                                            <h2> Total Experiance</h2>
+                                            <h3>{{ Jobhistory.emp_jh_years_experiance }} </h3>
+                                        </div>
+
+
+                                        <!-- Display each custom field -->
+                                        <ng-container *ngFor="let field of Jobhistory.job_history_custom_fields">
+                                            <div class="col-md-3">
+                                                <h2>{{ field.emp_custom_field }}</h2>
+                                                <h3>{{ field.field_value }}</h3>
+                                            </div>
+                                        </ng-container>
+
+
+
+
+                                    </div>
+
+
+                                </div>
+                                <div class=" mt-5">
+                                    <button type="button" class="btn-Edit btn-info btn d-block mx-auto "
+                                        (click)="employeefamAdd()">Add Job History</button>
+                                </div>
+                            </mat-tab>
+                            <!-- <mat-tab label="Leave Request">
                         <div class="tab_content  mt-3"  *ngFor="let Leavereq of LeaveRequests">
                             <div class="row">
                                 <div class="col-md-3">
@@ -406,76 +410,80 @@
                          
                         </div>
                     </mat-tab> -->
-                  
 
-                    <mat-tab label="Emp Documents">
-                        <div class="tab_content mt-3">
-                          <div class="row mt-3" *ngFor="let document of employee.emp_documents">
-                            
-                            <!-- Document Number -->
-                            <div class="col-md-2">
-                              <h2>Document Number</h2>
-                              <h3>{{ document.emp_doc_number }}</h3>
-                            </div>
-                            
-                            <!-- Issue Date -->
-                            <div class="col-md-2">
-                              <h2>Issue Date</h2>
-                              <h3>{{ document.emp_doc_issued_date }}</h3>
-                            </div>
-                            
-                            <!-- Expiry Date -->
-                            <div class="col-md-2">
-                              <h2>Expiry Date</h2>
-                              <h3>{{ document.emp_doc_expiry_date }}</h3>
-                            </div>
-                            
-                            <!-- Type -->
-                            <div class="col-md-2">
-                              <h2>Type</h2>
-                              <h3>{{ document.document_type }}</h3>
-                            </div>
-                            
-                            <!-- Status -->
-                            <div class="col-md-1">
-                              <h2>Status</h2>
-                              <h3>{{ document.is_active ? 'Active' : 'Inactive' }}</h3>
-                            </div>
-                            
-                            <!-- Employee Document -->
-                            <div class="col-md-3">
-                              <h2>Employee Document</h2>
-                              <div *ngIf="document.emp_doc_document">
-                                <a [href]="document.emp_doc_document" target="_blank" *ngIf="isPDF(document.emp_doc_document)">View Document</a>
-                                <img [src]="document.emp_doc_document" alt="Employee Document" *ngIf="!isPDF(document.emp_doc_document)" style="width: 100px; height: auto;">
-                              </div>
-                              <div *ngIf="!document.emp_doc_document">No Document Available</div>
-                            </div>
-                      
-                            <!-- Display each custom field -->
-                            <ng-container *ngFor="let field of document.doc_custom_fields">
-                              <div class="col-md-3">
-                                <h2>{{ field.emp_custom_field }}</h2>
-                                <h3>{{ field.field_value }}</h3>
-                              </div>
-                            </ng-container>
-                      
-                          </div>
-                        </div>
-                      
-                        <!-- Add Document Button -->
-                        <div class="mt-5">
-                          <button type="button" class="btn-Edit btn-info btn d-block mx-auto" (click)="employeefamAdd()">Add Document</button>
-                        </div>
-                      
-                        <!-- No Documents Message -->
-                        <div *ngIf="!employeeDocuments.length">No employee documents available.</div>
-                      </mat-tab>
-                      
-                  
-                    <mat-tab label="Emp Language">
-                        <div class="tab_content  mt-3"   >
-                            <!-- <div class="row mt-3" >
+
+                            <mat-tab label="Emp Documents">
+                                <div class="tab_content mt-3">
+                                    <div class="row mt-3" *ngFor="let document of employee.emp_documents">
+
+                                        <!-- Document Number -->
+                                        <div class="col-md-2">
+                                            <h2>Document Number</h2>
+                                            <h3>{{ document.emp_doc_number }}</h3>
+                                        </div>
+
+                                        <!-- Issue Date -->
+                                        <div class="col-md-2">
+                                            <h2>Issue Date</h2>
+                                            <h3>{{ document.emp_doc_issued_date }}</h3>
+                                        </div>
+
+                                        <!-- Expiry Date -->
+                                        <div class="col-md-2">
+                                            <h2>Expiry Date</h2>
+                                            <h3>{{ document.emp_doc_expiry_date }}</h3>
+                                        </div>
+
+                                        <!-- Type -->
+                                        <div class="col-md-2">
+                                            <h2>Type</h2>
+                                            <h3>{{ document.document_type }}</h3>
+                                        </div>
+
+                                        <!-- Status -->
+                                        <div class="col-md-1">
+                                            <h2>Status</h2>
+                                            <h3>{{ document.is_active ? 'Active' : 'Inactive' }}</h3>
+                                        </div>
+
+                                        <!-- Employee Document -->
+                                        <div class="col-md-3">
+                                            <h2>Employee Document</h2>
+                                            <div *ngIf="document.emp_doc_document">
+                                                <a [href]="document.emp_doc_document" target="_blank"
+                                                    *ngIf="isPDF(document.emp_doc_document)">View Document</a>
+                                                <img [src]="document.emp_doc_document" alt="Employee Document"
+                                                    *ngIf="!isPDF(document.emp_doc_document)"
+                                                    style="width: 100px; height: auto;">
+                                            </div>
+                                            <div *ngIf="!document.emp_doc_document">No Document Available</div>
+                                        </div>
+
+                                        <!-- Display each custom field -->
+                                        <ng-container *ngFor="let field of document.doc_custom_fields">
+                                            <div class="col-md-3">
+                                                <h2>{{ field.emp_custom_field }}</h2>
+                                                <h3>{{ field.field_value }}</h3>
+                                            </div>
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+
+                                <!-- Add Document Button -->
+                                <div class="mt-5">
+                                    <button type="button" class="btn-Edit btn-info btn d-block mx-auto"
+                                        (click)="employeefamAdd()">Add Document</button>
+                                </div>
+
+                                <!-- No Documents Message -->
+                                <div *ngIf="!employeeDocuments.length">No employee documents available.</div>
+                            </mat-tab>
+
+
+                            <mat-tab label="Emp Language">
+                                <div class="tab_content  mt-3">
+                                    <!-- <div class="row mt-3" >
 
                                 <div class="col-md-6">
                                     <div class="row">
@@ -535,113 +543,128 @@
                          
                             </div> -->
 
-                            <main class="">
+                                    <main class="">
 
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <section class="card cyan" >
-                                            <h2 class="card_title">Language</h2><hr>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <section class="card cyan">
+                                                    <h2 class="card_title">Language</h2>
+                                                    <hr>
 
-                                            <div class="skill_Sec" *ngFor="let member of EmpLangSkills">
-                                                <div class="row">
-                                                    <div class="col-md-9">
-                                                        <h6>{{member.value}}</h6>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <mat-icon (click)="onDeleteEmployeeLanguage(member.id)">delete</mat-icon>
-                                                    </div>
-
-                                                    <div class="col-md-12">
-                                                        <div class="perce_Sec">
-                                                            <div class="percentage-bar-container">
-                                                                <div class="percentage-bar" [style.width.%]="member.percentage" ></div>
+                                                    <div class="skill_Sec" *ngFor="let member of EmpLangSkills">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <h6>{{member.value}}</h6>
                                                             </div>
-                                                            <h6>{{member.percentage}}%</h6>
+
+                                                            <div class="col-md-3">
+                                                                <mat-icon
+                                                                    (click)="onDeleteEmployeeLanguage(member.id)">delete</mat-icon>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="perce_Sec">
+                                                                    <div class="percentage-bar-container">
+                                                                        <div class="percentage-bar"
+                                                                            [style.width.%]="member.percentage"></div>
+                                                                    </div>
+                                                                    <h6>{{member.percentage}}%</h6>
+                                                                </div>
+
+
+                                                            </div>
                                                         </div>
-                                                        
+                                                        <hr>
 
                                                     </div>
-                                                </div><hr>
-                                                
+                                                    <button type="button" class="btn-info btn mx-auto d-block"
+                                                        (click)="empLanguageOpen()">Add </button>
+
+
+                                                </section>
+
                                             </div>
-                                            <button type="button" class="btn-info btn mx-auto d-block" (click)="empLanguageOpen()">Add  </button>
-
-                                          
-                                        </section>
-
-                                        </div>
 
 
-                                        <div class="col-md-4">
+                                            <div class="col-md-4">
 
-                                            <section class="card red">
-                                                <h2 class="card_title">Programming Language</h2><hr>
+                                                <section class="card red">
+                                                    <h2 class="card_title">Programming Language</h2>
+                                                    <hr>
 
-                                                <div class="skill_Sec" *ngFor="let program of EmpPrgmSkills">
-                                                    <div class="row">
-                                                        <div class="col-md-9">
-                                                            <h6>{{program.program_skill}}</h6>
-                                                        </div>
-    
-                                                        <div class="col-md-3">
-                                                            <mat-icon (click)="onDeleteEmployeeProgramLanguage(program.id)">delete</mat-icon>
-                                                        </div>
-    
-                                                        <div class="col-md-12">
-                                                            <div class="perce_Sec">
-                                                                <div class="percentage-bar-container">
-                                                                    <div class="percentage-bar" [style.width.%]="program.percentage" ></div>
-                                                                </div>
-                                                                <h6>{{program.percentage}}%</h6>
+                                                    <div class="skill_Sec" *ngFor="let program of EmpPrgmSkills">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <h6>{{program.program_skill}}</h6>
                                                             </div>
-                                                            
-    
-                                                        </div>
-                                                    </div><hr>
-                                                    
-                                                </div>
-                                                <button type="button" class="btn-info btn mx-auto d-block" (click)="openAddFieldsModal()">Add  </button>
-    
-                                              </section>
 
-                                        </div>
-
-                                        <div class="col-md-4">
-
-                                            <section class="card blue">
-                                                <h2 class="card_title">Marketing</h2><hr>
-                                                <div class="skill_Sec" *ngFor="let market of EmpMarkkills">
-                                                    <div class="row">
-                                                        <div class="col-md-9">
-                                                            <h6>{{market.marketing_skill}}</h6>
-                                                        </div>
-    
-                                                        <div class="col-md-3">
-                                                            <mat-icon (click)="onDeleteEmployeeMarketLanguage(market.id)">delete</mat-icon>
-                                                        </div>
-    
-                                                        <div class="col-md-12">
-                                                            <div class="perce_Sec">
-                                                                <div class="percentage-bar-container">
-                                                                    <div class="percentage-bar" [style.width.%]="market.percentage" ></div>
-                                                                </div>
-                                                                <h6>{{market.percentage}}%</h6>
+                                                            <div class="col-md-3">
+                                                                <mat-icon
+                                                                    (click)="onDeleteEmployeeProgramLanguage(program.id)">delete</mat-icon>
                                                             </div>
-                                                            
-    
+
+                                                            <div class="col-md-12">
+                                                                <div class="perce_Sec">
+                                                                    <div class="percentage-bar-container">
+                                                                        <div class="percentage-bar"
+                                                                            [style.width.%]="program.percentage"></div>
+                                                                    </div>
+                                                                    <h6>{{program.percentage}}%</h6>
+                                                                </div>
+
+
+                                                            </div>
                                                         </div>
-                                                    </div><hr>
-                                                    
-                                                </div>
-                                                <button type="button" class="btn-info btn mx-auto d-block" (click)="openMarketingModal()">Add  </button>
+                                                        <hr>
 
-                                              </section>
-                                            
-                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn-info btn mx-auto d-block"
+                                                        (click)="openAddFieldsModal()">Add </button>
+
+                                                </section>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+
+                                                <section class="card blue">
+                                                    <h2 class="card_title">Marketing</h2>
+                                                    <hr>
+                                                    <div class="skill_Sec" *ngFor="let market of EmpMarkkills">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <h6>{{market.marketing_skill}}</h6>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <mat-icon
+                                                                    (click)="onDeleteEmployeeMarketLanguage(market.id)">delete</mat-icon>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="perce_Sec">
+                                                                    <div class="percentage-bar-container">
+                                                                        <div class="percentage-bar"
+                                                                            [style.width.%]="market.percentage"></div>
+                                                                    </div>
+                                                                    <h6>{{market.percentage}}%</h6>
+                                                                </div>
 
 
-                                        <!-- <div class="col-md-3">
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+
+                                                    </div>
+                                                    <button type="button" class="btn-info btn mx-auto d-block"
+                                                        (click)="openMarketingModal()">Add </button>
+
+                                                </section>
+
+                                            </div>
+
+
+                                            <!-- <div class="col-md-3">
 
                                             <section class="card orange">
                                                 <h2 class="card_title">Calculator</h2>
@@ -649,58 +672,59 @@
                                               </section>
                                             
                                         </div> -->
+                                        </div>
+
+
+
+
+
+
+
+                                    </main>
+
                                 </div>
-                               
-                            
-                              
-                            
-                               
-                            
-                              
-                              </main>
-                         
-                        </div>
-                        <!-- <div class=" mt-5" >
+                                <!-- <div class=" mt-5" >
                             <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeeLang()">Add Language</button>
                         </div> -->
-                    </mat-tab>
-                  </mat-tab-group>
+                            </mat-tab>
+                        </mat-tab-group>
 
 
 
 
-            </div>
-            </div>
-          </div>
-
-
-
-      
-          <div class="row mt-4" *ngIf="employeeLeaves?.available_leave_types?.length">
-            <div class="col-md-4" *ngFor="let comp of employeeLeaves.available_leave_types">
-              <div class="leave-type-sec">
-                <div class="row">
-                  <div class="col-md-5 mt-2">
-                    <h5>{{ comp.name }}</h5>
-                    <h6>Leave</h6>
-                  </div>
-          
-                  <div class="col-md-7 d-flex align-items-center justify-content-end">
-                    <div class="progress-circle">
-                      <svg viewBox="0 0 100 100">
-                        <circle class="bg" cx="50" cy="50" r="40"></circle>
-                        <circle class="progress" cx="50" cy="50" r="40"
-                          [attr.stroke-dashoffset]="getProgressOffset(getLeaveBalance(comp.id))">
-                        </circle>
-                      </svg>
-                      <div class="count">{{ getLeaveBalance(comp.id) }}</div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-          
+
+
+
+
+            <div class="row mt-4" *ngIf="employeeLeaves?.available_leave_types?.length">
+                <div class="col-md-4" *ngFor="let comp of employeeLeaves.available_leave_types">
+                    <div class="leave-type-sec">
+                        <div class="row">
+                            <div class="col-md-5 mt-2">
+                                <h5>{{ comp.name }}</h5>
+                                <h6>Leave</h6>
+                                <button type="button" class="btn" (click)="openingsModal(comp.id)">Add leave openings</button>
+                            </div>
+
+                            <div class="col-md-7 d-flex align-items-center justify-content-end">
+                                <div class="progress-circle">
+                                    <svg viewBox="0 0 100 100">
+                                        <circle class="bg" cx="50" cy="50" r="40"></circle>
+                                        <circle class="progress" cx="50" cy="50" r="40"
+                                            [attr.stroke-dashoffset]="getProgressOffset(getLeaveBalance(comp.id))">
+                                        </circle>
+                                    </svg>
+                                    <div class="count">{{ getLeaveBalance(comp.id) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
 
@@ -713,156 +737,207 @@
         <!-- modals -->
 
 
+         <!-- Modal Popup for add program language skill -->
+         <div *ngIf="isOpeningsModalOpen" class="modal">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-10">
+                  <h2>Add Leave Balance Openings</h2>
+                  <hr>
+                </div>
+                <div class="col-md-2">
+                  <span class="close pull-right" (click)="closeModal()">&times;</span>
+                </div>
+              </div>
+          
+              <form>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label>Leave Type ID:</label>
+                    <input type="text" class="form-control" [value]="selectedLeaveTypeId" readonly>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Opening Balance:</label>
+                    <input type="number" class="form-control" [(ngModel)]="openingBalance" name="openingBalance">
+                  </div>
+                </div>
+          
+                <div class="row">
+                  <div class="col-md-3">
+                    <button type="button" class="btn btn-success" (click)="submitOpenings()">Save</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+
         <!-- Modal Popup for add program language skill -->
         <div *ngIf="isAddFieldsModalOpen" class="modal">
             <div class="modal-content">
-              <div class="row">
-                <div class="col-md-10">
-                  <h2>Add Programming Langauge</h2>
-                  <hr>
-                </div>
-                <div class="col-md-2">
-                  <span class="close pull-right" (click)="closeAddFieldsModal()">&times;</span>
-                </div>
-              </div>
-
-
-
-              <form >
                 <div class="row">
-                   
-        
-                    <div class="col-md-6">
-        
-        
-                        <div class="custom-sel">
-                            <label>Select Employee Langauge</label>
-                            <select class="form-control" id="program_skill" required [(ngModel)]="program_skill"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !program_skill}" >
-                                <option value="" >Select</option>
-                                <option *ngFor="let deparmentsec of PrgmLangaguesSkills" [value]="deparmentsec.id">{{ deparmentsec.programming_language     }} </option>
-                            </select>
-                            <div *ngIf="registerButtonClicked && !program_skill" class="error-message">Please Select language</div>
-                        </div>
-                                    
-                    
+                    <div class="col-md-10">
+                        <h2>Add Programming Langauge</h2>
+                        <hr>
                     </div>
-                   
-                    <div class="col-md-6" >
-                       
-              <label>Percentage</label>
-             <input type="number"  class="form-control" required  [(ngModel)]="percentage"  placeholder="Enter Language Skill"
-              [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !percentage}">
-             
-             <div *ngIf="registerButtonClicked && !percentage" class="error-message">Language Skill is required.</div>
+                    <div class="col-md-2">
+                        <span class="close pull-right" (click)="closeAddFieldsModal()">&times;</span>
+                    </div>
+                </div>
+
+
+
+                <form>
+                    <div class="row">
+
+
+                        <div class="col-md-6">
+
+
+                            <div class="custom-sel">
+                                <label>Select Employee Langauge</label>
+                                <select class="form-control" id="program_skill" required [(ngModel)]="program_skill"
+                                    [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked && !program_skill}">
+                                    <option value="">Select</option>
+                                    <option *ngFor="let deparmentsec of PrgmLangaguesSkills" [value]="deparmentsec.id">
+                                        {{ deparmentsec.programming_language }} </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !program_skill" class="error-message">Please Select
+                                    language</div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label>Percentage</label>
+                            <input type="number" class="form-control" required [(ngModel)]="percentage"
+                                placeholder="Enter Language Skill" [ngModelOptions]="{standalone: true}"
+                                [ngClass]="{'error-field': registerButtonClicked && !percentage}">
+
+                            <div *ngIf="registerButtonClicked && !percentage" class="error-message">Language Skill is
+                                required.</div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                        <button (click)="closeAddFieldsModal()"
+                            class="pull-right btn btn-danger btn-full mt-4">Cancel</button>
+
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" (click)="registerlanguage()" mat-raised-button color="primary"
+                            class="pull-right btn-full mt-4">Add</button>
+
+                    </div>
+                </div>
+
+
+            </div>
         </div>
-        
-        
-        
-                 
-              
-                
-                
-           
-        
-        
-                </div>
-            </form>
-        
-            <div class="row">
-                <div class="col-md-8"></div>
-                <div class="col-md-2">
-                    <button (click)="closeAddFieldsModal()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
-        
-                </div>
-                <div class="col-md-2">
-                    <button type="button" (click)="registerlanguage()"  mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
-        
-                </div>
-            </div>
-          
-             
-            </div>
-          </div>
 
 
-              <!-- Modal Popup for add marketing language skill -->
+        <!-- Modal Popup for add marketing language skill -->
         <div *ngIf="isMArketingModalOpen" class="modal">
             <div class="modal-content">
-              <div class="row">
-                <div class="col-md-10">
-                  <h2>Add Programming Langauge</h2>
-                  <hr>
-                </div>
-                <div class="col-md-2">
-                  <span class="close pull-right" (click)="closemarketModal()">&times;</span>
-                </div>
-              </div>
-
-
-
-              <form >
                 <div class="row">
-                   
-        
-                    <div class="col-md-6">
-        
-        
-                        <div class="custom-sel">
-                            <label>Select Employee Langauge</label>
-                            <select class="form-control" id="marketing_skill" required [(ngModel)]="marketing_skill"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !marketing_skill}" >
-                                <option value="" >Select</option>
-                                <option *ngFor="let deparmentsec of MarlangaguesSkills" [value]="deparmentsec.id">{{ deparmentsec.marketing     }} </option>
-                            </select>
-                            <div *ngIf="registerButtonClicked && !marketing_skill" class="error-message">Please Select language</div>
-                        </div>
-                                    
-                    
+                    <div class="col-md-10">
+                        <h2>Add Programming Langauge</h2>
+                        <hr>
                     </div>
-                   
-                    <div class="col-md-6" >
-                       
-              <label>Percentage</label>
-             <input type="number"  class="form-control" required  [(ngModel)]="percentage"  placeholder="Enter Language Skill"
-              [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !percentage}">
-             
-             <div *ngIf="registerButtonClicked && !percentage" class="error-message">Language Skill is required.</div>
+                    <div class="col-md-2">
+                        <span class="close pull-right" (click)="closemarketModal()">&times;</span>
+                    </div>
+                </div>
+
+
+
+                <form>
+                    <div class="row">
+
+
+                        <div class="col-md-6">
+
+
+                            <div class="custom-sel">
+                                <label>Select Employee Langauge</label>
+                                <select class="form-control" id="marketing_skill" required [(ngModel)]="marketing_skill"
+                                    [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{'error-field': registerButtonClicked && !marketing_skill}">
+                                    <option value="">Select</option>
+                                    <option *ngFor="let deparmentsec of MarlangaguesSkills" [value]="deparmentsec.id">{{
+                                        deparmentsec.marketing }} </option>
+                                </select>
+                                <div *ngIf="registerButtonClicked && !marketing_skill" class="error-message">Please
+                                    Select language</div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label>Percentage</label>
+                            <input type="number" class="form-control" required [(ngModel)]="percentage"
+                                placeholder="Enter Language Skill" [ngModelOptions]="{standalone: true}"
+                                [ngClass]="{'error-field': registerButtonClicked && !percentage}">
+
+                            <div *ngIf="registerButtonClicked && !percentage" class="error-message">Language Skill is
+                                required.</div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                        <button (click)="closemarketModal()"
+                            class="pull-right btn btn-danger btn-full mt-4">Cancel</button>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="button" (click)="registerMarlanguage()" mat-raised-button color="primary"
+                            class="pull-right btn-full mt-4">Add</button>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
         </div>
-        
-        
-        
-                 
-              
-                
-                
-           
-        
-        
-                </div>
-            </form>
-        
-            <div class="row">
-                <div class="col-md-8"></div>
-                <div class="col-md-2">
-                    <button (click)="closemarketModal()"   class="pull-right btn btn-danger btn-full mt-4" >Cancel</button>
-        
-                </div>
-
-                <div class="col-md-2">
-                    <button type="button" (click)="registerMarlanguage()"  mat-raised-button color="primary" class="pull-right btn-full mt-4" >Add</button>
-        
-                </div>
-                
-            </div>
-          
-        
-             
-            </div>
-          </div>
 
 
-      
 
 
-      
+
+
     </div>
 </div>

@@ -174,6 +174,56 @@ ngOnInit(): void {
 }
 
 
+
+showBulkUpload: boolean = false;
+  selectedFile: File | null = null;
+
+
+toggleBulkUpload() {
+  this.showBulkUpload = !this.showBulkUpload;
+}
+
+
+    // File selection
+    onFileSelected(event: any) {
+      this.selectedFile = event.target.files[0];
+      console.log('Selected file:', this.selectedFile);
+    }
+    
+    // Submit file to backend
+    submitBulkUpload() {
+      if (!this.selectedFile) {
+        alert('Please select a file first.');
+        return;
+      }
+    
+      const selectedSchema = localStorage.getItem('selectedSchema');
+      if (!selectedSchema) {
+        alert('No schema selected.');
+        return;
+      }
+    
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+    
+      const uploadUrl = `http://localhost:8000/calendars/api/import-attendance/bulk_upload/?schema=${selectedSchema}`;
+    
+      this.http.post(uploadUrl, formData).subscribe(
+        (response: any) => {
+          console.log('Bulk upload successful', response);
+          alert('Bulk upload successful!');
+          this.selectedFile = null;
+          this.showBulkUpload = false;
+        },
+        (error: any) => {
+          console.error('Bulk upload failed', error);
+          alert('Bulk upload failed. Please check the file and try again.');
+        }
+      );
+    }
+        
+
+
 // checkViewPermission(permissions: any[]): boolean {
 //   const requiredPermission = 'add_attendance' ||'change_attendance' ||'delete_attendance' ||'view_attendance';
   

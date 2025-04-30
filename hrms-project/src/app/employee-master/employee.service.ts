@@ -291,7 +291,7 @@ export class EmployeeService {
 
     // Send only the required fields
     return this.http.patch(apiUrl, updateData);
-}
+  }
 
   getExpiredDocuments(selectedSchema: string): Observable<any> {
 
@@ -709,7 +709,7 @@ export class EmployeeService {
 
 
   // getDocument(employeeId: number): Observable<any> {
-    
+
 
 
   //   const selectedSchema = localStorage.getItem('selectedSchema');
@@ -729,14 +729,14 @@ export class EmployeeService {
       console.error('No schema selected.');
       return throwError('No schema selected.'); // Handle error if no schema is selected
     }
-  
+
     const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_documents/?schema=${selectedSchema}`;
     return this.http.get(apiUrl);
   }
 
   getApiUrl(): string {
-  return this.apiUrl;
-}
+    return this.apiUrl;
+  }
 
 
   getUserData(): Observable<any> {
@@ -1248,7 +1248,7 @@ export class EmployeeService {
   }
 
 
-  
+
   registerEmpAddMoreFeildFam(familyData: any): Observable<any> {
     const selectedSchema = localStorage.getItem('selectedSchema');
     if (!selectedSchema) {
@@ -1266,7 +1266,7 @@ export class EmployeeService {
       })
     );
   }
-  
+
 
 
   registerEmpAddMoreFeildQual(familyData: any): Observable<any> {
@@ -1373,7 +1373,7 @@ export class EmployeeService {
   }
 
 
-   getFormFieldQual(selectedSchema: string): Observable<any> {
+  getFormFieldQual(selectedSchema: string): Observable<any> {
     // const url = `${this.baseUrl}/Branch/`;
     // return this.http.get(url);
 
@@ -1712,19 +1712,31 @@ export class EmployeeService {
 
   getAssignWeekendcalendar(selectedSchema: string): Observable<any> {
     const Url = `${this.apiUrl}/calendars/api/assign-weekend/?schema=${selectedSchema}`;
-  
+
     // Fetch employees from the API
     return this.http.get(Url);
-  
+
   }
 
   getAssignHolcalendar(selectedSchema: string): Observable<any> {
     const Url = `${this.apiUrl}/calendars/api/assign-holiday/?schema=${selectedSchema}`;
-  
+
     // Fetch employees from the API
     return this.http.get(Url);
-  
+
   }
 
+
+
+  saveLeaveOpening(payload: any): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      return throwError(() => new Error('No schema selected.'));
+    }
+  
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-balance/apply-openings/?schema=${selectedSchema}`;
+    return this.http.post(apiUrl, payload);
+  }
+  
 
 }

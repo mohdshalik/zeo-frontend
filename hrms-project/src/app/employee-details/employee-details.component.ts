@@ -741,4 +741,57 @@ getProgressOffset(balance: number): number {
         this.isMArketingModalOpen=false;
       }
 
+
+
+      isOpeningsModalOpen:boolean=false;
+      
+      selectedLeaveTypeId: number | null = null;
+openingBalance: number | null = null;
+
+
+      openingsModal(leaveTypeId: number): void {
+        this.selectedLeaveTypeId = leaveTypeId;
+        this.isOpeningsModalOpen = true;
+      }
+      
+      closeModal(): void {
+        this.isOpeningsModalOpen = false;
+        this.selectedLeaveTypeId = null;
+        this.openingBalance = null;
+      }
+
+
+      submitOpenings(): void {
+        if (this.selectedLeaveTypeId == null || this.openingBalance == null) {
+          alert("Please enter opening balance");
+          return;
+        }
+      
+        const employeeIdParam = this.route.snapshot.paramMap.get('id');
+        if (!employeeIdParam) {
+          alert("Employee ID is missing.");
+          return;
+        }
+      
+        const payload = {
+          employee: +employeeIdParam,
+          leave_balance_id: this.selectedLeaveTypeId,
+          openings: this.openingBalance
+        };
+      
+        this.EmployeeService.saveLeaveOpening(payload).subscribe(
+          (res) => {
+            alert("Opening leave balance saved.");
+            this.closeModal();
+            // this.ngOnInit(); // Reload data
+          },
+          (err) => {
+            console.error("Failed to save opening balance", err);
+            alert("Failed to save opening balance.");
+          }
+        );
+      }
+      
+
+
 }
