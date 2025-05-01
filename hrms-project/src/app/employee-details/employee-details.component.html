@@ -698,36 +698,57 @@
 
 
 
-
-            <div class="row mt-4" *ngIf="employeeLeaves?.available_leave_types?.length">
-                <div class="col-md-4" *ngFor="let comp of employeeLeaves.available_leave_types">
-                    <div class="leave-type-sec">
-                        <div class="row">
-                            <div class="col-md-5 mt-2">
-                                <h5>{{ comp.name }}</h5>
-                                <h6>Leave</h6>
-                                <button type="button" class="btn" (click)="openingsModal(comp.id)">Add leave openings</button>
-                            </div>
-
-                            <div class="col-md-7 d-flex align-items-center justify-content-end">
-                                <div class="progress-circle">
-                                    <svg viewBox="0 0 100 100">
-                                        <circle class="bg" cx="50" cy="50" r="40"></circle>
-                                        <circle class="progress" cx="50" cy="50" r="40"
-                                            [attr.stroke-dashoffset]="getProgressOffset(getLeaveBalance(comp.id))">
-                                        </circle>
-                                    </svg>
-                                    <div class="count">{{ getLeaveBalance(comp.id) }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Looping leave balances -->
+<div class="row mt-4">
+    <div class="col-md-4" *ngFor="let balance of employeeLeaves.leave_balance">
+      <div class="leave-type-sec">
+        <div class="row">
+          <div class="col-md-5 mt-2">
+            <h5>{{ balance.leave_type }}</h5>
+            <h6>Leave</h6>
+            <!-- <button type="button" class="btn" (click)="openingsModal(balance.id, balance.leave_type)">
+              Add leave openings
+            </button> -->
+          </div>
+          <div class="col-md-7 d-flex align-items-center justify-content-end">
+            <div class="progress-circle">
+              <svg viewBox="0 0 100 100">
+                <circle class="bg" cx="50" cy="50" r="40"></circle>
+                <circle
+                  class="progress"
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  [attr.stroke-dashoffset]="getDashOffset(balance.balance)"
+                ></circle>
+              </svg>
+              <div class="count">{{ balance.balance }}</div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="opening_add_sec">
+ <button type="button" class="add_openongs"  (click)="openingsModal(balance.id, balance.leave_type)">
+              Add leave openings
+            </button>
+      </div>
+    </div>
+  </div>
+  
 
 
 
-
+            <!-- <div class="col-md-7 d-flex align-items-center justify-content-end">
+                <div class="progress-circle">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="bg" cx="50" cy="50" r="40"></circle>
+                        <circle class="progress" cx="50" cy="50" r="40"
+                            [attr.stroke-dashoffset]="getProgressOffset(getLeaveBalance(comp.id))">
+                        </circle>
+                    </svg>
+                    <div class="count">{{ getLeaveBalance(comp.id) }}</div>
+                </div>
+            </div> -->
 
 
         </div>
@@ -754,7 +775,7 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label>Leave Type ID:</label>
-                    <input type="text" class="form-control" [value]="selectedLeaveTypeId" readonly>
+                    <input type="text" class="form-control" [value]="selectedLeaveBalanceId" readonly>
                   </div>
                   <div class="col-md-6">
                     <label>Opening Balance:</label>

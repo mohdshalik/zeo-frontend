@@ -745,24 +745,26 @@ getProgressOffset(balance: number): number {
 
       isOpeningsModalOpen:boolean=false;
       
-      selectedLeaveTypeId: number | null = null;
-openingBalance: number | null = null;
+      selectedLeaveBalanceId: number | null = null;
+      selectedLeaveTypeName: string = '';
+      openingBalance: number | null = null;
 
 
-      openingsModal(leaveTypeId: number): void {
-        this.selectedLeaveTypeId = leaveTypeId;
+      openingsModal(leaveBalanceId: number, leaveTypeName: string): void {
+        this.selectedLeaveBalanceId = leaveBalanceId;
+        this.selectedLeaveTypeName = leaveTypeName;
         this.isOpeningsModalOpen = true;
       }
       
       closeModal(): void {
         this.isOpeningsModalOpen = false;
-        this.selectedLeaveTypeId = null;
+        this.selectedLeaveBalanceId = null;
         this.openingBalance = null;
       }
 
 
       submitOpenings(): void {
-        if (this.selectedLeaveTypeId == null || this.openingBalance == null) {
+        if (this.selectedLeaveBalanceId == null || this.openingBalance == null) {
           alert("Please enter opening balance");
           return;
         }
@@ -775,7 +777,7 @@ openingBalance: number | null = null;
       
         const payload = {
           employee: +employeeIdParam,
-          leave_balance_id: this.selectedLeaveTypeId,
+          leave_balance_id: this.selectedLeaveBalanceId,
           openings: this.openingBalance
         };
       
@@ -792,6 +794,18 @@ openingBalance: number | null = null;
         );
       }
       
+
+
+      // Max balance (you can adjust this value as needed)
+maxBalance = 30;
+
+// Total circle length (circumference = 2 * π * r)
+fullCircle = 2 * Math.PI * 40; // radius is 40
+
+getDashOffset(balance: number): number {
+  const percent = Math.min(balance / this.maxBalance, 1); // max 100%
+  return this.fullCircle * (1 - percent);
+}
 
 
 }

@@ -539,7 +539,6 @@ body {
   background: white;
   padding: 15px 15px 15px 30px;
   width: 100%;
-  margin-bottom: 20px;
 
 }
 
@@ -596,4 +595,23 @@ body {
   font-size: 18px;
   font-weight: bold;
   color: #4caf50;
+}
+
+.opening_add_sec{
+  background: white;
+  border-top: solid 0.5px whitesmoke;
+  width: 100%;
+  margin-bottom: 20px;
+
+}
+
+.add_openongs{
+  border: none;
+  background: transparent;
+  color: black;
+  width: 100%;
+  padding:10px 20px;
+  font-size: 14px;
+  text-transform: capitalize;
+
 }
