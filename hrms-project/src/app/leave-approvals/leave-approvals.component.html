@@ -20,9 +20,13 @@
               <div class="approval_sec" *ngFor="let apr of Approvals" >
                 <h6>Leave Request Approvals</h6><hr>
                 <div class="row ">
-                    <div class="col-md-4">
-                      <h4>Leave Type</h4>
+                    <div class="col-md-2">
+                      <h4>Leave Request</h4>
                       <h5>{{apr.leave_request}}</h5>
+                    </div>
+                       <div class="col-md-2">
+                      <h4>Employee</h4>
+                      <h5>{{apr.employee_id}}</h5>
                     </div>
                     <div class="col-md-2">
                       <h4>Status  </h4>
@@ -52,7 +56,47 @@
             </div>
           </div>
 
-
+          <div class="com_list">
+            <h2>Employee leave request history</h2>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Select Employee</label>
+                <div class="custom-sel">
+                  <select class="form-control" [(ngModel)]="selectedEmployeeId" (change)="getLeaveHistory()" [ngModelOptions]="{standalone: true}">
+                    <option value="">-- Select Employee --</option>
+                    <option *ngFor="let employee of Employees" [value]="employee.id">{{ employee.emp_code }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          
+            <!-- Leave request history table -->
+            <div class="row mt-4" *ngIf="leaveHistory.length > 0">
+              <div class="col-md-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Leave Type</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Reason</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let leave of leaveHistory">
+                      <td>{{ leave.leave_type_name }}</td>
+                      <td>{{ leave.start_date }}</td>
+                      <td>{{ leave.end_date }}</td>
+                      <td>{{ leave.reason }}</td>
+                      <td>{{ leave.status }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          
 
           <!-- Modal Popup for selected approval details -->
 <!-- Modal Popup for selected approval details -->
@@ -74,25 +118,7 @@
           [ngModelOptions]="{ standalone: true }"
         >  </textarea>
   
-        <!-- Additional input for rejection reason -->
-        <div *ngIf="showRejectionReason">
-          <!-- <textarea
-            class="form-control mt-2"
-            [(ngModel)]="rejectionReason"
-            placeholder="Add a Rejection Reason..."
-            [ngModelOptions]="{ standalone: true }"
-          ></textarea> -->
-
-          <div class="col-md-12">
-            <label>Leave Type</label>
-            <div class="custom-sel">
-              <select class="form-control" id="rejection_reason" name="rejection_reason" [(ngModel)]="rejection_reason" [ngModelOptions]="{standalone: true}">
-                <option *ngFor="let rejectionReason of RejectionResons" [value]="rejectionReason.id">{{ rejectionReason.reason_text }}</option>
-              </select>
-            </div>
-          </div>
-
-        </div>
+   
   
         <div class="row mt-2">
           <div class="col-md-6"></div>
@@ -114,6 +140,25 @@
               Approve
             </button>
           </div>
+        </div>
+             <!-- Additional input for rejection reason -->
+        <div *ngIf="showRejectionReason">
+          <textarea
+            class="form-control mt-2"
+            [(ngModel)]="rejection_reason"
+            placeholder="Add a Rejection Reason..."
+            [ngModelOptions]="{ standalone: true }"
+          ></textarea>
+
+          <!-- <div class="col-md-12">
+            <label>Leave Type</label>
+            <div class="custom-sel">
+              <select class="form-control" id="rejection_reason" name="rejection_reason" [(ngModel)]="rejection_reason" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let rejectionReason of RejectionResons" [value]="rejectionReason.id">{{ rejectionReason.reason_text }}</option>
+              </select>
+            </div>
+          </div> -->
+
         </div>
         <div class="mt-2" *ngIf="showRejectionReason">
           <button

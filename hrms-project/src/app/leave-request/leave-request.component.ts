@@ -23,7 +23,7 @@ export class LeaveRequestComponent {
   approved_by: any = '';
   approved_on: any = '';
   half_day_period: any = '';
-  leave_type: any = '';
+  leave_type: string = ''; // or number = 0, based on your API
   document_number: any = '';
 
 
@@ -237,8 +237,9 @@ export class LeaveRequestComponent {
     formData.append('half_day_period', this.half_day_period);
     formData.append('document_number', this.document_number);
 
+    formData.append('leave_type', this.leave_type.toString());
 
-    formData.append('leave_type', this.leave_type);
+    // formData.append('leave_type', this.leave_type);
     formData.append('employee', this.selectedEmployee?.toString() || '');
 
     this.leaveService.requestLeaveAdmin(formData).subscribe(

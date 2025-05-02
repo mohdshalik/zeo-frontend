@@ -36,6 +36,9 @@ export class LeaveApprovalsComponent {
   hasDeletePermission: boolean = false;
   hasViewPermission: boolean =false;
   hasEditPermission: boolean = false;
+
+  Employees: any[] = [];
+
   
   constructor(private authService: AuthenticationService,
     private router: Router,
@@ -72,6 +75,7 @@ export class LeaveApprovalsComponent {
       this.LoadLeaveRejectionReasons(selectedSchema);
 
 
+      this.LoadEmployee(selectedSchema);
 
 
 
@@ -258,6 +262,20 @@ fetchingApprovals(): void {
 }
 
 
+LoadEmployee(selectedSchema: string) {
+  this.leaveService.getEmployee(selectedSchema).subscribe(
+    (data: any) => {
+      this.Employees = data;
+
+      console.log('employee:', this.Employees);
+    },
+    (error: any) => {
+      console.error('Error fetching categories:', error);
+    }
+  );
+}
+
+
 
 selectedApproval: any = null;
 isAddFieldsModalOpen: boolean = false;
@@ -397,6 +415,31 @@ LoadLeaveRejectionReasons(selectedSchema: string) {
   );
 }
 
+
+
+
+
+
+selectedEmployeeId: string = '';
+leaveHistory: any[] = [];
+
+
+getLeaveHistory(): void {
+  if (!this.selectedEmployeeId || !this.selectedSchema) {
+    console.warn('Employee or schema not selected.');
+    return;
+  }
+
+  this.leaveService.getLeaveRequestHistory(this.selectedEmployeeId, this.selectedSchema).subscribe(
+    (data: any) => {
+      this.leaveHistory = data;
+      console.log('Leave History:', this.leaveHistory);
+    },
+    (error: any) => {
+      console.error('Error fetching leave history:', error);
+    }
+  );
+}
 
 
 }

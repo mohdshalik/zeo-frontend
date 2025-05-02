@@ -25,9 +25,14 @@
                       <div class="col-md-3">
                         <label>Leave Type</label>
                         <div class="custom-sel">
-                          <select class="form-control" id="leave_type" name="leave_type" [(ngModel)]="leave_type" [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let leavetype of LeaveTypes" [value]="leavetype.id">{{ leavetype.name }}</option>
-                          </select>
+                          <select class="form-control" id="leave_type" name="leave_type"
+                          [(ngModel)]="leave_type" [ngModelOptions]="{standalone: true}" required>
+                    <option value="">-- Select Leave Type --</option>
+                    <option *ngFor="let leavetype of LeaveTypes" [ngValue]="leavetype.id">
+                      {{ leavetype.name }}
+                    </option>
+                  </select>
+                  
                         </div>
                       </div>
                       
