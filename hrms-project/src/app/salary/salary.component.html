@@ -110,27 +110,22 @@
                       
             
 
-                    <div class="calculator-container mt-4" *ngIf="!is_fixed">
+                    <!-- <div class="calculator-container mt-4" >
                       <div class="calculator">
-                        <!-- Textarea for payroll formula -->
                         <label>Formula Text</label>
                         <textarea class="form-control display" [(ngModel)]="formula" [ngModelOptions]="{standalone: true}" readonly></textarea>
                     
-                        <!-- Buttons Grid -->
                         <div class="buttons-grid">
-                          <!-- Salary Components List -->
                           <button type="button" *ngFor="let component of Salarycomponent" 
                             class="btn btn-primary component-btn" 
                             (click)="insertIntoTextarea(component.code)">
                             {{ component.code }}
                           </button>
                     
-                          <!-- Number Buttons (0-9) -->
                           <button type="button" class="btn btn-dark number" *ngFor="let num of numbers" (click)="insertIntoTextarea(num)">
                             {{ num }}
                           </button>
                     
-                          <!-- Operator Buttons -->
                           <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('+')">+</button>
                           <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('-')">-</button>
                           <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('%')">%</button>
@@ -142,11 +137,12 @@
                           </button>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
 
    
                         <!-- Formula Writer -->
+                         <div *ngIf="!is_fixed">
                         <div class="col-md-8">
                           <label>Formula Writer</label>
                           <textarea 
@@ -170,7 +166,7 @@
                             </div>
                           </div>
                         </div>
-               
+               </div>
                       
                     
                     
