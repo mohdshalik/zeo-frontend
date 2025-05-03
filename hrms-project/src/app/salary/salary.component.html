@@ -143,6 +143,36 @@
                         </div>
                       </div>
                     </div>
+
+
+   
+                        <!-- Formula Writer -->
+                        <div class="col-md-8">
+                          <label>Formula Writer</label>
+                          <textarea 
+                            class="form-control display" 
+                            [(ngModel)]="formula" 
+                            [ngModelOptions]="{standalone: true}" 
+                            #formulaTextArea
+                            rows="6">
+                          </textarea>
+                        </div>
+                      
+                        <!-- Salary Components List -->
+                        <div class="col-md-4">
+                          <label>Select Components</label>
+                          <div class="email_placeholdername">
+                            <div 
+                              class="on_by_placeholders" 
+                              *ngFor="let component of Salarycomponent"
+                              (click)="insertComponentToFormula(component.code, formulaTextArea)">
+                              <h4>{{ component.code }}</h4>
+                            </div>
+                          </div>
+                        </div>
+               
+                      
+                    
                     
         
 
@@ -236,8 +266,7 @@
                             <label>Amount</label>
                             <input type="text" class="form-control" required [(ngModel)]="amount"
                                    placeholder="Enter amount"
-                                   [ngModelOptions]="{standalone: true}" 
-                            >
+                                   [ngModelOptions]="{standalone: true}"  >
                           
                           </div>
                           

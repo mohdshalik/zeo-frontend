@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { SessionService } from '../login/session.service';
 import { LeaveService } from '../leave-master/leave.service';
 import { DesignationService } from '../designation-master/designation.service';
 import { EmployeeService } from '../employee-master/employee.service';
+declare var $: any;
+import 'summernote'; // Ensure you have summernote imported
 @Component({
   selector: 'app-salary',
   templateUrl: './salary.component.html',
@@ -73,6 +75,8 @@ updateIdEmp: number | null = null;
     private leaveService:LeaveService,
     private DesignationService: DesignationService,
     private EmployeeService:EmployeeService,
+    private el:ElementRef,
+
 
     
     ) {}
@@ -449,6 +453,8 @@ if (this.userId !== null) {
     
 
 
+  
+
     editSalaryComponentEmp(component: any): void {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     
@@ -549,5 +555,28 @@ if (this.userId !== null) {
         this.amount = '';
       }
     }
+
+
+
+
+// Insert component code into formula textarea
+insertComponentToFormula(code: string, textarea: HTMLTextAreaElement): void {
+  const placeholder = `${code}`;
+
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+
+  // Insert placeholder at the cursor position
+  this.formula = 
+    this.formula.substring(0, start) + 
+    placeholder + 
+    this.formula.substring(end);
+
+  // Optional: Refocus and move cursor after inserted text
+  setTimeout(() => {
+    textarea.focus();
+    textarea.selectionStart = textarea.selectionEnd = start + placeholder.length;
+  }, 0);
+}
     
 }

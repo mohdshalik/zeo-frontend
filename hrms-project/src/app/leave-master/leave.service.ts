@@ -615,7 +615,7 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
 
   getLeaveRequestHistory(employeeId: string, schema: string): Observable<any> {
-    const apiUrl = `${this.apiUrl}/calendars/api/emp-leave-request/leave-request-history/?employee_id_=${employeeId}&schema=${schema}`;
+    const apiUrl = `${this.apiUrl}/calendars/api/emp-leave-request/leave-request-history/?employee_id=${employeeId}&schema=${schema}`;
     return this.http.get(apiUrl);
   }
 

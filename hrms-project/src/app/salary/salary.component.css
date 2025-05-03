@@ -308,3 +308,33 @@ button {
 table th{
   text-transform: capitalize;
 }
+
+
+.email_placeholdername{
+  /* margin-top: 50px; */
+  background: white;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  height: 200px;
+  overflow-y: scroll;
+
+}
+
+.on_by_placeholders{
+  background: whitesmoke;
+  padding: 10px;
+  margin-bottom: 10px;
+
+
+}
+
+.on_by_placeholders h4{
+  font-size: 12px;
+  text-align: center;
+}
+
+.emailtep_det_{
+  background: whitesmoke;
+  padding: 20px;
+  margin-bottom: 20px;
+}
