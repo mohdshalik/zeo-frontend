@@ -322,6 +322,10 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   
   }
 
+  rejectLeaveRequest(payload: any, schema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/calendars/api/immediate-reject/?schema=${schema}`;
+  return this.http.post(apiUrl, payload);
+}
   getEmployee(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/employee/api/Employee/?schema=${selectedSchema}`;
   

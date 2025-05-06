@@ -6,44 +6,17 @@ import { LeaveService } from '../leave-master/leave.service';
 import { DesignationService } from '../designation-master/designation.service';
 
 @Component({
-  selector: 'app-leave-request',
-  templateUrl: './leave-request.component.html',
-  styleUrl: './leave-request.component.css'
+  selector: 'app-immediate-rejection',
+  templateUrl: './immediate-rejection.component.html',
+  styleUrl: './immediate-rejection.component.css'
 })
-export class LeaveRequestComponent {
+export class ImmediateRejectionComponent {
 
-
-  start_date: any = '';
-  end_date: any = '';
-  reason: any = '';
-
-  status: any = '';
-
-  applied_on: any = '';
-  approved_by: any = '';
-  approved_on: any = '';
-  half_day_period: any = '';
-  leave_type: string = ''; // or number = 0, based on your API
-  document_number: any = '';
-
-
-  employee: any = '';
-
-
-  dis_half_day: boolean = false;
-
-  registerButtonClicked: boolean = false;
-
-
-
-  LeaveTypes: any[] = [];
-  Employees: any[] = [];
-  allLeaveTypes: any[] = [];
-  leaveBalances: any[] = [];
-
-  Users: any[] = [];
 
   LeaveRequests: any[] = [];
+
+  rejection_reason: any = '';
+  document_number: any = '';
 
 
 
@@ -56,8 +29,6 @@ export class LeaveRequestComponent {
   userDetails: any;
   userDetailss: any;
   schemas: string[] = []; // Array to store schema names
-
-
 
   constructor(
     private http: HttpClient,
@@ -73,9 +44,6 @@ export class LeaveRequestComponent {
     if (selectedSchema) {
 
 
-      // this.LoadLeavetype(selectedSchema);
-      this.LoadEmployee(selectedSchema);
-      this.LoadUsers(selectedSchema);
       this.LoadLeaveRequest(selectedSchema);
 
 
@@ -198,166 +166,57 @@ export class LeaveRequestComponent {
 
   }
 
-
-
-  // checkViewPermission(permissions: any[]): boolean {
-  //   const requiredPermission = 'add_employee_leave_request' ||'change_employee_leave_request' ||
-  //   'delete_employee_leave_request' ||'view_employee_leave_request';
-
-
-  //   // Check user permissions
-  //   if (permissions.some(permission => permission.codename === requiredPermission)) {
-  //     return true;
-  //   }
-
-  //   // Check group permissions (if applicable)
-  //   // Replace `// TODO: Implement group permission check`
-  //   // with your logic to retrieve and check group permissions
-  //   // (consider using a separate service or approach)
-  //   return false; // Replace with actual group permission check
-  //   }
-
-
-
-
   checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
     return groupPermissions.some(permission => permission.codename === codeName);
   }
 
 
-  requestLeave(): void {
-    this.registerButtonClicked = true;
-
-    const formData = new FormData();
-    formData.append('start_date', this.start_date);
-    formData.append('end_date', this.end_date);
-    formData.append('reason', this.reason);
-    formData.append('status', this.status);
-    formData.append('dis_half_day', this.dis_half_day.toString());
-    formData.append('half_day_period', this.half_day_period);
-    formData.append('document_number', this.document_number);
-
-    formData.append('leave_type', this.leave_type.toString());
-
-    // formData.append('leave_type', this.leave_type);
-    formData.append('employee', this.selectedEmployee?.toString() || '');
-
-    this.leaveService.requestLeaveAdmin(formData).subscribe(
-      (response) => {
-        console.log('Registration successful', response);
-        alert('Leave Request has been Sent');
-        window.location.reload();
-      },
-
-      (error) => {
-        console.error('Request failed', error);
-
-        let errorMessage = 'Enter all required fields!';
-
-        if (error.error) {
-          if (typeof error.error === 'string') {
-            errorMessage = error.error;
-          } else if (error.error.detail) {
-            errorMessage = error.error.detail;
-          } else if (error.error.non_field_errors) {
-            errorMessage = error.error.non_field_errors.join(', ');
-          } else {
-            // Collect field-specific error messages
-            const fieldErrors = Object.keys(error.error)
-              .map(field => `${field}: ${error.error[field].join(', ')}`)
-              .join('\n');
-            errorMessage = fieldErrors || errorMessage;
-          }
-        }
-
-        alert(errorMessage);
-      }
-    );
-  }
-
-
-
-
-
-
-
-  // LoadLeavetype(selectedSchema: string) {
-  //   this.leaveService.getLeaveType(selectedSchema).subscribe(
-  //     (data: any) => {
-  //       this.LeaveTypes = data;
-
-  //       console.log('employee:', this.LeaveTypes);
-  //     },
-  //     (error: any) => {
-  //       console.error('Error fetching categories:', error);
-  //     }
-  //   );
-  // }
-
-  selectedEmployee: number | null = null;
-
-  onEmployeeChange() {
-    if (!this.selectedEmployee) return;
-
-    this.leaveService.getLeaveBalance(this.selectedEmployee).subscribe(
-      (data: any) => {
-        this.leaveBalances = data.leave_balance;
-        this.allLeaveTypes = data.available_leave_types;
-
-        // Filter available leave types based on the employee's leave balance
-        const leaveTypeNames = this.leaveBalances.map(lb => lb.leave_type);
-        this.LeaveTypes = this.allLeaveTypes.filter(lt => leaveTypeNames.includes(lt.name));
-
-        console.log('Filtered Leave Types:', this.LeaveTypes);
-      },
-      (error: any) => {
-        console.error('Error fetching leave balance:', error);
-      }
-    );
-  }
-
-
-  LoadEmployee(selectedSchema: string) {
-    this.leaveService.getEmployee(selectedSchema).subscribe(
-      (data: any) => {
-        this.Employees = data;
-
-        console.log('employee:', this.Employees);
-      },
-      (error: any) => {
-        console.error('Error fetching categories:', error);
-      }
-    );
-  }
-
-
-  LoadUsers(selectedSchema: string) {
-    this.leaveService.getUsers(selectedSchema).subscribe(
-      (data: any) => {
-        this.Users = data;
-
-        console.log('employee:', this.LeaveTypes);
-      },
-      (error: any) => {
-        console.error('Error fetching categories:', error);
-      }
-    );
-  }
-
-
-  LoadLeaveRequest(selectedSchema: string) {
+  
+  LoadLeaveRequest(selectedSchema: string): void {
     this.leaveService.getLeaveRequest(selectedSchema).subscribe(
       (data: any) => {
-        this.LeaveRequests = data;
-
-        console.log('employee:', this.LeaveRequests);
+        // Filter only approved leave requests
+        this.LeaveRequests = data.filter((request: any) => request.status === 'approved');
+  
+        console.log('Approved leave requests:', this.LeaveRequests);
       },
       (error: any) => {
-        console.error('Error fetching categories:', error);
+        console.error('Error fetching leave requests:', error);
       }
     );
   }
+  
 
+  immediateReject(): void {
+    const payload = {
+      document_number: this.document_number,
+      rejection_reason: this.rejection_reason
+    };
+    const selectedSchema = this.authService.getSelectedSchema();
+    if (selectedSchema) {
+  
+    this.leaveService.rejectLeaveRequest(payload, selectedSchema).subscribe(
+      (response: any) => {
+        console.log('Rejection successful:', response);
+        alert('Leave request rejected successfully.');
+        // Optionally refresh the list
+        this.LoadLeaveRequest(selectedSchema);
+        this.rejection_reason = '';
+        this.document_number = '';
+      },
+      (error: any) => {
+        console.error('Error rejecting leave request:', error);
+        alert('Error occurred while rejecting leave request.');
+      }
+    );
+  
+  }
+  }
+  
 
+  selectedRequest: any = null;
 
+  onDocumentChange(): void {
+    this.selectedRequest = this.LeaveRequests.find(req => req.document_number === this.document_number);
+  }
 }

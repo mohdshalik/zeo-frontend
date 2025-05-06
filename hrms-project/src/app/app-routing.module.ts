@@ -70,6 +70,7 @@ import { PayrollDetailsComponent } from './payroll-details/payroll-details.compo
 import { SalaryOptionsComponent } from './salary-options/salary-options.component';
 import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
 import { EmailConfigurationComponent } from './email-configuration/email-configuration.component';
+import { ImmediateRejectionComponent } from './immediate-rejection/immediate-rejection.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -308,6 +309,11 @@ const routes: Routes = [
     {
       path:'compensatory-leave',
       component:CompensatoryLeaveComponent,
+    },
+
+    {
+      path:'immediate-rejection',
+      component:ImmediateRejectionComponent,
     },
 
   ]

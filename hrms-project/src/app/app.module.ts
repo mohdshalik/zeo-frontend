@@ -147,6 +147,7 @@ import { NotificationSettingsComponent } from './notification-settings/notificat
 import { SalaryOptionsComponent } from './salary-options/salary-options.component';
 import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
 import { EmailConfigurationComponent } from './email-configuration/email-configuration.component';
+import { ImmediateRejectionComponent } from './immediate-rejection/immediate-rejection.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -252,7 +253,8 @@ import { EmailConfigurationComponent } from './email-configuration/email-configu
      NotificationSettingsComponent,
      SalaryOptionsComponent,
      LeaveBalanceComponent,
-     EmailConfigurationComponent
+     EmailConfigurationComponent,
+     ImmediateRejectionComponent
      
      
 

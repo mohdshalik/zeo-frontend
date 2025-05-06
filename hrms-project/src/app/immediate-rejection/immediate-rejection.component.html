@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="comapny_section">
+        <div class="com_list " *ngIf="hasViewPermission">
+            <div class="cpm-sec">
+
+                <h2>Leave Request</h2>
+                <hr>
+                
+            
+                <form (ngSubmit)="immediateReject()" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label>Document Number</label>
+                        <div class="custom-sel">
+                          <select class="form-control" id="employee" name="employee"
+                                  [(ngModel)]="document_number" (change)="onDocumentChange()"
+                                  [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let employee of LeaveRequests" [value]="employee.document_number">
+                              {{ employee.document_number }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                  
+
+                      </div>
+                      <div class="row" *ngIf="document_number">
+                        <div class="col-md-4">
+                            <label>Employee Name</label>
+                            <input type="text" class="form-control" [value]="selectedRequest?.employee" disabled>
+                          </div>
+                      
+                          <div class="col-md-4">
+                            <label>Start Date</label>
+                            <input type="text" class="form-control" [value]="selectedRequest?.start_date" disabled>
+                          </div>
+                      
+                          <div class="col-md-4">
+                            <label>End Date</label>
+                            <input type="text" class="form-control" [value]="selectedRequest?.end_date" disabled>
+                          </div>
+                      
+                          <div class="col-md-12 mt-3">
+                            <label>Reason for Leave</label>
+                            <input type="text" class="form-control" [value]="selectedRequest?.reason" disabled>
+                          </div>
+                  
+                          
+                   
+                    </div>
+                    <div class="row">
+                            
+                        <div class="col-md-12 mt-3">
+                            <label>Rejection Reason</label>
+                            <textarea class="form-control" [(ngModel)]="rejection_reason" [ngModelOptions]="{standalone: true}"></textarea>
+                          </div>
+                    </div>
+                  
+                    <div class="row" *ngIf="hasAddPermission">
+                      <div class="col-md-9"></div>
+                      <div class="col-md-3">
+                        <button type="submit" class="btn btn-success btn-full mt-4">Reject Request</button>
+                      </div>
+                    </div>
+                  </form>
+                  
+
+
+            </div>
+
+
+        
+
+        </div>
+
+
+
+    </div>
+</div>
