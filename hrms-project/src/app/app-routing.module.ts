@@ -71,6 +71,7 @@ import { SalaryOptionsComponent } from './salary-options/salary-options.componen
 import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
 import { EmailConfigurationComponent } from './email-configuration/email-configuration.component';
 import { ImmediateRejectionComponent } from './immediate-rejection/immediate-rejection.component';
+import { LeaveApprovalsReportComponent } from './leave-approvals-report/leave-approvals-report.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -247,6 +248,10 @@ const routes: Routes = [
           {
             path:'designation-report',
             component:DesignationReportComponent
+          },
+          {
+            path:'leave-approvals-report',
+            component:LeaveApprovalsReportComponent
           },
           {
             path:'from-designer',

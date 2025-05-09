@@ -108,41 +108,16 @@
                       </div>
                     </div>
                       
-            
+            </div>
 
-                    <!-- <div class="calculator-container mt-4" >
-                      <div class="calculator">
-                        <label>Formula Text</label>
-                        <textarea class="form-control display" [(ngModel)]="formula" [ngModelOptions]="{standalone: true}" readonly></textarea>
-                    
-                        <div class="buttons-grid">
-                          <button type="button" *ngFor="let component of Salarycomponent" 
-                            class="btn btn-primary component-btn" 
-                            (click)="insertIntoTextarea(component.code)">
-                            {{ component.code }}
-                          </button>
-                    
-                          <button type="button" class="btn btn-dark number" *ngFor="let num of numbers" (click)="insertIntoTextarea(num)">
-                            {{ num }}
-                          </button>
-                    
-                          <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('+')">+</button>
-                          <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('-')">-</button>
-                          <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('%')">%</button>
-                          <button type="button" class="btn btn-secondary operator" (click)="insertIntoTextarea('*')">x</button>
-                    
-                          <button type="button" class="btn btn-danger operator" (click)="clearTextarea()">C</button>
-                          <button type="button" class="btn btn-warning operator" (click)="deleteLastCharacter()">
-                            <i class="fa-solid fa-delete-left"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div> -->
+                 
 
 
    
+
                         <!-- Formula Writer -->
                          <div *ngIf="!is_fixed">
+                          <div class="row">
                         <div class="col-md-8">
                           <label>Formula Writer</label>
                           <textarea 
@@ -166,6 +141,7 @@
                             </div>
                           </div>
                         </div>
+                        </div>
                </div>
                       
                     
@@ -174,7 +150,7 @@
 
         
 
-                            </div>
+                      
                             <div class="row" *ngIf="hasAddPermission">
                               <div class="col-md-6"></div>
                               <div class="col-md-3">

@@ -329,7 +329,7 @@ submitBulkUpload() {
   const formData = new FormData();
   formData.append('file', this.selectedFile);
 
-  const uploadUrl = `http://localhost:8000/calendars/api/Emp-bulkupld-openings/?schema=${selectedSchema}`;
+  const uploadUrl = `http://localhost:8000/calendars/api/Emp-bulkupld-openings/bulk_upload/?schema=${selectedSchema}`;
 
   this.http.post(uploadUrl, formData).subscribe(
     (response: any) => {

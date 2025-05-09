@@ -1617,7 +1617,7 @@ loadFormFields(): void {
 
 
 
-  
+  isLoading :boolean =false;
   bulkOn() {
     this.ReadMore = !this.ReadMore; //not equal to condition
     this.visible = !this.visible;
@@ -1633,6 +1633,8 @@ loadFormFields(): void {
   bulkuploaddocument(): void {
     this.registerButtonClicked = true;
   
+    this.isLoading = true;
+
     const formData = new FormData();
   
     if (this.file) {
@@ -1681,6 +1683,8 @@ loadFormFields(): void {
     this.http.post(`${this.apiUrl}/employee/api/emp-bulkupload/bulk_upload/?schema=${selectedSchema}`, formData)
     .subscribe(
       (response) => {
+        this.isLoading = false;
+
         console.log('Bulk upload successful', response);
   
         const dialogRef = this.dialog.open(SuccesModalComponent, {
@@ -1694,7 +1698,8 @@ loadFormFields(): void {
       },
       (error: HttpErrorResponse) => {
         console.error('Upload error:', error);
-  
+        this.isLoading = false;
+
         // If the backend provides an error message, display it in an alert
         if (error.error) {
           if (typeof error.error === 'string') {

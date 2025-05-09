@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="comapny_section" >
+
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-5">
+                    <h1>Leave Approval Reports</h1>
+                </div>
+
+                <div class="col-md-2">
+                 
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+
+                      
+                   
+                   
+                          </div>
+                </div>
+                 
+            </div>
+           
+           
+
+        </div>
+
+        <div class="tab_back mt-5">
+            <mat-tab-group> 
+                <mat-tab label="Standard Report">
+                    <div class="tab_boddy p-3">
+                      <button class="btn btn-primary mb-3" (click)="downloadExcel()">Download Excel</button>
+                  
+                      <table class="table table-bordered table-striped" *ngIf="approvalReportData.length > 0">
+                        <thead>
+                          <tr>
+                            <th>Employee</th>
+                            <th>Leave Request</th>
+                            <th>Approver</th>
+                            <th>Status</th>
+                            <th>Rejection Reason</th>
+                            <th>Note</th>
+                            <th>Created At</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of approvalReportData">
+                            <td>{{ item.emp_first_name || 'N/A' }}</td>
+                            <td>{{ item.leave_request }}</td>
+                            <td>{{ item.approver }}</td>
+                            <td>{{ item.status }}</td>
+                            <td>{{ item.rejection_reason || '-' }}</td>
+                            <td>{{ item.note || '-' }}</td>
+                            <td>{{ item.created_at | date:'short' }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  
+                      <p *ngIf="approvalReportData.length === 0">No report data available.</p>
+                    </div>
+                  </mat-tab>
+                  
+                  <mat-tab label="Custom Report ">
+      
+                    <div class="tab_boddy">
+                    
+                    </div>
+                      </mat-tab>
+      
+                 
+                      </mat-tab-group> 
+      
+                      </div>
+       
+        
+           
+  
+    </div>
+    
+
+
+    
+
+
+</div>

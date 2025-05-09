@@ -148,6 +148,7 @@ import { SalaryOptionsComponent } from './salary-options/salary-options.componen
 import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
 import { EmailConfigurationComponent } from './email-configuration/email-configuration.component';
 import { ImmediateRejectionComponent } from './immediate-rejection/immediate-rejection.component';
+import { LeaveApprovalsReportComponent } from './leave-approvals-report/leave-approvals-report.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -254,7 +255,8 @@ import { ImmediateRejectionComponent } from './immediate-rejection/immediate-rej
      SalaryOptionsComponent,
      LeaveBalanceComponent,
      EmailConfigurationComponent,
-     ImmediateRejectionComponent
+     ImmediateRejectionComponent,
+     LeaveApprovalsReportComponent
      
      
 
