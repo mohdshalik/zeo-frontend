@@ -284,17 +284,17 @@ LeaveRejoiningsubmit(): void {
 
   const payload = {
     rejoining_date: this.selectedRejoin.rejoining_date,
-    unpaid_leave_days: this.selectedRejoin.unpaid_leave_days,
+    unpaid_leave_days: this.selectedRejoin.unpaid_leave_days ?? 0, // Default to 0 if null/undefined
     employee: this.selectedRejoin.employee,
     leave_request: this.selectedRejoin.leave_request,
     deduct_from_leave_type: this.selectedRejoin.deduct_from_leave_type,
   };
 
-  this.leaveService.updateLeaveRejoin(this.selectedRejoin.id, payload).subscribe(
+  this.leaveService.deductLeaveBalance(this.selectedRejoin.id, payload).subscribe(
     (response) => {
       console.log('Leave rejoin updated successfully', response);
-      this.ClosePopup(); // Close modal
-      this.LoadLeaveRejoin(localStorage.getItem('selectedSchema') || ''); // Refresh list
+      this.ClosePopup(); // Optional: Close modal
+      this.LoadLeaveRejoin(localStorage.getItem('selectedSchema') || ''); // Optional: Refresh list
     },
     (error) => {
       console.error('Error updating leave rejoin:', error);

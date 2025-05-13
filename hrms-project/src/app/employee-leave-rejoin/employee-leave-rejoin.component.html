@@ -88,11 +88,11 @@
             <div class="row">
 
 
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <label>Rejoining date</label>
                 <input type="date" class="form-control" required [(ngModel)]="selectedRejoin.rejoining_date" placeholder="Enter balance"
                        [ngModelOptions]="{standalone: true}" >
-              </div>
+              </div> -->
           
               <div class="col-md-6">
                 <label>unpaid leave days</label>
@@ -102,7 +102,7 @@
           
             
 
-              <div class="col-md-6" >
+              <!-- <div class="col-md-6" >
                 <label>Employee</label>
                 <div class="custom-sel">
                   <select
@@ -117,11 +117,11 @@
                     </option>
                   </select>
                 </div>
-                </div>
+                </div> -->
                 
 
          
-      
+<!--       
                 <div class="col-md-6" >
                     <label>Leave Request</label>
                     <div class="custom-sel">
@@ -137,7 +137,7 @@
                         </option>
                       </select>
                     </div>
-                    </div>
+                    </div> -->
 
 <div class="col-md-6" >
 <label>Leave Type</label>
@@ -160,17 +160,6 @@
 
 
 
-
-        
-              <!-- <div class="col-md-6">
-                <label>Approver</label>
-                <div class="custom-sel">
-                  <select class="form-control" id="created_by" name="created_by" [(ngModel)]="created_by" [ngModelOptions]="{standalone: true}">
-                    <option *ngFor="let approver of Users" [value]="approver.id">{{ approver.username }}</option>
-                  </select>
-                </div>
-              </div> -->
-
           
          
           
@@ -178,9 +167,9 @@
             </div>
           
             <div class="row"  *ngIf="hasAddPermission">
-              <div class="col-md-9"></div>
-              <div class="col-md-3">
-                <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Balance</button>
+              <div class="col-md-8"></div>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-success btn-full mt-4">Deductive Leave Balance</button>
               </div>
             </div>
           </form>
