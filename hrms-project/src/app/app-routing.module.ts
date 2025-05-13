@@ -72,6 +72,7 @@ import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
 import { EmailConfigurationComponent } from './email-configuration/email-configuration.component';
 import { ImmediateRejectionComponent } from './immediate-rejection/immediate-rejection.component';
 import { LeaveApprovalsReportComponent } from './leave-approvals-report/leave-approvals-report.component';
+import { EmployeeLeaveRejoinComponent } from './employee-leave-rejoin/employee-leave-rejoin.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -278,6 +279,8 @@ const routes: Routes = [
             component:LeaveReportComponent
           },
 
+           
+
         ],
       },
 {
@@ -321,6 +324,10 @@ const routes: Routes = [
       component:ImmediateRejectionComponent,
     },
 
+    {
+      path:'employee-leave-rejoin',
+      component:EmployeeLeaveRejoinComponent
+    },
   ]
 
 },

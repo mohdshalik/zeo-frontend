@@ -1,0 +1,195 @@
+<div class="container">
+    <div class="comapny_section" >
+
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-5">
+                    <h1>Employee Leave rejoining</h1>
+                </div>
+
+                <div class="col-md-2">
+                 
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+
+                      
+                   
+                   
+                          </div>
+                </div>
+                 
+            </div>
+           
+           
+
+        </div>
+
+       
+        
+                <table class="mt-4" width="100%">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th> Rejoining Date</th>
+                        <th>Unpaid leave days </th>
+                        <th>deducted</th>
+                        <th>Employee</th>
+                        <th>Leave request</th>
+                        <th>Deduct from leave type</th>
+                        <th>Action</th>
+
+            
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                      <tr *ngFor="let docs of Rejoings;let i = index">
+                        <td>{{ i + 1 }}</td> 
+                        <td>{{ docs.rejoining_date }}</td>
+                        <td>{{ docs.unpaid_leave_days }}</td>
+                        <td>{{ docs.deducted }}</td> 
+                        <td>{{ docs.employee }}</td>
+                        <td>{{ docs.leave_request }}</td>
+                        <td>{{ docs.deduct_from_leave_type || 'N/A' }}</td>
+
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="openRejoinModal(docs.id)">Rejoin</button>
+                        </td>
+
+                       
+                      </tr>
+                  
+                    </tbody>
+                  </table>
+            
+  
+    </div>
+    
+
+
+
+
+   <!-- Modal Popup for add marketing language skill -->
+      <div *ngIf="isLeaveRejoinModalOpen" class="modal">
+        <div class="modal-content">
+       
+          <span class="close pull-right" (click)="ClosePopup()">&times;</span>
+     
+       <div *ngIf="selectedRejoin">
+
+          <form (ngSubmit)="LeaveRejoiningsubmit()" enctype="multipart/form-data">
+               
+               
+            <div class="row">
+
+
+              <div class="col-md-6">
+                <label>Rejoining date</label>
+                <input type="date" class="form-control" required [(ngModel)]="selectedRejoin.rejoining_date" placeholder="Enter balance"
+                       [ngModelOptions]="{standalone: true}" >
+              </div>
+          
+              <div class="col-md-6">
+                <label>unpaid leave days</label>
+                <input type="number" class="form-control" required [(ngModel)]="selectedRejoin.unpaid_leave_days" placeholder="Enter unpaid leave days"
+                       [ngModelOptions]="{standalone: true}" >
+              </div>
+          
+            
+
+              <div class="col-md-6" >
+                <label>Employee</label>
+                <div class="custom-sel">
+                  <select
+                    class="form-control"
+                    id="employee"
+                    name="employee"
+                    [(ngModel)]="selectedRejoin.employee"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option *ngFor="let leavetype of Employees" [value]="leavetype.id">
+                      {{ leavetype.emp_code }}
+                    </option>
+                  </select>
+                </div>
+                </div>
+                
+
+         
+      
+                <div class="col-md-6" >
+                    <label>Leave Request</label>
+                    <div class="custom-sel">
+                      <select
+                        class="form-control"
+                        id="leave_request"
+                        name="leave_request"
+                        [(ngModel)]="selectedRejoin.leave_request"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <option *ngFor="let leavetypes of LeaveReq" [value]="leavetypes.id">
+                          {{ leavetypes.emp_code }}   {{ leavetypes.start_date }}  {{ leavetypes.end_date }}
+                        </option>
+                      </select>
+                    </div>
+                    </div>
+
+<div class="col-md-6" >
+<label>Leave Type</label>
+<div class="custom-sel">
+  <select
+    class="form-control"
+    id="deduct_from_leave_type"
+    name="deduct_from_leave_type"
+    [(ngModel)]="selectedRejoin.deduct_from_leave_type"
+    [ngModelOptions]="{ standalone: true }"
+  >
+    <option *ngFor="let leavetypes of LeaveTypes" [value]="leavetypes.id">
+      {{ leavetypes.name }}
+    </option>
+  </select>
+</div>
+</div>
+
+
+
+
+
+
+        
+              <!-- <div class="col-md-6">
+                <label>Approver</label>
+                <div class="custom-sel">
+                  <select class="form-control" id="created_by" name="created_by" [(ngModel)]="created_by" [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let approver of Users" [value]="approver.id">{{ approver.username }}</option>
+                  </select>
+                </div>
+              </div> -->
+
+          
+         
+          
+         
+            </div>
+          
+            <div class="row"  *ngIf="hasAddPermission">
+              <div class="col-md-9"></div>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Balance</button>
+              </div>
+            </div>
+          </form>
+          </div>
+         
+        </div>
+      </div>
+
+    
+
+
+</div>

@@ -623,4 +623,36 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
     return this.http.get(apiUrl);
   }
 
+
+
+
+
+
+  getLeaveRejoins(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/calendars/api/employee-leave-rejoins/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+  }
+
+
+
+  updateLeaveRejoin(rejoinId: number, payload: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError(() => new Error('No schema selected.'));
+  }
+
+  const apiUrl = `${this.apiUrl}/calendars/api/employee-leave-rejoins/${rejoinId}/?schema=${selectedSchema}`;
+  return this.http.put(apiUrl, payload).pipe(
+    catchError((error) => {
+      console.error('Error updating leave rejoin:', error);
+      return throwError(() => error);
+    })
+  );
+}
+
+
 }

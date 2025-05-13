@@ -1,0 +1,500 @@
+
+.comapny_section{
+
+    margin-top: 100px;
+    margin-left: 50px;
+    
+  }
+  
+  .header_section{
+    background: white;
+    padding: 24px 20px 15px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    width: 100%;
+    border-bottom: solid 3px navy;
+  }
+  
+  .header_section h1{
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+  
+  }
+  
+  
+  .com_list{
+    padding: 20px;
+    width: 100%;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-top: solid 3px navy;
+    margin-bottom: 20px;
+  
+  
+  }
+  
+  .com_list h2{
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+  }
+  
+  
+  
+  
+  table thead th {
+    color: #ffffff;
+    background: #004976;
+    padding: 15px;
+    border: 1px solid #ebebec;
+    font-weight: 500;
+  }
+  
+  table tr {
+    background: #ffffff;
+  }
+  
+  table tr td {
+    border: 1px solid #e6edf1;
+    padding: 15px;
+  }
+  
+  @media only screen and (max-width: 640px) {
+    table thead {
+      display: none;
+    }
+  
+    table tbody {
+      display: block;
+    }
+  
+    table tbody tr td {
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+  
+    table tbody tr {
+      margin-bottom: 20px;
+      display: block;
+      border: 1px solid #004976;
+      background: #f9f9f9;
+      overflow: hidden;
+    }
+  
+    table tbody td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      width: 30%;
+      display: flex;
+      background: #004976;
+      color: #fff;
+      padding: 15px;
+      margin-inline-end: 10px;
+    }
+  }
+  
+  
+  
+  
+  p{
+    margin-bottom: 0px;
+  }
+  
+  
+  .form-control-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ::ng-deep .form-control-wrapper mat-form-field {
+    width: 100%;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-wrapper {
+    padding: 0;
+    margin: 0;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-flex {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-underline {
+    display: none;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    height: auto;
+    line-height: 1.5;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select-trigger {
+    height: auto;
+    padding: 0;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select-value-text {
+    padding: 0;
+    margin: 0;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-form-field-infix {
+    padding: 0;
+    border: none;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-select-placeholder {
+    transform: translateY(-50%);
+    top: 50%;
+  }
+  
+  
+  ::ng-deep .form-control-wrapper  .mat-mdc-form-field-infix{
+    margin-top: -14px;
+  }
+  
+  ::ng-deep .form-control-wrapper .mdc-text-field--filled:not(.mdc-text-field--disabled){
+  
+  background-color: white;
+  }
+  
+  ::ng-deep .form-control-wrapper .mdc-text-field{
+  padding: 0px;
+  }
+  
+  ::ng-deep .form-control-wrapper .mat-mdc-form-field-infix:focus-visible{
+  outline: none-webkit-focus-ring-color auto 0px;
+  
+  
+  }
+  
+  
+  /* Remove :focus-visible style from all input elements */
+  input:focus-visible {
+  outline: none;
+  }
+  
+  /* Remove :focus-visible style from mat-select */
+  .mat-select:focus-visible {
+  outline: none;
+  }
+  
+  /* Use !important to ensure the outline is removed */
+  ::ng-deep .form-control-wrapper:focus-visible {
+  outline: none !important;
+  }
+  
+  
+  ::ng-deep .mat-select:focus-visible {
+  outline: none;
+  }
+  
+  /* Optionally, you can also override other styles */
+  ::ng-deep .mat-select:focus-visible .mat-select-value {
+  outline: none;
+  }
+  
+  ::ng-deep .mdc-text-field--no-label{
+  border:1px solid #ced4da;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-flex {
+  padding: 4px 7px;
+  height: 35px;
+  }
+  
+  .check-box-selection-sec{
+    padding: 0px !important;
+  }
+  
+  .form-control {
+    font-size: 14px;
+  }
+  
+  label{
+    font-size: 14px;
+  }
+  
+  .tab_boddy{
+    padding: 30px;
+  }
+  
+  .tab_back{
+    background: white;
+  }
+  
+  .header-btn-icon{
+    vertical-align: middle;
+  }
+  
+  
+  
+  .visitcount {
+    /* background: linear-gradient(45deg, #aff0af, #fff8c1); */
+    background: linear-gradient(45deg, #5c1e81, #d2a7a8);
+    width: 100%;
+    padding: 20px 20px 10px 20px;
+    cursor: pointer;
+  }
+  
+  .visitcount h4 {
+    font-size: 30px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .visitcount h6 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .visitcount h5 {
+    font-size: 70px;
+    margin-left: -15px;
+    opacity: 0.2;
+  }
+  
+  
+  
+  
+  .leave_type_outer{
+  
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    overflow: hidden;
+  
+  }
+  
+  .leave-img-section {
+    position: relative;
+    width: 100%;
+    height: 160px;         /* Fixed height */
+    border-radius: 15px;
+    overflow: hidden;      /* Hide any overflow */
+    padding: 0;            /* Remove extra padding so the image fits snugly */
+  }
+  
+  .leave-img-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* or 'contain', depending on your preference */
+    object-position: center;
+    border-radius: 15px;   /* Round the image corners if desired */
+  }
+  
+  .leave-name-section h4{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #5b5b5b;
+  
+  }
+  
+  .leave-name-section h5{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+  
+  }
+  
+  
+  .button-row {
+    display: flex;
+    width: 100%;
+    /* gap: 10px; */
+  }
+  
+  .configure-btn {
+    flex: 0  70%;
+    font-size: 14px;
+  }
+  
+  .action-btn {
+    flex: 0  25%;
+    /* Optionally, center icon inside the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button-row .action-btn{
+    margin-left: 5px;
+  }
+  
+  
+  
+  
+  /* Add your CSS styles here */
+  .modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; /* Could be more or less, depending on screen size */
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 100px;
+    height: auto;
+  
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: right;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal h2{
+  
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-family: math;
+  }
+  
+  
+  
+  
+  
+  .flip-card-inner {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front,
+  .flip-card-back {
+    backface-visibility: hidden;
+    top: 0;
+    left: 0;
+  }
+  
+  /* Front side is default */
+  .flip-card-front {
+    z-index: 2;
+  }
+  
+  /* Back side: rotated 180 degrees */
+  .flip-card-back {
+    transform: rotateY(180deg);
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    position: absolute;
+    width: 100%;
+  }
+  
+  /* Optional: style the edit form on the back side */
+  .edit-content {
+    text-align: center;
+  }
+  
+  
+  .edit-content h2{
+    font-size: 16px;
+    font-weight: 400;
+    color: #5b5b5b;
+    text-align: left;
+    text-transform: capitalize;
+  
+  }
+  
+  .edit-content h4{
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    
+  }
+  
+  
+
+  
+
+/* Add your CSS styles here */
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; /* Could be more or less, depending on screen size */
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 100px;
+    height: auto;
+  
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: right;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal h2{
+  
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-family: math;
+  }
+  
+  
+  
