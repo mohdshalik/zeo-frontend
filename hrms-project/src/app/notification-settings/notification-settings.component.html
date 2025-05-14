@@ -1,1 +1,183 @@
-<p>notification-settings works!</p>
+<div class="container">
+    <div class="comapny_section" >
+
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-5">
+                    <h1>Noification Settings</h1>
+                </div>
+
+                <div class="col-md-2">
+                 
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+<!-- Toggle Bulk Upload Button -->
+<!-- <button type="button" class="btn-Create btn btn-danger" (click)="toggleBulkUpload()">
+    <span class="header-btn-icon">
+      <mat-icon>{{ showBulkUpload ? 'cancel' : 'add_circle' }}</mat-icon>
+    </span>
+    {{ showBulkUpload ? 'Cancel Bulk Upload' : 'Bulk Upload Opening Leave Balance' }}
+  </button>
+                       -->
+                   
+                   
+                          </div>
+                </div>
+                 
+            </div>
+           
+           
+
+        </div>
+
+        <div class="com_list mt-4 " >
+
+            <div class=""  >
+                
+            <form (ngSubmit)="registerUserAssignedPermission()" enctype="multipart/form-data">
+               
+               
+                <div class="row">
+
+
+                  <div class="col-md-6">
+                    <label>Days before expiry</label>
+                    <input type="number" class="form-control" required [(ngModel)]="days_before_expiry" placeholder="Enter days before expiry"
+                           [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !days_before_expiry}">
+                    <div *ngIf="registerButtonClicked && !days_before_expiry" class="error-message">days_before_expiry field is required.</div>
+                  </div>
+              
+                  <div class="col-md-6">
+                    <label>Days after expiry</label>
+                    <input type="number" class="form-control" required [(ngModel)]="days_after_expiry" placeholder="Enter openings"
+                           [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !days_after_expiry}">
+                    <div *ngIf="registerButtonClicked && !days_after_expiry" class="error-message">days_after_expiry field is required.</div>
+                  </div>
+              
+                
+
+             
+
+             
+          
+
+                  <div class="col-md-6">
+                    <div class="custom-sel">
+                        <label>Select Branch</label>
+                        <select class="form-control" id="branch" required [(ngModel)]="branch"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !branch}">
+                            <option *ngFor="let deparmentsec of Branches" [value]="deparmentsec.id">{{ deparmentsec.branch_name }}</option>
+                        </select>
+                        <div *ngIf="registerButtonClicked && !branch" class="error-message">Please Select Your Company</div>
+                    </div>
+                </div>
+                
+
+  
+
+
+
+
+            
+  <div class="col-md-6">
+    <label>Notify users</label>
+
+
+    <!-- <div class="custom-sel">
+        <label>Select Group</label>
+        <select class="form-control" id="groups" multiple required [(ngModel)]="groups"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !groups}" >
+            <option value="" >Select</option>
+            <option *ngFor="let deparmentsec of   Groups" [value]="deparmentsec.id">{{ deparmentsec.name     }} </option>
+        </select>
+        <div *ngIf="registerButtonClicked && !groups" class="error-message">Please Select Your Company</div>
+    </div> -->
+
+
+    <div class="custom-sel">
+        <div class="form-control-wrapper">
+      
+
+          <mat-form-field>
+            <!-- <mat-label>Favorite food</mat-label> -->
+            <mat-select placeholder="Select" [(ngModel)]="notify_users" [ngModelOptions]="{standalone: true}" #select multiple>
+              <div class="select-all">
+                <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelection()">
+                  Select All
+                </mat-checkbox>
+              </div>
+              <input type="text" placeholder="serach" class="form-control">
+
+              <mat-option *ngFor="let deparmentsec of   Users" [value]="deparmentsec.id">
+                {{ deparmentsec.username }} 
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+        </div>
+        <div *ngIf="registerButtonClicked && (!notify_users || notify_users.length === 0)" class="error-message">
+          Please Select Your notify_users
+        </div>
+      </div>
+                
+
+</div>
+
+              
+             
+              
+             
+                </div>
+              
+                <div class="row"  *ngIf="hasAddPermission">
+                  <div class="col-md-9"></div>
+                  <div class="col-md-3">
+                    <button type="submit" class="btn btn-success btn-full mt-4">Save</button>
+                  </div>
+                </div>
+              </form>
+
+              </div>
+
+            
+        
+                </div>
+        
+                <!-- <table width="100%" *ngIf="hasViewPermission">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th> Leave Type</th>
+                        <th> Balance</th>
+                        <th>Openings</th>
+                        <th>Employee</th>
+            
+            
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                      <tr *ngFor="let docs of LeaveBalances;let i = index">
+                        <td>{{ i + 1 }}</td> 
+                        <td>{{ docs.leave_type }}</td>
+                        <td>{{ docs.balance }}</td>
+                        <td>{{ docs.openings }}</td> 
+                        <td>{{ docs.employee }}</td>
+                       
+                      </tr>
+                  
+                    </tbody>
+                  </table> -->
+            
+  
+    </div>
+    
+
+
+    
+
+
+</div>

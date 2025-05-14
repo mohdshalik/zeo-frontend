@@ -104,6 +104,10 @@
                             <!-- <p class="side_option">I'm visible because I am open</p> -->
                           </div>
 
+                          <div class="mat-expansion-panel-body "  routerLink="/main-sidebar/settings/notification-settings"  *ngIf="hasViewPermissionLeaveEmtemp">
+                            <a class="set_siding" mat-list-item  ><span class="side_option" >Notification Settings</span> </a>
+                          </div>
+
                           <div *ngIf="!hasAddCompanyMaster">
 
                           </div>
@@ -265,6 +269,13 @@
                         <div class="mat-expansion-panel-body "  routerLink="/main-sidebar/settings/leave-template"  *ngIf="hasViewPermissionLeaveEmtemp">
                           <a class="set_siding" mat-list-item  ><span class="side_option" >Leave Request</span> </a>
                         </div>
+
+                        <div class="mat-expansion-panel-body "  routerLink="/main-sidebar/settings/doc-exp-emailtemplate"  *ngIf="hasViewPermissionLeaveEmtemp">
+                          <a class="set_siding" mat-list-item  ><span class="side_option" >Document Expired</span> </a>
+                        </div>
+
+                        
+                     
                           <!-- <div class="mat-expansion-panel-body " >
                           <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/from-designer"><span class="side_option" >Employee-form</span> </a>
                         </div> -->

@@ -73,6 +73,8 @@ import { EmailConfigurationComponent } from './email-configuration/email-configu
 import { ImmediateRejectionComponent } from './immediate-rejection/immediate-rejection.component';
 import { LeaveApprovalsReportComponent } from './leave-approvals-report/leave-approvals-report.component';
 import { EmployeeLeaveRejoinComponent } from './employee-leave-rejoin/employee-leave-rejoin.component';
+import { DocExpEmailtemplateComponent } from './doc-exp-emailtemplate/doc-exp-emailtemplate.component';
+import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -266,9 +268,17 @@ const routes: Routes = [
             path:'email-configuration',
             component:EmailConfigurationComponent
           },
+          {
+            path:'notification-settings',
+            component:NotificationSettingsComponent
+          },
             {
       path:'leave-template',
       component:LeaveTemplateComponent,
+    },
+    {
+      path:'doc-exp-emailtemplate',
+      component:DocExpEmailtemplateComponent
     },
              {
             path:'company-policy',
