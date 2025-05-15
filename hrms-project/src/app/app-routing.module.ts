@@ -75,6 +75,7 @@ import { LeaveApprovalsReportComponent } from './leave-approvals-report/leave-ap
 import { EmployeeLeaveRejoinComponent } from './employee-leave-rejoin/employee-leave-rejoin.component';
 import { DocExpEmailtemplateComponent } from './doc-exp-emailtemplate/doc-exp-emailtemplate.component';
 import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
+import { LeaveAccruvalComponent } from './leave-accruval/leave-accruval.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -333,7 +334,10 @@ const routes: Routes = [
       path:'immediate-rejection',
       component:ImmediateRejectionComponent,
     },
-
+    {
+      path:'leave-accruval',
+      component:LeaveAccruvalComponent
+    },
     {
       path:'employee-leave-rejoin',
       component:EmployeeLeaveRejoinComponent

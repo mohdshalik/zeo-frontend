@@ -1,1 +1,159 @@
-<p>leave-accruval works!</p>
+<div class="container">
+    <div class="comapny_section">
+        <div class="tab_back mt-5">
+            <mat-tab-group> 
+                <mat-tab label="Leave Acrrual">
+                    
+                    <div class="tab_boddy">
+                   
+        <div class="com_list mt-4 " >
+            <div class="cpm-sec">
+
+                <h2>Leave Accrual</h2>
+                <hr>
+                
+            
+                   
+<div class="row">
+    <div class="col-md-6">
+        <label>Select Employee</label>
+        <div class="custom-sel">
+          <select class="form-control" id="employee" name="employee"
+                  [(ngModel)]="selectedEmployeeId"
+                  (change)="onSelectEmployeeId()"
+                  [ngModelOptions]="{standalone: true}">
+            <option [ngValue]="null">-- Select --</option>
+            <option *ngFor="let employee of Employees" [ngValue]="employee.id">
+              {{ employee.emp_code }}
+            </option>
+          </select>
+        </div>
+      </div>
+      
+    <!-- <div class="col-md-6">
+        <label>Year</label>
+        <div class="custom-sel">
+            <select class="form-control">
+                <option>test</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label>Month</label>
+        <div class="custom-sel">
+            <select class="form-control">
+                <option>
+
+                </option> </select>
+        </div>
+    </div> -->
+</div>
+
+
+<div  class="table-str" *ngIf="employeeAccruals">
+    <h2 class="mt-4">Accrual Summary for {{ employeeAccruals.employee_name }} ({{ employeeAccruals.year }})</h2>
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Leave Type</th>
+          <th>Accrual Rate</th>
+          <th>Existing Balance</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of employeeAccruals.leave_accrual_summary">
+          <td>{{ item.leave_type }}</td>
+          <td>{{ item.accrual_rate }}</td>
+          <td>{{ item.existing_balance }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+                           
+                  
+
+
+            </div>
+
+
+        
+
+        </div>
+                </div>
+              </mat-tab>
+                  <mat-tab label="Rest Accrual ">
+      
+                    <div class="tab_boddy">
+                    
+                        <div class="com_list mt-4 ">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="resetDate">Select Reset Date</label>
+                                    <input
+                                      type="date"
+                                      id="resetDate"
+                                      class="form-control"
+                                      [(ngModel)]="resetDate"
+                                      [ngModelOptions]="{standalone: true}"
+                                    />
+                                </div>
+                            </div>
+                         
+
+
+
+                            <button class="btn btn-primary mt-2" (click)="previewLeaveReset()">Preview Leave Reset</button>
+                          
+                            <div *ngIf="resetPreviewResults && resetPreviewResults.length > 0" class="mt-4">
+                              <h4>Reset Preview Results</h4>
+                              <table class="table table-bordered table-striped mt-4">
+                                <thead>
+                                  <tr>
+                                    <th>Employee</th>
+                                    <th>Leave Type</th>
+                                    <th>Reset Date</th>
+                                    <th>Initial Balance</th>
+                                    <th>Carry Forward</th>
+                                    <th>Encashment</th>
+                                    <th>Final Balance</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let row of resetPreviewResults">
+                                    <td>{{ row.employee }}</td>
+                                    <td>{{ row.leave_type }}</td>
+                                    <td>{{ row.reset_date }}</td>
+                                    <td>{{ row.initial_balance }}</td>
+                                    <td>{{ row.carry_forward }}</td>
+                                    <td>{{ row.encashment }}</td>
+                                    <td>{{ row.final_balance }}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          
+                       
+                          
+
+                    </div>
+                      </mat-tab>
+      
+                 
+                      </mat-tab-group> 
+      
+                      </div>
+
+
+
+
+
+
+
+    </div>
+</div>

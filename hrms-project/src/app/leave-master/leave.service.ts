@@ -675,4 +675,24 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
     );
   }
 
+
+
+
+
+
+  getAccrualDetails(employeeId: number, schema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/calendars/api/test-monthwise-accrual/?employee_id=${employeeId}&schema=${schema}`;
+    return this.http.get(apiUrl);
+  }
+
+
+  getLeaveResetPreview(payload: any, schema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/calendars/api/leave/reset-preview/?schema=${schema}`;
+    return this.http.post(apiUrl, payload).pipe(
+      catchError((error) => {
+        console.error('Error fetching leave reset preview:', error);
+        return throwError(() => error);
+      })
+    );
+  }
 }
