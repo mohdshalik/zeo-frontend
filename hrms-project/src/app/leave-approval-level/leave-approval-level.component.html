@@ -129,7 +129,7 @@
             <tr>
               <th>No</th>
               <th> Level  </th>
-              <th> Role</th>
+              <th> Branch</th>
               <th>Leave Type</th>
               <th>Approver</th>
               <th>Is compensatory</th>
@@ -143,7 +143,7 @@
             <tr *ngFor="let docs of LeaveapprovalLevels;let i = index">
               <td>{{ i + 1 }}</td> 
               <td>{{ docs.level }}</td>
-              <td>{{ docs.role }}</td>
+              <td>{{ docs.branch }}</td>
               <td>{{ docs.request_type }}</td> 
               <td>{{ docs.approver }}</td>
               <td>{{ docs.is_compensatory }}</td>
