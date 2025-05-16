@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../login/authentication.service';
 import { SessionService } from '../login/session.service';
 import { LeaveService } from '../leave-master/leave.service';
 import { DesignationService } from '../designation-master/designation.service';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-leave-approval-level',
@@ -12,11 +14,21 @@ import { DesignationService } from '../designation-master/designation.service';
 })
 export class LeaveApprovalLevelComponent {
 
+    
+  @ViewChild('select') select: MatSelect | undefined;
+
+  allSelected=false;
+
+  Branches: any[] = []; // Array to store schema names
+
+
   role:any='';
   level:any='' ;
   request_type:any='' ;
 
   approver:any='' ;
+  branch: any = '';
+
 
 
   is_compensatory: boolean = false;
@@ -53,6 +65,7 @@ schemas: string[] = []; // Array to store schema names
       const selectedSchema = this.authService.getSelectedSchema();
       if (selectedSchema) {
 
+        this.LoadBranch(selectedSchema);
 
         this.LoadLeavetype(selectedSchema);
       this.LoadUsers(selectedSchema);
@@ -204,6 +217,34 @@ if (this.userId !== null) {
   checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
   return groupPermissions.some(permission => permission.codename === codeName);
   }
+
+
+
+  toggleAllSelection(): void {
+    if (this.select) {
+      if (this.allSelected) {
+        
+        this.select.options.forEach((item: MatOption) => item.select());
+      } else {
+        this.select.options.forEach((item: MatOption) => item.deselect());
+      }
+    }
+  }
+
+
+  
+  LoadBranch(selectedSchema: string) {
+    this.leaveService.getBranches(selectedSchema).subscribe(
+      (data: any) => {
+        this.Branches = data;
+      
+        console.log('employee:', this.Branches);
+      },
+      (error: any) => {
+        console.error('Error fetching categories:', error);
+      }
+    );
+  }
   
 
     LoadLeavetype(selectedSchema: string) {
@@ -270,7 +311,8 @@ if (this.userId !== null) {
       formData.append('approver', this.approver);
       formData.append('request_type', this.request_type);
     
-  
+      formData.append('branch', this.branch);
+
      
   
       

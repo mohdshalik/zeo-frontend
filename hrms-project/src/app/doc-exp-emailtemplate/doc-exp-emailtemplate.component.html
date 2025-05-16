@@ -24,7 +24,7 @@
                         <select class="form-control" id="template_name" required [(ngModel)]="template_name"  [ngModelOptions]="{standalone: true}">
                             <option value="" >Select</option>
                             <option value="Employee Notification">Employee Notification</option>
-                            <option value="ESS User Notification">ESS User Notification</option>
+                            <option value="User Notification">User Notification</option>
 
 
                         </select>
@@ -94,14 +94,14 @@
         <div class="com_list " *ngIf="hasViewPermission">
             <div class="cpm-sec">
         
-                <h2>General Request Email Templates</h2><hr>
+                <h2> Email Templates</h2><hr>
 
                 <div class="row" *ngFor="let deparmentsec of tempEmails">
                     <div class="col-md-12">
                         <div class="emailtep_det_">
                         <div class="row"> 
                             <div class="col-md-10 col-8">
-                                <h6>{{deparmentsec.template_type}}</h6>
+                                <h6>{{deparmentsec.template_name}}</h6>
 
                             </div>
                             <div class="col-md-2 col-4">

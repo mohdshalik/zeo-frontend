@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { EmployeeService } from '../employee-master/employee.service';
 import { UserMasterService } from '../user-master/user-master.service';
 import { DepartmentServiceService } from '../department-master/department-service.service';
 import { DesignationService } from '../designation-master/designation.service';
 import { SessionService } from '../login/session.service';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { LeaveService } from '../leave-master/leave.service';
 
 @Component({
   selector: 'app-approval-level',
@@ -14,10 +17,21 @@ import { SessionService } from '../login/session.service';
 })
 export class ApprovalLevelComponent {
 
+  
+  @ViewChild('select') select: MatSelect | undefined;
+
+  allSelected=false;
+
+  Branches: any[] = []; // Array to store schema names
+
+
+
   level: any = '';
   role: any = '';
   approver: any = '';
   request_type: any = '';
+  branch: any = '';
+
  
   Users:any []=[];
   RequestType:any []=[];
@@ -45,6 +59,7 @@ schemas: string[] = []; // Array to store schema names
     private DepartmentServiceService: DepartmentServiceService,
     private DesignationService: DesignationService,
     private sessionService: SessionService,
+    private leaveService:LeaveService,
 
 
 
@@ -54,6 +69,12 @@ schemas: string[] = []; // Array to store schema names
 ) {}
 
 ngOnInit(): void {
+
+  const selectedSchema = this.authService.getSelectedSchema();
+  if (selectedSchema) {
+    this.LoadBranch(selectedSchema);
+
+  }
  
   this.loadUsers();
   this.loadRequestType();
@@ -241,7 +262,8 @@ loadUsers(): void {
     }
 
 
-    
+  
+      
   loadApprovalLevelGen(): void {
     
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
@@ -275,7 +297,8 @@ loadUsers(): void {
   
         request_type: this.request_type,
       
-    
+        branch: this.branch,
+
 
      
   
@@ -301,5 +324,36 @@ loadUsers(): void {
       );
     }
   
+
+    
+
+    toggleAllSelection(): void {
+      if (this.select) {
+        if (this.allSelected) {
+          
+          this.select.options.forEach((item: MatOption) => item.select());
+        } else {
+          this.select.options.forEach((item: MatOption) => item.deselect());
+        }
+      }
+    }
+
+
+    
+    LoadBranch(selectedSchema: string) {
+      this.leaveService.getBranches(selectedSchema).subscribe(
+        (data: any) => {
+          this.Branches = data;
+        
+          console.log('employee:', this.Branches);
+        },
+        (error: any) => {
+          console.error('Error fetching categories:', error);
+        }
+      );
+    }
+
+
+    
 
 }

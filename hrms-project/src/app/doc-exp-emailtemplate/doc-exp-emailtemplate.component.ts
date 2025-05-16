@@ -395,7 +395,7 @@ if (this.userId !== null) {
       console.log('schemastore',selectedSchema )
       // Check if selectedSchema is available
       if (selectedSchema) {
-        this.DepartmentServiceService.getEmailTemplates(selectedSchema).subscribe(
+        this.DepartmentServiceService.getEmailTemplatesDoc(selectedSchema).subscribe(
           (result: any) => {
             this.tempEmails = result;
             console.log(' fetching Companies:');

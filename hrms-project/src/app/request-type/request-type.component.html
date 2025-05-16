@@ -5,73 +5,75 @@
 
         <h2> Request Type Master</h2><hr>
 
-        <mat-tab-group>
+        <form >
+
+            <div class="row">
+                <div class="col-md-6" >
+               
+                    <label>Name</label>
+                   <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter name"
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
+                   
+                   <div *ngIf="registerButtonClicked && !name" class="error-message">name is required.</div>
+              </div>
+              
+
+              <div class="col-md-6" >
+               
+                <label>Description</label>
+               <input type="text"  class="form-control" required  [(ngModel)]="description"  placeholder="Enter description"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !description}">
+               
+               <div *ngIf="registerButtonClicked && !description" class="error-message">description is required.</div>
+          </div>
+
+<!--         
+          <div class="col-md-6 mt-4">
+            <div class="check-box-selection-sec form-control">
+                <div class="mat-set">
+                    <mat-checkbox [(ngModel)]="use_common_workflow" [ngModelOptions]="{standalone: true}">use common workflow</mat-checkbox>
+                </div>
+               
+            </div>
+        </div> -->
+       
+
+
+    <div class="col-md-6" *ngIf="!created_by">
+
+
+        <div class="custom-sel">
+            <label>Created by</label>
+            <select class="form-control" id="created_by" required [(ngModel)]="created_by"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !created_by}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of Users" [value]="deparmentsec.id">{{ deparmentsec.username     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !created_by" class="error-message">Please Select Created by </div>
+        </div>
+                    
+
+    </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-10">
+    
+                </div>
+    
+                <div class="col-md-2">
+                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerGeneralreq()">Save</button>  
+                 </div>
+            </div>
+            
+       
+    </form>
+
+
+        <!-- <mat-tab-group>
             <mat-tab label="Create Request Type">
   
-                <form >
-
-                    <div class="row">
-                        <div class="col-md-6" >
-                       
-                            <label>Name</label>
-                           <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter name"
-                            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
-                           
-                           <div *ngIf="registerButtonClicked && !name" class="error-message">name is required.</div>
-                      </div>
-                      
-        
-                      <div class="col-md-6" >
-                       
-                        <label>Description</label>
-                       <input type="text"  class="form-control" required  [(ngModel)]="description"  placeholder="Enter description"
-                        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !description}">
-                       
-                       <div *ngIf="registerButtonClicked && !description" class="error-message">description is required.</div>
-                  </div>
-        
-        
-                  <div class="col-md-6 mt-4">
-                    <div class="check-box-selection-sec form-control">
-                        <div class="mat-set">
-                            <mat-checkbox [(ngModel)]="use_common_workflow" [ngModelOptions]="{standalone: true}">use common workflow</mat-checkbox>
-                        </div>
-                       
-                    </div>
-                </div>
-               
-        
-        
-            <div class="col-md-6" *ngIf="!created_by">
-        
-        
-                <div class="custom-sel">
-                    <label>Created by</label>
-                    <select class="form-control" id="created_by" required [(ngModel)]="created_by"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !created_by}" >
-                        <option value="" >Select</option>
-                        <option *ngFor="let deparmentsec of Users" [value]="deparmentsec.id">{{ deparmentsec.username     }} </option>
-                    </select>
-                    <div *ngIf="registerButtonClicked && !created_by" class="error-message">Please Select Created by </div>
-                </div>
-                            
-        
-            </div>
-                    </div>
-        
-        
-                    <div class="row">
-                        <div class="col-md-10">
-            
-                        </div>
-            
-                        <div class="col-md-2">
-                            <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerGeneralreq()">Save</button>  
-                         </div>
-                    </div>
-                    
-               
-            </form>
-        
+           
          
           </mat-tab>
               <mat-tab label="Create Request Type Common Work Flow">
@@ -99,7 +101,7 @@
                     </div>
           
                 
-                    <div class="col-md-6" >
+                    <div class="col-md-6" *ngIf="!created_by" >
         
         
                         <div class="custom-sel">
@@ -133,7 +135,7 @@
   
              
                   </mat-tab-group> 
-  
+   -->
 
   
 

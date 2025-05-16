@@ -86,6 +86,34 @@
         </div>
 
         
+
+        <table class="table mt-4" *ngIf="policies && policies.length">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Branch</th>
+              <th>Department</th>
+              <th>Category</th>
+              <th>Policy File</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let policy of policies">
+              <td>{{ policy.title }}</td>
+              <td>{{ policy.description }}</td>
+              <td>{{ policy.branch }}</td>
+              <td>{{ policy.department }}</td>
+              <td>{{ policy.category }}</td>
+              <td>
+                <button (click)="downloadPolicy(policy.policy_file, policy.title + '.pdf')" class="btn btn-sm btn-primary">
+                  Download PDF
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
      
 
 

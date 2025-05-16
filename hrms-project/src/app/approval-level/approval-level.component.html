@@ -56,6 +56,42 @@
 
     </div>
 
+
+                
+  <div class="col-md-6">
+    <label>Branch</label>
+
+
+
+
+    <div class="custom-sel">
+        <div class="form-control-wrapper">
+      
+
+          <mat-form-field>
+            <!-- <mat-label>Favorite food</mat-label> -->
+            <mat-select placeholder="Select" [(ngModel)]="branch" [ngModelOptions]="{standalone: true}" #select multiple>
+              <div class="select-all">
+                <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelection()">
+                  Select All
+                </mat-checkbox>
+              </div>
+              <input type="text" placeholder="serach" class="form-control">
+
+              <mat-option *ngFor="let deparmentsec of   Branches" [value]="deparmentsec.id">
+                {{ deparmentsec.branch_name }} 
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+        </div>
+        <div *ngIf="registerButtonClicked && (!branch || branch.length === 0)" class="error-message">
+          Please Select Your branch
+        </div>
+      </div>
+                
+
+</div>
    
 
 
@@ -91,6 +127,7 @@
                 <th> Level  </th>
                 <th>Request Type</th>
                 <th>Approver</th>
+                <th>Branch</th>
   
     
                
@@ -103,7 +140,8 @@
                 <td>{{ docs.level }}</td>
                 <td>{{ docs.request_type }}</td> 
                 <td>{{ docs.approver }}</td>
-  
+                <td>{{ docs.branch }}</td>
+
               </tr>
           
             </tbody>

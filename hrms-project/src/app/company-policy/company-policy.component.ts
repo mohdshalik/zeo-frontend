@@ -46,6 +46,9 @@ userDetailss: any;
 schemas: string[] = []; // Array to store schema names
 
 
+policies: any[] = [];
+
+
 
 
 
@@ -66,6 +69,8 @@ schemas: string[] = []; // Array to store schema names
       this.LoadCats();
 
       this.LoadDepts();
+      this.getCompanyPolicies();
+
 
       
 this.userId = this.sessionService.getUserId();
@@ -246,6 +251,53 @@ if (this.userId !== null) {
       );
     }
   
+
+    // getCompanyPolicies(): void {
+    //   const selectedSchema = localStorage.getItem('selectedSchema');
+    //   const url = `${this.apiUrl}/organisation/api/policies/?schema=${selectedSchema}`;
+    
+    //   this.http.get<any[]>(url).subscribe(
+    //     (data) => {
+    //       this.policies = data;
+    //     },
+    //     (error) => {
+    //       console.error('Error fetching policies', error);
+    //     }
+    //   );
+    // }
+
+    getCompanyPolicies() {
+      const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+      console.log('schemastore',selectedSchema )
+      // Check if selectedSchema is available
+      if (selectedSchema) {
+        this.branchService.getplo(selectedSchema).subscribe(
+          (result: any) => {
+            this.policies = result;
+            console.log(' fetching Employees:');
+    
+          },
+          (error) => {
+            console.error('Error fetching Employees:', error);
+          }
+        );
+      }
+  
+    }
+
+
+
+    downloadPolicy(policyUrl: string, fileName: string): void {
+      this.http.get(policyUrl, { responseType: 'blob' }).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      });
+    }
 
 
     LoadBranches() {

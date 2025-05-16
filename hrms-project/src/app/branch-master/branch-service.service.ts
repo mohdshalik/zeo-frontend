@@ -93,6 +93,13 @@ export class BranchServiceService {
   
 
 
+  
+  getplo(selectedSchema: string): Observable<any> {
+    const url = `${this.apiUrl}/organisation/api/policies/?schema=${selectedSchema}`;
+    return this.http.get(url);
+  }
+
+
 
 
 
