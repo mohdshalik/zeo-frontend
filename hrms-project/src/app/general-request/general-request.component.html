@@ -37,7 +37,7 @@
                 </div> -->
                 <div class="col-md-3">
                     <label>Document Number</label>
-                    <input type="number" class="form-control" required [(ngModel)]="document_number" placeholder="Enter document number"
+                    <input type="text" class="form-control" required [(ngModel)]="document_number" placeholder="Enter document number"
                         [disabled]="automaticNumbering" [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !document_number && !automaticNumbering}">
                     <div *ngIf="registerButtonClicked && !document_number && !automaticNumbering" class="error-message">Document number is required.</div>
                 </div>

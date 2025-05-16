@@ -152,6 +152,7 @@ import { LeaveApprovalsReportComponent } from './leave-approvals-report/leave-ap
 import { EmployeeLeaveRejoinComponent } from './employee-leave-rejoin/employee-leave-rejoin.component';
 import { DocExpEmailtemplateComponent } from './doc-exp-emailtemplate/doc-exp-emailtemplate.component';
 import { LeaveAccruvalComponent } from './leave-accruval/leave-accruval.component';
+import { EmployeeOvertimeComponent } from './employee-overtime/employee-overtime.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -262,7 +263,8 @@ import { LeaveAccruvalComponent } from './leave-accruval/leave-accruval.componen
      LeaveApprovalsReportComponent,
      EmployeeLeaveRejoinComponent,
      DocExpEmailtemplateComponent,
-     LeaveAccruvalComponent
+     LeaveAccruvalComponent,
+     EmployeeOvertimeComponent
      
      
 

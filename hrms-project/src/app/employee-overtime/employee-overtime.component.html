@@ -1,0 +1,188 @@
+<div class="container">
+    <div class="comapny_section" >
+
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-5">
+                    <h1>Employee OverTime</h1>
+                </div>
+
+                <div class="col-md-2">
+                 
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+<!-- Toggle Bulk Upload Button -->
+
+                      
+                   
+                   
+                          </div>
+                </div>
+                 
+            </div>
+           
+           
+
+        </div>
+
+        <div class="com_list mt-4 " >
+
+            <div class=""  >
+                
+            <form (ngSubmit)="EmployeeOvertime()" enctype="multipart/form-data">
+               
+               
+                <div class="row">
+
+
+                  <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="date" class="form-control" required [(ngModel)]="date" placeholder="Enter date"
+                           [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !date}">
+                    <div *ngIf="registerButtonClicked && !date" class="error-message">date field is required.</div>
+                  </div>
+              
+                  <div class="col-md-6">
+                    <label>Hours</label>
+                    <input type="text" class="form-control" required [(ngModel)]="hours" placeholder="Number of overtime hours"
+                           [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !hours}">
+                    <div *ngIf="registerButtonClicked && !hours" class="error-message">hours field is required.</div>
+                  </div>
+              
+                
+                  <div class="col-md-6">
+                    <label>Rate multiplier</label>
+                    <input type="text" class="form-control" required [(ngModel)]="rate_multiplier" placeholder="Multiplier for overtime rate"
+                           [ngModelOptions]="{standalone: true}" >
+                  </div>
+              
+
+               
+                  <div class="col-md-6">
+                    <label></label>
+                    <div class="check-box-selection-sec form-control mt-3">
+                      <div class="mat-set">
+                        <mat-checkbox [(ngModel)]="approved" [ngModelOptions]="{standalone: true}">Approved</mat-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+             
+          
+
+<!-- <div class="col-md-6" >
+    <label>Leave Type</label>
+    <div class="custom-sel">
+      <select
+        class="form-control"
+        id="leave_type"
+        name="leave_type"
+        [(ngModel)]="leave_type"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let leavetypes of LeaveTypes" [value]="leavetypes.id">
+          {{ leavetypes.name }}
+        </option>
+      </select>
+    </div>
+  </div> -->
+
+  
+<div class="col-md-6" >
+    <label>Employee</label>
+    <div class="custom-sel">
+      <select
+        class="form-control"
+        id="employee"
+        name="employee"
+        [(ngModel)]="employee"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let leavetype of Employees" [value]="leavetype.id">
+          {{ leavetype.emp_code }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+
+
+            
+                  <div class="col-md-6">
+                    <label>approved by</label>
+                    <div class="custom-sel">
+                      <select class="form-control" id="approved_by" name="approved_by" [(ngModel)]="approved_by" [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let approver of Users" [value]="approver.id">{{ approver.username }}</option>
+                      </select>
+                    </div>
+                  </div>
+
+              
+               
+
+             
+              
+             
+                </div>
+              
+                <div class="row"  *ngIf="hasAddPermission">
+                  <div class="col-md-9"></div>
+                  <div class="col-md-3">
+                    <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Balance</button>
+                  </div>
+                </div>
+              </form>
+
+              </div>
+
+   
+            
+        
+                </div>
+        
+                <table width="100%" *ngIf="hasViewPermission">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th> Date</th>
+                        <th> Hours</th>
+                        <th>Rate multiplier</th>
+                        <th>Approved </th>
+            
+                        <th>Employee</th>
+                        <th>Approved By</th>
+
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                      <tr *ngFor="let docs of LeaveBalances;let i = index">
+                        <td>{{ i + 1 }}</td> 
+                        <td>{{ docs.date }}</td>
+                        <td>{{ docs.hours }}</td>
+                        <td>{{ docs.rate_multiplier }}</td> 
+                        <td>{{ docs.approved }}</td>
+                        <td>{{ docs.employee }}</td>
+                        <td>{{ docs.approved_by }}</td>
+
+
+                      </tr>
+                  
+                    </tbody>
+                  </table>
+            
+  
+    </div>
+    
+
+
+    
+
+
+</div>

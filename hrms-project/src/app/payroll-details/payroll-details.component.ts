@@ -77,5 +77,27 @@ export class PayrollDetailsComponent {
     );
   }
   
+
+  approvePayslip() {
+    if (!this.payslipDetails || !this.payslipId) {
+      console.error("No payslip details loaded.");
+      return;
+    }
+  
+    const updatedPayslip = {
+      ...this.payslipDetails,
+      status: 'processed'
+    };
+  
+    this.leaveService.updatePayslip(this.payslipId, updatedPayslip).subscribe(
+      response => {
+        console.log('Payslip approved:', response);
+        this.payslipDetails = response; // update UI
+      },
+      error => {
+        console.error('Failed to approve payslip', error);
+      }
+    );
+  }
   
 }

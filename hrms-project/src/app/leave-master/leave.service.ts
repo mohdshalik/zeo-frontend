@@ -187,6 +187,25 @@ export class LeaveService {
   }
 
 
+  
+  CreateEmployeeOvertime(formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const apiUrl = `${this.apiUrl}/calendars/api/Emp-overtime/?schema=${selectedSchema}`;
+  
+    return this.http.post(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during leave type registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
   registerEmailTemplateLeave(companyData: any): Observable<any> {
     const selectedSchema = localStorage.getItem('selectedSchema');
     if (!selectedSchema) {
@@ -308,6 +327,15 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
   getLeaveBalanceAll(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/calendars/api/Leave_balance/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+  }
+
+
+  getEmployeeOvertime(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/calendars/api/Emp-overtime/?schema=${selectedSchema}`;
   
     // Fetch employees from the API
     return this.http.get(apiUrl);
@@ -694,5 +722,19 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
         return throwError(() => error);
       })
     );
+  }
+
+
+
+
+  updatePayslip(id: string, payload: any): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/payslip/${id}/?schema=${selectedSchema}`;
+    return this.http.put(apiUrl, payload);
   }
 }

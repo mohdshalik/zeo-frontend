@@ -18,6 +18,8 @@
               <p class="mt-2">Status: 
                 <span [ngClass]="{
                   'pill green': payslipDetails.status === 'approved',
+                  'pill blue': payslipDetails.status === 'processed',
+
                   'pill yellow': payslipDetails.status === 'pending',
                   'pill red': payslipDetails.status === 'rejected'    
                 }">{{ payslipDetails.status | titlecase }}</span>
@@ -88,8 +90,16 @@
 
              
             </div>
+
           </div>
           
+          <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-full btn-success" (click)="approvePayslip()">Approve</button>
+
+        </div>
+      </div>
           
 
 </div>

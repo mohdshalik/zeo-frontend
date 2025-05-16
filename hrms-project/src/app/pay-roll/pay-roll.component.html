@@ -187,6 +187,8 @@
                         <td>
                           <span class="pill" [ngClass]="{
                             'pill green': payslip.status === 'approved',
+                            'pill blue': payslip.status === 'processed',
+
                             'pill yellow': payslip.status === 'pending',
                             'pill red': payslip.status === 'rejected'
                           }">

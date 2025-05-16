@@ -76,6 +76,7 @@ import { EmployeeLeaveRejoinComponent } from './employee-leave-rejoin/employee-l
 import { DocExpEmailtemplateComponent } from './doc-exp-emailtemplate/doc-exp-emailtemplate.component';
 import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
 import { LeaveAccruvalComponent } from './leave-accruval/leave-accruval.component';
+import { EmployeeOvertimeComponent } from './employee-overtime/employee-overtime.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -147,7 +148,10 @@ const routes: Routes = [
             path:'document-expired',
             component:DocumentExpiredComponent
           },
-
+          {
+            path:'employee-overtime',
+            component:EmployeeOvertimeComponent
+          },
 
 
           

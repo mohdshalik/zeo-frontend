@@ -882,7 +882,17 @@
         </div>
         
     </div>
-    
+    <div class="row">
+        <div class="col-md-6">
+            <label></label>
+            <div class="check-box-selection-sec form-control mt-3">
+              <div class="mat-set">
+                <mat-checkbox [(ngModel)]="emp_ot_applicable" [ngModelOptions]="{standalone: true}">Applicable To</mat-checkbox>
+              </div>
+            </div>
+          </div>
+          
+    </div>
 
     <div class="row mt-4">
         <div class="col-md-12">
@@ -906,6 +916,7 @@
         
         </div>
     </div>
+  
     
 
     <!-- <div class="col-md-6">
@@ -1396,4 +1407,9 @@
     
 </div>
 
+
+  <!-- Loader -->
+  <div class="loader-container" [class.show]="isLoading">
+    <div class="loader"></div>
+  </div>
 

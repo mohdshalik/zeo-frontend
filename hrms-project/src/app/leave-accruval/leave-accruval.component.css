@@ -236,3 +236,9 @@ input:focus-visible {
 .cpm-sec .form-control{
   font-size: 13px !important;
 }
+
+
+table thead .inner_t_head{
+  background: whitesmoke !important;
+  color: black;
+}

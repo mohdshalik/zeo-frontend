@@ -64,12 +64,38 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of employeeAccruals.leave_accrual_summary">
-          <td>{{ item.leave_type }}</td>
-          <td>{{ item.accrual_rate }}</td>
-          <td>{{ item.existing_balance }}</td>
-        </tr>
+        <ng-container *ngFor="let item of employeeAccruals.leave_accrual_summary">
+          <!-- Main row -->
+          <tr>
+            <td>{{ item.leave_type }}</td>
+            <td>{{ item.accrual_rate }}</td>
+            <td>{{ item.existing_balance }}</td>
+          </tr>
+      
+          <!-- Nested table row for monthly accruals -->
+          <tr *ngIf="item.monthly_accruals">
+            <td colspan="3">
+              <table class="table table-sm table-striped table-bordered mt-2">
+                <thead >
+                  <tr>
+                    <th class="inner_t_head">Month</th>
+                    <th class="inner_t_head">Accrued Balance</th>
+                    <th class="inner_t_head">Total With Existing Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let monthData of item.monthly_accruals">
+                    <td>{{ monthData.month }}</td>
+                    <td>{{ monthData.accrued_balance }}</td>
+                    <td>{{ monthData.total_with_existing_balance }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
+      
     </table>
   </div>
   

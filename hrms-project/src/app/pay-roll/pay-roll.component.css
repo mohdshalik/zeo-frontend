@@ -479,6 +479,17 @@ table th{
 
 }
 
+.blue {
+  background-color: blue;
+  color: white;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 60px;
+  padding: 6px;
+
+}
+
+
 
 ::ng-deep .styled-table tbody tr:hover td {
   background-color: #f3f4f6 !important;
