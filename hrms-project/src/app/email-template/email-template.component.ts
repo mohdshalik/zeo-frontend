@@ -373,7 +373,7 @@ if (this.userId !== null) {
           console.log('Registration successful', response);
         
               alert('Email Template has been Added ');
-              // window.location.reload();
+              window.location.reload();
          
   
         },
