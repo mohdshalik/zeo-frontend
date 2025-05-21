@@ -757,3 +757,15 @@ body {
   background-color: #f3f4f6 !important;
   cursor: pointer;
 }
+
+
+
+::ng-deep .table-scroll thead th{
+  color: white !important;
+  font-size: 13px;
+  font-weight: 500;
+}
+::ng-deep .table-scroll tbody td{
+  font-size: 13px;
+  font-weight: 400;
+}

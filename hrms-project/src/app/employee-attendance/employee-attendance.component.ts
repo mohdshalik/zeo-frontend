@@ -58,7 +58,7 @@ export class EmployeeAttendanceComponent {
 
       this.LoadEmployee(selectedSchema);
 
-      // this.loadAllAttendance(selectedSchema); // Load all on init
+      this.loadAllAttendance(selectedSchema); // Load all on init
 
 
     }

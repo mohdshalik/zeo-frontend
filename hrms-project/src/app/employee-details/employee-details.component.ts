@@ -16,6 +16,7 @@ import { SuccesModalComponent } from '../succes-modal/succes-modal.component';
 import { EmployeeFamilyComponent } from '../employee-family/employee-family.component';
 import { NotificationServiceService } from '../notification-service.service';
 import { EmployeeCreateLanguageComponent } from '../employee-create-language/employee-create-language.component';
+import { LeaveService } from '../leave-master/leave.service';
 
 
 @Component({
@@ -95,13 +96,20 @@ export class EmployeeDetailsComponent implements OnInit {
     private renderer: Renderer2,
     private router: Router,
     private route: ActivatedRoute,
+    private leaveService: LeaveService,
+
     
     ) {}
+
+
+    daysArray: number[] = [];
+
 
     ngOnInit(): void {
 
       
       
+      this.daysArray = Array.from({ length: 31 }, (_, i) => i + 1);
 
     
 
@@ -134,7 +142,7 @@ export class EmployeeDetailsComponent implements OnInit {
 
       if (employeeIdParam) {
         const employeeId = +employeeIdParam;
-  
+        this.employee_id =employeeId;
         // Fetch employee details
         this.EmployeeService.getEmployeeDetails(employeeId).subscribe(
           (details) => {
@@ -204,6 +212,61 @@ getProgressOffset(balance: number): number {
   return url.toLowerCase().endsWith('.pdf');
 }
 
+
+
+
+year: any = '';
+month: any = '';
+
+employee_id: any = '';
+
+
+
+attendanceData: any = null; // Define this at the class level
+
+  generateAttendanceReport(): void {
+    if (!this.year || !this.month || !this.employee_id) {
+      alert('Please enter Year, Month, and Employee');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('year', this.year.toString());
+    formData.append('month', this.month.toString());
+    formData.append('employee_id', this.employee_id.toString());
+
+    this.leaveService.CreateEmployeeattendance(formData).subscribe(
+      (response) => {
+        console.log('Report data received', response);
+        this.attendanceData = response[0]; // Assuming response is an array as shown in your backend example
+      },
+      (error) => {
+        console.error('Error generating report', error);
+        alert('Failed to generate report. Please try again.');
+      }
+    );
+  }
+
+
+  getStatusForDay(day: number, summary_data: any[]): string {
+    const entry = summary_data.find((d: { date: string }) => {
+      const dateObj = new Date(d.date);
+      return dateObj.getDate() === day;
+    });
+    return entry ? this.getShortStatus(entry.status) : '-';
+  }
+  
+
+  getShortStatus(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'present': return 'P';
+      case 'absent': return 'A';
+      case 'leave': return 'L';
+      case 'holiday': return 'H';
+
+      default: return status;
+    }
+  }
   
     // fetchEmployeeDocuments(): void {
     //   this.EmployeeService.getDocument(this.employee).subscribe(

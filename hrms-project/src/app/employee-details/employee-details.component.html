@@ -528,6 +528,79 @@
                             <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeeLang()">Add Language</button>
                         </div> -->
                             </mat-tab>
+
+
+                            <mat-tab label="Emp Attendance">
+                                <div class="tab_content  mt-3">
+                                 
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label >Year</label>
+                                            <input
+                                              type="number"
+                                              class="form-control"
+                                              [(ngModel)]="year"
+                                              [ngModelOptions]="{standalone: true}"
+                                            />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label >Month</label>
+                                            <input
+                                              type="number"
+                                              class="form-control"
+                                              [(ngModel)]="month"
+                                              [ngModelOptions]="{standalone: true}"
+                                            />
+                                        </div>
+                                    
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                        
+                                            </div>
+                                            <div class="col-md-2 mt-3">
+                                                <button class="btn btn-primary" (click)="generateAttendanceReport()">Generate Report</button>
+                                              </div>
+                                        </div>
+                                        
+
+                                        <div *ngIf="attendanceData">
+    <h2>Attendance Sheet for {{ attendanceData.employee_name }} - {{ attendanceData.month }}/{{ attendanceData.year }}</h2>
+    <div class="table-container table-scroll">
+      <table class="table table-bordered table-hover mt-3 text-center">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th *ngFor="let day of daysArray">Day {{ day }}</th>
+            <!-- <th>Total Days</th> -->
+            <th>Present Days</th>
+            <th>Absent Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ attendanceData.employee_name }}</td>
+            <td *ngFor="let day of daysArray">
+              {{ getStatusForDay(day, attendanceData.summary_data) }}
+            </td>
+            <!-- <td>{{ attendanceData.total_days }}</td> -->
+            <td>{{ attendanceData.total_present }}</td>
+            <td>{{ attendanceData.total_absent }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+                
+                                </div>
+                                <!-- <div class=" mt-5" >
+                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeeLang()">Add Language</button>
+                        </div> -->
+                            </mat-tab>
+
+
+
                             <mat-tab label="Emp Language">
                                 <div class="tab_content  mt-3">
                                     <!-- <div class="row mt-3" >
