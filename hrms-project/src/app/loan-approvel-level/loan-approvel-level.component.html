@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="comapny_section" *ngIf="hasViewPermission">
+        <div class="com_list " >
+
+                <h2>Loan Repayment</h2>
+                <hr>
+                
+                <form (ngSubmit)="CreateLoanApproverLevel()" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Level</label>
+                        <input type="number" class="form-control" required [(ngModel)]="level" placeholder="Enter Level"
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+                  
+                      <div class="col-md-6">
+                        <label>Role</label>
+                        <input type="text" class="form-control" required [(ngModel)]="role" placeholder="Enter Role"
+                               [ngModelOptions]="{standalone: true}">
+                      
+                      </div>
+
+                  
+    
+                      <div class="col-md-6" >
+                        <label>Approver</label>
+                        <div class="custom-sel">
+                          <select
+                            class="form-control"
+                            id="approver"
+                            name="approver"
+                            [(ngModel)]="approver"
+                            [ngModelOptions]="{ standalone: true }"
+                          >
+                            <option *ngFor="let employees of Approvers" [value]="employees.id">
+                              {{ employees.username }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                 
+                  
+                     
+
+                      <div class="col-md-6" >
+                        <label>Loan Type</label>
+                        <div class="custom-sel">
+                          <select
+                            class="form-control"
+                            id="loan_type"
+                            name="loan_type"
+                            [(ngModel)]="loan_type"
+                            [ngModelOptions]="{ standalone: true }"
+                          >
+                            <option *ngFor="let employees of LoanTypes" [value]="employees.id">
+                              {{ employees.loan_type }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  
+                    <div class="row" *ngIf="hasAddPermission">
+                      <div class="col-md-9"></div>
+                      <div class="col-md-3">
+                        <button type="submit" class="btn btn-success btn-full mt-4">Add Loan Approval Level </button>
+                      </div>
+                    </div>
+                  </form>
+                  
+
+
+
+
+
+            </div>
+
+
+
+            <div class=""  *ngIf="hasViewPermission">
+
+                <table class="table-container " width="100%">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Level</th>
+                        <th>Role</th>
+                        <th>Approver</th>
+
+                        <th>Loan Type</th>
+                       
+          
+            
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                      <tr *ngFor="let docs of approvalLevels;let i = index">
+                        <td>{{ i + 1 }}</td> 
+                        <td>{{ docs.level }}</td>
+                        <td>{{ docs.role }}</td> 
+                        <td>{{ docs.approver }}</td>
+                        <td>{{ docs.loan_type }}</td>
+
+                      
+        
+                      </tr>
+                  
+                    </tbody>
+                  </table>
+    
+                  </div>
+
+        </div>
+
+
+
+
+
+</div>

@@ -5,17 +5,17 @@ import { EmployeeService } from '../employee-master/employee.service';
 import { UserMasterService } from '../user-master/user-master.service';
 import { SessionService } from '../login/session.service';
 import { DesignationService } from '../designation-master/designation.service';
-
 declare var $: any;
 
+
 @Component({
-  selector: 'app-request-type',
-  templateUrl: './request-type.component.html',
-  styleUrl: './request-type.component.css'
+  selector: 'app-loan-type',
+  templateUrl: './loan-type.component.html',
+  styleUrl: './loan-type.component.css'
 })
-export class RequestTypeComponent    {
+export class LoanTypeComponent {
 
-
+  
 
   hasAddPermission: boolean = false;
   hasDeletePermission: boolean = false;
@@ -23,19 +23,19 @@ export class RequestTypeComponent    {
   hasEditPermission: boolean = false;
 
   
-  name: any = '';
-  description: any = '';
+  loan_type: any = '';
+  max_amount: any = '';
+  repayment_period: any = '';
+
   created_by: any = '';
  
   
-  level: any = '';
-  role: any = '';
-  approver: any = '';
+
 
 
 
   Users:any []=[];
-  ReqTypes:any []=[];
+  LoanTypes:any []=[];
 
 
 
@@ -72,7 +72,8 @@ export class RequestTypeComponent    {
 ngOnInit(): void {
  
   this.loadUsers();
-  this.loadReqTypes();
+  this.loadLoanTypes();
+
 
 
   this.userId = this.sessionService.getUserId();
@@ -235,15 +236,16 @@ ngOnInit(): void {
 
 
 
-          registerGeneralreq(): void {
+          CreateLoanType(): void {
             this.registerButtonClicked = true;
             const companyData = {
-              name: this.name,
+              loan_type: this.loan_type,
             
-              description:this.description,
+              max_amount:this.max_amount,
+              repayment_period:this.repayment_period,
+
             
               created_by:this.created_by,
-              use_common_workflow:this.use_common_workflow,
 
            
         
@@ -251,11 +253,11 @@ ngOnInit(): void {
             };
           
         
-            this.employeeService.registerReqType(companyData).subscribe(
+            this.employeeService.registerLoanType(companyData).subscribe(
               (response) => {
                 console.log('Registration successful', response);
               
-                    alert('Request Type has been Added ');
+                    alert('Loan Type has been Added ');
                     window.location.reload();
                     // window.location.reload();
                
@@ -270,16 +272,19 @@ ngOnInit(): void {
           }
 
 
-          loadReqTypes(): void {
+
+
+      
+          loadLoanTypes(): void {
     
             const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
           
             console.log('schemastore',selectedSchema )
             // Check if selectedSchema is available
             if (selectedSchema) {
-              this.employeeService.getGenReqType(selectedSchema).subscribe(
+              this.employeeService.getLoanTypes(selectedSchema).subscribe(
                 (result: any) => {
-                  this.ReqTypes = result;
+                  this.LoanTypes = result;
                   console.log(' fetching Loantypes:');
           
                 },
@@ -291,37 +296,11 @@ ngOnInit(): void {
             }
         
 
-          registerRequestTyopecmnwrkflow(): void {
-            this.registerButtonClicked = true;
-            const companyData = {
-              level: this.level,
-            
-              role:this.role,
-            
-              approver:this.approver,
 
-           
+
+
+
+
         
-              // Add other form field values to the companyData object
-            };
-          
-        
-            this.employeeService.registerReqType(companyData).subscribe(
-              (response) => {
-                console.log('Registration successful', response);
-              
-                    alert('Request Type has been Added ');
-                    window.location.reload();
-                    // window.location.reload();
-               
-        
-              },
-              (error) => {
-                console.error('Added failed', error);
-                alert('enter all field!')
-                // Handle the error appropriately, e.g., show a user-friendly error message.
-              }
-            );
-          }
 
 }

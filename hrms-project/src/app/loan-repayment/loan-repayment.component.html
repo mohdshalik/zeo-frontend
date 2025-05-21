@@ -1,0 +1,113 @@
+<div class="container">
+    <div class="comapny_section" *ngIf="hasViewPermission">
+        <div class="com_list " >
+
+                <h2>Loan Repayment</h2>
+                <hr>
+                
+                <form (ngSubmit)="CreateLoanrepayment()" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Repayment date</label>
+                        <input type="date" class="form-control" required [(ngModel)]="repayment_date" placeholder="Enter Repayment date"
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+                  
+                      <div class="col-md-6">
+                        <label>Amount paid</label>
+                        <input type="text" class="form-control" required [(ngModel)]="amount_paid" placeholder="Enter Amount paid"
+                               [ngModelOptions]="{standalone: true}">
+                      
+                      </div>
+
+                      <div class="col-md-6">
+                        <label>Remaining balance</label>
+                        <input type="text" class="form-control" required [(ngModel)]="remaining_balance" placeholder="Enter Remaining balance"
+                               [ngModelOptions]="{standalone: true}">
+                      
+                      </div>
+                  
+    
+                 
+                  
+                     
+
+                      <div class="col-md-6" >
+                        <label>Loan Type</label>
+                        <div class="custom-sel">
+                          <select
+                            class="form-control"
+                            id="loan"
+                            name="loan"
+                            [(ngModel)]="loan"
+                            [ngModelOptions]="{ standalone: true }"
+                          >
+                            <option *ngFor="let employees of LoanTypes" [value]="employees.id">
+                              {{ employees.loan_type }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  
+                    <div class="row" *ngIf="hasAddPermission">
+                      <div class="col-md-9"></div>
+                      <div class="col-md-3">
+                        <button type="submit" class="btn btn-success btn-full mt-4">Add Loan Repayment </button>
+                      </div>
+                    </div>
+                  </form>
+                  
+
+
+
+
+
+            </div>
+
+
+
+            <div class=""  *ngIf="hasViewPermission">
+
+                <table class="table-container " width="100%">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Repayment date </th>
+                        <th>Amount paid</th>
+                        <th>Remaining balance</th>
+
+                        <th>Loan Type</th>
+                       
+          
+            
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                      <tr *ngFor="let docs of LoanRepayements;let i = index">
+                        <td>{{ i + 1 }}</td> 
+                        <td>{{ docs.repayment_date }}</td>
+                        <td>{{ docs.amount_paid }}</td> 
+                        <td>{{ docs.remaining_balance }}</td>
+                        <td>{{ docs.loan }}</td>
+
+                      
+        
+                      </tr>
+                  
+                    </tbody>
+                  </table>
+    
+                  </div>
+
+        </div>
+
+
+
+
+
+</div>

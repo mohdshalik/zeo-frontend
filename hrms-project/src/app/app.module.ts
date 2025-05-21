@@ -153,6 +153,13 @@ import { EmployeeLeaveRejoinComponent } from './employee-leave-rejoin/employee-l
 import { DocExpEmailtemplateComponent } from './doc-exp-emailtemplate/doc-exp-emailtemplate.component';
 import { LeaveAccruvalComponent } from './leave-accruval/leave-accruval.component';
 import { EmployeeOvertimeComponent } from './employee-overtime/employee-overtime.component';
+import { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';
+import { LoanSidebarComponent } from './loan-sidebar/loan-sidebar.component';
+import { LoanTypeComponent } from './loan-type/loan-type.component';
+import { LoanApplicationComponent } from './loan-application/loan-application.component';
+import { LoanRepaymentComponent } from './loan-repayment/loan-repayment.component';
+import { LoanApprovelLevelComponent } from './loan-approvel-level/loan-approvel-level.component';
+import { LoanApprovalComponent } from './loan-approval/loan-approval.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -264,7 +271,14 @@ import { EmployeeOvertimeComponent } from './employee-overtime/employee-overtime
      EmployeeLeaveRejoinComponent,
      DocExpEmailtemplateComponent,
      LeaveAccruvalComponent,
-     EmployeeOvertimeComponent
+     EmployeeOvertimeComponent,
+     EmployeeAttendanceComponent,
+     LoanSidebarComponent,
+     LoanTypeComponent,
+     LoanApplicationComponent,
+     LoanRepaymentComponent,
+     LoanApprovelLevelComponent,
+     LoanApprovalComponent
      
      
 

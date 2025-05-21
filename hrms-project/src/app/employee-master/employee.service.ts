@@ -181,6 +181,19 @@ export class EmployeeService {
     );
   }
 
+  
+  // get method for loans
+
+  getGenReqType(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/employee/api/request-type/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+
+    
+  }
+
+
 
 
   registerAssignweekCalendar(companyData: any): Observable<any> {
@@ -468,6 +481,25 @@ export class EmployeeService {
     }
 
     const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_family/?schema=${selectedSchema}`;
+
+    return this.http.get(apiUrl);
+  }
+
+
+  getSalary(employeeId: number): Observable<any> {
+    // return this.http.get<any>(`http://localhost:8000/api/Employee/${employeeId}/emp_family/`);
+
+    // const url = `${this.baseUrl}/Employee/${employeeId}/emp_family/`;
+    // return this.http.get(url);
+
+
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_payslip/?schema=${selectedSchema}`;
 
     return this.http.get(apiUrl);
   }
@@ -1759,6 +1791,179 @@ export class EmployeeService {
     const apiUrl = `${this.apiUrl}/calendars/api/leave-balance/apply-openings/?schema=${selectedSchema}`;
     return this.http.post(apiUrl, payload);
   }
+  
+
+
+
+  // loan module post method services code here
+
+  registerLoanType(companyData: any): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+
+
+
+    const apiUrl = `${this.apiUrl}/payroll/api/loan-type/?schema=${selectedSchema}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post(apiUrl, companyData, { headers }).pipe(
+      catchError((error) => {
+        // Handle errors here (you can log, show a user-friendly message, etc.)
+        console.error('Error during company registration:', error);
+        return throwError(error);
+
+      })
+    );
+  }
+
+
+  registerLoanApplication(formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/loan-application/?schema=${selectedSchema}`;
+  
+    return this.http.post(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during leave type registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+
+  registerLoanrepayment(formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/loan-repayment/?schema=${selectedSchema}`;
+  
+    return this.http.post(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during leave type registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+
+  registerLoanApproverLevel(formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const apiUrl = `${this.apiUrl}/payroll/api/loan-approval-levels/?schema=${selectedSchema}`;
+  
+    return this.http.post(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during leave type registration:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+
+  // get method for loans
+
+  getLoanTypes(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/loan-type/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+
+    
+  }
+
+
+  getLoanApplications(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/loan-application/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+
+    
+  }
+
+  getLoanRepayments(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/loan-repayment/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+
+    
+  }
+
+
+  getLoanapprover(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/users/api/user/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+
+    
+  }
+
+  getLoanApprovalLevels(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/loan-approval-levels/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+
+    
+  }
+
+
+
+
+
+
+
+
+  // loan approval services
+
+
+  getApprovalslistLeave(selectedSchema: string, userId: number): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/loan-approval/?schema=${selectedSchema}`;
+  
+    // Fetch approvals for the user from the API
+    
+    return this.http.get(apiUrl);
+  }
+  
+
+  getApprovalDetailsLeave(apiUrl: string): Observable<any> {
+    return this.http.get(apiUrl);
+  }
+  
+
+  
+approveApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status: string }): Observable<any> {
+  // Sending a POST request to approve with note and status
+  return this.http.post(apiUrl, approvalData);
+}
+
+rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status: string }): Observable<any> {
+  // Sending a POST request to approve with note and status
+  return this.http.post(apiUrl, approvalData);
+}
+
+
+
+
   
 
 }

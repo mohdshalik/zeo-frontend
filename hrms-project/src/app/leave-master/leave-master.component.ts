@@ -106,6 +106,8 @@ export class LeaveMasterComponent {
   schemas: string[] = []; // Array to store schema names
 
   Employees: any[] = []; // Array to store schema names
+  leaveRests: any[] = []; // Array to store schema names
+
 
   name: any = '';
   code: any = '';
@@ -191,6 +193,8 @@ export class LeaveMasterComponent {
     if (selectedSchema) {
 
       this.loadLeaveEntitlements();
+      this.loadLeaveRestValues();
+
 
       this.LoadLeavetype(selectedSchema);
       this.LoadEmployee(selectedSchema);
@@ -546,6 +550,28 @@ loadLeaveEntitlements(): void {
   );
 }
 
+
+
+
+
+  // Call this method to load all leave entitlement records (e.g., after registration or on init)
+  loadLeaveRestValues(): void {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return;
+    }
+    
+    this.leaveService.getAllLeaveResetValues(selectedSchema).subscribe(
+      (result: any) => {
+        console.log('Fetched leave entitlements:', result);
+        this.leaveRests = result; // Assuming your API returns an array of records
+      },
+      (error) => {
+        console.error('Error fetching leave entitlements:', error);
+      }
+    );
+  }
 
   LoadLeavetype(selectedSchema: string) {
     this.leaveService.getLeaveType(selectedSchema).subscribe(

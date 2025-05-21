@@ -77,6 +77,13 @@ import { DocExpEmailtemplateComponent } from './doc-exp-emailtemplate/doc-exp-em
 import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
 import { LeaveAccruvalComponent } from './leave-accruval/leave-accruval.component';
 import { EmployeeOvertimeComponent } from './employee-overtime/employee-overtime.component';
+import { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';
+import { LoanSidebarComponent } from './loan-sidebar/loan-sidebar.component';
+import { LoanTypeComponent } from './loan-type/loan-type.component';
+import { LoanApplicationComponent } from './loan-application/loan-application.component';
+import { LoanRepaymentComponent } from './loan-repayment/loan-repayment.component';
+import { LoanApprovelLevelComponent } from './loan-approvel-level/loan-approvel-level.component';
+import { LoanApprovalComponent } from './loan-approval/loan-approval.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -262,6 +269,10 @@ const routes: Routes = [
             component:LeaveApprovalsReportComponent
           },
           {
+            path:'employee-attendance',
+            component:EmployeeAttendanceComponent
+          },
+          {
             path:'from-designer',
             component:FromDesignerComponent
           },
@@ -367,6 +378,38 @@ const routes: Routes = [
       path: 'payroll-details/:id',
       component: PayrollDetailsComponent
     },
+
+  ]
+
+},
+
+
+{
+  path: 'loan-sidebar',
+  component: LoanSidebarComponent,
+  children:[
+    {
+      path:'loan-type',
+      component:LoanTypeComponent,
+    },
+    {
+      path:'loan-application',
+      component:LoanApplicationComponent,
+    },
+    {
+      path:'loan-repayment',
+      component:LoanRepaymentComponent,
+    },
+    {
+      path:'loan-approvel-level',
+      component:LoanApprovelLevelComponent,
+    },
+   
+    {
+      path:'loan-approval',
+      component:LoanApprovalComponent,
+    },
+   
 
   ]
 

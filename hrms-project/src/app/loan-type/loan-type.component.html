@@ -1,0 +1,123 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="com_list " *ngIf="hasAddPermission">
+    <div class="cpm-sec">
+
+        <h2> Loan Type</h2><hr>
+
+        <form >
+
+            <div class="row">
+                <div class="col-md-6" >
+               
+                    <label>Loan Type</label>
+                   <input type="text"  class="form-control" required  [(ngModel)]="loan_type"  placeholder="Enter loan type"
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !loan_type}">
+                   
+                   <div *ngIf="registerButtonClicked && !loan_type" class="error-message">loan type is required.</div>
+              </div>
+              
+
+              <div class="col-md-6" >
+               
+                <label>Maximum Amount</label>
+               <input type="text"  class="form-control" required  [(ngModel)]="max_amount"  placeholder="Enter Maximum amount"
+                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !max_amount}">
+               
+               <div *ngIf="registerButtonClicked && !max_amount" class="error-message">max amount is required.</div>
+          </div>
+
+          
+          <div class="col-md-6" >
+               
+            <label>Repayment period</label>
+           <input type="number"  class="form-control" required  [(ngModel)]="repayment_period"  placeholder="Enter Repayment period"
+            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !repayment_period}">
+           
+           <div *ngIf="registerButtonClicked && !repayment_period" class="error-message">Repayment period is required.</div>
+      </div>
+
+      
+   
+<!--         
+          <div class="col-md-6 mt-4">
+            <div class="check-box-selection-sec form-control">
+                <div class="mat-set">
+                    <mat-checkbox [(ngModel)]="use_common_workflow" [ngModelOptions]="{standalone: true}">use common workflow</mat-checkbox>
+                </div>
+               
+            </div>
+        </div> -->
+       
+
+
+    <div class="col-md-6" *ngIf="!created_by">
+
+
+        <div class="custom-sel">
+            <label>Created by</label>
+            <select class="form-control" id="created_by" required [(ngModel)]="created_by"  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !created_by}" >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of Users" [value]="deparmentsec.id">{{ deparmentsec.username     }} </option>
+            </select>
+            <div *ngIf="registerButtonClicked && !created_by" class="error-message">Please Select Created by </div>
+        </div>
+                    
+
+    </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-10">
+    
+                </div>
+    
+                <div class="col-md-2">
+                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="CreateLoanType()">Save</button>  
+                 </div>
+            </div>
+            
+       
+    </form>
+
+
+     
+
+
+        </div>
+
+        </div>
+
+        <div class="" *ngIf="hasViewPermission">
+
+
+            <table width="100%" *ngIf="hasViewPermission">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th> Loan type  </th>
+                    <th>Maximum amount</th>
+                    <th>Repayment period</th>
+      
+        
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr *ngFor="let docs of LoanTypes;let i = index">
+                    <td>{{ i + 1 }}</td> 
+                    <td>{{ docs.loan_type }}</td>
+                    <td>{{ docs.max_amount }}</td> 
+                    <td>{{ docs.repayment_period }}</td>
+    
+                  </tr>
+              
+                </tbody>
+              </table>
+
+        </div>
+        </div>
+        </div>
+        

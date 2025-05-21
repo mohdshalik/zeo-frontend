@@ -3,7 +3,7 @@
         <div class="com_list " >
     <div class="">
 
-        <h2>Leave Approval List </h2>
+        <h2>Loan Approval List </h2>
 
 
   
@@ -18,11 +18,11 @@
         <div class="row">
             <div class="col-md-12">
               <div class="approval_sec" *ngFor="let apr of Approvals" >
-                <h6>Leave Request Approvals</h6><hr>
+                <h6>Loan Request Approvals</h6><hr>
                 <div class="row ">
                     <div class="col-md-2">
-                      <h4>Leave Request</h4>
-                      <h5>{{apr.leave_request}}</h5>
+                      <h4>Loan Request</h4>
+                      <h5>{{apr.loan_request}}</h5>
                     </div>
                        <div class="col-md-2">
                       <h4>Employee</h4>
@@ -107,7 +107,7 @@
       <div *ngIf="selectedApproval">
         <h6>Leave Request Approvals</h6>
         <hr>
-        <h6>Leave Request - {{ selectedApproval.leave_request }}</h6>
+        <h6>Leave Request - {{ selectedApproval.loan_request }}</h6>
         <h6>Status - {{ selectedApproval.status }}</h6>
         <h6>Level - {{ selectedApproval.level }}</h6>
   

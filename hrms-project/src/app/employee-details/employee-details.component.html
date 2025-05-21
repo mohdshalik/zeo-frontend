@@ -480,7 +480,54 @@
                                 <div *ngIf="!employeeDocuments.length">No employee documents available.</div>
                             </mat-tab>
 
+                            <mat-tab label="Emp Salary">
+                                <div class="tab_content  mt-3">
+                                 
+                                    
+                  <table class="styled-table" width="100%" style=" border-collapse: collapse;">
+                    <thead>
+                      <tr>
+                        <th class="text-table-header" style="width: 0;">No</th>
+                        <!-- <th class="text-table-header">Employee</th> -->
+                        <th class="text-table-header">Name</th>
+                        <th class="text-table-header">Start Date</th>
+                        <th class="text-table-header">End Date</th>
+                        <th class="text-table-header">Gross Salary</th>
+                        <th class="text-table-header">Net Salary</th>
+                        <th class="text-table-header">Status</th>
+                        <!-- <th class="text-table-header">Payslip Component</th> -->
+                      </tr>
+                    </thead>
+                    <tbody class="text-table-body">
+                      <tr class="tbodytext" *ngFor="let payslip of EmpSalary; let i = index"
+                      >
+                        <td>{{ i + 1 }}</td>
+                        <!-- <td class="table-body-text-spl">{{ payslip.employee }}</td> -->
+                        <td>{{ payslip.payroll_run?.name }}</td>
+                        <td>{{ payslip.payroll_run?.start_date }}</td>
+                        <td>{{ payslip.payroll_run?.end_date }}</td>
+                        <td>{{ payslip.gross_salary }}</td>
+                        <td>{{ payslip.net_salary }}</td>
+                        <td>
+                          <span class="pill" [ngClass]="{
+                            'pill green': payslip.status === 'approved',
+                            'pill blue': payslip.status === 'processed',
 
+                            'pill yellow': payslip.status === 'pending',
+                            'pill red': payslip.status === 'rejected'
+                          }">
+                            {{ payslip.status }}
+                          </span>
+                        </td>
+                        <!-- <td>{{ payslip.end_date }}</td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                                </div>
+                                <!-- <div class=" mt-5" >
+                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeeLang()">Add Language</button>
+                        </div> -->
+                            </mat-tab>
                             <mat-tab label="Emp Language">
                                 <div class="tab_content  mt-3">
                                     <!-- <div class="row mt-3" >

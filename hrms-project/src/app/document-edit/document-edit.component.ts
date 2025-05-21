@@ -245,7 +245,7 @@ setDropdownValues(): void {
 
  
   ClosePopups(){
-    this.ref.close('Closed using function')
+    this.ref.close('Closed using function');
   }
 
 

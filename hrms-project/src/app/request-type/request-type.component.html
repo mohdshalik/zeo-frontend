@@ -146,6 +146,30 @@
 
         <div class="" *ngIf="hasViewPermission">
 
+
+            <table width="100%" *ngIf="hasViewPermission">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th> Request Name </th>
+                    <th>Description</th>
+      
+        
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr *ngFor="let docs of ReqTypes;let i = index">
+                    <td>{{ i + 1 }}</td> 
+                    <td>{{ docs.name }}</td>
+                    <td>{{ docs.description }}</td> 
+    
+                  </tr>
+              
+                </tbody>
+              </table>
+
         </div>
         </div>
         </div>

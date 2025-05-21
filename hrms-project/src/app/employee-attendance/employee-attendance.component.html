@@ -1,0 +1,140 @@
+<div class="container">
+    <div class="comapny_section">
+    
+        <div class="com_list mt-4 " >
+            <div class="cpm-sec">
+
+                <h2>Attendance report employee</h2>
+                <hr>
+                
+            
+                   
+<div class="row">
+    
+
+
+    <div class="col-md-6">
+        <label >Year</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="year"
+          [ngModelOptions]="{standalone: true}"
+        />
+    </div>
+    <div class="col-md-6">
+        <label >Month</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="month"
+          [ngModelOptions]="{standalone: true}"
+        />
+    </div>
+
+
+    <div class="col-md-6">
+        <label>Select Employee</label>
+        <div class="custom-sel">
+          <select class="form-control" id="employee" name="employee"
+          
+          [(ngModel)]="employee_id"
+
+                  [ngModelOptions]="{standalone: true}">
+            <option [ngValue]="null">-- Select --</option>
+            <option *ngFor="let employee of Employees" [ngValue]="employee.id">
+              {{ employee.emp_code }}
+            </option>
+          </select>
+        </div>
+      </div>
+      
+</div>
+
+
+<div class="row">
+    <div class="col-md-10">
+
+    </div>
+    <div class="col-md-2 mt-3">
+        <button class="btn btn-primary" (click)="generateAttendanceReport()">Generate Report</button>
+      </div>
+</div>
+
+
+
+                           
+                  
+
+
+            </div>
+
+
+        <!-- Show selected employee report if available -->
+<div *ngIf="attendanceData">
+    <h2>Attendance Sheet for {{ attendanceData.employee_name }} - {{ attendanceData.month }}/{{ attendanceData.year }}</h2>
+    <div class="table-container table-scroll">
+      <table class="table table-bordered table-hover mt-3 text-center">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th *ngFor="let day of daysArray">{{ day }}</th>
+            <!-- <th>Total Days</th> -->
+            <th>Present Days</th>
+            <th>Absent Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ attendanceData.employee_name }}</td>
+            <td *ngFor="let day of daysArray">
+              {{ getStatusForDay(day, attendanceData.summary_data) }}
+            </td>
+            <!-- <td>{{ attendanceData.total_days }}</td> -->
+            <td>{{ attendanceData.total_present }}</td>
+            <td>{{ attendanceData.total_absent }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Show all employee attendance initially -->
+  <div *ngIf="!attendanceData && allAttendanceData.length > 0">
+    <h2>All Employees Attendance Records</h2>
+    <div class="table-container table-scroll">
+      <table class="table table-bordered table-hover mt-3 text-center">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th *ngFor="let day of daysArray">{{ day }}</th>
+            <th>Total Days</th>
+            <th>Present Days</th>
+            <th>Absent Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of allAttendanceData">
+            <td>{{ record.employee_name }}</td>
+            <td *ngFor="let day of daysArray">
+              {{ getStatusForDay(day, record.summary_data) }}
+            </td>
+            <td>{{ record.total_days }}</td>
+            <td>{{ record.total_present }}</td>
+            <td>{{ record.total_absent }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+        
+
+        </div>
+
+
+
+
+
+
+    </div>
+</div>

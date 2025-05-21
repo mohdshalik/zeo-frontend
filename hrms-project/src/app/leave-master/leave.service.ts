@@ -73,6 +73,12 @@ export class LeaveService {
     const apiUrl = `${this.apiUrl}/calendars/api/leave-entitlement/?schema=${selectedSchema}`;
     return this.http.get(apiUrl);
   }
+
+
+  getAllLeaveResetValues(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/calendars/api/leave-reset-policy/?schema=${selectedSchema}`;
+    return this.http.get(apiUrl);
+  }
   
 
   registerLeaveapplicable(formData: FormData): Observable<any> {
@@ -205,6 +211,23 @@ export class LeaveService {
     );
   }
 
+
+  CreateEmployeeattendance(formData: FormData): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError(() => new Error('No schema selected.'));
+    }
+
+    const apiUrl = `${this.apiUrl}/calendars/api/monthly-attendance/generate/?schema=${selectedSchema}`;
+    
+    return this.http.post(apiUrl, formData).pipe(
+      catchError((error) => {
+        console.error('Error during employee overtime creation:', error);
+        return throwError(() => error);
+      })
+    );
+  }
 
   registerEmailTemplateLeave(companyData: any): Observable<any> {
     const selectedSchema = localStorage.getItem('selectedSchema');
@@ -396,6 +419,13 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
     return this.http.get(apiUrl);
   
   }
+
+  // leave.service.ts
+generateAttendanceReport(schema: string, data: any): Observable<any> {
+  const url = `${this.apiUrl}/calendars/api/monthly-attendance/generate/?schema=${schema}`;
+  return this.http.post<any>(url, data);
+}
+
 
 
   getLeaverejectionReasons(selectedSchema: string): Observable<any> {
@@ -736,5 +766,18 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
   
     const apiUrl = `${this.apiUrl}/payroll/api/payslip/${id}/?schema=${selectedSchema}`;
     return this.http.put(apiUrl, payload);
+  }
+
+
+
+
+  getAllAttendance(schema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/calendars/api/monthly-attendance/?schema=${schema}`;
+    return this.http.get(apiUrl).pipe(
+      catchError((error) => {
+        console.error('Error fetching all attendance', error);
+        return throwError(() => error);
+      })
+    );
   }
 }

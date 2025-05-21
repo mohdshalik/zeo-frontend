@@ -375,3 +375,8 @@ option{
 
 
 
+
+
+.btn-full{
+  text-transform: capitalize;
+}

@@ -615,3 +615,145 @@ body {
   text-transform: capitalize;
 
 }
+
+
+
+
+
+.styled-table{
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    white-space: nowrap;
+    border-collapse: collapse  !important;
+}
+
+::ng-deep  .styled-table tr:nth-child(even){
+  background-color: whitesmoke;
+}
+
+
+.styled-table thead th {
+  border-spacing: 0 10px;
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: whitesmoke !important;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.text-table-header{
+
+      --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+        font-weight: 500;
+        font-size: 0.75rem;
+    line-height: 1rem;
+    border-collapse: collapse !important; 
+    border-width: 0 !important;
+
+}
+
+.text-table-body td{
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  white-space: nowrap;
+  border-collapse: collapse !important; 
+  border-width: 0 !important;
+}
+
+
+
+
+.table-body-text-spl{
+      color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+      font-weight: 500;
+  
+}
+
+
+
+
+.styled-table th {
+  text-align: left;
+  color: #555;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.styled-table td {
+  padding: 12px;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.pill {
+  display: inline-flex;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: capitalize;    
+  border-radius: 9999px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 0.75rem;
+
+}
+
+.green {
+  background-color: #e3f9e5;
+  color: #2e7d32;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 60px;
+  padding: 6px;
+
+}
+
+.yellow {
+  background-color: #fff8db;
+  color: #a47e1b;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 60px;
+  padding: 6px;
+
+
+}
+
+.red {
+  background-color: #fdecea;
+  color: #b00020;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 60px;
+  padding: 6px;
+
+}
+
+.blue {
+  background-color: blue;
+  color: white;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 60px;
+  padding: 6px;
+
+}
+
+
+
+::ng-deep .styled-table tbody tr:hover td {
+  background-color: #f3f4f6 !important;
+  cursor: pointer;
+}

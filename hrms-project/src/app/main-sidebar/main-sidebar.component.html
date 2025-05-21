@@ -35,6 +35,12 @@
 
 
       </a>
+
+      <a  routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" (click)="onToolbarMenuToggle()">
+        <span><mat-icon>real_estate_agent </mat-icon><span class="sidenav-opt" routerLink="/main-sidebar/loan-sidebar"> Loan Management</span></span>
+
+
+      </a>
       <a routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple" *ngIf="!hideButton" routerLink="/main-sidebar/settings" (click)="onToolbarMenuToggle()">
         <span><mat-icon>settings</mat-icon> <span class="sidenav-opt" > Settings</span></span>
       </a>

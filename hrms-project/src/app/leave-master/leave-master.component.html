@@ -1007,7 +1007,62 @@
         
                           </div>
                       </div>
-                  </form>   
+                  </form> 
+                  
+                  <div class="table-container mt-5">
+
+
+
+  
+                    <table class="table table-bordered table-hover preview-table" width="100%"
+                    *ngIf="leaveEntitlements && leaveEntitlements.length > 0">
+               <thead>
+                 <tr>
+                   <th>No</th>
+                   <th>Leave Type</th>
+                   <th>Reset</th>
+                   <th>Frequency</th>
+                   <th>Month</th>
+                   <th>Day</th>
+                   <th>Allow Carry Forward</th>
+                   <th>Carry Forward Choice</th>
+                   <th>CF Value</th>
+                   <th>CF Unit/Percentage</th>
+                   <th>CF Max Limit</th>
+                   <th>CF Expires In Value</th>
+                   <th>CF Time Choice</th>
+                   <th>Allow Encashment</th>
+                   <th>Encashment Value</th>
+                   <th>Encashment Unit/Percentage</th>
+                   <th>Encashment Max Limit</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr *ngFor="let ent of leaveRests; let i = index">
+                   <td>{{ i + 1 }}</td>
+                   <td>{{ ent.leave_type }}</td>
+                   <td>{{ ent.reset }}</td>
+                   <td>{{ ent.frequency }}</td>
+                   <td>{{ ent.month }}</td>
+                   <td>{{ ent.day }}</td>
+                   <td>{{ ent.allow_cf }}</td>
+                   <td>{{ ent.carry_forward_choice }}</td>
+                   <td>{{ ent.cf_value }}</td>
+                   <td>{{ ent.cf_unit_or_percentage }}</td>
+                   <td>{{ ent.cf_max_limit }}</td>
+                   <td>{{ ent.cf_expires_in_value }}</td>
+                   <td>{{ ent.cf_time_choice }}</td>
+                   <td>{{ ent.allow_encashment }}</td>
+                   <td>{{ ent.encashment_value }}</td>
+                   <td>{{ ent.encashment_unit_or_percentage }}</td>
+                   <td>{{ ent.encashment_max_limit }}</td>
+                 </tr>
+               </tbody>
+             </table>
+             
+                    
+                    </div>
+
                     </div>
                  </mat-tab>
   

@@ -43,6 +43,9 @@ export class EmployeeDetailsComponent implements OnInit {
 
   employeeDocuments: any[] = [] ;
 
+  EmpSalary: any[] | undefined;
+
+
   // expiredDocuments: any[] = [];
 
   isEssUser: boolean = false; // Initialize with a default value, or set it based on some condition
@@ -127,6 +130,7 @@ export class EmployeeDetailsComponent implements OnInit {
       const employeeIdParam = this.route.snapshot.paramMap.get('id');
       this.loadFamilyDetails();
 
+      this.loadSalary();
 
       if (employeeIdParam) {
         const employeeId = +employeeIdParam;
@@ -261,6 +265,18 @@ getProgressOffset(balance: number): number {
         }
       );
     }
+
+      loadSalary(): void {
+      this.EmployeeService.getSalary(this.employee).subscribe(
+        family => {
+          this.EmpSalary = family;
+        },
+        error => {
+          console.error('Error fetching family details:', error);
+        }
+      );
+    }
+
 
   
 
