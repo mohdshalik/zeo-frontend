@@ -307,5 +307,91 @@ private employeeService: EmployeeService,
   
 
 
+      isPauseModalOpen: boolean = false;
+      isResumeModalOpen: boolean = false;
+
+
+    
+
+selectedLoanId: number | null = null;
+
+
+
+openPauseModal(loan: any): void {
+  this.selectedLoanId = loan.id;
+  this.pause_start_date = '';
+  this.pause_reason = '';
+  this.isPauseModalOpen = true;
+}
+closePauseModal(): void {
+  this.isPauseModalOpen = false;
+}
+
+
+openResumeModal(loan: any): void {
+  this.selectedLoanId = loan.id;
+  this.resume_date = '';
+  this.isResumeModalOpen = true;
+}
+
+closeResumeModal(): void {
+  this.isResumeModalOpen = false;
+}
+
+
+
+// -------------------- Submit Pause --------------------
+
+submitPauseLoan(): void {
+  if (!this.selectedLoanId) {
+    alert('Loan ID is missing!');
+    return;
+  }
+
+  const pauseData = {
+    pause_start_date: this.pause_start_date,
+    pause_reason: this.pause_reason,
+    resume_date: null // resume date is not set during pause
+  };
+
+  this.employeeService.pauseLoanApplication(this.selectedLoanId, pauseData).subscribe(
+    (response) => {
+      alert('Loan application paused successfully!');
+      this.closePauseModal();
+      this.loadLoanApplications();
+    },
+    (error) => {
+      console.error('Pause failed:', error);
+      alert('Failed to pause the loan application.');
+    }
+  );
+}
+
+// -------------------- Submit Resume --------------------
+
+submitResumeLoan(): void {
+  if (!this.selectedLoanId) {
+    alert('Loan ID is missing!');
+    return;
+  }
+
+  const resumeData = {
+    resume_date: this.resume_date,
+    pause_start_date: null, // clear pause date when resuming
+    pause_reason: null
+  };
+
+  this.employeeService.resumeLoanApplication(this.selectedLoanId, resumeData).subscribe(
+    (response) => {
+      alert('Loan application resumed successfully!');
+      this.closeResumeModal();
+      this.loadLoanApplications();
+    },
+    (error) => {
+      console.error('Resume failed:', error);
+      alert('Failed to resume the loan application.');
+    }
+  );
+}
 
 }

@@ -1964,6 +1964,36 @@ rejectApprovalRequestLeave(apiUrl: string, approvalData: { note: string; status:
 
 
 
+
+
+pauseLoanApplication(id: number, data: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) return throwError('No schema selected');
+
+  const apiUrl = `${this.apiUrl}/payroll/api/loan-application/${id}/?schema=${selectedSchema}`;
+  return this.http.patch(apiUrl, data).pipe(
+    catchError((error) => {
+      console.error('Pause loan error:', error);
+      return throwError(error);
+    })
+  );
+}
+
+resumeLoanApplication(id: number, data: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) return throwError('No schema selected');
+
+  const apiUrl = `${this.apiUrl}/payroll/api/loan-application/${id}/?schema=${selectedSchema}`;
+  return this.http.patch(apiUrl, data).pipe(
+    catchError((error) => {
+      console.error('Resume loan error:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+
   
 
 }

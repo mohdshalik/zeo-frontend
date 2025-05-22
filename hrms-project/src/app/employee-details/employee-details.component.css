@@ -710,7 +710,7 @@ body {
 
 }
 
-.green {
+.styled-table .green {
   background-color: #e3f9e5;
   color: #2e7d32;
   font-weight: 600;
@@ -720,7 +720,7 @@ body {
 
 }
 
-.yellow {
+.styled-table .yellow {
   background-color: #fff8db;
   color: #a47e1b;
   font-weight: 600;
@@ -731,7 +731,7 @@ body {
 
 }
 
-.red {
+.styled-table .red {
   background-color: #fdecea;
   color: #b00020;
   font-weight: 600;
@@ -741,7 +741,7 @@ body {
 
 }
 
-.blue {
+.styled-table .blue {
   background-color: blue;
   color: white;
   font-weight: 600;
