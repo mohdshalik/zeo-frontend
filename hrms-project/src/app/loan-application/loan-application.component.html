@@ -1,154 +1,70 @@
 <div class="container">
     <div class="comapny_section" *ngIf="hasViewPermission">
-        <div class="com_list " >
+       
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h1> Loan Application</h1>
+                </div>
+                <div class="col-md-3">
+                    
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name " [(ngModel)]="searchQuery" (input)="filterEmployees()"> -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+                        <button type="button" (click)="openPopus()" class="btn-Create btn btn-success " ><span class="header-btn-icon"><i class="fa-solid fa-circle-plus"></i>
+                        </span> Create</button>
+                        <!-- <span *ngIf="!hasAddPermission"></span>
+
+                        <button type="button" class="btn-Edit btn-info btn"  (click)="EditShowButtons()" *ngIf="hasEditPermission">
+                            <span class="header-btn-icon">
+                             <mat-icon>draw
+                        </mat-icon></span> Edit</button>
+                        <span *ngIf="hasEditPermission"></span>
+
+                        <button type="button" class="btn-Delete btn btn-danger" (click)="toggleCheckboxes()" *ngIf="hasDeletePermission">
+                            <span class="header-btn-icon">
+                                <mat-icon> delete
+                           </mat-icon></span> {{ Delete ? 'Cancel' : 'Delete' }}</button>
+                           
+                           <span *ngIf="!hasDeletePermission"></span> -->
+                    </div>
+                </div>
+            </div>
+           
+           
+
+        </div>
+       
+       
+        <!-- <div class="com_list " >
 
                 <h2>Create Loan Application</h2>
                 <hr>
                 
-                <form (ngSubmit)="CreateLoanApplication()" enctype="multipart/form-data">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <label>Amount requested</label>
-                        <input type="text" class="form-control" required [(ngModel)]="amount_requested" placeholder="Enter Amount requested"
-                               [ngModelOptions]="{standalone: true}" >
-                      </div>
-                  
-                      <div class="col-md-4">
-                        <label>Repayment period</label>
-                        <input type="number" class="form-control" required [(ngModel)]="repayment_period" placeholder="Enter Repayment period"
-                               [ngModelOptions]="{standalone: true}">
-                      
-                      </div>
-
-                      <div class="col-md-4">
-                        <label>Emi amount</label>
-                        <input type="text" class="form-control" required [(ngModel)]="emi_amount" placeholder="Enter Repayment period"
-                               [ngModelOptions]="{standalone: true}">
-                      
-                      </div>
-                  
-                   
-<!--                       
-                      <div class="col-md-4">
-                        <label>Leave Unit</label>
-                        <div class="custom-sel">
-                          <select class="form-control" id="unit" name="unit" [(ngModel)]="unit" [ngModelOptions]="{standalone: true}">
-                            <option>days</option>
-                            <option>hours</option>
-                          </select>
-                        </div>
-                      </div>
-                   -->
-                      <div class="col-md-4">
-                        <label>Disbursement date</label>
-                        <input type="date" class="form-control" required [(ngModel)]="disbursement_date" placeholder="Enter Disbursement date"
-                               [ngModelOptions]="{standalone: true}">
-                      </div>
-                   
-
-                      <div class="col-md-4">
-                        <label>Remaining balance</label>
-                        <input type="text" class="form-control" required [(ngModel)]="remaining_balance" placeholder="Enter remaining balance"
-                               [ngModelOptions]="{standalone: true}">
-                      
-                      </div>
-                  
-                      <div class="col-md-4">
-                        <label>Approved on</label>
-                        <input type="date" class="form-control" required [(ngModel)]="approved_on" placeholder="Enter Approved on"
-                               [ngModelOptions]="{standalone: true}" >
-                      </div>
-
-                  
-                 
-                  
-                      <div class="col-md-12">
-                        <label>Rejection reason</label>
-                        <textarea class="form-control" [(ngModel)]="rejection_reason" [ngModelOptions]="{standalone: true}"></textarea>
-                      </div>
-
-<!-- 
-                      <div class="col-md-4">
-                        <label>Pause start date</label>
-                        <input type="date" class="form-control" required [(ngModel)]="pause_start_date" placeholder="Enter Pause start date"
-                               [ngModelOptions]="{standalone: true}" >
-                      </div>
-
-                      
-                      <div class="col-md-4">
-                        <label>Resume date</label>
-                        <input type="date" class="form-control" required [(ngModel)]="resume_date" placeholder="Enter resume date"
-                               [ngModelOptions]="{standalone: true}" >
-                      </div>
-
-
-                      
-                      <div class="col-md-12">
-                        <label>Pause reason</label>
-                        <textarea class="form-control" [(ngModel)]="pause_reason" [ngModelOptions]="{standalone: true}"></textarea>
-                      </div> -->
-
-                      <div class="col-md-6" >
-                        <label>Employee</label>
-                        <div class="custom-sel">
-                          <select
-                            class="form-control"
-                            id="employee"
-                            name="employee"
-                            [(ngModel)]="employee"
-                            [ngModelOptions]="{ standalone: true }"
-                          >
-                            <option *ngFor="let employees of Employees" [value]="employees.id">
-                              {{ employees.emp_code }}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-
-
-                      <div class="col-md-6" >
-                        <label>Loan Type</label>
-                        <div class="custom-sel">
-                          <select
-                            class="form-control"
-                            id="loan_type"
-                            name="loan_type"
-                            [(ngModel)]="loan_type"
-                            [ngModelOptions]="{ standalone: true }"
-                          >
-                            <option *ngFor="let employees of LoanTypes" [value]="employees.id">
-                              {{ employees.loan_type }}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-
-
-                    </div>
-                  
-                    <div class="row" *ngIf="hasAddPermission">
-                      <div class="col-md-9"></div>
-                      <div class="col-md-3">
-                        <button type="submit" class="btn btn-success btn-full mt-4">Add Loan Application</button>
-                      </div>
-                    </div>
-                  </form>
+             
                   
 
 
 
 
 
-            </div>
+            </div> -->
 
 
 
-            <div class="com_list table-scroll"  *ngIf="hasViewPermission">
+            <div class="com_list mt-4 table-scroll"  *ngIf="hasViewPermission">
 
                 <table class="table-container " width="100%">
                     <thead>
                       <tr>
                         <th>No</th>
+                        <th>Actions</th>
+
+                        <th>Employee</th>
+
                         <th>Amount requested </th>
                         <th>Repayment period</th>
                         <th>Status</th>
@@ -162,9 +78,7 @@
                         <th>Pause reason</th>
                         <th>Resume date</th>
 
-                        <th>Employee</th>
                         <th>Loan type</th>
-                        <th>Actions</th>
 
           
             
@@ -175,6 +89,13 @@
                         
                       <tr *ngFor="let docs of LoanApplications;let i = index">
                         <td>{{ i + 1 }}</td> 
+                        <td>
+                            <button *ngIf="!docs.pause_start_date" class="btn btn-full btn-warning" (click)="openPauseModal(docs)">Pause</button>
+                            <button *ngIf="docs.pause_start_date" class="btn btn-full btn-primary" (click)="openResumeModal(docs)">Resume</button>
+                          </td>
+                          <td>{{ docs.employee }}</td>
+
+                               
                         <td>{{ docs.amount_requested }}</td>
                         <td>{{ docs.repayment_period }}</td> 
                         <td>{{ docs.status }}</td>
@@ -187,13 +108,8 @@
                         <td>{{ docs.pause_reason }}</td> 
                         <td>{{ docs.resume_date }}</td>
 
-                        <td>{{ docs.employee }}</td>
                         <td>{{ docs.loan_type }}</td>
-                        <td>
-                            <button *ngIf="!docs.pause_start_date" class="btn btn-warning" (click)="openPauseModal(docs)">Pause</button>
-                            <button *ngIf="docs.pause_start_date" class="btn btn-primary" (click)="openResumeModal(docs)">Resume</button>
-                          </td>
-                               
+                      
                       </tr>
                   
                     </tbody>
@@ -204,6 +120,141 @@
         </div>
 
 
+
+
+        <div *ngIf="iscreateLoanApp" class="modal">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-10">
+                  <h2> Loan Application</h2>
+                </div>
+                <div class="col-md-2">
+                  <span class="close pull-right" (click)="closeapplicationModal()">&times;</span>
+                </div>
+              </div>
+              <hr />
+          
+              <form (ngSubmit)="CreateLoanApplication()" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label>Amount requested</label>
+                    <input type="text" class="form-control" required [(ngModel)]="amount_requested" placeholder="Enter Amount requested"
+                           [ngModelOptions]="{standalone: true}" >
+                  </div>
+              
+                  <div class="col-md-4">
+                    <label>Repayment period</label>
+                    <input type="number" class="form-control" required [(ngModel)]="repayment_period" placeholder="Enter Repayment period"
+                           [ngModelOptions]="{standalone: true}">
+                  
+                  </div>
+
+                  <div class="col-md-4">
+                    <label>Emi amount</label>
+                    <input type="text" class="form-control" required [(ngModel)]="emi_amount" placeholder="Enter Repayment period"
+                           [ngModelOptions]="{standalone: true}">
+                  
+                  </div>
+              
+               
+
+                  <div class="col-md-4">
+                    <label>Disbursement date</label>
+                    <input type="date" class="form-control" required [(ngModel)]="disbursement_date" placeholder="Enter Disbursement date"
+                           [ngModelOptions]="{standalone: true}">
+                  </div>
+               
+
+                  <div class="col-md-4">
+                    <label>Remaining balance</label>
+                    <input type="text" class="form-control" required [(ngModel)]="remaining_balance" placeholder="Enter remaining balance"
+                           [ngModelOptions]="{standalone: true}">
+                  
+                  </div>
+              
+                  <div class="col-md-4">
+                    <label>Approved on</label>
+                    <input type="date" class="form-control" required [(ngModel)]="approved_on" placeholder="Enter Approved on"
+                           [ngModelOptions]="{standalone: true}" >
+                  </div>
+
+              
+             
+              
+                  <div class="col-md-12">
+                    <label>Rejection reason</label>
+                    <textarea class="form-control" [(ngModel)]="rejection_reason" [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+
+<!-- 
+                  <div class="col-md-4">
+                    <label>Pause start date</label>
+                    <input type="date" class="form-control" required [(ngModel)]="pause_start_date" placeholder="Enter Pause start date"
+                           [ngModelOptions]="{standalone: true}" >
+                  </div>
+
+                  
+                  <div class="col-md-4">
+                    <label>Resume date</label>
+                    <input type="date" class="form-control" required [(ngModel)]="resume_date" placeholder="Enter resume date"
+                           [ngModelOptions]="{standalone: true}" >
+                  </div>
+
+
+                  
+                  <div class="col-md-12">
+                    <label>Pause reason</label>
+                    <textarea class="form-control" [(ngModel)]="pause_reason" [ngModelOptions]="{standalone: true}"></textarea>
+                  </div> -->
+
+                  <div class="col-md-6" >
+                    <label>Employee</label>
+                    <div class="custom-sel">
+                      <select
+                        class="form-control"
+                        id="employee"
+                        name="employee"
+                        [(ngModel)]="employee"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <option *ngFor="let employees of Employees" [value]="employees.id">
+                          {{ employees.emp_code }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-6" >
+                    <label>Loan Type</label>
+                    <div class="custom-sel">
+                      <select
+                        class="form-control"
+                        id="loan_type"
+                        name="loan_type"
+                        [(ngModel)]="loan_type"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <option *ngFor="let employees of LoanTypes" [value]="employees.id">
+                          {{ employees.loan_type }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+
+                </div>
+              
+                <div class="row" *ngIf="hasAddPermission">
+                  <div class="col-md-8"></div>
+                  <div class="col-md-4">
+                    <button type="submit" class="btn btn-success btn-full mt-4">Add Loan Application</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        
 
 <!-- Modal Popup for selected loan to pause details -->
 <!-- Pause Modal -->

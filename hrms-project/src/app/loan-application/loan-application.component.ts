@@ -310,8 +310,20 @@ private employeeService: EmployeeService,
       isPauseModalOpen: boolean = false;
       isResumeModalOpen: boolean = false;
 
+      iscreateLoanApp: boolean = false;
 
+
+
+
+      openPopus():void{
+        this.iscreateLoanApp = true;
+
+      }
     
+      closeapplicationModal():void{
+        this.iscreateLoanApp = false;
+
+      }
 
 selectedLoanId: number | null = null;
 
