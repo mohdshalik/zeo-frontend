@@ -11,88 +11,87 @@
       
 
 
-        <div class="payslip-container" *ngIf="payslipDetails">
-          
-            <div class="payslip-header">
-              <h2>Payslip - {{ payslipDetails.payroll_run?.name }} {{ payslipDetails.payroll_run?.start_date | date:'yyyy' }}</h2>
-              <p class="mt-2">Status: 
-                <span [ngClass]="{
-                  'pill green': payslipDetails.status === 'approved',
-                  'pill blue': payslipDetails.status === 'processed',
+      <div class="payslip-container" *ngIf="payslipDetails">
 
-                  'pill yellow': payslipDetails.status === 'pending',
-                  'pill red': payslipDetails.status === 'rejected'    
-                }">{{ payslipDetails.status | titlecase }}</span>
-              </p>
-            </div>  
-          
-            <div class="employee-details mt-4">
-                
-              <p><span>Employee ID:</span> {{ payslipDetails.employee }}</p>
-              <p><span>Payroll Period:</span> {{ payslipDetails.payroll_run?.start_date }} to {{ payslipDetails.payroll_run?.end_date }}</p>
-              <p><span>Payment Date:</span> {{ payslipDetails.payroll_run?.payment_date }}</p>
-              
+        <div class="payslip-header">
+          <h2>Payslip - {{ payslipDetails.payroll_run?.name }} {{ payslipDetails.payroll_run?.start_date | date:'yyyy' }}</h2>
+          <p class="mt-2">Status: 
+            <span [ngClass]="{
+              'pill green': payslipDetails.status === 'approved',
+              'pill blue': payslipDetails.status === 'processed',
+
+              'pill yellow': payslipDetails.status === 'pending',
+              'pill red': payslipDetails.status === 'rejected'    
+            }">{{ payslipDetails.status | titlecase }}</span>
+          </p>
+        </div>  
+        <div class="employee-details mt-4">
+          <div class="row">
+            <div class="col-md-4">
+             <P> Employee ID </P>
             </div>
-          
-            <!-- ⬇️ Working days moved here -->
-            <div class="work-summary work-top">
-              <p><strong>Total Working Days:</strong> {{ payslipDetails.total_working_days }}</p>
-              <p><strong>Days Worked:</strong> {{ payslipDetails.days_worked }}</p>
+            <div class="col-md-8">
+              <p>: {{ payslipDetails.employee }}</p>
             </div>
-          
-            <div class="salary-summary">
+            <div class="col-md-4">
+              <P> Payroll Period </P>
+             </div>
+             <div class="col-md-8">
+               <p>: {{ payslipDetails.payroll_run?.start_date }} to {{ payslipDetails.payroll_run?.end_date }}</p>
+             </div>
 
-              <table >
-                <thead>
-                  <tr>
-                    <th>components</th>
-                    <th>Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let comp of payslipDetails.components">
-                    <td>{{comp.component }}</td>
-                    <td>₹ {{ comp.amount }}</td>
-                  </tr>
-                </tbody>
-            
-              </table>
-              <table class="mt-4" >
-                <thead>
-                  <tr>
-                    <th>Earnings</th>
-                    <th>Deductions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <p>Gross Salary: ₹ {{ payslipDetails.gross_salary }}</p>
-                      <p>Pro-rata Adjustment: ₹ {{ payslipDetails.pro_rata_adjustment }}</p>
-                      <p>Arrears: ₹ {{ payslipDetails.arrears }}</p>
-                      <p><strong>Total Additions:</strong> ₹ {{ payslipDetails.total_additions }}</p>
-                    </td>
-                    <td>
-                      <p>Total Deductions: ₹ {{ payslipDetails.total_deductions }}</p>
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="2" class="net-salary">
-                      <strong>Net Salary Payable: ₹ {{ payslipDetails.net_salary }}</strong>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-
-
-
-             
-            </div>
-
+             <div class="col-md-4">
+              <P>Payment Date</P>
+             </div>
+             <div class="col-md-8">
+               <p>: {{ payslipDetails.payroll_run?.payment_date }}</p>
+             </div>
           </div>
+                
+          <!-- <p><span>Employee ID:</span> </p>
+          <p><span>Payroll Period:</span> {{ payslipDetails.payroll_run?.start_date }} to {{ payslipDetails.payroll_run?.end_date }}</p>
+          <p><span>Payment Date:</span> {{ payslipDetails.payroll_run?.payment_date }}</p> -->
           
+        </div>
+        <table class="salary-table mt-4">
+          <thead>
+            <tr>
+              <th colspan="3">Earning</th>
+              <th colspan="2">Deduction</th>
+            </tr>
+            <tr>
+              <th>Component</th>
+              <th>Gross </th>
+              <th>Amount After LOP </th>
+              <th>Component</th>
+              <th>Amount </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let earning of earnings; let i = index">
+              <td>{{ earning.component_name }}</td>
+              <td>{{ earning.amount }}</td>
+              <td>{{ earning.amount }}</td>
+              <td>{{ deductions[i]?.component_name || '' }}</td>
+              <td>{{ deductions[i]?.amount || '' }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2" class="highlight-red"><strong>Total Allowance</strong></td>
+              <td>{{ payslipDetails.total_additions }}</td>
+              <td class="highlight-red"><strong>Total Deduction</strong></td>
+              <td>{{ payslipDetails.total_deductions }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      
+        <div class="net-salary mt-4">
+          <p><strong>Net Salary:</strong> {{ payslipDetails.net_salary }}</p>
+        </div>
+      
+      </div>
+      
           <div class="row">
         <div class="col-md-9"></div>
         <div class="col-md-2">

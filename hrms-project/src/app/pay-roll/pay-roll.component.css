@@ -535,3 +535,12 @@ table th{
 .search-btn i {
   color: #ffffff;
 }
+
+.btn-export{
+
+  background: whitesmoke;
+  color: black;
+  padding: 7px 20px;
+  
+
+}

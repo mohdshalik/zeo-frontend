@@ -682,3 +682,68 @@ table th{
     
 
   }
+
+
+  .employee-details{
+    border: solid 1px gray;
+    padding: 10px;
+  }
+
+
+
+
+  
+
+
+
+  .payslip-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+  }
+  
+  .details-table,
+  .salary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .details-table td {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .salary-table th,
+  .salary-table td {
+    border: 1px solid #333;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .highlight-red {
+    color: red;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .mt-4 {
+    margin-top: 20px;
+  }
+  
+  .net-salary {
+    font-size: 1.1em;
+    margin-top: 30px;
+  }
+  
+
+  ::ng-deep .salary-table thead th{
+    background: transparent !important;
+    color: black !important;
+  font-weight: 600 !important;
+
+  }

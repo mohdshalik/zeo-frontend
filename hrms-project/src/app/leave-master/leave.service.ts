@@ -780,4 +780,15 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
       })
     );
   }
+
+
+
+
+
+
+
+  deletePayroll(payrollId: number): Observable<any> {
+    const url = `${this.apiUrl}/payroll/api/PayrollRun/${payrollId}/`;
+    return this.http.delete(url);
+  }
 }

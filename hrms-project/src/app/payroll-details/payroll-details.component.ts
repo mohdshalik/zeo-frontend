@@ -18,6 +18,9 @@ export class PayrollDetailsComponent {
   payslipId: string | null = null;
   payslipDetails: any;
 
+  earnings: any[] = [];
+  deductions: any[] = [];
+
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +34,10 @@ export class PayrollDetailsComponent {
       this.leaveService.getSinglePayslip(this.payslipId).subscribe(
         data => {
           this.payslipDetails = data;
+  
+          // Split components into earnings and deductions
+          this.earnings = data.components.filter((comp: { component_type: string; }) => comp.component_type === 'Addition');
+          this.deductions = data.components.filter((comp: { component_type: string; }) => comp.component_type === 'Deduction');
         },
         error => {
           console.error('Failed to fetch payslip details', error);
@@ -39,8 +46,22 @@ export class PayrollDetailsComponent {
     }
   }
 
+  getComponentName(componentId: number): string {
+    const componentMap: { [key: number]: string } = {
+      1: 'Basic',
+      2: 'HRA',
+      3: 'Allowance',
+      4: 'Bonus',
+      5: 'OT',
+      6: 'Incentive',
+      7: 'Telephone Allowance',
+      8: 'Vehicle Variable',
+      // Add more if needed
+    };
+    return componentMap[componentId] || 'Other';
+  }
 
-  
+
 
   downloadPayslip(): void {
     if (!this.payslipDetails || !this.payslipDetails.employee || !this.payslipDetails.payroll_run?.start_date) {

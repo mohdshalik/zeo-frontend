@@ -7,6 +7,8 @@ import { DesignationService } from '../designation-master/designation.service';
 import { EmployeeService } from '../employee-master/employee.service';
 import { CatogaryService } from '../catogary-master/catogary.service';
 import { Route, Router } from '@angular/router';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-pay-roll',
@@ -247,6 +249,36 @@ if (this.userId !== null) {
     }
 
 
+
+    exportToExcel(): void {
+      const exportData = this.PaySlips.map((p, index) => ({
+        No: index + 1,
+        Employee: p.employee,
+        Name: p.payroll_run?.name,
+        'Start Date': p.payroll_run?.start_date,
+        'End Date': p.payroll_run?.end_date,
+        'Gross Salary': p.gross_salary,
+        'Net Salary': p.net_salary,
+        Status: p.status
+      }));
+    
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData);
+      const workbook: XLSX.WorkBook = {
+        Sheets: { 'Payslips': worksheet },
+        SheetNames: ['Payslips']
+      };
+    
+      const excelBuffer: any = XLSX.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array'
+      });
+    
+      const blobData: Blob = new Blob([excelBuffer], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+      });
+    
+      FileSaver.saveAs(blobData, `Payslips_${new Date().toISOString().slice(0,10)}.xlsx`);
+    }
     
     checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
       return groupPermissions.some(permission => permission.codename === codeName);
@@ -541,6 +573,22 @@ onFileSelected(event:any){
       );
     }
 
+
+    deletePayroll(payrollId: number): void {
+      if (confirm('Are you sure you want to delete this payroll entry?')) {
+        this.leaveService.deletePayroll(payrollId).subscribe(
+          () => {
+            // Filter out the deleted payroll from the list
+            this.Payrolls = this.Payrolls.filter(p => p.id !== payrollId);
+            console.log('Payroll deleted successfully');
+          },
+          (error) => {
+            console.error('Failed to delete payroll', error);
+          }
+        );
+      }
+    }
+    
     LoadPayrollSettings(selectedSchema: string) {
       this.leaveService.getPayrollSettings(selectedSchema).subscribe(
         (data: any) => {

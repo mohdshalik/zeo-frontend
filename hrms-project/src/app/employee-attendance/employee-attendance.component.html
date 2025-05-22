@@ -71,8 +71,18 @@
 
 
         <!-- Show selected employee report if available -->
+
 <div *ngIf="attendanceData">
-    <h2>Attendance Sheet for {{ attendanceData.employee_name }} - {{ attendanceData.month }}/{{ attendanceData.year }}</h2>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Attendance Sheet for {{ attendanceData.employee_name }} - {{ attendanceData.month }}/{{ attendanceData.year }}</h2>
+
+        </div>
+
+        <div class="col-md-10">
+            <button type="button" class="btn btn-success" (click)="exportToExcel()">Export</button>
+        </div>
+    </div>
     <div class="table-container table-scroll">
       <table class="table table-bordered table-hover mt-3 text-center">
         <thead>

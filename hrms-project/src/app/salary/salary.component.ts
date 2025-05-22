@@ -559,24 +559,63 @@ if (this.userId !== null) {
 
 
 
-// Insert component code into formula textarea
-insertComponentToFormula(code: string, textarea: HTMLTextAreaElement): void {
-  const placeholder = `${code}`;
-
-  const start = textarea.selectionStart;
-  const end = textarea.selectionEnd;
-
-  // Insert placeholder at the cursor position
-  this.formula = 
-    this.formula.substring(0, start) + 
-    placeholder + 
-    this.formula.substring(end);
-
-  // Optional: Refocus and move cursor after inserted text
-  setTimeout(() => {
-    textarea.focus();
-    textarea.selectionStart = textarea.selectionEnd = start + placeholder.length;
-  }, 0);
-}
+    insertComponentToFormula(code: string, textarea: HTMLTextAreaElement): void {
+      const placeholder = `${code}`;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
     
+      this.formula = 
+        this.formula.substring(0, start) + 
+        placeholder + 
+        this.formula.substring(end);
+    
+      setTimeout(() => {
+        textarea.focus();
+        textarea.selectionStart = textarea.selectionEnd = start + placeholder.length;
+      }, 0);
+    
+      // Close dropdowns after selection
+      this.dropdownOpen = false;
+      this.operatorDropdownOpen = false;
+    }
+
+isAddFieldsModalOpen: boolean = false;
+
+
+// Triggered when the checkbox is changed
+onFixedChange() {
+  if (!this.is_fixed) {
+    this.isAddFieldsModalOpen = true;
+  }
+}
+
+closemarketModal(){
+  this.isAddFieldsModalOpen=false;
+}
+
+
+
+
+dropdownOpen: boolean = false;
+
+operatorDropdownOpen: boolean = false;
+logicalOperators: string[] = ['<', '>', '+', '-', '=', '*', '/']; // Add more if needed
+
+
+
+toggleDropdown() {
+  this.dropdownOpen = !this.dropdownOpen;
+  this.operatorDropdownOpen = false; // close the other dropdown if open
+
+}
+
+toggleOperatorDropdown() {
+  this.operatorDropdownOpen = !this.operatorDropdownOpen;
+  this.dropdownOpen = false; // close the salary component dropdown if open
+}
+
+
+
+
+
 }

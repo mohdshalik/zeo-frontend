@@ -102,7 +102,8 @@
                       <label></label>
                       <div class="check-box-selection-sec form-control  mt-2">
                           <div class="mat-set">
-                              <mat-checkbox [(ngModel)]="is_fixed" [ngModelOptions]="{standalone: true}">Is Fixed</mat-checkbox>
+                              <mat-checkbox [(ngModel)]="is_fixed" [ngModelOptions]="{standalone: true}"
+                              (change)="onFixedChange()">Is Fixed</mat-checkbox>
                           </div>
                          
                       </div>
@@ -110,13 +111,84 @@
                       
             </div>
 
+
+<!-- Modal Popup for selected approval details -->
+<div *ngIf="isAddFieldsModalOpen" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col-md-10">
+        <h2>Formula Writer</h2>
+
+      </div>
+      <div class="col-md-2">
+        <span class="close pull-right" (click)="closemarketModal()">&times;</span>
+
+      </div>
+    </div><hr>
+
+
+    <div class="row">
+      <!-- Left column: Dropdowns -->
+      <div class="col-md-5 col-6">
+    
+        <!-- Salary Component Dropdown -->
+        <div class="dropdown-container">
+          <div class="dropdown-header" (click)="toggleDropdown()">
+            Head Of Pay
+            <span class="arrow" [ngClass]="{ 'open': dropdownOpen }">&#9662;</span>
+          </div>
+    
+          <ul class="dropdown-options" *ngIf="dropdownOpen">
+            <li 
+              class="dropdown-option" 
+              *ngFor="let component of Salarycomponent" 
+              (click)="insertComponentToFormula(component.code, formulaTextArea)">
+              {{ component.code }}
+            </li>
+          </ul>
+        </div>
+    
+        <!-- Logical Operator Dropdown -->
+        <div class="dropdown-container mt-2">
+          <div class="dropdown-header" (click)="toggleOperatorDropdown()">
+            Logical Operators
+            <span class="arrow" [ngClass]="{ 'open': operatorDropdownOpen }">&#9662;</span>
+          </div>
+    
+          <ul class="dropdown-options" *ngIf="operatorDropdownOpen">
+            <li 
+              class="dropdown-option" 
+              *ngFor="let op of logicalOperators" 
+              (click)="insertComponentToFormula(op, formulaTextArea)">
+              {{ op }}
+            </li>
+          </ul>
+        </div>
+    
+      </div>
+    
+      <!-- Right column: Textarea -->
+      <div class="col-md-7 col-6">
+        <textarea 
+          class="form-control" 
+          [(ngModel)]="formula" 
+          #formulaTextArea
+          [ngModelOptions]="{standalone: true}" 
+          rows="6">
+        </textarea>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
                  
 
 
    
 
                         <!-- Formula Writer -->
-                         <div *ngIf="!is_fixed">
+                         <!-- <div *ngIf="!is_fixed">
                           <div class="row">
                         <div class="col-md-8">
                           <label>Formula Writer</label>
@@ -129,7 +201,6 @@
                           </textarea>
                         </div>
                       
-                        <!-- Salary Components List -->
                         <div class="col-md-4">
                           <label>Select Components</label>
                           <div class="email_placeholdername">
@@ -143,7 +214,7 @@
                         </div>
                         </div>
                </div>
-                      
+                       -->
                     
                     
         
@@ -321,9 +392,12 @@
    
 
 
+                  
+
 
 
     </div>
 </div>
+
 
 

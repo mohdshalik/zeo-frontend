@@ -114,6 +114,7 @@
                   <th>department</th>
                   <th>category</th>
                   <th>status</th>
+                  <th>Action</th>
 
 
 
@@ -137,8 +138,14 @@
                       <td>{{payroll.category}}</td>
 
                       <td>{{payroll.status}}</td>
-
-                     
+                      <td>
+                        <i
+                          class="fa-solid fa-trash"
+                          style="cursor: pointer; text-align: center;"
+                          (click)="deletePayroll(payroll.id)"
+                          title="Delete Payroll"
+                        ></i>
+                      </td>                     
 
 
                 </tr>
@@ -159,8 +166,8 @@
                       <i class="fa fa-search"></i>
                     </button>
                   </div> -->
-
-                  <table class="styled-table" width="100%" style=" border-collapse: collapse;">
+                  <button class="btn pull-right btn-export" (click)="exportToExcel()">Export</button>
+                  <table class="styled-table mt-2" width="100%" style=" border-collapse: collapse;">
                     <thead>
                       <tr>
                         <th class="text-table-header" style="width: 0;">No</th>
