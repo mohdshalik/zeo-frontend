@@ -479,3 +479,7 @@ table th{
 .dropdown-option:hover {
   background-color: #f1f1f1;
 }
+
+.dropdown-option{
+  font-size: 12px;
+}

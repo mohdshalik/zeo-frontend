@@ -602,18 +602,26 @@ dropdownOpen: boolean = false;
 
 operatorDropdownOpen: boolean = false;
 arithmeticDropdownOpen: boolean = false;
+FunctionsdropdownOpen: boolean = false;
+
+VariablesdropdownOpen: boolean = false;
 
 
 logicalOperators: string[] = ['<', '>', '>=', '<=', '==', '!=', 'AND','OR','NOT']; // Add more if needed
 
 arithmeticOperators: string[] = ['+', '-', '*', '/', '%'];
 
+FunctionsOperators: string[] = ['WORKHOURS()','MAX()', 'MIN()', 'ROUND()', 'SUM()', 'AVG()','ABS()','INT()',];
+
+VariablesOperators: string[] = ['WORK_DAYS','OT_HOURS','DAYS_IN_MONTH','DAYS_WORKED'];
 
 
 toggleDropdown() {
   this.dropdownOpen = !this.dropdownOpen;
   this.operatorDropdownOpen = false; // close the other dropdown if open
   this.arithmeticDropdownOpen = false; // close the salary component dropdown if open
+  this.FunctionsdropdownOpen = false;
+  this.VariablesdropdownOpen = false;
 
 }
 
@@ -621,6 +629,8 @@ toggleOperatorDropdown() {
   this.operatorDropdownOpen = !this.operatorDropdownOpen;
   this.dropdownOpen = false; // close the salary component dropdown if open
   this.arithmeticDropdownOpen = false; // close the salary component dropdown if open
+  this.FunctionsdropdownOpen = false;
+  this.VariablesdropdownOpen = false;
 
 }
 
@@ -631,8 +641,34 @@ toggleArithmeticDropdown() {
   // Close the other dropdowns
   this.dropdownOpen = false;
   this.operatorDropdownOpen = false;
+  this.FunctionsdropdownOpen = false;
+  this.VariablesdropdownOpen = false;
+
 }
 
+toggleFunctionsDropdown() {
+  this.FunctionsdropdownOpen = !this.FunctionsdropdownOpen;
+
+  // Close the other dropdowns
+  this.dropdownOpen = false;
+  this.operatorDropdownOpen = false;
+  this.arithmeticDropdownOpen = false;
+
+  this.VariablesdropdownOpen = false;
+
+}
+
+
+toggleVariablesDropdown() {
+  this.VariablesdropdownOpen = !this.VariablesdropdownOpen;
+
+  // Close the other dropdowns
+  this.dropdownOpen = false;
+  this.operatorDropdownOpen = false;
+  this.arithmeticDropdownOpen = false;
+  this.FunctionsdropdownOpen = false;
+
+}
 
 
 }

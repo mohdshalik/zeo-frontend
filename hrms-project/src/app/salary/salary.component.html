@@ -149,8 +149,44 @@
                         </ul>
                       </div>
 
-                      <!-- Logical Operator Dropdown -->
-                      <div class="dropdown-container mt-2">
+                      <!-- functions Operator Dropdown -->
+<div class="dropdown-container mt-2">
+  <div class="dropdown-header" (click)="toggleFunctionsDropdown()">
+    Functions
+    <span class="arrow" [ngClass]="{ 'open': FunctionsdropdownOpen }">&#9662;</span>
+  </div>
+
+  <ul class="dropdown-options" *ngIf="FunctionsdropdownOpen">
+    <li class="dropdown-option" *ngFor="let fn of FunctionsOperators"
+        (click)="insertComponentToFormula(fn, formulaTextArea)">
+      {{ fn }}
+    </li>
+  </ul>
+</div>
+                  
+ 
+         <!-- variables Operator Dropdown -->
+<div class="dropdown-container mt-2">
+  <div class="dropdown-header" (click)="toggleVariablesDropdown()">
+    Variables
+    <span class="arrow" [ngClass]="{ 'open': VariablesdropdownOpen }">&#9662;</span>
+  </div>
+
+  <ul class="dropdown-options" *ngIf="VariablesdropdownOpen">
+    <li class="dropdown-option" *ngFor="let vars of VariablesOperators"
+        (click)="insertComponentToFormula(vars, formulaTextArea)">
+      {{ vars }}
+    </li>
+  </ul>
+  
+</div>
+
+                   
+
+
+<!-- Logical Operator Dropdown -->
+                      
+  <div class="dropdown-container mt-2">
                         <div class="dropdown-header" (click)="toggleOperatorDropdown()">
                           Logical Operators
                           <span class="arrow" [ngClass]="{ 'open': operatorDropdownOpen }">&#9662;</span>
@@ -179,6 +215,10 @@
     </li>
   </ul>
 </div>
+
+
+
+
 
 
 
