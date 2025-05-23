@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { EmployeeService } from '../employee-master/employee.service';
@@ -14,7 +14,8 @@ import { DesignationService } from '../designation-master/designation.service';
 export class LoanApprovalComponent {
 
 
-  
+  @ViewChild('bottomOfPage') bottomOfPage!: ElementRef;
+
 
   private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
 
@@ -304,7 +305,10 @@ note: string = '';  // To hold the note entered by the user
   
 
 
-
+scrollToBottom(): void {
+  this.bottomOfPage.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+  
 
 
 

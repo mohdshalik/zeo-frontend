@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { EmployeeService } from '../employee-master/employee.service';
@@ -14,6 +14,7 @@ import { DesignationService } from '../designation-master/designation.service';
 })
 export class LeaveApprovalsComponent {
 
+  @ViewChild('bottomOfPage') bottomOfPage!: ElementRef;
 
 
   private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
@@ -208,24 +209,7 @@ export class LeaveApprovalsComponent {
 
 }
 
-// checkViewPermission(permissions: any[]): boolean {
-//   const requiredPermission = 'add_leaveapproval' ||'change_leaveapproval' ||'delete_leaveapproval' ||'view_leaveapproval';
-  
-  
-//   // Check user permissions
-//   if (permissions.some(permission => permission.codename === requiredPermission)) {
-//     return true;
-//   }
-  
-//   // Check group permissions (if applicable)
-//   // Replace `// TODO: Implement group permission check`
-//   // with your logic to retrieve and check group permissions
-//   // (consider using a separate service or approach)
-//   return false; // Replace with actual group permission check
-//   }
-  
-  
-  
+
   
   checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
   return groupPermissions.some(permission => permission.codename === codeName);
@@ -233,6 +217,11 @@ export class LeaveApprovalsComponent {
   
 
 
+  
+scrollToBottom(): void {
+  this.bottomOfPage.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+  
 // Modified fetchingApprovals to accept userId
 
 fetchingApprovals(): void {

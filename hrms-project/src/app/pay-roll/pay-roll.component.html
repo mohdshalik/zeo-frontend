@@ -28,19 +28,32 @@
                  
     
                   <div class="col-md-6">
-                    <label> Start date</label>
-                    <input type="date" class="form-control" required [(ngModel)]="start_date" placeholder="Enter  Start date"
-                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !start_date}">
-             <div *ngIf="registerButtonClicked && !start_date" class="error-message"> Start date is required.</div>
+                    <label> Year</label>
+                    <input type="number" class="form-control" required [(ngModel)]="year" placeholder="Enter  year"
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !year}">
+             <div *ngIf="registerButtonClicked && !year" class="error-message"> year is required.</div>
                 </div>
     
                 <div class="col-md-6">
-                  <label> End date</label>
-                  <input type="date" class="form-control" required [(ngModel)]="end_date" placeholder="Enter  end date"
-                  [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !end_date}">
-           <div *ngIf="registerButtonClicked && !end_date" class="error-message"> end date is required.</div>
-              </div>
-    
+                  <label>Month</label>
+                  <div class="custom-sel">
+                    <select class="form-control" id="month" name="month" [(ngModel)]="month" [ngModelOptions]="{standalone: true}">
+                      <option value="1">January</option>
+                      <option value="2">February</option>
+                      <option value="3">March</option>
+                      <option value="4">April</option>
+                      <option value="5">May</option>
+                      <option value="6">June</option>
+                      <option value="7">July</option>
+                      <option value="8">August</option>
+                      <option value="9">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                    </select>
+                  </div>
+                </div>
+                
               <div class="col-md-6">
                 <label> Payment date</label>
                 <input type="date" class="form-control" required [(ngModel)]="payment_date" placeholder="Payment  date"

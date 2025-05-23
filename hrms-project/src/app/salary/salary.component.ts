@@ -577,6 +577,8 @@ if (this.userId !== null) {
       // Close dropdowns after selection
       this.dropdownOpen = false;
       this.operatorDropdownOpen = false;
+      this.arithmeticDropdownOpen = false; // close the salary component dropdown if open
+
     }
 
 isAddFieldsModalOpen: boolean = false;
@@ -599,22 +601,37 @@ closemarketModal(){
 dropdownOpen: boolean = false;
 
 operatorDropdownOpen: boolean = false;
-logicalOperators: string[] = ['<', '>', '+', '-', '=', '*', '/']; // Add more if needed
+arithmeticDropdownOpen: boolean = false;
+
+
+logicalOperators: string[] = ['<', '>', '>=', '<=', '==', '!=', 'AND','OR','NOT']; // Add more if needed
+
+arithmeticOperators: string[] = ['+', '-', '*', '/', '%'];
 
 
 
 toggleDropdown() {
   this.dropdownOpen = !this.dropdownOpen;
   this.operatorDropdownOpen = false; // close the other dropdown if open
+  this.arithmeticDropdownOpen = false; // close the salary component dropdown if open
 
 }
 
 toggleOperatorDropdown() {
   this.operatorDropdownOpen = !this.operatorDropdownOpen;
   this.dropdownOpen = false; // close the salary component dropdown if open
+  this.arithmeticDropdownOpen = false; // close the salary component dropdown if open
+
 }
 
 
+toggleArithmeticDropdown() {
+  this.arithmeticDropdownOpen = !this.arithmeticDropdownOpen;
+
+  // Close the other dropdowns
+  this.dropdownOpen = false;
+  this.operatorDropdownOpen = false;
+}
 
 
 

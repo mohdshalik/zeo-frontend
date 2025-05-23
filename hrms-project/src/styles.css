@@ -380,3 +380,13 @@ option{
 .btn-full{
   text-transform: capitalize;
 }
+
+
+.btn-export{
+
+  background: whitesmoke;
+  color: black;
+  padding: 7px 20px;
+  
+
+}

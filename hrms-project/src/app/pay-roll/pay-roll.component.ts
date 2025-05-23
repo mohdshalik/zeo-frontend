@@ -30,8 +30,8 @@ export class PayRollComponent {
 
 
   name:any='';
-  start_date:any='';
-  end_date:any='';
+  year:any='';
+  month:any='';
   payment_date:any='';
 
 
@@ -342,15 +342,15 @@ if (this.userId !== null) {
         this.registerButtonClicked = true;
       
         // Frontend validation
-        if (!this.name || !this.start_date ) {
+        if (!this.name || !this.year ) {
           alert('Please fill in all required fields.');
           return;
         }
       
         const formData = new FormData();
         formData.append('name', this.name);
-        formData.append('start_date', this.start_date);
-        formData.append('end_date', this.end_date);
+        formData.append('year', this.year);
+        formData.append('month', this.month);
         formData.append('payment_date', this.payment_date);
         formData.append('branch', this.branch);
 

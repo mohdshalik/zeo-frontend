@@ -19,29 +19,29 @@
       <span><mat-icon>home</mat-icon> <span class="sidenav-opt" routerLink="/main-sidebar/dashboard-contents"> Dashboard</span></span>
     </a>
       <a routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple"
-        aria-current="true" routerLink="/main-sidebar/sub-sidebar" (click)="onToolbarMenuToggle()">
+        aria-current="true" routerLink="/main-sidebar/sub-sidebar/employee-master" (click)="onToolbarMenuToggle()">
         <span><mat-icon>peoples</mat-icon> <span class="sidenav-opt" > Employee Management</span></span>
       </a>
 
       <a  routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" (click)="onToolbarMenuToggle()">
-        <span><mat-icon>account_tree</mat-icon> <span class="sidenav-opt" routerLink="/main-sidebar/leave-options"> Leave Management</span></span>
+        <span><mat-icon>account_tree</mat-icon> <span class="sidenav-opt" routerLink="/main-sidebar/leave-options/leave-master"> Leave Management</span></span>
 
 
       </a>
 
 
       <a  routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" (click)="onToolbarMenuToggle()">
-        <span><i class="fa-solid fa-money-bill" style="color: white;"></i><span class="sidenav-opt" routerLink="/main-sidebar/salary-options"> Payroll Management</span></span>
+        <span><i class="fa-solid fa-money-bill" style="color: white;"></i><span class="sidenav-opt" routerLink="/main-sidebar/salary-options/salary"> Payroll Management</span></span>
 
 
       </a>
 
       <a  routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" (click)="onToolbarMenuToggle()">
-        <span><mat-icon>real_estate_agent </mat-icon><span class="sidenav-opt" routerLink="/main-sidebar/loan-sidebar"> Loan Management</span></span>
+        <span><mat-icon>real_estate_agent </mat-icon><span class="sidenav-opt" routerLink="/main-sidebar/loan-sidebar/loan-type"> Loan Management</span></span>
 
 
       </a>
-      <a routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple" *ngIf="!hideButton" routerLink="/main-sidebar/settings" (click)="onToolbarMenuToggle()">
+      <a routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple" *ngIf="!hideButton" routerLink="/main-sidebar/settings/branch-master" (click)="onToolbarMenuToggle()">
         <span><mat-icon>settings</mat-icon> <span class="sidenav-opt" > Settings</span></span>
       </a>
      

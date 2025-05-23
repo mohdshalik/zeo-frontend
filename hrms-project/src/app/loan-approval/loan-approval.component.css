@@ -304,3 +304,14 @@ input:focus-visible {
    margin-bottom: 20px;
   }
   
+
+
+  .btn-export{
+
+    background: whitesmoke;
+    color: black;
+    padding: 7px 20px;
+    
+  
+  }
+  

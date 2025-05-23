@@ -1,9 +1,20 @@
 <div class="container" >
     <div class="comapny_section" *ngIf="hasViewPermission">
         <div class="com_list " >
+
     <div class="">
 
-        <h2>Loan Approval List </h2>
+        <div class="row">
+            <div class="col-md-9">
+                <h2>Loan Approval List </h2>
+    
+              </div>
+              <div class="col-md-3">
+                <button class="btn pull-right btn-export" (click)="scrollToBottom()">Employee Leave Request History</button>
+    
+              </div>
+            </div>
+
 
 
   
@@ -56,7 +67,7 @@
             </div>
           </div>
 
-          <div class="com_list mt-4">
+          <div class="com_list mt-4" #bottomOfPage>
             <h2>Employee leave request history</h2>
             <div class="row">
               <div class="col-md-6">

@@ -1,23 +1,23 @@
 <div class="container">
-    <div class="comapny_section" >
+  <div class="comapny_section">
 
-        <div class="header_section">
+    <div class="header_section">
 
-            <div class="row">
-                <div class="col-md-3">
-                    <h1>Salary </h1>
-                </div>
+      <div class="row">
+        <div class="col-md-3">
+          <h1>Salary </h1>
+        </div>
 
-                <div class="col-md-4">
-                 
-                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+        <div class="col-md-4">
 
-                </div>
-                <div class="col-md-5">
-                    <div class="button-group pull-right">
-                        <!-- <button type="button"  class="btn-Create btn btn-success " > <span class="header-btn-icon"><mat-icon>add_circle
+          <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+
+        </div>
+        <div class="col-md-5">
+          <div class="button-group pull-right">
+            <!-- <button type="button"  class="btn-Create btn btn-success " > <span class="header-btn-icon"><mat-icon>add_circle
                         </mat-icon></span> Create</button> -->
-                        <!-- <span *ngIf="!hasAddPermission"></span>
+            <!-- <span *ngIf="!hasAddPermission"></span>
 
                         <button type="button" class="btn-Edit btn-info btn"  (click)="EditShowButtons()" *ngIf="hasEditPermission">
                             <span class="header-btn-icon">
@@ -29,166 +29,179 @@
                                 <mat-icon> delete
                            </mat-icon></span> {{ Delete ? 'Cancel' : 'Delete' }}</button>
                            <span *ngIf="!hasDeletePermission"></span> -->
-                   
-                   
-                   
-                          </div>
-                </div>
-                 
-            </div>
-           
-           
 
+
+
+          </div>
         </div>
 
+      </div>
 
-    
 
-        <div class="tab_back mt-5">
-        <mat-tab-group> 
-            <mat-tab label="Salary Component">
-                
-                <div class="tab_boddy">
-                    <form (ngSubmit)="saveOrUpdateSalaryComponent()" enctype="multipart/form-data">
 
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label> Component Name</label>
-                                <input type="text" class="form-control" required [(ngModel)]="name" placeholder="Enter  name"
-                                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
-                         <div *ngIf="registerButtonClicked && !name" class="error-message"> name is required.</div>
-                            </div>
-                            <div class="col-md-4" >
-                                <label>Component Type</label>
-                                <div class="custom-sel">
-                                  <select class="form-control" id="component_type" name="component_type" [(ngModel)]="component_type" [ngModelOptions]="{standalone: true}">
-                                    <option value="deduction">Deduction</option>
-                                    <option value="addition">Addition</option>
-                                    <option value="others">Others</option>
-                                  </select>
-                                </div>
-                              </div>
+    </div>
 
-                              <div class="col-md-4">
-                                <label>Code</label>
-                                <input type="text" class="form-control" required [(ngModel)]="code" placeholder="Enter code "
-                                       [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !code}">
-                                <div *ngIf="registerButtonClicked && !code" class="error-message">code  is required.</div>
-                              </div>      
-              
-                  
-                      <div class="col-md-12">
-                        <label>Description</label>
-                        <textarea class="form-control" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
-                      </div>
 
-                 
 
-                      <div class="col-md-4">
-                        <label></label>
-                        <div class="check-box-selection-sec form-control mt-2">
-                            <div class="mat-set">
-                               <mat-checkbox [(ngModel)]="unpaid_leave" [ngModelOptions]="{standalone: true}">
-                                Unpaid leave</mat-checkbox>
-                            </div>
-                           
+
+    <div class="tab_back mt-5">
+      <mat-tab-group>
+        <mat-tab label="Salary Component">
+
+          <div class="tab_boddy">
+            <form (ngSubmit)="saveOrUpdateSalaryComponent()" enctype="multipart/form-data">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label> Component Name</label>
+                  <input type="text" class="form-control" required [(ngModel)]="name" placeholder="Enter  name"
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !name}">
+                  <div *ngIf="registerButtonClicked && !name" class="error-message"> name is required.</div>
+                </div>
+                <div class="col-md-4">
+                  <label>Component Type</label>
+                  <div class="custom-sel">
+                    <select class="form-control" id="component_type" name="component_type" [(ngModel)]="component_type"
+                      [ngModelOptions]="{standalone: true}">
+                      <option value="deduction">Deduction</option>
+                      <option value="addition">Addition</option>
+                      <option value="others">Others</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label>Code</label>
+                  <input type="text" class="form-control" required [(ngModel)]="code" placeholder="Enter code "
+                    [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !code}">
+                  <div *ngIf="registerButtonClicked && !code" class="error-message">code is required.</div>
+                </div>
+
+
+                <div class="col-md-12">
+                  <label>Description</label>
+                  <textarea class="form-control" [(ngModel)]="description"
+                    [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+
+
+
+                <div class="col-md-4">
+                  <label></label>
+                  <div class="check-box-selection-sec form-control mt-2">
+                    <div class="mat-set">
+                      <mat-checkbox [(ngModel)]="unpaid_leave" [ngModelOptions]="{standalone: true}">
+                        Unpaid leave</mat-checkbox>
+                    </div>
+
+                  </div>
+
+
+
+                </div>
+
+                <div class="col-md-4">
+                  <label></label>
+                  <div class="check-box-selection-sec form-control  mt-2">
+                    <div class="mat-set">
+                      <mat-checkbox [(ngModel)]="is_fixed" [ngModelOptions]="{standalone: true}"
+                        (change)="onFixedChange()">Is Fixed</mat-checkbox>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+              <!-- Modal Popup for  formula writer -->
+              <div *ngIf="isAddFieldsModalOpen" class="modal">
+                <div class="modal-content">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <h2>Formulae Writer</h2>
+
+                    </div>
+                    <div class="col-md-2">
+                      <span class="close pull-right" (click)="closemarketModal()">&times;</span>
+
+                    </div>
+                  </div>
+                  <hr>
+
+
+                  <div class="row">
+                    <!-- Left column: Dropdowns -->
+                    <div class="col-md-5 col-6">
+
+                      <!-- Salary Component Dropdown -->
+                      <div class="dropdown-container">
+                        <div class="dropdown-header" (click)="toggleDropdown()">
+                          Head Of Pay
+                          <span class="arrow" [ngClass]="{ 'open': dropdownOpen }">&#9662;</span>
                         </div>
 
-
-                      
-                    </div>
-
-                    <div class="col-md-4">
-                      <label></label>
-                      <div class="check-box-selection-sec form-control  mt-2">
-                          <div class="mat-set">
-                              <mat-checkbox [(ngModel)]="is_fixed" [ngModelOptions]="{standalone: true}"
-                              (change)="onFixedChange()">Is Fixed</mat-checkbox>
-                          </div>
-                         
+                        <ul class="dropdown-options" *ngIf="dropdownOpen">
+                          <li class="dropdown-option" *ngFor="let component of Salarycomponent"
+                            (click)="insertComponentToFormula(component.code, formulaTextArea)">
+                            {{ component.code }}
+                          </li>
+                        </ul>
                       </div>
-                    </div>
-                      
-            </div>
+
+                      <!-- Logical Operator Dropdown -->
+                      <div class="dropdown-container mt-2">
+                        <div class="dropdown-header" (click)="toggleOperatorDropdown()">
+                          Logical Operators
+                          <span class="arrow" [ngClass]="{ 'open': operatorDropdownOpen }">&#9662;</span>
+                        </div>
+
+                        <ul class="dropdown-options" *ngIf="operatorDropdownOpen">
+                          <li class="dropdown-option" *ngFor="let op of logicalOperators"
+                          (click)="insertComponentToFormula(op, formulaTextArea)">
+                          {{ op }}
+                        </li>        
+                        </ul>
+                      </div>
 
 
-<!-- Modal Popup for selected approval details -->
-<div *ngIf="isAddFieldsModalOpen" class="modal">
-  <div class="modal-content">
-    <div class="row">
-      <div class="col-md-10">
-        <h2>Formula Writer</h2>
-
-      </div>
-      <div class="col-md-2">
-        <span class="close pull-right" (click)="closemarketModal()">&times;</span>
-
-      </div>
-    </div><hr>
-
-
-    <div class="row">
-      <!-- Left column: Dropdowns -->
-      <div class="col-md-5 col-6">
-    
-        <!-- Salary Component Dropdown -->
-        <div class="dropdown-container">
-          <div class="dropdown-header" (click)="toggleDropdown()">
-            Head Of Pay
-            <span class="arrow" [ngClass]="{ 'open': dropdownOpen }">&#9662;</span>
-          </div>
-    
-          <ul class="dropdown-options" *ngIf="dropdownOpen">
-            <li 
-              class="dropdown-option" 
-              *ngFor="let component of Salarycomponent" 
-              (click)="insertComponentToFormula(component.code, formulaTextArea)">
-              {{ component.code }}
-            </li>
-          </ul>
-        </div>
-    
-        <!-- Logical Operator Dropdown -->
-        <div class="dropdown-container mt-2">
-          <div class="dropdown-header" (click)="toggleOperatorDropdown()">
-            Logical Operators
-            <span class="arrow" [ngClass]="{ 'open': operatorDropdownOpen }">&#9662;</span>
-          </div>
-    
-          <ul class="dropdown-options" *ngIf="operatorDropdownOpen">
-            <li 
-              class="dropdown-option" 
-              *ngFor="let op of logicalOperators" 
-              (click)="insertComponentToFormula(op, formulaTextArea)">
-              {{ op }}
-            </li>
-          </ul>
-        </div>
-    
-      </div>
-    
-      <!-- Right column: Textarea -->
-      <div class="col-md-7 col-6">
-        <textarea 
-          class="form-control" 
-          [(ngModel)]="formula" 
-          #formulaTextArea
-          [ngModelOptions]="{standalone: true}" 
-          rows="6">
-        </textarea>
-      </div>
-    </div>
-    
+<!-- Arithmetic Operator Dropdown -->
+<div class="dropdown-container mt-2">
+  <div class="dropdown-header" (click)="toggleArithmeticDropdown()">
+    Arithmetic Operators
+    <span class="arrow" [ngClass]="{ 'open': arithmeticDropdownOpen }">&#9662;</span>
   </div>
+
+  <ul class="dropdown-options" *ngIf="arithmeticDropdownOpen">
+    <li class="dropdown-option" *ngFor="let arith of arithmeticOperators"
+        (click)="insertComponentToFormula(arith, formulaTextArea)">
+      {{ arith }}
+    </li>
+  </ul>
 </div>
 
-                 
 
 
-   
+                    </div>
 
-                        <!-- Formula Writer -->
-                         <!-- <div *ngIf="!is_fixed">
+                    <!-- Right column: Textarea -->
+                    <div class="col-md-7 col-6">
+                      <textarea class="form-control display" [(ngModel)]="formula" #formulaTextArea
+                        [ngModelOptions]="{standalone: true}" rows="6">
+        </textarea>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+
+
+
+
+              <!-- Formula Writer -->
+              <!-- <div *ngIf="!is_fixed">
                           <div class="row">
                         <div class="col-md-8">
                           <label>Formula Writer</label>
@@ -215,189 +228,186 @@
                         </div>
                </div>
                        -->
-                    
-                    
-        
-
-        
-
-                      
-                            <div class="row" *ngIf="hasAddPermission">
-                              <div class="col-md-6"></div>
-                              <div class="col-md-3">
-                                <button *ngIf="isEditMode" type="button" class="btn btn-danger btn-full mt-4" (click)="resetForm()">Cancel</button>
-                                </div>
-                              <div class="col-md-3">
-                                <button type="submit" class="btn btn-success btn-full mt-4">
-                                  {{ isEditMode ? 'Update' : 'Save' }}
-                                </button>                  
-                              </div>
-                          </div>
-                      
-                    </form>
 
 
 
-                 
-            
 
 
-                    
-            </div>
 
 
-            <div class="end_section"></div>
-            <table width="100%" *ngIf="hasViewPermission">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                   
-                    <th>Name</th>
-                    <th>Component Type</th>
-                    <th>Code</th>
-                    <th>Is Fixed</th>
-                    <th>Formula</th>
-                    <th>Description</th>
+              <div class="row" *ngIf="hasAddPermission">
+                <div class="col-md-6"></div>
+                <div class="col-md-3">
+                  <button *ngIf="isEditMode" type="button" class="btn btn-danger btn-full mt-4"
+                    (click)="resetForm()">Cancel</button>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-success btn-full mt-4">
+                    {{ isEditMode ? 'Update' : 'Save' }}
+                  </button>
+                </div>
+              </div>
 
-    
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let docs of Salarycomponent; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ docs.name }}</td>
-                    <td>{{ docs.component_type }}</td>
-                    <td>{{ docs.code }}</td>
-                    <td>{{ docs.is_fixed }}</td>
-                    <td>{{ docs.formula }}</td>
+            </form>
 
-                    <td>{{ docs.description }}</td>
-                  
-    
-                    <td>
-                      <i class="fa-solid fa-edit" (click)="editSalaryComponent(docs)"></i>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-          </mat-tab>
-           
-              <mat-tab label="Employee Salary ">
-  
-                <div class="tab_boddy">
-                    <form (ngSubmit)="saveOrUpdateSalaryComponentEmp()" enctype="multipart/form-data">
 
-                        <div class="row">
-                         
-                          <div class="col-md-6">
-                            <label>Salary Component</label>
-                            <div class="custom-sel">
-                              <select class="form-control" id="component" name="component"
-                                      [(ngModel)]="component" 
-                                      [ngModelOptions]="{standalone: true}" 
-                                      (change)="onComponentChange()">
-                                <option *ngFor="let component of Salarycomponent" [value]="component.id">
-                                  {{ component.name }}
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-                          
-                          <!-- Amount Field (Only Visible if is_fixed === true) -->
-                          <div class="col-md-6" *ngIf="selectedComponent?.is_fixed">
-                            <label>Amount</label>
-                            <input type="text" class="form-control" required [(ngModel)]="amount"
-                                   placeholder="Enter amount"
-                                   [ngModelOptions]="{standalone: true}"  >
-                          
-                          </div>
-                          
-                 
-                      <div class="col-md-6">
-                        <label>Employee</label>
-                        <div class="custom-sel">
-                          <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.emp_code }}</option>
-                          </select>
-                        </div>
-                      </div>
 
-                    
 
-                      <div class="col-md-4">
-                        <label></label>
-                        <div class="check-box-selection-sec mt-2">
-                            <div class="mat-set">
-                               <mat-checkbox [(ngModel)]="is_active" [ngModelOptions]="{standalone: true}">
-                                Is Active</mat-checkbox>
-                            </div>
-                           
-                        </div>
-                    </div>
 
-                            </div>
-                            
-                            <div class="row" >
-                              <div class="col-md-6"></div>
-                              <div class="col-md-3">
-                                <button *ngIf="isEditModeEmp" type="button" class="btn btn-danger btn-full mt-4" (click)="resetFormEmp()">Cancel</button>
-                                </div>
-                              <div class="col-md-3">
-                                <button type="submit" class="btn btn-success btn-full mt-4">
-                                  {{ isEditModeEmp ? 'Update' : 'Save' }}
-                                </button>                   
-                              </div>
-                          </div>
-                      
-                    </form>
+
+
+
+          </div>
+
+
+          <div class="end_section"></div>
+          <table width="100%" *ngIf="hasViewPermission">
+            <thead>
+              <tr>
+                <th>No</th>
+
+                <th>Name</th>
+                <th>Component Type</th>
+                <th>Code</th>
+                <th>Is Fixed</th>
+                <th>Formula</th>
+                <th>Description</th>
+
+
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let docs of Salarycomponent; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ docs.name }}</td>
+                <td>{{ docs.component_type }}</td>
+                <td>{{ docs.code }}</td>
+                <td>{{ docs.is_fixed }}</td>
+                <td>{{ docs.formula }}</td>
+
+                <td>{{ docs.description }}</td>
+
+
+                <td>
+                  <i class="fa-solid fa-edit" (click)="editSalaryComponent(docs)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>
+
+        <mat-tab label="Employee Salary ">
+
+          <div class="tab_boddy">
+            <form (ngSubmit)="saveOrUpdateSalaryComponentEmp()" enctype="multipart/form-data">
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <label>Salary Component</label>
+                  <div class="custom-sel">
+                    <select class="form-control" id="component" name="component" [(ngModel)]="component"
+                      [ngModelOptions]="{standalone: true}" (change)="onComponentChange()">
+                      <option *ngFor="let component of Salarycomponent" [value]="component.id">
+                        {{ component.name }}
+                      </option>
+                    </select>
+                  </div>
                 </div>
 
-                <div class="end_section"></div>
-                <table width="100%" *ngIf="hasViewPermission">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                       
-                        <th>Amount</th>
-                        <th>Employee</th>
-                        <th>component</th>
-                     
-    
-        
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let docs of EmployeeSalarycomponent; let i = index">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ docs.amount }}</td>
-                        <td>{{ docs.employee }}</td>
-                        <td>{{ docs.component }}</td>
-                       
-                      
-        
-                        <td>
-                          <i class="fa-solid fa-edit" (click)="editSalaryComponentEmp(docs)"></i>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  </mat-tab>
-  
-             
-                  </mat-tab-group> 
-  
+                <!-- Amount Field (Only Visible if is_fixed === true) -->
+                <div class="col-md-6" *ngIf="selectedComponent?.is_fixed">
+                  <label>Amount</label>
+                  <input type="text" class="form-control" required [(ngModel)]="amount" placeholder="Enter amount"
+                    [ngModelOptions]="{standalone: true}">
+
+                </div>
+
+
+                <div class="col-md-6">
+                  <label>Employee</label>
+                  <div class="custom-sel">
+                    <select class="form-control" id="employee" name="employee" [(ngModel)]="employee"
+                      [ngModelOptions]="{standalone: true}">
+                      <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.emp_code }}</option>
+                    </select>
                   </div>
-   
+                </div>
 
 
-                  
+
+                <div class="col-md-4">
+                  <label></label>
+                  <div class="check-box-selection-sec mt-2">
+                    <div class="mat-set">
+                      <mat-checkbox [(ngModel)]="is_active" [ngModelOptions]="{standalone: true}">
+                        Is Active</mat-checkbox>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-3">
+                  <button *ngIf="isEditModeEmp" type="button" class="btn btn-danger btn-full mt-4"
+                    (click)="resetFormEmp()">Cancel</button>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-success btn-full mt-4">
+                    {{ isEditModeEmp ? 'Update' : 'Save' }}
+                  </button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="end_section"></div>
+          <table width="100%" *ngIf="hasViewPermission">
+            <thead>
+              <tr>
+                <th>No</th>
+
+                <th>Amount</th>
+                <th>Employee</th>
+                <th>component</th>
 
 
+
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let docs of EmployeeSalarycomponent; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ docs.amount }}</td>
+                <td>{{ docs.employee }}</td>
+                <td>{{ docs.component }}</td>
+
+
+
+                <td>
+                  <i class="fa-solid fa-edit" (click)="editSalaryComponentEmp(docs)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>
+
+
+      </mat-tab-group>
 
     </div>
+
+
+
+
+
+
+
+  </div>
 </div>
-
-
-

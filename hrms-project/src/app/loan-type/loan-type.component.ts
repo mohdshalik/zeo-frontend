@@ -298,6 +298,22 @@ ngOnInit(): void {
 
 
 
+               iscreateLoanApp: boolean = false;
+
+
+
+
+      openPopus():void{
+        this.iscreateLoanApp = true;
+
+      }
+    
+      closeapplicationModal():void{
+        this.iscreateLoanApp = false;
+
+      }
+
+
 
 
 
