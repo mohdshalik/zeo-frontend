@@ -21,7 +21,7 @@ export class SalaryComponent {
   description:any='';
   reason:any='';
   is_fixed: boolean = true;
-  unpaid_leave: boolean = false;
+  deduct_leave: boolean = false;
   affected_by_halfpaid_leave: boolean = false;
   prorata_calculation: boolean = false;
   is_emi_deduction: boolean = false;
@@ -268,7 +268,7 @@ if (this.userId !== null) {
       formData.append('formula', this.formula || '');
     
       formData.append('is_fixed', (this.is_fixed ?? false).toString());
-      formData.append('unpaid_leave', (this.unpaid_leave ?? false).toString());
+      formData.append('deduct_leave', (this.deduct_leave ?? false).toString());
       formData.append('affected_by_halfpaid_leave', (this.affected_by_halfpaid_leave ?? false).toString());
       formData.append('prorata_calculation', (this.prorata_calculation ?? false).toString());
       formData.append('is_emi_deduction', (this.is_emi_deduction ?? false).toString());
@@ -309,7 +309,7 @@ if (this.userId !== null) {
       this.description = '';
       this.formula = '';
       this.is_fixed = true;
-      this.unpaid_leave = false;
+      this.deduct_leave = false;
       this.affected_by_halfpaid_leave = false;
       this.prorata_calculation = false;
       this.is_emi_deduction = false;
@@ -330,7 +330,7 @@ if (this.userId !== null) {
       this.formula = component.formula;
     
       this.is_fixed = component.is_fixed;
-      this.unpaid_leave = component.unpaid_leave;
+      this.deduct_leave = component.deduct_leave;
       this.affected_by_halfpaid_leave = component.affected_by_halfpaid_leave;
       this.prorata_calculation = component.prorata_calculation;
       this.is_emi_deduction = component.is_emi_deduction;
@@ -613,7 +613,7 @@ arithmeticOperators: string[] = ['+', '-', '*', '/', '%'];
 
 FunctionsOperators: string[] = ['WORKHOURS()','MAX()', 'MIN()', 'ROUND()', 'SUM()', 'AVG()','ABS()','INT()',];
 
-VariablesOperators: string[] = ['WORK_DAYS','OT_HOURS','DAYS_IN_MONTH','DAYS_WORKED'];
+VariablesOperators: string[] = ['Year_Of_Service','Ot_Hours','Joining_Date','Working_ays','calandar_days','Fixed_days'];
 
 
 toggleDropdown() {
