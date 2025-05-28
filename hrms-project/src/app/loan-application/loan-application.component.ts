@@ -371,6 +371,7 @@ submitPauseLoan(): void {
       alert('Loan application paused successfully!');
       this.closePauseModal();
       this.loadLoanApplications();
+      window.location.reload();
     },
     (error) => {
       console.error('Pause failed:', error);
@@ -398,6 +399,8 @@ submitResumeLoan(): void {
       alert('Loan application resumed successfully!');
       this.closeResumeModal();
       this.loadLoanApplications();
+      window.location.reload();
+
     },
     (error) => {
       console.error('Resume failed:', error);
