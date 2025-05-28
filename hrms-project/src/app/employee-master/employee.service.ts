@@ -1971,7 +1971,7 @@ pauseLoanApplication(id: number, data: any): Observable<any> {
   if (!selectedSchema) return throwError('No schema selected');
 
   const apiUrl = `${this.apiUrl}/payroll/api/loan-application/${id}/pause/?schema=${selectedSchema}`;
-  return this.http.patch(apiUrl, data).pipe(
+  return this.http.put(apiUrl, data).pipe(
     catchError((error) => {
       console.error('Pause loan error:', error);
       return throwError(error);
@@ -1984,7 +1984,7 @@ resumeLoanApplication(id: number, data: any): Observable<any> {
   if (!selectedSchema) return throwError('No schema selected');
 
   const apiUrl = `${this.apiUrl}/payroll/api/loan-application/${id}/resume/?schema=${selectedSchema}`;
-  return this.http.patch(apiUrl, data).pipe(
+  return this.http.put(apiUrl, data).pipe(
     catchError((error) => {
       console.error('Resume loan error:', error);
       return throwError(error);
