@@ -11,7 +11,7 @@
       
 
 
-      <div class="payslip-container" *ngIf="payslipDetails">
+      <div class="payslip-container" *ngIf="payslipDetails" #payslipContent>
 
         <div class="payslip-header">
           <h2>Payslip - {{ payslipDetails.payroll_run?.name }} {{ payslipDetails.payroll_run?.start_date | date:'yyyy' }}</h2>

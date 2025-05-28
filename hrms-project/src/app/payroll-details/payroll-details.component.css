@@ -747,3 +747,20 @@ table th{
   font-weight: 600 !important;
 
   }
+
+
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+  
+    .payslip-container, .payslip-container * {
+      visibility: visible;
+    }
+  
+    .payslip-container {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }

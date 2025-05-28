@@ -3,6 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { LeaveService } from '../leave-master/leave.service';
 import { throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { ElementRef, ViewChild } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-payroll-details',
@@ -10,6 +15,9 @@ import { environment } from '../../environments/environment';
   styleUrl: './payroll-details.component.css'
 })
 export class PayrollDetailsComponent {
+
+
+  @ViewChild('payslipContent') payslipContent!: ElementRef;
 
 
   private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
@@ -46,6 +54,27 @@ export class PayrollDetailsComponent {
     }
   }
 
+
+  downloadPayslip() {
+    const element = this.payslipContent.nativeElement;
+
+    html2canvas(element, {
+      scale: 2, // Higher scale = better resolution
+      useCORS: true
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`Payslip-${this.payslipDetails.employee}.pdf`);
+    }); 
+  }
+
+
   getComponentName(componentId: number): string {
     const componentMap: { [key: number]: string } = {
       1: 'Basic',
@@ -63,40 +92,40 @@ export class PayrollDetailsComponent {
 
 
 
-  downloadPayslip(): void {
-    if (!this.payslipDetails || !this.payslipDetails.employee || !this.payslipDetails.payroll_run?.start_date) {
-      console.error('Missing payslip details');
-      return;
-    }
+  // downloadPayslip(): void {
+  //   if (!this.payslipDetails || !this.payslipDetails.employee || !this.payslipDetails.payroll_run?.start_date) {
+  //     console.error('Missing payslip details');
+  //     return;
+  //   }
   
-    const employeeId = this.payslipDetails.employee;
-    const startDateStr = this.payslipDetails.payroll_run.start_date;
+  //   const employeeId = this.payslipDetails.employee;
+  //   const startDateStr = this.payslipDetails.payroll_run.start_date;
   
-    const [year, month] = startDateStr.split('-'); // month will be '04'
+  //   const [year, month] = startDateStr.split('-'); // month will be '04'
   
-    const selectedSchema = localStorage.getItem('selectedSchema');
-    if (!selectedSchema) {
-      console.error('No schema selected.');
-      return;
-    }
+  //   const selectedSchema = localStorage.getItem('selectedSchema');
+  //   if (!selectedSchema) {
+  //     console.error('No schema selected.');
+  //     return;
+  //   }
   
-    const url = `${this.apiUrl}/payroll/api/payslip/employee/${employeeId}/download/${year}/${month}/?schema=${selectedSchema}`;
+  //   const url = `${this.apiUrl}/payroll/api/payslip/employee/${employeeId}/download/${year}/${month}/?schema=${selectedSchema}`;
   
-    this.leaveService.downloadFile(url).subscribe(
-      (response: Blob) => {
-        const file = new Blob([response], { type: 'application/pdf' });
-        const fileURL = URL.createObjectURL(file);
-        const a = document.createElement('a');
-        a.href = fileURL;
-        a.download = `Payslip_${employeeId}_${year}_${month}.pdf`;
-        a.click();
-        URL.revokeObjectURL(fileURL);
-      },
-      error => {
-        console.error('Download failed', error);
-      }
-    );
-  }
+  //   this.leaveService.downloadFile(url).subscribe(
+  //     (response: Blob) => {
+  //       const file = new Blob([response], { type: 'application/pdf' });
+  //       const fileURL = URL.createObjectURL(file);
+  //       const a = document.createElement('a');
+  //       a.href = fileURL;
+  //       a.download = `Payslip_${employeeId}_${year}_${month}.pdf`;
+  //       a.click();
+  //       URL.revokeObjectURL(fileURL);
+  //     },
+  //     error => {
+  //       console.error('Download failed', error);
+  //     }
+  //   );
+  // }
   
 
   approvePayslip() {
@@ -120,5 +149,7 @@ export class PayrollDetailsComponent {
       }
     );
   }
+  
+
   
 }

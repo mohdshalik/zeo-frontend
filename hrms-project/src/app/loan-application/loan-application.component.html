@@ -93,6 +93,9 @@
                             <!-- Show buttons only if the loan status is 'Approved' -->
                             <ng-container *ngIf="docs.status === 'Approved'">
                               <button *ngIf="!docs.pause_start_date" class="btn btn-full btn-warning" (click)="openPauseModal(docs)">Pause</button>
+                             </ng-container>
+                             <ng-container *ngIf="docs.status === 'Paused'">
+                             
                               <button *ngIf="docs.pause_start_date" class="btn btn-full btn-primary" (click)="openResumeModal(docs)">Resume</button>
                             </ng-container>
                           </td>
