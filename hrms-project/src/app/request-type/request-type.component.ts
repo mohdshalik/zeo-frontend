@@ -5,6 +5,7 @@ import { EmployeeService } from '../employee-master/employee.service';
 import { UserMasterService } from '../user-master/user-master.service';
 import { SessionService } from '../login/session.service';
 import { DesignationService } from '../designation-master/designation.service';
+import { LeaveService } from '../leave-master/leave.service';
 
 declare var $: any;
 
@@ -25,6 +26,8 @@ export class RequestTypeComponent    {
   
   name: any = '';
   description: any = '';
+  salary_component: any = '';
+
   created_by: any = '';
  
   
@@ -36,6 +39,7 @@ export class RequestTypeComponent    {
 
   Users:any []=[];
   ReqTypes:any []=[];
+  Salarycomponent:any []=[];
 
 
 
@@ -63,6 +67,7 @@ export class RequestTypeComponent    {
     private sessionService: SessionService,
     private DesignationService: DesignationService,
 
+    private leaveService: LeaveService,
 
     
 
@@ -74,7 +79,11 @@ ngOnInit(): void {
   this.loadUsers();
   this.loadReqTypes();
 
+  const selectedSchema = this.authService.getSelectedSchema();
+  if (selectedSchema) {
+    this.LoadSalaryCom(selectedSchema);
 
+  }
   this.userId = this.sessionService.getUserId();
   
   if (this.userId !== null) {
@@ -241,9 +250,9 @@ ngOnInit(): void {
               name: this.name,
             
               description:this.description,
-            
+              salary_component:this.salary_component,
               created_by:this.created_by,
-              use_common_workflow:this.use_common_workflow,
+              // use_common_workflow:this.use_common_workflow,
 
            
         
@@ -324,4 +333,19 @@ ngOnInit(): void {
             );
           }
 
+
+
+          LoadSalaryCom(selectedSchema: string) {
+            this.leaveService.getSalaryCom(selectedSchema).subscribe(
+              (data: any) => {
+                this.Salarycomponent = data;
+              
+                console.log('employee:', this.Salarycomponent);
+              },
+              (error: any) => {
+                console.error('Error fetching categories:', error);
+              }
+            );
+          }
+      
 }

@@ -22,6 +22,10 @@ export class SalaryComponent {
   reason:any='';
   is_fixed: boolean = true;
   deduct_leave: boolean = false;
+  is_loan_component: boolean = false;
+
+  show_in_payslip: boolean = false;
+
   affected_by_halfpaid_leave: boolean = false;
   prorata_calculation: boolean = false;
   is_emi_deduction: boolean = false;
@@ -269,6 +273,10 @@ if (this.userId !== null) {
     
       formData.append('is_fixed', (this.is_fixed ?? false).toString());
       formData.append('deduct_leave', (this.deduct_leave ?? false).toString());
+      formData.append('is_loan_component', (this.is_loan_component ?? false).toString());
+
+      formData.append('show_in_payslip', (this.show_in_payslip ?? false).toString());
+
       formData.append('affected_by_halfpaid_leave', (this.affected_by_halfpaid_leave ?? false).toString());
       formData.append('prorata_calculation', (this.prorata_calculation ?? false).toString());
       formData.append('is_emi_deduction', (this.is_emi_deduction ?? false).toString());

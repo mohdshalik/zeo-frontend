@@ -366,7 +366,7 @@ checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
               document_number: this.document_number,
             
               reason:this.reason,
-              // total: this.total,
+              total: this.total,
             
               // branch:this.branch,
               request_type: this.request_type,

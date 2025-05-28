@@ -37,6 +37,17 @@
             </div>
         </div> -->
        
+        <div class="col-md-6">
+            <label>Salary Component</label>
+            <div class="custom-sel">
+              <select class="form-control" id="salary_component" name="salary_component" [(ngModel)]="salary_component"
+                [ngModelOptions]="{standalone: true}" >
+                <option *ngFor="let component of Salarycomponent" [value]="component.id">
+                  {{ component.name }}
+                </option>
+              </select>
+            </div>
+          </div>
 
 
     <div class="col-md-6" *ngIf="!created_by">
@@ -154,7 +165,8 @@
                     <th> Request Name </th>
                     <th>Description</th>
       
-        
+                    <th>Salary Component</th>
+
                    
                   </tr>
                 </thead>
@@ -164,7 +176,8 @@
                     <td>{{ i + 1 }}</td> 
                     <td>{{ docs.name }}</td>
                     <td>{{ docs.description }}</td> 
-    
+                    <td>{{ docs.salary_component }}</td> 
+
                   </tr>
               
                 </tbody>
