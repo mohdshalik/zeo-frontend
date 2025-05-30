@@ -216,6 +216,7 @@
 
 <!-- Logical Operator Dropdown -->
                       
+
   <div class="dropdown-container mt-2">
                         <div class="dropdown-header" (click)="toggleOperatorDropdown()">
                           Logical Operators
@@ -355,6 +356,8 @@
                 <th>Is Fixed</th>
                 <th>Formula</th>
                 <th>Description</th>
+                <th>is Loan Component</th>
+                <!-- <th>Show in Payslip</th> -->
 
 
                 <th>Action</th>
@@ -370,10 +373,20 @@
                 <td>{{ docs.formula }}</td>
 
                 <td>{{ docs.description }}</td>
+                <td>{{ docs.is_loan_component }}</td>
+
+                <!-- <td>{{ docs.show_in_payslip }}</td> -->
+
 
 
                 <td>
                   <i class="fa-solid fa-edit" (click)="editSalaryComponent(docs)"></i>
+                  <i  
+                          class="fa-solid fa-trash"
+                          style="cursor: pointer;  margin-left: 10px;"
+                          (click)="deletePayroll(docs.id)"
+                          title="Delete Component " 
+                        ></i>
                 </td>
               </tr>
             </tbody>

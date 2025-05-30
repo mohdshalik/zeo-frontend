@@ -621,7 +621,7 @@ arithmeticOperators: string[] = ['+', '-', '*', '/', '%'];
 
 FunctionsOperators: string[] = ['WORKHOURS()','MAX()', 'MIN()', 'ROUND()', 'SUM()', 'AVG()','ABS()','INT()',];
 
-VariablesOperators: string[] = ['Year_Of_Service','Ot_Hours','Joining_Date','Working_ays','calandar_days','Fixed_days'];
+VariablesOperators: string[] = ['calendar_days','working_days','fixed_days','standard_hours','ot_hours','years_of_service'];
 
 
 toggleDropdown() {
@@ -677,6 +677,24 @@ toggleVariablesDropdown() {
   this.FunctionsdropdownOpen = false;
 
 }
+
+
+deletePayroll(payrollId: number): void {
+  if (confirm('Are you sure you want to delete this Component?')) {
+    this.leaveService.deleteSalary(payrollId).subscribe(
+      () => {
+        // Filter out the deleted payroll from the list
+        this.Salarycomponent = this.Salarycomponent.filter(p => p.id !== payrollId);
+        console.log('Payroll deleted successfully');
+        alert('salary Component deleted succesfull');
+      },
+      (error) => {
+        console.error('Failed to delete payroll', error);
+      }
+    );
+  }
+}
+
 
 
 }

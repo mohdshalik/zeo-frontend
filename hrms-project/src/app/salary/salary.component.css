@@ -483,3 +483,8 @@ table th{
 .dropdown-option{
   font-size: 12px;
 }
+
+
+table thead th{
+  white-space: nowrap;
+}

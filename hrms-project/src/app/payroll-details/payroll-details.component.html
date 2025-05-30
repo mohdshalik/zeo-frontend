@@ -29,23 +29,44 @@
           <div class="row">
             <div class="col-md-4">
              <P> Employee ID </P>
+             <p class="payrol_det_data"> {{ payslipDetails.employee }}</p>
+
             </div>
-            <div class="col-md-8">
-              <p>: {{ payslipDetails.employee }}</p>
-            </div>
+           
             <div class="col-md-4">
               <P> Payroll Period </P>
+              <p class="payrol_det_data"> {{ payslipDetails.payroll_run?.month }} - {{ payslipDetails.payroll_run?.year }}</p>
+
              </div>
-             <div class="col-md-8">
-               <p>: {{ payslipDetails.payroll_run?.start_date }} to {{ payslipDetails.payroll_run?.end_date }}</p>
+          
+             <div class="col-md-4">
+              <P>Payment Date</P>
+              <p class="payrol_det_data">
+                 {{ payslipDetails.payroll_run?.payment_date }}</p>
+
              </div>
 
              <div class="col-md-4">
-              <P>Payment Date</P>
+              <P>Branch</P>
+              <p class="payrol_det_data">
+                 {{ payslipDetails.payroll_run?.branch }}</p>
+
              </div>
-             <div class="col-md-8">
-               <p>: {{ payslipDetails.payroll_run?.payment_date }}</p>
+
+             <div class="col-md-4">
+              <P>Department</P>
+              <p class="payrol_det_data">
+                 {{ payslipDetails.payroll_run?.department }}</p>
+
              </div>
+
+                <div class="col-md-4">
+              <P>Category</P>
+              <p class="payrol_det_data">
+                 {{ payslipDetails.payroll_run?.category }}</p>
+
+             </div>
+         
           </div>
                 
           <!-- <p><span>Employee ID:</span> </p>
@@ -53,6 +74,24 @@
           <p><span>Payment Date:</span> {{ payslipDetails.payroll_run?.payment_date }}</p> -->
           
         </div>
+
+        <table  class="salary-table mt-4">
+          <thead>
+           
+              <tr>
+                <th>
+                  Total Working Days : {{payslipDetails.total_working_days}}
+                </th>
+              
+                <th>Days Worked : {{payslipDetails.days_worked}}</th>
+              </tr>
+           
+          </thead>
+
+        </table>
+
+
+
         <table class="salary-table mt-4">
           <thead>
             <tr>
@@ -70,8 +109,8 @@
           <tbody>
             <tr *ngFor="let earning of earnings; let i = index">
               <td>{{ earning.component_name }}</td>
-              <td>{{ earning.amount }}</td>
-              <td>{{ earning.amount }}</td>
+              <td>{{ earning.structure_amount }}</td>
+              <td>{{ earning.payslip_amount }}</td>
               <td>{{ deductions[i]?.component_name || '' }}</td>
               <td>{{ deductions[i]?.amount || '' }}</td>
             </tr>

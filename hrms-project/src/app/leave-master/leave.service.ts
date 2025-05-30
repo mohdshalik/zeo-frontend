@@ -797,4 +797,17 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/payroll/api/PayrollRun/${payrollId}/?schema=${selectedSchema}`;
     return this.http.delete(url);
   }
+
+
+
+  deleteSalary(payrollId: number): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+
+    const url = `${this.apiUrl}/payroll/api/salarycomponent/${payrollId}/?schema=${selectedSchema}`;
+    return this.http.delete(url);
+  }
 }
