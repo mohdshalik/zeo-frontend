@@ -20,7 +20,7 @@ export class LoanApplicationComponent {
   emi_amount:any='';
   disbursement_date:any='';
   remaining_balance:any='';
-  approved_on:any='';
+  // approved_on:any='';
 
   rejection_reason:any='';
 
@@ -212,10 +212,10 @@ private employeeService: EmployeeService,
     formData.append('amount_requested', this.amount_requested);
     formData.append('repayment_period', this.repayment_period);
     formData.append('emi_amount', this.emi_amount);
-    formData.append('disbursement_date', this.disbursement_date );
+    // formData.append('disbursement_date', this.disbursement_date );
     formData.append('remaining_balance', this.remaining_balance);
-    formData.append('approved_on', this.approved_on);
-    formData.append('rejection_reason', this.rejection_reason);
+    // formData.append('approved_on', this.approved_on);
+    // formData.append('rejection_reason', this.rejection_reason);
 
     formData.append('pause_start_date', this.pause_start_date);
     formData.append('resume_date', this.resume_date );
