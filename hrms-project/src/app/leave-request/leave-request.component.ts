@@ -13,6 +13,10 @@ import { DesignationService } from '../designation-master/designation.service';
 export class LeaveRequestComponent {
 
 
+
+  totalDays: number = 0;
+
+
   start_date: any = '';
   end_date: any = '';
   reason: any = '';
@@ -199,6 +203,18 @@ export class LeaveRequestComponent {
   }
 
 
+
+  calculateTotalDays() {
+    if (this.start_date && this.end_date) {
+      const start = new Date(this.start_date);
+      const end = new Date(this.end_date);
+      const diff = Math.floor((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+  
+      this.totalDays = diff > 0 ? diff : 0;
+    } else {
+      this.totalDays = 0;
+    }
+  }
 
   // checkViewPermission(permissions: any[]): boolean {
   //   const requiredPermission = 'add_employee_leave_request' ||'change_employee_leave_request' ||

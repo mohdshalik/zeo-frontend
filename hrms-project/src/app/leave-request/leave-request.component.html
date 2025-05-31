@@ -47,20 +47,30 @@
 
 
                     
+                     
+
+
                       <div class="col-md-3">
                         <label>Start Date</label>
-                        <input type="date" class="form-control" required [(ngModel)]="start_date" placeholder="Enter Start Date"
+                        <input type="date" class="form-control" required [(ngModel)]="start_date" placeholder="Enter Start Date" (change)="calculateTotalDays()"
                                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !start_date}">
                         <div *ngIf="registerButtonClicked && !start_date" class="error-message">start date is required.</div>
                       </div>
                   
                       <div class="col-md-3">
                         <label>End Date</label>
-                        <input type="date" class="form-control" required [(ngModel)]="end_date" placeholder="Enter End Date"
+                        <input type="date" class="form-control" required [(ngModel)]="end_date" placeholder="Enter End Date" (change)="calculateTotalDays()"
                                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !end_date}">
                         <div *ngIf="registerButtonClicked && !end_date" class="error-message">End Date is required.</div>
                       </div>
-                  
+
+
+                      <div class="col-m-3">
+                        <label>total days</label>
+                        <input type="text" class="form-control" [value]="totalDays" readonly>
+                      </div>
+
+
                       <div class="col-md-12">
                         <label>Reason</label>
                         <textarea class="form-control" [(ngModel)]="reason" [ngModelOptions]="{standalone: true}"></textarea>

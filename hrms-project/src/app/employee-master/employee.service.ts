@@ -82,28 +82,46 @@ export class EmployeeService {
   }
 
 
-  registerGeneralReq(companyData: any): Observable<any> {
+  // registerGeneralReq(companyData: any): Observable<any> {
+  //   const selectedSchema = localStorage.getItem('selectedSchema');
+  //   if (!selectedSchema) {
+  //     console.error('No schema selected.');
+  //     return throwError('No schema selected.'); // Return an error observable if no schema is selected
+  //   }
+
+
+
+  //   const apiUrl = `${this.apiUrl}/employee/api/general-request/?schema=${selectedSchema}`;
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  //   return this.http.post(apiUrl, companyData, { headers }).pipe(
+  //     catchError((error) => {
+  //       // Handle errors here (you can log, show a user-friendly message, etc.)
+  //       console.error('Error during company registration:', error);
+  //       return throwError(error);
+
+  //     })
+  //   );
+  // }
+
+
+  registerGeneralReq(formData: FormData): Observable<any> {
     const selectedSchema = localStorage.getItem('selectedSchema');
     if (!selectedSchema) {
       console.error('No schema selected.');
-      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+      return throwError('No schema selected.');
     }
-
-
-
+  
     const apiUrl = `${this.apiUrl}/employee/api/general-request/?schema=${selectedSchema}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    return this.http.post(apiUrl, companyData, { headers }).pipe(
+  
+    // DO NOT manually set headers when using FormData
+    return this.http.post(apiUrl, formData).pipe(
       catchError((error) => {
-        // Handle errors here (you can log, show a user-friendly message, etc.)
         console.error('Error during company registration:', error);
         return throwError(error);
-
       })
     );
   }
-
 
   getAllgeneralRequest(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/employee/api/general-request/?schema=${selectedSchema}`;

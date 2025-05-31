@@ -1,20 +1,61 @@
 
 <div class="container">
     <div class="comapny_section" >
+
+      <div class="header_section">
+
+        <div class="row">
+          <div class="col-md-3">
+            <h1>Employee Payslip </h1>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="custom-sel ">
+              <select  [(ngModel)]="selectedPayslipDesign" class="form-control ">
+                <option value="default">Default Design</option>
+                <option value="design2">Design-2</option>
+              </select>
+        
+            </div>
+  
+            <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+  
+          </div>
+          <div class="col-md-5">
+            <div class="button-group pull-right">
+              <button type="button" class="btn  btn-download " (click)="downloadPayslip()"><i class="fa-solid fa-download dwl-clr"></i> Download</button>
+
+            
+                       
+  
+  
+  
+            </div>
+          </div>
+  
+        </div>
+  
+  
+  
+      </div>
+  
+
+
+
       <div class="row">
         <div class="col-md-9"></div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-full btn-download" (click)="downloadPayslip()"><i class="fa-solid fa-download"></i> Download</button>
 
         </div>
       </div>
       
+  
 
-
+      <div class="mt-4" *ngIf="selectedPayslipDesign === 'default'">
       <div class="payslip-container" *ngIf="payslipDetails" #payslipContent>
 
         <div class="payslip-header">
-          <h2>Payslip - {{ payslipDetails.payroll_run?.name }} {{ payslipDetails.payroll_run?.start_date | date:'yyyy' }}</h2>
+          <h2>Payslip - {{ payslipDetails.payroll_run?.name }} {{ payslipDetails.payroll_run?.month }} - {{ payslipDetails.payroll_run?.year }}</h2>
           <p class="mt-2">Status: 
             <span [ngClass]="{
               'pill green': payslipDetails.status === 'approved',
@@ -28,7 +69,7 @@
         <div class="employee-details mt-4">
           <div class="row">
             <div class="col-md-4">
-             <P> Employee ID </P>
+             <P> Employee Code </P>
              <p class="payrol_det_data"> {{ payslipDetails.employee }}</p>
 
             </div>
@@ -129,6 +170,68 @@
           <p><strong>Net Salary:</strong> {{ payslipDetails.net_salary }}</p>
         </div>
       
+      </div>
+      </div>
+
+      <div *ngIf="selectedPayslipDesign === 'design2'" class="modern-payslip mt-4" #payslipContent>
+        <div class="modern-header">
+          <h2>{{ payslipDetails.payroll_run?.name }} Payslip</h2>
+          <div class="status-tag">
+            Status:
+            <span [ngClass]="{
+              'status-approved': payslipDetails.status === 'approved',
+              'status-pending': payslipDetails.status === 'pending',
+              'status-processed': payslipDetails.status === 'processed',
+              'status-rejected': payslipDetails.status === 'rejected'
+            }">{{ payslipDetails.status | titlecase }}</span>
+          </div>
+        </div>
+      
+        <div class="modern-info-grid">
+          <div><strong>Employee ID:</strong> {{ payslipDetails.employee }}</div>
+          <div><strong>Payroll Period:</strong> {{ payslipDetails.payroll_run?.month }} - {{ payslipDetails.payroll_run?.year }}</div>
+          <div><strong>Payment Date:</strong> {{ payslipDetails.payroll_run?.payment_date | date }}</div>
+          <div><strong>Branch:</strong> {{ payslipDetails.payroll_run?.branch }}</div>
+          <div><strong>Department:</strong> {{ payslipDetails.payroll_run?.department }}</div>
+          <div><strong>Category:</strong> {{ payslipDetails.payroll_run?.category }}</div>
+          <div><strong>Total Working Days:</strong> {{ payslipDetails.total_working_days }}</div>
+
+          <div><strong>Days Worked:</strong> {{ payslipDetails.days_worked }}</div>
+
+        </div>
+      
+        <table class="modern-salary-table salary-table">
+          <thead>
+            <tr>
+              <th>Earning</th>
+              <th>Gross</th>
+              <th>After LOP</th>
+              <th>Deduction</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let earning of earnings; let i = index">
+              <td>{{ earning.component_name }}</td>
+              <td>{{ earning.structure_amount }}</td>
+              <td>{{ earning.payslip_amount }}</td>
+              <td>{{ deductions[i]?.component_name || '-' }}</td>
+              <td>{{ deductions[i]?.amount || '-' }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2"><strong>Total Allowance:</strong></td>
+              <td>{{ payslipDetails.total_additions }}</td>
+              <td><strong>Total Deduction:</strong></td>
+              <td>{{ payslipDetails.total_deductions }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      
+        <div class="modern-net-salary">
+          <strong>Net Salary:</strong> ₹{{ payslipDetails.net_salary }}
+        </div>
       </div>
       
           <div class="row">

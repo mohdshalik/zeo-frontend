@@ -98,7 +98,7 @@
 </div>
 
 
-<div class="col-md-3" *ngIf="type === 'leave_request'">
+<!-- <div class="col-md-3" *ngIf="type === 'leave_request'">
 
 
     <div class="custom-sel">
@@ -110,7 +110,7 @@
     </div>
                 
 
-</div>
+</div> -->
 
 
       <div class="col-md-3">
@@ -186,6 +186,7 @@
                 <th>Suffix</th>
                 <th>Current No</th>
                 <th>Branch</th>
+                <th>Type</th>
                 <th>Total Length</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -200,6 +201,8 @@
                 <td>{{ docs.suffix }}</td>
                 <td>{{ docs.current_number }}</td>
                 <td>{{ docs.branch_id }}</td>
+                <td>{{ docs.type }}</td>
+
                 <td>{{ docs.total_length }}</td>
 
                 <td>{{ docs.start_date }}</td>

@@ -29,6 +29,8 @@ export class PayrollDetailsComponent {
   earnings: any[] = [];
   deductions: any[] = [];
 
+  selectedPayslipDesign = 'default';  // other value could be 'design2'
+
 
   constructor(
     private route: ActivatedRoute,
@@ -91,6 +93,10 @@ export class PayrollDetailsComponent {
   }
 
 
+  
+
+  
+
 
   // downloadPayslip(): void {
   //   if (!this.payslipDetails || !this.payslipDetails.employee || !this.payslipDetails.payroll_run?.start_date) {
@@ -151,5 +157,5 @@ export class PayrollDetailsComponent {
   }
   
 
-  
+
 }

@@ -318,7 +318,7 @@ ngOnInit(): void {
                 end_date: this.end_date,
                 // automatic_numbering: this.automatic_numbering,
                 type: this.type,
-                leave_type: this.leave_type,
+                // leave_type: this.leave_type,
               };
             
               this.employeeService.registerDocNum(companyData).subscribe(

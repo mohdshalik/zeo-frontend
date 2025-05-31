@@ -29,6 +29,9 @@ export class GeneralRequestComponent {
 
   automaticNumbering: boolean = false;
 
+  remarks: string = '';
+  request_document: File | null = null;
+
 
 
 
@@ -361,46 +364,33 @@ checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
 
           registerGeneralreq(): void {
             this.registerButtonClicked = true;
-            
-            const companyData = {
-              document_number: this.document_number,
-            
-              reason:this.reason,
-              total: this.total,
-            
-              // branch:this.branch,
-              request_type: this.request_type,
-            
-              employee:this.employee,
-              created_by:this.created_by,
-
-              approved:this.approved,
-
-
-           
-        
-              // Add other form field values to the companyData object
-            };
           
-        
-            this.employeeService.registerGeneralReq(companyData).subscribe(
+            const formData = new FormData();
+          
+            formData.append('document_number', this.document_number?.toString() || '');
+            formData.append('reason', this.reason || '');
+            formData.append('total', this.total?.toString() || '');
+            formData.append('request_type', this.request_type || '');
+            formData.append('employee', this.employee || '');
+            formData.append('created_by', this.created_by || '');
+            formData.append('approved', this.approved ? 'true' : 'false');
+            formData.append('remarks', this.remarks || '');
+          
+            if (this.request_document) {
+              formData.append('request_document', this.request_document);
+            }
+          
+            this.employeeService.registerGeneralReq(formData).subscribe(
               (response) => {
-                console.log('Registration successful', response);
-              
-                    alert('General request has been Added ');
-                    window.location.reload();
-                    // window.location.reload();
-               
-        
+                alert('General request has been added');
+                window.location.reload();
               },
               (error) => {
-                console.error('Added failed', error);
-                alert('enter all field!')
-                // Handle the error appropriately, e.g., show a user-friendly error message.
+                alert('Enter all fields!');
               }
             );
           }
-        
+          
 
           loadgeneralReq(): void {
     
@@ -422,8 +412,14 @@ checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
             }
             }
     
-    
-
+   
+            
+            onFileChange(event: any) {
+              const file = event.target.files[0];
+              if (file) {
+                this.request_document = file;
+              }
+            }
           
   
 
