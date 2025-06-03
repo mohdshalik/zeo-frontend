@@ -539,6 +539,7 @@ body {
   background: white;
   padding: 15px 15px 15px 30px;
   width: 100%;
+  border: solid 1px whitesmoke;
 
 }
 
@@ -599,7 +600,7 @@ body {
 
 .opening_add_sec{
   background: white;
-  border-top: solid 0.5px whitesmoke;
+  border: solid 1px whitesmoke;
   width: 100%;
   margin-bottom: 20px;
 

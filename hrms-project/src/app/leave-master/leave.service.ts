@@ -810,4 +810,44 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/payroll/api/salarycomponent/${payrollId}/?schema=${selectedSchema}`;
     return this.http.delete(url);
   }
+
+
+
+
+
+
+  getApprovalReport(): Observable<any[]> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError(() => new Error('No schema selected.'));
+    }
+  
+    const apiUrl = `${this.apiUrl}/calendars/api/Lv_Approval_Report/?schema=${selectedSchema}`;
+    return this.http.get<any[]>(apiUrl);
+  }
+  
+  fetchApprovalJsonData(url: string): Observable<any> {
+    return this.http.get<any>(url);
+  }
+
+
+
+  getLeavebalanceReport(): Observable<any[]> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError(() => new Error('No schema selected.'));
+    }
+  
+    const apiUrl = `${this.apiUrl}/calendars/api/lvBalanceReport/?schema=${selectedSchema}`;
+    return this.http.get<any[]>(apiUrl);
+  }
+  
+  fetchLeavebalanceJsonData(url: string): Observable<any> {
+    return this.http.get<any>(url);
+  }
+
+
+
 }

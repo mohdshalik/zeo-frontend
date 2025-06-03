@@ -160,6 +160,7 @@ import { LoanApplicationComponent } from './loan-application/loan-application.co
 import { LoanRepaymentComponent } from './loan-repayment/loan-repayment.component';
 import { LoanApprovelLevelComponent } from './loan-approvel-level/loan-approvel-level.component';
 import { LoanApprovalComponent } from './loan-approval/loan-approval.component';
+import { LeaveBalanceReportComponent } from './leave-balance-report/leave-balance-report.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -278,7 +279,8 @@ import { LoanApprovalComponent } from './loan-approval/loan-approval.component';
      LoanApplicationComponent,
      LoanRepaymentComponent,
      LoanApprovelLevelComponent,
-     LoanApprovalComponent
+     LoanApprovalComponent,
+     LeaveBalanceReportComponent
      
      
 

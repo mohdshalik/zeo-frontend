@@ -46,28 +46,30 @@ export class LeaveApprovalsReportComponent {
       this.fetchStandardReport();
     }
   
+// your.component.ts
 
-    fetchStandardReport() {
-      const schema = 'zeosoftwares';
-      this.http.get<any[]>(`http://localhost:8000/calendars/api/Lv_Approval_Report/?schema=${schema}`).subscribe(
-        (response) => {
-          if (response.length > 0 && response[0].report_data) {
-            this.http.get(response[0].report_data).subscribe((jsonData: any) => {
-              const flatData = jsonData.flatMap((entry: any) =>
-                entry.approvals.map((approval: any) => ({
-                  ...approval,
-                  request_id: entry.request_id,
-                }))
-              );
-              this.approvalReportData = flatData;
-            });
-          }
-        },
-        (error) => {
-          console.error('Error fetching report:', error);
-        }
-      );
+fetchStandardReport() {
+  this.leaveService.getApprovalReport().subscribe(
+    (response) => {
+      if (response.length > 0 && response[0].report_data) {
+        const jsonUrl = response[0].report_data;
+        this.leaveService.fetchApprovalJsonData(jsonUrl).subscribe((jsonData: any) => {
+          const flatData = jsonData.flatMap((entry: any) =>
+            entry.approvals.map((approval: any) => ({
+              ...approval,
+              request_id: entry.request_id,
+            }))
+          );
+          this.approvalReportData = flatData;
+        });
+      }
+    },
+    (error) => {
+      console.error('Error fetching report:', error);
     }
+  );
+}
+
   
     downloadExcel() {
       // Step 1: Define custom headers mapping

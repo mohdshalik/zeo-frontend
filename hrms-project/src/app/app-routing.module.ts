@@ -84,6 +84,7 @@ import { LoanApplicationComponent } from './loan-application/loan-application.co
 import { LoanRepaymentComponent } from './loan-repayment/loan-repayment.component';
 import { LoanApprovelLevelComponent } from './loan-approvel-level/loan-approvel-level.component';
 import { LoanApprovalComponent } from './loan-approval/loan-approval.component';
+import { LeaveBalanceReportComponent } from './leave-balance-report/leave-balance-report.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -267,6 +268,10 @@ const routes: Routes = [
           {
             path:'leave-approvals-report',
             component:LeaveApprovalsReportComponent
+          },
+          {
+            path:'leave-balance-report',
+            component:LeaveBalanceReportComponent
           },
           {
             path:'employee-attendance',

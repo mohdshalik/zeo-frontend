@@ -599,7 +599,52 @@
                         </div> -->
                             </mat-tab>
 
-
+                            <mat-tab label="Emp Leaves">
+                                <div class="tab_content  mt-3">
+                                 
+                                <!-- Looping leave balances -->
+<div class="row mt-4">
+    <div class="col-md-4" *ngFor="let balance of employeeLeaves.leave_balance">
+      <div class="leave-type-sec">
+        <div class="row">
+          <div class="col-md-5 mt-2">
+            <h5>{{ balance.leave_type }}</h5>
+            <h6>Leave</h6>
+            <!-- <button type="button" class="btn" (click)="openingsModal(balance.id, balance.leave_type)">
+              Add leave openings
+            </button> -->
+          </div>
+          <div class="col-md-7 d-flex align-items-center justify-content-end">
+            <div class="progress-circle">
+              <svg viewBox="0 0 100 100">
+                <circle class="bg" cx="50" cy="50" r="40"></circle>
+                <circle
+                  class="progress"
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  [attr.stroke-dashoffset]="getDashOffset(balance.balance)"
+                ></circle>
+              </svg>
+              <div class="count">{{ balance.balance }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="opening_add_sec">
+ <button type="button" class="add_openongs"  (click)="openingsModal(balance.id, balance.leave_type)">
+              Add leave openings
+            </button>
+      </div>
+    </div>
+  </div>
+  
+                
+                                </div>
+                                <!-- <div class=" mt-5" >
+                            <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeeLang()">Add Language</button>
+                        </div> -->
+                            </mat-tab>
 
                             <mat-tab label="Emp Language">
                                 <div class="tab_content  mt-3">
@@ -818,43 +863,7 @@
 
 
 
-<!-- Looping leave balances -->
-<div class="row mt-4">
-    <div class="col-md-4" *ngFor="let balance of employeeLeaves.leave_balance">
-      <div class="leave-type-sec">
-        <div class="row">
-          <div class="col-md-5 mt-2">
-            <h5>{{ balance.leave_type }}</h5>
-            <h6>Leave</h6>
-            <!-- <button type="button" class="btn" (click)="openingsModal(balance.id, balance.leave_type)">
-              Add leave openings
-            </button> -->
-          </div>
-          <div class="col-md-7 d-flex align-items-center justify-content-end">
-            <div class="progress-circle">
-              <svg viewBox="0 0 100 100">
-                <circle class="bg" cx="50" cy="50" r="40"></circle>
-                <circle
-                  class="progress"
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  [attr.stroke-dashoffset]="getDashOffset(balance.balance)"
-                ></circle>
-              </svg>
-              <div class="count">{{ balance.balance }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="opening_add_sec">
- <button type="button" class="add_openongs"  (click)="openingsModal(balance.id, balance.leave_type)">
-              Add leave openings
-            </button>
-      </div>
-    </div>
-  </div>
-  
+
 
 
 
