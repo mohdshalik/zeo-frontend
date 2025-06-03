@@ -31,6 +31,7 @@ export class LeaveApprovalsReportComponent {
 
     approvalReportData: any[] = [];
 
+    groupedApprovalData: any[] = [];
 
 
   constructor(
@@ -53,14 +54,11 @@ fetchStandardReport() {
     (response) => {
       if (response.length > 0 && response[0].report_data) {
         const jsonUrl = response[0].report_data;
-        this.leaveService.fetchApprovalJsonData(jsonUrl).subscribe((jsonData: any) => {
-          const flatData = jsonData.flatMap((entry: any) =>
-            entry.approvals.map((approval: any) => ({
-              ...approval,
-              request_id: entry.request_id,
-            }))
-          );
-          this.approvalReportData = flatData;
+        this.leaveService.fetchApprovalJsonData(jsonUrl).subscribe((jsonData: any[]) => {
+          this.groupedApprovalData = jsonData.map(entry => ({
+            request_id: entry.request_id,
+            approvals: entry.approvals
+          }));
         });
       }
     },

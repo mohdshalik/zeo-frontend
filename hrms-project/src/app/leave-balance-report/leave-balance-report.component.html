@@ -39,6 +39,7 @@
                           <tr>
                             <th>Employee</th>
                             <th>First Name</th>
+                            <th>Branch</th>
                             <th>Department</th>
                             <th>Designation</th>
                             <th>Category</th>
@@ -52,12 +53,15 @@
                           <tr *ngFor="let item of approvalReportData">
                             <td>{{ item.employee || '-' }}</td>
                             <td>{{ item.emp_first_name || '-' }}</td>
+                            <td>{{ item.emp_branch_id || '-' }}</td>
+
                             <td>{{ item.emp_dept_id || '-' }}</td>
                             <td>{{ item.emp_desgntn_id || '-' }}</td>
                             <td>{{ item.emp_ctgry_id || '-' }}</td>
                             <td>{{ item.leave_type || '-' }}</td>
                             <td>{{ item.balance }}</td>
                             <td>{{ item.openings }}</td>
+                            
                             <!-- <td>{{ item.created_at | date:'short' }}</td> -->
                           </tr>
                         </tbody>

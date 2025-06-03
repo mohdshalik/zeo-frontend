@@ -33,32 +33,53 @@
                 <mat-tab label="Standard Report">
                     <div class="tab_boddy p-3">
                       <button class="btn btn-primary mb-3" (click)="downloadExcel()">Download Excel</button>
-                  
-                      <table class="table table-bordered table-striped" *ngIf="approvalReportData.length > 0">
+                      <table class="table table-bordered table-striped">
                         <thead>
                           <tr>
                             <th>Employee</th>
+                            <th>Branch</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Category</th>
                             <th>Leave Request</th>
+                            <th>Compensatory Request</th>
+                            <th>Level</th>
+
                             <th>Approver</th>
+                            <th>Role</th>
                             <th>Status</th>
                             <th>Rejection Reason</th>
                             <th>Note</th>
-                            <th>Created At</th>
+                            <th>Updated At</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of approvalReportData">
-                            <td>{{ item.emp_first_name || 'N/A' }}</td>
-                            <td>{{ item.leave_request }}</td>
-                            <td>{{ item.approver }}</td>
-                            <td>{{ item.status }}</td>
-                            <td>{{ item.rejection_reason || '-' }}</td>
-                            <td>{{ item.note || '-' }}</td>
-                            <td>{{ item.created_at | date:'short' }}</td>
-                          </tr>
+                          <ng-container *ngFor="let request of groupedApprovalData">
+                            <ng-container *ngFor="let approval of request.approvals; let i = index">
+                              <tr>
+                                <td *ngIf="i === 0" [attr.rowspan]="request.approvals.length">{{ approval.emp_first_name || 'N/A' }}</td>
+                                <td *ngIf="i === 0" [attr.rowspan]="request.approvals.length">{{ approval.emp_branch_id || '-' }}</td>
+                                <td *ngIf="i === 0" [attr.rowspan]="request.approvals.length">{{ approval.emp_dept_id || '-' }}</td>
+                                <td *ngIf="i === 0" [attr.rowspan]="request.approvals.length">{{ approval.emp_desgntn_id || '-' }}</td>
+                                <td *ngIf="i === 0" [attr.rowspan]="request.approvals.length">{{ approval.emp_ctgry_id || '-' }}</td>
+                                <td *ngIf="i === 0" [attr.rowspan]="request.approvals.length">{{ approval.leave_request || '-' }}</td>
+                                <td *ngIf="i === 0" [attr.rowspan]="request.approvals.length">{{ approval.compensatory_request || '-' }}</td>
+                      
+                                <!-- Per-approval data -->
+                                <td>{{ approval.level || '-' }}</td>
+
+                                <td>{{ approval.approver || '-' }}</td>
+                                <td>{{ approval.role || '-' }}</td>
+                                <td>{{ approval.status || '-' }}</td>
+                                <td>{{ approval.rejection_reason || '-' }}</td>
+                                <td>{{ approval.note || '-' }}</td>
+                                <td>{{ approval.updated_at | date: 'short' }}</td>
+                              </tr>
+                            </ng-container>
+                          </ng-container>
                         </tbody>
                       </table>
-                  
+                      
                       <p *ngIf="approvalReportData.length === 0">No report data available.</p>
                     </div>
                   </mat-tab>

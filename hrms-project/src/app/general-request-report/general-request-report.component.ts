@@ -68,7 +68,7 @@ interface Employee {
     emp_ctgry_id: string;
     emp_doc_number:string;
     reason:string;
-    branch:string;
+    emp_branch_id:string;
     request_type: string;
     employee:string;
     total:string;
@@ -169,7 +169,7 @@ public datePipe: DatePipe;
     emp_ctgry_id: "Category",
     doc_number: "Document Number",
     reason: "Reason",
-    branch: "Branch",
+    emp_branch_id: "Branch",
     request_type: "Request Type",
     employee: "Employee Code",
     total: "Total",
@@ -186,11 +186,11 @@ public datePipe: DatePipe;
     'emp_ctgry_id',
     'doc_number',
     'reason',
-    'branch',
+    'emp_branch_id',
     'request_type',
     'employee',
     'total',
-    'remarks',
+    // 'remarks',
     'status',
 
     'created_at_date'
@@ -649,7 +649,7 @@ StandardDownload(): void {
       emp_ctgry_id: "Category",
       doc_number:" Document Number",
       reason:"Reason",
-      branch:"Branch",
+      emp_branch_id:"Branch",
       request_type: "Request Type",
       employee: "Employee Code",
       total: "Total",
