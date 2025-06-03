@@ -231,3 +231,8 @@
   .header-btn-icon{
     vertical-align: middle;
   }
+
+
+  table thead th {
+    white-space: nowrap;
+  }

@@ -72,6 +72,9 @@ interface Employee {
     request_type: string;
     employee:string;
     total:string;
+    remarks:string;
+    status:string;
+
     created_at_date:string;
 
  
@@ -170,6 +173,9 @@ public datePipe: DatePipe;
     request_type: "Request Type",
     employee: "Employee Code",
     total: "Total",
+    remarks: "Remarks",
+    status: "Status",
+
     created_at_date:"Created At"
   };
   
@@ -184,6 +190,9 @@ public datePipe: DatePipe;
     'request_type',
     'employee',
     'total',
+    'remarks',
+    'status',
+
     'created_at_date'
   ];
   
@@ -644,6 +653,9 @@ StandardDownload(): void {
       request_type: "Request Type",
       employee: "Employee Code",
       total: "Total",
+      remarks: "Remarks",
+      status: "Status",
+
       created_at_date:"Created At"
 
     };
