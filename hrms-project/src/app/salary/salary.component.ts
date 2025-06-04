@@ -621,7 +621,7 @@ arithmeticOperators: string[] = ['+', '-', '*', '/', '%'];
 
 FunctionsOperators: string[] = ['WORKHOURS()','MAX()', 'MIN()', 'ROUND()', 'SUM()', 'AVG()','ABS()','INT()',];
 
-VariablesOperators: string[] = ['calendar_days','working_days','fixed_days','standard_hours','ot_hours','years_of_service','holiday_weekend_ot_days'];
+VariablesOperators: string[] = ['calendar_days','working_days','fixed_days','standard_hours','ot_hours','years_of_service','holiday_weekend_ot_days','encashed_days'];
 
 
 toggleDropdown() {

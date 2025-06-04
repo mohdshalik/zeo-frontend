@@ -1,0 +1,270 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h1> Announcement Master</h1>
+                </div>
+                <div class="col-md-3">
+                    
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name " [(ngModel)]="searchQuery" (input)="filterEmployees()"> -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+                        <button type="button" (click)="openPopus()" class="btn-Create btn btn-success " ><span class="header-btn-icon"><i class="fa-solid fa-circle-plus"></i>
+                        </span> Create</button>
+                        <!-- <span *ngIf="!hasAddPermission"></span>
+
+                        <button type="button" class="btn-Edit btn-info btn"  (click)="EditShowButtons()" *ngIf="hasEditPermission">
+                            <span class="header-btn-icon">
+                             <mat-icon>draw
+                        </mat-icon></span> Edit</button>
+                        <span *ngIf="hasEditPermission"></span>
+
+                        <button type="button" class="btn-Delete btn btn-danger" (click)="toggleCheckboxes()" *ngIf="hasDeletePermission">
+                            <span class="header-btn-icon">
+                                <mat-icon> delete
+                           </mat-icon></span> {{ Delete ? 'Cancel' : 'Delete' }}</button>
+                           
+                           <span *ngIf="!hasDeletePermission"></span> -->
+                    </div>
+                </div>
+            </div>
+           
+           
+
+        </div>
+
+
+      
+
+        <div *ngIf="iscreateLoanApp" class="modal">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-10">
+                  <h2> Create Announcement</h2>
+                </div>
+                <div class="col-md-2">
+                  <span class="close pull-right" (click)="closeapplicationModal()">&times;</span>
+                </div>
+              </div>
+              <hr />
+          
+        <form >
+
+            <div class="row">
+                <div class="col-md-6" >
+               
+                    <label>Title</label>
+                   <input type="text"  class="form-control" required  [(ngModel)]="title"  placeholder="Enter title"
+                    [ngModelOptions]="{standalone: true}" >
+                   
+              </div>
+              
+
+              <div class="col-md-6" >
+               
+                <label>Message</label>
+             <textarea class="form-control" [(ngModel)]="message"  [ngModelOptions]="{standalone: true}"></textarea>
+          </div>
+
+          
+          <div class="col-md-6" >
+               
+            <label>Schedule at</label>
+           <input type="date"  class="form-control" required  [(ngModel)]="schedule_at"  placeholder="Enter schedule at"
+            [ngModelOptions]="{standalone: true}" >
+           
+      </div>
+
+      <div class="col-md-6" >
+               
+        <label>Expires at</label>
+       <input type="date"  class="form-control" required  [(ngModel)]="expires_at"  placeholder="Enter expires at"
+        [ngModelOptions]="{standalone: true}" >
+       
+  </div>
+
+  <div class="col-md-6">
+    <label>Employee</label>
+
+
+
+
+    <div class="custom-sel">
+        <div class="form-control-wrapper">
+      
+
+          <mat-form-field>
+            <!-- <mat-label>Favorite food</mat-label> -->
+            <mat-select placeholder="Select" [(ngModel)]="specific_employees" [ngModelOptions]="{standalone: true}" #selectEmp multiple>
+              <div class="select-all">
+                <mat-checkbox [(ngModel)]="allSelectedEmp" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelectionEmp()">
+                  Select All
+                </mat-checkbox>
+              </div>
+              <input type="text" placeholder="serach" class="form-control">
+
+              <mat-option *ngFor="let deparmentsec of   Employees" [value]="deparmentsec.id">
+                {{ deparmentsec.emp_code }} 
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+        </div>
+       
+      </div>
+                
+
+</div>
+
+  <div class="col-md-6">
+    <label>Branch</label>
+
+
+
+
+    <div class="custom-sel">
+        <div class="form-control-wrapper">
+      
+
+          <mat-form-field>
+            <!-- <mat-label>Favorite food</mat-label> -->
+            <mat-select placeholder="Select" [(ngModel)]="branches" [ngModelOptions]="{standalone: true}" #select multiple>
+              <div class="select-all">
+                <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelection()">
+                  Select All
+                </mat-checkbox>
+              </div>
+              <input type="text" placeholder="serach" class="form-control">
+
+              <mat-option *ngFor="let deparmentsec of   Branches" [value]="deparmentsec.id">
+                {{ deparmentsec.branch_name }} 
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+        </div>
+        
+      </div>
+                
+
+</div>
+   
+        
+          <div class="col-md-4 mt-4">
+            <div class="check-box-selection-sec form-control">
+                <div class="mat-set">
+                    <mat-checkbox [(ngModel)]="send_email" [ngModelOptions]="{standalone: true}">Send email</mat-checkbox>
+                </div>
+               
+            </div>
+        </div>
+       
+        <div class="col-md-4 mt-4">
+            <div class="check-box-selection-sec form-control">
+                <div class="mat-set">
+                    <mat-checkbox [(ngModel)]="is_sticky" [ngModelOptions]="{standalone: true}">is sticky</mat-checkbox>
+                </div>
+               
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-4">
+            <div class="check-box-selection-sec form-control">
+                <div class="mat-set">
+                    <mat-checkbox [(ngModel)]="allow_comments" [ngModelOptions]="{standalone: true}">Allow comments</mat-checkbox>
+                </div>
+               
+            </div>
+        </div>
+       
+
+        <!-- <div class="col-md-6">
+            <label>Request Document</label>
+            <input type="file" class="form-control" (change)="onFileChange($event)">
+          </div> -->
+
+    <div class="col-md-6" *ngIf="!created_by">
+
+
+        <div class="custom-sel">
+            <label>Created by</label>
+            <select class="form-control" id="created_by" required [(ngModel)]="created_by"  [ngModelOptions]="{standalone: true}"  >
+                <option value="" >Select</option>
+                <option *ngFor="let deparmentsec of Users" [value]="deparmentsec.id">{{ deparmentsec.username     }} </option>
+            </select>
+\        </div>
+                    
+
+    </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-10">
+    
+                </div>
+    
+                <div class="col-md-2">
+                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerAnnouncement()">Save</button>  
+                 </div>
+            </div>
+            
+       
+    </form>
+
+            
+            </div>
+          </div>
+
+        <div class="com_list table-scroll mt-4" *ngIf="hasViewPermission">
+
+
+            <table class="table-container" width="100%" *ngIf="hasViewPermission">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th> Title  </th>
+                    <th>Message</th>
+                    <th>Send email</th>
+                    <th>Is sticky</th>
+                    <th>Schedule at</th>
+                    <th>Expires at</th>
+                    <th>Allow comments</th>
+                    <th>Specific employees </th>
+                    <th>Branches </th>
+
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr *ngFor="let docs of LoanTypes;let i = index">
+                    <td>{{ i + 1 }}</td> 
+                    <td>{{ docs.title }}</td>
+                    <td>{{ docs.message }}</td> 
+                    <td>{{ docs.send_email }}</td>
+                    <td>{{ docs.is_sticky }}</td>
+
+                    <td>{{ docs.schedule_at }}</td>
+
+                    <td>{{ docs.expires_at }}</td>
+
+                    <td>{{ docs.allow_comments }}</td>
+
+                    <td>{{ docs.specific_employees }}</td>
+                    <td>{{ docs.branches }}</td>
+
+
+                  </tr>
+              
+                </tbody>
+              </table>
+
+        </div>
+        </div>
+        </div>
+        

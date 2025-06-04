@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, forkJoin } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -665,6 +666,21 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
   
     
   }
+
+  confirmPayslips(payload: any[]): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const requests = payload.map(p =>
+      this.http.put(`${this.apiUrl}/payroll/api/payslip/${p.id}/?schema=${selectedSchema}`, { confirm_status: p.confirm_status })
+    );
+  
+    return forkJoin(requests); // Executes all PUTs in parallel
+  }
+  
 
 
   getSinglePayslip(id: string): Observable<any> {

@@ -69,39 +69,37 @@ fetchStandardReport() {
 }
 
   
-    downloadExcel() {
-      // Step 1: Define custom headers mapping
-      const headerMap: { [key: string]: string } = {
-        emp_first_name: 'First Name',
-        leave_request: 'Leave Request',
-        approver: 'Approver',
-        status: 'Status',
-        emp_dept_id:'Department',
-        emp_desgntn_id:'Designation',
-        emp_ctgry_id:'Category',
+downloadExcel(): void {
+  const exportData: any[] = [];
 
-        rejection_reason: 'Rejection Reason',
-        note: 'Note',
-        created_at: 'Created At',
-        request_id: 'Request ID',
-      };
-    
-      // Step 2: Transform the data
-      const exportData = this.approvalReportData.map(item => {
-        const transformed: any = {};
-        for (const key in headerMap) {
-          if (item.hasOwnProperty(key)) {
-            transformed[headerMap[key]] = item[key];
-          }
-        }
-        return transformed;
+  this.groupedApprovalData.forEach(group => {
+    group.approvals.forEach((approval: any, index: number) => {
+      exportData.push({
+        'Employee': approval.emp_first_name || 'N/A',
+        'Branch': approval.emp_branch_id || '-',
+        'Department': approval.emp_dept_id || '-',
+        'Designation': approval.emp_desgntn_id || '-',
+        'Category': approval.emp_ctgry_id || '-',
+        'Leave Request': approval.leave_request || '-',
+        'Compensatory Request': approval.compensatory_request || '-',
+
+        'Level': approval.level || '-',
+        'Approver': approval.approver || '-',
+        'Role': approval.role || '-',
+        'Status': approval.status || '-',
+        'Rejection Reason': approval.rejection_reason || '-',
+        'Note': approval.note || '-',
+        'Updated At': approval.updated_at ? new Date(approval.updated_at).toLocaleString() : '-',
       });
-    
-      // Step 3: Export to Excel
-      const worksheet = XLSX.utils.json_to_sheet(exportData);
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, 'Leave Approval Report');
-      XLSX.writeFile(workbook, 'Leave_Approval_Report.xlsx');
-    }
+    });
+  });
+
+  const worksheet = XLSX.utils.json_to_sheet(exportData);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Leave Approval Report');
+
+  XLSX.writeFile(workbook, `Leave_Approval_Report_${new Date().toISOString().slice(0, 10)}.xlsx`);
+}
+
     
 }

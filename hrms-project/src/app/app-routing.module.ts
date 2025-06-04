@@ -85,6 +85,7 @@ import { LoanRepaymentComponent } from './loan-repayment/loan-repayment.componen
 import { LoanApprovelLevelComponent } from './loan-approvel-level/loan-approvel-level.component';
 import { LoanApprovalComponent } from './loan-approval/loan-approval.component';
 import { LeaveBalanceReportComponent } from './leave-balance-report/leave-balance-report.component';
+import { AnnouncementMasterComponent } from './announcement-master/announcement-master.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -218,6 +219,11 @@ const routes: Routes = [
           {
             path:'document-numbering',
             component:DocumentNumberingComponent
+          },
+
+          {
+            path:'announcement-master',
+            component:AnnouncementMasterComponent
           },
           {
             path:'weelcalendar',

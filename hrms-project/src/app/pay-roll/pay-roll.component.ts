@@ -81,6 +81,8 @@ PayrollSettings: any[] = [];
 PaySlips: any[] = [];
 PaySlipsComponent: any[] = [];
 
+PaySlipsConfrimed: any[] = [];
+
 
 
 Branches: any[] = [];
@@ -118,6 +120,8 @@ this.LoadCategory();
 this.LoadPayroll(selectedSchema);
 this.LoadPayrollSettings(selectedSchema);
 this.LoadPaySlip(selectedSchema)
+this.LoadConfrimedPayslip(selectedSchema)
+
 this.LoadSalaryCom(selectedSchema)
 this.LoadPaySlipComponent(selectedSchema);
 
@@ -251,16 +255,29 @@ if (this.userId !== null) {
 
 
     exportToExcel(): void {
-      const exportData = this.PaySlips.map((p, index) => ({
-        No: index + 1,
-        Employee: p.employee,
-        Name: p.payroll_run?.name,
-        'Start Date': p.payroll_run?.start_date,
-        'End Date': p.payroll_run?.end_date,
-        'Gross Salary': p.gross_salary,
-        'Net Salary': p.net_salary,
-        Status: p.status
-      }));
+      const exportData = this.PaySlips.map((p, index) => {
+        const components = p.components?.map((c: { component_name: any; component_type: any; payslip_amount: any; }) =>
+          `${c.component_name} (${c.component_type}): ${c.payslip_amount}`
+        ).join(' | ') || '';
+    
+        return {
+          No: index + 1,
+          Employee: p.employee,
+          'Payroll Name': p.payroll_run?.name,
+          Year: p.payroll_run?.year,
+          Month: this.getMonthName(p.payroll_run?.month),
+          'Gross Salary': p.gross_salary,
+          'Net Salary': p.net_salary,
+          'Total Additions': p.total_additions,
+          'Total Deductions': p.total_deductions,
+          'Pro Rata Adjustment': p.pro_rata_adjustment,
+          // Arrears: p.arrears,
+          'Working Days': p.total_working_days,
+          'Days Worked': p.days_worked,
+          Status: p.status,
+          Components: components
+        };
+      });
     
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData);
       const workbook: XLSX.WorkBook = {
@@ -279,6 +296,7 @@ if (this.userId !== null) {
     
       FileSaver.saveAs(blobData, `Payslips_${new Date().toISOString().slice(0,10)}.xlsx`);
     }
+    
     
     checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
       return groupPermissions.some(permission => permission.codename === codeName);
@@ -606,18 +624,24 @@ onFileSelected(event:any){
     LoadPaySlip(selectedSchema: string) {
       this.leaveService.getPaySlip(selectedSchema).subscribe(
         (data: any) => {
-          // Ensure each payslip has a valid URL
           this.PaySlips = data.map((payslip: any) => ({
             ...payslip,
             payslip_pdf: payslip.payslip_pdf ? payslip.payslip_pdf : null
           }));
-    
-          console.log('Fetched Payslips:', this.PaySlips);
         },
         (error: any) => {
           console.error('Error fetching Payslips:', error);
         }
       );
+    }
+    
+
+    getMonthName(month: number): string {
+      const months = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      ];
+      return months[month - 1] || 'N/A';
     }
     
 
@@ -666,19 +690,33 @@ onFileSelected(event:any){
 
 
  
-  LoadPayslip(selectedSchema: string) {
+  LoadConfrimedPayslip(selectedSchema: string) {
     this.leaveService.getPaySlip(selectedSchema).subscribe(
       (data: any) => {
-        this.PaySlips = data;
-        this.filteredDocuments = data;  // Initialize filtered data
-      
-        console.log('Payrolls:', this.Payrolls);
+        this.PaySlipsConfrimed = data.filter((item: any) => item.confirm_status === true);
+        this.filteredDocuments = this.PaySlipsConfrimed;  // Initialize filtered data
+        console.log('Confirmed Payslips:', this.PaySlipsConfrimed);
       },
       (error: any) => {
         console.error('Error fetching Payrolls:', error);
       }
     );
   }
+  
+
+  LoadPayslip(selectedSchema: string) {
+    this.leaveService.getPaySlip(selectedSchema).subscribe(
+      (data: any[]) => {
+        this.PaySlips = data;
+        this.masterSelected = false;
+        console.log('Payrolls:', this.PaySlips);
+      },
+      (error: any) => {
+        console.error('Error fetching Payrolls:', error);
+      }
+    );
+  }
+  
 
   searchQuery = '';
 
@@ -707,5 +745,52 @@ viewPayrollDetails(payslip: any) {
   // Navigate and pass the payslip ID as a route parameter (or use state)
   this.router.navigate(['/main-sidebar/salary-options/payroll-details', payslip.id]);
 }
+
+
+
+masterSelected: boolean = false;
+
+
+selectAllRows() {
+  for (let payslip of this.PaySlips) {
+    payslip.selected = this.masterSelected;
+  }
+}
+
+checkIfAllSelected() {
+  this.masterSelected = this.PaySlips.every(item => item.selected);
+}
+
+
+confirmSelectedPayslips() {
+  const selectedPayslips = this.PaySlips.filter(p => p.selected && !p.confirm_status);
+
+  if (selectedPayslips.length === 0) {
+    alert('No unconfirmed payslips selected.');
+    return;
+  }
+
+  const payload = selectedPayslips.map(p => ({
+    id: p.id,
+    confirm_status: true
+  }));
+
+  this.leaveService.confirmPayslips(payload).subscribe(
+    (response: any) => {
+      // Update local state
+      for (let p of selectedPayslips) {
+        p.confirm_status = true;
+        p.selected = false;
+      }
+      this.masterSelected = false;
+      alert('Selected payslips confirmed successfully.');
+    },
+    (error: any) => {
+      console.error('Error confirming payslips:', error);
+      alert('Failed to confirm payslips.');
+    }
+  );
+}
+
 
 }
