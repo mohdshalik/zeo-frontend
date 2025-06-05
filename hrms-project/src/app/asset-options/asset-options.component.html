@@ -1,0 +1,67 @@
+<div class="sub-sidebar clickOutside">
+
+
+    <mat-sidenav-container>
+      <mat-sidenav class="sidnav_scrolling" #sidenav opened="true" mode="side">
+  
+        <div class="wrapper">
+          <div class="sidebar">
+              <ul>
+                <li routerLink="/main-sidebar/asset-options/asset-type" *ngIf="hasViewPermissionSalary"><a><mat-icon>peoples</mat-icon> Asset Types</a></li>
+                <li routerLink="/main-sidebar/asset-options/asset-master" *ngIf="hasViewPermissionSalary"><a><mat-icon>peoples</mat-icon> Asset Master</a></li>
+                <li routerLink="/main-sidebar/asset-options/asset-allocation" *ngIf="hasViewPermissionSalary"><a><mat-icon>peoples</mat-icon> Asset Allocation</a></li>
+                <li routerLink="/main-sidebar/asset-options/asset-request" *ngIf="hasViewPermissionSalary"><a><mat-icon>peoples</mat-icon> Asset Request</a></li>
+
+                  <!-- <li routerLink="/main-sidebar/loan-sidebar/loan-type/" *ngIf="hasViewPermissionSalary"><a ><mat-icon>peoples</mat-icon> Loan Type</a></li>
+                  <li routerLink="/main-sidebar/loan-sidebar/loan-repayment" *ngIf="hasViewPermissionSalary"><a><mat-icon>peoples</mat-icon> Loan Repayment</a></li>
+                  <li routerLink="/main-sidebar/loan-sidebar/loan-approvel-level" *ngIf="hasViewPermissionSalary"><a><mat-icon>peoples</mat-icon> Loan Approval Level</a></li>
+                  <li routerLink="/main-sidebar/loan-sidebar/loan-application" *ngIf="hasViewPermissionSalary"><a><mat-icon>peoples</mat-icon> Loan Application</a></li> -->
+
+                  <!-- <li routerLink="/main-sidebar/salary-options/pay-roll" *ngIf="hasViewPermissionPayroll"><a ><mat-icon>peoples</mat-icon> Payroll</a></li> -->
+
+  
+                  <mat-nav-list>
+     
+  
+  
+                    <div>
+            
+            
+                 
+                    </div>
+                    <style>
+                      .mat-expansion-panel-body {
+                        padding: 0 0px 16px !important;
+                      }
+                      .mat-expansion-panel{
+                background: transparent;
+               
+              }
+                    </style>
+            
+                  </mat-nav-list>
+                   
+              </ul> 
+  
+                   
+   
+          </div>
+    
+      </div>
+   
+  
+  
+  
+  
+  
+  
+      </mat-sidenav>
+  
+  
+      <router-outlet></router-outlet>
+  
+      <!-- <router-outlet></router-outlet> -->
+  
+    </mat-sidenav-container>
+  
+  </div>

@@ -86,6 +86,11 @@ import { LoanApprovelLevelComponent } from './loan-approvel-level/loan-approvel-
 import { LoanApprovalComponent } from './loan-approval/loan-approval.component';
 import { LeaveBalanceReportComponent } from './leave-balance-report/leave-balance-report.component';
 import { AnnouncementMasterComponent } from './announcement-master/announcement-master.component';
+import { AssetOptionsComponent } from './asset-options/asset-options.component';
+import { AssetTypesComponent } from './asset-types/asset-types.component';
+import { AssetMasterComponent } from './asset-master/asset-master.component';
+import { AssetAllocationComponent } from './asset-allocation/asset-allocation.component';
+import { AssetRequestComponent } from './asset-request/asset-request.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -421,6 +426,36 @@ const routes: Routes = [
       component:LoanApprovalComponent,
     },
    
+
+  ]
+
+},
+
+
+{
+  path: 'asset-options',
+  component: AssetOptionsComponent,
+  children:[
+   
+    {
+      path:'asset-type',
+      component:AssetTypesComponent,
+    },
+
+    {
+      path:'asset-master',
+      component:AssetMasterComponent,
+    },
+
+    {
+      path:'asset-allocation',
+      component:AssetAllocationComponent,
+    },
+    {
+      path:'asset-request',
+      component:AssetRequestComponent,
+    },
+
 
   ]
 

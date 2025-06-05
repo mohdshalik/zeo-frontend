@@ -1,0 +1,338 @@
+<div class="container" >
+    <div class="comapny_section">
+
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h1> Asset Request</h1>
+                </div>
+
+                <div class="col-md-3">
+                    
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name " [(ngModel)]="searchQuery" (input)="filterEmployees()"> -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+                        <button type="button" (click)="openPopus()" class="btn-Create btn btn-success " *ngIf="hasAddPermission"><span class="header-btn-icon"><mat-icon>add_circle
+                        </mat-icon></span> Create</button>
+                      <span *ngIf="!hasAddPermission"></span>
+
+                        <button type="button" class="btn-Edit btn-info btn"  (click)="EditShowButtons()" *ngIf="hasEditPermission" >
+                            <span class="header-btn-icon">
+                             <mat-icon>draw
+                        </mat-icon></span> Edit</button>
+                        <span *ngIf="hasEditPermission"></span>
+                        <button type="button" class="btn-Delete btn btn-danger" (click)="toggleCheckboxes()" *ngIf="hasDeletePermission">
+                            <span class="header-btn-icon">
+                                <mat-icon> delete
+                           </mat-icon></span> {{ Delete ? 'Cancel' : 'Delete' }}</button>
+
+                           <span *ngIf="!hasDeletePermission"></span>
+                    </div>
+                </div>
+            </div>
+           
+           
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                
+                <button  class=" mt-3 btn-danger btn " style="width: 100%;" color="warn" *ngIf="Delete" (click)="toggleSelectAllEmployees()">Select All</button>
+
+            </div>
+            <div class="col-md-3">
+                <button class=" mt-3 btn-danger btn"  color="warn" *ngIf="Delete" (click)="deleteSelectedAssetType()">Delete Selected </button>
+
+            </div>
+        </div>
+      
+
+      
+
+        <div *ngIf="iscreateLoanApp" class="modal">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-10">
+                  <h2>  Asset Request</h2>
+                </div>
+                <div class="col-md-2">
+                  <span class="close pull-right" (click)="closeapplicationModal()">&times;</span>
+                </div>
+              </div>
+              <hr />
+          
+        <form >
+
+            <div class="row">
+               
+
+              <div class="col-md-12" >
+               
+                <label>Reason</label>
+                
+               <textarea  class="form-control" required  [(ngModel)]="reason"  placeholder="Enter reason"
+                [ngModelOptions]="{standalone: true}" > </textarea>
+               
+          </div>
+
+          
+
+  
+
+        
+
+          <div class="col-md-6" >
+            <label>Select Asset Type</label>
+            <div class="custom-sel">
+              <select
+                class="form-control"
+                id="asset_type"
+                name="asset_type"
+                [(ngModel)]="asset_type"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                <option *ngFor="let employees of AssetTypes" [value]="employees.id">
+                  {{ employees.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        
+
+
+
+  <div class="col-md-6" >
+    <label>Select Requested Asset </label>
+    <div class="custom-sel">
+      <select
+        class="form-control"
+        id="requested_asset"
+        name="requested_asset"
+        [(ngModel)]="requested_asset"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let employees of Assets" [value]="employees.id">
+          {{ employees.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+     
+  <div class="col-md-6" >
+    <label>Select Employee </label>
+    <div class="custom-sel">
+      <select
+        class="form-control"
+        id="employee"
+        name="employee"
+        [(ngModel)]="employee"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let employees of Employees" [value]="employees.id">
+          {{ employees.emp_code }}
+        </option>
+      </select>
+    </div>
+  </div>
+          
+      
+      
+   
+
+
+
+    
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-10">
+    
+                </div>
+    
+                <div class="col-md-2">
+                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="CreateAssetType()">Save</button>  
+                 </div>
+            </div>
+            
+       
+    </form>
+
+            
+            </div>
+          </div>
+
+          <!-- Edit Modal -->
+<div *ngIf="isEditModalOpen" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-10">
+          <h2>Edit Asset Allocation</h2>
+        </div>
+        <div class="col-md-2">
+          <span class="close pull-right" (click)="closeEditModal()">&times;</span>
+        </div>
+      </div>
+      <hr />
+  
+      <form>
+        <div class="row">
+               
+
+            <div class="col-md-12" >
+             
+              <label>Reason</label>
+              
+             <textarea  class="form-control" required  [(ngModel)]="editAsset.reason"  placeholder="Enter reason"
+              [ngModelOptions]="{standalone: true}" > </textarea>
+             
+        </div>
+
+        
+
+
+
+     
+
+        <div class="col-md-6" >
+          <label>Select Asset Type</label>
+          <div class="custom-sel">
+            <select
+              class="form-control"
+              id="asset_type"
+              name="asset_type"
+              [(ngModel)]="editAsset.asset_type"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <option *ngFor="let employees of AssetTypes" [value]="employees.id">
+                {{ employees.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      
+
+
+
+<div class="col-md-6" >
+  <label>Select Requested Asset </label>
+  <div class="custom-sel">
+    <select
+      class="form-control"
+      id="requested_asset"
+      name="requested_asset"
+      [(ngModel)]="editAsset.requested_asset"
+      [ngModelOptions]="{ standalone: true }"
+    >
+      <option *ngFor="let employees of Assets" [value]="employees.id">
+        {{ employees.name }}
+      </option>
+    </select>
+  </div>
+</div>
+
+   
+<div class="col-md-6" >
+  <label>Select Employee </label>
+  <div class="custom-sel">
+    <select
+      class="form-control"
+      id="employee"
+      name="employee"
+      [(ngModel)]="editAsset.employee"
+      [ngModelOptions]="{ standalone: true }"
+    >
+      <option *ngFor="let employees of Employees" [value]="employees.id">
+        {{ employees.emp_code }}
+      </option>
+    </select>
+  </div>
+</div>
+        
+    
+    
+ 
+
+
+
+  
+          </div>
+  
+        <div class="row">
+          <div class="col-md-10"></div>
+          <div class="col-md-2">
+            <button
+              type="button"
+              class="btn-Create btn-full mt-5 btn-success btn"
+              (click)="updateAssetType()"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+
+        <div class="com_list mt-4" *ngIf="hasViewPermission">
+
+
+            <table width="100%" *ngIf="hasViewPermission">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th> Reason </th>
+      
+                    <th>Employee</th>
+                    <th>Asset type</th>
+                    <th>Requested asset</th>
+                    <th>Status</th>
+
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr *ngFor="let docs of AssetsRequest;let i = index">
+                    <td>{{ i + 1 }}</td> 
+                    <td>{{ docs.reason }}</td>
+                    <td>{{ docs.employee }}</td> 
+
+                    <td>{{ docs.asset_type }}</td> 
+
+                    <td>{{ docs.requested_asset }}</td> 
+                    <td>{{ docs.status }}</td> 
+
+
+
+                    <td>
+                        <button
+                          mat-fab
+                          color="primary"
+                          aria-label="Edit icon"
+                          *ngIf="showEditBtn"
+
+                          
+                          (click)="openEditModal(docs)"
+                        >
+                          <mat-icon style="color: white;">draw</mat-icon>
+                        </button>
+
+                        <mat-checkbox *ngIf="Delete" [(ngModel)]="docs.selected" ></mat-checkbox>
+
+                      </td>
+                      
+              
+                </tbody>
+              </table>
+
+        </div>
+        </div>
+        </div>
+        

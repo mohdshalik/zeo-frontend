@@ -162,6 +162,11 @@ import { LoanApprovelLevelComponent } from './loan-approvel-level/loan-approvel-
 import { LoanApprovalComponent } from './loan-approval/loan-approval.component';
 import { LeaveBalanceReportComponent } from './leave-balance-report/leave-balance-report.component';
 import { AnnouncementMasterComponent } from './announcement-master/announcement-master.component';
+import { AssetOptionsComponent } from './asset-options/asset-options.component';
+import { AssetTypesComponent } from './asset-types/asset-types.component';
+import { AssetMasterComponent } from './asset-master/asset-master.component';
+import { AssetAllocationComponent } from './asset-allocation/asset-allocation.component';
+import { AssetRequestComponent } from './asset-request/asset-request.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -282,7 +287,12 @@ import { AnnouncementMasterComponent } from './announcement-master/announcement-
      LoanApprovelLevelComponent,
      LoanApprovalComponent,
      LeaveBalanceReportComponent,
-     AnnouncementMasterComponent
+     AnnouncementMasterComponent,
+     AssetOptionsComponent,
+     AssetTypesComponent,
+     AssetMasterComponent,
+     AssetAllocationComponent,
+     AssetRequestComponent
      
      
 

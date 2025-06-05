@@ -88,9 +88,9 @@ interface Employee {
   emp_dept_id: string;
   emp_desgntn_id: string;
   emp_ctgry_id: string;
-  date: string;
-  sdd: string;
-  zipcode: string;
+  // date: string;
+  // sdd: string;
+  // zipcode: string;
     [key: string]: any; // Define an index signature to allow any string key
 }
 interface KeyValue {
@@ -402,9 +402,9 @@ private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` fo
       catFieldName: 'emp_ctgry_id',
       hiredFieldName: 'emp_hired_date',
       joinFieldName: 'emp_active_date',
-      zipcodeFieldName: 'zipcode',
-      sddFieldName: 'sdd',
-      dateFieldName: 'date'
+      // zipcodeFieldName: 'zipcode',
+      // sddFieldName: 'sdd',
+      // dateFieldName: 'date'
     };
   
     // Initialize display_names as an empty object
@@ -456,9 +456,9 @@ private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` fo
       emp_dept_id: "Department",
       emp_desgntn_id: "Designation",
       emp_ctgry_id: "Category",
-      date: "Date",
-      sdd: "SDD",
-      zipcode: "Zipcode"
+      // date: "Date",
+      // sdd: "SDD",
+      // zipcode: "Zipcode"
     };
     return defaultNames[key] || key;
   }
