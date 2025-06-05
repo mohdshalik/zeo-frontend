@@ -320,6 +320,9 @@ this.loadLAssetRequest();
               }
           
 
+              
+        
+
 
                iscreateLoanApp: boolean = false;
 
@@ -476,5 +479,56 @@ loadLAsset(): void {
     }
   
 
+
+    approveRequest(id: number): void {
+      const confirmApproval = confirm('Are you sure you want to approve this asset request?');
+      if (!confirmApproval) {
+        return; // Exit if user cancels
+      }
+    
+      const selectedSchema = this.authService.getSelectedSchema();
+      if (!selectedSchema) {
+        alert('Schema not found');
+        return;
+      }
+    
+      this.employeeService.approveAssetRequest(id, selectedSchema).subscribe(
+        (response) => {
+          alert('Asset request approved successfully!');
+          this.loadLAssetRequest(); // Refresh list
+        },
+        (error) => {
+          console.error('Approval failed', error);
+    
+          // Extract backend message if available
+          const errorMsg =
+            error?.error?.detail || error?.error?.message || 'Error approving asset request';
+    
+          alert(`Approval failed: ${errorMsg}`);
+        }
+      );
+    }
+    
+
+
+
+    rejectRequest(id: number): void {
+  const selectedSchema = this.authService.getSelectedSchema();
+  if (!selectedSchema) {
+    alert('Schema not found');
+    return;
+  }
+
+  this.employeeService.rejectAssetRequest(id, selectedSchema).subscribe(
+    (response) => {
+      alert('Asset request rejected successfully!');
+      this.loadLAssetRequest(); // Refresh list
+    },
+    (error) => {
+      console.error('Approval failed', error);
+      alert('Error rejecting asset request');
+    }
+  );
+}
 
 }

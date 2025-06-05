@@ -72,8 +72,8 @@
 
               <div class="col-md-6" >
                
-                <label>Returned date</label>
-               <input type="date"  class="form-control" required  [(ngModel)]="returned_date"  placeholder="Enter returned date"
+                <label>Assigned date</label>
+               <input type="date"  class="form-control" required  [(ngModel)]="assigned_date"  placeholder="Enter assigned date"
                 [ngModelOptions]="{standalone: true}" >
                
           </div>
@@ -181,8 +181,8 @@
 
             <div class="col-md-6" >
              
-              <label>Returned date</label>
-             <input type="date"  class="form-control" required  [(ngModel)]="editAsset.returned_date"  placeholder="Enter returned date"
+              <label>Assigned date</label>
+             <input type="date"  class="form-control" required  [(ngModel)]="editAsset.assigned_date"  placeholder="Enter assigned date"
               [ngModelOptions]="{standalone: true}" >
              
         </div>
@@ -277,12 +277,13 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th> Returned date </th>
-                    <th>Return condition </th>
+                    <th> Assigned date </th>
       
                     <th>Asset</th>
                     <th>Employee</th>
-                   
+                    <th>Return Date</th>
+                    <th>Return condition </th>
+
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -290,16 +291,31 @@
                     
                   <tr *ngFor="let docs of AssetAllocations;let i = index">
                     <td>{{ i + 1 }}</td> 
-                    <td>{{ docs.returned_date }}</td>
-                    <td>{{ docs.return_condition }}</td> 
+                    <td>{{ docs.assigned_date }}</td>
                     <td>{{ docs.asset }}</td> 
 
                     <td>{{ docs.employee }}</td> 
 
-                 
+                    <td>{{ docs.returned_date }}</td>
+
+                    <td>{{ docs.return_condition }}</td> 
 
 
                     <td>
+
+                 
+                        <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="openReturnModal(docs)"
+                        [disabled]="docs.returned_date"
+                        [title]="docs.returned_date ? 'Asset already returned' : 'Click to return asset'"
+                      >
+                        Returned
+                      </button>
+                      
+                
+
                         <button
                           mat-fab
                           color="primary"
@@ -319,6 +335,83 @@
               
                 </tbody>
               </table>
+
+
+                    <!-- Edit Modal -->
+<div *ngIf="isRetrunModalOpen" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-10">
+          <h2>Edit Asset Allocation</h2>
+        </div>
+        <div class="col-md-2">
+          <span class="close pull-right" (click)="closeretrunassetModal()">&times;</span>
+        </div>
+      </div>
+      <hr />
+  
+      <form>
+        <div class="row">
+               
+
+            <div class="col-md-6" >
+             
+              <label>return date</label>
+             <input type="date"  class="form-control" required  [(ngModel)]="returned_date"  placeholder="Enter returned date"
+              [ngModelOptions]="{standalone: true}" >
+             
+        </div>
+
+        
+
+
+
+<div class="col-md-6" >
+  <label>Returned Condition</label>
+  <div class="custom-sel">
+    <select
+      class="form-control" [(ngModel)]="return_condition" [ngModelOptions]="{ standalone: true }">
+      <option value="healthy">Healthy </option>
+      <option value="minor_damage">Minor Damage </option>
+      <option value="major_damage">Major Damage </option>
+
+  
+
+    </select>
+  </div>
+</div>
+
+
+
+
+
+   
+
+    
+    
+ 
+
+
+
+  
+          </div>
+  
+        <div class="row">
+          <div class="col-md-10"></div>
+          <div class="col-md-2">
+            <button
+              type="button"
+              class="btn-Create btn-full mt-5 btn-success btn"
+              (click)="updateretruened()"
+            >
+              return asset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
 
         </div>
         </div>

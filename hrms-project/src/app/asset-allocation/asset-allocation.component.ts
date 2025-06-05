@@ -24,6 +24,8 @@ export class AssetAllocationComponent {
 
  
   returned_date: any = '';
+  assigned_date: any = '';
+
   return_condition: any = '';
   asset: any = '';
   employee: any = '';
@@ -242,7 +244,7 @@ this.loadEmployees();
           CreateAssetType(): void {
             this.registerButtonClicked = true;
             const companyData = {
-              returned_date: this.returned_date,
+              assigned_date: this.assigned_date,
             
               return_condition:this.return_condition,
               asset:this.asset,
@@ -451,8 +453,80 @@ loadLAsset(): void {
   }
 
 
+  
 
 
+  isRetrunModalOpen: boolean = false;
+
+selectedAllocationId: number | null = null;
+
+
+
+// Method to open the modal and store the selected asset allocation ID
+openReturnModal(allocation: any): void {
+  this.selectedAllocationId = allocation.id;
+  this.isRetrunModalOpen = true;
+
+  // Optionally reset modal fields
+  this.return_condition = '';
+  this.returned_date = '';
+}
+
+// Close modal method
+closeretrunassetModal(): void {
+  this.isRetrunModalOpen = false;
+}
+
+// Submit return data to backend
+updateretruened(): void {
+  if (!this.selectedAllocationId) {
+    alert('No asset allocation selected.');
+    return;
+  }
+
+  const selectedSchema = this.authService.getSelectedSchema();
+  if (!selectedSchema) {
+    alert('Schema not found');
+    return;
+  }
+
+  const returnData = {
+    return_condition: this.return_condition,
+    returned_date: this.returned_date
+  };
+
+  this.employeeService.returnAsset(this.selectedAllocationId, selectedSchema, returnData).subscribe(
+    (response) => {
+      alert('✅ Asset returned successfully!');
+      this.loadLAssetType(); // Refresh the list
+      this.closeretrunassetModal(); // Close modal
+    },
+    (error) => {
+      console.error('Return failed:', error);
+
+      // Try to extract useful error messages
+      let errorMsg = '❌ Error returning asset.';
+
+      if (error.error) {
+        if (typeof error.error === 'string') {
+          // If backend sent a plain string message
+          errorMsg = error.error;
+        } else if (error.error.detail) {
+          // Django typically uses `detail` field
+          errorMsg = error.error.detail;
+        } else {
+          // If multiple field errors (e.g., form validation errors)
+          const messages = Object.entries(error.error)
+            .map(([field, msgs]: [string, any]) => `${field}: ${Array.isArray(msgs) ? msgs.join(', ') : msgs}`)
+            .join('\n');
+          errorMsg = `Validation Error:\n${messages}`;
+        }
+      }
+
+      alert(errorMsg);
+    }
+  );
+}
 
 
 

@@ -2288,6 +2288,11 @@ deleteAssetAllocation(categoryId: number): Observable<any> {
 
 
 
+returnAsset(id: number, schema: string, data: any): Observable<any> {
+  const url = `${this.apiUrl}/organisation/api/asset-allocations/${id}/return_asset/?schema=${schema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  return this.http.post(url, data, { headers });
+}
 
 
 
@@ -2360,6 +2365,22 @@ deleteAssetRequest(categoryId: number): Observable<any> {
   const apiUrl = `${this.apiUrl}/organisation/api/asset-Request/${categoryId}/?schema=${selectedSchema}`;
  
   return this.http.delete(apiUrl);
+}
+
+
+approveAssetRequest(id: number, schema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/organisation/api/asset-Request/${id}/approve/?schema=${schema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(apiUrl, {}, { headers }); // Usually a POST with an empty body
+}
+
+
+rejectAssetRequest(id: number, schema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/organisation/api/asset-Request/${id}/reject/?schema=${schema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(apiUrl, {}, { headers }); // Usually a POST with an empty body
 }
 
 

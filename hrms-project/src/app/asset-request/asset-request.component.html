@@ -287,51 +287,59 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th> Reason </th>
-      
+                    <th>Reason</th>
                     <th>Employee</th>
                     <th>Asset type</th>
                     <th>Requested asset</th>
                     <th>Status</th>
-
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                    
-                  <tr *ngFor="let docs of AssetsRequest;let i = index">
-                    <td>{{ i + 1 }}</td> 
-                    <td>{{ docs.reason }}</td>
-                    <td>{{ docs.employee }}</td> 
-
-                    <td>{{ docs.asset_type }}</td> 
-
-                    <td>{{ docs.requested_asset }}</td> 
-                    <td>{{ docs.status }}</td> 
-
-
-
+                  <tr *ngFor="let docs of AssetsRequest; let i = index">
                     <td>
-                        <button
-                          mat-fab
-                          color="primary"
-                          aria-label="Edit icon"
-                          *ngIf="showEditBtn"
-
-                          
-                          (click)="openEditModal(docs)"
-                        >
-                          <mat-icon style="color: white;">draw</mat-icon>
-                        </button>
-
-                        <mat-checkbox *ngIf="Delete" [(ngModel)]="docs.selected" ></mat-checkbox>
-
-                      </td>
-                      
+                      <button
+                        mat-fab
+                        color="primary"
+                        aria-label="Edit icon"
+                        *ngIf="showEditBtn"
+                        (click)="openEditModal(docs)"
+                      >
+                        <mat-icon style="color: white;">draw</mat-icon>
+                      </button>
               
+                      <mat-checkbox *ngIf="Delete" [(ngModel)]="docs.selected"></mat-checkbox>
+                      {{ i + 1 }}
+                    </td>
+                    <td>{{ docs.reason }}</td>
+                    <td>{{ docs.employee }}</td>
+                    <td>{{ docs.asset_type }}</td>
+                    <td>{{ docs.requested_asset }}</td>
+                    <td>{{ docs.status }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="approveRequest(docs.id)"
+                        [disabled]="docs.status === 'approved'"
+                      >
+                        Approve
+                      </button>
+              
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="rejectRequest(docs.id)"
+                        [disabled]="docs.status === 'rejected'"
+                        style="margin-left: 5px;"
+                      >
+                        Reject
+                      </button>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
-
+              
         </div>
         </div>
         </div>
