@@ -504,6 +504,25 @@ export class EmployeeService {
   }
 
 
+    getAssetDetails(employeeId: number): Observable<any> {
+    // return this.http.get<any>(`http://localhost:8000/api/Employee/${employeeId}/emp_family/`);
+
+    // const url = `${this.baseUrl}/Employee/${employeeId}/emp_family/`;
+    // return this.http.get(url);
+
+
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.'); // Return an error observable if no schema is selected
+    }
+
+    const apiUrl = `${this.apiUrl}/employee/api/Employee/${employeeId}/emp_asset/?schema=${selectedSchema}`;
+
+    return this.http.get(apiUrl);
+  }
+
+
   getSalary(employeeId: number): Observable<any> {
     // return this.http.get<any>(`http://localhost:8000/api/Employee/${employeeId}/emp_family/`);
 

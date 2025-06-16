@@ -59,39 +59,39 @@ interface Report {
 }
 
 interface Employee {
-  emp_code: string;
   emp_first_name: string;
-  emp_last_name: string;
-  emp_gender: string;
-  emp_date_of_birth: string;
-  emp_personal_email: string;
-  emp_mobile_number_1: string;
-  emp_mobile_number_2: string;
-  emp_country_id: string;
-  emp_state_id: string;
-  emp_city: string;
-  emp_permenent_address: string;
-  emp_present_address: string;
-  emp_status: string;
-  emp_hired_date: string;
-  emp_active_date: string;
-  emp_relegion: string;
-  emp_blood_group: string;
-  emp_nationality_id: string;
-  emp_marital_status: string;
-  emp_father_name: string;
-  emp_mother_name: string;
-  emp_posting_location: string;
-  is_active: boolean;
-  epm_ot_applicable: boolean;
-  emp_company_id: string;
   emp_branch_id: string;
   emp_dept_id: string;
   emp_desgntn_id: string;
   emp_ctgry_id: string;
-  date: string;
-  sdd: string;
-  zipcode: string;
+  employee: string;
+  leave_type: string;
+  start_date: string;
+  end_date: string;
+  reason: string;
+  status: string;
+  applied_on: string;
+  document_number: string;
+  dis_half_day: string;
+  half_day_period: string;
+  number_of_days: string;
+  // emp_relegion: string;
+  // emp_blood_group: string;
+  // emp_nationality_id: string;
+  // emp_marital_status: string;
+  // emp_father_name: string;
+  // emp_mother_name: string;
+  // emp_posting_location: string;
+  // is_active: boolean;
+  // epm_ot_applicable: boolean;
+  // emp_company_id: string;
+  // emp_branch_id: string;
+  // emp_dept_id: string;
+  // emp_desgntn_id: string;
+  // emp_ctgry_id: string;
+  // date: string;
+  // sdd: string;
+  // zipcode: string;
     [key: string]: any; // Define an index signature to allow any string key
 }
 interface KeyValue {
@@ -372,7 +372,7 @@ export class LeaveReportComponent {
   loadFieldNames(): void {
     // Define the mapping of localStorage keys to field names
     const fieldMappings: { [key: string]: string } = {
-      empCodeFieldName: 'emp_code',
+      empCodeFieldName: 'emp_first_name',
       firstNameFieldName: 'emp_first_name',
       lastNameFieldName: 'emp_last_name',
       emailFieldName: 'emp_personal_email',
@@ -422,38 +422,24 @@ export class LeaveReportComponent {
   
   getDefaultDisplayName(key: string): string {
     const defaultNames: { [key: string]: string } = {
-      emp_code: "Employee Code",
+      
       emp_first_name: "First Name",
-      emp_last_name: "Last Name",
-      emp_gender: "Gender",
-      emp_date_of_birth: "Date of Birth",
-      emp_personal_email: "Email",
-      emp_mobile_number_1: "Mobile Number 1",
-      emp_mobile_number_2: "Mobile Number 2",
-      emp_country_id: "Country",
-      emp_city: "City",
-      emp_permenent_address: "Permanent Address",
-      emp_present_address: "Present Address",
-      emp_status: "Status",
-      emp_hired_date: "Hired Date",
-      emp_active_date: "Active Date",
-      emp_relegion: "Religion",
-      emp_blood_group: "Blood Group",
-      emp_nationality_id: "Nationality",
-      emp_marital_status: "Marital Status",
-      emp_father_name: "Father Name",
-      emp_mother_name: "Mother Name",
-      emp_posting_location: "Posting Location",
-      is_active: "Active",
-      epm_ot_applicable: "OT Applicable",
-      emp_company_id: "Company",
       emp_branch_id: "Branch",
       emp_dept_id: "Department",
       emp_desgntn_id: "Designation",
       emp_ctgry_id: "Category",
-      date: "Date",
-      sdd: "SDD",
-      zipcode: "Zipcode"
+      employee: "Employee",
+      leave_type: "Leave Type",
+      start_date: "Start Date",
+      end_date: "End Date",
+      reason: "Reason",
+      status: "Status",
+      applied_on: "Applied on",
+      document_number: " Document Number",
+      dis_half_day: " Halfday",
+      half_day_period: "Halfday Period",
+      number_of_days: "No Of Days",
+     
     };
     return defaultNames[key] || key;
   }
@@ -584,14 +570,14 @@ StandardDownload(): void {
 
   try {
     // Use display_names to map column headers
-    const displayNames: { [key: string]: string } = this.display_names;
+    const displayName: { [key: string]: string } = this.display_names;
 
     // Prepare worksheet data
     const worksheetData: any[][] = [];
-    const title = 'Employee Master Standard Report';
+    const title = 'Employee Leave Standard Report';
 
     // Prepare headers
-    const headers = Object.keys(displayNames).map(key => displayNames[key]);
+    const headers = Object.keys(displayName).map(key => displayName[key]);
 
     // Add title row
     const titleRow = new Array(headers.length).fill('');
@@ -605,8 +591,8 @@ StandardDownload(): void {
     const mappedData = this.dataSource.data.map((item: { [key: string]: any }) => {
       const newItem: { [key: string]: any } = {};
       for (const key in item) {
-        if (item.hasOwnProperty(key) && displayNames[key]) {
-          newItem[displayNames[key]] = item[key];
+        if (item.hasOwnProperty(key) && displayName[key]) {
+          newItem[displayName[key]] = item[key];
         }
       }
       return newItem;
@@ -646,7 +632,7 @@ StandardDownload(): void {
     // Create workbook and save
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, 'standard_report');
+    this.saveAsExcelFile(excelBuffer, 'Leave_standard_report');
     this.snackBar.open('Report downloaded successfully.', 'Success', {
       duration: 3000,
     });

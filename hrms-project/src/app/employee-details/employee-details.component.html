@@ -852,6 +852,50 @@
                             <button type="button" class="btn-Edit btn-info btn d-block mx-auto " (click)="employeeLang()">Add Language</button>
                         </div> -->
                             </mat-tab>
+
+
+
+                            <mat-tab label="Employee Assets">
+                                <div class="tab_content  mt-3" *ngFor="let member of emp_asset_details">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2>Asset Name</h2>
+                                            <h3>{{ member.asset }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Assigned Date</h2>
+                                            <h3>{{ member.assigned_date }} </h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>Return Condition</h2>
+                                            <h3>{{ member.return_condition }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Return Date</h2>
+                                            <h3>{{ member.returned_date }} </h3>
+                                        </div>
+
+                                        <!-- Display each custom field -->
+                                        <ng-container *ngFor="let field of member.fam_custom_fields">
+                                            <div class="col-md-3">
+                                                <h2>{{ field.emp_custom_field }}</h2>
+                                                <h3>{{ field.field_value }}</h3>
+                                            </div>
+                                        </ng-container>
+
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class=" mt-5">
+                                    <button type="button" class="btn-Edit btn-info btn d-block mx-auto "
+                                        (click)="employeefamAdd()">Add Family</button>
+                                </div>
+                            </mat-tab>
+
                         </mat-tab-group>
 
 
