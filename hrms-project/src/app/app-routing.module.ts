@@ -91,6 +91,10 @@ import { AssetTypesComponent } from './asset-types/asset-types.component';
 import { AssetMasterComponent } from './asset-master/asset-master.component';
 import { AssetAllocationComponent } from './asset-allocation/asset-allocation.component';
 import { AssetRequestComponent } from './asset-request/asset-request.component';
+import { AssetUdfComponent } from './asset-udf/asset-udf.component';
+import { PayrollAppovalLevelComponent } from './payroll-appoval-level/payroll-appoval-level.component';
+import { PayslipApprovalComponent } from './payslip-approval/payslip-approval.component';
+import { WpsComponent } from './wps/wps.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -293,6 +297,10 @@ const routes: Routes = [
             component:FromDesignerComponent
           },
           {
+            path:'asset-udf',
+            component:AssetUdfComponent
+          },
+          {
             path:'email-template',
             component:EmailTemplateComponent
           },
@@ -394,6 +402,21 @@ const routes: Routes = [
       path: 'payroll-details/:id',
       component: PayrollDetailsComponent
     },
+
+    {
+      path:'payroll-appoval-level',
+      component:PayrollAppovalLevelComponent,
+    },
+
+    {
+      path:'payslip-approval',
+      component:PayslipApprovalComponent,
+    },
+    {
+      path:'wps',
+      component:WpsComponent,
+    },
+
 
   ]
 

@@ -621,13 +621,30 @@ onFileSelected(event:any){
     }
 
 
+    // LoadPaySlip(selectedSchema: string) {
+    //   this.leaveService.getPaySlip(selectedSchema).subscribe(
+    //     (data: any) => {
+    //       this.PaySlips = data.map((payslip: any) => ({
+    //         ...payslip,
+    //         payslip_pdf: payslip.payslip_pdf ? payslip.payslip_pdf : null
+    //       }));
+    //     },
+    //     (error: any) => {
+    //       console.error('Error fetching Payslips:', error);
+    //     }
+    //   );
+    // }
+    
+
     LoadPaySlip(selectedSchema: string) {
       this.leaveService.getPaySlip(selectedSchema).subscribe(
-        (data: any) => {
-          this.PaySlips = data.map((payslip: any) => ({
-            ...payslip,
-            payslip_pdf: payslip.payslip_pdf ? payslip.payslip_pdf : null
-          }));
+        (data: any[]) => {
+          this.PaySlips = data
+            .filter((payslip: any) => payslip.confirm_status === false) // Only pending confirm status
+            .map((payslip: any) => ({
+              ...payslip,
+              payslip_pdf: payslip.payslip_pdf ? payslip.payslip_pdf : null
+            }));
         },
         (error: any) => {
           console.error('Error fetching Payslips:', error);
@@ -691,9 +708,9 @@ onFileSelected(event:any){
 
  
   LoadConfrimedPayslip(selectedSchema: string) {
-    this.leaveService.getPaySlip(selectedSchema).subscribe(
+    this.leaveService.getPaySlipApproved(selectedSchema).subscribe(
       (data: any) => {
-        this.PaySlipsConfrimed = data.filter((item: any) => item.confirm_status === true);
+        this.PaySlipsConfrimed = data;
         this.filteredDocuments = this.PaySlipsConfrimed;  // Initialize filtered data
         console.log('Confirmed Payslips:', this.PaySlipsConfrimed);
       },

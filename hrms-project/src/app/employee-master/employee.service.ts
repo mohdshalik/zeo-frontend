@@ -2403,4 +2403,130 @@ rejectAssetRequest(id: number, schema: string): Observable<any> {
 }
 
 
+
+
+
+
+// asset-AssetUdfComponent----
+
+
+getFormFieldAsset(selectedSchema: string): Observable<any> {
+  // const url = `${this.baseUrl}/Branch/`;
+  // return this.http.get(url);
+
+  const apiUrl = `${this.apiUrl}/organisation/api/asset-customfield/?schema=${selectedSchema}`;
+
+  // Fetch employees from the API
+  return this.http.get(apiUrl);
+}
+
+
+registerEmpAddMoreFeildAsset(familyData: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.');
+  }
+
+  const apiUrl = `${this.apiUrl}/organisation/api/asset-customfield/?schema=${selectedSchema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(apiUrl, familyData, { headers }).pipe(
+    catchError((error) => {
+      console.error('Error during family registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+
+updateEmpCustomFieldAsset(field: any): Observable<any> {
+
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.'); // Return an error observable if no schema is selected
+  }
+
+
+  const apiUrl = `${this.apiUrl}/organisation/api/asset-customfield-value/${field.id}/?schema=${selectedSchema}`; // Replace with your actual API URL
+  return this.http.put(apiUrl, field);
+}
+
+
+
+// payroll aprooval level setting
+
+
+getpayrollApprovalLevels(selectedSchema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/payroll/api/payslip-approval-levels/?schema=${selectedSchema}`;
+
+  // Fetch employees from the API
+  return this.http.get(apiUrl);
+
+  
+}
+
+
+registerPayrollApproverLevel(formData: FormData): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.');
+  }
+
+  const apiUrl = `${this.apiUrl}/payroll/api/payslip-approval-levels/?schema=${selectedSchema}`;
+
+  return this.http.post(apiUrl, formData).pipe(
+    catchError((error) => {
+      console.error('Error during leave type registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+
+
+
+// payslip approval and rejections
+
+
+getApprovalslistPayslip(selectedSchema: string, userId: number): Observable<any> {
+  const apiUrl = `${this.apiUrl}/payroll/api/approval-payroll/?schema=${selectedSchema}`;
+
+  // Fetch approvals for the user from the API
+  
+  return this.http.get(apiUrl);
+}
+
+
+bulkApprovePayslips(selectedSchema: string, approvalIds: number[], note: string): Observable<any> {
+  const url = `${this.apiUrl}/payroll/api/approval-payroll/bulk_approve/?schema=${selectedSchema}`;
+  const body = {
+    approval_ids: approvalIds,
+    note: note
+  };
+  return this.http.post(url, body);
+}
+
+
+getApprovalDetailsPayslip(apiUrl: string): Observable<any> {
+  return this.http.get(apiUrl);
+}
+
+
+
+// approveApprovalRequestPayslip(apiUrl: string, approvalData: { note: string; status: string }): Observable<any> {
+//   // Sending a POST request to approve with note and status
+//   return this.http.post(apiUrl, approvalData);
+// }
+
+// rejectApprovalRequestPayslip(apiUrl: string, approvalData: { note: string; status: string }): Observable<any> {
+//   // Sending a POST request to approve with note and status
+//   return this.http.post(apiUrl, approvalData);
+// }
+
+
 }

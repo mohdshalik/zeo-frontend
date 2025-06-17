@@ -1,0 +1,254 @@
+<div class="container" >
+    <div class="comapny_section" *ngIf="hasViewPermission">
+        <div class="com_list " >
+
+    <div class="">
+
+        <div class="row">
+            <div class="col-md-9">
+                <h2>Payslip Approval List </h2>
+    
+              </div>
+              <div class="col-md-3">
+                <!-- <button class="btn pull-right btn-export" (click)="scrollToBottom()">Employee Leave Request History</button> -->
+    
+              </div>
+            </div>
+
+
+
+  
+  
+
+
+        </div>
+
+        </div>
+
+        <div class="com_list">
+
+            <div style="overflow-x: auto; max-height: 500px; overflow-y: auto;">
+                <table class="styled-table mt-2" width="100%" style="border-collapse: collapse; min-width: 1200px;">
+                  <thead>
+                    <tr>
+                        <th><input type="checkbox" [(ngModel)]="masterSelected" (change)="toggleAll()" /></th>
+                        <th class="text-table-header">No</th>
+                      <th class="text-table-header">Employee Code</th>
+                      <th class="text-table-header">Payroll Name</th>
+                      <th class="text-table-header">Year</th>
+                      <th class="text-table-header">Month</th>
+                      <th class="text-table-header">Gross Salary</th>
+                      <th class="text-table-header">Total Additions</th>
+                      <th class="text-table-header">Total Deductions</th>
+                      <th class="text-table-header">Net Salary</th>
+                      <th class="text-table-header">Pro Rata Adjustment</th>
+                      <th class="text-table-header">Working Days</th>
+                      <th class="text-table-header">Days Worked</th>
+                      <th class="text-table-header">Status</th>
+                      <th class="text-table-header">Components</th>
+                    </tr>
+                  </thead>
+              
+                  <tbody class="text-table-body">
+                    <tr *ngFor="let payslip of Approvals; let i = index">
+                      <td>
+                        <input type="checkbox" [(ngModel)]="payslip.selected" />
+
+                      </td>
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ payslip.request?.employee }}</td>
+                      <td>{{ payslip.request?.payroll_run?.name }}</td>
+                      <td>{{ payslip.request?.payroll_run?.year }}</td>
+                      <td>{{ getMonthName(payslip.request?.payroll_run?.month) }}</td>
+                      <td>{{ payslip.request?.gross_salary }}</td>
+                      <td>{{ payslip.request?.total_additions }}</td>
+                      <td>{{ payslip.request?.total_deductions }}</td>
+                      <td>{{ payslip.request?.net_salary }}</td>
+                      <td>{{ payslip.request?.pro_rata_adjustment }}</td>
+                      <td>{{ payslip.request?.total_working_days }}</td>
+                      <td>{{ payslip.request?.days_worked }}</td>
+                      <td>
+                        <span class="pill" [ngClass]="{
+                          'pill green': payslip.request?.status === 'approved',
+                          'pill blue': payslip.request?.status === 'processed',
+                          'pill yellow': payslip.request?.status === 'pending',
+                          'pill red': payslip.request?.status === 'rejected'
+                        }">{{ payslip.request?.status }}</span>
+                      </td>
+                      <td>
+                        <ul>
+                          <li *ngFor="let comp of payslip.request?.components">
+                            <strong>{{ comp.component_name }}</strong> ({{ comp.component_type }}): {{ comp.payslip_amount }}
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <!-- Approve Button -->
+              <button type="button" class="btn btn-primary mt-3" (click)="approveSelectedPayslips()">Approve</button>
+              
+        </div>
+<!-- 
+        <div class="row">
+            <div class="col-md-12">
+              <div class="approval_sec" *ngFor="let apr of Approvals" >
+                <h6>Loan Request Approvals</h6><hr>
+                <div class="row ">
+                    <div class="col-md-2">
+                      <h4>Loan Request</h4>
+                      <h5>{{apr.loan_request}}</h5>
+                    </div>
+                       <div class="col-md-2">
+                      <h4>Employee</h4>
+                      <h5>{{apr.employee_id}}</h5>
+                    </div>
+                    <div class="col-md-2">
+                      <h4>Status  </h4>
+                      <h5>{{apr.status}} </h5>
+                    </div>
+                    <div class="col-md-2">
+                      <h4>Level </h4>
+                      <h5>{{apr.level}}</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h4>Reason </h4>
+                        <h5>{{apr.note}}</h5>
+                      </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn pull-right" (click)="selectedaprovaldetalis(apr.id)">View</button>
+                    </div>
+                  </div>
+              
+         
+    
+        
+            
+        
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="com_list mt-4" #bottomOfPage>
+            <h2>Employee loan request history</h2>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Select Employee</label>
+                <div class="custom-sel">
+                  <select class="form-control" [(ngModel)]="selectedEmployeeId" (change)="getLeaveHistory()" [ngModelOptions]="{standalone: true}">
+                    <option value="">-- Select Employee --</option>
+                    <option *ngFor="let employee of Employees" [value]="employee.id">{{ employee.emp_code }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          
+            <div class="row mt-4" *ngIf="leaveHistory.length > 0">
+              <div class="col-md-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Leave Type</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Reason</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let leave of leaveHistory">
+                      <td>{{ leave.leave_type }}</td>
+                      <td>{{ leave.start_date }}</td>
+                      <td>{{ leave.end_date }}</td>
+                      <td>{{ leave.reason }}</td>
+                      <td>{{ leave.status }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div> -->
+          
+
+          <!-- Modal Popup for selected approval details -->
+<!-- Modal Popup for selected approval details -->
+<div *ngIf="isAddFieldsModalOpen" class="modal">
+    <div class="modal-content">
+      <span class="close pull-right" (click)="closemarketModal()">&times;</span>
+  
+      <div *ngIf="selectedApproval">
+        <h6>Leave Request Approvals</h6>
+        <hr>
+        <h6>Leave Request - {{ selectedApproval.loan_request }}</h6>
+        <h6>Status - {{ selectedApproval.status }}</h6>
+        <h6>Level - {{ selectedApproval.level }}</h6>
+  
+        <textarea
+          class="form-control"
+          [(ngModel)]="note"
+          placeholder="Add a Comment here..."
+          [ngModelOptions]="{ standalone: true }"
+        >  </textarea>
+  
+   
+  
+        <div class="row mt-2">
+          <div class="col-md-6"></div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn btn-danger btn-full"
+              (click)="showRejectionReason = true"
+            >
+              Reject
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-success btn-full"
+              (click)="approveApproval(selectedApproval.id)"
+            >
+              Approve
+            </button>
+          </div>
+        </div>
+             <!-- Additional input for rejection reason -->
+        <div *ngIf="showRejectionReason">
+          <textarea
+            class="form-control mt-2"
+            [(ngModel)]="rejection_reason"
+            placeholder="Add a Rejection Reason..."
+            [ngModelOptions]="{ standalone: true }"
+          ></textarea>
+
+          <!-- <div class="col-md-12">
+            <label>Leave Type</label>
+            <div class="custom-sel">
+              <select class="form-control" id="rejection_reason" name="rejection_reason" [(ngModel)]="rejection_reason" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let rejectionReason of RejectionResons" [value]="rejectionReason.id">{{ rejectionReason.reason_text }}</option>
+              </select>
+            </div>
+          </div> -->
+
+        </div>
+        <div class="mt-2" *ngIf="showRejectionReason">
+          <button
+            type="button"
+            class="btn btn-danger btn-full"
+            (click)="confirmRejection(selectedApproval.id)"
+          >
+            Confirm Rejection
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+
+</div>
+</div>

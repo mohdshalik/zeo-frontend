@@ -5,6 +5,9 @@ import { EmployeeService } from '../employee-master/employee.service';
 import { UserMasterService } from '../user-master/user-master.service';
 import { SessionService } from '../login/session.service';
 import { DesignationService } from '../designation-master/designation.service';
+import { environment } from '../../environments/environment';
+import {  HttpErrorResponse } from '@angular/common/http';
+
 @Component({
   selector: 'app-asset-master',
   templateUrl: './asset-master.component.html',
@@ -12,7 +15,8 @@ import { DesignationService } from '../designation-master/designation.service';
 })
 export class AssetMasterComponent {
 
-  
+  private apiUrl = `${environment.apiBaseUrl}`; // Use the correct `apiBaseUrl` for live and local
+
    
 
   hasAddPermission: boolean = false;
@@ -58,6 +62,10 @@ export class AssetMasterComponent {
   registerButtonClicked = false;
 
 
+  custom_fieldsFam :any[] = [];
+
+
+
   constructor(
     private http: HttpClient,
     private authService: AuthenticationService,
@@ -78,7 +86,7 @@ ngOnInit(): void {
   this.loadUsers();
   this.loadLAssetType();
 this.loadLAsset();
-
+this.loadFormFieldsFam();
 
   this.userId = this.sessionService.getUserId();
   
@@ -259,7 +267,9 @@ this.loadLAsset();
             this.employeeService.registerAsset(companyData).subscribe(
               (response) => {
                 console.log('Registration successful', response);
-              
+                const createdEmployeeId = response.id; // Adjust based on your API response
+                this.employeeService.setEmployeeId(createdEmployeeId);
+                this.postCustomFieldValuesFam(createdEmployeeId);
                     alert('Asset  has been Added ');
                     window.location.reload();
                     // window.location.reload();
@@ -439,7 +449,52 @@ loadLAsset(): void {
 
 
 
+  
+  loadFormFieldsFam(): void {
+    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+  
+    console.log('schemastore',selectedSchema )
+    // Check if selectedSchema is available
+    if (selectedSchema) {
+    this.employeeService.getFormFieldAsset(selectedSchema).subscribe(
+      (result: any) => {
+        this.custom_fieldsFam = result;
+      },
+      (error: any) => {
+        console.error('Error fetching countries:', error);
+      }
+    );
+    }
+  }
 
+
+  postCustomFieldValuesFam(empMasterId: number): void {
+    const customFieldValues = this.custom_fieldsFam.map(field => ({
+      custom_field: field.custom_field, // Assuming the field has an 'id' property
+        field_value: field.field_value, // The value entered by the user
+        asset: empMasterId ,// The employee ID from the response
+        // created_by:this.created_by
+    }));
+  
+    // Make API calls to post each custom field value
+    customFieldValues.forEach(fieldValue => {
+      const selectedSchema = localStorage.getItem('selectedSchema');
+      if (!selectedSchema) {
+        console.error('No schema selected.');
+        // return throwError('No schema selected.'); // Return an error observable if no schema is selected
+      }
+        this.http.post(`${this.apiUrl}/organisation/api/asset-customfield-value/?schema=${selectedSchema}`, fieldValue)
+            .subscribe(
+                (response: any) => {
+                    console.log('Custom field value posted successfully', response);
+                },
+                (error: HttpErrorResponse) => {
+                    console.error('Failed to post custom field value', error);
+                }
+            );
+    });
+  }
+  
 
 
 }

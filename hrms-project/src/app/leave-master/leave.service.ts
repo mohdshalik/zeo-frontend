@@ -667,6 +667,31 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
     
   }
 
+  
+  getPaySlipApproved(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/payslip/aproved_payslips/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+    
+  }
+
+  confirmPayslipstrial(payload: any[]): Observable<any> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError('No schema selected.');
+    }
+  
+    const requests = payload.map(p =>
+      this.http.put(`${this.apiUrl}/payroll/api/payslip/${p.id}/?schema=${selectedSchema}`, { trial_status  : p.trial_status   })
+    );
+  
+    return forkJoin(requests); // Executes all PUTs in parallel
+  }
+  
+
   confirmPayslips(payload: any[]): Observable<any> {
     const selectedSchema = localStorage.getItem('selectedSchema');
     if (!selectedSchema) {
@@ -864,6 +889,15 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
     return this.http.get<any>(url);
   }
 
+
+
+  getPaysliprejectionReasons(selectedSchema: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/payroll/api/approval-payroll/?schema=${selectedSchema}`;
+  
+    // Fetch employees from the API
+    return this.http.get(apiUrl);
+  
+  }
 
 
 }

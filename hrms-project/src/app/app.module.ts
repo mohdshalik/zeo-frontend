@@ -167,6 +167,10 @@ import { AssetTypesComponent } from './asset-types/asset-types.component';
 import { AssetMasterComponent } from './asset-master/asset-master.component';
 import { AssetAllocationComponent } from './asset-allocation/asset-allocation.component';
 import { AssetRequestComponent } from './asset-request/asset-request.component';
+import { AssetUdfComponent } from './asset-udf/asset-udf.component';
+import { PayrollAppovalLevelComponent } from './payroll-appoval-level/payroll-appoval-level.component';
+import { PayslipApprovalComponent } from './payslip-approval/payslip-approval.component';
+import { WpsComponent } from './wps/wps.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -292,7 +296,11 @@ import { AssetRequestComponent } from './asset-request/asset-request.component';
      AssetTypesComponent,
      AssetMasterComponent,
      AssetAllocationComponent,
-     AssetRequestComponent
+     AssetRequestComponent,
+     AssetUdfComponent,
+     PayrollAppovalLevelComponent,
+     PayslipApprovalComponent,
+     WpsComponent
      
      
 

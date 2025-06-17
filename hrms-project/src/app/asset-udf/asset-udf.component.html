@@ -1,0 +1,254 @@
+<div class="container" >
+    <div class="comapny_section">
+
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h1> Asset </h1>
+                </div>
+
+                <div class="col-md-3">
+                    
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name " [(ngModel)]="searchQuery" (input)="filterEmployees()"> -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+                        <button type="button" class="btn-Create btn btn-success " ><span class="header-btn-icon"><mat-icon>add_circle
+                        </mat-icon></span> Create</button>
+
+            
+                    </div>
+                </div>
+            </div>
+           
+           
+
+        </div>
+
+        
+
+        <div class="com_list mt-4" >
+
+            
+<div class="calendar_view_sec mt-3" *ngFor="let field of custom_fields_fam">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <div class="col-md-6">
+                    Field Name - {{field.name}}
+                </div>
+                <div class="col-md-5">
+                    Data Type - {{field.data_type}}
+                </div>
+                <div class="col-md-1">
+                    <mat-icon class="trash" (click)="deleteCustomFieldFam(field.id)">delete</mat-icon>
+                </div>
+  
+  
+                <mat-panel-title></mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <div class="inside_udf">
+                <!-- Collapsible panel content for editing the field -->
+                <div class="row">
+                    <!-- Field Name -->
+                    <div class="col-md-6">
+                        <label>Field Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="field.emp_custom_field" placeholder="Enter Field Name" [ngModelOptions]="{standalone: true}" />
+                    </div>
+  
+                    <!-- Data Type -->
+                    <div class="col-md-6">
+                        <label>Data Type</label>
+                        <div class="custom-sel">
+                            <select class="form-control" [(ngModel)]="field.data_type" [ngModelOptions]="{standalone: true}">
+                                <option value="dropdown">Dropdown</option>
+                                <option value="radio">Radio</option>
+                                <option value="date">Date</option>
+                            </select>
+                        </div>
+                    </div>
+  
+                    <!-- Dropdown Values -->
+                    <div class="col-md-6" *ngIf="field.data_type === 'dropdown'">
+                        <label>Dropdown Values</label>
+                        <input type="text" class="form-control" [(ngModel)]="field.dropdown_values" placeholder="Enter Dropdown Values (comma separated)" [ngModelOptions]="{standalone: true}" />
+                    </div>
+  
+                    <!-- Radio Values -->
+                    <div class="col-md-6" *ngIf="field.data_type === 'radio'">
+                        <label>Radio Values</label>
+                        <input type="text" class="form-control" [(ngModel)]="field.radio_values" placeholder="Enter Radio Values (comma separated)" [ngModelOptions]="{standalone: true}" />
+                    </div>
+  
+                    <!-- Mandatory Field Checkbox -->
+                    <div class="col-md-6">
+                        <label></label>
+                        <div class="check-box-selection-sec mt-2">
+                            <div class="mat-set">
+                                <mat-checkbox [(ngModel)]="field.mandatory" [ngModelOptions]="{standalone: true}">Mandatory Field</mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+  
+                <!-- Update Button -->
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button type="button"  class="btn btn-zeo mt-3" mat-raised-button color="primary" (click)="updateCustomField(field)">Update</button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  
+  
+  <button class="d-block mx-auto btn " (click)="openFamFieldModal()">Add More Field</button>
+
+
+   <!-- Modal Popup for add marketing language skill -->
+
+   <div *ngIf="isFamfieldModalOpen" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-10">
+          <h2>Add New Fields For Employee Family</h2>
+          <hr>
+        </div>
+        <div class="col-md-2">
+          <span class="close pull-right" (click)="ClosePopupFam()">&times;</span>
+        </div>
+      </div>
+
+
+
+      <form>
+        <div class="row">
+            <div class="col-md-6">
+
+                <label> Field Name</label>
+                <input type="text" class="form-control" required [(ngModel)]="field_name_fam"
+                    placeholder="Enter Feild Name" [ngModelOptions]="{standalone: true}"
+                    [ngClass]="{'error-field': registerButtonClicked && !field_name_fam}">
+
+                <div *ngIf="registerButtonClicked && !field_name_fam" class="error-message">Feild
+                    Name is required.</div>
+            </div>
+
+       
+
+            <div class="col-md-6">
+                <label>Data Type</label>
+                <div class="custom-sel">
+                  <select
+                    class="form-control"
+                    id="data_type_fam"
+                    required
+                    [(ngModel)]="data_type_fam"
+                    [ngModelOptions]="{ standalone: true }"
+                    [ngClass]="{ 'error-field': registerButtonClicked1 && !data_type_fam }"
+                  >
+                    <option value="" disabled>Select Data Type</option>
+                    <option value="dropdown">Dropdown</option>
+                    <option value="radio">Radio</option>
+                    <option value="date">Date</option>
+                    <option value="text">Text Box</option>
+                  </select>
+                  <div *ngIf="registerButtonClicked1 && !data_type_fam" class="error-message">
+                    Please select a type
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Dropdown values input field, displayed only if "dropdown" is selected -->
+              <div class="col-md-6" *ngIf="data_type_fam === 'dropdown'">
+                <label>Dropdown Values</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  [(ngModel)]="dropdown_values_fam"
+                  placeholder="Enter Dropdown Values (comma separated)"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+              
+              <!-- Radio values input field, displayed only if "radio" is selected -->
+              <div class="col-md-6" *ngIf="data_type_fam === 'radio'">
+                <label>Radio Values</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  [(ngModel)]="radio_values_fam"
+                  placeholder="Enter Radio Values (comma separated)"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+              
+
+              <div class="col-md-6" >
+                <label>Select Asset Type</label>
+                <div class="custom-sel">
+                  <select
+                    class="form-control"
+                    id="asset_type"
+                    name="asset_type"
+                    [(ngModel)]="asset_type"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option *ngFor="let employees of LoanTypes" [value]="employees.id">
+                      {{ employees.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+
+              <!-- <div class="col-md-6">
+                <label></label>
+                <div class="check-box-selection-sec mt-2">
+                    <div class="mat-set">
+                        <mat-checkbox [(ngModel)]="mandatory">Mandatory Field</mat-checkbox>
+                    </div>
+                   
+                </div>
+              </div>
+             -->
+
+        
+        </div>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <button (click)="ClosePopupFam()" class="pull-right btn btn-danger btn-full mt-4">Close</button>
+
+            </div>
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" (click)="CreateEmployeeFeildFam()" class="pull-right btn-full mt-4">Done</button>
+
+            </div>
+        </div>
+    </form>
+
+   
+
+     
+    </div>
+  </div>
+        </div>
+
+      
+
+      
+
+    
+
+        </div>
+        </div>
+        
