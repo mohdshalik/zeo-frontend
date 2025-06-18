@@ -237,10 +237,68 @@
           <div class="row">
         <div class="col-md-9"></div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-full btn-success" (click)="approvePayslip()">Approve</button>
+          <button type="button" class="btn btn-full btn-success" (click)="openPopus()" >Approve</button>
 
         </div>
       </div>
+
+
+      <div *ngIf="iscreateLoanApp" class="modal">
+        <div class="modal-content">
+          <div class="row">
+            <div class="col-md-10">
+              <h2> process payroll </h2>
+            </div>
+            <div class="col-md-2">
+              <span class="close pull-right" (click)="closeapplicationModal()">&times;</span>
+            </div>
+          </div>
+          <hr />
+      
+    <form >
+
+        <div class="row">
+          
+
+     
+
+   <div class="col-md-6">
+    <input type="file" class="form-control" >   </div>
+  
+
+        
+      <div class="col-md-6 mt-4">
+        <div class="check-box-selection-sec form-control">
+            <div class="mat-set">
+                <mat-checkbox [(ngModel)]="send_email" [ngModelOptions]="{standalone: true}">Sent to email</mat-checkbox>
+            </div>
+           
+        </div>
+    </div>
+   
+
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-10">
+
+            </div>
+
+            <div class="col-md-2">
+                <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="approvePayslip()">Approve</button>  
+             </div>
+        </div>
+        
+   
+</form>
+
+        
+        </div>
+      </div>
+
           
 
 </div>

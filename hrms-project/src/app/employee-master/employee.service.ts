@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
@@ -2527,6 +2527,32 @@ getApprovalDetailsPayslip(apiUrl: string): Observable<any> {
 //   // Sending a POST request to approve with note and status
 //   return this.http.post(apiUrl, approvalData);
 // }
+
+
+
+
+
+uploadPayslipPdf(payslipId: number, pdfFile: File, sendEmail: boolean): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError(() => new Error('No schema selected.'));
+  }
+
+  const uploadUrl = `${this.apiUrl}/payroll/api/payslip/${payslipId}/upload-pdf/`;
+  const formData = new FormData();
+  formData.append('payslip_pdf', pdfFile);
+  formData.append('send_email', sendEmail ? 'true' : 'false');
+
+  const params = new HttpParams().set('schema', selectedSchema);
+
+  return this.http.post(uploadUrl, formData, { params }).pipe(
+    catchError((error) => {
+      console.error('Error uploading payslip:', error);
+      return throwError(() => error);
+    })
+  );
+}
 
 
 }

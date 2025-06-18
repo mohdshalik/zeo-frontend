@@ -6,6 +6,9 @@ import { environment } from '../../environments/environment';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ElementRef, ViewChild } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { AuthenticationService } from '../login/authentication.service';
+import { EmployeeService } from '../employee-master/employee.service';
 
 
 
@@ -30,11 +33,15 @@ export class PayrollDetailsComponent {
   deductions: any[] = [];
 
   selectedPayslipDesign = 'default';  // other value could be 'design2'
-
+  send_email: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private leaveService: LeaveService
+    private leaveService: LeaveService,
+    private authService: AuthenticationService,
+    private employeeService: EmployeeService,
+
+
   ) {}
 
 
@@ -95,67 +102,54 @@ export class PayrollDetailsComponent {
 
   
 
-  
+  iscreateLoanApp: boolean = false;
 
 
-  // downloadPayslip(): void {
-  //   if (!this.payslipDetails || !this.payslipDetails.employee || !this.payslipDetails.payroll_run?.start_date) {
-  //     console.error('Missing payslip details');
-  //     return;
-  //   }
-  
-  //   const employeeId = this.payslipDetails.employee;
-  //   const startDateStr = this.payslipDetails.payroll_run.start_date;
-  
-  //   const [year, month] = startDateStr.split('-'); // month will be '04'
-  
-  //   const selectedSchema = localStorage.getItem('selectedSchema');
-  //   if (!selectedSchema) {
-  //     console.error('No schema selected.');
-  //     return;
-  //   }
-  
-  //   const url = `${this.apiUrl}/payroll/api/payslip/employee/${employeeId}/download/${year}/${month}/?schema=${selectedSchema}`;
-  
-  //   this.leaveService.downloadFile(url).subscribe(
-  //     (response: Blob) => {
-  //       const file = new Blob([response], { type: 'application/pdf' });
-  //       const fileURL = URL.createObjectURL(file);
-  //       const a = document.createElement('a');
-  //       a.href = fileURL;
-  //       a.download = `Payslip_${employeeId}_${year}_${month}.pdf`;
-  //       a.click();
-  //       URL.revokeObjectURL(fileURL);
-  //     },
-  //     error => {
-  //       console.error('Download failed', error);
-  //     }
-  //   );
-  // }
-  
 
-  approvePayslip() {
-    if (!this.payslipDetails || !this.payslipId) {
-      console.error("No payslip details loaded.");
-      return;
-    }
-  
-    const updatedPayslip = {
-      ...this.payslipDetails,
-      status: 'processed'
-    };
-  
-    this.leaveService.updatePayslip(this.payslipId, updatedPayslip).subscribe(
-      response => {
-        console.log('Payslip approved:', response);
-        this.payslipDetails = response; // update UI
-      },
-      error => {
-        console.error('Failed to approve payslip', error);
-      }
-    );
+
+  openPopus():void{
+    this.iscreateLoanApp = true;
+
   }
+
+  closeapplicationModal():void{
+    this.iscreateLoanApp = false;
+
+  }
+
+  approvePayslip(): void {
+    const element = this.payslipContent.nativeElement;
   
+    html2canvas(element, { scale: 2, useCORS: true }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+      const pdfBlob = pdf.output('blob');
+      const file = new File([pdfBlob], `Payslip-${this.payslipDetails.employee}.pdf`, {
+        type: 'application/pdf',
+      });
+  
+      const payslipId = this.payslipDetails.id;
+  
+      // Use the separate service method
+      this.employeeService.uploadPayslipPdf(payslipId, file, this.send_email).subscribe({
+        next: () => {
+          alert('Payslip uploaded successfully.');
+          this.closeapplicationModal();
+        },
+        error: (error) => {
+          alert('Failed to upload payslip.');
+          console.error(error);
+        }
+      });
+    });
+  }
+
 
 
 }
