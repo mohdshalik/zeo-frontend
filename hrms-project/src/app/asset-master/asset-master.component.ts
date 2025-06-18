@@ -46,6 +46,8 @@ export class AssetMasterComponent {
   Assets:any []=[];
 
 
+  customFieldHeaders: { custom_field_id: number, custom_field_name: string }[] = [];
+
 
 
   userId: number | null | undefined;
@@ -271,7 +273,7 @@ this.loadFormFieldsFam();
                 this.employeeService.setEmployeeId(createdEmployeeId);
                 this.postCustomFieldValuesFam(createdEmployeeId);
                     alert('Asset  has been Added ');
-                    window.location.reload();
+                    // window.location.reload();
                     // window.location.reload();
                
         
@@ -425,30 +427,59 @@ deleteSelectedAssetType() {
   }
 }
 
-loadLAsset(): void {
+// loadLAsset(): void {
     
-  const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
+//   const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
 
-  console.log('schemastore',selectedSchema )
-  // Check if selectedSchema is available
+//   console.log('schemastore',selectedSchema )
+//   // Check if selectedSchema is available
+//   if (selectedSchema) {
+//     this.employeeService.getAsset(selectedSchema).subscribe(
+//       (result: any) => {
+//         this.Assets = result;
+//         console.log(' fetching Loantypes:');
+
+//       },
+//       (error) => {
+//         console.error('Error fetching Companies:', error);
+//       }
+//     );
+//   }
+//   }
+
+
+loadLAsset(): void {
+  const selectedSchema = this.authService.getSelectedSchema();
   if (selectedSchema) {
     this.employeeService.getAsset(selectedSchema).subscribe(
-      (result: any) => {
+      (result: any[]) => {
         this.Assets = result;
-        console.log(' fetching Loantypes:');
+
+        // Step: Extract unique custom_field IDs and map to readable names
+        const allCustomFields = result.flatMap(asset => asset.asset_custom_fields || []);
+        const uniqueFieldIds = [...new Set(allCustomFields.map(field => field.custom_field))];
+
+        // Map IDs to names using your existing custom field definitions
+        this.customFieldHeaders = uniqueFieldIds.map(fieldId => {
+          const fieldDef = this.custom_fieldsFam.find(f => f.id === fieldId);
+          return {
+            custom_field_id: fieldId,
+            custom_field_name: fieldDef ? fieldDef.custom_field : `Field ${fieldId}`
+          };
+        });
 
       },
       (error) => {
-        console.error('Error fetching Companies:', error);
+        console.error('Error fetching assets:', error);
       }
     );
   }
-  }
+}
 
-
-
-
-
+getCustomFieldValue(asset: any, fieldId: number): string {
+  const field = asset.asset_custom_fields?.find((f: any) => f.custom_field === fieldId);
+  return field ? field.field_value : '-';
+}
   
   loadFormFieldsFam(): void {
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
@@ -470,30 +501,30 @@ loadLAsset(): void {
 
   postCustomFieldValuesFam(empMasterId: number): void {
     const customFieldValues = this.custom_fieldsFam.map(field => ({
-      custom_field: field.custom_field, // Assuming the field has an 'id' property
-        field_value: field.field_value, // The value entered by the user
-        asset: empMasterId ,// The employee ID from the response
-        // created_by:this.created_by
+      custom_field: field.id,  // ✅ Use field ID instead of name
+      field_value: field.field_value,
+      asset: empMasterId
     }));
   
-    // Make API calls to post each custom field value
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return;
+    }
+  
     customFieldValues.forEach(fieldValue => {
-      const selectedSchema = localStorage.getItem('selectedSchema');
-      if (!selectedSchema) {
-        console.error('No schema selected.');
-        // return throwError('No schema selected.'); // Return an error observable if no schema is selected
-      }
-        this.http.post(`${this.apiUrl}/organisation/api/asset-customfield-value/?schema=${selectedSchema}`, fieldValue)
-            .subscribe(
-                (response: any) => {
-                    console.log('Custom field value posted successfully', response);
-                },
-                (error: HttpErrorResponse) => {
-                    console.error('Failed to post custom field value', error);
-                }
-            );
+      this.http.post(`${this.apiUrl}/organisation/api/asset-customfield-value/?schema=${selectedSchema}`, fieldValue)
+        .subscribe(
+          (response: any) => {
+            console.log('Custom field value posted successfully', response);
+          },
+          (error: HttpErrorResponse) => {
+            console.error('Failed to post custom field value', error);
+          }
+        );
     });
   }
+  
   
 
 
