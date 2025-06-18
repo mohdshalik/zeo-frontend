@@ -238,14 +238,34 @@ export class PayslipApprovalComponent {
 
 // Modified fetchingApprovals to accept userId
 
+// fetchingApprovals(): void {
+//   const selectedSchema = this.authService.getSelectedSchema();
+//   if (selectedSchema && this.userId) {
+//     this.EmployeeService.getApprovalslistPayslip(selectedSchema, this.userId).subscribe(
+//       (result: any[]) => {
+//         // ✅ Filter only "pending" status items and add "selected" property
+//         this.Approvals = result
+//           .filter((item: any) => item.request?.status === 'pending')
+//           .map((item: any) => ({ ...item, selected: false }));
+//       },
+//       (error) => {
+//         console.error('Error fetching approvals:', error);
+//       }
+//     );
+//   }
+// }
+
 fetchingApprovals(): void {
   const selectedSchema = this.authService.getSelectedSchema();
   if (selectedSchema && this.userId) {
     this.EmployeeService.getApprovalslistPayslip(selectedSchema, this.userId).subscribe(
       (result: any[]) => {
-        // ✅ Filter only "pending" status items and add "selected" property
+        // Filter items where status is "pending" AND confirm_status is true
         this.Approvals = result
-          .filter((item: any) => item.request?.status === 'pending')
+          .filter((item: any) =>
+            item.request?.status === 'pending' &&
+            item.request?.confirm_status === true
+          )
           .map((item: any) => ({ ...item, selected: false }));
       },
       (error) => {
@@ -254,6 +274,7 @@ fetchingApprovals(): void {
     );
   }
 }
+
 
 masterSelected = false;
 

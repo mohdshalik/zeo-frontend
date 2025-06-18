@@ -122,7 +122,7 @@ CreateEmployeeFeildFam(): void {
  : [];
 
   const fieldData = {
-    name: this.field_name_fam,
+    custom_field: this.field_name_fam,
       field_value: this.field_value_fam,
       data_type: this.data_type_fam,
       dropdown_values: dropdownValuesArray,

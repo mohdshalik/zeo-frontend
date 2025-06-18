@@ -544,3 +544,20 @@ table th{
   
 
 }
+
+.table-container {
+  margin-top: 10px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  /* border: 1px solid #ddd;
+  border-radius: 8px; */
+}

@@ -397,7 +397,7 @@ updateAssetType(): void {
 
 
 deleteSelectedAssetType() { 
-  const selectedEmployeeIds = this.LoanTypes
+  const selectedEmployeeIds = this.Assets
     .filter(employee => employee.selected)
     .map(employee => employee.id);
 

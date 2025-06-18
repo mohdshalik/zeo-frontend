@@ -172,8 +172,9 @@
   
             <div class="tab_boddy mt-4" style="padding: 10px;">
          
-            
-              <table class="styled-table mt-2" width="100%" style="border-collapse: collapse;">
+              <div style="overflow-x: auto; max-height: 500px; overflow-y: auto;">
+
+              <table class="styled-table mt-2" width="100%" style="border-collapse: collapse; min-width: 1200px;">
                 <thead>
                   <tr>
                     <!-- Select All Checkbox -->
@@ -234,6 +235,7 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
 
               <div class="row">
                 <div class="col-md-2">
@@ -254,7 +256,7 @@
            
 
            
-              <mat-tab label="Confirmed  Pay Sheet">
+              <mat-tab label="Final Pay Sheet">
   
                 <div class="tab_boddy mt-4" style="padding: 10px;">
              
@@ -265,65 +267,71 @@
                       <i class="fa fa-search"></i>
                     </button>
                   </div> -->
-                  <button class="btn pull-right btn-export" (click)="exportToExcel()">Export</button>
-                  <table class="styled-table mt-2" width="100%" style="border-collapse: collapse;">
-                    <thead>
-                      <tr>
-                        <th class="text-table-header">No</th>
-                        <th class="text-table-header">Employee Code</th>
-                        <th class="text-table-header">Payroll Name</th>
-                        <th class="text-table-header">Year</th>
-                        <th class="text-table-header">Month</th>
-                        <th class="text-table-header">Gross Salary</th>
-                        <th class="text-table-header">Total Additions</th>
-                        <th class="text-table-header">Total Deductions</th>
-                        <th class="text-table-header">Net Salary</th>
+                <!-- Container for Export button and scrollable table -->
+<div class="table-container">
+  
+  <!-- Export Button on top -->
+  <div class="table-header">
+    <button class="btn pull-right btn-export" (click)="exportToExcel()">Export</button>
+  </div>
 
-                        <th class="text-table-header">Pro Rata Adjustment</th>
-                        <!-- <th class="text-table-header">Arrears</th> -->
-                        <th class="text-table-header">Working Days</th>
-                        <th class="text-table-header">Days Worked</th>
-                        <th class="text-table-header">Status</th>
-                        <th class="text-table-header">Components</th>
-                      </tr>
-                    </thead>
-                  
-                    <tbody class="text-table-body">
-                      <tr *ngFor="let payslip of PaySlipsConfrimed; let i = index" (click)="viewPayrollDetails(payslip)">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ payslip.employee }}</td>
-                        <td>{{ payslip.payroll_run?.name }}</td>
-                        <td>{{ payslip.payroll_run?.year }}</td>
-                        <td>{{ getMonthName(payslip.payroll_run?.month) }}</td>
-                        <td>{{ payslip.gross_salary }}</td>
-                        <td>{{ payslip.total_additions }}</td>
-                        <td>{{ payslip.total_deductions }}</td>
-                        <td>{{ payslip.net_salary }}</td>
+  <!-- Scrollable Table Wrapper -->
+  <div class="table-scroll">
+    <table class="styled-table mt-2" width="100%" style="border-collapse: collapse; min-width: 1200px;">
+      <thead>
+        <tr>
+          <th class="text-table-header">No</th>
+          <th class="text-table-header">Employee Code</th>
+          <th class="text-table-header">Payroll Name</th>
+          <th class="text-table-header">Year</th>
+          <th class="text-table-header">Month</th>
+          <th class="text-table-header">Gross Salary</th>
+          <th class="text-table-header">Total Additions</th>
+          <th class="text-table-header">Total Deductions</th>
+          <th class="text-table-header">Net Salary</th>
+          <th class="text-table-header">Pro Rata Adjustment</th>
+          <th class="text-table-header">Working Days</th>
+          <th class="text-table-header">Days Worked</th>
+          <th class="text-table-header">Status</th>
+          <th class="text-table-header">Components</th>
+        </tr>
+      </thead>
+      <tbody class="text-table-body">
+        <tr *ngFor="let payslip of PaySlipsConfrimed; let i = index" (click)="viewPayrollDetails(payslip)">
+          <td>{{ i + 1 }}</td>
+          <td>{{ payslip.employee }}</td>
+          <td>{{ payslip.payroll_run?.name }}</td>
+          <td>{{ payslip.payroll_run?.year }}</td>
+          <td>{{ getMonthName(payslip.payroll_run?.month) }}</td>
+          <td>{{ payslip.gross_salary }}</td>
+          <td>{{ payslip.total_additions }}</td>
+          <td>{{ payslip.total_deductions }}</td>
+          <td>{{ payslip.net_salary }}</td>
+          <td>{{ payslip.pro_rata_adjustment }}</td>
+          <td>{{ payslip.total_working_days }}</td>
+          <td>{{ payslip.days_worked }}</td>
+          <td>
+            <span class="pill" [ngClass]="{
+              'pill green': payslip.status === 'approved',
+              'pill blue': payslip.status === 'processed',
+              'pill yellow': payslip.status === 'pending',
+              'pill red': payslip.status === 'rejected'
+            }">{{ payslip.status }}</span>
+          </td>
+          <td>
+            <ul>
+              <li *ngFor="let comp of payslip.components">
+                <strong>{{ comp.component_name }}</strong> 
+                ({{ comp.component_type }}): {{ comp.payslip_amount }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-                        <td>{{ payslip.pro_rata_adjustment }}</td>
-                        <!-- <td>{{ payslip.arrears }}</td> -->
-                        <td>{{ payslip.total_working_days }}</td>
-                        <td>{{ payslip.days_worked }}</td>
-                        <td>
-                          <span class="pill" [ngClass]="{
-                            'pill green': payslip.status === 'approved',
-                            'pill blue': payslip.status === 'processed',
-                            'pill yellow': payslip.status === 'pending',
-                            'pill red': payslip.status === 'rejected'
-                          }">{{ payslip.status }}</span>
-                        </td>
-                        <td>
-                          <ul>
-                            <li *ngFor="let comp of payslip.components">
-                              <strong>{{ comp.component_name }}</strong> 
-                              ({{ comp.component_type }}): {{ comp.payslip_amount }}
-                            </li>
-                          </ul>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  
 
                 </div>
 
