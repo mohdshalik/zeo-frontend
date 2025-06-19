@@ -649,6 +649,8 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
   }
 
 
+
+
   
   getPayrollSettings(selectedSchema: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/payroll/api/PayrollFormula/?schema=${selectedSchema}`;
@@ -900,4 +902,13 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
   }
 
 
+
+
+// Wps APi services
+
+  postSIFData(payload: any, selectedSchema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/payroll/sif-data/?schema=${selectedSchema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  return this.http.post(apiUrl, payload, { headers });
+}
 }

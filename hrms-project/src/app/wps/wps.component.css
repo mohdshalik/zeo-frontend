@@ -1,133 +1,133 @@
 
 .comapny_section{
 
-    margin-top: 100px;
-    margin-left: 50px;
-    
+  margin-top: 100px;
+  margin-left: 50px;
+  
 }
 
 .header_section{
-    background: white;
-    padding: 24px 20px 15px 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    width: 100%;
-    border-bottom: solid 3px navy;
+  background: white;
+  padding: 24px 20px 15px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 100%;
+  border-bottom: solid 3px navy;
 }
 
 .header_section h1{
-    font-size: 16px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
 
 }
 
 
 .com_list{
-    padding: 20px;
-    width: 100%;
-    background: white;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    border-top: solid 3px navy;
-    margin-bottom: 20px;
+  padding: 20px;
+  width: 100%;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border-top: solid 3px navy;
+  margin-bottom: 20px;
 
 
 }
 
 .com_list h2{
-    font-size: 16px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
 }
 
 
 
-  
+
 table thead th {
-    color: #ffffff;
+  color: #ffffff;
+  background: #004976;
+  padding: 15px;
+  border: 1px solid #ebebec;
+  font-weight: 500;
+}
+
+table tr {
+  background: #ffffff;
+}
+
+table tr td {
+  border: 1px solid #e6edf1;
+  padding: 15px;
+}
+
+@media only screen and (max-width: 640px) {
+  table thead {
+    display: none;
+  }
+
+  table tbody {
+    display: block;
+  }
+
+  table tbody tr td {
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  table tbody tr {
+    margin-bottom: 20px;
+    display: block;
+    border: 1px solid #004976;
+    background: #f9f9f9;
+    overflow: hidden;
+  }
+
+  table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 30%;
+    display: flex;
     background: #004976;
+    color: #fff;
     padding: 15px;
-    border: 1px solid #ebebec;
-    font-weight: 500;
+    margin-inline-end: 10px;
   }
-  
-  table tr {
-    background: #ffffff;
-  }
-  
-  table tr td {
-    border: 1px solid #e6edf1;
-    padding: 15px;
-  }
-  
-  @media only screen and (max-width: 640px) {
-    table thead {
-      display: none;
-    }
-  
-    table tbody {
-      display: block;
-    }
-  
-    table tbody tr td {
-      display: flex;
-      align-items: center;
-      padding: 0;
-    }
-  
-    table tbody tr {
-      margin-bottom: 20px;
-      display: block;
-      border: 1px solid #004976;
-      background: #f9f9f9;
-      overflow: hidden;
-    }
-  
-    table tbody td::before {
-      content: attr(data-label);
-      font-weight: bold;
-      width: 30%;
-      display: flex;
-      background: #004976;
-      color: #fff;
-      padding: 15px;
-      margin-inline-end: 10px;
-    }
-  }
-  
+}
 
 
 
 
-  .dropdown-checkboxes {
-    max-height: 200px;
-    overflow-y: auto;
-  }
-  
-  .dropdown-checkboxes input[type="checkbox"] {
-    margin-right: 5px;
-  }
 
-  .dropdown-menu {
-    display: none; /* Hide the dropdown menu by default */
-  }
-  
-  .dropdown-menu.show {
-    display: block; /* Show the dropdown menu when the 'showCompanyList' flag is true */
-  }
+.dropdown-checkboxes {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdown-checkboxes input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.dropdown-menu {
+  display: none; /* Hide the dropdown menu by default */
+}
+
+.dropdown-menu.show {
+  display: block; /* Show the dropdown menu when the 'showCompanyList' flag is true */
+}
 
 
 /* Custom styles for dropdown with checkboxes */
 .dropdown-item {
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
 
 .dropdown-item input[type="checkbox"] {
-  margin-right: 5px;
+margin-right: 5px;
 }
 
 
@@ -136,144 +136,144 @@ table thead th {
 
 /* Custom Multi Select */
 .sd-multiSelect {
-  position: relative;
+position: relative;
 }
 .sd-multiSelect .placeholder {
-  opacity: 1;
-  background-color: transparent;
-  cursor: pointer;
+opacity: 1;
+background-color: transparent;
+cursor: pointer;
 }
 .sd-multiSelect .ms-offscreen {
-  height: 1px;
-  width: 1px;
-  opacity: 0;
-  overflow: hidden;
-  display: none;
+height: 1px;
+width: 1px;
+opacity: 0;
+overflow: hidden;
+display: none;
 }
 
 .sd-multiSelect .sd-CustomSelect {
-  width: 100% !important;
+width: 100% !important;
 }
 
 .sd-multiSelect .ms-choice {
-  position: relative;
-  text-align: left !important;
-  width: 100%;
-  border: 1px solid #e3e3e3;
-  background: #ffff;
-  box-shadow: none;
-  font-size: 15px;
-  height: 44px;
-  font-weight: 500;
-  color: #212529;
-  line-height: 1.5;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+position: relative;
+text-align: left !important;
+width: 100%;
+border: 1px solid #e3e3e3;
+background: #ffff;
+box-shadow: none;
+font-size: 15px;
+height: 44px;
+font-weight: 500;
+color: #212529;
+line-height: 1.5;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+border-radius: 0.25rem;
+transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .sd-multiSelect .ms-choice:after {
-  content: "\f107 ";
-  font-family: "FontAwesome";
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
+content: "\f107 ";
+font-family: "FontAwesome";
+position: absolute;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 18px;
 }
 
 .sd-multiSelect .ms-choice:focus {
-  border-color: var(--theme-color);
+border-color: var(--theme-color);
 }
 
 .sd-multiSelect .ms-drop.bottom {
-  display: none;
-  background: #fff;
-  border: 1px solid #e5e5e5;
-  padding: 10px;
+display: none;
+background: #fff;
+border: 1px solid #e5e5e5;
+padding: 10px;
 }
 
 .sd-multiSelect .ms-drop li {
-  position: relative;
-  margin-bottom: 10px;
+position: relative;
+margin-bottom: 10px;
 }
 
 .sd-multiSelect .ms-drop li input[type="checkbox"] {
-  padding: 0;
-  height: initial;
-  width: initial;
-  margin-bottom: 0;
-  display: none;
-  cursor: pointer;
+padding: 0;
+height: initial;
+width: initial;
+margin-bottom: 0;
+display: none;
+cursor: pointer;
 }
 
 .sd-multiSelect .ms-drop li label {
-  cursor: pointer;
-  user-select: none;
-  -ms-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
+cursor: pointer;
+user-select: none;
+-ms-user-select: none;
+-moz-user-select: none;
+-webkit-user-select: none;
 }
 
 .sd-multiSelect .ms-drop li label:before {
-  content: "";
-  /* -webkit-appearance: none; */
-  background-color: transparent;
-  border: 2px solid var(--theme-color);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
-    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
-  padding: 8px;
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-  cursor: pointer;
-  margin-right: 5px;
+content: "";
+/* -webkit-appearance: none; */
+background-color: transparent;
+border: 2px solid var(--theme-color);
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+  inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+padding: 8px;
+display: inline-block;
+position: relative;
+vertical-align: middle;
+cursor: pointer;
+margin-right: 5px;
 }
 
 .sd-multiSelect .ms-drop li input:checked + span:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 9px;
-  left: 5px;
-  width: 10px;
-  height: 10px;
-  background: var(--theme-color);
-  border-width: 0 2px 2px 0;
+content: "";
+display: block;
+position: absolute;
+top: 9px;
+left: 5px;
+width: 10px;
+height: 10px;
+background: var(--theme-color);
+border-width: 0 2px 2px 0;
 }
 
 
 .check-box-selection-sec{
-  /* padding: 20px; */
-  margin-top: 50px;
-  /* border: solid 1px gray;
-  border-radius: 5px; */
-  height: 37px;
-  padding: 0px !important;
+/* padding: 20px; */
+margin-top: 50px;
+/* border: solid 1px gray;
+border-radius: 5px; */
+height: 37px;
+padding: 0px !important;
 }
 
 .mat-mdc-checkbox .mdc-form-field {
-  margin-top: -15px !important;
+margin-top: -15px !important;
 }
 
 .mat-set mat-checkbox {
-  margin-left: 20px; /* Adjust the value as needed */
+margin-left: 20px; /* Adjust the value as needed */
 }
 
 .cpm-sec label{
-  font-size: 15px;
+font-size: 15px;
 
 }
 
 .cpm-sec .form-control{
-  font-size: 13px !important;
+font-size: 13px !important;
 }
 
 .mat-set .mat-mdc-checkbox .mdc-form-field label{
-  font-size: 12px !important;
-  margin-bottom: 12px;
+font-size: 12px !important;
+margin-bottom: 12px;
 }
 
 
@@ -281,60 +281,60 @@ table thead th {
 
 /* Add your CSS styles here */
 .modal {
-  display: block; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  margin-left: auto;
-  margin-right: auto;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+display: block; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 1; /* Sit on top */
+margin-left: auto;
+margin-right: auto;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 .modal-content {
-  background-color: #fefefe;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 60%; /* Could be more or less, depending on screen size */
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 100px;
-  height: auto;
+background-color: #fefefe;
+padding: 20px;
+border: 1px solid #888;
+width: 60%; /* Could be more or less, depending on screen size */
+margin-right: auto;
+margin-left: auto;
+margin-top: 100px;
+height: auto;
 
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  text-align: right;
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+text-align: right;
 }
 
 .close:hover,
 .close:focus {
-  color: red;
-  text-decoration: none;
-  cursor: pointer;
+color: red;
+text-decoration: none;
+cursor: pointer;
 }
 
 .modal h2{
 
-  font-size: 16px;
-  text-transform: capitalize;
-  font-weight: 600;
-  font-family: math;
+font-size: 16px;
+text-transform: capitalize;
+font-weight: 600;
+font-family: math;
 }
 
 
 .com_list{
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .table-scroll{
-    overflow-x: scroll;
-    overflow-y: scroll;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }

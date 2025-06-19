@@ -1,1 +1,98 @@
-<p>wps works!</p>
+<div class="container">
+    <div class="comapny_section" *ngIf="hasViewPermission">
+        <div class="com_list " >
+
+                <h2>Wps</h2>
+                <hr>
+                
+        
+                <div class="row ">
+                  <div class="col-md-6">
+                    <label>Select Payroll</label>
+                    <div class="custom-sel">
+                      <select class="form-control" [(ngModel)]="selectedPayrollId" [ngModelOptions]="{ standalone: true }">
+                        <option *ngFor="let payroll of Payrolls" [value]="payroll.id">
+                          {{ payroll.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <!-- OK button triggers posting and fetching SIF -->
+                  
+                </div>
+                <div class="row">
+                  <div class="col-md-10"></div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-full btn-success mt-4" (click)="fetchSIFData()">OK</button>
+
+                  </div>
+                </div>
+           
+
+                             
+                <div *ngIf="sifData">
+                  <div class="row mt-4">
+                    <div class="col-md-9">
+                      <h4 class="mt-3">Unified SIF Table</h4>
+
+                    </div>
+                    <div class="col-md-3">
+                      <button type="button" class="btn btn-info pull-right mt-2 " (click)="downloadSIFStyledExcel()">
+                        Download 
+                      </button>  
+                    </div>
+                  </div>
+                
+                  <div style="overflow-x: auto; max-height: 500px; overflow-y: auto;">
+                    
+                  <table class="styled-table mt-2" width="100%" style="border-collapse: collapse; min-width: 1200px;">
+                    <thead>
+                      <tr>
+                        <th>Type</th> <!-- to show HDR, EDR, SCR -->
+                        <th *ngFor="let key of getUnifiedSIFKeys()">{{ key }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- HDR Row -->
+                      <tr>
+                        <td>HDR</td>
+                        <td *ngFor="let key of getUnifiedSIFKeys()">{{ sifData.hdr[key] || '-' }}</td>
+                      </tr>
+                
+                      <!-- EDR Rows -->
+                      <tr *ngFor="let edrItem of sifData.edr">
+                        <td>EDR</td>
+                        <td *ngFor="let key of getUnifiedSIFKeys()">{{ edrItem[key] || '-' }}</td>
+                      </tr>
+                
+                      <!-- SCR Row -->
+                      <tr>
+                        <td>SCR</td>
+                        <td *ngFor="let key of getUnifiedSIFKeys()">{{ sifData.scr[key] || '-' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+                
+
+
+
+
+ 
+            </div>
+
+             
+
+
+
+          
+
+        </div>
+
+
+
+
+
+</div>

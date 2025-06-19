@@ -890,11 +890,101 @@
 
 
                                 </div>
-                                <div class=" mt-5">
-                                    <button type="button" class="btn-Edit btn-info btn d-block mx-auto "
-                                        (click)="employeefamAdd()">Add Family</button>
-                                </div>
+                              
                             </mat-tab>
+
+
+
+                              <mat-tab label="Employee Loan">
+                                <div class="tab_content  mt-3" *ngFor="let member of emp_loan_details">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2>Amount requested</h2>
+                                            <h3>{{ member.amount_requested }} </h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>EMI Amount</h2>
+                                            <h3>{{ member.emi_amount }} </h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>Loan Type </h2>
+                                            <h3>{{ member.loan_type }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Repayment Period </h2>
+                                            <h3>{{ member.repayment_period }} </h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>Remaining Balance</h2>
+                                            <h3>{{ member.remaining_balance }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Status</h2>
+                                            <h3>{{ member.status }} </h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>applied on</h2>
+                                            <h3>{{ member.applied_on }} </h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h2>Approved on</h2>
+                                            <h3>{{ member.approved_on }} </h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2>Disbursement date</h2>
+                                            <h3>{{ member.disbursement_date }} </h3>
+                                        </div>
+
+
+
+
+                                    
+
+                                    </div>
+
+
+
+
+                                </div>
+                               
+                            </mat-tab>
+
+
+                            
+
+                            <mat-tab label="Employee Announcement ">
+                                <div class="tab_content  mt-3" *ngFor="let member of emp_anc_details">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h2> Tittle</h2>
+                                            <h3>{{ member.title }} </h3>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h2> Message </h2>
+                                            <h3>{{ member.message }} </h3>
+                                        </div>
+
+
+
+
+                                    
+
+                                    </div>
+
+
+
+
+                                </div>
+                               
+                            </mat-tab>
+
+                            
 
                         </mat-tab-group>
 

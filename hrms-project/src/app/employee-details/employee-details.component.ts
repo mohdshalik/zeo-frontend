@@ -37,6 +37,9 @@ export class EmployeeDetailsComponent implements OnInit {
   EmpSkills: any[] | undefined;
   EmpPrgmSkills: any[] | undefined;
   EmpMarkkills: any[] | undefined;
+  emp_loan_details: any[] | undefined;
+  emp_anc_details: any[] | undefined;
+
 
   EmpLangSkills:any[] | undefined ;
 
@@ -139,6 +142,9 @@ export class EmployeeDetailsComponent implements OnInit {
       const employeeIdParam = this.route.snapshot.paramMap.get('id');
       this.loadFamilyDetails();
       this.loadAssetDetails();
+      this.loadAncDetails();
+
+      this.loadLoanDetails();
 
       this.loadSalary();
 
@@ -342,6 +348,30 @@ attendanceData: any = null; // Define this at the class level
         }
       );
     }
+
+
+    loadAncDetails(): void {
+      this.EmployeeService.getAncDetails(this.employee).subscribe(
+        family => {
+          this.emp_anc_details = family;
+        },
+        error => {
+          console.error('Error fetching Asset details:', error);
+        }
+      );
+    }
+
+      loadLoanDetails(): void {
+      this.EmployeeService.getLoanDetails(this.employee).subscribe(
+        family => {
+          this.emp_loan_details = family;
+        },
+        error => {
+          console.error('Error fetching Asset details:', error);
+        }
+      );
+    }
+
 
       loadSalary(): void {
       this.EmployeeService.getSalary(this.employee).subscribe(
