@@ -400,3 +400,17 @@ outline: none-webkit-focus-ring-color auto 0px;
 
 
 }
+
+
+table thead th {
+  white-space: nowrap;
+}
+table thead td {
+  white-space: nowrap;
+}
+
+.suprete-div{
+  background: whitesmoke;
+  height: 10px;
+  margin-top: 30px;
+}

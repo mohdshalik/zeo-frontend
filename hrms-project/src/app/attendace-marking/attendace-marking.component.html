@@ -1,91 +1,97 @@
 <div class="container" >
     <div class="comapny_section">
-        <div class="com_list ">
+
+      <div class="header_section">
+
+        <div class="row">
+          <div class="col-md-3">
+            <h1>Attendance Marking</h1>
+          </div>
+  
+          <div class="col-md-4">
+  
+            <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+  
+          </div>
+          <div class="col-md-5">
+            <div class="button-group pull-right">
+              <button type="button" class="btn-Create btn pull-right btn-danger" (click)="toggleBulkUpload()">
+                <span class="header-btn-icon">
+                  <mat-icon>{{ showBulkUpload ? 'cancel' : 'add_circle' }}</mat-icon>
+                </span>
+                {{ showBulkUpload ? 'Cancel Bulk Upload' : 'Bulk Upload Attendance' }}
+              </button>
+                           
+              <!-- <button type="button"  class="btn-Create btn btn-success " > <span class="header-btn-icon"><mat-icon>add_circle
+                          </mat-icon></span> Create</button> -->
+              <!-- <span *ngIf="!hasAddPermission"></span>
+  
+                          <button type="button" class="btn-Edit btn-info btn"  (click)="EditShowButtons()" *ngIf="hasEditPermission">
+                              <span class="header-btn-icon">
+                               <mat-icon>draw
+                          </mat-icon></span> Edit</button>
+                          <span *ngIf="hasEditPermission"></span>
+                          <button type="button" class="btn-Delete btn btn-danger" (click)="toggleCheckboxes()" *ngIf="hasDeletePermission">
+                              <span class="header-btn-icon">
+                                  <mat-icon> delete
+                             </mat-icon></span> {{ Delete ? 'Cancel' : 'Delete' }}</button>
+                             <span *ngIf="!hasDeletePermission"></span> -->
+  
+  
+  
+            </div>
+          </div>
+  
+        </div>
+  
+  
+  
+      </div>
+  
+        <div class="com_list mt-4">
     <div class="cpm-sec" *ngIf="hasViewPermission"    >
 
-      <div class="row">
-        <div class="col-md-8">
-          <h2>Attendance Marking</h2><hr>
-
-          </div>
-
-          <div class="col-md-4">
-            <!-- Toggle Bulk Upload Button -->
-<button type="button" class="btn-Create btn pull-right btn-danger" (click)="toggleBulkUpload()">
-  <span class="header-btn-icon">
-    <mat-icon>{{ showBulkUpload ? 'cancel' : 'add_circle' }}</mat-icon>
-  </span>
-  {{ showBulkUpload ? 'Cancel Bulk Upload' : 'Bulk Upload Attendance' }}
-</button>
-             
-          </div>
-      </div>
+    
 
 
       <div *ngIf="!showBulkUpload">
 
     <form>
         <div class="row">
-            <div class="col-md-6" >
-           
-                <label>Date</label>
-               <input type="date"  class="form-control" required  [(ngModel)]="date"  placeholder="Enter date"
-                [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !date}">
-               
-               <div *ngIf="registerButtonClicked && !date" class="error-message">date is required.</div>
-          </div>
+         
           
-
-          <div class="col-md-6" >
+          <div class="col-md-12">
+            <label>Employee</label>
+            <div class="custom-sel">
+              <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}">
+              <option disabled>--Select Employee--</option>
+                <option *ngFor="let employee of Employees" [value]="employee.id">{{ employee.emp_code }}</option>
+              </select>
+            </div>
+          </div>
            
-            <label>check in time</label>
-           <input type="time"  class="form-control" required  [(ngModel)]="check_in_time"  placeholder="Enter check in time"
-            [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !check_in_time}">
-           
-           <div *ngIf="registerButtonClicked && !check_in_time" class="error-message">check_in_time is required.</div>
-      </div>
+
+      
 
 
-      <div class="col-md-6" >
-           
-        <label>check out time</label>
-       <input type="time"  class="form-control" required  [(ngModel)]="check_out_time"  placeholder="Enter check out time"
-        [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !check_out_time}">
-       
-       <div *ngIf="registerButtonClicked && !check_out_time" class="error-message">check_out_time is required.</div>
-  </div>
-
-  <div class="col-md-6" >
-           
-    <label>Total hours</label>
-   <input type="text"  class="form-control" required  [(ngModel)]="total_hours"  placeholder="Enter total hours"
-    [ngModelOptions]="{standalone: true}" >
-   
-</div>
      
-<div class="col-md-6">
-    <label>Employee</label>
-    <div class="custom-sel">
-      <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}">
-        <option *ngFor="let employee of Employees" [value]="employee.id">{{ employee.emp_code }}</option>
-      </select>
-    </div>
-  </div>
-   
+
 
 
 
         </div>
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-6">
 
             </div>
 
-            <div class="col-md-2" *ngIf="hasAddPermission"
-            >
-                <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerApproveLevel()">Save</button>  
+            <div class="col-md-3"   >
+                <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="registerCheckIn()">Check In</button>  
              </div>
 
+             <div class="col-md-3"   >
+              <button type="button" class="btn-Create btn-full mt-5 btn-danger btn" (click)="registerCheckOut()">Check Out</button>  
+           </div>
              
         </div>
     </form>
@@ -118,7 +124,19 @@
         </div>
 
 
+
+
+
+
+        
   
 
 </div>
+
+
+
 </div>
+
+
+
+

@@ -85,6 +85,12 @@ export class ShiftsComponent {
   schedule_name:any='';
   shift_type:any='';
   rotation_cycle_weeks :any='';
+
+  week1_pattern:any='';
+  week2_pattern:any='';
+  week3_pattern:any='';
+  week4_pattern:any='';
+
   departments:any='';
   single_shift_pattern:any='';
 
@@ -356,8 +362,15 @@ this.loadShiftsPattern();
       start_date: this.start_date || null,
       schedule_name: this.schedule_name || null,
       shift_type: this.shift_type || null,
+
       // Convert to number if provided; otherwise, send null.
       rotation_cycle_weeks: this.rotation_cycle_weeks ? Number(this.rotation_cycle_weeks) : null,
+
+      week1_pattern: this.week1_pattern || null,
+      week2_pattern: this.week2_pattern || null,
+      week3_pattern: this.week3_pattern || null,
+      week4_pattern: this.week4_pattern || null,
+
       employee: this.employee || null,
       // For a multi-select field, ensure we send an array.
       departments: (this.departments && Array.isArray(this.departments)) ? this.departments : [],
@@ -477,6 +490,7 @@ this.loadShiftsPattern();
     }
 
 
+  
     loadEmployeeshift(): void {
     
       const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema

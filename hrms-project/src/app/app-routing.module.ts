@@ -95,6 +95,7 @@ import { AssetUdfComponent } from './asset-udf/asset-udf.component';
 import { PayrollAppovalLevelComponent } from './payroll-appoval-level/payroll-appoval-level.component';
 import { PayslipApprovalComponent } from './payslip-approval/payslip-approval.component';
 import { WpsComponent } from './wps/wps.component';
+import { AssetReportComponent } from './asset-report/asset-report.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -291,6 +292,10 @@ const routes: Routes = [
           {
             path:'employee-attendance',
             component:EmployeeAttendanceComponent
+          },
+          {
+            path:'asset-report',
+            component:AssetReportComponent
           },
           {
             path:'from-designer',

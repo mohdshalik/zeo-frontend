@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="comapny_section" >
+
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-5">
+                    <h1>Asset Reports</h1>
+                </div>
+
+                <div class="col-md-2">
+                 
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name" > -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+
+                      
+                   
+                   
+                          </div>
+                </div>
+                 
+            </div>
+           
+           
+
+        </div>
+
+        <div class="tab_back mt-5">
+            <mat-tab-group> 
+                <mat-tab label="Standard Report">
+                    <div class="tab_boddy p-3">
+                      <button class="btn btn-primary mb-3" (click)="downloadExcel()">Download Excel</button>
+                  
+                      <table class="table table-bordered table-striped" *ngIf="approvalReportData.length > 0">
+                        <thead>
+                          <tr>
+                            <th>Employee</th>
+                            <th>First Name</th>
+                            <th>Branch</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Category</th>
+                            <th>Leave Type</th>
+                            <th>Balance</th>
+                            <th>Openings</th>
+                            <!-- <th>Created At</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of approvalReportData">
+                            <td>{{ item.employee || '-' }}</td>
+                            <td>{{ item.emp_first_name || '-' }}</td>
+                            <td>{{ item.emp_branch_id || '-' }}</td>
+
+                            <td>{{ item.emp_dept_id || '-' }}</td>
+                            <td>{{ item.emp_desgntn_id || '-' }}</td>
+                            <td>{{ item.emp_ctgry_id || '-' }}</td>
+                            <td>{{ item.leave_type || '-' }}</td>
+                            <td>{{ item.balance }}</td>
+                            <td>{{ item.openings }}</td>
+                            
+                            <!-- <td>{{ item.created_at | date:'short' }}</td> -->
+                          </tr>
+                        </tbody>
+                      </table>
+                      
+                      <p *ngIf="approvalReportData.length === 0">No report data available.</p>
+                    </div>
+                  </mat-tab>
+                  
+                  <mat-tab label="Custom Report ">
+      
+                    <div class="tab_boddy">
+                    
+                    </div>
+                      </mat-tab>
+      
+                 
+                      </mat-tab-group> 
+      
+                      </div>
+       
+        
+           
+  
+    </div>
+    
+
+
+    
+
+
+</div>

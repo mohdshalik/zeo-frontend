@@ -171,6 +171,7 @@ import { AssetUdfComponent } from './asset-udf/asset-udf.component';
 import { PayrollAppovalLevelComponent } from './payroll-appoval-level/payroll-appoval-level.component';
 import { PayslipApprovalComponent } from './payslip-approval/payslip-approval.component';
 import { WpsComponent } from './wps/wps.component';
+import { AssetReportComponent } from './asset-report/asset-report.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -300,7 +301,8 @@ import { WpsComponent } from './wps/wps.component';
      AssetUdfComponent,
      PayrollAppovalLevelComponent,
      PayslipApprovalComponent,
-     WpsComponent
+     WpsComponent,
+     AssetReportComponent
      
      
 

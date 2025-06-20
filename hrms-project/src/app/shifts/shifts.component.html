@@ -374,6 +374,42 @@
                          </div>
                     </div>
                 </form>
+
+                <div class="row mt-5">
+                  <div class="col-md-12">
+                      <!-- <h4>Shifts</h4> -->
+                      <div style="overflow-x: auto; width: 100%;">
+                        <table class="table" style="min-width: 1000px;">
+                          <thead>
+                            <tr>
+                              <th>Shift Pattern Name</th>
+                              <th>Monday Shift</th>
+                              <th>Tuesday Shift</th>
+                              <th>Wednesday Shift</th>
+                              <th>Thursday Shift</th>
+                              <th>Friday Shift</th>
+                              <th>Saturday Shift</th>
+                              <th>Sunday Shift</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let deparmentsec of ShiftsPattern">
+                              <td>{{ deparmentsec.name }}</td>
+                              <td>{{ deparmentsec.monday_shift }}</td>
+                              <td>{{ deparmentsec.tuesday_shift }}</td>
+                              <td>{{ deparmentsec.wednesday_shift }}</td>
+                              <td>{{ deparmentsec.thursday_shift }}</td>
+                              <td>{{ deparmentsec.friday_shift }}</td>
+                              <td>{{ deparmentsec.saturday_shift }}</td>
+                              <td>{{ deparmentsec.sunday_shift }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                  </div>
+              </div>
+      
            
                 </mat-tab>
 
@@ -422,6 +458,44 @@
         <input type="number" class="form-control" required [(ngModel)]="rotation_cycle_weeks" placeholder="Enter Rotation Cycle Weeks" [ngModelOptions]="{standalone: true}">
       </div>
       
+
+    <!-- Week 1 -->
+<div class="col-md-6" *ngIf="shift_type === 'rotating' && rotation_cycle_weeks >= 1">
+  <label>Week 1 Pattern</label>
+  <select class="form-control" [(ngModel)]="week1_pattern" [ngModelOptions]="{standalone: true}">
+    <option value="">Select</option>
+    <option *ngFor="let shift of ShiftsPattern" [value]="shift.id">{{ shift.name }}</option>
+  </select>
+</div>
+
+<!-- Week 2 -->
+<div class="col-md-6" *ngIf="shift_type === 'rotating' && rotation_cycle_weeks >= 2">
+  <label>Week 2 Pattern</label>
+  <select class="form-control" [(ngModel)]="week2_pattern" [ngModelOptions]="{standalone: true}">
+    <option value="">Select</option>
+    <option *ngFor="let shift of ShiftsPattern" [value]="shift.id">{{ shift.name }}</option>
+  </select>
+</div>
+
+<!-- Week 3 -->
+<div class="col-md-6" *ngIf="shift_type === 'rotating' && rotation_cycle_weeks >= 3">
+  <label>Week 3 Pattern</label>
+  <select class="form-control" [(ngModel)]="week3_pattern" [ngModelOptions]="{standalone: true}">
+    <option value="">Select</option>
+    <option *ngFor="let shift of ShiftsPattern" [value]="shift.id">{{ shift.name }}</option>
+  </select>
+</div>
+
+<!-- Week 4 -->
+<div class="col-md-6" *ngIf="shift_type === 'rotating' && rotation_cycle_weeks >= 4">
+  <label>Week 4 Pattern</label>
+  <select class="form-control" [(ngModel)]="week4_pattern" [ngModelOptions]="{standalone: true}">
+    <option value="">Select</option>
+    <option *ngFor="let shift of ShiftsPattern" [value]="shift.id">{{ shift.name }}</option>
+  </select>
+</div>
+
+   
       <!-- Only display Single Shift Pattern when shift_type is "fixed" -->
       <div class="col-md-6" *ngIf="shift_type === 'fixed'">
         <label>Single Shift Pattern</label>
@@ -502,6 +576,7 @@
                 </div>
                 </form>
             
+                <div class="suprete-div"></div>
 
                 <div class="shift-board-container">
 
@@ -509,7 +584,7 @@
                    <form (ngSubmit)="fetchShifts()" *ngIf="hasAddPermission">
                     <div class="row">
                         <!-- Schedule Dropdown -->
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label>Schedule</label>
                             <select class="form-control" [(ngModel)]="selectedSchedule" name="schedule" required>
                                 <option value="" disabled>Select Schedule</option>
@@ -520,7 +595,7 @@
                         </div>
             
                         <!-- Year Dropdown -->
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label>Year</label>
                             <select class="form-control" [(ngModel)]="selectedYear" name="year" required>
                                 <option value="" disabled>Select Year</option>
@@ -595,7 +670,7 @@
              
                   </mat-tab>
 
-
+<!-- 
                   <mat-tab label="Week Pattern Assigning">
                     <form *ngIf="hasAddPermission">
 <div class="row">
@@ -655,7 +730,7 @@
 </div>
 
                     </form>
-                    </mat-tab>
+                    </mat-tab> -->
   
 
                     <mat-tab label="Shift Override">

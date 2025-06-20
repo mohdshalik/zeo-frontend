@@ -886,8 +886,27 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
     const apiUrl = `${this.apiUrl}/calendars/api/lvBalanceReport/?schema=${selectedSchema}`;
     return this.http.get<any[]>(apiUrl);
   }
+
+
+
+  
+  getAssetReport(): Observable<any[]> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError(() => new Error('No schema selected.'));
+    }
+  
+    const apiUrl = `${this.apiUrl}/organisation/api/asset-Report/?schema=${selectedSchema}`;
+    return this.http.get<any[]>(apiUrl);
+  }
+  
   
   fetchLeavebalanceJsonData(url: string): Observable<any> {
+    return this.http.get<any>(url);
+  }
+
+  fetchAssetJsonData(url: string): Observable<any> {
     return this.http.get<any>(url);
   }
 

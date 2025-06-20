@@ -250,20 +250,14 @@ checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
 
 
 
-  registerApproveLevel(): void {
+  registerCheckIn(): void {
     this.registerButtonClicked = true;
     
     const companyData = {
-      date: this.date   ,
-    
-      check_in_time:this.check_in_time,
-      check_out_time: this.check_out_time,
-
-      total_hours: this.total_hours,
+  
     
       employee: this.employee   ,
-      shift: this.shift,
-  
+
 
    
 
@@ -271,11 +265,11 @@ checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
     };
   
 
-    this.employeeService.registerEmployeeAttendence(companyData).subscribe(
+    this.employeeService.registerEmployeeAttendenceCheckIn(companyData).subscribe(
       (response) => {
         console.log('Attendance Marking successful', response);
       
-            alert('Registration successful ');
+            alert('Check In successful ');
             window.location.reload();
             // window.location.reload();
        
@@ -289,6 +283,40 @@ checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
     );
   }
 
+
+
+  registerCheckOut(): void {
+    this.registerButtonClicked = true;
+    
+    const companyData = {
+  
+    
+      employee: this.employee   ,
+
+
+   
+
+      // Add other form field values to the companyData object
+    };
+  
+
+    this.employeeService.registerEmployeeAttendenceCheckOut(companyData).subscribe(
+      (response) => {
+        console.log('Punch Out Marking successful', response);
+      
+            alert('Check Out successful ');
+            window.location.reload();
+            // window.location.reload();
+       
+
+      },
+      (error) => {
+        console.error('Added failed', error);
+        alert('enter all field!')
+        // Handle the error appropriately, e.g., show a user-friendly error message.
+      }
+    );
+  }
 
 
   LoadEmployee() {
