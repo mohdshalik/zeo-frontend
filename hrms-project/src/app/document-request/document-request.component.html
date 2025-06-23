@@ -1,0 +1,124 @@
+<div class="container">
+    <div class="comapny_section">
+        <div class="com_list " >
+            <div class="cpm-sec">
+
+                <h2>Document Request </h2>
+                <hr>
+                
+            
+                <form (ngSubmit)="SetLeaveApprovaLevel()" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Document Number</label>
+                        <input type="number" class="form-control" required [(ngModel)]="document_number" placeholder="Enter document number"
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+                  
+                      <div class="col-md-6">
+                        <label>reason</label>
+                        <input type="text" class="form-control" required [(ngModel)]="reason" placeholder="Enter reason"
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+
+                      <div class="col-md-6">
+                        <label>Total</label>
+                        <input type="number" class="form-control" required [(ngModel)]="total" placeholder="Enter total "
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+                  
+                      <div class="col-md-6">
+                        <label>Remark</label>
+                        <input type="text" class="form-control" required [(ngModel)]="remarks" placeholder="Enter remarks"
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+                    
+
+                      <div class="col-md-6">
+                        <label>Request Type</label>
+                        <div class="custom-sel">
+                          <select class="form-control" id="request_type" name="request_type" [(ngModel)]="request_type" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let approver of DocType" [value]="approver.id">{{ approver.type_name }}</option>
+                          </select>
+                        </div>
+                      </div> 
+
+                
+              
+
+         
+
+                
+                      <div class="col-md-6">
+                        <label>Employee</label>
+                        <div class="custom-sel">
+                          <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let approver of Users" [value]="approver.id">{{ approver.emp_code }}</option>
+                          </select>
+                        </div>
+                      </div>
+
+
+                  
+
+                
+                       
+                 
+                  
+                 
+                    </div>
+                  
+                    <div class="row" >
+                      <div class="col-md-9"></div>
+                      <div class="col-md-3">
+                        <button type="submit" class="btn btn-success btn-full mt-4">Sent</button>
+                      </div>
+                    </div>
+                  </form>
+
+
+
+            </div>
+
+        </div>
+
+        
+        <table width="100%" >
+          <thead>
+            <tr>
+              <th>No</th>
+              <th> Document number  </th>
+              <th> Reason</th>
+              <th>Total</th>
+              <th>Remarks</th>
+              <th>Request type</th>   
+              <th>Employee</th>
+              <th>Status</th>
+             
+  
+             
+            </tr>
+          </thead>
+          <tbody>
+              
+            <tr *ngFor="let docs of DocRequest;let i = index">
+              <td>{{ i + 1 }}</td> 
+              <td>{{ docs.document_number }}</td>
+              <td>{{ docs.reason }}</td>
+              <td>{{ docs.total }}</td> 
+              <td>{{ docs.remarks }}</td>
+              <td>{{ docs.request_type }}</td>
+              <td>{{ docs.employee }}</td> 
+              <td>{{ docs.status }}</td>
+
+
+            </tr>
+        
+          </tbody>
+        </table>
+
+
+
+
+    </div>
+</div>

@@ -172,6 +172,11 @@ import { PayrollAppovalLevelComponent } from './payroll-appoval-level/payroll-ap
 import { PayslipApprovalComponent } from './payslip-approval/payslip-approval.component';
 import { WpsComponent } from './wps/wps.component';
 import { AssetReportComponent } from './asset-report/asset-report.component';
+import { AssetTransactionReportComponent } from './asset-transaction-report/asset-transaction-report.component';
+import { AdvanceSalaryRequestComponent } from './advance-salary-request/advance-salary-request.component';
+import { DocumentRequestComponent } from './document-request/document-request.component';
+import { DocumentRequestLevelComponent } from './document-request-level/document-request-level.component';
+import { DocumentRequestApprovalsComponent } from './document-request-approvals/document-request-approvals.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -302,7 +307,12 @@ import { AssetReportComponent } from './asset-report/asset-report.component';
      PayrollAppovalLevelComponent,
      PayslipApprovalComponent,
      WpsComponent,
-     AssetReportComponent
+     AssetReportComponent,
+     AssetTransactionReportComponent,
+     AdvanceSalaryRequestComponent,
+     DocumentRequestComponent,
+     DocumentRequestLevelComponent,
+     DocumentRequestApprovalsComponent
      
      
 

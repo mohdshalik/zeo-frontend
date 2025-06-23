@@ -5,14 +5,14 @@ import { SessionService } from '../login/session.service';
 import { LeaveService } from '../leave-master/leave.service';
 import { DesignationService } from '../designation-master/designation.service';
 import * as XLSX from 'xlsx';
-
 @Component({
-  selector: 'app-asset-report',
-  templateUrl: './asset-report.component.html',
-  styleUrl: './asset-report.component.css'
+  selector: 'app-asset-transaction-report',
+  templateUrl: './asset-transaction-report.component.html',
+  styleUrl: './asset-transaction-report.component.css'
 })
-export class AssetReportComponent {
+export class AssetTransactionReportComponent {
 
+  
   
   Users: any[] = [];
 
@@ -50,11 +50,11 @@ export class AssetReportComponent {
 // your.component.ts
 
 fetchStandardReport() {
-  this.leaveService.getAssetReport().subscribe(
+  this.leaveService.getAssetTransactionReport().subscribe(
     (response) => {
       if (response.length > 0 && response[0].report_data) {
         const jsonUrl = response[0].report_data;
-        this.leaveService.fetchAssetJsonData(jsonUrl).subscribe((jsonData: any) => {
+        this.leaveService.fetchAssetTransactionJsonData(jsonUrl).subscribe((jsonData: any) => {
           // Directly assign the data since it's already flat
           this.approvalReportData = jsonData;
         });
@@ -64,40 +64,37 @@ fetchStandardReport() {
       console.error('Error fetching report:', error);
     }
   );
-  
 }
 
 
 
 downloadExcel() {
   const headerMap: { [key: string]: string } = {
-    name: 'Name',
-    asset_type: 'Asset Type',
-    condition: 'Condition',
-    model: 'Model',
-    purchase_date: 'Purchase date',
-    serial_number: 'Serial number',
-    status: 'Status',
-   
+    emp_first_name: 'Employee Name',
+    employee: 'Employee ID',
+    asset: 'Asset',
+    assigned_date: 'Assigned Date',
+    returned_date: 'Returned Date',
+    return_condition: 'Return Condition',
+    emp_branch_id: 'Branch',
+    emp_dept_id: 'Department',
+    emp_desgntn_id: 'Designation',
+    emp_ctgry_id: 'Category'
   };
 
   const exportData = this.approvalReportData.map(item => {
     const transformed: any = {};
     for (const key in headerMap) {
-      if (item.hasOwnProperty(key)) {
-        transformed[headerMap[key]] = item[key];
-      }
+      transformed[headerMap[key]] = item[key] || '-';  // fallback if value is missing
     }
     return transformed;
   });
 
   const worksheet = XLSX.utils.json_to_sheet(exportData);
   const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Asset Report');
-  XLSX.writeFile(workbook, 'Asset_report.xlsx');
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Asset Transaction Report');
+  XLSX.writeFile(workbook, 'Asset_transaction_Report.xlsx');
 }
-
-
 
 
 }

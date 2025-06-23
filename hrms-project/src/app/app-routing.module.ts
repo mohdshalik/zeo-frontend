@@ -96,6 +96,10 @@ import { PayrollAppovalLevelComponent } from './payroll-appoval-level/payroll-ap
 import { PayslipApprovalComponent } from './payslip-approval/payslip-approval.component';
 import { WpsComponent } from './wps/wps.component';
 import { AssetReportComponent } from './asset-report/asset-report.component';
+import { AssetTransactionReportComponent } from './asset-transaction-report/asset-transaction-report.component';
+import { DocumentRequestLevelComponent } from './document-request-level/document-request-level.component';
+import { DocumentRequestComponent } from './document-request/document-request.component';
+import { DocumentRequestApprovalsComponent } from './document-request-approvals/document-request-approvals.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -298,6 +302,10 @@ const routes: Routes = [
             component:AssetReportComponent
           },
           {
+            path:'asset-transaction-report',
+            component:AssetTransactionReportComponent
+          },
+          {
             path:'from-designer',
             component:FromDesignerComponent
           },
@@ -316,6 +324,20 @@ const routes: Routes = [
           {
             path:'notification-settings',
             component:NotificationSettingsComponent
+          },
+
+          {
+            path:'document-request-level',
+            component:DocumentRequestLevelComponent
+          },
+          {
+            path:'document-request',
+            component:DocumentRequestComponent
+          },
+
+          {
+            path:'document-request-approval',
+            component:DocumentRequestApprovalsComponent
           },
             {
       path:'leave-template',

@@ -902,6 +902,18 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
   }
   
   
+
+  getAssetTransactionReport(): Observable<any[]> {
+    const selectedSchema = localStorage.getItem('selectedSchema');
+    if (!selectedSchema) {
+      console.error('No schema selected.');
+      return throwError(() => new Error('No schema selected.'));
+    }
+  
+    const apiUrl = `${this.apiUrl}/organisation/api/asset-transaction-report/?schema=${selectedSchema}`;
+    return this.http.get<any[]>(apiUrl);
+  }
+  
   fetchLeavebalanceJsonData(url: string): Observable<any> {
     return this.http.get<any>(url);
   }
@@ -910,6 +922,9 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
     return this.http.get<any>(url);
   }
 
+  fetchAssetTransactionJsonData(url: string): Observable<any> {
+    return this.http.get<any>(url);
+  }
 
 
   getPaysliprejectionReasons(selectedSchema: string): Observable<any> {
@@ -930,4 +945,102 @@ generateAttendanceReport(schema: string, data: any): Observable<any> {
   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   return this.http.post(apiUrl, payload, { headers });
 }
+
+
+// document request approver level setting
+
+
+getDocType(selectedSchema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/core/api/Documents/?schema=${selectedSchema}`;
+
+  // Fetch employees from the API
+  return this.http.get(apiUrl);
+
+}
+
+
+CreateDocRequestapprovalLevel(formData: FormData): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.');
+  }
+
+  const apiUrl = `${this.apiUrl}/employee/api/Doc-request-approval-levels/?schema=${selectedSchema}`;
+
+  return this.http.post(apiUrl, formData).pipe(
+    catchError((error) => {
+      console.error('Error during leave type registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+
+getDocReqApprovalLevel(selectedSchema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/employee/api/Doc-request-approval-levels/?schema=${selectedSchema}`;
+
+  // Fetch employees from the API
+  return this.http.get(apiUrl);
+
+}
+
+
+
+
+CreateDocRequest(formData: FormData): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.');
+  }
+
+  const apiUrl = `${this.apiUrl}/employee/api/Doc-request/?schema=${selectedSchema}`;
+
+  return this.http.post(apiUrl, formData).pipe(
+    catchError((error) => {
+      console.error('Error during leave type registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+getDocRequest(selectedSchema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/employee/api/Doc-request/?schema=${selectedSchema}`;
+
+  // Fetch employees from the API
+  return this.http.get(apiUrl);
+
+}
+
+
+
+// document request Approvals
+
+getApprovalslistDocrequest(selectedSchema: string, userId: number): Observable<any> {
+  const apiUrl = `${this.apiUrl}/employee/api/Doc-request-approval/?schema=${selectedSchema}`;
+
+  // Fetch approvals for the user from the API
+  
+  return this.http.get(apiUrl);
+}
+
+getApprovalDetailsDocRequest(apiUrl: string): Observable<any> {
+  return this.http.get(apiUrl);
+}
+
+
+
+approveApprovalDocRequest(apiUrl: string, approvalData: { note: string; status: string }): Observable<any> {
+  // Sending a POST request to approve with note and status
+  return this.http.post(apiUrl, approvalData);
+}
+
+rejectApprovalDocRequest(apiUrl: string, approvalData: { note: string; status: string }): Observable<any> {
+  // Sending a POST request to approve with note and status
+  return this.http.post(apiUrl, approvalData);
+}
+
 }

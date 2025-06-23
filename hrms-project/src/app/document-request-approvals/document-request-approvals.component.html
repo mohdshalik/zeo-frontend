@@ -1,0 +1,147 @@
+<div class="container" >
+    <div class="comapny_section" *ngIf="hasViewPermission">
+        <div class="com_list " >
+    <div class="">
+
+      <div class="row">
+        <div class="col-md-9">
+          <h2>Document Request Approval List </h2>
+
+          </div>
+         
+        </div>
+
+
+
+  
+  
+
+
+        </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="approval_sec" *ngFor="let apr of Approvals" >
+                <h6>Document Request Approvals</h6><hr>
+                <div class="row ">
+                    <div class="col-md-2">
+                      <h4>General Request</h4>
+                      <h5>{{apr.general_request}}</h5>
+                    </div>
+                       <div class="col-md-2">
+                      <h4>Approver</h4>
+                      <h5>{{apr.approver}}</h5>
+                    </div>
+                    <div class="col-md-2">
+                      <h4>Status  </h4>
+                      <h5>{{apr.status}} </h5>
+                    </div>
+                    <div class="col-md-2">
+                      <h4>Level </h4>
+                      <h5>{{apr.level}}</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h4>Reason </h4>
+                        <h5>{{apr.note}}</h5>
+                      </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn pull-right" (click)="selectedaprovaldetalis(apr.id)">View</button>
+                    </div>
+                  </div>
+              
+         
+                <!-- <h6> General Request - {{apr.general_request}}</h6>
+                <h6>Status - {{apr.status}}</h6>
+                <h6>Level - {{apr.level}}</h6> -->
+        
+            
+        
+              </div>
+            </div>
+          </div>
+
+          
+
+          <!-- Modal Popup for selected approval details -->
+<!-- Modal Popup for selected approval details -->
+<div *ngIf="isAddFieldsModalOpen" class="modal">
+    <div class="modal-content">
+      <span class="close pull-right" (click)="closemarketModal()">&times;</span>
+  
+      <div *ngIf="selectedApproval">
+        <h6>Document Request Approvals</h6>
+        <hr>
+        <h6>Document Request - {{ selectedApproval.general_request }}</h6>
+        <h6>Status - {{ selectedApproval.status }}</h6>
+        <h6>Level - {{ selectedApproval.level }}</h6>
+  
+        <textarea
+          class="form-control"
+          [(ngModel)]="note"
+          placeholder="Add a Comment here..."
+          [ngModelOptions]="{ standalone: true }"
+        >  </textarea>
+  
+   
+  
+        <div class="row mt-2">
+          <div class="col-md-6"></div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn btn-danger btn-full"
+              (click)="showRejectionReason = true"
+            >
+              Reject
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-success btn-full"
+              (click)="approveApproval(selectedApproval.id)"
+            >
+              Approve
+            </button>
+          </div>
+        </div>
+             <!-- Additional input for rejection reason -->
+        <div *ngIf="showRejectionReason">
+          <textarea
+            class="form-control mt-2"
+            [(ngModel)]="rejection_reason"
+            placeholder="Add a Rejection Reason..."
+            [ngModelOptions]="{ standalone: true }"
+          ></textarea>
+
+          <!-- <div class="col-md-12">
+            <label>Leave Type</label>
+            <div class="custom-sel">
+              <select class="form-control" id="rejection_reason" name="rejection_reason" [(ngModel)]="rejection_reason" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let rejectionReason of RejectionResons" [value]="rejectionReason.id">{{ rejectionReason.reason_text }}</option>
+              </select>
+            </div>
+          </div> -->
+
+        </div>
+        <div class="mt-2" *ngIf="showRejectionReason">
+          <button
+            type="button"
+            class="btn btn-danger btn-full"
+            (click)="confirmRejection(selectedApproval.id)"
+          >
+            Confirm Rejection
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+
+</div>
+</div>

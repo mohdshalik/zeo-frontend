@@ -1,3 +1,4 @@
+<p>asset-transaction-report works!</p>
 <div class="container">
     <div class="comapny_section" >
 
@@ -37,32 +38,34 @@
                       <table class="table table-bordered table-striped" *ngIf="approvalReportData.length > 0">
                         <thead>
                           <tr>
-                            <th>Name</th>
-                            <th>Asset Type</th>
-                            <th>Condition</th>
-                            <th>Model</th>
-                            <th>Purchase date</th>
-                            <th>serial number</th>
-                            <th>status</th>
-                            <!-- <th>Created At</th> -->
+                            <th>Employee Name</th>
+                            <th>Employee ID</th>
+                            <th>Asset</th>
+                            <th>Assigned Date</th>
+                            <th>Returned Date</th>
+                            <th>Return Condition</th>
+                            <th>Branch</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Category</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let item of approvalReportData">
-                            <td>{{ item.name || '-' }}</td>
-                            <td>{{ item.asset_type || '-' }}</td>
-                            <td>{{ item.condition || '-' }}</td>
-
-                            <td>{{ item.model || '-' }}</td>
-                            <td>{{ item.purchase_date || '-' }}</td>
-                            <td>{{ item.serial_number || '-' }}</td>
-                            <td>{{ item.status || '-' }}</td>
-                      
-                            
-                            <!-- <td>{{ item.created_at | date:'short' }}</td> -->
+                            <td>{{ item.emp_first_name || '-' }}</td>
+                            <td>{{ item.employee || '-' }}</td>
+                            <td>{{ item.asset || '-' }}</td>
+                            <td>{{ item.assigned_date || '-' }}</td>
+                            <td>{{ item.returned_date || '-' }}</td>
+                            <td>{{ item.return_condition || '-' }}</td>
+                            <td>{{ item.emp_branch_id || '-' }}</td>
+                            <td>{{ item.emp_dept_id || '-' }}</td>
+                            <td>{{ item.emp_desgntn_id || '-' }}</td>
+                            <td>{{ item.emp_ctgry_id || '-' }}</td>
                           </tr>
                         </tbody>
                       </table>
+                      
                       
                       <p *ngIf="approvalReportData.length === 0">No report data available.</p>
                     </div>

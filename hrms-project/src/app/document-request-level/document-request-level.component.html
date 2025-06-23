@@ -1,0 +1,141 @@
+<div class="container">
+    <div class="comapny_section">
+        <div class="com_list " *ngIf="hasViewPermission">
+            <div class="cpm-sec">
+
+                <h2>Document Request Approvel Level</h2>
+                <hr>
+                
+            
+                <form (ngSubmit)="SetLeaveApprovaLevel()" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Level</label>
+                        <input type="number" class="form-control" required [(ngModel)]="level" placeholder="Enter level"
+                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !level}">
+                        <div *ngIf="registerButtonClicked && !level" class="error-message">Level field is required.</div>
+                      </div>
+                  
+                      <!-- <div class="col-md-6">
+                        <label>Role</label>
+                        <input type="text" class="form-control" required [(ngModel)]="role" placeholder="Enter role"
+                               [ngModelOptions]="{standalone: true}" [ngClass]="{'error-field': registerButtonClicked && !role}">
+                        <div *ngIf="registerButtonClicked && !role" class="error-message">role field is required.</div>
+                      </div> -->
+                  
+                    
+
+                 
+
+                
+              
+
+         
+
+                
+                      <div class="col-md-6">
+                        <label>Approver</label>
+                        <div class="custom-sel">
+                          <select class="form-control" id="approver" name="approver" [(ngModel)]="approver" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let approver of Users" [value]="approver.id">{{ approver.username }}</option>
+                          </select>
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-6">
+                        <label>Request Type</label>
+                        <div class="custom-sel">
+                          <select class="form-control" id="request_type" name="request_type" [(ngModel)]="request_type" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let approver of DocType" [value]="approver.id">{{ approver.type_name }}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label>Branch</label>
+                    
+                    
+                    
+                    
+                        <div class="custom-sel">
+                            <div class="form-control-wrapper">
+                          
+                    
+                              <mat-form-field>
+                                <!-- <mat-label>Favorite food</mat-label> -->
+                                <mat-select placeholder="Select" [(ngModel)]="branch" [ngModelOptions]="{standalone: true}" #select multiple>
+                                  <div class="select-all">
+                                    <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}" (change)="toggleAllSelection()">
+                                      Select All
+                                    </mat-checkbox>
+                                  </div>
+                                  <input type="text" placeholder="serach" class="form-control">
+                    
+                                  <mat-option *ngFor="let deparmentsec of   Branches" [value]="deparmentsec.id">
+                                    {{ deparmentsec.branch_name }} 
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                              
+                            </div>
+                            <div *ngIf="registerButtonClicked && (!branch || branch.length === 0)" class="error-message">
+                              Please Select Your branch
+                            </div>
+                          </div>
+                                    
+                    
+                    </div>
+                       
+                 
+                  
+                 
+                    </div>
+                  
+                    <div class="row"  *ngIf="hasAddPermission">
+                      <div class="col-md-9"></div>
+                      <div class="col-md-3">
+                        <button type="submit" class="btn btn-success btn-full mt-4">Add Leave Aproval Level</button>
+                      </div>
+                    </div>
+                  </form>
+
+
+
+            </div>
+
+        </div>
+
+        
+        <table width="100%" *ngIf="hasViewPermission">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th> Level  </th>
+              <th> Branch</th>
+              <th>Document Type</th>
+              <th>Approver</th>
+
+  
+             
+            </tr>
+          </thead>
+          <tbody>
+              
+            <tr *ngFor="let docs of LeaveapprovalLevels;let i = index">
+              <td>{{ i + 1 }}</td> 
+              <td>{{ docs.level }}</td>
+              <td>{{ docs.branch }}</td>
+              <td>{{ docs.request_type }}</td> 
+              <td>{{ docs.approver }}</td>
+
+            </tr>
+        
+          </tbody>
+        </table>
+
+
+
+
+    </div>
+</div>

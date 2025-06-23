@@ -234,6 +234,12 @@
                           <!-- <p class="side_option">I'm visible because I am open</p> -->
                         </div>
 
+                           <div class="mat-expansion-panel-body " *ngIf="hasViewPermissionLeavereport" >
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/asset-transaction-report"><span class="side_option" >Asset Transaction Report</span> </a>
+                          <!-- <p class="side_option">I'm visible because I am open</p> -->
+                        </div>
+
+
                         
                          
                         </mat-expansion-panel>
@@ -262,6 +268,7 @@
                         
                          
                         </mat-expansion-panel>
+
                         <mat-expansion-panel >
 
                           <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/email-configuration"  *ngIf="hasViewPermissionCmp">
@@ -311,8 +318,9 @@
                         
                          
                         </mat-expansion-panel>
+
                         <mat-expansion-panel >
-                          <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/company-policy"  *ngIf="hasViewPermissionCmp">
+                          <!-- <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/company-policy"  *ngIf="hasViewPermissionCmp">
                           
                             <a mat-list-item> <mat-icon>dashboard_customize
 
@@ -321,7 +329,7 @@
                                 <span class="con_clr"> Email Configuration</span></a>
                    
                       
-                      </mat-expansion-panel-header>
+                      </mat-expansion-panel-header> -->
 
                           <mat-expansion-panel-header class="mar-expantion-span" routerLink="/main-sidebar/settings/company-policy"  *ngIf="hasViewPermissionCmp">
                           
@@ -342,6 +350,37 @@
                       
                       
                         
+                         
+                        </mat-expansion-panel>
+
+
+                        
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header class="mar-expantion-span">
+                          
+                                <a mat-list-item> <mat-icon>dashboard_customize
+
+
+                                </mat-icon>
+                                    <span class="con_clr"> Document Request</span></a>
+                       
+                          
+                          </mat-expansion-panel-header>
+
+                          <div class="mat-expansion-panel-body "  *ngIf="hasViewPermissionFormdes">
+                            <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/document-request-approval"><span class="side_option" > Approval List</span> </a>
+                          </div>
+                     
+                          <div class="mat-expansion-panel-body "  *ngIf="hasViewPermissionFormdes">
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/document-request-level"><span class="side_option" > Approval Level Setting</span> </a>
+                        </div>
+
+                  
+                      
+                      
+                        <div class="mat-expansion-panel-body "  *ngIf="hasViewPermissionFormdes">
+                          <a class="set_siding" mat-list-item  routerLink="/main-sidebar/settings/document-request"><span class="side_option" > Request Document</span> </a>
+                        </div>
                          
                         </mat-expansion-panel>
                
