@@ -177,6 +177,10 @@ import { AdvanceSalaryRequestComponent } from './advance-salary-request/advance-
 import { DocumentRequestComponent } from './document-request/document-request.component';
 import { DocumentRequestLevelComponent } from './document-request-level/document-request-level.component';
 import { DocumentRequestApprovalsComponent } from './document-request-approvals/document-request-approvals.component';
+import { AirTicketOptionsComponent } from './air-ticket-options/air-ticket-options.component';
+import { AirTicketPolicyComponent } from './air-ticket-policy/air-ticket-policy.component';
+import { AdvanceSalaryApprovalLevelComponent } from './advance-salary-approval-level/advance-salary-approval-level.component';
+import { AdvanceSalaryApprovalsComponent } from './advance-salary-approvals/advance-salary-approvals.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -312,7 +316,11 @@ import { DocumentRequestApprovalsComponent } from './document-request-approvals/
      AdvanceSalaryRequestComponent,
      DocumentRequestComponent,
      DocumentRequestLevelComponent,
-     DocumentRequestApprovalsComponent
+     DocumentRequestApprovalsComponent,
+     AirTicketOptionsComponent,
+     AirTicketPolicyComponent,
+     AdvanceSalaryApprovalLevelComponent,
+     AdvanceSalaryApprovalsComponent
      
      
 

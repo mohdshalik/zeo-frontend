@@ -6,7 +6,7 @@
 
         <div class="row">
             <div class="col-md-9">
-                <h2>Loan Approval List </h2>
+                <h2>Advance Salary Approval List </h2>
     
               </div>
               <div class="col-md-3">
@@ -29,15 +29,15 @@
         <div class="row">
             <div class="col-md-12">
               <div class="approval_sec" *ngFor="let apr of Approvals" >
-                <h6>Loan Request Approvals</h6><hr>
+                <h6>Advance Salary Request Approvals</h6><hr>
                 <div class="row ">
                     <div class="col-md-2">
-                      <h4>Loan Request</h4>
-                      <h5>{{apr.loan_request}}</h5>
+                      <h4> Request</h4>
+                      <h5>{{apr.request}}</h5>
                     </div>
                        <div class="col-md-2">
                       <h4>Employee</h4>
-                      <h5>{{apr.employee_id}}</h5>
+                      <h5>{{apr.employee}}</h5>
                     </div>
                     <div class="col-md-2">
                       <h4>Status  </h4>
@@ -75,9 +75,9 @@
       <span class="close pull-right" (click)="closemarketModal()">&times;</span>
   
       <div *ngIf="selectedApproval">
-        <h6>Loan Request Approvals</h6>
+        <h6>Advance Salary Request Approvals</h6>
         <hr>
-        <h6>Loan Request - {{ selectedApproval.loan_request }}</h6>
+        <h6>Advance Salary Request - {{ selectedApproval.request }}</h6>
         <h6>Status - {{ selectedApproval.status }}</h6>
         <h6>Level - {{ selectedApproval.level }}</h6>
   

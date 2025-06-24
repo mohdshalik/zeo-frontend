@@ -11,7 +11,7 @@
 
 
 
-  .ico_set{
+   .ico_set{
     margin-top: 10px;
 }
 .mat-icon{
@@ -40,17 +40,16 @@
 
 .mdc-list-item.mdc-list-item--with-one-line {
     /* border-bottom:solid 0.2px #a7a4a4; */
-    padding: 5px;
-    height: 40px;
+    padding: 25px;
+    height: 50px;
 }
 .mdc-list-item.mdc-list-item--with-one-line:hover{
-    border-bottom: solid 1px white;
-    /* border-radius: 2%; */
+    background: 	#5a1f82;
+    border-radius: 2%;
 }
 
 .mat-accordion .mat-expansion-panel:last-of-type {
     background: transparent;
-    padding: 10px;
 }
 .mat-expansion-panel-content{
     color: white !important;
@@ -61,7 +60,7 @@
 
 .side_option{
     color: white;
-    font-size: 13px;
+    font-size: 14px;
    
 }
 
@@ -161,7 +160,7 @@
 }
 
 .mat-drawer.mat-drawer-side{
-    top: 20px;
+    top: 34px;
     bottom: 0;
     position: fixed;
 }
@@ -176,30 +175,134 @@
 
 .mat-expansion-panel-body{
     padding: 0px 10px 10px !important;
-    margin-bottom: 10px;
-}
-
-.mdc-list-item{
-    display: inline-block !important;
-}
-
-.calender{
-    margin-left: 15px;
-    
 }
 
 
-.mat-expansion-panel::after{
-    margin-right: 10px;
-    color: white !important;
+
+/* CSS Styles */
+.hide-class {
+    display: none; /* or any other style to hide the element */
+  }
+  
+  .show-class {
+    display: block; /* or any other style to show the element */
+  }
+
+
+
+  .mdc-list-item.mdc-list-item--with-one-line {
+    /* border-bottom:solid 0.2px #a7a4a4; */
+    padding: 10px;
+    height: 40px;
+}
+.mdc-list-item.mdc-list-item--with-one-line:hover{
+    border-bottom: solid 1px white;
+    /* border-radius: 2%; */
 }
 
 
-.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled="true"]):hover{
+
+  
+.wrapper{
+    display: flex;
+    position: relative;
+  }
+  
+  .wrapper .sidebar{
+    width: 200px;
+    height: 100%;
+    background: #000000;
+    padding: 20px 0px;
+    position: fixed;
+  }
+  
+  .wrapper .sidebar h2{
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .wrapper .sidebar ul li{
+    padding: 10px;
+    border-bottom: 1px solid #bdb8d7;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px;
+  }    
+  
+  .wrapper .sidebar ul li a{
+    color: #fefeff;
+    display: block;
+  }
+  
+  .wrapper .sidebar ul li a .fas{
+    width: 25px;
+  }
+  
+  .wrapper .sidebar ul li:hover{
+    background-color: #5c1e81;
+    cursor: pointer;
+  }
+      
+  .wrapper .sidebar ul li:hover a{
+    color: #fff;
+  }
+   
+  .wrapper .sidebar .social_media{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+  }
+  
+  .wrapper .sidebar .social_media a{
+    display: block;
+    width: 40px;
+    background: #594f8d;
+    height: 40px;
+    line-height: 45px;
+    text-align: center;
+    margin: 0 5px;
+    color: #bdb8d7;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  .wrapper .main_content{
+    width: 100%;
+    margin-left: 200px;
+  }
+  
+  .wrapper .main_content .header{
+    padding: 20px;
+    background: #fff;
+    color: #717171;
+    border-bottom: 1px solid #e0e4e8;
+  }
+  
+  .wrapper .main_content .info{
+    margin: 20px;
+    color: #717171;
+    line-height: 25px;
+  }
+  
+  .wrapper .main_content .info div{
+    margin-bottom: 20px;
+  }
+  
+  @media (max-height: 500px){
+    .social_media{
+      display: none !important;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 5px;
+   }
+
+   .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled="true"]):hover{
     background: transparent !important;
-}
-
-
-.calender{
-    margin-bottom: 60px;
 }

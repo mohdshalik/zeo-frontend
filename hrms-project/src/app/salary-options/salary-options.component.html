@@ -14,8 +14,37 @@
                   <li routerLink="/main-sidebar/salary-options/payslip-approval" *ngIf="hasViewPermissionPayroll"><a ><mat-icon>peoples</mat-icon> Payslip Approvals</a></li>
 
 
+                
+                
+                
                   <li routerLink="/main-sidebar/salary-options/payroll-appoval-level" *ngIf="hasViewPermissionPayroll"><a ><mat-icon>peoples</mat-icon> payroll Approval Level</a></li>
+                  
+
+                  <li (click)="toggleAdvanceSalary()" style="cursor: pointer;">
+                    <a>
+                      <mat-icon>peoples</mat-icon> Advance Salary
+                      <mat-icon style="float: right;">{{ showAdvanceSalary ? 'expand_less' : 'expand_more' }}</mat-icon>
+                    </a>
+                  </li>
+                  
+                  <ul *ngIf="showAdvanceSalary" style="padding-left: 20px;">
+                    <li routerLink="/main-sidebar/salary-options/advance-salary-approvals">
+                      <a> Approval List</a>
+                    </li>
+                    <li routerLink="/main-sidebar/salary-options/advance-salary-request">
+                      <a> Advance Salary Request</a>
+                    </li>
+                    <li routerLink="/main-sidebar/salary-options/advance-salary-approval-level">
+                      <a>Advance Salary Approval Level</a>
+                    </li>
+                  </ul>
+                  
+                  
+                  
                   <li routerLink="/main-sidebar/salary-options/wps" *ngIf="hasViewPermissionPayroll"><a ><mat-icon>peoples</mat-icon>   WPS</a></li>
+
+             
+                 
 
                   <mat-nav-list>
      
@@ -24,29 +53,7 @@
                     <div>
             
             
-                      <!-- <mat-accordion>
-            
-            
-            
-                        <mat-expansion-panel>
-                          <mat-expansion-panel-header class="mar-expantion-span">
-            
-                            <a mat-list-item> <mat-icon>dashboard_customize
-                              </mat-icon>
-                              <span class="con_clr"> Leave Arrangement</span></a>
-                          </mat-expansion-panel-header>
-            
-                          <div class="mat-expansion-panel-body " *ngIf="hasViewPermissionLeaveAprvlvl"  routerLink="/main-sidebar/leave-options/leave-approval-level">
-                            <a class="set_siding" mat-list-item><span class="side_option">Leave Approval Level</span> </a>
-                          </div>
-            
-                          <div class="mat-expansion-panel-body "  *ngIf="hasViewPermissionLeavetemp" routerLink="/main-sidebar/leave-options/leave-template">
-                            <a class="set_siding" mat-list-item><span class="side_option">Leave Template</span> </a>
-                          </div>
-                        </mat-expansion-panel>
-            
-            
-                      </mat-accordion> -->
+                    
                     </div>
                     <style>
                       .mat-expansion-panel-body {

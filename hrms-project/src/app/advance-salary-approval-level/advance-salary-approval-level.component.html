@@ -1,0 +1,146 @@
+<div class="container" >
+    <div class="comapny_section">
+        <div class="header_section">
+
+            <div class="row">
+                <div class="col-md-5">
+                    <h1> Advance salary Approval Level Setting</h1>
+                </div>
+                <div class="col-md-2">
+                    
+                    <!-- <input type="text" class="form-control mt-1" placeholder="Search by name " [(ngModel)]="searchQuery" (input)="filterEmployees()"> -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="button-group pull-right">
+                        <button type="button" (click)="openPopus()" class="btn-Create btn btn-success " ><span class="header-btn-icon"><i class="fa-solid fa-circle-plus"></i>
+                        </span> Create</button>
+                        <!-- <span *ngIf="!hasAddPermission"></span>
+
+                        <button type="button" class="btn-Edit btn-info btn"  (click)="EditShowButtons()" *ngIf="hasEditPermission">
+                            <span class="header-btn-icon">
+                             <mat-icon>draw
+                        </mat-icon></span> Edit</button>
+                        <span *ngIf="hasEditPermission"></span>
+
+                        <button type="button" class="btn-Delete btn btn-danger" (click)="toggleCheckboxes()" *ngIf="hasDeletePermission">
+                            <span class="header-btn-icon">
+                                <mat-icon> delete
+                           </mat-icon></span> {{ Delete ? 'Cancel' : 'Delete' }}</button>
+                           
+                           <span *ngIf="!hasDeletePermission"></span> -->
+                    </div>
+                </div>
+            </div>
+           
+           
+
+        </div>
+
+
+      
+
+        <div *ngIf="iscreateLoanApp" class="modal">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-10">
+                  <h2>   Approval level </h2>
+                </div>
+                <div class="col-md-2">
+                  <span class="close pull-right" (click)="closeapplicationModal()">&times;</span>
+                </div>
+              </div>
+              <hr />
+          
+              <form (ngSubmit)="CreateLoanApproverLevel()" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Level</label>
+                    <input type="number" class="form-control" required [(ngModel)]="level" placeholder="Enter Level"
+                           [ngModelOptions]="{standalone: true}" >
+                  </div>
+              
+                  <div class="col-md-6">
+                    <label>Role</label>
+                    <input type="text" class="form-control" required [(ngModel)]="role" placeholder="Enter Role"
+                           [ngModelOptions]="{standalone: true}">
+                  
+                  </div>
+
+              
+
+                  <div class="col-md-6" >
+                    <label>Approver</label>
+                    <div class="custom-sel">
+                      <select
+                        class="form-control"
+                        id="approver"
+                        name="approver"
+                        [(ngModel)]="approver"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <option *ngFor="let employees of Approvers" [value]="employees.id">
+                          {{ employees.username }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+             
+              
+                 
+
+                
+
+
+                </div>
+              
+                <div class="row" *ngIf="hasAddPermission">
+                  <div class="col-md-8"></div>
+                  <div class="col-md-4">
+                    <button type="submit" class="btn btn-success btn-full mt-4">Add Approval Level </button>
+                  </div>
+                </div>
+              </form>
+              
+
+            
+            </div>
+          </div>
+
+        <div class="com_list mt-4" *ngIf="hasViewPermission">
+
+
+           
+            <table class="table-container " width="100%">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Level</th>
+                    <th>Role</th>
+                    <th>Approver</th>
+
+                   
+      
+        
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr *ngFor="let docs of approvalLevels;let i = index">
+                    <td>{{ i + 1 }}</td> 
+                    <td>{{ docs.level }}</td>
+                    <td>{{ docs.role }}</td> 
+                    <td>{{ docs.approver }}</td>
+
+                  
+    
+                  </tr>
+              
+                </tbody>
+              </table>
+
+        </div>
+        </div>
+        </div>
+        

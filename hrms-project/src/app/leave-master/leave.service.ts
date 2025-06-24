@@ -1043,4 +1043,67 @@ rejectApprovalDocRequest(apiUrl: string, approvalData: { note: string; status: s
   return this.http.post(apiUrl, approvalData);
 }
 
+
+
+
+
+
+// advced salary request
+
+
+CreateAdvSalaryRequest(formData: FormData): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.');
+  }
+
+  const apiUrl = `${this.apiUrl}/payroll/api/advance-salary-request/?schema=${selectedSchema}`;
+
+  return this.http.post(apiUrl, formData).pipe(
+    catchError((error) => {
+      console.error('Error during leave type registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+
+getAdvSalaryRequest(selectedSchema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/payroll/api/advance-salary-request/?schema=${selectedSchema}`;
+
+  // Fetch employees from the API
+  return this.http.get(apiUrl);
+
+}
+
+
+
+pauseAdvsalaryApplication(id: number, data: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) return throwError('No schema selected');
+
+  const apiUrl = `${this.apiUrl}/payroll/api/advance-salary-request/${id}/pause/?schema=${selectedSchema}`;
+  return this.http.post(apiUrl, data).pipe(
+    catchError((error) => {
+      console.error('Pause loan error:', error);
+      return throwError(error);
+    })
+  );
+}
+
+resumeAdvsalaryApplication(id: number, data: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) return throwError('No schema selected');
+
+  const apiUrl = `${this.apiUrl}/payroll/api/advance-salary-request/${id}/resume/?schema=${selectedSchema}`;
+  return this.http.post(apiUrl, data).pipe(
+    catchError((error) => {
+      console.error('Resume loan error:', error);
+      return throwError(error);
+    })
+  );
+}
+
 }

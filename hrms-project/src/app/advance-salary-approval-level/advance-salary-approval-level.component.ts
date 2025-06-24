@@ -6,44 +6,22 @@ import { LeaveService } from '../leave-master/leave.service';
 import { DesignationService } from '../designation-master/designation.service';
 import { SessionService } from '../login/session.service';
 import { EmployeeService } from '../employee-master/employee.service';
-
 @Component({
-  selector: 'app-loan-application',
-  templateUrl: './loan-application.component.html',
-  styleUrl: './loan-application.component.css'
+  selector: 'app-advance-salary-approval-level',
+  templateUrl: './advance-salary-approval-level.component.html',
+  styleUrl: './advance-salary-approval-level.component.css'
 })
-export class LoanApplicationComponent {
-
-
-  amount_requested:any='';
-  repayment_period:any='';
-  emi_amount:any='';
-  disbursement_date:any='';
-  remaining_balance:any='';
-  // approved_on:any='';
-
-  rejection_reason:any='';
-
-  pause_start_date:any='';
-
-  resume_date:any='';
-
-  pause_reason:any='';
-
-  employee:any='';
-  loan_type:any='';
-
-
-
-
+export class AdvanceSalaryApprovalLevelComponent {
 
   
 
+  
+  level:any='';
+  role:any='';
+  approver:any='';
 
-  Employees: any[] = []; // Array to store schema names
-  LoanTypes:any []=[];
-  LoanApplications:any []=[];
-
+  approvalLevels:any []=[];
+  Approvers:any []=[];
 
 
   selectedFile!: File | null;
@@ -71,9 +49,10 @@ private employeeService: EmployeeService,
 
   ngOnInit(): void {
 
-    this.loadLoanTypes();
-    this.LoadEmployees();
-    this.loadLoanApplications();
+    // this.loadLoanTypes();
+    this.loadLoanApprovalLevels();
+    this.loadLoanapprover();
+
 
     this.userId = this.sessionService.getUserId();
     if (this.userId !== null) {
@@ -172,65 +151,35 @@ private employeeService: EmployeeService,
       );
   }
 }
-// checkViewPermission(permissions: any[]): boolean {
-//   const requiredPermission = 'add_leave_type' ||'change_leave_type' ||'delete_leave_type' ||'view_leave_type';
-  
-  
-//   // Check user permissions
-//   if (permissions.some(permission => permission.codename === requiredPermission)) {
-//     return true;
-//   }
-  
-//   // Check group permissions (if applicable)
-//   // Replace `// TODO: Implement group permission check`
-//   // with your logic to retrieve and check group permissions
-//   // (consider using a separate service or approach)
-//   return false; // Replace with actual group permission check
-//   }
-  
-  
-  
   
   checkGroupPermission(codeName: string, groupPermissions: any[]): boolean {
   return groupPermissions.some(permission => permission.codename === codeName);
   }
   
 
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files.length > 0 ? event.target.files[0] : null;
-  }
+
   
 
   registerButtonClicked = false;
 
 
-  CreateLoanApplication(): void {
+  CreateLoanApproverLevel(): void {
     this.registerButtonClicked = true;
   
   
     const formData = new FormData();
-    formData.append('amount_requested', this.amount_requested);
-    formData.append('repayment_period', this.repayment_period);
-    formData.append('emi_amount', this.emi_amount);
-    // formData.append('disbursement_date', this.disbursement_date );
-    formData.append('remaining_balance', this.remaining_balance);
-    // formData.append('approved_on', this.approved_on);
-    // formData.append('rejection_reason', this.rejection_reason);
+    formData.append('level', this.level);
+    formData.append('role', this.role);
+    formData.append('approver', this.approver);
 
 
-    
-    formData.append('pause_start_date', this.pause_start_date);
-    formData.append('resume_date', this.resume_date );
-    formData.append('pause_reason', this.pause_reason);
-    formData.append('employee', this.employee);
-    formData.append('loan_type', this.loan_type);
-
+ 
 
   
-    this.employeeService.registerLoanApplication(formData).subscribe(
+    this.employeeService.registeradvSalaryApproverLevel(formData).subscribe(
       (response) => {
         console.log('Registration successful', response);
-        alert('Loan application has been added');
+        alert(' Approval Level has been added');
         window.location.reload();
       },
       (error) => {
@@ -242,38 +191,16 @@ private employeeService: EmployeeService,
 
 
 
-  LoadEmployees() {
-    const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
-  
-    console.log('schemastore',selectedSchema )
-    // Check if selectedSchema is available
-    if (selectedSchema) {
-      this.employeeService.getemployees(selectedSchema).subscribe(
-        (result: any) => {
-          this.Employees = result;
-          console.log(' fetching Employees:');
-  
-        },
-        (error) => {
-          console.error('Error fetching Companies:', error);
-        }
-      );
-    }
-    }
-  
-
-
-      
-  loadLoanTypes(): void {
+  loadLoanApprovalLevels(): void {
     
     const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
   
     console.log('schemastore',selectedSchema )
     // Check if selectedSchema is available
     if (selectedSchema) {
-      this.employeeService.getLoanTypes(selectedSchema).subscribe(
+      this.employeeService.getadvSalaryApprovalLevels(selectedSchema).subscribe(
         (result: any) => {
-          this.LoanTypes = result;
+          this.approvalLevels = result;
           console.log(' fetching Loantypes:');
   
         },
@@ -286,17 +213,16 @@ private employeeService: EmployeeService,
 
 
 
-     
-    loadLoanApplications(): void {
-    
+    loadLoanapprover(): void {
+  
       const selectedSchema = this.authService.getSelectedSchema(); // Assuming you have a method to get the selected schema
     
       console.log('schemastore',selectedSchema )
       // Check if selectedSchema is available
       if (selectedSchema) {
-        this.employeeService.getLoanApplications(selectedSchema).subscribe(
+        this.employeeService.getLoanapprover(selectedSchema).subscribe(
           (result: any) => {
-            this.LoanApplications = result;
+            this.Approvers = result;
             console.log(' fetching Loantypes:');
     
           },
@@ -306,12 +232,9 @@ private employeeService: EmployeeService,
         );
       }
       }
-  
 
 
-      isPauseModalOpen: boolean = false;
-      isResumeModalOpen: boolean = false;
-
+      
       iscreateLoanApp: boolean = false;
 
 
@@ -327,88 +250,6 @@ private employeeService: EmployeeService,
 
       }
 
-selectedLoanId: number | null = null;
 
-
-
-openPauseModal(loan: any): void {
-  this.selectedLoanId = loan.id;
-  this.pause_start_date = '';
-  this.pause_reason = '';
-  this.isPauseModalOpen = true;
-}
-closePauseModal(): void {
-  this.isPauseModalOpen = false;
-}
-
-
-openResumeModal(loan: any): void {
-  this.selectedLoanId = loan.id;
-  this.resume_date = '';
-  this.isResumeModalOpen = true;
-}
-
-closeResumeModal(): void {
-  this.isResumeModalOpen = false;
-}
-
-
-
-// -------------------- Submit Pause --------------------
-
-submitPauseLoan(): void {
-  if (!this.selectedLoanId) {
-    alert('Loan ID is missing!');
-    return;
-  }
-
-  const pauseData = {
-    pause_start_date: this.pause_start_date,
-    pause_reason: this.pause_reason,
-    resume_date: null // resume date is not set during pause
-  };
-
-  this.employeeService.pauseLoanApplication(this.selectedLoanId, pauseData).subscribe(
-    (response) => {
-      alert('Loan application paused successfully!');
-      this.closePauseModal();
-      this.loadLoanApplications();
-      window.location.reload();
-    },
-    (error) => {
-      console.error('Pause failed:', error);
-      alert('Failed to pause the loan application.');
-    }
-  );
-}
-
-// -------------------- Submit Resume --------------------
-
-submitResumeLoan(): void {
-  if (!this.selectedLoanId) {
-    alert('Loan ID is missing!');
-    return;
-  }
-
-  const resumeData = {
-    resume_date: this.resume_date,
-    pause_start_date: null, // clear pause date when resuming
-    pause_reason: null
-  };
-
-  this.employeeService.resumeLoanApplication(this.selectedLoanId, resumeData).subscribe(
-    (response) => {
-      alert('Loan application resumed successfully!');
-      this.closeResumeModal();
-      this.loadLoanApplications();
-      window.location.reload();
-
-    },
-    (error) => {
-      console.error('Resume failed:', error);
-      alert('Failed to resume the loan application.');
-    }
-  );
-}
 
 }

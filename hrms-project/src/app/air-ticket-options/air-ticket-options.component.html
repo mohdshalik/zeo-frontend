@@ -1,0 +1,59 @@
+<div class="sub-sidebar clickOutside">
+
+
+    <mat-sidenav-container>
+      <mat-sidenav class="sidnav_scrolling" #sidenav opened="true" mode="side">
+  
+        <div class="wrapper">
+          <div class="sidebar">
+              <ul>
+                <li routerLink="/main-sidebar/air-ticket-options/air-ticket-policy" *ngIf="hasViewPermissionSalary"><a><mat-icon>peoples</mat-icon> Policy</a></li>
+             
+              
+
+  
+                  <mat-nav-list>
+     
+  
+  
+                    <div>
+            
+            
+                 
+                    </div>
+                    <style>
+                      .mat-expansion-panel-body {
+                        padding: 0 0px 16px !important;
+                      }
+                      .mat-expansion-panel{
+                background: transparent;
+               
+              }
+                    </style>
+            
+                  </mat-nav-list>
+                   
+              </ul> 
+  
+                   
+   
+          </div>
+    
+      </div>
+   
+  
+  
+  
+  
+  
+  
+      </mat-sidenav>
+  
+  
+      <router-outlet></router-outlet>
+  
+      <!-- <router-outlet></router-outlet> -->
+  
+    </mat-sidenav-container>
+  
+  </div>

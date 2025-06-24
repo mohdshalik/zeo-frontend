@@ -306,3 +306,20 @@
    .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled="true"]):hover{
     background: transparent !important;
 }
+
+
+
+.sidebar ul ul {
+  list-style: none;
+  padding-left: 15px;
+}
+
+.sidebar ul ul li {
+  font-size: 13px;
+  padding: 8px;
+  color: #ccc;
+}
+
+.sidebar ul ul li:hover {
+  background-color: #3a1c4f;
+}

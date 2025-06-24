@@ -100,6 +100,11 @@ import { AssetTransactionReportComponent } from './asset-transaction-report/asse
 import { DocumentRequestLevelComponent } from './document-request-level/document-request-level.component';
 import { DocumentRequestComponent } from './document-request/document-request.component';
 import { DocumentRequestApprovalsComponent } from './document-request-approvals/document-request-approvals.component';
+import { AirTicketOptionsComponent } from './air-ticket-options/air-ticket-options.component';
+import { AirTicketPolicyComponent } from './air-ticket-policy/air-ticket-policy.component';
+import { AdvanceSalaryApprovalLevelComponent } from './advance-salary-approval-level/advance-salary-approval-level.component';
+import { AdvanceSalaryRequestComponent } from './advance-salary-request/advance-salary-request.component';
+import { AdvanceSalaryApprovalsComponent } from './advance-salary-approvals/advance-salary-approvals.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -444,6 +449,18 @@ const routes: Routes = [
       component:WpsComponent,
     },
 
+    {
+      path:'advance-salary-approval-level',
+      component:AdvanceSalaryApprovalLevelComponent,
+    },
+    {
+      path:'advance-salary-request',
+      component:AdvanceSalaryRequestComponent,
+    },
+     {
+      path:'advance-salary-approvals',
+      component:AdvanceSalaryApprovalsComponent,
+    },
 
   ]
 
@@ -505,6 +522,23 @@ const routes: Routes = [
       path:'asset-request',
       component:AssetRequestComponent,
     },
+
+
+  ]
+
+},
+
+{
+  path: 'air-ticket-options',
+  component: AirTicketOptionsComponent,
+  children:[
+   
+    {
+      path:'air-ticket-policy',
+      component:AirTicketPolicyComponent,
+    },
+
+   
 
 
   ]

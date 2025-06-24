@@ -4,16 +4,15 @@ import { SessionService } from '../login/session.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { DesignationService } from '../designation-master/designation.service';
 import { CatogaryService } from '../catogary-master/catogary.service';
-
 @Component({
-  selector: 'app-salary-options',
-  templateUrl: './salary-options.component.html',
-  styleUrl: './salary-options.component.css'
+  selector: 'app-air-ticket-options',
+  templateUrl: './air-ticket-options.component.html',
+  styleUrl: './air-ticket-options.component.css'
 })
-export class SalaryOptionsComponent {
+export class AirTicketOptionsComponent {
 
-
-
+  
+  
   hasViewPermissionSalary: boolean = false;
   hasViewPermissionPayroll: boolean = false;
 
@@ -164,11 +163,7 @@ export class SalaryOptionsComponent {
 
 
 
-    showAdvanceSalary = false;
 
-    toggleAdvanceSalary() {
-      this.showAdvanceSalary = !this.showAdvanceSalary;
-    }
 
 
 
@@ -188,6 +183,7 @@ export class SalaryOptionsComponent {
         }
       );
     }
+
 
 
 }

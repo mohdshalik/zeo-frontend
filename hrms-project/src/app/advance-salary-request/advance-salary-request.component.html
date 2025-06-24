@@ -1,1 +1,192 @@
-<p>advance-salary-request works!</p>
+<div class="container">
+    <div class="comapny_section">
+        <div class="com_list " >
+            <div class="cpm-sec">
+
+                <h2>Advance Salary Request </h2>
+                <hr>
+                
+            
+                <form (ngSubmit)="SetLeaveApprovaLevel()" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Document Number</label>
+                        <input type="number" class="form-control" required [(ngModel)]="document_number" placeholder="Enter document number"
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+
+                      <div class="col-md-6">
+                        <label>Requested amount</label>
+                        <input type="number" class="form-control" required [(ngModel)]="requested_amount" placeholder="Enter requested amount"
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+                  
+                      <div class="col-md-6">
+                        <label>reason</label>
+                        <input type="text" class="form-control" required [(ngModel)]="reason" placeholder="Enter reason"
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+
+                    
+                      <div class="col-md-6">
+                        <label>Remark</label>
+                        <input type="text" class="form-control" required [(ngModel)]="remarks" placeholder="Enter remarks"
+                               [ngModelOptions]="{standalone: true}" >
+                      </div>
+                    
+
+                 
+                
+              
+
+         
+
+                
+                      <div class="col-md-6">
+                        <label>Employee</label>
+                        <div class="custom-sel">
+                          <select class="form-control" id="employee" name="employee" [(ngModel)]="employee" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let approver of Users" [value]="approver.id">{{ approver.emp_code }}</option>
+                          </select>
+                        </div>
+                      </div>
+
+
+                  
+
+                
+                       
+                 
+                  
+                 
+                    </div>
+                  
+                    <div class="row" >
+                      <div class="col-md-9"></div>
+                      <div class="col-md-3">
+                        <button type="submit" class="btn btn-success btn-full mt-4">Sent</button>
+                      </div>
+                    </div>
+                  </form>
+
+
+
+            </div>
+
+        </div>
+
+        <div style="overflow-x: auto; width: 100%;">
+        <table width="100%" >
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Actions</th>
+
+              <th> Document number  </th>
+              <th> Reason</th>
+              <th>Requested amount</th>
+              <th>Remarks</th>
+              <th>Employee</th>
+              <th>Status</th>
+             
+  
+              <th>Pause start date</th>
+              <th>Pause reason</th>
+              <th>Resume date</th>
+            </tr>
+          </thead>
+          <tbody>
+              
+            <tr *ngFor="let docs of DocRequest;let i = index">
+              <td>{{ i + 1 }}</td> 
+              <td>
+                <!-- Show buttons only if the loan status is 'Approved' -->
+                <ng-container *ngIf="docs.status === 'Approved'">
+                  <button  class="btn btn-full btn-warning" (click)="openPauseModal(docs)">Pause</button>
+                 </ng-container>
+                 <ng-container *ngIf="docs.status === 'Paused'">
+                 
+                  <button class="btn btn-full btn-primary" (click)="openResumeModal(docs)">Resume</button>
+                </ng-container>
+              </td>
+              <td>{{ docs.document_number }}</td>
+              <td>{{ docs.reason }}</td>
+              <td>{{ docs.requested_amount }}</td> 
+              <td>{{ docs.remarks }}</td>
+              <td>{{ docs.employee }}</td> 
+              <td>{{ docs.status }}</td>
+              <td>{{ docs.pause_start_date }}</td>
+              <td>{{ docs.resume_date }}</td> 
+              <td>{{ docs.pause_reason }}</td>
+
+            </tr>
+        
+          </tbody>
+        </table>
+
+</div>
+        <!-- Modal Popup for selected loan to pause details -->
+<!-- Pause Modal -->
+<div *ngIf="isPauseModalOpen" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-10">
+          <h2>Pause Loan Application</h2>
+        </div>
+        <div class="col-md-2">
+          <span class="close pull-right" (click)="closePauseModal()">&times;</span>
+        </div>
+      </div>
+      <hr />
+  
+      <form (ngSubmit)="submitPauseLoan()">
+        <div class="row">
+          <div class="col-md-4">
+            <label>Pause Start Date</label>
+            <input type="date" class="form-control" [(ngModel)]="pause_start_date" name="pause_start_date" required />
+          </div>
+          <div class="col-md-12">
+            <label>Pause Reason</label>
+            <textarea class="form-control" [(ngModel)]="pause_reason" name="pause_reason" required></textarea>
+          </div>
+          <div class="col-md-12 mt-3">
+            <button type="submit" class="btn btn-primary">Pause Loan</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  <!-- Resume Modal -->
+<div *ngIf="isResumeModalOpen" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-10">
+          <h2>Resume Loan Application</h2>
+        </div>
+        <div class="col-md-2">
+          <span class="close pull-right" (click)="closeResumeModal()">&times;</span>
+        </div>
+      </div>
+      <hr />
+  
+      <form (ngSubmit)="submitResumeLoan()">
+        <div class="row">
+          <div class="col-md-4">
+            <label>Resume Date</label>
+            <input type="date" class="form-control" [(ngModel)]="resume_date" name="resume_date" required />
+          </div>
+          <div class="col-md-12 mt-3">
+            <button type="submit" class="btn btn-success">Resume Loan</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+
+
+
+    </div>
+</div>

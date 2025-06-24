@@ -2611,4 +2611,135 @@ uploadPayslipPdf(payslipId: number, pdfFile: File, sendEmail: boolean): Observab
 }
 
 
+
+
+
+
+// Airticket policy
+
+registerAirTicketPolicy(companyData: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.'); // Return an error observable if no schema is selected
+  }
+
+
+
+  const apiUrl = `${this.apiUrl}/payroll/api/airticket-policy/?schema=${selectedSchema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(apiUrl, companyData, { headers }).pipe(
+    catchError((error) => {
+      // Handle errors here (you can log, show a user-friendly message, etc.)
+      console.error('Error during company registration:', error);
+      return throwError(error);
+
+    })
+  );
+}
+
+getairticketpolicy(selectedSchema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/payroll/api/airticket-policy/?schema=${selectedSchema}`;
+
+  // Fetch employees from the API
+  return this.http.get(apiUrl);
+
+  
+}
+
+
+updateAirpolicy(id: number, data: any): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  const apiUrl = `${this.apiUrl}/payroll/api/airticket-policy/${id}/?schema=${selectedSchema}`;
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.put(apiUrl, data, { headers }).pipe(
+    catchError((error) => {
+      console.error('Error updating asset:', error);
+      return throwError(error);
+    })
+  );
+}
+
+deleteAirPolicy(categoryId: number): Observable<any> {
+  // const url = `${this.baseUrl}/Catogory/${categoryId}`;
+  // return this.http.delete(url);
+
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.'); // Return an error observable if no schema is selected
+  }
+ 
+  const apiUrl = `${this.apiUrl}/payroll/api/airticket-policy/${categoryId}/?schema=${selectedSchema}`;
+ 
+  return this.http.delete(apiUrl);
+}
+
+
+
+
+
+
+// advance salary approval level
+registeradvSalaryApproverLevel(formData: FormData): Observable<any> {
+  const selectedSchema = localStorage.getItem('selectedSchema');
+  if (!selectedSchema) {
+    console.error('No schema selected.');
+    return throwError('No schema selected.');
+  }
+
+  const apiUrl = `${this.apiUrl}/payroll/api/advance-salary-approval-levels/?schema=${selectedSchema}`;
+
+  return this.http.post(apiUrl, formData).pipe(
+    catchError((error) => {
+      console.error('Error during leave type registration:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+
+getadvSalaryApprovalLevels(selectedSchema: string): Observable<any> {
+  const apiUrl = `${this.apiUrl}/payroll/api/advance-salary-approval-levels/?schema=${selectedSchema}`;
+
+  // Fetch employees from the API
+  return this.http.get(apiUrl);
+
+  
+}
+
+
+
+
+getApprovalslistadvSalary(selectedSchema: string, userId: number): Observable<any> {
+  const apiUrl = `${this.apiUrl}/payroll/api/approval-salaryrequest/?schema=${selectedSchema}`;
+
+  // Fetch approvals for the user from the API
+  
+  return this.http.get(apiUrl);
+}
+
+
+
+getApprovalDetailsadvSalary(apiUrl: string): Observable<any> {
+  return this.http.get(apiUrl);
+}
+
+
+
+approveApprovalRequestadvSalary(apiUrl: string, approvalData: { note: string; status: string }): Observable<any> {
+// Sending a POST request to approve with note and status
+return this.http.post(apiUrl, approvalData);
+}
+
+rejectApprovalRequestadvSalary(apiUrl: string, approvalData: { note: string; status: string }): Observable<any> {
+// Sending a POST request to approve with note and status
+return this.http.post(apiUrl, approvalData);
+}
+
+
+
 }

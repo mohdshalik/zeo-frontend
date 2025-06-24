@@ -50,6 +50,14 @@
       </a>
 
 
+      <a  routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" (click)="onToolbarMenuToggle()">
+        <span><mat-icon>airplane_ticket
+        </mat-icon><span class="sidenav-opt" routerLink="/main-sidebar/air-ticket-options"> Air Ticket Management</span></span>
+
+
+      </a>
+
+
       <a routerLinkActive="active"  class="list-group-item list-group-item-action py-2 ripple" *ngIf="!hideButton" routerLink="/main-sidebar/settings/branch-master" (click)="onToolbarMenuToggle()">
         <span><mat-icon>settings</mat-icon> <span class="sidenav-opt" > Settings</span></span>
       </a>
