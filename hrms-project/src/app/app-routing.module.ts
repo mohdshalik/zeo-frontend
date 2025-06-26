@@ -105,6 +105,8 @@ import { AirTicketPolicyComponent } from './air-ticket-policy/air-ticket-policy.
 import { AdvanceSalaryApprovalLevelComponent } from './advance-salary-approval-level/advance-salary-approval-level.component';
 import { AdvanceSalaryRequestComponent } from './advance-salary-request/advance-salary-request.component';
 import { AdvanceSalaryApprovalsComponent } from './advance-salary-approvals/advance-salary-approvals.component';
+import { AirticketAllocationComponent } from './airticket-allocation/airticket-allocation.component';
+import { AirticketRequestComponent } from './airticket-request/airticket-request.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full', },
    { path: 'login', component: LoginComponent ,  },
@@ -539,6 +541,16 @@ const routes: Routes = [
     },
 
    
+    {
+      path:'airticket-allocation',
+      component:AirticketAllocationComponent,
+    },
+
+       
+    {
+      path:'airticket-request',
+      component:AirticketRequestComponent,
+    },
 
 
   ]

@@ -5,7 +5,7 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <h1> Air Ticket Policy </h1>
+                    <h1> Air Ticket Request </h1>
                 </div>
 
                 <div class="col-md-3">
@@ -57,7 +57,7 @@
             <div class="modal-content">
               <div class="row">
                 <div class="col-md-10">
-                  <h2>  Air Ticket Policy </h2>
+                  <h2>  Air Ticket Request </h2>
                 </div>
                 <div class="col-md-2">
                   <span class="close pull-right" (click)="closeapplicationModal()">&times;</span>
@@ -68,78 +68,110 @@
         <form >
 
             <div class="row">
+                <div class="col-md-6">
+                
+                
+                    <div class="custom-sel">
+                        <label>Allocation Id</label>
+                        <select class="form-control" id="allocation" required [(ngModel)]="allocation"  [ngModelOptions]="{standalone: true}"  >
+                            <option value="" >Select</option>
+                            <option *ngFor="let user of Allocations" [value]="user.id">{{ user.employee }} - {{ user.amount }}</option>
+                        </select>
+                       
+                    </div>
+                                
+                
+                
+                       
+                       
+                    
+                </div> 
+                <div class="col-md-6">
+                
+                
+                    <div class="custom-sel">
+                        <label>Employee</label>
+                        <select class="form-control" id="employee" required [(ngModel)]="employee"  [ngModelOptions]="{standalone: true}"  >
+                            <option value="" >Select</option>
+                            <option *ngFor="let user of Employees" [value]="user.id">{{ user.emp_code }} </option>
+                        </select>
+                       
+                    </div>
+                                
+                
+                
+                       
+                       
+                    
+                </div> 
+
+                <div class="col-md-6" >
+                    <label>request type</label>
+                    <div class="custom-sel">
+                      <select
+                        class="form-control" [(ngModel)]="request_type" [ngModelOptions]="{ standalone: true }">
+                      
+                        <option value="TICKET">Ticket </option>
+                
+                        <option value="ENCASHMENT"> Encashment </option>
+                
+                
+                      </select>
+                    </div>
+                  </div>
+                
+                
+                 
+                
+               
                
 
               <div class="col-md-6" >
                
-                <label> Name</label>
-               <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter name"
+                <label> Request date</label>
+               <input type="date"  class="form-control" required  [(ngModel)]="request_date"  placeholder="Enter request date"
                 [ngModelOptions]="{standalone: true}" >
                
           </div>
 
            <div class="col-md-6" >
                
-                <label>frequency years</label>
-               <input type="number"  class="form-control" required  [(ngModel)]="frequency_years"  placeholder="Enter frequency years"
+                <label>Departure date</label>
+               <input type="date"  class="form-control" required  [(ngModel)]="departure_date"  placeholder="Enter departure date"
                 [ngModelOptions]="{standalone: true}" >
                
           </div>
           <div class="col-md-6" >
                
-            <label>amount</label>
-           <input type="number"  class="form-control" required  [(ngModel)]="amount"  placeholder="Enter amount"
+            <label>Return date</label>
+           <input type="date"  class="form-control" required  [(ngModel)]="return_date"  placeholder="Enter Return date"
             [ngModelOptions]="{standalone: true}" >
            
       </div>
 
 
+      <div class="col-md-6" >
+               
+        <label>Origin</label>
+       <input type="text"  class="form-control" required  [(ngModel)]="origin"  placeholder="Enter origin "
+        [ngModelOptions]="{standalone: true}" >
+       
+  </div>
+
+
   <div class="col-md-6" >
-    <label>allowance type</label>
-    <div class="custom-sel">
-      <select
-        class="form-control" [(ngModel)]="allowance_type" [ngModelOptions]="{ standalone: true }">
-        <option value="CASH">Cash </option>
-        <option value="TICKET">Ticket </option>
-
-        <option value="BOTH"> Both </option>
-
-
-      </select>
-    </div>
-  </div>
-
-
- 
-  <div class="col-md-6">
-    <label></label>
-    <div class="check-box-selection-sec form-control mt-3">
-      <div class="mat-set">
-        <mat-checkbox [(ngModel)]="allowed_in_probation" [ngModelOptions]="{standalone: true}">allowed in probation</mat-checkbox>
-      </div>
-    </div>
-  </div>
-     
-  <div class="col-md-6">
-
-
-    <div class="custom-sel">
-        <label>Country</label>
-        <select class="form-control" id="country" required [(ngModel)]="country"  [ngModelOptions]="{standalone: true}"  >
-            <option value="" >Select</option>
-            <option *ngFor="let user of countries" [value]="user.id">{{ user.country_name }}</option>
-        </select>
-       
-    </div>
-                
-
-
-       
-       
-    
-</div> 
+               
+    <label>Destination</label>
+   <input type="text"  class="form-control" required  [(ngModel)]="destination"  placeholder="Enter destination "
+    [ngModelOptions]="{standalone: true}" >
+   
+</div>
       
-      
+<div class="col-md-12">
+    <label>Notes</label>
+    <textarea class="form-control" [(ngModel)]="notes"  placeholder="Enter notes... "
+    [ngModelOptions]="{standalone: true}"></textarea>
+</div>
    
 
 
@@ -154,7 +186,7 @@
                 </div>
     
                 <div class="col-md-2">
-                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="CreateAssetType()">Save</button>  
+                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="SentRequest()">Save</button>  
                  </div>
             </div>
             
@@ -299,18 +331,24 @@
 
         <div class="com_list mt-4" *ngIf="hasViewPermission">
 
-
+<div style="overflow-x: auto; width: 100%;">
           <table width="100%" *ngIf="hasViewPermission">
             <thead>
               <tr>
                 <th>No</th>
-                <th> Name</th>
-                <th>Frequency year</th>
-                <th>Amount</th>
-                <th> Allowance Type</th>
-                <th> Country </th>
+                <th> Allocation id</th>
+                <th>Employee</th>
+                <th>Request type</th>
+                <th>Request date</th>
+                <th> Departure date</th>
+                <th> Return date </th>
 
-                <th>Allowed in probation</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th> Status</th>
+                <th>Notes </th>
+
+                <th>Approved date</th>
           
                
           
@@ -319,15 +357,23 @@
             </thead>
           
             <tbody>
-              <tr *ngFor="let docs of LoanTypes; let i = index">
+              <tr *ngFor="let docs of Requests; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ docs.name }}</td>
-                <td>{{ docs.frequency_years }}</td>
-                <td>{{ docs.amount }}</td>
-                <td>{{ docs.allowance_type }}</td>
-                <td>{{ docs.country }}</td>
+                <td>{{ docs.allocation }}</td>
+                <td>{{ docs.employee }}</td>
 
-                <td>{{ docs.allowed_in_probation }}</td>
+                <td>{{ docs.request_type }}</td>
+                <td>{{ docs.request_date }}</td>
+                <td>{{ docs.departure_date }}</td>
+                <td>{{ docs.return_date }}</td>
+
+                <td>{{ docs.origin }}</td>
+                <td>{{ docs.destination }}</td>
+                <td>{{ docs.status }}</td>
+                <td>{{ docs.notes }}</td>
+
+                <td>{{ docs.approved_date }}</td>
+
 
           
                 <!-- Dynamic custom field values -->
@@ -348,7 +394,7 @@
               </tr>
             </tbody>
           </table>
-          
+          </div>
 
         </div>
         </div>

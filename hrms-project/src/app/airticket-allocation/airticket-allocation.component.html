@@ -5,7 +5,7 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <h1> Air Ticket Policy </h1>
+                    <h1> Air Ticket Allocation </h1>
                 </div>
 
                 <div class="col-md-3">
@@ -57,7 +57,7 @@
             <div class="modal-content">
               <div class="row">
                 <div class="col-md-10">
-                  <h2>  Air Ticket Policy </h2>
+                  <h2>  Air Ticket Allocation </h2>
                 </div>
                 <div class="col-md-2">
                   <span class="close pull-right" (click)="closeapplicationModal()">&times;</span>
@@ -68,46 +68,75 @@
         <form >
 
             <div class="row">
+
+                <div class="col-md-6">
+
+
+                    <div class="custom-sel">
+                        <label>Employee</label>
+                        <select class="form-control" id="employee" required [(ngModel)]="employee"  [ngModelOptions]="{standalone: true}"  >
+                            <option value="" >Select</option>
+                            <option *ngFor="let user of Employee" [value]="user.id">{{ user.emp_code }}</option>
+                        </select>
+                       
+                    </div>
+                                
+                
+                
+                       
+                       
+                    
+                </div> 
                
+
+                <div class="col-md-6">
+
+
+                    <div class="custom-sel">
+                        <label>Policy</label>
+                        <select class="form-control" id="policy" required [(ngModel)]="policy"  [ngModelOptions]="{standalone: true}"  >
+                            <option value="" >Select</option>
+                            <option *ngFor="let user of Policies" [value]="user.id">{{ user.name }}</option>
+                        </select>
+                       
+                    </div>
+                                
+                
+                
+                       
+                       
+                    
+                </div> 
+                      
 
               <div class="col-md-6" >
                
-                <label> Name</label>
-               <input type="text"  class="form-control" required  [(ngModel)]="name"  placeholder="Enter name"
-                [ngModelOptions]="{standalone: true}" >
-               
-          </div>
-
-           <div class="col-md-6" >
-               
-                <label>frequency years</label>
-               <input type="number"  class="form-control" required  [(ngModel)]="frequency_years"  placeholder="Enter frequency years"
+                <label> Amount</label>
+               <input type="number"  class="form-control" required  [(ngModel)]="amount"  placeholder="Enter amount"
                 [ngModelOptions]="{standalone: true}" >
                
           </div>
           <div class="col-md-6" >
                
-            <label>amount</label>
-           <input type="number"  class="form-control" required  [(ngModel)]="amount"  placeholder="Enter amount"
+            <label> remaining amount</label>
+           <input type="number"  class="form-control" required  [(ngModel)]="remaining_amount"  placeholder="Enter remaining amount"
             [ngModelOptions]="{standalone: true}" >
            
       </div>
 
-
-  <div class="col-md-6" >
-    <label>allowance type</label>
-    <div class="custom-sel">
-      <select
-        class="form-control" [(ngModel)]="allowance_type" [ngModelOptions]="{ standalone: true }">
-        <option value="CASH">Cash </option>
-        <option value="TICKET">Ticket </option>
-
-        <option value="BOTH"> Both </option>
-
-
-      </select>
-    </div>
+      <div class="col-md-6" >
+               
+        <label> Expiry date</label>
+       <input type="date"  class="form-control" required  [(ngModel)]="expiry_date"  placeholder="Enter Expiry date"
+        [ngModelOptions]="{standalone: true}" >
+       
   </div>
+
+
+
+
+          
+
 
 
  
@@ -115,30 +144,12 @@
     <label></label>
     <div class="check-box-selection-sec form-control mt-3">
       <div class="mat-set">
-        <mat-checkbox [(ngModel)]="allowed_in_probation" [ngModelOptions]="{standalone: true}">allowed in probation</mat-checkbox>
+        <mat-checkbox [(ngModel)]="is_active" [ngModelOptions]="{standalone: true}">is active</mat-checkbox>
       </div>
     </div>
   </div>
      
-  <div class="col-md-6">
 
-
-    <div class="custom-sel">
-        <label>Country</label>
-        <select class="form-control" id="country" required [(ngModel)]="country"  [ngModelOptions]="{standalone: true}"  >
-            <option value="" >Select</option>
-            <option *ngFor="let user of countries" [value]="user.id">{{ user.country_name }}</option>
-        </select>
-       
-    </div>
-                
-
-
-       
-       
-    
-</div> 
-      
       
    
 
@@ -154,7 +165,7 @@
                 </div>
     
                 <div class="col-md-2">
-                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="CreateAssetType()">Save</button>  
+                    <button type="button" class="btn-Create btn-full mt-5 btn-success btn" (click)="CreateAirticketAllocation()">Save</button>  
                  </div>
             </div>
             
@@ -180,103 +191,7 @@
   
       <form>
       
-        <div class="row">
-               
-
-            <div class="col-md-6" >
-             
-              <label>Asset Name</label>
-             <input type="text"  class="form-control" required  [(ngModel)]="editAsset.name"  placeholder="Enter name"
-              [ngModelOptions]="{standalone: true}" >
-             
-        </div>
-
-         <div class="col-md-6" >
-             
-              <label>Serial No</label>
-             <input type="text"  class="form-control" required  [(ngModel)]="editAsset.serial_number"  placeholder="Enter Serial no"
-              [ngModelOptions]="{standalone: true}" >
-             
-        </div>
-        <div class="col-md-6" >
-             
-          <label>Model</label>
-         <input type="text"  class="form-control" required  [(ngModel)]="editAsset.model"  placeholder="Enter Model"
-          [ngModelOptions]="{standalone: true}" >
-         
-    </div>
-
-    <div class="col-md-6" >
-             
-      <label>Purchase date</label>
-     <input type="date"  class="form-control" required  [(ngModel)]="editAsset.purchase_date"  placeholder="Enter Purchase date"
-      [ngModelOptions]="{standalone: true}" >
-     
-</div>
-
-<div class="col-md-6" >
-  <label>Status</label>
-  <div class="custom-sel">
-    <select
-      class="form-control" [(ngModel)]="editAsset.status" [ngModelOptions]="{ standalone: true }">
-      <option value="available">Available </option>
-      <option value="assigned">Assigned </option>
-
-      <option value="maintenance">Under Maintenance </option>
-
-      <option value="disposed">Disposed </option>
-
-    </select>
-  </div>
-</div>
-
-
-<div class="col-md-6" >
-  <label>Condition</label>
-  <div class="custom-sel">
-    <select
-      class="form-control" [(ngModel)]="editAsset.condition" [ngModelOptions]="{ standalone: true }">
-      <option value="healthy">Healthy </option>
-      <option value="minor_damage">Minor Damage </option>
-      <option value="major_damage">Major Damage </option>
-
-  
-
-    </select>
-  </div>
-</div>
-
-
-
-
-<div class="col-md-6" >
-  <label>Select Asset Type</label>
-  <div class="custom-sel">
-    <select
-      class="form-control"
-      id="asset_type"
-      name="asset_type"
-      [(ngModel)]="editAsset.asset_type"
-      [ngModelOptions]="{ standalone: true }"
-    >
-      <option *ngFor="let employees of LoanTypes" [value]="employees.id">
-        {{ employees.name }}
-      </option>
-    </select>
-  </div>
-</div>
-
-   
-        
-    
-    
- 
-
-
-
-  
-          </div>
-
+      
 
         
   
@@ -304,30 +219,32 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th> Name</th>
-                <th>Frequency year</th>
+                <th> Employee</th>
+                <th>Policy</th>
                 <th>Amount</th>
-                <th> Allowance Type</th>
-                <th> Country </th>
+                <th>Remaining amount</th>
+                <th> Expiry date </th>
 
-                <th>Allowed in probation</th>
+                <th>Status</th>
           
                
           
+                <th>Is active</th>
                 <th>Action</th>
               </tr>
             </thead>
           
             <tbody>
-              <tr *ngFor="let docs of LoanTypes; let i = index">
+              <tr *ngFor="let docs of Allocations; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ docs.name }}</td>
-                <td>{{ docs.frequency_years }}</td>
+                <td>{{ docs.employee }}</td>
+                <td>{{ docs.policy }}</td>
                 <td>{{ docs.amount }}</td>
-                <td>{{ docs.allowance_type }}</td>
-                <td>{{ docs.country }}</td>
+                <td>{{ docs.remaining_amount }}</td>
+                <td>{{ docs.expiry_date }}</td>
 
-                <td>{{ docs.allowed_in_probation }}</td>
+                <td>{{ docs.status }}</td>
+                <td>{{ docs.is_active }}</td>
 
           
                 <!-- Dynamic custom field values -->

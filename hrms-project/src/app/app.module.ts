@@ -181,6 +181,8 @@ import { AirTicketOptionsComponent } from './air-ticket-options/air-ticket-optio
 import { AirTicketPolicyComponent } from './air-ticket-policy/air-ticket-policy.component';
 import { AdvanceSalaryApprovalLevelComponent } from './advance-salary-approval-level/advance-salary-approval-level.component';
 import { AdvanceSalaryApprovalsComponent } from './advance-salary-approvals/advance-salary-approvals.component';
+import { AirticketAllocationComponent } from './airticket-allocation/airticket-allocation.component';
+import { AirticketRequestComponent } from './airticket-request/airticket-request.component';
 // import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -320,7 +322,9 @@ import { AdvanceSalaryApprovalsComponent } from './advance-salary-approvals/adva
      AirTicketOptionsComponent,
      AirTicketPolicyComponent,
      AdvanceSalaryApprovalLevelComponent,
-     AdvanceSalaryApprovalsComponent
+     AdvanceSalaryApprovalsComponent,
+     AirticketAllocationComponent,
+     AirticketRequestComponent
      
      
 
