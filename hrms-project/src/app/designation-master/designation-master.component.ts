@@ -289,7 +289,7 @@ if (this.userId !== null) {
     filterEmployees(): void {
       const query = this.searchQuery.toLowerCase();
       this.filteredEmployees = this.Designations.filter(Designations =>
-        Designations.job_title.toLowerCase().includes(query) 
+        Designations.ctgry_title.toLowerCase().includes(query) 
       );
     }
     
